@@ -1,12 +1,13 @@
 {
   "name": "@vtex/pickup-points-modal",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Pickup Points Modal React component",
   "main": "lib/index.js",
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "scripts": {
-    "build":
-      "nwb build-react-component --no-demo && npm run removeMocks && npm run addLocales",
+    "build": "nwb build-react-component --no-demo && npm run removeMocks && npm run addLocales",
     "removeMocks": "rm -rf lib/**/__mocks__ && rm -rf lib/__mocks__",
     "addLocales": "cp -R -f src/locales/ lib/locales/",
     "clean": "nwb clean-module && nwb clean-demo",
@@ -16,7 +17,12 @@
     "test:watch": "jest --env=jsdom --watch",
     "prepublishOnly": "npm run build"
   },
-  "keywords": ["react-component", "vtex", "checkout", "pickup-points"],
+  "keywords": [
+    "react-component",
+    "vtex",
+    "checkout",
+    "pickup-points"
+  ],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/vtex/pickup-points-modal.git"
@@ -73,8 +79,7 @@
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
     ],
     "moduleNameMapper": {
-      "\\.(css|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)(\\?.*)?$":
-        "identity-obj-proxy"
+      "\\.(css|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)(\\?.*)?$": "identity-obj-proxy"
     },
     "transform": {
       "^.+\\.js$": "<rootDir>/jest.transform.js"
