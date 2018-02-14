@@ -1,15 +1,24 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
+require('react-hot-loader/patch')
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
+import Container from './Container'
 
-import Example from '../../src'
-
-class Demo extends Component {
-  render() {
-    return <div>
-      <h1>pickup-points-modal Demo</h1>
-      <Example/>
-    </div>
-  }
+const root = document.getElementById('demo')
+const renderApp = Root => {
+  ReactDOM.render(
+    <AppContainer>
+      <Root />
+    </AppContainer>,
+    root
+  )
 }
 
-render(<Demo/>, document.querySelector('#demo'))
+renderApp(Container)
+
+if (module.hot) {
+  module.hot.accept('./Container', () => {
+    const NewApp = require('./Container').default
+    renderApp(NewApp)
+  })
+}

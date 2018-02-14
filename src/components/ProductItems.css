@@ -1,0 +1,19 @@
+.items {
+  display: flex;
+  overflow: auto;
+  padding: 0 10px 10px 0;
+}
+
+.item {
+  border: 1px solid #e7e7e7;
+  margin-right: 5px;
+  padding: 2px;
+}
+
+.unavailable {
+  opacity: 0.5;
+}
+
+.itemsGroup {
+  margin: 10px 0 0;
+}

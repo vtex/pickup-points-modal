@@ -1,0 +1,46 @@
+.PickupPoint {
+  display: table;
+}
+
+.PickupPointMarker,
+.PickupPointInfo {
+  display: table-cell;
+}
+
+.PickupPointMarker {
+  vertical-align: top;
+  text-align: center;
+  width: 50px;
+}
+
+.PickupPointName {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.PickupPointAddress {
+  font-size: 14px;
+  color: #333333;
+  margin: 4px 0;
+}
+
+.PickupPointPrice,
+.PickupPointSLA {
+  display: inline-block;
+  font-size: 14px;
+}
+
+.PickupPointPrice {
+  margin-right: 20px;
+}
+
+.details {
+  padding-left: 0;
+}
+
+.markerIcon {
+  height: 15px;
+  margin-right: 3px;
+  padding: 2px 2px 2px 0;
+}

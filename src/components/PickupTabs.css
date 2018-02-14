@@ -1,0 +1,34 @@
+.PickupViewMode {
+  position: relative;
+  width: 100%;
+  padding: 8px;
+  padding-top: 0;
+  box-sizing: border-box;
+}
+
+.PickupViewMap,
+.PickupViewList {
+  width: 50%;
+}
+
+.PickupViewOptionActive,
+.PickupViewOptionActive:hover,
+.PickupViewOptionActive:active,
+.PickupViewOptionActive:focus {
+  border: 1px solid #357edd;
+  background: #357edd;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+
+.PickupViewOptionInactive,
+.PickupViewOptionInactive:hover,
+.PickupViewOptionInactive:active,
+.PickupViewOptionInactive:focus {
+  border: 1px solid #357edd;
+  background: #fff;
+  color: #357edd;
+  text-decoration: none;
+  text-shadow: none;
+}

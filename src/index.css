@@ -1,0 +1,135 @@
+.PickupModal {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 100;
+  background: #fff;
+}
+
+.PickupModalHeader {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 5px 0 5px 15px;
+  overflow: hidden;
+  flex: none;
+  z-index: 1;
+}
+
+.PickupModalTitle {
+  float: left;
+}
+
+.PickupModalTitle h4 {
+  font-size: 15px;
+}
+
+.PickupModalAsk {
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+.PickupModalClose {
+  float: right;
+  padding: 8px 12px;
+}
+
+.PickupModalSearch {
+  position: relative;
+  padding: 8px;
+}
+
+.PickupModalPointsList {
+  flex: 1 1 auto;
+  position: relative;
+  overflow: auto;
+}
+
+.PickupModalPointsItem {
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+  cursor: pointer;
+}
+
+.PickupModalPointsItem:hover {
+  background: #f4f4f4;
+}
+
+.detail {
+  flex: 1 1 auto;
+  display: flex;
+}
+
+.backdrop {
+  background: #fff;
+  opacity: 0.8;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 99;
+}
+
+@media (max-width: 1023px) {
+  .PickupModal {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .PickupModal {
+    border: 1px solid #ccc;
+    top: 50%;
+    left: 50%;
+    height: 560px;
+    width: 900px;
+    margin-top: -280px;
+    margin-left: -450px;
+  }
+
+  .pickupTabsContainer {
+    display: none;
+  }
+
+  .PickupModalHeader,
+  .PickupModalSearch,
+  .PickupModalPointsList,
+  .PickupModalAsk,
+  .detail {
+    box-sizing: border-box;
+    background: #fff;
+    margin-left: 10px;
+    width: 320px;
+    z-index: 102;
+  }
+
+  .PickupModalHeader {
+    margin-top: 10px;
+  }
+
+  .PickupModalPointsList,
+  .detail {
+    margin-bottom: 10px;
+  }
+
+  .PickupModalPointsList {
+    margin-top: 0;
+    overflow: auto;
+  }
+
+  .PickupModalClose,
+  .PickupModalClose:hover {
+    border-radius: 20px;
+    background: #fff;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+}

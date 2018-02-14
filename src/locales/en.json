@@ -1,0 +1,89 @@
+{
+  "pickupPointsModal.deliveryTitle": "Delivery",
+  "pickupPointsModal.loading": "Loading…",
+  "pickupPointsModal.awatingData": "Waiting for more information",
+  "pickupPointsModal.deliveryAddressTitle": "Complete your address information",
+  "pickupPointsModal.paymentCTA": "Go to payment",
+  "pickupPointsModal.locatePickupPoint": "Locate a pickup point",
+  "pickupPointsModal.deliver": "Deliver",
+  "pickupPointsModal.pickup": "Pickup",
+  "pickupPointsModal.deliverySummary": "Delivery",
+  "pickupPointsModal.items":
+    "{itemsAmount, plural, =0 {} one {# item} other {# items}}",
+  "pickupPointsModal.pickupSummary": "Pickup",
+  "pickupPointsModal.cancelBackList": "Back to the pickup points list",
+  "pickupPointsModal.cancelPickup": "Cancel pickup",
+  "pickupPointsModal.chooseDelivery": "Select a delivery option",
+  "pickupPointsModal.choosePickup": "Pickup in a point",
+  "pickupPointsModal.findPickup": "Find a pickup point next to you.",
+  "pickupPointsModal.noPickupSelected": "You haven't selected a store yet",
+  "pickupPointsModal.slaOption": "{name} - {price} - {shippingEstimate}",
+  "pickupPointsModal.slaOptionSimple": "{price} - {shippingEstimate}{scheduled}",
+  "pickupPointsModal.shippingEstimate-bd":
+    "{days, plural, =0 {Same day} one {# business day} other {Up to # business days}}",
+  "pickupPointsModal.shippingEstimate-d":
+    "{days, plural, =0 {Same day} one {# day} other {Up to # days}}",
+  "pickupPointsModal.shippingEstimate-h":
+    "{days, plural, =0 {Now} one {# hours} other {Up to # hours}}",
+  "pickupPointsModal.shippingEstimate-m":
+    "{days, plural, =0 {Now} one {# minute} other {Up to # minutes}}",
+  "pickupPointsModal.free": "Free",
+  "pickupPointsModal.shippingEstimatePickup-bd":
+    "{days, plural, =0 {Ready on the same day} one {Ready in up to # business day} other {Ready in up to # business days}}",
+  "pickupPointsModal.shippingEstimatePickup-d":
+    "{days, plural, =0 {Ready on the same day} one {Ready in up to # day} other {Ready in up to # days}}",
+  "pickupPointsModal.shippingEstimatePickup-h":
+    "{days, plural, =0 {Ready for pickup} one {Ready in up to # hour} other {Ready in up to # hours}}",
+  "pickupPointsModal.shippingEstimatePickup-m":
+    "{days, plural, =0 {Ready for pickup} one {Ready in up to # minute} other {Ready in up to # minutes}}",
+  "pickupPointsModal.scheduled": "Scheduled",
+  "pickupPointsModal.scheduledDeliveryChoice": "Choose your shipping date",
+  "pickupPointsModal.selectPickupPoint": "Select a pickup point",
+  "pickupPointsModal.selectDeliveryOptions": "Select delivery options",
+  "pickupPointsModal.pointDetails": "Pickup point details",
+  "pickupPointsModal.closeButton": "close",
+  "pickupPointsModal.deliveryDate": "Date and time",
+  "pickupPointsModal.deliveryTime": "Delivery time",
+  "pickupPointsModal.datepickerDateFormat": "dddd, LL",
+  "pickupPointsModal.deliveryWindows": "From {startDate} to {endDate} - {price}",
+  "pickupPointsModal.deliveryWindowsSummary":
+    "{date}, between {startDate} and {endDate}",
+  "pickupPointsModal.list": "List",
+  "pickupPointsModal.map": "Map",
+  "pickupPointsModal.pickupPoint.modify": "Modify",
+  "pickupPointsModal.modify": "modify",
+  "pickupPointsModal.details": "See details or change the pickup point.",
+  "pickupPointsModal.searchLocationMap":
+    "Search for Street, ZIP Code or neighborhood or city",
+  "pickupPointsModal.productsInPoint": "Products available in this pickup point",
+  "pickupPointsModal.aditionalInfo": "Other information",
+  "pickupPointsModal.unavailable": "unavailable",
+  "pickupPointsModal.unavailableItemsAmount":
+    "{itemsAmount, plural, =0 {} one {# item unavailable} other {# item unavailable}}",
+  "pickupPointsModal.confirmPoint": "Pickup in this point",
+  "pickupPointsModal.modifyDeliveryOptions": "Modify delivery options",
+  "pickupPointsModal.shippingAddress": "Shipping address",
+  "pickupPointsModal.editSelectedAddressButton":
+    "Update selected address information",
+  "pickupPointsModal.addDeliveryPlaceButton": "Deliver in another address",
+  "pickupPointsModal.unavailableDelivery":
+    "{items, plural, =0 {} one {Delivery for following item is unavailable using the selected ZIP Code.} other {Delivery for following items are unavailable using the selected ZIP Code.}}",
+  "pickupPointsModal.unavailableDeliveryOptionsPostalCode":
+    "Change the ZIP Code or {removeFromCart}",
+  "pickupPointsModal.unavailableDeliveryOptions":
+    "Choose another pickup point or {removeFromCart}",
+  "pickupPointsModal.changePostalCode": "change ZIP Code",
+  "pickupPointsModal.removeFromCart":
+    "{items, plural, =0 {} one {remove item from the cart.} other {remove items from the cart.}}",
+  "pickupPointsModal.noTimesAvailable":
+    "There is no appointment time available for this date.",
+  "pickupPointsModal.productsFromSeller": "Products from {seller}",
+  "pickupPointsModal.deliverySplitDisclaimer":
+    "Some items cannot be delivered to this address. Select a pickup point.",
+  "pickupPointsModal.pickupSplitDisclaimer":
+    "Some of items are unavailable for pickup in this point. Type an address to deliver them.",
+  "pickupPointsModal.pickupSplitDisclaimerLogged":
+    "Some of items are unavailable for shipping in this point. Choose an address to deliver them.",
+  "pickupPointsModal.price": "{value, plural, =0 {Free} other {{formattedPrice}}}",
+  "pickupPointsModal.askGeolocation": "Search an address with your location"
+}
