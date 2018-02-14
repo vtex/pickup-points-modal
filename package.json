@@ -1,6 +1,6 @@
 {
-  "name": "pickup-points-modal",
-  "version": "0.1.0",
+  "name": "@vtex/pickup-points-modal",
+  "version": "0.1.1",
   "description": "Pickup Points Modal React component",
   "main": "lib/index.js",
   "files": ["lib"],
@@ -17,7 +17,10 @@
     "prepublishOnly": "npm run build"
   },
   "keywords": ["react-component", "vtex", "checkout", "pickup-points"],
-  "repository": "git@github.com:vtex/pickup-points-modal.git",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/vtex/pickup-points-modal.git"
+  },
   "author": "Fernando de Almeida Coelho <nandoacoelho@gmail.com>",
   "license": "MIT",
   "dependencies": {
@@ -76,5 +79,12 @@
     "transform": {
       "^.+\\.js$": "<rootDir>/jest.transform.js"
     }
+  },
+  "bugs": {
+    "url": "https://github.com/vtex/pickup-points-modal/issues"
+  },
+  "homepage": "https://github.com/vtex/pickup-points-modal#readme",
+  "directories": {
+    "lib": "lib"
   }
 }
