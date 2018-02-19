@@ -30,7 +30,7 @@ export class PickupPointsModal extends Component {
       mapStatus: HIDE_MAP,
       largeScreen: window.innerWidth > 1023,
       selectedPickupPoint: props.selectedPickupPoint,
-      isPickupDetailsActive: props.isPickupDetailsActive || false,
+      isPickupDetailsActive: null,
     }
   }
 
@@ -40,15 +40,25 @@ export class PickupPointsModal extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.selectedPickupPoint) return
-    this.props.changeActivePickupDetails(this.props.selectedPickupPoint)
-    this.setState({ isMounted: true })
+    if (
+      !!this.props.selectedPickupPoint &&
+      this.state.isPickupDetailsActive === null
+    ) {
+      this.setState({
+        isPickupDetailsActive: true,
+        isMounted: true,
+      })
+    } else {
+      this.setState({
+        isMounted: true,
+      })
+    }
     window.addEventListener('resize', this.resize)
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     return (
-      this.props.isPickupDetailsActive !== nextProps.isPickupDetailsActive ||
+      this.state.isPickupDetailsActive !== nextState.isPickupDetailsActive ||
       this.state.mapStatus !== nextState.mapStatus ||
       this.state.largeScreen !== nextState.largeScreen ||
       this.props.searchAddress !== nextState.searchAddress ||
