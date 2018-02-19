@@ -8,6 +8,7 @@
 
 # production
 /demo/dist
+/dist
 /es
 /lib
 /umd
