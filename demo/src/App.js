@@ -6,6 +6,11 @@ import { newAddress } from '../../src/utils/newAddress'
 import BRA from '@vtex/address-form/lib/country/BRA'
 import { SEARCH, PICKUP_IN_STORE } from '../../src/constants/index'
 import { addValidation } from '@vtex/address-form/lib/transforms/address'
+import '../../src/index.css'
+import '../../src/components/PickupPoint.css'
+import '../../src/components/PickupPointDetails.css'
+import '../../src/components/PickupTabs.css'
+import '../../src/components/ProductItems.css'
 
 const ACCOUNT_NAME = 'qamarketplace'
 const API_KEY = 'AIzaSyATLp76vkHxfMZqJF_sJbjQqZwvSIBhsTM'
@@ -79,6 +84,8 @@ class App extends Component {
       selectedPickupPoint: pickup,
     })
 
+  handleAddressChange = address => this.setState({ address })
+
   render() {
     const {
       isModalOpen,
@@ -95,22 +102,20 @@ class App extends Component {
       <div>
         {isModalOpen && (
           <PickupPointsModal
-            changeActiveSLAOption={() => {}}
-            searchAddress={searchAddress}
-            googleMapsKey={API_KEY}
-            intl={this.props.intl}
-            pickupOptions={pickupOptions}
-            pickupOptionGeolocations={pickupOptions.map(
-              option => option.pickupStoreInfo.address.geoCoordinates
-            )}
-            selectedRules={BRA}
+            onAddressChange={this.handleAddressChange}
             closePickupPointsModal={this.handleCloseModal}
             changeActivePickupDetails={this.changeActivePickupDetails}
-            selectedPickupPoint={selectedPickupPoint}
-            isPickupDetailsActive={isPickupDetailsActive}
-            storePreferencesData={storePreferencesData}
-            logisticsInfo={logisticsInfo}
+            changeActiveSLAOption={() => {}}
+            googleMapsKey={API_KEY}
+            intl={this.props.intl}
             items={items}
+            isPickupDetailsActive={isPickupDetailsActive}
+            logisticsInfo={logisticsInfo}
+            pickupOptions={pickupOptions}
+            searchAddress={searchAddress}
+            selectedPickupPoint={selectedPickupPoint}
+            selectedRules={BRA}
+            storePreferencesData={storePreferencesData}
           />
         )}
         <a onClick={this.handleOpenModal}>Open Modal</a>
