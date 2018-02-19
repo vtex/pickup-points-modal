@@ -13,14 +13,9 @@ module.exports = {
     esModules: false,
   },
   webpack: {
-    rules: {
-      css: {
-        modules: true,
-        localIdentName:
-          process.env.NODE_ENV === 'production'
-            ? '[path][name]-[local]-[hash:base64:5]'
-            : '[hash:base64:5]',
-      },
+    extractText: {
+      allChunks: true,
+      filename: 'styles.css',
     },
   },
 }
