@@ -34,12 +34,12 @@ export class PickupPointDetails extends Component {
   handleBackButtonClick = () => this.props.togglePickupDetails()
 
   handleConfirmButtonClick = () => {
-    this.props.changeActiveSLAOption({
+    this.props.handleChangeActiveSLAOption({
       slaOption: this.props.pickupPoint.id,
       sellerId: this.props.sellerId,
     })
     this.props.togglePickupDetails()
-    this.props.closePickupPointsModal()
+    this.props.handleClosePickupPointsModal()
   }
 
   translate = (id, values) =>
@@ -124,7 +124,7 @@ export class PickupPointDetails extends Component {
 }
 
 PickupPointDetails.propTypes = {
-  changeActiveSLAOption: PropTypes.func.isRequired,
+  handleChangeActiveSLAOption: PropTypes.func.isRequired,
   intl: intlShape,
   isSelectedSla: PropTypes.bool,
   items: PropTypes.array.isRequired,
@@ -134,7 +134,7 @@ PickupPointDetails.propTypes = {
   storePreferencesData: PropTypes.object.isRequired,
   sellerId: PropTypes.string,
   togglePickupDetails: PropTypes.func.isRequired,
-  closePickupPointsModal: PropTypes.func.isRequired,
+  handleClosePickupPointsModal: PropTypes.func.isRequired,
   logisticsInfo: PropTypes.array.isRequired,
 }
 

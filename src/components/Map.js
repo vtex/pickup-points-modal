@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import debounce from 'lodash/debounce'
+
 import geolocationAutoCompleteAddress from '@vtex/address-form/lib/geolocation/geolocationAutoCompleteAddress'
+import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
+
 import markerIconBlue from '../assets/icons/marker_blue.svg'
 import markerIconSelected from '../assets/icons/marker_selected.svg'
 
@@ -301,7 +304,7 @@ Map.defaultProps = {
 }
 
 Map.propTypes = {
-  address: PropTypes.object,
+  address: AddressShapeWithValidation,
   changeActivePickupDetails: PropTypes.func.isRequired,
   geoCoordinates: PropTypes.array,
   googleMaps: PropTypes.object,

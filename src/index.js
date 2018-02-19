@@ -4,8 +4,10 @@ import { injectIntl, intlShape } from 'react-intl'
 import { HIDE_MAP, SHOW_MAP, PICKUP_IN_STORE } from './constants'
 import debounce from 'lodash/debounce'
 
+import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 import GoogleMapsContainer from '@vtex/address-form/lib/geolocation/GoogleMapsContainer'
 import GeolocationInput from '@vtex/address-form/lib/geolocation/GeolocationInput'
+
 import Heading from './components/Heading'
 import PickupTabs from './components/PickupTabs'
 import PickupPoint from './components/PickupPoint'
@@ -27,9 +29,8 @@ export class PickupPointsModal extends Component {
       isMounted: false,
       mapStatus: HIDE_MAP,
       largeScreen: window.innerWidth > 1023,
-      shouldAskForGeolocation: false,
       selectedPickupPoint: props.selectedPickupPoint,
-      isPickupDetailsActive: props.isPickupDetailsActive,
+      isPickupDetailsActive: props.isPickupDetailsActive || false,
     }
   }
 
@@ -48,7 +49,6 @@ export class PickupPointsModal extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     return (
       this.props.isPickupDetailsActive !== nextProps.isPickupDetailsActive ||
-      this.props.pickupPointId !== nextProps.pickupPointId ||
       this.state.mapStatus !== nextState.mapStatus ||
       this.state.largeScreen !== nextState.largeScreen ||
       this.props.searchAddress !== nextState.searchAddress ||
@@ -91,8 +91,10 @@ export class PickupPointsModal extends Component {
       googleMapsKey,
       searchAddress,
       intl,
-      selectedRules,
+      rules,
       changeActivePickupDetails,
+      closePickupPointsModal,
+      changeActiveSLAOption,
       sellerId,
       storePreferencesData,
       items,
@@ -103,7 +105,6 @@ export class PickupPointsModal extends Component {
       isPickupDetailsActive,
       largeScreen,
       mapStatus,
-      shouldAskForGeolocation,
       selectedPickupPoint,
     } = this.state
 
@@ -168,12 +169,8 @@ export class PickupPointsModal extends Component {
                       pickupOptions
                     )}
                     pickupOptions={pickupOptions}
-                    rules={selectedRules}
-                    shouldAskForGeolocation={shouldAskForGeolocation}
-                    searchPickupAddressByGeolocationEvent={
-                      this.props.searchPickupAddressByGeolocationEvent
-                    }
-                    selectedPickupPointGeolocation={getPickupOptionGeolocation(
+                    rules={rules}
+                    selectedPickupPointGeolocation={getPickupOptionGeolocations(
                       selectedPickupPoint
                     )}
                     pickupPoint={selectedPickupPoint}
@@ -191,7 +188,7 @@ export class PickupPointsModal extends Component {
                       loadingGoogle={loading}
                       googleMaps={googleMaps}
                       address={searchAddress}
-                      rules={selectedRules}
+                      rules={rules}
                       onChangeAddress={this.handleAddressChange}
                     />
                   </form>
@@ -205,7 +202,7 @@ export class PickupPointsModal extends Component {
                       )}
                       googleMaps={googleMaps}
                       onChangeAddress={this.handleAddressChange}
-                      rules={selectedRules}
+                      rules={rules}
                     />
                   )}
               </div>
@@ -237,12 +234,10 @@ export class PickupPointsModal extends Component {
                     logisticsInfo={logisticsInfo}
                     sellerId={sellerId}
                     togglePickupDetails={this.togglePickupDetails}
-                    changeActivePickupDetails={
-                      this.props.changeActivePickupDetails
-                    }
+                    handleChangeActivePickupDetails={changeActivePickupDetails}
                     changeActivePickupPointId={this.changeActivePickupPointId}
                     sellerId={sellerId}
-                    selectedRules={selectedRules}
+                    selectedRules={rules}
                     pickupPoint={pickupPoint}
                     storePreferencesData={storePreferencesData}
                     pickupPointId={pickupPoint.id}
@@ -258,13 +253,13 @@ export class PickupPointsModal extends Component {
                 items={items}
                 logisticsInfo={logisticsInfo}
                 sellerId={sellerId}
-                changeActiveSLAOption={this.props.changeActiveSLAOption}
+                handleChangeActiveSLAOption={changeActiveSLAOption}
                 togglePickupDetails={this.togglePickupDetails}
                 storePreferencesData={storePreferencesData}
-                closePickupPointsModal={this.props.closePickupPointsModal}
+                handleClosePickupPointsModal={closePickupPointsModal}
                 sellerId={sellerId}
                 pickupPoint={selectedPickupPoint}
-                selectedRules={selectedRules}
+                selectedRules={rules}
               />
             </div>
           )}
@@ -275,21 +270,20 @@ export class PickupPointsModal extends Component {
 }
 
 PickupPointsModal.propTypes = {
-  intl: intlShape,
-  pickupOptions: PropTypes.array.isRequired,
-  closePickupPointsModal: PropTypes.func.isRequired,
-  onAddressChange: PropTypes.func.isRequired,
-  googleMapsKey: PropTypes.string.isRequired,
   changeActivePickupDetails: PropTypes.func.isRequired,
-  pickupPointId: PropTypes.string,
-  searchAddress: PropTypes.object.isRequired,
-  searchPickupAddressByGeolocationEvent: PropTypes.func,
-  selectedPickupPoint: PropTypes.object,
-  sellerId: PropTypes.string,
-  selectedRules: PropTypes.object,
-  storePreferencesData: PropTypes.object.isRequired,
+  changeActiveSLAOption: PropTypes.func.isRequired,
+  closePickupPointsModal: PropTypes.func.isRequired,
+  googleMapsKey: PropTypes.string.isRequired,
+  intl: intlShape,
   items: PropTypes.array.isRequired,
   logisticsInfo: PropTypes.array.isRequired,
+  onAddressChange: PropTypes.func.isRequired,
+  pickupOptions: PropTypes.array.isRequired,
+  rules: PropTypes.object,
+  searchAddress: AddressShapeWithValidation,
+  selectedPickupPoint: PropTypes.object,
+  sellerId: PropTypes.string,
+  storePreferencesData: PropTypes.object.isRequired,
 }
 
 export default injectIntl(PickupPointsModal)

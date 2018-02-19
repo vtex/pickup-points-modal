@@ -46,11 +46,10 @@ export function getItemsByPickup(items, logisticsInfo, pickupPoint, sellerId) {
 }
 
 export function getPickupOptionGeolocations(pickupOptions) {
-  return pickupOptions.map(
-    pickup => pickup.pickupStoreInfo.address.geoCoordinates
-  )
-}
-
-export function getPickupOptionGeolocation(pickupOption) {
-  return pickupOption.pickupStoreInfo.address.geoCoordinates
+  if (Array.isArray(pickupOptions)) {
+    return pickupOptions.map(
+      pickup => pickup.pickupStoreInfo.address.geoCoordinates
+    )
+  }
+  return pickupOptions && pickupOptions.pickupStoreInfo.address.geoCoordinates
 }

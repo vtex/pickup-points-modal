@@ -26,7 +26,7 @@ export class PickupPoint extends Component {
   handleOpenPickupDetails = () => {
     if (!this.props.isModal) return
     this.props.togglePickupDetails()
-    this.props.changeActivePickupDetails(this.props.pickupPoint)
+    this.props.handleChangeActivePickupDetails(this.props.pickupPoint)
     this.props.changeActivePickupPointId &&
       this.props.changeActivePickupPointId(this.props.pickupPoint)
   }
@@ -152,8 +152,8 @@ PickupPoint.defaultProps = {
   showAddress: true,
 }
 PickupPoint.propTypes = {
-  changeActivePickupDetails: PropTypes.func,
-  changeActivePickupPointId: PropTypes.func,
+  handleChangeActivePickupDetails: PropTypes.func,
+  onChangeActivePickupPointId: PropTypes.func,
   togglePickupDetails: PropTypes.func,
   intl: intlShape,
   isModal: PropTypes.bool,

@@ -11,3 +11,21 @@ export const SHOW_MAP = 'SHOW_MAP'
 export const AVAILABLE = 'available'
 export const SHIPPING_HASH = '#/shipping'
 export const PAYMENT_HASH = '#/payment'
+
+export const EEMPTY = 'ERROR_EMPTY_FIELD'
+export const EADDRESSTYPE = 'ERROR_ADDRESS_TYPE'
+export const ENOTOPTION = 'ERROR_VALUE_IS_NOT_AN_OPTION'
+export const ECOUNTRY = 'ERROR_COUNTRY_CODE'
+export const EGEOCOORDS = 'ERROR_GEO_COORDS'
+export const EPOSTALCODE = 'ERROR_POSTAL_CODE'
+export const EGOOGLEADDRESS = 'ERROR_GOOGLE_ADDRESS'
+
+export const ERROR_TYPES = [
+  EEMPTY,
+  EADDRESSTYPE,
+  ENOTOPTION,
+  ECOUNTRY,
+  EGEOCOORDS,
+  EPOSTALCODE,
+  EGOOGLEADDRESS,
+]

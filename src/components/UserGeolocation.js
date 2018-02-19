@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 
 import geolocationAutoCompleteAddress from '@vtex/address-form/lib/geolocation/geolocationAutoCompleteAddress'
+import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
 import styles from '../index.css'
 
@@ -117,7 +118,7 @@ class UserGeolocation extends Component {
 }
 
 UserGeolocation.propTypes = {
-  address: PropTypes.object,
+  address: AddressShapeWithValidation,
   googleMaps: PropTypes.object,
   intl: intlShape,
   onChangeAddress: PropTypes.func.isRequired,
