@@ -8,7 +8,7 @@ import markerIconSelected from '../assets/icons/marker_selected_check.svg'
 import { AddressSummary } from '@vtex/address-form'
 import { getUnavailableItemsAmount } from '../utils/pickupUtils'
 
-import styles from './PickupPoint.css'
+import './PickupPoint.css'
 
 export class PickupPoint extends Component {
   constructor(props) {
@@ -63,9 +63,7 @@ export class PickupPoint extends Component {
 
     return (
       <div
-        className={`${
-          styles.PickupPoint
-        } pickup-point bg-white bb b--light-gray pv3`}
+        className="PickupPoint pickup-point bg-white bb b--light-gray pv3"
         id={pickupPoint.id
           .replace(/[^\w\s]/gi, '')
           .split(' ')
@@ -74,11 +72,7 @@ export class PickupPoint extends Component {
       >
         <div className="flex lh-copy">
           {isModal && (
-            <div
-              className={`${
-                styles.PickupPointMarker
-              } pickup-point-market flex-none w3 tc pb1 f7 gray`}
-            >
+            <div className="PickupPointMarker pickup-point-market flex-none w3 tc pb1 f7 gray">
               <img
                 className="pt1"
                 src={isSelected ? markerIconSelected : markerIcon}
@@ -87,16 +81,8 @@ export class PickupPoint extends Component {
               <div>{pickupPoint.distance}</div>
             </div>
           )}
-          <div
-            className={`${
-              styles.PickupPointInfo
-            } pickup-point-info flex-auto relative mr2`}
-          >
-            <p
-              className={`${
-                styles.PickupPointName
-              } pickup-point-name fw5 f6 pb1y`}
-            >
+          <div className="PickupPointInfo pickup-point-info flex-auto relative mr2">
+            <p className="PickupPointName pickup-point-name fw5 f6 pb1y">
               {!isModal && (
                 <img
                   className={styles.markerIcon}
@@ -106,13 +92,7 @@ export class PickupPoint extends Component {
               )}
               {pickupPoint.pickupStoreInfo.friendlyName}
             </p>
-            <div
-              className={`${
-                styles.PickupPointAddress
-              } pickup-point-address f7 pb1 gray ${
-                !showAddress ? 'hidden dn' : ''
-              }`}
-            >
+            <div className="PickupPointAddress pickup-point-address">
               <AddressSummary
                 address={pickupPoint.pickupStoreInfo.address}
                 rules={selectedRules}
@@ -122,11 +102,7 @@ export class PickupPoint extends Component {
             <div className="f6">
               {isModal && (
                 <p>
-                  <span
-                    className={`${
-                      styles.PickupPointPrice
-                    } pickup-point-price dib mr3 gray`}
-                  >
+                  <span className="PickupPointPrice pickup-point-price">
                     {this.translate('price', {
                       value: pickupPoint.price,
                       formattedPrice: formatCurrency({
@@ -135,11 +111,7 @@ export class PickupPoint extends Component {
                       }),
                     })}
                   </span>
-                  <span
-                    className={`${
-                      styles.PickupPointSLA
-                    } pickup-point-sla dib mr3 gray`}
-                  >
+                  <span className="PickupPointSLA pickup-point-sla">
                     {this.translate(`shippingEstimatePickup-${days}`, {
                       days: daysAmount,
                     })}
@@ -161,9 +133,7 @@ export class PickupPoint extends Component {
             {!isModal && (
               <button
                 type="button"
-                className={`${
-                  styles.details
-                } button-details-pickup-point btn btn-link f6 blue no-underline`}
+                className="details button-details-pickup-point btn btn-link f6 blue no-underline"
                 id="change-pickup-button"
                 onClick={this.handlePickupModal}
               >
@@ -195,11 +165,5 @@ PickupPoint.propTypes = {
   showAddress: PropTypes.bool,
   storePreferencesData: PropTypes.object.isRequired,
 }
-
-const makeMapStateToProps = (state, props) => ({
-  storePreferencesData: state.orderForm.storePreferencesData,
-  unavailableItemsAmount: getUnavailableItemsAmount(state, props),
-  pickupPoint: getPickupPointsById(state, props),
-})
 
 export default injectIntl(PickupPoint)

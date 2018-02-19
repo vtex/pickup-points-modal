@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { fixImageUrl } from '../utils/Images'
 
-import styles from './ProductItems.css'
+import './ProductItems.css'
 
 export class ProductItems extends Component {
   translate = (id, values) =>
@@ -33,7 +33,8 @@ export class ProductItems extends Component {
                   itemsPackage.selectedSlaItem.id) +
                 (itemsPackage.selectedSlaItem &&
                   itemsPackage.selectedSlaItem.shippingEstimate)
-              }>
+              }
+            >
               {daysAmount &&
                 itemsByPackages.length > 1 && (
                   <p>
@@ -42,13 +43,11 @@ export class ProductItems extends Component {
                     })}
                   </p>
                 )}
-              <div className={`${styles.items} delivery-items`}>
+              <div className="items delivery-items">
                 {itemsPackage.items.map(item => {
                   return (
                     <img
-                      className={`${styles.item} ${
-                        available ? '' : styles.unavailable
-                      } ${
+                      className={`item ${available ? '' : 'unavailable'} ${
                         available ? '' : 'delivery-item-unavailable'
                       } delivery-item mr1`}
                       key={item.uniqueId}
@@ -63,13 +62,11 @@ export class ProductItems extends Component {
         })}
       </div>
     ) : (
-      <div className={`${styles.items} delivery-items`}>
+      <div className="items delivery-items">
         {items.map(item => {
           return (
             <img
-              className={`${styles.item} ${
-                available ? '' : styles.unavailable
-              } ${
+              className={`item ${available ? '' : 'unavailable'} ${
                 available ? '' : 'delivery-item-unavailable'
               } delivery-item mr1`}
               key={item.uniqueId}

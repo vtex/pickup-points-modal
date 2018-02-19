@@ -6,6 +6,8 @@ import geolocationAutoCompleteAddress from '@vtex/address-form/lib/geolocation/g
 
 import styles from '../index.css'
 
+import { searchPickupAddressByGeolocationEvent } from '../utils/metrics'
+
 class UserGeolocation extends Component {
   componentWillUnmount() {
     this.setState({ isMounted: false })
@@ -27,7 +29,7 @@ class UserGeolocation extends Component {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           })
-          this.props.searchPickupAddressByGeolocationEvent({
+          searchPickupAddressByGeolocationEvent({
             searchedAddressByGeolocation: true,
             confirmedGeolocation: true,
           })
@@ -35,24 +37,24 @@ class UserGeolocation extends Component {
         error => {
           switch (error.code) {
             case 0: // UNKNOWN ERROR
-              this.props.searchPickupAddressByGeolocationEvent({
+              searchPickupAddressByGeolocationEvent({
                 confirmedGeolocation: true,
                 browserError: true,
               })
               break
             case 1: // PERMISSION_DENIED
-              this.props.searchPickupAddressByGeolocationEvent({
+              searchPickupAddressByGeolocationEvent({
                 deniedGeolocation: true,
               })
               break
             case 2: // POSITION_UNAVAILABLE
-              this.props.searchPickupAddressByGeolocationEvent({
+              searchPickupAddressByGeolocationEvent({
                 confirmedGeolocation: true,
                 positionUnavailable: true,
               })
               break
             case 3: // TIMEOUT
-              this.props.searchPickupAddressByGeolocationEvent({
+              searchPickupAddressByGeolocationEvent({
                 dismissedGeolocation: true,
               })
               break
@@ -100,7 +102,7 @@ class UserGeolocation extends Component {
 
   render() {
     return (
-      <div className={styles.PickupModalAsk}>
+      <div className="PickupModalAsk">
         <a
           type="button"
           className="button-ask-geolocation btn btn-link f6 blue no-underline"
@@ -121,7 +123,6 @@ UserGeolocation.propTypes = {
   onChangeAddress: PropTypes.func.isRequired,
   pickupOptionGeolocations: PropTypes.array,
   rules: PropTypes.object,
-  searchPickupAddressByGeolocationEvent: PropTypes.func,
 }
 
 export default injectIntl(UserGeolocation)

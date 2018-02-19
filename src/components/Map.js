@@ -28,6 +28,8 @@ class Map extends Component {
     const pickupOptionsChanged =
       prevProps.pickupOptionGeolocations !== this.props.pickupOptionGeolocations
     const pickupPointChanged =
+      prevProps.pickupPoint &&
+      this.props.pickupPoint &&
       prevProps.pickupPoint.id !== this.props.pickupPoint.id
     return (
       rulesChanged ||
@@ -52,7 +54,7 @@ class Map extends Component {
     const { googleMaps, pickupOptionGeolocations } = this.props
 
     const selectedGeolocation = nextProps.pickupOptions.find(
-      item => item.id === nextProps.pickupPoint.id
+      item => nextProps.pickupPoint && item.id === nextProps.pickupPoint.id
     )
 
     this.address = nextProps.address
@@ -61,7 +63,7 @@ class Map extends Component {
       this.createNewMarkers({
         pickups: nextProps.pickupOptionGeolocations,
         pickupOptions: nextProps.pickupOptions,
-        pickupPoint: nextProps.pickupPoint.id,
+        pickupPoint: nextProps.pickupPoint && nextProps.pickupPoint.id,
         selectedPickupPointGeolocation:
           nextProps.selectedPickupPointGeolocation,
         recenter: false,
@@ -71,7 +73,9 @@ class Map extends Component {
     const markerObj =
       this.markers &&
       this.markers.find(
-        item => item.pickupPoint.id === nextProps.pickupPoint.id
+        item =>
+          nextProps.pickupPoint &&
+          item.pickupPoint.id === nextProps.pickupPoint.id
       )
 
     if (
@@ -113,7 +117,7 @@ class Map extends Component {
     this.createNewMarkers({
       pickups: this.props.pickupOptionGeolocations,
       pickupOptions: this.props.pickupOptions,
-      pickupPoint: this.props.pickupPoint.id,
+      pickupPoint: this.props.pickupPoint && this.props.pickupPoint.id,
       selectedPickupPointGeolocation: this.props.selectedPickupPointGeolocation,
       recenter: true,
     })

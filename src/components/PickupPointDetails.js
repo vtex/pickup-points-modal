@@ -10,7 +10,7 @@ import {
 import PickupPoint from './PickupPoint'
 import ProductItems from '../components/ProductItems'
 
-import styles from './PickupPointDetails.css'
+import './PickupPointDetails.css'
 
 export class PickupPointDetails extends Component {
   constructor(props) {
@@ -58,30 +58,20 @@ export class PickupPointDetails extends Component {
     const { unavailableItems, items } = this.state
 
     return (
-      <div className={`${styles.pickupPointDetails} pickup-point-details`}>
-        <div className={`${styles.flexNone} pickup-point-details-top`}>
+      <div className="pickupPointDetails pickup-point-details">
+        <div className="flexNone pickup-point-details-top">
           <button
             type="button"
-            className={`${
-              styles.backLink
-            } link-back-pickup-points-list btn btn-link f6 blue no-underline`}
+            className="backLink link-back-pickup-points-list btn btn-link f6 blue no-underline"
             onClick={this.handleBackButtonClick}
           >
-            <i className={`${styles.iconBack} icon-angle-left`} />
+            <i className={'iconBack icon-angle-left'} />
             {this.translate('cancelBackList')}
           </button>
         </div>
 
-        <div
-          className={`${
-            styles.pickupDetailsMiddle
-          } pickup-point-details-middle`}
-        >
-          <div
-            className={`${
-              styles.pickupPointDetailsStore
-            } pickup-point-details-store`}
-          >
+        <div className="pickupDetailsMiddle pickup-point-details-middle">
+          <div className="pickupPointDetailsStore pickup-point-details-store">
             <PickupPoint
               items={items}
               logisticsInfo={logisticsInfo}
@@ -93,13 +83,9 @@ export class PickupPointDetails extends Component {
             />
           </div>
 
-          <div className={`${styles.info} pickup-point-details-info`}>
-            <div className={`${styles.group} pickup-point-details-group mb3`}>
-              <h3
-                className={`${
-                  styles.title
-                } pickup-point-details-info-title fw5 f6 pb1`}
-              >
+          <div className="info pickup-point-details-info">
+            <div className="group pickup-point-details-group mb3">
+              <h3 className="title pickup-point-details-info-title fw5 f6 pb1">
                 {this.translate('productsInPoint')}
               </h3>
               {items && <ProductItems items={items} />}
@@ -109,14 +95,8 @@ export class PickupPointDetails extends Component {
             </div>
             {pickupPoint.pickupStoreInfo &&
               pickupPoint.pickupStoreInfo.additionalInfo && (
-                <div
-                  className={`${styles.group} pickup-point-details-group mb3`}
-                >
-                  <h3
-                    className={`${
-                      styles.title
-                    } pickup-point-details-info-title fw5 f6 pb1`}
-                  >
+                <div className="group pickup-point-details-group mb3">
+                  <h3 className="title pickup-point-details-info-title fw5 f6 pb1">
                     {this.translate('aditionalInfo')}
                   </h3>
                   {pickupPoint.pickupStoreInfo.additionalInfo}
@@ -125,16 +105,10 @@ export class PickupPointDetails extends Component {
           </div>
         </div>
 
-        <div
-          className={`${styles.pickupPointDetailsBottom} ${
-            styles.bottom
-          } pickup-point-details-bottom mt3`}
-        >
+        <div className="pickupPointDetailsBottom bottom pickup-point-details-bottom mt3">
           <button
             type="button"
-            className={`${
-              styles.confirmButton
-            } pickup-point-details-confirm btn btn-success btn-large`}
+            className="confirmButton pickup-point-details-confirm btn btn-success btn-large"
             id={`confirm-pickup-${pickupPoint.id
               .replace(/[^\w\s]/gi, '')
               .split(' ')
@@ -163,13 +137,5 @@ PickupPointDetails.propTypes = {
   closePickupPointsModal: PropTypes.func.isRequired,
   logisticsInfo: PropTypes.array.isRequired,
 }
-
-const makeMapStateToProps = (state, props) => ({
-  pickupPoint: getPickupPointsByStateId(state, props),
-  storePreferencesData: state.orderForm.storePreferencesData,
-  isSelectedSla: isSelectedSla(state, props),
-  items: getItemsByPickup(state, props),
-  unavailableItems: getUnavailableItemsByPickup(state, props),
-})
 
 export default injectIntl(PickupPointDetails)

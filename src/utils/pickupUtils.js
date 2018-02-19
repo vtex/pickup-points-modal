@@ -44,3 +44,13 @@ export function getItemsByPickup(items, logisticsInfo, pickupPoint, sellerId) {
       logisticsInfo[index].slas.find(sla => sla.id === pickupPoint.id)
   )
 }
+
+export function getPickupOptionGeolocations(pickupOptions) {
+  return pickupOptions.map(
+    pickup => pickup.pickupStoreInfo.address.geoCoordinates
+  )
+}
+
+export function getPickupOptionGeolocation(pickupOption) {
+  return pickupOption.pickupStoreInfo.address.geoCoordinates
+}

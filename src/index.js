@@ -14,8 +14,10 @@ import UserGeolocation from './components/UserGeolocation'
 import Input from './components/Input'
 import Map from './components/Map'
 
+import { getPickupOptionGeolocations } from './utils/pickupUtils'
+
 import closebutton from './assets/icons/close_icon.svg'
-import styles from './index.css'
+import './index.css'
 
 export class PickupPointsModal extends Component {
   constructor(props) {
@@ -27,7 +29,7 @@ export class PickupPointsModal extends Component {
       largeScreen: window.innerWidth > 1023,
       shouldAskForGeolocation: false,
       selectedPickupPoint: props.selectedPickupPoint,
-      isPickupDetailsActive: false,
+      isPickupDetailsActive: props.isPickupDetailsActive,
     }
   }
 
@@ -80,7 +82,7 @@ export class PickupPointsModal extends Component {
     this.setState({ isPickupDetailsActive: !this.state.isPickupDetailsActive })
 
   handleAddressChange = address => {
-    this.props.handleAddressChange(address)
+    this.props.onAddressChange(address)
   }
 
   render() {
@@ -90,9 +92,7 @@ export class PickupPointsModal extends Component {
       searchAddress,
       intl,
       selectedRules,
-      pickupOptionGeolocations,
       changeActivePickupDetails,
-      selectedPickupPointGeolocation,
       sellerId,
       storePreferencesData,
       items,
@@ -115,24 +115,12 @@ export class PickupPointsModal extends Component {
     return (
       <div>
         <div
-          className={`${styles.backdrop} pickup-modal-backdrop`}
+          className="backdrop pickup-modal-backdrop"
           onClick={this.handleClick}
         />
-        <div
-          className={`${
-            styles.PickupModal
-          } pickup-modal aspect-ratio--object z-999 bg-white flex flex-column overflow-hidden fixed`}
-        >
-          <div
-            className={`${
-              styles.PickupModalHeader
-            } flex-none flex items-center bb b--light-gray`}
-          >
-            <div
-              className={`${
-                styles.PickupModalTitle
-              } pickup-modal-title flex-auto pv3 pl3`}
-            >
+        <div className="PickupModal pickup-modal aspect-ratio--object z-999 bg-white flex flex-column overflow-hidden fixed">
+          <div className="PickupModalHeader flex-none flex items-center bb b--light-gray">
+            <div className="PickupModalTitle pickup-modal-title flex-auto pv3 pl3">
               <Heading level="4" size="5" variation="bolder">
                 {isPickupDetailsActive
                   ? this.translate('pointDetails')
@@ -141,9 +129,9 @@ export class PickupPointsModal extends Component {
             </div>
             <button
               type="button"
-              className={`${
-                styles.PickupModalClose
-              } pickup-modal-close btn btn-link flex-none pa3 bn bg-white`}
+              className={
+                'PickupModalClose PickupModalClose pickup-modal-close btn btn-link flex-none pa3 bn bg-white'
+              }
               onClick={this.handleClick}
             >
               <img
@@ -176,25 +164,25 @@ export class PickupPointsModal extends Component {
                       },
                     }}
                     onChangeAddress={this.handleAddressChange}
-                    pickupOptionGeolocations={pickupOptionGeolocations}
+                    pickupOptionGeolocations={getPickupOptionGeolocations(
+                      pickupOptions
+                    )}
                     pickupOptions={pickupOptions}
                     rules={selectedRules}
                     shouldAskForGeolocation={shouldAskForGeolocation}
                     searchPickupAddressByGeolocationEvent={
                       this.props.searchPickupAddressByGeolocationEvent
                     }
-                    selectedPickupPointGeolocation={
-                      selectedPickupPointGeolocation
-                    }
+                    selectedPickupPointGeolocation={getPickupOptionGeolocation(
+                      selectedPickupPoint
+                    )}
                     pickupPoint={selectedPickupPoint}
                   />
                 )}
                 {!isPickupDetailsActive && (
                   <form
                     id="pickup-modal-search"
-                    className={`${
-                      styles.PickupModalSearch
-                    } pickup-modal-search flex-none pa2 relative`}
+                    className="PickupModalSearch pickup-modal-search flex-none pa2 relative"
                     onSubmit={this.handlePreventSubmitRefresh}
                   >
                     <GeolocationInput
@@ -212,7 +200,9 @@ export class PickupPointsModal extends Component {
                   navigator.geolocation && (
                     <UserGeolocation
                       address={searchAddress}
-                      pickupOptionGeolocations={pickupOptionGeolocations}
+                      pickupOptionGeolocations={getPickupOptionGeolocations(
+                        pickupOptions
+                      )}
                       googleMaps={googleMaps}
                       onChangeAddress={this.handleAddressChange}
                       rules={selectedRules}
@@ -223,9 +213,7 @@ export class PickupPointsModal extends Component {
           </GoogleMapsContainer>
 
           {!isPickupDetailsActive && (
-            <div
-              className={`${styles.pickupTabsContainer} pickup-tabs-container`}
-            >
+            <div className="pickupTabsContainer pickupTabsContainer pickup-tabs-container">
               <PickupTabs
                 mapStatus={mapStatus}
                 updateLocationTab={this.updateLocationTab}
@@ -235,16 +223,14 @@ export class PickupPointsModal extends Component {
 
           {isNotShowingPickupDetailsAndHasPickupOptions && (
             <div
-              className={`${
-                styles.PickupModalPointsList
-              } pickup-modal-points-list flex-auto relative overflow-auto`}
+              className={
+                'PickupModalPointsList pickup-modal-points-list flex-auto relative overflow-auto'
+              }
             >
               {pickupOptions.map(pickupPoint => (
                 <div
                   key={pickupPoint.id}
-                  className={`${
-                    styles.PickupModalPointsItem
-                  } pickup-modal-points-item`}
+                  className="PickupModalPointsItem pickup-modal-points-item"
                 >
                   <PickupPoint
                     items={items}
@@ -267,11 +253,7 @@ export class PickupPointsModal extends Component {
           )}
 
           {isPickupDetailsActive && (
-            <div
-              className={`${
-                styles.detail
-              } pickup-modal-details-wrapper flex-auto flex`}
-            >
+            <div className="detail pickup-modal-details-wrapper flex-auto flex">
               <PickupPointDetails
                 items={items}
                 logisticsInfo={logisticsInfo}
@@ -296,34 +278,18 @@ PickupPointsModal.propTypes = {
   intl: intlShape,
   pickupOptions: PropTypes.array.isRequired,
   closePickupPointsModal: PropTypes.func.isRequired,
+  onAddressChange: PropTypes.func.isRequired,
   googleMapsKey: PropTypes.string.isRequired,
   changeActivePickupDetails: PropTypes.func.isRequired,
-  pickupOptionGeolocations: PropTypes.array.isRequired,
   pickupPointId: PropTypes.string,
   searchAddress: PropTypes.object.isRequired,
   searchPickupAddressByGeolocationEvent: PropTypes.func,
   selectedPickupPoint: PropTypes.object,
   sellerId: PropTypes.string,
   selectedRules: PropTypes.object,
-  selectedPickupPointGeolocation: PropTypes.array,
   storePreferencesData: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
   logisticsInfo: PropTypes.array.isRequired,
 }
-
-const mapStateToProps = (state, props) => ({
-  sellerId: state.pickup.activeSellerId,
-  pickupOptions: getPickupOptionsBySeller(state, props),
-  searchAddress: getSearchAddress(state),
-  address: getAddress(state),
-  pickupOptionGeolocations: getPickupGeolocations(state),
-  isPickupDetailsActive: state.pickup.isPickupDetailsActive,
-  pickupPointId: state.pickup.pickupPointId,
-  selectedPickupPoint: getSelectedPickupSla(state, props),
-  selectedPickupPointGeolocation: getSelectedPickupPointGeolocation(
-    state,
-    props
-  ),
-})
 
 export default injectIntl(PickupPointsModal)
