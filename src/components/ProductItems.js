@@ -47,15 +47,19 @@ export class ProductItems extends Component {
               <div className="items delivery-items">
                 {itemsPackage.items.map(item => {
                   return (
-                    <img
+                    <span
+                      key={item.uniqueId}
+                      data-tip={item.name}
                       className={`item ${available ? '' : 'unavailable'} ${
                         available ? '' : 'delivery-item-unavailable'
-                      } delivery-item mr1`}
-                      key={item.uniqueId}
-                      src={fixImageUrl(item.imageUrl)}
-                      alt={item.name}
-                      data-tip={item.name}
-                    />
+                      } delivery-item mr1`}>
+                      <img
+                        src={fixImageUrl(item.imageUrl)}
+                        alt={item.name}
+                      />
+                      { !available && <span className="unavailable-slash"></span> }
+                      <ReactTooltip effect="solid" />
+                    </span>
                   )
                 })}
               </div>
@@ -68,18 +72,22 @@ export class ProductItems extends Component {
       <div className="items delivery-items">
         {items.map(item => {
           return (
-            <img
+            <span
+              key={item.uniqueId}
+              data-tip={item.name}
               className={`item ${available ? '' : 'unavailable'} ${
                 available ? '' : 'delivery-item-unavailable'
-              } delivery-item mr1`}
-              key={item.uniqueId}
-              src={fixImageUrl(item.imageUrl)}
-              alt={item.name}
-              data-tip="will run tests on every change and generate coverage report in the console as well as in coverage/ folder."
-            />
+              } delivery-item mr1`}>
+              <img
+                src={fixImageUrl(item.imageUrl)}
+                alt={item.name}
+                data-tip={item.name}
+              />
+              { !available && <span className="unavailable-slash"></span> }
+              <ReactTooltip effect="solid" />
+            </span>
           )
         })}
-        <ReactTooltip effect="solid" />
       </div>
     )
   }
