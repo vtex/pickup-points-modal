@@ -6,31 +6,19 @@ import { newAddress } from '../../src/utils/newAddress'
 import BRA from '@vtex/address-form/lib/country/BRA'
 import { SEARCH, PICKUP_IN_STORE } from '../../src/constants/index'
 import { addValidation } from '@vtex/address-form/lib/transforms/address'
+
 import '../../src/index.css'
 import '../../src/components/PickupPoint.css'
 import '../../src/components/PickupPointDetails.css'
 import '../../src/components/PickupTabs.css'
 import '../../src/components/ProductItems.css'
 
+import pickupMock from './pickup-options'
+import itemsMock from './items'
+import logisticsInfoMock from './logistics-info'
+
 const ACCOUNT_NAME = 'qamarketplace'
 const API_KEY = 'AIzaSyATLp76vkHxfMZqJF_sJbjQqZwvSIBhsTM'
-
-const pickup = {
-  id: '1',
-  price: 100,
-  shippingEstimate: '0bd',
-  pickupStoreInfo: {
-    friendlyName: 'xablau',
-    address: newAddress({
-      geoCoordinates: [1, 2],
-      country: 'BRA',
-      neighborhood: 'Botafogo',
-      street: 'Praia de Botafogo',
-      number: '300',
-      postalCode: '22.251-040',
-    }),
-  },
-}
 
 class App extends Component {
   constructor(props) {
@@ -38,25 +26,10 @@ class App extends Component {
 
     this.state = {
       isModalOpen: true,
-      selectedPickupPoint: pickup,
-      pickupOptions: [pickup],
-      logisticsInfo: [
-        {
-          itemIndex: 0,
-          selectedDeliveryChannel: PICKUP_IN_STORE,
-          deliveryChannels: [{ id: PICKUP_IN_STORE }],
-          slas: [pickup],
-        },
-      ],
-      items: [
-        {
-          seller: '1',
-          name: 'title',
-          imageUrl:
-            'https://basedevmkp.vteximg.com.br/arquivos/ids/168552-55-55/3413316.jpg',
-          uniqueId: '10',
-        },
-      ],
+      selectedPickupPoint: pickupMock.pickupOptions[0],
+      pickupOptions: pickupMock.pickupOptions,
+      logisticsInfo: logisticsInfoMock.logisticsInfo,
+      items: itemsMock.items,
       storePreferencesData: {
         countryCode: 'BRA',
         currencyCode: 'BRL',
@@ -83,7 +56,7 @@ class App extends Component {
 
   changeActivePickupDetails = () =>
     this.setState({
-      selectedPickupPoint: pickup,
+      selectedPickupPoint: pickupMock.pickupOptions[0],
     })
 
   handleAddressChange = address => this.setState({ address })
@@ -113,7 +86,7 @@ class App extends Component {
             items={items}
             isPickupDetailsActive={isPickupDetailsActive}
             logisticsInfo={logisticsInfo}
-            pickupOptions={pickupOptions}
+            pickupOptions={pickupMock.pickupOptions}
             searchAddress={searchAddress}
             selectedPickupPoint={selectedPickupPoint}
             rules={BRA}

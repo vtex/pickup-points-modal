@@ -3,7 +3,7 @@ import IntlContainer from './IntlContainer'
 
 import App from './App'
 
-const locale = 'en'
+const locale = 'pt'
 
 class Container extends Component {
   render() {

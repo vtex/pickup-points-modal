@@ -1,0 +1,473 @@
+{
+  "items": [
+    {
+      "uniqueId": "B273E28D4E864D388604C02C74067F81",
+      "id": "2361190",
+      "productId": "2176463",
+      "refId": "8658657",
+      "ean": null,
+      "name": "Regata Ace Basic Dry Preta 1 P",
+      "skuName": "P",
+      "modalType": null,
+      "priceValidUntil": "2020-01-31T16:30:00Z",
+      "tax": 0,
+      "price": 1999,
+      "listPrice": 1999,
+      "manualPrice": null,
+      "sellingPrice": 1999,
+      "rewardValue": 0,
+      "isGift": false,
+      "additionalInfo": {
+        "brandName": "C&A",
+        "brandId": "1",
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "preSaleDate": null,
+      "productCategoryIds": "/1000083/1000133/1000136/",
+      "productCategories": {
+        "1000083": "Moda Masculina",
+        "1000133": "Esporte Ace",
+        "1000136": "Camisetas"
+      },
+      "defaultPicker": null,
+      "handlerSequence": 0,
+      "handling": false,
+      "quantity": 1,
+      "seller": "1",
+      "sellerChain": ["1"],
+      "imageUrl":
+        "http://cea.vteximg.com.br/arquivos/ids/2446217-200-240/Regata-Ace-Basic-Dry-Preta-8573998-Preto_1.jpg?v=636548245964530000",
+      "detailUrl": "/regata-ace-basic-dry-preta-1-8573998-preto_1/p",
+      "components": [],
+      "bundleItems": [],
+      "attachments": [],
+      "itemAttachment": {
+        "name": null,
+        "content": {}
+      },
+      "attachmentOfferings": [],
+      "offerings": [],
+      "priceTags": [
+        {
+          "name":
+            "discount@shipping-46620c01-ff0c-4f1d-aa51-639bae230f95#6e5823f3-f878-4e23-a284-612dc8efbef8",
+          "value": -180,
+          "rawValue": -1.8,
+          "isPercentual": false,
+          "identifier": "46620c01-ff0c-4f1d-aa51-639bae230f95",
+          "ratesAndBenefitsIdentifier": {
+            "id": "46620c01-ff0c-4f1d-aa51-639bae230f95",
+            "name": "Frete Grátis - BI/PL - V2 - R$ 49,00",
+            "featured": false,
+            "description": "Frete Grátis - BI/PL - V2 - R$ 49,00",
+            "matchedParameters": {
+              "Seller@CatalogSystem": "1|inclusive",
+              "slaIds": "normal",
+              "productCluster@CatalogSystem": "2243|exclusive"
+            }
+          }
+        },
+        {
+          "name":
+            "discount@shipping-d702aa7b-02a9-4f16-8550-c3b4047368ac#f0e5c3fd-7140-495e-b370-723bff581efd",
+          "value": -201,
+          "rawValue": -2.01,
+          "isPercentual": false,
+          "identifier": "d702aa7b-02a9-4f16-8550-c3b4047368ac",
+          "ratesAndBenefitsIdentifier": {
+            "id": "d702aa7b-02a9-4f16-8550-c3b4047368ac",
+            "name": "Frete FG Retira",
+            "featured": false,
+            "description": "Pickup in store",
+            "matchedParameters": {
+              "Seller@CatalogSystem": "1|inclusive",
+              "slaIds":
+                "retirada na loja (cpw),retirada na loja (rcr),retirada na loja (itr),retirada na loja (tij),retirada na loja (cpo),retirada na loja (leb),retirada na loja (ipm),retirada na loja (tjs),retirada na loja (ban),retirada na loja (nbm),retirada na loja (alc),retirada na loja (bar),retirada na loja (mdu),retirada na loja (bot),retirada na loja (sgb),retirada na loja (nit),retirada na loja (sgs),retirada na loja (brx),retirada na loja (nil),retirada na loja (ouv),retirada na loja (cpr),retirada na loja (cpp),retirada na loja (suc),retirada na loja (nor),retirada na loja (vol),retirada na loja (jfs),retirada na loja (dqe),retirada na loja (dqs),retirada na loja (nig),retirada na loja (nir),retirada na loja (rio),retirada na loja (mix),retirada na loja (ame),retirada na loja (gov),retirada na loja (nis)"
+            }
+          }
+        }
+      ],
+      "availability": "available",
+      "measurementUnit": "un",
+      "unitMultiplier": 1
+    },
+    {
+      "uniqueId": "779E57BBF0B4402583B4B39D2C994C17",
+      "id": "2430126",
+      "productId": "2176412",
+      "refId": "9013804",
+      "ean": null,
+      "name": "Blusa em Suede com Nó Caramelo M",
+      "skuName": "M",
+      "modalType": null,
+      "priceValidUntil": "2020-01-31T16:30:00Z",
+      "tax": 0,
+      "price": 3999,
+      "listPrice": 3999,
+      "manualPrice": null,
+      "sellingPrice": 3999,
+      "rewardValue": 0,
+      "isGift": false,
+      "additionalInfo": {
+        "brandName": "C&A",
+        "brandId": "1",
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "preSaleDate": null,
+      "productCategoryIds": "/1000003/1000025/",
+      "productCategories": {
+        "1000003": "Moda Feminina",
+        "1000025": "Blusas",
+        "1000616": "Camisetas"
+      },
+      "defaultPicker": null,
+      "handlerSequence": 0,
+      "handling": false,
+      "quantity": 1,
+      "seller": "1",
+      "sellerChain": ["1"],
+      "imageUrl":
+        "http://cea.vteximg.com.br/arquivos/ids/2444759-200-240/Blusa-em-Suede-com-No-Caramelo-8740907-Caramelo_1.jpg?v=636548065033570000",
+      "detailUrl": "/blusa-em-suede-com-no-caramelo-8740907-caramelo_1/p",
+      "components": [],
+      "bundleItems": [],
+      "attachments": [],
+      "itemAttachment": {
+        "name": null,
+        "content": {}
+      },
+      "attachmentOfferings": [],
+      "offerings": [],
+      "priceTags": [
+        {
+          "name":
+            "discount@shipping-46620c01-ff0c-4f1d-aa51-639bae230f95#6e5823f3-f878-4e23-a284-612dc8efbef8",
+          "value": -180,
+          "rawValue": -1.8,
+          "isPercentual": false,
+          "identifier": "46620c01-ff0c-4f1d-aa51-639bae230f95",
+          "ratesAndBenefitsIdentifier": {
+            "id": "46620c01-ff0c-4f1d-aa51-639bae230f95",
+            "name": "Frete Grátis - BI/PL - V2 - R$ 49,00",
+            "featured": false,
+            "description": "Frete Grátis - BI/PL - V2 - R$ 49,00",
+            "matchedParameters": {
+              "Seller@CatalogSystem": "1|inclusive",
+              "slaIds": "normal",
+              "productCluster@CatalogSystem": "2243|exclusive"
+            }
+          }
+        },
+        {
+          "name":
+            "discount@shipping-d702aa7b-02a9-4f16-8550-c3b4047368ac#f0e5c3fd-7140-495e-b370-723bff581efd",
+          "value": -201,
+          "rawValue": -2.01,
+          "isPercentual": false,
+          "identifier": "d702aa7b-02a9-4f16-8550-c3b4047368ac",
+          "ratesAndBenefitsIdentifier": {
+            "id": "d702aa7b-02a9-4f16-8550-c3b4047368ac",
+            "name": "Frete FG Retira",
+            "featured": false,
+            "description": "Pickup in store",
+            "matchedParameters": {
+              "Seller@CatalogSystem": "1|inclusive",
+              "slaIds":
+                "retirada na loja (cpw),retirada na loja (rcr),retirada na loja (itr),retirada na loja (tij),retirada na loja (cpo),retirada na loja (leb),retirada na loja (ipm),retirada na loja (tjs),retirada na loja (ban),retirada na loja (nbm),retirada na loja (alc),retirada na loja (bar),retirada na loja (mdu),retirada na loja (bot),retirada na loja (sgb),retirada na loja (nit),retirada na loja (sgs),retirada na loja (brx),retirada na loja (nil),retirada na loja (ouv),retirada na loja (cpr),retirada na loja (cpp),retirada na loja (suc),retirada na loja (nor),retirada na loja (vol),retirada na loja (jfs),retirada na loja (dqe),retirada na loja (dqs),retirada na loja (nig),retirada na loja (nir),retirada na loja (rio),retirada na loja (mix),retirada na loja (ame),retirada na loja (gov),retirada na loja (nis)"
+            }
+          }
+        }
+      ],
+      "availability": "available",
+      "measurementUnit": "un",
+      "unitMultiplier": 1
+    },
+    {
+      "uniqueId": "731CE4245538437D97657FB6118F9F23",
+      "id": "2425302",
+      "productId": "2175869",
+      "refId": "8786444",
+      "ean": null,
+      "name":
+        "Body Estampado 101 Dálmatas em Algodão + Sustentável  Branco 0-3",
+      "skuName": "0-3",
+      "modalType": null,
+      "priceValidUntil": "2020-01-31T16:30:00Z",
+      "tax": 0,
+      "price": 1999,
+      "listPrice": 1999,
+      "manualPrice": null,
+      "sellingPrice": 1999,
+      "rewardValue": 0,
+      "isGift": false,
+      "additionalInfo": {
+        "brandName": "C&A",
+        "brandId": "1",
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "preSaleDate": null,
+      "productCategoryIds": "/1000162/1000168/",
+      "productCategories": {
+        "1000162": "Menino",
+        "1000168": "Bodies",
+        "1000562": "Moda Infantil",
+        "1000564": "Blusas",
+        "1000565": "Bodies"
+      },
+      "defaultPicker": null,
+      "handlerSequence": 0,
+      "handling": false,
+      "quantity": 1,
+      "seller": "1",
+      "sellerChain": ["1"],
+      "imageUrl":
+        "http://cea.vteximg.com.br/arquivos/ids/2417212-200-240/Body-Estampado-101-Dalmatas-em-Algodao---Sustentavel--Branco-8786443-Branco_1.jpg?v=636544014685500000",
+      "detailUrl":
+        "/body-estampado-101-dalmatas-em-algodao---sustentavel--branco-8786443-branco/p",
+      "components": [],
+      "bundleItems": [],
+      "attachments": [],
+      "itemAttachment": {
+        "name": null,
+        "content": {}
+      },
+      "attachmentOfferings": [],
+      "offerings": [],
+      "priceTags": [
+        {
+          "name":
+            "discount@shipping-46620c01-ff0c-4f1d-aa51-639bae230f95#6e5823f3-f878-4e23-a284-612dc8efbef8",
+          "value": -129,
+          "rawValue": -1.29,
+          "isPercentual": false,
+          "identifier": "46620c01-ff0c-4f1d-aa51-639bae230f95",
+          "ratesAndBenefitsIdentifier": {
+            "id": "46620c01-ff0c-4f1d-aa51-639bae230f95",
+            "name": "Frete Grátis - BI/PL - V2 - R$ 49,00",
+            "featured": false,
+            "description": "Frete Grátis - BI/PL - V2 - R$ 49,00",
+            "matchedParameters": {
+              "Seller@CatalogSystem": "1|inclusive",
+              "slaIds": "normal",
+              "productCluster@CatalogSystem": "2243|exclusive"
+            }
+          }
+        },
+        {
+          "name":
+            "discount@shipping-d702aa7b-02a9-4f16-8550-c3b4047368ac#f0e5c3fd-7140-495e-b370-723bff581efd",
+          "value": -145,
+          "rawValue": -1.45,
+          "isPercentual": false,
+          "identifier": "d702aa7b-02a9-4f16-8550-c3b4047368ac",
+          "ratesAndBenefitsIdentifier": {
+            "id": "d702aa7b-02a9-4f16-8550-c3b4047368ac",
+            "name": "Frete FG Retira",
+            "featured": false,
+            "description": "Pickup in store",
+            "matchedParameters": {
+              "Seller@CatalogSystem": "1|inclusive",
+              "slaIds":
+                "retirada na loja (cpw),retirada na loja (rcr),retirada na loja (itr),retirada na loja (tij),retirada na loja (cpo),retirada na loja (leb),retirada na loja (ipm),retirada na loja (tjs),retirada na loja (ban),retirada na loja (nbm),retirada na loja (alc),retirada na loja (bar),retirada na loja (mdu),retirada na loja (bot),retirada na loja (sgb),retirada na loja (nit),retirada na loja (sgs),retirada na loja (brx),retirada na loja (nil),retirada na loja (ouv),retirada na loja (cpr),retirada na loja (cpp),retirada na loja (suc),retirada na loja (nor),retirada na loja (vol),retirada na loja (jfs),retirada na loja (dqe),retirada na loja (dqs),retirada na loja (nig),retirada na loja (nir),retirada na loja (rio),retirada na loja (mix),retirada na loja (ame),retirada na loja (gov),retirada na loja (nis)"
+            }
+          }
+        }
+      ],
+      "availability": "available",
+      "measurementUnit": "un",
+      "unitMultiplier": 1
+    },
+    {
+      "uniqueId": "4D357B1460B54FC693AE3A0709DF62E8",
+      "id": "2427794",
+      "productId": "2175411",
+      "refId": "8908421",
+      "ean": null,
+      "name": "Camiseta com Estampa de Coqueiro Branca P",
+      "skuName": "P",
+      "modalType": null,
+      "priceValidUntil": "2020-01-31T16:30:00Z",
+      "tax": 0,
+      "price": 2999,
+      "listPrice": 2999,
+      "manualPrice": null,
+      "sellingPrice": 2999,
+      "rewardValue": 0,
+      "isGift": false,
+      "additionalInfo": {
+        "brandName": "C&A",
+        "brandId": "1",
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "preSaleDate": null,
+      "productCategoryIds": "/1000083/1000198/1000306/",
+      "productCategories": {
+        "1000083": "Moda Masculina",
+        "1000084": "Camisetas",
+        "1000198": "Moda Praia",
+        "1000306": "Camisetas"
+      },
+      "defaultPicker": null,
+      "handlerSequence": 0,
+      "handling": false,
+      "quantity": 1,
+      "seller": "1",
+      "sellerChain": ["1"],
+      "imageUrl":
+        "http://cea.vteximg.com.br/arquivos/ids/2375127-200-240/Camiseta-com-Estampa-de-Coqueiro-Branca-8908417-Branco_1.jpg?v=636537863056170000",
+      "detailUrl": "/camiseta-com-estampa-de-coqueiro-branca-8908417-branco/p",
+      "components": [],
+      "bundleItems": [],
+      "attachments": [],
+      "itemAttachment": {
+        "name": null,
+        "content": {}
+      },
+      "attachmentOfferings": [],
+      "offerings": [],
+      "priceTags": [
+        {
+          "name":
+            "discount@shipping-46620c01-ff0c-4f1d-aa51-639bae230f95#6e5823f3-f878-4e23-a284-612dc8efbef8",
+          "value": -180,
+          "rawValue": -1.8,
+          "isPercentual": false,
+          "identifier": "46620c01-ff0c-4f1d-aa51-639bae230f95",
+          "ratesAndBenefitsIdentifier": {
+            "id": "46620c01-ff0c-4f1d-aa51-639bae230f95",
+            "name": "Frete Grátis - BI/PL - V2 - R$ 49,00",
+            "featured": false,
+            "description": "Frete Grátis - BI/PL - V2 - R$ 49,00",
+            "matchedParameters": {
+              "Seller@CatalogSystem": "1|inclusive",
+              "slaIds": "normal",
+              "productCluster@CatalogSystem": "2243|exclusive"
+            }
+          }
+        },
+        {
+          "name":
+            "discount@shipping-d702aa7b-02a9-4f16-8550-c3b4047368ac#f0e5c3fd-7140-495e-b370-723bff581efd",
+          "value": -201,
+          "rawValue": -2.01,
+          "isPercentual": false,
+          "identifier": "d702aa7b-02a9-4f16-8550-c3b4047368ac",
+          "ratesAndBenefitsIdentifier": {
+            "id": "d702aa7b-02a9-4f16-8550-c3b4047368ac",
+            "name": "Frete FG Retira",
+            "featured": false,
+            "description": "Pickup in store",
+            "matchedParameters": {
+              "Seller@CatalogSystem": "1|inclusive",
+              "slaIds":
+                "retirada na loja (cpw),retirada na loja (rcr),retirada na loja (itr),retirada na loja (tij),retirada na loja (cpo),retirada na loja (leb),retirada na loja (ipm),retirada na loja (tjs),retirada na loja (ban),retirada na loja (nbm),retirada na loja (alc),retirada na loja (bar),retirada na loja (mdu),retirada na loja (bot),retirada na loja (sgb),retirada na loja (nit),retirada na loja (sgs),retirada na loja (brx),retirada na loja (nil),retirada na loja (ouv),retirada na loja (cpr),retirada na loja (cpp),retirada na loja (suc),retirada na loja (nor),retirada na loja (vol),retirada na loja (jfs),retirada na loja (dqe),retirada na loja (dqs),retirada na loja (nig),retirada na loja (nir),retirada na loja (rio),retirada na loja (mix),retirada na loja (ame),retirada na loja (gov),retirada na loja (nis)"
+            }
+          }
+        }
+      ],
+      "availability": "available",
+      "measurementUnit": "un",
+      "unitMultiplier": 1
+    },
+    {
+      "uniqueId": "39F3A4912D0C4EA99C5D7612E6AA5986",
+      "id": "2428390",
+      "productId": "2175430",
+      "refId": "8969390",
+      "ean": null,
+      "name": "Regata 2 New York Preta P",
+      "skuName": "P",
+      "modalType": null,
+      "priceValidUntil": "2020-01-31T16:30:00Z",
+      "tax": 0,
+      "price": 2999,
+      "listPrice": 2999,
+      "manualPrice": null,
+      "sellingPrice": 2999,
+      "rewardValue": 0,
+      "isGift": false,
+      "additionalInfo": {
+        "brandName": "C&A",
+        "brandId": "1",
+        "offeringInfo": null,
+        "offeringType": null,
+        "offeringTypeId": null
+      },
+      "preSaleDate": null,
+      "productCategoryIds": "/1000083/1000084/",
+      "productCategories": {
+        "1000083": "Moda Masculina",
+        "1000084": "Camisetas"
+      },
+      "defaultPicker": null,
+      "handlerSequence": 0,
+      "handling": false,
+      "quantity": 1,
+      "seller": "1",
+      "sellerChain": ["1"],
+      "imageUrl":
+        "http://cea.vteximg.com.br/arquivos/ids/2375010-200-240/Regata--2-New-York--Preta-8969381-Preto_1.jpg?v=636537857218400000",
+      "detailUrl": "/regata--2-new-york--preta-8969381-preto/p",
+      "components": [],
+      "bundleItems": [],
+      "attachments": [],
+      "itemAttachment": {
+        "name": null,
+        "content": {}
+      },
+      "attachmentOfferings": [],
+      "offerings": [],
+      "priceTags": [
+        {
+          "name":
+            "discount@shipping-46620c01-ff0c-4f1d-aa51-639bae230f95#6e5823f3-f878-4e23-a284-612dc8efbef8",
+          "value": -180,
+          "rawValue": -1.8,
+          "isPercentual": false,
+          "identifier": "46620c01-ff0c-4f1d-aa51-639bae230f95",
+          "ratesAndBenefitsIdentifier": {
+            "id": "46620c01-ff0c-4f1d-aa51-639bae230f95",
+            "name": "Frete Grátis - BI/PL - V2 - R$ 49,00",
+            "featured": false,
+            "description": "Frete Grátis - BI/PL - V2 - R$ 49,00",
+            "matchedParameters": {
+              "Seller@CatalogSystem": "1|inclusive",
+              "slaIds": "normal",
+              "productCluster@CatalogSystem": "2243|exclusive"
+            }
+          }
+        },
+        {
+          "name":
+            "discount@shipping-d702aa7b-02a9-4f16-8550-c3b4047368ac#f0e5c3fd-7140-495e-b370-723bff581efd",
+          "value": -201,
+          "rawValue": -2.01,
+          "isPercentual": false,
+          "identifier": "d702aa7b-02a9-4f16-8550-c3b4047368ac",
+          "ratesAndBenefitsIdentifier": {
+            "id": "d702aa7b-02a9-4f16-8550-c3b4047368ac",
+            "name": "Frete FG Retira",
+            "featured": false,
+            "description": "Pickup in store",
+            "matchedParameters": {
+              "Seller@CatalogSystem": "1|inclusive",
+              "slaIds":
+                "retirada na loja (cpw),retirada na loja (rcr),retirada na loja (itr),retirada na loja (tij),retirada na loja (cpo),retirada na loja (leb),retirada na loja (ipm),retirada na loja (tjs),retirada na loja (ban),retirada na loja (nbm),retirada na loja (alc),retirada na loja (bar),retirada na loja (mdu),retirada na loja (bot),retirada na loja (sgb),retirada na loja (nit),retirada na loja (sgs),retirada na loja (brx),retirada na loja (nil),retirada na loja (ouv),retirada na loja (cpr),retirada na loja (cpp),retirada na loja (suc),retirada na loja (nor),retirada na loja (vol),retirada na loja (jfs),retirada na loja (dqe),retirada na loja (dqs),retirada na loja (nig),retirada na loja (nir),retirada na loja (rio),retirada na loja (mix),retirada na loja (ame),retirada na loja (gov),retirada na loja (nis)"
+            }
+          }
+        }
+      ],
+      "availability": "available",
+      "measurementUnit": "un",
+      "unitMultiplier": 1
+    }
+  ]
+}

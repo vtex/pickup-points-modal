@@ -308,7 +308,7 @@ Map.propTypes = {
   changeActivePickupDetails: PropTypes.func.isRequired,
   geoCoordinates: PropTypes.array,
   googleMaps: PropTypes.object,
-  isPickupDetailsActive: PropTypes.bool.isRequired,
+  isPickupDetailsActive: PropTypes.bool,
   largeScreen: PropTypes.bool,
   loadingElement: PropTypes.node,
   loadingGoogle: PropTypes.bool,

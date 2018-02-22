@@ -4,9 +4,9 @@ import { IntlProvider, addLocaleData } from 'react-intl'
 import reduce from 'lodash/reduce'
 import { getISOAlpha3 } from './countryISO'
 
-import enLocaleData from 'react-intl/locale-data/en'
-import enAdressFormTranslations from '../../src/locales/en.json'
-import enCountryCodeTranslations from 'i18n-iso-countries/langs/en.json'
+import enLocaleData from 'react-intl/locale-data/pt'
+import enAdressFormTranslations from '../../src/locales/pt.json'
+import enCountryCodeTranslations from 'i18n-iso-countries/langs/pt.json'
 
 addLocaleData(enLocaleData)
 
@@ -15,7 +15,7 @@ class IntlContainer extends Component {
     super(props)
 
     this.state = {
-      locale: 'en',
+      locale: 'pt',
       messages: {
         ...enAdressFormTranslations,
         ...this.addCountryCodeNameSpace(enCountryCodeTranslations),

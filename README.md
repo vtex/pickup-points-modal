@@ -46,7 +46,7 @@ PickupPointsModal.propTypes = {
   changeActiveSLAOption: PropTypes.func.isRequired,
   googleMapsKey: PropTypes.string.isRequired,
   items: PropTypes.array.isRequired,
-  isPickupDetailsActive: PropTypes.bool.isRequired,
+  isPickupDetailsActive: PropTypes.bool,
   logisticsInfo: PropTypes.array.isRequired
   onAddressChange: PropTypes.func.isRequired,
   pickupOptions: PropTypes.array.isRequired,
