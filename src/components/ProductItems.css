@@ -10,10 +10,32 @@
   padding: 2px;
 }
 
+.unavailable img {
+  opacity: 0.3;
+}
+
 .unavailable {
-  opacity: 0.5;
+  position: relative;
+  overflow: hidden;
+  border-color: #FFC1C1;
+}
+
+.unavailable-slash {
+  content: ' ';
+  top: 49%;
+  left: -20%;
+  position: absolute;
+
+  background: #FFC1C1;
+  transform: rotate(45deg);
+  width: 140%;
+  height: 1px;
 }
 
 .itemsGroup {
   margin: 10px 0 0;
+}
+
+.__react_component_tooltip {
+  max-width: 200px;
 }

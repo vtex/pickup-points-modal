@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { fixImageUrl } from '../utils/Images'
+import ReactTooltip from 'react-tooltip'
 
 import './ProductItems.css'
 
@@ -13,7 +14,7 @@ export class ProductItems extends Component {
     const { itemsByPackages, items, available } = this.props
 
     return itemsByPackages ? (
-      <div className={styles.itemsGroup}>
+      <div className="itemsGroup">
         {itemsByPackages.map(itemsPackage => {
           const days =
             itemsPackage.selectedSlaItem &&
@@ -46,33 +47,45 @@ export class ProductItems extends Component {
               <div className="items delivery-items">
                 {itemsPackage.items.map(item => {
                   return (
-                    <img
+                    <span
+                      key={item.uniqueId}
+                      data-tip={item.name}
                       className={`item ${available ? '' : 'unavailable'} ${
                         available ? '' : 'delivery-item-unavailable'
-                      } delivery-item mr1`}
-                      key={item.uniqueId}
-                      src={fixImageUrl(item.imageUrl)}
-                      alt={item.name}
-                    />
+                      } delivery-item mr1`}>
+                      <img
+                        src={fixImageUrl(item.imageUrl)}
+                        alt={item.name}
+                      />
+                      { !available && <span className="unavailable-slash"></span> }
+                      <ReactTooltip effect="solid" />
+                    </span>
                   )
                 })}
               </div>
             </div>
           )
         })}
+        <ReactTooltip effect="solid" />
       </div>
     ) : (
       <div className="items delivery-items">
         {items.map(item => {
           return (
-            <img
+            <span
+              key={item.uniqueId}
+              data-tip={item.name}
               className={`item ${available ? '' : 'unavailable'} ${
                 available ? '' : 'delivery-item-unavailable'
-              } delivery-item mr1`}
-              key={item.uniqueId}
-              src={fixImageUrl(item.imageUrl)}
-              alt={item.name}
-            />
+              } delivery-item mr1`}>
+              <img
+                src={fixImageUrl(item.imageUrl)}
+                alt={item.name}
+                data-tip={item.name}
+              />
+              { !available && <span className="unavailable-slash"></span> }
+              <ReactTooltip effect="solid" />
+            </span>
           )
         })}
       </div>
