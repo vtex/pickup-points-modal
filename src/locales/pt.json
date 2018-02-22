@@ -11,7 +11,7 @@
   "pickupPointsModal.items":
     "{itemsAmount, plural, =0 {} one {# item} other {# itens}}",
   "pickupPointsModal.pickupSummary": "Retirada",
-  "pickupPointsModal.cancelBackList": "Cancelar e voltar para a lista",
+  "pickupPointsModal.cancelBackList": "Ver todos os pontos de retirada",
   "pickupPointsModal.cancelPickup": "Cancelar retirada",
   "pickupPointsModal.chooseDelivery": "Escolha o tipo de entrega",
   "pickupPointsModal.choosePickup": "Retire em um ponto",
