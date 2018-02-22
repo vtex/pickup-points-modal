@@ -14,7 +14,7 @@ export class ProductItems extends Component {
     const { itemsByPackages, items, available } = this.props
 
     return itemsByPackages ? (
-      <div className={styles.itemsGroup}>
+      <div className="itemsGroup">
         {itemsByPackages.map(itemsPackage => {
           const days =
             itemsPackage.selectedSlaItem &&
