@@ -92,6 +92,8 @@ export class PickupPointsModal extends Component {
     this.setState({ isPickupDetailsActive: !this.state.isPickupDetailsActive })
 
   handleAddressChange = address => {
+    console.log(address)
+    if (!address.postalCode.value) return
     this.props.onAddressChange(address)
   }
 

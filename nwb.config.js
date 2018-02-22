@@ -17,5 +17,8 @@ module.exports = {
       allChunks: true,
       filename: 'styles.css',
     },
+    html: {
+      template: 'src/index.html',
+    },
   },
 }

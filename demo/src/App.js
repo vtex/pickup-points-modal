@@ -23,6 +23,8 @@ const pickup = {
     friendlyName: 'xablau',
     address: newAddress({
       geoCoordinates: [1, 2],
+      country: 'BRA',
+      neighborhood: 'Botafogo',
       street: 'Praia de Botafogo',
       number: '300',
       postalCode: '22.251-040',
@@ -114,7 +116,7 @@ class App extends Component {
             pickupOptions={pickupOptions}
             searchAddress={searchAddress}
             selectedPickupPoint={selectedPickupPoint}
-            selectedRules={BRA}
+            rules={BRA}
             storePreferencesData={storePreferencesData}
           />
         )}
