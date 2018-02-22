@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { fixImageUrl } from '../utils/Images'
+import ReactTooltip from 'react-tooltip'
 
 import './ProductItems.css'
 
@@ -53,6 +54,7 @@ export class ProductItems extends Component {
                       key={item.uniqueId}
                       src={fixImageUrl(item.imageUrl)}
                       alt={item.name}
+                      data-tip={item.name}
                     />
                   )
                 })}
@@ -60,6 +62,7 @@ export class ProductItems extends Component {
             </div>
           )
         })}
+        <ReactTooltip effect="solid" />
       </div>
     ) : (
       <div className="items delivery-items">
@@ -72,9 +75,11 @@ export class ProductItems extends Component {
               key={item.uniqueId}
               src={fixImageUrl(item.imageUrl)}
               alt={item.name}
+              data-tip="will run tests on every change and generate coverage report in the console as well as in coverage/ folder."
             />
           )
         })}
+        <ReactTooltip effect="solid" />
       </div>
     )
   }

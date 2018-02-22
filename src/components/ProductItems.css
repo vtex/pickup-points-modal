@@ -17,3 +17,7 @@
 .itemsGroup {
   margin: 10px 0 0;
 }
+
+.__react_component_tooltip {
+  max-width: 200px;
+}
