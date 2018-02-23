@@ -11,7 +11,7 @@
   "pickupPointsModal.items":
     "{itemsAmount, plural, =0 {} one {# item} other {# itens}}",
   "pickupPointsModal.pickupSummary": "Retirada",
-  "pickupPointsModal.cancelBackList": "Cancelar y volver a la lista",
+  "pickupPointsModal.cancelBackList": "Ver todos los puntos de recogida",
   "pickupPointsModal.cancelPickup": "Cancelar la recolección",
   "pickupPointsModal.chooseDelivery": "Elegir la opción de entrega",
   "pickupPointsModal.choosePickup": "Recogida en un punto",
@@ -55,7 +55,7 @@
   "pickupPointsModal.details": "Ver detalles o cambiar el punto de retirada.",
   "pickupPointsModal.searchLocationMap":
     "Buscar por Lugar, Código Postal, Barrio o Ciudad",
-  "pickupPointsModal.productsInPoint": "Productos en este punto",
+  "pickupPointsModal.productsInPoint": "Disponibilidad de productos en este punto",
   "pickupPointsModal.aditionalInfo": "Otras informaciones",
   "pickupPointsModal.unavailable": "indisponible",
   "pickupPointsModal.unavailableItemsAmount":
