@@ -37,7 +37,7 @@ export class PickupPointDetails extends Component {
     this.props.handleChangeActiveSLAOption({
       slaOption: this.props.pickupPoint.id,
       sellerId: this.props.sellerId,
-      updateShippingData: false,
+      shouldUpdateShippingData: false,
     })
     this.props.togglePickupDetails()
     this.props.handleClosePickupPointsModal()
