@@ -11,7 +11,7 @@
   "pickupPointsModal.items":
     "{itemsAmount, plural, =0 {} one {# item} other {# items}}",
   "pickupPointsModal.pickupSummary": "Pickup",
-  "pickupPointsModal.cancelBackList": "Back to the pickup points list",
+  "pickupPointsModal.cancelBackList": "See all pickup points",
   "pickupPointsModal.cancelPickup": "Cancel pickup",
   "pickupPointsModal.chooseDelivery": "Select a delivery option",
   "pickupPointsModal.choosePickup": "Pickup in a point",
@@ -55,7 +55,7 @@
   "pickupPointsModal.details": "See details or change the pickup point.",
   "pickupPointsModal.searchLocationMap":
     "Search for Street, ZIP Code or neighborhood or city",
-  "pickupPointsModal.productsInPoint": "Products available in this pickup point",
+  "pickupPointsModal.productsInPoint": "Product availability in this pickup point",
   "pickupPointsModal.aditionalInfo": "Other information",
   "pickupPointsModal.unavailable": "unavailable",
   "pickupPointsModal.unavailableItemsAmount":
