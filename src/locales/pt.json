@@ -18,24 +18,25 @@
   "pickupPointsModal.findPickup": "Econtre um ponto de retirada perto de você.",
   "pickupPointsModal.noPickupSelected": "Nenhuma loja selecionada",
   "pickupPointsModal.slaOption": "{name} - {price} - {shippingEstimate}",
-  "pickupPointsModal.slaOptionSimple": "{price} - {shippingEstimate}{scheduled}",
+  "pickupPointsModal.slaOptionSimple":
+    "{price} - {shippingEstimate}{scheduled}",
   "pickupPointsModal.shippingEstimate-bd":
-    "{days, plural, =0 {No mesmo dia} one {# dia útil} other {Até # dias úteis}}",
+    "{timeAmount, plural, =0 {No mesmo dia} one {# dia útil} other {Até # dias úteis}}",
   "pickupPointsModal.shippingEstimate-d":
-    "{days, plural, =0 {No mesmo dia} one {# dia} other {Até # dias}}",
+    "{timeAmount, plural, =0 {No mesmo dia} one {# dia} other {Até # dias}}",
   "pickupPointsModal.shippingEstimate-h":
-    "{days, plural, =0 {Entrega imediata} one {# hora} other {Até # horas}}",
+    "{timeAmount, plural, =0 {Entrega imediata} one {# hora} other {Até # horas}}",
   "pickupPointsModal.shippingEstimate-m":
-    "{days, plural, =0 {Entrega imediata} one {# minuto} other {Até # minutos}}",
+    "{timeAmount, plural, =0 {Entrega imediata} one {# minuto} other {Até # minutos}}",
   "pickupPointsModal.free": "Grátis",
   "pickupPointsModal.shippingEstimatePickup-bd":
-    "{days, plural, =0 {Pronto no mesmo dia} one {Pronto em até # dia útil} other {Pronto em até # dias úteis}}",
+    "{timeAmount, plural, =0 {Pronto no mesmo dia} one {Pronto em até # dia útil} other {Pronto em até # dias úteis}}",
   "pickupPointsModal.shippingEstimatePickup-d":
-    "{days, plural, =0 {Pronto no mesmo dia} one {Pronto em até # dia} other {Pronto em até # dias}}",
+    "{timeAmount, plural, =0 {Pronto no mesmo dia} one {Pronto em até # dia} other {Pronto em até # dias}}",
   "pickupPointsModal.shippingEstimatePickup-h":
-    "{days, plural, =0 {Retirada imediata} one {Pronto em até # hora} other {Pronto em até # horas}}",
+    "{timeAmount, plural, =0 {Retirada imediata} one {Pronto em até # hora} other {Pronto em até # horas}}",
   "pickupPointsModal.shippingEstimatePickup-m":
-    "{days, plural, =0 {Retirada imediata} one {pronto em # minuto} other {Pronto em até # minutos}}",
+    "{timeAmount, plural, =0 {Retirada imediata} one {pronto em # minuto} other {Pronto em até # minutos}}",
   "pickupPointsModal.scheduled": "Agendado",
   "pickupPointsModal.scheduledDeliveryChoice": "Escolha sua data de entrega",
   "pickupPointsModal.selectPickupPoint": "Selecione um ponto de retirada",
@@ -53,8 +54,10 @@
   "pickupPointsModal.pickupPoint.modify": "Alterar",
   "pickupPointsModal.modify": "alterar",
   "pickupPointsModal.details": "Ver detalhes ou altere o ponto de retirada.",
-  "pickupPointsModal.searchLocationMap": "Buscar por Lugar, CEP, Bairro ou Cidade",
-  "pickupPointsModal.productsInPoint": "Disponibilidade de produtos neste ponto",
+  "pickupPointsModal.searchLocationMap":
+    "Buscar por Lugar, CEP, Bairro ou Cidade",
+  "pickupPointsModal.productsInPoint":
+    "Disponibilidade de produtos neste ponto",
   "pickupPointsModal.aditionalInfo": "Outras informações",
   "pickupPointsModal.unavailable": "indisponível",
   "pickupPointsModal.unavailableItemsAmount":
@@ -62,7 +65,8 @@
   "pickupPointsModal.confirmPoint": "Retirar neste ponto",
   "pickupPointsModal.modifyDeliveryOptions": "Alterar opções de entrega",
   "pickupPointsModal.shippingAddress": "Endereço de recebimento",
-  "pickupPointsModal.editSelectedAddressButton": "Modificar endereço selecionado",
+  "pickupPointsModal.editSelectedAddressButton":
+    "Modificar endereço selecionado",
   "pickupPointsModal.addDeliveryPlaceButton": "Entregar em outro endereço",
   "pickupPointsModal.unavailableDelivery":
     "{items, plural, =0 {} one {O item a seguir está com entrega indisponível para o CEP escolhido.} other {Os itens a seguir estão com entrega indisponível para o CEP escolhido.}}",
@@ -73,7 +77,8 @@
   "pickupPointsModal.changePostalCode": "Altere seu CEP",
   "pickupPointsModal.removeFromCart":
     "{items, plural, =0 {} one {remova o item do carrinho.} other {remova os items do carrinho.}}",
-  "pickupPointsModal.noTimesAvailable": "Nenhum horário disponível para esta data.",
+  "pickupPointsModal.noTimesAvailable":
+    "Nenhum horário disponível para esta data.",
   "pickupPointsModal.productsFromSeller": "Produtos de {seller}",
   "pickupPointsModal.deliverySplitDisclaimer":
     "Opa! Alguns itens não podem ser entregues neste endereço. Escolha um ponto de retirada.",
@@ -81,6 +86,7 @@
     "Opa! Alguns itens não podem ser retirados neste ponto. Informe um endereço para recebê-los.",
   "pickupPointsModal.pickupSplitDisclaimerLogged":
     "Opa! Alguns itens não podem ser retirados neste ponto. Escolha um endereço para recebê-los.",
-  "pickupPointsModal.price": "{value, plural, =0 {Grátis} other {{formattedPrice}}}",
+  "pickupPointsModal.price":
+    "{value, plural, =0 {Grátis} other {{formattedPrice}}}",
   "pickupPointsModal.askGeolocation": "Pesquise um endereço com sua localização"
 }

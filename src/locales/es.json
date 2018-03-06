@@ -18,24 +18,25 @@
   "pickupPointsModal.findPickup": "Encuentra un punto de recogida a tu lado.",
   "pickupPointsModal.noPickupSelected": "No hay tienda seleccionada",
   "pickupPointsModal.slaOption": "{name} - {price} - {shippingEstimate}",
-  "pickupPointsModal.slaOptionSimple": "{price} - {shippingEstimate}{scheduled}",
+  "pickupPointsModal.slaOptionSimple":
+    "{price} - {shippingEstimate}{scheduled}",
   "pickupPointsModal.shippingEstimate-bd":
-    "{days, plural, =0 {mismo día} one {# día hábil} other {Hasta # día hábiles}}",
+    "{timeAmount, plural, =0 {mismo día} one {# día hábil} other {Hasta # día hábiles}}",
   "pickupPointsModal.shippingEstimate-d":
-    "{days, plural, =0 {mismo día} one {# día} other {Hasta # días}}",
+    "{timeAmount, plural, =0 {mismo día} one {# día} other {Hasta # días}}",
   "pickupPointsModal.shippingEstimate-h":
-    "{days, plural, =0 {Entrega inmediata} one {# hora} other {Hasta # horas}}",
+    "{timeAmount, plural, =0 {Entrega inmediata} one {# hora} other {Hasta # horas}}",
   "pickupPointsModal.shippingEstimate-m":
-    "{days, plural, =0 {Entrega inmediata} one {# minuto} other {Hasta # minutos}}",
+    "{timeAmount, plural, =0 {Entrega inmediata} one {# minuto} other {Hasta # minutos}}",
   "pickupPointsModal.free": "Gratis",
   "pickupPointsModal.shippingEstimatePickup-bd":
-    "{days, plural, =0 {Listo el mismo día} one {Listo en hasta # día hábil} other {Listo en hasta # días hábiles}}",
+    "{timeAmount, plural, =0 {Listo el mismo día} one {Listo en hasta # día hábil} other {Listo en hasta # días hábiles}}",
   "pickupPointsModal.shippingEstimatePickup-d":
-    "{days, plural, =0 {Listo el mismo día} one {Listo en hasta # día} other {Listo en hasta # días}}",
+    "{timeAmount, plural, =0 {Listo el mismo día} one {Listo en hasta # día} other {Listo en hasta # días}}",
   "pickupPointsModal.shippingEstimatePickup-h":
-    "{days, plural, =0 {Retirada inmediata} one {Listo en hasta # hora} other {Listo en hasta # horas}}",
+    "{timeAmount, plural, =0 {Retirada inmediata} one {Listo en hasta # hora} other {Listo en hasta # horas}}",
   "pickupPointsModal.shippingEstimatePickup-m":
-    "{days, plural, =0 {Retirada inmediata} one {Listo en hasta # minuto} other {Listo en hasta # minutos}}",
+    "{timeAmount, plural, =0 {Retirada inmediata} one {Listo en hasta # minuto} other {Listo en hasta # minutos}}",
   "pickupPointsModal.scheduled": "Agendada",
   "pickupPointsModal.scheduledDeliveryChoice": "Elige una fecha de entrega",
   "pickupPointsModal.selectPickupPoint": "Elija un punto de recogida",
@@ -45,7 +46,8 @@
   "pickupPointsModal.deliveryDate": "Fecha y hora",
   "pickupPointsModal.deliveryTime": "Hora de entrega",
   "pickupPointsModal.datepickerDateFormat": "dddd, LL",
-  "pickupPointsModal.deliveryWindows": "Desde {startDate} hasta {endDate} - {price}",
+  "pickupPointsModal.deliveryWindows":
+    "Desde {startDate} hasta {endDate} - {price}",
   "pickupPointsModal.deliveryWindowsSummary":
     "{date}, desde las {startDate} hasta {endDate}",
   "pickupPointsModal.list": "Lista",
@@ -55,7 +57,8 @@
   "pickupPointsModal.details": "Ver detalles o cambiar el punto de retirada.",
   "pickupPointsModal.searchLocationMap":
     "Buscar por Lugar, Código Postal, Barrio o Ciudad",
-  "pickupPointsModal.productsInPoint": "Disponibilidad de productos en este punto",
+  "pickupPointsModal.productsInPoint":
+    "Disponibilidad de productos en este punto",
   "pickupPointsModal.aditionalInfo": "Otras informaciones",
   "pickupPointsModal.unavailable": "indisponible",
   "pickupPointsModal.unavailableItemsAmount":
@@ -75,7 +78,8 @@
   "pickupPointsModal.changePostalCode": "Cambie su código postal",
   "pickupPointsModal.removeFromCart":
     "{items, plural, =0 {} one {retira el item del carrito.} other {retira el itenes del carrito.}}",
-  "pickupPointsModal.noTimesAvailable": "No hay horario disponible para esta fecha.",
+  "pickupPointsModal.noTimesAvailable":
+    "No hay horario disponible para esta fecha.",
   "pickupPointsModal.productsFromSeller": "Productos de {seller}",
   "pickupPointsModal.deliverySplitDisclaimer":
     "Algunos itenes no se pueden entregar en esta dirección. Seleccione un punto de retirada.",
@@ -83,6 +87,7 @@
     "Algunos itenes no se pueden quitar en este punto. Introduzca una dirección para recibirlos.",
   "pickupPointsModal.pickuplSplitDisclaimerLogged":
     "Algunos itenes no se pueden quitar en este punto. Elija una dirección para recibirlos.",
-  "pickupPointsModal.price": "{value, plural, =0 {Gratis} other {{formattedPrice}}}",
+  "pickupPointsModal.price":
+    "{value, plural, =0 {Gratis} other {{formattedPrice}}}",
   "pickupPointsModal.askGeolocation": "Busque una dirección con su ubicación"
 }

@@ -16,11 +16,11 @@ export class ProductItems extends Component {
     return itemsByPackages ? (
       <div className="itemsGroup">
         {itemsByPackages.map(itemsPackage => {
-          const days =
+          const time =
             itemsPackage.selectedSlaItem &&
             itemsPackage.selectedSlaItem.shippingEstimate &&
             itemsPackage.selectedSlaItem.shippingEstimate.split(/[0-9]+/)[1]
-          const daysAmount =
+          const timeAmount =
             itemsPackage.selectedSlaItem &&
             itemsPackage.selectedSlaItem.shippingEstimate &&
             itemsPackage.selectedSlaItem.shippingEstimate.split(/\D+/)[0]
@@ -39,8 +39,8 @@ export class ProductItems extends Component {
               {daysAmount &&
                 itemsByPackages.length > 1 && (
                   <p>
-                    {this.translate(`shippingEstimate-${days}`, {
-                      days: daysAmount,
+                    {this.translate(`shippingEstimate-${time}`, {
+                      timeAmount,
                     })}
                   </p>
                 )}

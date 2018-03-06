@@ -52,11 +52,11 @@ export class PickupPoint extends Component {
       return <div />
     }
 
-    const days =
+    const time =
       pickupPoint &&
       pickupPoint.shippingEstimate &&
       pickupPoint.shippingEstimate.split(/[0-9]+/)[1]
-    const daysAmount =
+    const timeAmount =
       pickupPoint &&
       pickupPoint.shippingEstimate &&
       pickupPoint.shippingEstimate.split(/\D+/)[0]
@@ -112,8 +112,8 @@ export class PickupPoint extends Component {
                     })}
                   </span>
                   <span className="PickupPointSLA pickup-point-sla">
-                    {this.translate(`shippingEstimatePickup-${days}`, {
-                      days: daysAmount,
+                    {this.translate(`shippingEstimatePickup-${time}`, {
+                      timeAmount,
                     })}
                   </span>
                 </p>

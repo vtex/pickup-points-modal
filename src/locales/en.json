@@ -18,24 +18,25 @@
   "pickupPointsModal.findPickup": "Find a pickup point next to you.",
   "pickupPointsModal.noPickupSelected": "You haven't selected a store yet",
   "pickupPointsModal.slaOption": "{name} - {price} - {shippingEstimate}",
-  "pickupPointsModal.slaOptionSimple": "{price} - {shippingEstimate}{scheduled}",
+  "pickupPointsModal.slaOptionSimple":
+    "{price} - {shippingEstimate}{scheduled}",
   "pickupPointsModal.shippingEstimate-bd":
-    "{days, plural, =0 {Same day} one {# business day} other {Up to # business days}}",
+    "{timeAmount, plural, =0 {Same day} one {# business day} other {Up to # business days}}",
   "pickupPointsModal.shippingEstimate-d":
-    "{days, plural, =0 {Same day} one {# day} other {Up to # days}}",
+    "{timeAmount, plural, =0 {Same day} one {# day} other {Up to # days}}",
   "pickupPointsModal.shippingEstimate-h":
-    "{days, plural, =0 {Now} one {# hours} other {Up to # hours}}",
+    "{timeAmount, plural, =0 {Now} one {# hours} other {Up to # hours}}",
   "pickupPointsModal.shippingEstimate-m":
-    "{days, plural, =0 {Now} one {# minute} other {Up to # minutes}}",
+    "{timeAmount, plural, =0 {Now} one {# minute} other {Up to # minutes}}",
   "pickupPointsModal.free": "Free",
   "pickupPointsModal.shippingEstimatePickup-bd":
-    "{days, plural, =0 {Ready on the same day} one {Ready in up to # business day} other {Ready in up to # business days}}",
+    "{timeAmount, plural, =0 {Ready on the same day} one {Ready in up to # business day} other {Ready in up to # business days}}",
   "pickupPointsModal.shippingEstimatePickup-d":
-    "{days, plural, =0 {Ready on the same day} one {Ready in up to # day} other {Ready in up to # days}}",
+    "{timeAmount, plural, =0 {Ready on the same day} one {Ready in up to # day} other {Ready in up to # days}}",
   "pickupPointsModal.shippingEstimatePickup-h":
-    "{days, plural, =0 {Ready for pickup} one {Ready in up to # hour} other {Ready in up to # hours}}",
+    "{timeAmount, plural, =0 {Ready for pickup} one {Ready in up to # hour} other {Ready in up to # hours}}",
   "pickupPointsModal.shippingEstimatePickup-m":
-    "{days, plural, =0 {Ready for pickup} one {Ready in up to # minute} other {Ready in up to # minutes}}",
+    "{timeAmount, plural, =0 {Ready for pickup} one {Ready in up to # minute} other {Ready in up to # minutes}}",
   "pickupPointsModal.scheduled": "Scheduled",
   "pickupPointsModal.scheduledDeliveryChoice": "Choose your shipping date",
   "pickupPointsModal.selectPickupPoint": "Select a pickup point",
@@ -45,7 +46,8 @@
   "pickupPointsModal.deliveryDate": "Date and time",
   "pickupPointsModal.deliveryTime": "Delivery time",
   "pickupPointsModal.datepickerDateFormat": "dddd, LL",
-  "pickupPointsModal.deliveryWindows": "From {startDate} to {endDate} - {price}",
+  "pickupPointsModal.deliveryWindows":
+    "From {startDate} to {endDate} - {price}",
   "pickupPointsModal.deliveryWindowsSummary":
     "{date}, between {startDate} and {endDate}",
   "pickupPointsModal.list": "List",
@@ -55,7 +57,8 @@
   "pickupPointsModal.details": "See details or change the pickup point.",
   "pickupPointsModal.searchLocationMap":
     "Search for Street, ZIP Code or neighborhood or city",
-  "pickupPointsModal.productsInPoint": "Product availability in this pickup point",
+  "pickupPointsModal.productsInPoint":
+    "Product availability in this pickup point",
   "pickupPointsModal.aditionalInfo": "Other information",
   "pickupPointsModal.unavailable": "unavailable",
   "pickupPointsModal.unavailableItemsAmount":
@@ -84,6 +87,7 @@
     "Some of items are unavailable for pickup in this point. Type an address to deliver them.",
   "pickupPointsModal.pickupSplitDisclaimerLogged":
     "Some of items are unavailable for shipping in this point. Choose an address to deliver them.",
-  "pickupPointsModal.price": "{value, plural, =0 {Free} other {{formattedPrice}}}",
+  "pickupPointsModal.price":
+    "{value, plural, =0 {Free} other {{formattedPrice}}}",
   "pickupPointsModal.askGeolocation": "Search an address with your location"
 }
