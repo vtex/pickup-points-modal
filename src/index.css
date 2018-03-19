@@ -1,16 +1,25 @@
-.PickupModal {
-  display: flex;
-  flex-direction: column;
+.pickup-modal {
+  background: #fff;
   position: fixed;
   z-index: 100;
+}
+
+.pickup-modal-info-bar {
+  height: 100%;
+  position: relative;
+}
+
+.pickup-modal-info-bar-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   background: #fff;
+  position: relative;
 }
 
 .PickupModalHeader {
-  background: #fff;
   border-bottom: 1px solid #eee;
   padding: 5px 0 5px 15px;
-  overflow: hidden;
   flex: none;
   z-index: 1;
 }
@@ -73,7 +82,7 @@
 }
 
 @media (max-width: 1023px) {
-  .PickupModal {
+  .pickup-modal {
     top: 0;
     bottom: 0;
     right: 0;
@@ -84,7 +93,7 @@
 }
 
 @media (min-width: 1024px) {
-  .PickupModal {
+  .pickup-modal {
     border: 1px solid #ccc;
     top: 50%;
     left: 50%;
@@ -98,25 +107,10 @@
     display: none;
   }
 
-  .PickupModalHeader,
-  .PickupModalSearch,
-  .PickupModalPointsList,
-  .PickupModalAsk,
-  .detail {
+  .pickup-modal-info-bar {
+    padding: 10px;
     box-sizing: border-box;
-    background: #fff;
-    margin-left: 10px;
-    width: 320px;
-    z-index: 102;
-  }
-
-  .PickupModalHeader {
-    margin-top: 10px;
-  }
-
-  .PickupModalPointsList,
-  .detail {
-    margin-bottom: 10px;
+    width: 340px;
   }
 
   .PickupModalPointsList {
