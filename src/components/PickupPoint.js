@@ -63,7 +63,7 @@ export class PickupPoint extends Component {
 
     return (
       <div
-        className="PickupPoint pickup-point bg-white bb b--light-gray pv3"
+        className="pickup-point"
         id={pickupPoint.id
           .replace(/[^\w\s]/gi, '')
           .split(' ')
@@ -72,17 +72,17 @@ export class PickupPoint extends Component {
       >
         <div className="flex lh-copy">
           {isModal && (
-            <div className="PickupPointMarker pickup-point-market flex-none w3 tc pb1 f7 gray">
+            <div className="pickup-point-marker">
               <img
-                className="pt1"
+                className="pickup-point-marker-image"
                 src={isSelected ? markerIconSelected : markerIcon}
                 alt=""
               />
-              <div>{pickupPoint.distance}</div>
+              <div className="hide">{pickupPoint.distance}</div>
             </div>
           )}
-          <div className="PickupPointInfo pickup-point-info flex-auto relative mr2">
-            <p className="PickupPointName pickup-point-name fw5 f6 pb1y">
+          <div className="pickup-point-info">
+            <p className="pickup-point-name">
               {!isModal && (
                 <img
                   className={styles.markerIcon}
@@ -92,7 +92,7 @@ export class PickupPoint extends Component {
               )}
               {pickupPoint.pickupStoreInfo.friendlyName}
             </p>
-            <div className="PickupPointAddress pickup-point-address">
+            <div className="pickup-point-address">
               <AddressSummary
                 address={pickupPoint.pickupStoreInfo.address}
                 rules={selectedRules}
@@ -102,7 +102,7 @@ export class PickupPoint extends Component {
             <div className="f6">
               {isModal && (
                 <p>
-                  <span className="PickupPointPrice pickup-point-price">
+                  <span className="pickup-point-price">
                     {this.translate('price', {
                       value: pickupPoint.price,
                       formattedPrice: formatCurrency({
@@ -111,7 +111,7 @@ export class PickupPoint extends Component {
                       }),
                     })}
                   </span>
-                  <span className="PickupPointSLA pickup-point-sla">
+                  <span className="pickup-point-sla">
                     {this.translate(`shippingEstimatePickup-${time}`, {
                       timeAmount,
                     })}
@@ -119,9 +119,9 @@ export class PickupPoint extends Component {
                 </p>
               )}
               {isModal && (
-                <div className="dib">
+                <div className="">
                   {unavailableItemsAmount > 0 && (
-                    <span className="light-red">
+                    <span className="">
                       {this.translate('unavailableItemsAmount', {
                         itemsAmount: unavailableItemsAmount,
                       })}
@@ -133,7 +133,7 @@ export class PickupPoint extends Component {
             {!isModal && (
               <button
                 type="button"
-                className="details button-details-pickup-point btn btn-link f6 blue no-underline"
+                className="button-details-pickup-point btn btn-link"
                 id="change-pickup-button"
                 onClick={this.handlePickupModal}
               >
