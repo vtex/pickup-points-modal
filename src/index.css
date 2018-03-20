@@ -38,8 +38,11 @@
 }
 
 .pickup-modal-close {
-  float: right;
-  padding: 8px 12px;
+  position: absolute;
+  padding: 14px;
+  right: 0;
+  top: 0;
+  z-index: 999;
 }
 
 .pickup-modal-search {
@@ -74,6 +77,24 @@
   height: 100%;
   width: 100%;
   z-index: 99;
+}
+
+.pickup-modal-search {
+  position: relative;
+}
+
+.pickup-modal-search input {
+  font-size: 16px;
+  height: auto;
+  padding: 12px 12px 12px 46px !important;
+  width: 100%;
+}
+
+.pickup-modal-search-icon {
+  position: absolute;
+  z-index: 99;
+  left: 24px;
+  top: 23px;
 }
 
 @media (max-width: 1023px) {
@@ -117,8 +138,8 @@
   .pickup-modal-close:hover {
     border-radius: 20px;
     background: #fff;
-    position: absolute;
     right: 10px;
     top: 10px;
+    padding: 10px 14px;
   }
 }
