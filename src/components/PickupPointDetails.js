@@ -84,8 +84,8 @@ export class PickupPointDetails extends Component {
             />
           </div>
 
-          <div className="info pickup-point-details-info">
-            <div className="group pickup-point-details-group">
+          <div className="pickup-point-details-info">
+            <div className="pickup-point-details-group">
               <h3 className="title pickup-point-details-info-title">
                 {this.translate('productsInPoint')}
               </h3>
@@ -109,7 +109,7 @@ export class PickupPointDetails extends Component {
         <div className="pickup-point-details-bottom">
           <button
             type="button"
-            className="pickup-point-details-confirm btn btn-success btn-large"
+            className="pickup-point-details-confirm btn btn-success btn-large btn-block"
             id={`confirm-pickup-${pickupPoint.id
               .replace(/[^\w\s]/gi, '')
               .split(' ')

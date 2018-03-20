@@ -1,3 +1,5 @@
+/* main structure */
+
 .pickup-point-details {
   display: flex;
   flex-direction: column;
@@ -22,13 +24,25 @@
   padding: 10px;
 }
 
-.info {
-  padding: 15px;
-}
+/* middle section areas */
 
 .pickup-point-details-store {
   background: #f4f4f4;
 }
+
+.pickup-point-details-info {
+  padding: 15px;
+}
+
+.pickup-point-details-info-goup {
+  margin-bottom: 20px;
+}
+
+.pickup-point-details-info-title {
+  margin-top: 0;
+}
+
+/* links and icons */
 
 .link-back-pickup-points-list {
   display: block;
@@ -41,22 +55,4 @@
   vertical-align: sub;
   margin-right: 12px;
   text-decoration: none;
-}
-
-.group {
-  margin-bottom: 20px;
-}
-
-.title {
-  margin-top: 0;
-}
-
-.cancelButton,
-.cancelButton:hover {
-  color: red;
-}
-
-.pickup-point-details-confirm,
-.cancelButton {
-  width: 100%;
 }

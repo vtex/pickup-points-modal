@@ -1,3 +1,5 @@
+/* main structue */
+
 .pickup-point {
   display: table;
   padding: 15px 10px 15px 0;
@@ -8,11 +10,15 @@
   display: table-cell;
 }
 
+/* marker */
+
 .pickup-point-marker {
   vertical-align: top;
   text-align: center;
   width: 50px;
 }
+
+/* name */
 
 .pickup-point-name {
   font-size: 16px;
@@ -20,11 +26,15 @@
   margin: 0;
 }
 
+/* address */
+
 .pickup-point-address {
   color: #333333;
   margin: 4px 0 10px;
   line-height: 1.5;
 }
+
+/* sla info */
 
 .pickup-point-price,
 .pickup-point-sla {

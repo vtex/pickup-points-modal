@@ -1,8 +1,33 @@
+/* main structue */
+
 .pickup-modal {
   background: #fff;
   position: fixed;
   z-index: 100;
 }
+
+.pickup-modal-backdrop {
+  background: #fff;
+  opacity: 0.8;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 99;
+}
+
+.pickup-modal-close {
+  position: absolute;
+  padding: 14px;
+  right: 0;
+  top: 0;
+  z-index: 999;
+}
+
+/* info bar structue */
 
 .pickup-modal-info-bar {
   height: 100%;
@@ -17,6 +42,8 @@
   position: relative;
 }
 
+/* header */
+
 .pickup-modal-header {
   border-bottom: 1px solid #eee;
   padding: 5px 0 5px 15px;
@@ -28,24 +55,36 @@
   font-size: 15px;
 }
 
+/* searh */
+
+.pickup-modal-search {
+  position: relative;
+  padding: 8px;
+}
+
+.pickup-modal-search input {
+  font-size: 16px;
+  height: auto;
+  padding: 12px 12px 12px 46px !important;
+  width: 100%;
+}
+
+.pickup-modal-search-icon {
+  position: absolute;
+  z-index: 99;
+  left: 24px;
+  top: 23px;
+}
+
+/* ask for geolocation */
+
 .button-ask-geolocation {
   border-bottom: 1px solid #eee;
   padding-bottom: 10px;
   text-align: left;
 }
 
-.pickup-modal-close {
-  position: absolute;
-  padding: 14px;
-  right: 0;
-  top: 0;
-  z-index: 999;
-}
-
-.pickup-modal-search {
-  position: relative;
-  padding: 8px;
-}
+/* list of points */
 
 .pickup-modal-points-list {
   flex: 1 1 auto;
@@ -62,36 +101,7 @@
   background: #f4f4f4;
 }
 
-.pickup-modal-backdrop {
-  background: #fff;
-  opacity: 0.8;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 99;
-}
-
-.pickup-modal-search {
-  position: relative;
-}
-
-.pickup-modal-search input {
-  font-size: 16px;
-  height: auto;
-  padding: 12px 12px 12px 46px !important;
-  width: 100%;
-}
-
-.pickup-modal-search-icon {
-  position: absolute;
-  z-index: 99;
-  left: 24px;
-  top: 23px;
-}
+/* media queries */
 
 @media (max-width: 1023px) {
   .pickup-modal {
