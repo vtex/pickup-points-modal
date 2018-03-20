@@ -50,18 +50,30 @@
   margin: 48px 0;
 }
 
+.ask-for-geolocation-image-waiting-pin {
+  transform: translateY(-15px);
+}
+
 .ask-for-geolocation-image-searching-pin {
   animation: bounce 1s infinite;
 }
 
+.ask-for-geolocation-image-waiting-shadow,
 .ask-for-geolocation-image-searching-shadow {
     background-color: #ccc;
     width: 30px;
     height: 30px;
     border-radius: 80px;
     margin-bottom: 30px;
-    animation: bounce-shadow 1s infinite;
     margin: -15px auto 0;
+}
+
+.ask-for-geolocation-image-waiting-shadow {
+  transform: rotateX(80deg) scale(1.6);
+}
+
+.ask-for-geolocation-image-searching-shadow {
+  animation: bounce-shadow 1s infinite;
 }
 
 .ask-for-geolocation-cta {
@@ -70,6 +82,10 @@
 
 .btn-ask-for-geolocation-manual {
   font-size: 14px;
+}
+
+.ask-for-geolocation-instructions {
+  height: 120px;
 }
 
 .close-modal,
@@ -99,30 +115,34 @@
   .ask-for-geolocation-waiting {
     padding: 0 220px;
   }
+
+  .ask-for-geolocation-instructions {
+    height: 80px;
+  }
 }
 
 @keyframes bounce {
   0% {
-    transform: translateY(-10px);
+    transform: translateY(-15px);
   }
   40% {
     filter: none;
     transform: translateY(0px);
   }
   100% {
-    transform: translateY(-10px);
+    transform: translateY(-15px);
   }
 }
 
 @keyframes bounce-shadow {
   0% {
-    transform: rotateX(70deg) scale(1);
+    transform: rotateX(80deg) scale(1.6);
   }
   40% {
     filter: none;
-    transform: rotateX(80deg) scale(0.6);
+    transform: rotateX(76deg) scale(1);
   }
   100% {
-    transform: rotateX(70deg) scale(1);
+    transform: rotateX(80deg) scale(1.6);
   }
 }
