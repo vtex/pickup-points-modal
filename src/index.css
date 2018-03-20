@@ -112,6 +112,10 @@
     height: 100%;
     width: 100%;
   }
+
+  .pickup-modal-info-bar-map {
+    height: auto;
+  }
 }
 
 @media (min-width: 1024px) {

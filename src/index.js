@@ -182,7 +182,7 @@ export class PickupPointsModal extends Component {
                 showAskForGeolocation
                   ? ''
                   : (
-                    <div className="pickup-modal-info-bar">
+                    <div className={`pickup-modal-info-bar ${mapStatus === SHOW_MAP && 'pickup-modal-info-bar-map'}`}>
                       <div className="pickup-modal-info-bar-container">
                         <div className="pickup-modal-header">
                           <h4 className="pickup-modal-title">
