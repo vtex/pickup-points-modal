@@ -21,16 +21,16 @@ export class PickupTabs extends Component {
     return (
       <div
         className={
-          'PickupViewMode pickup-view-mode flex-none relative flex ph2 pb1'
+          'pickup-view-mode'
         }
       >
         <button
           value={HIDE_MAP}
           type="button"
-          className={`PickupViewList pickup-view-list btn btn-link flex-auto ba b--blue pv2 br0 db w-100 ${
+          className={`pickup-view-list btn btn-link ${
             mapStatus === HIDE_MAP
-              ? 'bg-blue white PickupViewOptionActive'
-              : 'bg-white blue PickupViewOptionInactive'
+              ? 'pickup-view-option-active'
+              : 'pickup-view-option-inactive'
           }`}
           onClick={this.handleLocationTab}
         >
@@ -39,10 +39,10 @@ export class PickupTabs extends Component {
         <button
           value={SHOW_MAP}
           type="button"
-          className={`PickupViewMap pickup-view-map btn btn-link map flex-auto ba b--blue pv2 br0 db w-100 ${
+          className={`pickup-view-map btn btn-link ${
             mapStatus === SHOW_MAP
-              ? 'bg-blue white PickupViewOptionActive'
-              : 'bg-white blue PickupViewOptionInactive'
+              ? 'pickup-view-option-active'
+              : 'pickup-view-option-inactive'
           }`}
           onClick={this.handleLocationTab}
         >
