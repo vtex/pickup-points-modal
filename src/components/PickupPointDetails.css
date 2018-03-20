@@ -1,47 +1,43 @@
-.pickupPointDetails {
+.pickup-point-details {
   display: flex;
   flex-direction: column;
   z-index: 101;
   flex: 1 1 auto;
-  overflow: auto;
   position: relative;
 }
 
-.flex {
-  flex: 1 1 auto;
-}
-
-.flexNone {
+.pickup-point-details-top {
   flex: none;
 }
 
-.pickupDetailsMiddle {
-  overflow: scroll;
+.pickup-point-details-middle {
+  overflow: auto;
   flex: 1 1 auto;
 }
 
-.pickupPointDetailsBottom {
+.pickup-point-details-bottom {
   background: white;
   flex: none;
   bottom: 0;
+  padding: 10px;
 }
 
 .info {
   padding: 15px;
 }
 
-.pickupPointDetailsStore {
+.pickup-point-details-store {
   background: #f4f4f4;
   padding: 15px 0;
 }
 
-.backLink {
+.link-back-pickup-points-list {
   display: block;
   text-align: left;
   padding: 8px 12px 9px;
 }
 
-.iconBack {
+.icon-back-pickup-points-list {
   font-size: 25px;
   vertical-align: sub;
   margin-right: 12px;
@@ -61,31 +57,7 @@
   color: red;
 }
 
-.confirmButton,
+.pickup-point-details-confirm,
 .cancelButton {
   width: 100%;
 }
-
-.bottom {
-  padding: 10px;
-}
-
-/*@media (max-width: 1023px) {
-  .pickupPointDetails {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-  }
-}
-
-@media (min-width: 1024px) {
-  .pickupPointDetails {
-    position: absolute;
-    top: 10px;
-    bottom: 10px;
-    left: 10px;
-    width: 320px;
-  }
-}*/

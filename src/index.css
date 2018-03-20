@@ -63,11 +63,6 @@
   background: #f4f4f4;
 }
 
-.detail {
-  flex: 1 1 auto;
-  display: flex;
-}
-
 .backdrop {
   background: #fff;
   opacity: 0.8;
