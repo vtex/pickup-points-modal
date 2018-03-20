@@ -23,6 +23,7 @@ class UserGeolocation extends Component {
   }
 
   handleGetCurrentPosition = () => {
+    this.props.onGetGeolocation()
     this.props.googleMaps &&
       navigator.geolocation.getCurrentPosition(
         position => {
@@ -113,7 +114,7 @@ class UserGeolocation extends Component {
     return (
       <button
         type="button"
-        className="button-ask-geolocation btn btn-link"
+        className="btn-ask-for-geolocation-cta btn btn-success btn-large"
         id="ask-geolocation-button"
         onClick={this.handleGetCurrentPosition}
       >
@@ -128,6 +129,7 @@ UserGeolocation.propTypes = {
   googleMaps: PropTypes.object,
   intl: intlShape,
   onChangeAddress: PropTypes.func.isRequired,
+  onGetGeolocation: PropTypes.func.isRequired,
   pickupOptionGeolocations: PropTypes.array,
   rules: PropTypes.object,
 }

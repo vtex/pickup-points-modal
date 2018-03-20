@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
+
+import UserGeolocation from '../components/UserGeolocation'
+
+import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
 import './AskForGeolocation.css'
 
@@ -10,8 +15,12 @@ export class AskForGeolocation extends Component {
     super(props)
 
     this.state = {
-      status: 'waiting',
+      status: 'ask',
     }
+  }
+
+  handleGetGeolocation = () => {
+    this.setState({ status: 'waiting' })
   }
 
   translate = id =>
@@ -53,7 +62,14 @@ export class AskForGeolocation extends Component {
               </svg>
             </div>
             <div className="ask-for-geolocation-cta">
-              <button className="btn-ask-for-geolocation-cta btn btn-success btn-large">Usar minha localização atual</button>
+              <UserGeolocation
+                address={this.props.address}
+                pickupOptionGeolocations={this.props.pickupOptionGeolocations}
+                googleMaps={this.props.googleMaps}
+                onChangeAddress={this.props.onChangeAddress}
+                onGetGeolocation={this.handleGetGeolocation}
+                rules={this.props.rules}
+              />
             </div>
             <div className="ask-for-geolocation-manual">
               <button className="btn-ask-for-geolocation-manual btn btn-link">Procurar endereço manualmente</button>
@@ -101,7 +117,12 @@ export class AskForGeolocation extends Component {
 }
 
 AskForGeolocation.propTypes = {
+  address: AddressShapeWithValidation,
+  googleMaps: PropTypes.object,
   intl: intlShape,
+  onChangeAddress: PropTypes.func.isRequired,
+  pickupOptionGeolocations: PropTypes.array,
+  rules: PropTypes.object,
 }
 
 export default injectIntl(AskForGeolocation)
