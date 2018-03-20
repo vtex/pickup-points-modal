@@ -1,5 +1,6 @@
 .pickup-point {
   display: table;
+  padding: 15px 10px 15px 0;
 }
 
 .pickup-point-marker,
@@ -20,19 +21,24 @@
 }
 
 .pickup-point-address {
-  font-size: 14px;
   color: #333333;
-  margin: 4px 0;
+  margin: 4px 0 10px;
+  line-height: 1.5;
 }
 
 .pickup-point-price,
 .pickup-point-sla {
+  background: #fff;
+  color: #3386e8;
   display: inline-block;
-  font-size: 14px;
+  font-size: 12px;
+  border: 1px solid #3386e8;
+  padding: 0 8px;
+  border-radius: 12px;
 }
 
 .pickup-point-price {
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .button-details-pickup-point {

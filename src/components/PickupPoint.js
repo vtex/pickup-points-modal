@@ -24,7 +24,6 @@ export class PickupPoint extends Component {
     }
   }
   handleOpenPickupDetails = () => {
-    if (!this.props.isModal) return
     this.props.togglePickupDetails()
     this.props.handleChangeActivePickupDetails(this.props.pickupPoint)
     this.props.changeActivePickupPointId &&
@@ -38,11 +37,9 @@ export class PickupPoint extends Component {
 
   render() {
     const {
-      isModal,
       isSelected,
       pickupPoint,
       selectedRules,
-      showAddress,
       storePreferencesData,
     } = this.props
 
@@ -71,25 +68,16 @@ export class PickupPoint extends Component {
         onClick={this.handleOpenPickupDetails}
       >
         <div className="flex lh-copy">
-          {isModal && (
-            <div className="pickup-point-marker">
-              <img
-                className="pickup-point-marker-image"
-                src={isSelected ? markerIconSelected : markerIcon}
-                alt=""
-              />
-              <div className="hide">{pickupPoint.distance}</div>
-            </div>
-          )}
+          <div className="pickup-point-marker">
+            <img
+              className="pickup-point-marker-image"
+              src={isSelected ? markerIconSelected : markerIcon}
+              alt=""
+            />
+            <div className="hide">{pickupPoint.distance}</div>
+          </div>
           <div className="pickup-point-info">
             <p className="pickup-point-name">
-              {!isModal && (
-                <img
-                  className={styles.markerIcon}
-                  src={markerIcon}
-                  alt={pickupPoint.pickupStoreInfo.friendlyName}
-                />
-              )}
               {pickupPoint.pickupStoreInfo.friendlyName}
             </p>
             <div className="pickup-point-address">
@@ -100,46 +88,28 @@ export class PickupPoint extends Component {
               />
             </div>
             <div className="f6">
-              {isModal && (
-                <p>
-                  <span className="pickup-point-price">
-                    {this.translate('price', {
-                      value: pickupPoint.price,
-                      formattedPrice: formatCurrency({
-                        value: pickupPoint.price,
-                        storePreferencesData,
-                      }),
-                    })}
-                  </span>
-                  <span className="pickup-point-sla">
-                    {this.translate(`shippingEstimatePickup-${time}`, {
-                      timeAmount,
-                    })}
-                  </span>
-                </p>
-              )}
-              {isModal && (
-                <div className="">
-                  {unavailableItemsAmount > 0 && (
-                    <span className="">
-                      {this.translate('unavailableItemsAmount', {
-                        itemsAmount: unavailableItemsAmount,
-                      })}
-                    </span>
-                  )}
-                </div>
+              <span className="pickup-point-price">
+                {this.translate('price', {
+                  value: pickupPoint.price,
+                  formattedPrice: formatCurrency({
+                    value: pickupPoint.price,
+                    storePreferencesData,
+                  }),
+                })}
+              </span>
+              <span className="pickup-point-sla">
+                {this.translate(`shippingEstimatePickup-${time}`, {
+                  timeAmount,
+                })}
+              </span>
+              {unavailableItemsAmount > 0 && (
+                <span className="">
+                  {this.translate('unavailableItemsAmount', {
+                    itemsAmount: unavailableItemsAmount,
+                  })}
+                </span>
               )}
             </div>
-            {!isModal && (
-              <button
-                type="button"
-                className="button-details-pickup-point btn btn-link"
-                id="change-pickup-button"
-                onClick={this.handlePickupModal}
-              >
-                {this.translate('details')}
-              </button>
-            )}
           </div>
         </div>
       </div>
@@ -148,7 +118,6 @@ export class PickupPoint extends Component {
 }
 
 PickupPoint.defaultProps = {
-  isModal: true,
   showAddress: true,
 }
 PickupPoint.propTypes = {
@@ -156,7 +125,6 @@ PickupPoint.propTypes = {
   onChangeActivePickupPointId: PropTypes.func,
   togglePickupDetails: PropTypes.func,
   intl: intlShape,
-  isModal: PropTypes.bool,
   isSelected: PropTypes.bool,
   liPackage: PropTypes.object,
   onClickPickupModal: PropTypes.func,
