@@ -79,7 +79,6 @@
 /* ask for geolocation */
 
 .button-ask-geolocation {
-  border-bottom: 1px solid #eee;
   padding-bottom: 10px;
   text-align: left;
 }
@@ -90,16 +89,18 @@
   flex: 1 1 auto;
   position: relative;
   overflow: auto;
+  padding: 5px 12px;
 }
 
 .pickup-modal-points-item {
-  border-bottom: 1px solid #eee;
   cursor: pointer;
+  margin-bottom: 12px;
 }
 
-.pickup-modal-points-item:hover {
-  background: #f4f4f4;
+.pickup-modal-points-item:hover .pickup-point {
+  border-color: #ccc;
 }
+
 
 /* media queries */
 

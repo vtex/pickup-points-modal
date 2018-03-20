@@ -67,48 +67,50 @@ export class PickupPoint extends Component {
           .join('-')}
         onClick={this.handleOpenPickupDetails}
       >
-        <div className="pickup-point-marker">
-          <img
-            className="pickup-point-marker-image"
-            src={isSelected ? markerIconSelected : markerIcon}
-            alt=""
-          />
-          <div className="pickup-point-distance hide">{pickupPoint.distance}</div>
-        </div>
-        <div className="pickup-point-info">
-          <p className="pickup-point-name">
-            {pickupPoint.pickupStoreInfo.friendlyName}
-          </p>
-          <div className="pickup-point-address">
-            <AddressSummary
-              address={pickupPoint.pickupStoreInfo.address}
-              rules={selectedRules}
-              onClickMaskedInfoIcon={this.handleClickMaskedInfoIcon}
+        <div className="pickup-point-main">
+          <div className="pickup-point-marker">
+            <img
+              className="pickup-point-marker-image"
+              src={isSelected ? markerIconSelected : markerIcon}
+              alt=""
             />
+            <div className="pickup-point-distance hide">{pickupPoint.distance}</div>
           </div>
-          <div className="pickup-point-sla-availability">
-            <span className="pickup-point-price">
-              {this.translate('price', {
+          <div className="pickup-point-info">
+            <p className="pickup-point-name">
+              {pickupPoint.pickupStoreInfo.friendlyName}
+            </p>
+            <div className="pickup-point-address">
+              <AddressSummary
+                address={pickupPoint.pickupStoreInfo.address}
+                rules={selectedRules}
+                onClickMaskedInfoIcon={this.handleClickMaskedInfoIcon}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="pickup-point-sla-availability">
+          <span className="pickup-point-price">
+            {this.translate('price', {
+              value: pickupPoint.price,
+              formattedPrice: formatCurrency({
                 value: pickupPoint.price,
-                formattedPrice: formatCurrency({
-                  value: pickupPoint.price,
-                  storePreferencesData,
-                }),
+                storePreferencesData,
+              }),
+            })}
+          </span>
+          <span className="pickup-point-sla">
+            {this.translate(`shippingEstimatePickup-${time}`, {
+              timeAmount,
+            })}
+          </span>
+          {unavailableItemsAmount > 0 && (
+            <span className="pickup-point-availability">
+              {this.translate('unavailableItemsAmount', {
+                itemsAmount: unavailableItemsAmount,
               })}
             </span>
-            <span className="pickup-point-sla">
-              {this.translate(`shippingEstimatePickup-${time}`, {
-                timeAmount,
-              })}
-            </span>
-            {unavailableItemsAmount > 0 && (
-              <span className="pickup-point-availability">
-                {this.translate('unavailableItemsAmount', {
-                  itemsAmount: unavailableItemsAmount,
-                })}
-              </span>
-            )}
-          </div>
+          )}
         </div>
       </div>
     )

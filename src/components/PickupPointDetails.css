@@ -24,17 +24,17 @@
   padding: 10px;
 }
 
-/* middle section areas */
+/* middle section */
 
 .pickup-point-details-store {
-  background: #f4f4f4;
+  padding: 12px;
 }
 
 .pickup-point-details-info {
   padding: 15px;
 }
 
-.pickup-point-details-info-goup {
+.pickup-point-details-group {
   margin-bottom: 20px;
 }
 

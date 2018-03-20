@@ -88,5 +88,5 @@
     "Opa! Alguns itens não podem ser retirados neste ponto. Escolha um endereço para recebê-los.",
   "pickupPointsModal.price":
     "{value, plural, =0 {Grátis} other {{formattedPrice}}}",
-  "pickupPointsModal.askGeolocation": "Usar minha localização atual"
+  "pickupPointsModal.askGeolocation": "Buscar perto da minha localização atual"
 }

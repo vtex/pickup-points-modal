@@ -1,13 +1,21 @@
 /* main structue */
 
 .pickup-point {
-  display: table;
-  padding: 15px 10px 15px 0;
+  border: 1px solid #f4f4f4;
+  border-radius: 4px;
 }
 
-.pickup-point-marker,
+.pickup-point-main {
+  display: flex;
+  padding: 12px 10px 12px 0;
+}
+
+.pickup-point-marker {
+  flex: none;
+}
+
 .pickup-point-info {
-  display: table-cell;
+  flex: 1 1 auto;
 }
 
 /* marker */
@@ -23,30 +31,27 @@
 .pickup-point-name {
   font-size: 16px;
   font-weight: 700;
-  margin: 0;
 }
 
 /* address */
 
 .pickup-point-address {
-  color: #333333;
-  margin: 4px 0 10px;
+  color: #666;
   line-height: 1.5;
 }
 
 /* sla info */
 
+.pickup-point-sla-availability {
+  border-top: 1px solid #f4f4f4;
+  padding: 8px 12px 8px 50px;
+}
+
 .pickup-point-price,
 .pickup-point-sla {
-  /* background: #fff; */
-  color: #3386e8;
   display: inline-block;
-  font-size: 12px;
-  border: 1px solid #9EAFC5;
-  padding: 0 8px;
-  border-radius: 12px;
 }
 
 .pickup-point-price {
-  margin-right: 5px;
+  margin-right: 20px;
 }
