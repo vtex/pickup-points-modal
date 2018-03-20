@@ -50,10 +50,6 @@
   margin: 48px 0;
 }
 
-.ask-for-geolocation-image-waiting-pin {
-  transform: translateY(-15px);
-}
-
 .ask-for-geolocation-image-searching-pin {
   animation: bounce 1s infinite;
 }
@@ -69,7 +65,7 @@
 }
 
 .ask-for-geolocation-image-waiting-shadow {
-  transform: rotateX(80deg) scale(1.6);
+  transform: rotateX(76deg) scale(1);
 }
 
 .ask-for-geolocation-image-searching-shadow {

@@ -15,7 +15,7 @@ export class AskForGeolocation extends Component {
     super(props)
 
     this.state = {
-      status: 'ask',
+      status: 'waiting',
     }
   }
 
