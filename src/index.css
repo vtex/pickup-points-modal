@@ -17,18 +17,18 @@
   position: relative;
 }
 
-.PickupModalHeader {
+.pickup-modal-header {
   border-bottom: 1px solid #eee;
   padding: 5px 0 5px 15px;
   flex: none;
   z-index: 1;
 }
 
-.PickupModalTitle {
+.pickup-modal-title {
   float: left;
 }
 
-.PickupModalTitle h4 {
+.pickup-modal-title h4 {
   font-size: 15px;
 }
 
@@ -37,33 +37,33 @@
   position: relative;
 }
 
-.PickupModalClose {
+.pickup-modal-close {
   float: right;
   padding: 8px 12px;
 }
 
-.PickupModalSearch {
+.pickup-modal-search {
   position: relative;
   padding: 8px;
 }
 
-.PickupModalPointsList {
+.pickup-modal-points-list {
   flex: 1 1 auto;
   position: relative;
   overflow: auto;
 }
 
-.PickupModalPointsItem {
+.pickup-modal-points-item {
   border-bottom: 1px solid #eee;
   padding: 15px 0;
   cursor: pointer;
 }
 
-.PickupModalPointsItem:hover {
+.pickup-modal-points-item:hover {
   background: #f4f4f4;
 }
 
-.backdrop {
+.pickup-modal-backdrop {
   background: #fff;
   opacity: 0.8;
   position: fixed;
@@ -98,7 +98,7 @@
     margin-left: -450px;
   }
 
-  .pickupTabsContainer {
+  .pickup-tabs-container {
     display: none;
   }
 
@@ -108,13 +108,13 @@
     width: 340px;
   }
 
-  .PickupModalPointsList {
+  .pickup-modal-points-list {
     margin-top: 0;
     overflow: auto;
   }
 
-  .PickupModalClose,
-  .PickupModalClose:hover {
+  .pickup-modal-close,
+  .pickup-modal-close:hover {
     border-radius: 20px;
     background: #fff;
     position: absolute;

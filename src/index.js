@@ -129,7 +129,7 @@ export class PickupPointsModal extends Component {
     return (
       <div>
         <div
-          className="backdrop pickup-modal-backdrop"
+          className="pickup-modal-backdrop"
           onClick={this.handleClick}
         />
         <GoogleMapsContainer apiKey={googleMapsKey} locale={intl.locale}>
@@ -138,7 +138,7 @@ export class PickupPointsModal extends Component {
               <button
                 type="button"
                 className={
-                  'PickupModalClose PickupModalClose pickup-modal-close btn btn-link flex-none pa3 bn bg-white'
+                  'pickup-modal-close btn btn-link flex-none pa3 bn bg-white'
                 }
                 onClick={this.handleClick}
               >
@@ -185,8 +185,8 @@ export class PickupPointsModal extends Component {
                   : (
                     <div className="pickup-modal-info-bar">
                       <div className="pickup-modal-info-bar-container">
-                        <div className="PickupModalHeader flex-none flex items-center bb b--light-gray">
-                          <div className="PickupModalTitle pickup-modal-title flex-auto pv3 pl3">
+                        <div className="pickup-modal-header">
+                          <div className="pickup-modal-title">
                             <Heading level="4" size="5" variation="bolder">
                               {isPickupDetailsActive
                                 ? this.translate('pointDetails')
@@ -198,7 +198,7 @@ export class PickupPointsModal extends Component {
                         {!isPickupDetailsActive && (
                           <form
                             id="pickup-modal-search"
-                            className="PickupModalSearch pickup-modal-search flex-none pa2 relative"
+                            className="pickup-modal-search"
                             onSubmit={this.handlePreventSubmitRefresh}
                           >
                             <GeolocationInput
@@ -226,7 +226,7 @@ export class PickupPointsModal extends Component {
                           )}
 
                         {!isPickupDetailsActive && (
-                          <div className="pickupTabsContainer pickupTabsContainer pickup-tabs-container">
+                          <div className="pickup-tabs-container">
                             <PickupTabs
                               mapStatus={mapStatus}
                               updateLocationTab={this.updateLocationTab}
@@ -237,13 +237,13 @@ export class PickupPointsModal extends Component {
                         {isNotShowingPickupDetailsAndHasPickupOptions && (
                           <div
                             className={
-                              'PickupModalPointsList pickup-modal-points-list flex-auto relative overflow-auto'
+                              'pickup-modal-points-list'
                             }
                           >
                             {pickupOptions.map(pickupPoint => (
                               <div
                                 key={pickupPoint.id}
-                                className="PickupModalPointsItem pickup-modal-points-item"
+                                className="pickup-modal-points-item"
                               >
                                 <PickupPoint
                                   items={items}
