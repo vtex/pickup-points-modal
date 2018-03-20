@@ -85,8 +85,8 @@ export class PickupPointDetails extends Component {
           </div>
 
           <div className="info pickup-point-details-info">
-            <div className="group pickup-point-details-group mb3">
-              <h3 className="title pickup-point-details-info-title fw5 f6 pb1">
+            <div className="group pickup-point-details-group">
+              <h3 className="title pickup-point-details-info-title">
                 {this.translate('productsInPoint')}
               </h3>
               {items && <ProductItems items={items} />}
@@ -96,8 +96,8 @@ export class PickupPointDetails extends Component {
             </div>
             {pickupPoint.pickupStoreInfo &&
               pickupPoint.pickupStoreInfo.additionalInfo && (
-                <div className="group pickup-point-details-group mb3">
-                  <h3 className="title pickup-point-details-info-title fw5 f6 pb1">
+                <div className="group pickup-point-details-group">
+                  <h3 className="title pickup-point-details-info-title">
                     {this.translate('aditionalInfo')}
                   </h3>
                   {pickupPoint.pickupStoreInfo.additionalInfo}

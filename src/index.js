@@ -8,7 +8,6 @@ import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/Address
 import GoogleMapsContainer from '@vtex/address-form/lib/geolocation/GoogleMapsContainer'
 import GeolocationInput from '@vtex/address-form/lib/geolocation/GeolocationInput'
 
-import Heading from './components/Heading'
 import PickupTabs from './components/PickupTabs'
 import PickupPoint from './components/PickupPoint'
 import PickupPointDetails from './components/PickupPointDetails'
@@ -138,7 +137,7 @@ export class PickupPointsModal extends Component {
               <button
                 type="button"
                 className={
-                  'pickup-modal-close btn btn-link flex-none pa3 bn bg-white'
+                  'pickup-modal-close btn btn-link'
                 }
                 onClick={this.handleClick}
               >
@@ -186,13 +185,11 @@ export class PickupPointsModal extends Component {
                     <div className="pickup-modal-info-bar">
                       <div className="pickup-modal-info-bar-container">
                         <div className="pickup-modal-header">
-                          <div className="pickup-modal-title">
-                            <Heading level="4" size="5" variation="bolder">
-                              {isPickupDetailsActive
-                                ? this.translate('pointDetails')
-                                : this.translate('selectPickupPoint')}
-                            </Heading>
-                          </div>
+                          <h4 className="pickup-modal-title">
+                            {isPickupDetailsActive
+                              ? this.translate('pointDetails')
+                              : this.translate('selectPickupPoint')}
+                          </h4>
                         </div>
 
                         {!isPickupDetailsActive && (

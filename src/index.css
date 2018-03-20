@@ -25,16 +25,13 @@
 }
 
 .pickup-modal-title {
-  float: left;
-}
-
-.pickup-modal-title h4 {
   font-size: 15px;
 }
 
-.PickupModalAsk {
+.button-ask-geolocation {
   border-bottom: 1px solid #eee;
-  position: relative;
+  padding-bottom: 10px;
+  text-align: left;
 }
 
 .pickup-modal-close {
