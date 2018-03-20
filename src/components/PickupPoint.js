@@ -117,6 +117,7 @@ export class PickupPoint extends Component {
 
 PickupPoint.defaultProps = {
   showAddress: true,
+  isSelected: true,
 }
 PickupPoint.propTypes = {
   handleChangeActivePickupDetails: PropTypes.func,

@@ -38,15 +38,15 @@
 
 .pickup-point-price,
 .pickup-point-sla {
-  background: #fff;
+  /* background: #fff; */
   color: #3386e8;
   display: inline-block;
   font-size: 12px;
-  border: 1px solid #3386e8;
+  border: 1px solid #9EAFC5;
   padding: 0 8px;
   border-radius: 12px;
 }
 
 .pickup-point-price {
-  margin-right: 10px;
+  margin-right: 5px;
 }

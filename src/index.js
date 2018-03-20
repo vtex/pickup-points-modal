@@ -252,11 +252,11 @@ export class PickupPointsModal extends Component {
                                   togglePickupDetails={this.togglePickupDetails}
                                   handleChangeActivePickupDetails={changeActivePickupDetails}
                                   changeActivePickupPointId={this.changeActivePickupPointId}
-                                  sellerId={sellerId}
                                   selectedRules={rules}
                                   pickupPoint={pickupPoint}
                                   storePreferencesData={storePreferencesData}
                                   pickupPointId={pickupPoint.id}
+                                  isSelected={pickupPoint === selectedPickupPoint}
                                 />
                               </div>
                             ))}
@@ -272,7 +272,6 @@ export class PickupPointsModal extends Component {
                             togglePickupDetails={this.togglePickupDetails}
                             storePreferencesData={storePreferencesData}
                             handleClosePickupPointsModal={closePickupPointsModal}
-                            sellerId={sellerId}
                             pickupPoint={selectedPickupPoint}
                             selectedRules={rules}
                           />
