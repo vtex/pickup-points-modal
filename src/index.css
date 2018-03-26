@@ -101,7 +101,6 @@
   border-color: #ccc;
 }
 
-
 /* media queries */
 
 @media (max-width: 1023px) {
@@ -112,6 +111,10 @@
     left: 0;
     height: 100%;
     width: 100%;
+  }
+
+  .pickup-modal-info-bar-container {
+    height: 100vh;
   }
 
   .pickup-modal-info-bar-map {
