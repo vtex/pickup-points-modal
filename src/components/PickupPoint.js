@@ -74,7 +74,7 @@ export class PickupPoint extends Component {
             <img
               className="pickup-point-marker-image"
               src={isSelected ? markerIconSelected : markerIcon}
-              alt=""
+              alt={this.translate('marker')}
             />
             <div className="pickup-point-distance hide">
               {pickupPoint.distance}

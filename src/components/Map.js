@@ -63,11 +63,19 @@ class Map extends Component {
     )
 
   componentWillReceiveProps(nextProps) {
-    const { googleMaps, pickupOptionGeolocations } = this.props
+    const { googleMaps, pickupOptionGeolocations, address } = this.props
 
     const selectedGeolocation = nextProps.pickupOptions.find(
       item => nextProps.pickupPoint && item.id === nextProps.pickupPoint.id
     )
+
+    if (
+      address.geoCoordinates &&
+      address.geoCoordinates.value[0] !==
+        nextProps.address.geoCoordinates.value[0]
+    ) {
+      this.map.setZoom(15)
+    }
 
     this.address = nextProps.address
 
@@ -203,7 +211,7 @@ class Map extends Component {
     if (!this.map) return
     let bounds = null
 
-    if ((address && address.geoCoordinates.value.length === 0) || recenter) {
+    if (address && address.geoCoordinates.value.length === 0) {
       bounds = new googleMaps.LatLngBounds()
     }
 
@@ -222,10 +230,7 @@ class Map extends Component {
               : this.state.icon,
         }
 
-        if (
-          (address && address.geoCoordinates.value.length === 0) ||
-          recenter
-        ) {
+        if (address && address.geoCoordinates.value.length === 0) {
           bounds.extend(location)
         }
 
@@ -263,10 +268,7 @@ class Map extends Component {
 
         this.markerListeners.push(positionListener)
 
-        if (
-          (address && address.geoCoordinates.value.length === 0) ||
-          recenter
-        ) {
+        if (address && address.geoCoordinates.value.length === 0) {
           this.map.fitBounds(bounds)
         }
 

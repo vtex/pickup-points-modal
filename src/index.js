@@ -19,7 +19,6 @@ import { getPickupOptionGeolocations } from './utils/pickupUtils'
 
 import closebutton from './assets/icons/close_icon.svg'
 import './index.css'
-
 export class PickupPointsModal extends Component {
   constructor(props) {
     super(props)

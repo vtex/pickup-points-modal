@@ -78,6 +78,7 @@ class App extends Component {
         {isModalOpen && (
           <PickupPointsModal
             onAddressChange={this.handleAddressChange}
+            activePickupPoint={selectedPickupPoint}
             closePickupPointsModal={this.handleCloseModal}
             changeActivePickupDetails={this.changeActivePickupDetails}
             changeActiveSLAOption={() => {}}

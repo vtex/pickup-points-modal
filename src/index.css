@@ -65,7 +65,7 @@
 .pickup-modal-search input {
   font-size: 16px;
   height: auto;
-  padding: 12px 12px 12px 46px !important;
+  padding: 12px 12px 12px 46px;
   width: 100%;
 }
 
@@ -81,6 +81,7 @@
 .button-ask-geolocation {
   padding-bottom: 10px;
   text-align: left;
+  height: 50%;
 }
 
 /* list of points */

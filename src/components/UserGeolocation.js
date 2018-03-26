@@ -103,14 +103,14 @@ class UserGeolocation extends Component {
 
   render() {
     return (
-      <a
+      <button
         type="button"
         className="button-ask-geolocation btn btn-link"
         id="ask-geolocation-button"
         onClick={this.handleGetCurrentPosition}
       >
         {this.translate('askGeolocation')}
-      </a>
+      </button>
     )
   }
 }
