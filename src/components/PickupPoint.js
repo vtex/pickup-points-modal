@@ -25,7 +25,9 @@ export class PickupPoint extends Component {
   }
   handleOpenPickupDetails = () => {
     this.props.togglePickupDetails()
-    this.props.handleChangeActivePickupDetails(this.props.pickupPoint)
+    this.props.handleChangeActivePickupDetails({
+      pickupPoint: this.props.pickupPoint,
+    })
     this.props.changeActivePickupPointId &&
       this.props.changeActivePickupPointId(this.props.pickupPoint)
   }
@@ -74,7 +76,9 @@ export class PickupPoint extends Component {
               src={isSelected ? markerIconSelected : markerIcon}
               alt=""
             />
-            <div className="pickup-point-distance hide">{pickupPoint.distance}</div>
+            <div className="pickup-point-distance hide">
+              {pickupPoint.distance}
+            </div>
           </div>
           <div className="pickup-point-info">
             <p className="pickup-point-name">
