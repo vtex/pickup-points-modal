@@ -1,65 +1,12 @@
-.PickupModal {
-  display: flex;
-  flex-direction: column;
+/* main structue */
+
+.pickup-modal {
+  background: #fff;
   position: fixed;
   z-index: 100;
-  background: #fff;
 }
 
-.PickupModalHeader {
-  background: #fff;
-  border-bottom: 1px solid #eee;
-  padding: 5px 0 5px 15px;
-  overflow: hidden;
-  flex: none;
-  z-index: 1;
-}
-
-.PickupModalTitle {
-  float: left;
-}
-
-.PickupModalTitle h4 {
-  font-size: 15px;
-}
-
-.PickupModalAsk {
-  border-bottom: 1px solid #eee;
-  position: relative;
-}
-
-.PickupModalClose {
-  float: right;
-  padding: 8px 12px;
-}
-
-.PickupModalSearch {
-  position: relative;
-  padding: 8px;
-}
-
-.PickupModalPointsList {
-  flex: 1 1 auto;
-  position: relative;
-  overflow: auto;
-}
-
-.PickupModalPointsItem {
-  border-bottom: 1px solid #eee;
-  padding: 15px 0;
-  cursor: pointer;
-}
-
-.PickupModalPointsItem:hover {
-  background: #f4f4f4;
-}
-
-.detail {
-  flex: 1 1 auto;
-  display: flex;
-}
-
-.backdrop {
+.pickup-modal-backdrop {
   background: #fff;
   opacity: 0.8;
   position: fixed;
@@ -72,8 +19,93 @@
   z-index: 99;
 }
 
+.pickup-modal-close {
+  position: absolute;
+  padding: 14px;
+  right: 0;
+  top: 0;
+  z-index: 999;
+}
+
+/* info bar structue */
+
+.pickup-modal-info-bar {
+  height: 100%;
+  position: relative;
+}
+
+.pickup-modal-info-bar-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  position: relative;
+}
+
+/* header */
+
+.pickup-modal-header {
+  border-bottom: 1px solid #eee;
+  padding: 5px 0 5px 15px;
+  flex: none;
+  z-index: 1;
+}
+
+.pickup-modal-title {
+  font-size: 15px;
+}
+
+/* searh */
+
+.pickup-modal-search {
+  position: relative;
+  padding: 8px;
+}
+
+.pickup-modal-search input {
+  font-size: 16px;
+  height: auto;
+  padding: 12px 12px 12px 46px;
+  width: 100%;
+}
+
+.pickup-modal-search-icon {
+  position: absolute;
+  z-index: 99;
+  left: 24px;
+  top: 23px;
+}
+
+/* ask for geolocation */
+
+.button-ask-geolocation {
+  padding-bottom: 10px;
+  text-align: left;
+  height: 50%;
+}
+
+/* list of points */
+
+.pickup-modal-points-list {
+  flex: 1 1 auto;
+  position: relative;
+  overflow: auto;
+  padding: 5px 12px;
+}
+
+.pickup-modal-points-item {
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.pickup-modal-points-item:hover .pickup-point {
+  border-color: #ccc;
+}
+
+/* media queries */
+
 @media (max-width: 1023px) {
-  .PickupModal {
+  .pickup-modal {
     top: 0;
     bottom: 0;
     right: 0;
@@ -81,10 +113,18 @@
     height: 100%;
     width: 100%;
   }
+
+  .pickup-modal-info-bar-container {
+    height: 100vh;
+  }
+
+  .pickup-modal-info-bar-map {
+    height: auto;
+  }
 }
 
 @media (min-width: 1024px) {
-  .PickupModal {
+  .pickup-modal {
     border: 1px solid #ccc;
     top: 50%;
     left: 50%;
@@ -94,42 +134,27 @@
     margin-left: -450px;
   }
 
-  .pickupTabsContainer {
+  .pickup-tabs-container {
     display: none;
   }
 
-  .PickupModalHeader,
-  .PickupModalSearch,
-  .PickupModalPointsList,
-  .PickupModalAsk,
-  .detail {
+  .pickup-modal-info-bar {
+    padding: 10px;
     box-sizing: border-box;
-    background: #fff;
-    margin-left: 10px;
-    width: 320px;
-    z-index: 102;
+    width: 340px;
   }
 
-  .PickupModalHeader {
-    margin-top: 10px;
-  }
-
-  .PickupModalPointsList,
-  .detail {
-    margin-bottom: 10px;
-  }
-
-  .PickupModalPointsList {
+  .pickup-modal-points-list {
     margin-top: 0;
     overflow: auto;
   }
 
-  .PickupModalClose,
-  .PickupModalClose:hover {
+  .pickup-modal-close,
+  .pickup-modal-close:hover {
     border-radius: 20px;
     background: #fff;
-    position: absolute;
     right: 10px;
     top: 10px;
+    padding: 10px 14px;
   }
 }

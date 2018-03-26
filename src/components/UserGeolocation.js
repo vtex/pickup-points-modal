@@ -103,16 +103,14 @@ class UserGeolocation extends Component {
 
   render() {
     return (
-      <div className="PickupModalAsk">
-        <a
-          type="button"
-          className="button-ask-geolocation btn btn-link f6 blue no-underline"
-          id="ask-geolocation-button"
-          onClick={this.handleGetCurrentPosition}
-        >
-          {this.translate('askGeolocation')}
-        </a>
-      </div>
+      <button
+        type="button"
+        className="button-ask-geolocation btn btn-link"
+        id="ask-geolocation-button"
+        onClick={this.handleGetCurrentPosition}
+      >
+        {this.translate('askGeolocation')}
+      </button>
     )
   }
 }

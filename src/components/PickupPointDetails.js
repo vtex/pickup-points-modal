@@ -59,20 +59,20 @@ export class PickupPointDetails extends Component {
     const { unavailableItems, items } = this.state
 
     return (
-      <div className="pickupPointDetails pickup-point-details">
-        <div className="flexNone pickup-point-details-top">
+      <div className="pickup-point-details">
+        <div className="pickup-point-details-top">
           <button
             type="button"
-            className="backLink link-back-pickup-points-list btn btn-link f6 blue no-underline"
+            className="link-back-pickup-points-list btn btn-link"
             onClick={this.handleBackButtonClick}
           >
-            <i className={'iconBack icon-angle-left'} />
+            <i className={'icon-back-pickup-points-list icon-angle-left'} />
             {this.translate('cancelBackList')}
           </button>
         </div>
 
-        <div className="pickupDetailsMiddle pickup-point-details-middle">
-          <div className="pickupPointDetailsStore pickup-point-details-store">
+        <div className="pickup-point-details-middle">
+          <div className="pickup-point-details-store">
             <PickupPoint
               items={items}
               logisticsInfo={logisticsInfo}
@@ -84,9 +84,9 @@ export class PickupPointDetails extends Component {
             />
           </div>
 
-          <div className="info pickup-point-details-info">
-            <div className="group pickup-point-details-group mb3">
-              <h3 className="title pickup-point-details-info-title fw5 f6 pb1">
+          <div className="pickup-point-details-info">
+            <div className="pickup-point-details-group">
+              <h3 className="title pickup-point-details-info-title">
                 {this.translate('productsInPoint')}
               </h3>
               {items && <ProductItems items={items} />}
@@ -96,8 +96,8 @@ export class PickupPointDetails extends Component {
             </div>
             {pickupPoint.pickupStoreInfo &&
               pickupPoint.pickupStoreInfo.additionalInfo && (
-                <div className="group pickup-point-details-group mb3">
-                  <h3 className="title pickup-point-details-info-title fw5 f6 pb1">
+                <div className="group pickup-point-details-group">
+                  <h3 className="title pickup-point-details-info-title">
                     {this.translate('aditionalInfo')}
                   </h3>
                   {pickupPoint.pickupStoreInfo.additionalInfo}
@@ -106,10 +106,10 @@ export class PickupPointDetails extends Component {
           </div>
         </div>
 
-        <div className="pickupPointDetailsBottom bottom pickup-point-details-bottom mt3">
+        <div className="pickup-point-details-bottom">
           <button
             type="button"
-            className="confirmButton pickup-point-details-confirm btn btn-success btn-large"
+            className="pickup-point-details-confirm btn btn-success btn-large btn-block"
             id={`confirm-pickup-${pickupPoint.id
               .replace(/[^\w\s]/gi, '')
               .split(' ')

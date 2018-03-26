@@ -8,7 +8,6 @@ import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/Address
 import GoogleMapsContainer from '@vtex/address-form/lib/geolocation/GoogleMapsContainer'
 import GeolocationInput from '@vtex/address-form/lib/geolocation/GeolocationInput'
 
-import Heading from './components/Heading'
 import PickupTabs from './components/PickupTabs'
 import PickupPoint from './components/PickupPoint'
 import PickupPointDetails from './components/PickupPointDetails'
@@ -20,7 +19,6 @@ import { getPickupOptionGeolocations } from './utils/pickupUtils'
 
 import closebutton from './assets/icons/close_icon.svg'
 import './index.css'
-
 export class PickupPointsModal extends Component {
   constructor(props) {
     super(props)
@@ -31,7 +29,20 @@ export class PickupPointsModal extends Component {
       largeScreen: window.innerWidth > 1023,
       selectedPickupPoint: props.selectedPickupPoint,
       isPickupDetailsActive: null,
+      filteredPickupOptions: props.pickupOptions.filter(
+        option => option.id !== props.activePickupPoint.id
+      ),
+      showAskForGeolocation: false,
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      selectedPickupPoint: nextProps.selectedPickupPoint,
+      filteredPickupOptions: nextProps.pickupOptions.filter(
+        option => option.id !== nextProps.activePickupPoint.id
+      ),
+    })
   }
 
   componentWillUnmount() {
@@ -62,7 +73,8 @@ export class PickupPointsModal extends Component {
       this.state.mapStatus !== nextState.mapStatus ||
       this.state.largeScreen !== nextState.largeScreen ||
       this.props.searchAddress !== nextState.searchAddress ||
-      this.props.pickupOptions !== nextProps.pickupOptions
+      this.props.pickupOptions !== nextProps.pickupOptions ||
+      this.props.selectedPickupPoint.id !== nextProps.selectedPickupPoint.id
     )
   }
 
@@ -91,14 +103,15 @@ export class PickupPointsModal extends Component {
   togglePickupDetails = () =>
     this.setState({ isPickupDetailsActive: !this.state.isPickupDetailsActive })
 
+  activatePickupDetails = () => this.setState({ isPickupDetailsActive: true })
+
   handleAddressChange = address => {
-    if (!address.postalCode.value) return
+    if (address.postalCode && !address.postalCode.value) return
     this.props.onAddressChange(address)
   }
 
   render() {
     const {
-      pickupOptions,
       googleMapsKey,
       searchAddress,
       intl,
@@ -109,14 +122,18 @@ export class PickupPointsModal extends Component {
       sellerId,
       storePreferencesData,
       items,
+      pickupOptions,
       logisticsInfo,
+      activePickupPoint,
     } = this.props
 
     const {
+      filteredPickupOptions,
       isPickupDetailsActive,
       largeScreen,
       mapStatus,
       selectedPickupPoint,
+      showAskForGeolocation,
     } = this.state
 
     const isNotShowingPickupDetailsAndHasPickupOptions =
@@ -126,161 +143,201 @@ export class PickupPointsModal extends Component {
 
     return (
       <div>
-        <div
-          className="backdrop pickup-modal-backdrop"
-          onClick={this.handleClick}
-        />
-        <div className="PickupModal pickup-modal aspect-ratio--object z-999 bg-white flex flex-column overflow-hidden fixed">
-          <div className="PickupModalHeader flex-none flex items-center bb b--light-gray">
-            <div className="PickupModalTitle pickup-modal-title flex-auto pv3 pl3">
-              <Heading level="4" size="5" variation="bolder">
-                {isPickupDetailsActive
-                  ? this.translate('pointDetails')
-                  : this.translate('selectPickupPoint')}
-              </Heading>
-            </div>
-            <button
-              type="button"
-              className={
-                'PickupModalClose PickupModalClose pickup-modal-close btn btn-link flex-none pa3 bn bg-white'
-              }
-              onClick={this.handleClick}
-            >
-              <img
-                href="#"
-                src={closebutton}
-                alt={this.translate('closeButton')}
-              />
-            </button>
-          </div>
-
-          <GoogleMapsContainer apiKey={googleMapsKey} locale={intl.locale}>
-            {({ loading, googleMaps }) => (
-              <div>
-                {(largeScreen || mapStatus === SHOW_MAP) && (
-                  <Map
-                    address={searchAddress}
-                    changeActivePickupDetails={changeActivePickupDetails}
-                    googleMaps={googleMaps}
-                    isPickupDetailsActive={isPickupDetailsActive}
-                    handleAskForGeolocation={this.onAskForGeolocation}
-                    largeScreen={largeScreen}
-                    loadingGoogle={loading}
-                    mapProps={{
-                      style: {
-                        height: '100%',
-                        width: '100%',
-                        position: 'absolute',
-                        top: 0,
-                        zIndex: 0,
-                      },
-                    }}
-                    onChangeAddress={this.handleAddressChange}
-                    pickupOptionGeolocations={getPickupOptionGeolocations(
-                      pickupOptions
-                    )}
-                    pickupOptions={pickupOptions}
-                    rules={rules}
-                    selectedPickupPointGeolocation={getPickupOptionGeolocations(
-                      selectedPickupPoint
-                    )}
-                    pickupPoint={selectedPickupPoint}
-                  />
-                )}
-                {!isPickupDetailsActive && (
-                  <form
-                    id="pickup-modal-search"
-                    className="PickupModalSearch pickup-modal-search flex-none pa2 relative"
-                    onSubmit={this.handlePreventSubmitRefresh}
-                  >
-                    <GeolocationInput
-                      Input={Input}
-                      placeholder={this.translate('searchLocationMap')}
-                      loadingGoogle={loading}
-                      googleMaps={googleMaps}
-                      address={searchAddress}
-                      rules={rules}
-                      onChangeAddress={this.handleAddressChange}
-                    />
-                  </form>
-                )}
-                {!isPickupDetailsActive &&
-                  navigator.geolocation && (
-                    <UserGeolocation
-                      address={searchAddress}
-                      pickupOptionGeolocations={getPickupOptionGeolocations(
-                        pickupOptions
-                      )}
-                      googleMaps={googleMaps}
-                      onChangeAddress={this.handleAddressChange}
-                      rules={rules}
-                    />
+        <div className="pickup-modal-backdrop" onClick={this.handleClick} />
+        <GoogleMapsContainer apiKey={googleMapsKey} locale={intl.locale}>
+          {({ loading, googleMaps }) => (
+            <div className="pickup-modal">
+              <button
+                type="button"
+                className={'pickup-modal-close btn btn-link'}
+                onClick={this.handleClick}
+              >
+                <img
+                  href="#"
+                  src={closebutton}
+                  alt={this.translate('closeButton')}
+                />
+              </button>
+              {(largeScreen || mapStatus === SHOW_MAP) && (
+                <Map
+                  address={searchAddress}
+                  activatePickupDetails={this.activatePickupDetails}
+                  activePickupPoint={activePickupPoint}
+                  changeActivePickupDetails={changeActivePickupDetails}
+                  googleMaps={googleMaps}
+                  isPickupDetailsActive={isPickupDetailsActive}
+                  handleAskForGeolocation={this.onAskForGeolocation}
+                  largeScreen={largeScreen}
+                  loadingGoogle={loading}
+                  mapProps={{
+                    style: {
+                      height: '100%',
+                      width: '100%',
+                      position: 'absolute',
+                      top: 0,
+                      zIndex: 0,
+                    },
+                  }}
+                  onChangeAddress={this.handleAddressChange}
+                  pickupOptionGeolocations={getPickupOptionGeolocations(
+                    pickupOptions
                   )}
-              </div>
-            )}
-          </GoogleMapsContainer>
+                  pickupOptions={pickupOptions}
+                  rules={rules}
+                  selectedPickupPointGeolocation={getPickupOptionGeolocations(
+                    selectedPickupPoint
+                  )}
+                  pickupPoint={selectedPickupPoint}
+                />
+              )}
 
-          {!isPickupDetailsActive && (
-            <div className="pickupTabsContainer pickupTabsContainer pickup-tabs-container">
-              <PickupTabs
-                mapStatus={mapStatus}
-                updateLocationTab={this.updateLocationTab}
-              />
-            </div>
-          )}
-
-          {isNotShowingPickupDetailsAndHasPickupOptions && (
-            <div
-              className={
-                'PickupModalPointsList pickup-modal-points-list flex-auto relative overflow-auto'
-              }
-            >
-              {pickupOptions.map(pickupPoint => (
+              {showAskForGeolocation ? (
+                ''
+              ) : (
                 <div
-                  key={pickupPoint.id}
-                  className="PickupModalPointsItem pickup-modal-points-item"
+                  className={`pickup-modal-info-bar ${mapStatus === SHOW_MAP &&
+                    'pickup-modal-info-bar-map'}`}
                 >
-                  <PickupPoint
-                    items={items}
-                    logisticsInfo={logisticsInfo}
-                    sellerId={sellerId}
-                    togglePickupDetails={this.togglePickupDetails}
-                    handleChangeActivePickupDetails={changeActivePickupDetails}
-                    changeActivePickupPointId={this.changeActivePickupPointId}
-                    sellerId={sellerId}
-                    selectedRules={rules}
-                    pickupPoint={pickupPoint}
-                    storePreferencesData={storePreferencesData}
-                    pickupPointId={pickupPoint.id}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
+                  <div className="pickup-modal-info-bar-container">
+                    <div className="pickup-modal-header">
+                      <h4 className="pickup-modal-title">
+                        {isPickupDetailsActive
+                          ? this.translate('pointDetails')
+                          : this.translate('selectPickupPoint')}
+                      </h4>
+                    </div>
 
-          {isPickupDetailsActive && (
-            <div className="detail pickup-modal-details-wrapper flex-auto flex">
-              <PickupPointDetails
-                items={items}
-                logisticsInfo={logisticsInfo}
-                sellerId={sellerId}
-                handleChangeActiveSLAOption={changeActiveSLAOption}
-                togglePickupDetails={this.togglePickupDetails}
-                storePreferencesData={storePreferencesData}
-                handleClosePickupPointsModal={closePickupPointsModal}
-                sellerId={sellerId}
-                pickupPoint={selectedPickupPoint}
-                selectedRules={rules}
-              />
+                    {!isPickupDetailsActive && (
+                      <form
+                        id="pickup-modal-search"
+                        className="pickup-modal-search"
+                        onSubmit={this.handlePreventSubmitRefresh}
+                      >
+                        <GeolocationInput
+                          Input={Input}
+                          placeholder={this.translate('searchLocationMap')}
+                          loadingGoogle={loading}
+                          googleMaps={googleMaps}
+                          address={searchAddress}
+                          rules={rules}
+                          onChangeAddress={this.handleAddressChange}
+                        />
+                        <svg
+                          className="pickup-modal-search-icon"
+                          version="1.1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          x="0px"
+                          y="0px"
+                          viewBox="0 0 16 16"
+                          width="16"
+                          height="16"
+                        >
+                          <path
+                            fill="#666666"
+                            d="M12.7,11.3c0.9-1.2,1.4-2.6,1.4-4.2C14.1,3.2,11,0,7.1,0S0,3.2,0,7.1c0,3.9,3.2,7.1,7.1,7.1 c1.6,0,3.1-0.5,4.2-1.4l3,3c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3c0.4-0.4,0.4-1,0-1.4L12.7,11.3z M7.1,12.1 C4.3,12.1,2,9.9,2,7.1S4.3,2,7.1,2s5.1,2.3,5.1,5.1S9.9,12.1,7.1,12.1z"
+                          />
+                        </svg>
+                      </form>
+                    )}
+                    {!isPickupDetailsActive &&
+                      navigator.geolocation && (
+                        <UserGeolocation
+                          address={searchAddress}
+                          pickupOptionGeolocations={getPickupOptionGeolocations(
+                            pickupOptions
+                          )}
+                          googleMaps={googleMaps}
+                          onChangeAddress={this.handleAddressChange}
+                          rules={rules}
+                        />
+                      )}
+
+                    {!isPickupDetailsActive && (
+                      <div className="pickup-tabs-container">
+                        <PickupTabs
+                          mapStatus={mapStatus}
+                          updateLocationTab={this.updateLocationTab}
+                        />
+                      </div>
+                    )}
+
+                    {isNotShowingPickupDetailsAndHasPickupOptions && (
+                      <div className={'pickup-modal-points-list'}>
+                        {pickupOptions.length > 0 &&
+                          activePickupPoint && (
+                            <div className="pickup-modal-points-item">
+                              <PickupPoint
+                                items={items}
+                                logisticsInfo={logisticsInfo}
+                                sellerId={sellerId}
+                                togglePickupDetails={this.togglePickupDetails}
+                                handleChangeActivePickupDetails={
+                                  changeActivePickupDetails
+                                }
+                                changeActivePickupPointId={
+                                  this.changeActivePickupPointId
+                                }
+                                selectedRules={rules}
+                                pickupPoint={activePickupPoint}
+                                storePreferencesData={storePreferencesData}
+                                pickupPointId={activePickupPoint.id}
+                                isSelected
+                              />
+                            </div>
+                          )}
+                        {filteredPickupOptions.map(pickupPoint => (
+                          <div
+                            key={pickupPoint.id}
+                            className="pickup-modal-points-item"
+                          >
+                            <PickupPoint
+                              items={items}
+                              logisticsInfo={logisticsInfo}
+                              sellerId={sellerId}
+                              togglePickupDetails={this.togglePickupDetails}
+                              handleChangeActivePickupDetails={
+                                changeActivePickupDetails
+                              }
+                              changeActivePickupPointId={
+                                this.changeActivePickupPointId
+                              }
+                              selectedRules={rules}
+                              pickupPoint={pickupPoint}
+                              storePreferencesData={storePreferencesData}
+                              pickupPointId={pickupPoint.id}
+                              isSelected={pickupPoint === activePickupPoint}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {isPickupDetailsActive && (
+                      <PickupPointDetails
+                        items={items}
+                        logisticsInfo={logisticsInfo}
+                        sellerId={sellerId}
+                        handleChangeActiveSLAOption={changeActiveSLAOption}
+                        togglePickupDetails={this.togglePickupDetails}
+                        storePreferencesData={storePreferencesData}
+                        handleClosePickupPointsModal={closePickupPointsModal}
+                        pickupPoint={selectedPickupPoint}
+                        selectedRules={rules}
+                      />
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           )}
-        </div>
+        </GoogleMapsContainer>
       </div>
     )
   }
 }
 
 PickupPointsModal.propTypes = {
+  activePickupPoint: PropTypes.object.isRequired,
   changeActivePickupDetails: PropTypes.func.isRequired,
   changeActiveSLAOption: PropTypes.func.isRequired,
   closePickupPointsModal: PropTypes.func.isRequired,

@@ -1,26 +1,30 @@
-.items {
+.product-items-group {
+  margin: 10px 0 0;
+}
+
+.product-items {
   display: flex;
   overflow: auto;
   padding: 0 10px 10px 0;
 }
 
-.item {
+.product-item {
   border: 1px solid #e7e7e7;
   margin-right: 5px;
   padding: 2px;
 }
 
-.unavailable img {
-  opacity: 0.3;
-}
-
-.unavailable {
+.product-item-unavailable {
   position: relative;
   overflow: hidden;
   border-color: #FFC1C1;
 }
 
-.unavailable-slash {
+.product-item-unavailable img {
+  opacity: 0.3;
+}
+
+.product-item-unavailable-slash {
   content: ' ';
   top: 49%;
   left: -20%;
@@ -30,10 +34,6 @@
   transform: rotate(45deg);
   width: 140%;
   height: 1px;
-}
-
-.itemsGroup {
-  margin: 10px 0 0;
 }
 
 .__react_component_tooltip {

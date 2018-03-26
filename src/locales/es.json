@@ -89,5 +89,6 @@
     "Algunos itenes no se pueden quitar en este punto. Elija una dirección para recibirlos.",
   "pickupPointsModal.price":
     "{value, plural, =0 {Gratis} other {{formattedPrice}}}",
-  "pickupPointsModal.askGeolocation": "Busque una dirección con su ubicación"
+  "pickupPointsModal.askGeolocation": "Busque una dirección con su ubicación",
+  "pickupPointsModal.marker": "Pin de geolocalización"
 }

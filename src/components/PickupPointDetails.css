@@ -1,92 +1,58 @@
-.pickupPointDetails {
+/* main structure */
+
+.pickup-point-details {
   display: flex;
   flex-direction: column;
   z-index: 101;
-  background: #fff;
   flex: 1 1 auto;
-  overflow: auto;
   position: relative;
 }
 
-.flex {
-  flex: 1 1 auto;
-}
-
-.flexNone {
+.pickup-point-details-top {
   flex: none;
 }
 
-.pickupDetailsMiddle {
-  overflow: scroll;
+.pickup-point-details-middle {
+  overflow: auto;
   flex: 1 1 auto;
 }
 
-.pickupPointDetailsBottom {
+.pickup-point-details-bottom {
   background: white;
   flex: none;
   bottom: 0;
+  padding: 10px;
 }
 
-.info {
+/* middle section */
+
+.pickup-point-details-store {
+  padding: 12px;
+}
+
+.pickup-point-details-info {
   padding: 15px;
 }
 
-.pickupPointDetailsStore {
-  background: #f4f4f4;
-  padding: 15px 0;
+.pickup-point-details-group {
+  margin-bottom: 20px;
 }
 
-.backLink {
+.pickup-point-details-info-title {
+  margin-top: 0;
+}
+
+/* links and icons */
+
+.link-back-pickup-points-list {
   display: block;
   text-align: left;
   padding: 8px 12px 9px;
 }
 
-.iconBack {
+.icon-back-pickup-points-list {
   font-size: 25px;
   vertical-align: sub;
   margin-right: 12px;
   text-decoration: none;
 }
-
-.group {
-  margin-bottom: 20px;
-}
-
-.title {
-  margin-top: 0;
-}
-
-.cancelButton,
-.cancelButton:hover {
-  color: red;
-}
-
-.confirmButton,
-.cancelButton {
-  width: 100%;
-}
-
-.bottom {
-  padding: 10px;
-}
-
-/*@media (max-width: 1023px) {
-  .pickupPointDetails {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-  }
-}
-
-@media (min-width: 1024px) {
-  .pickupPointDetails {
-    position: absolute;
-    top: 10px;
-    bottom: 10px;
-    left: 10px;
-    width: 320px;
-  }
-}*/
