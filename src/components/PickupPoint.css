@@ -50,15 +50,11 @@
 
 .pickup-point-availability {
   color: #E86B60;
-  display: block;
-  margin-top: 4px;
+  display: inline-block;
 }
 
 .pickup-point-price,
 .pickup-point-sla {
   display: inline-block;
-}
-
-.pickup-point-price {
   margin-right: 20px;
 }
