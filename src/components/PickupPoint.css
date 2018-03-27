@@ -47,6 +47,12 @@
   padding: 8px 12px 8px 50px;
 }
 
+.pickup-point-availability {
+  color: #E86B60;
+  display: block;
+  margin-top: 4px;
+}
+
 .pickup-point-price,
 .pickup-point-sla {
   display: inline-block;
