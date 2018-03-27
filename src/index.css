@@ -51,13 +51,14 @@
   z-index: 1;
 }
 
-.pickup-modal-title {
+h4.pickup-modal-title {
   font-size: 15px;
 }
 
 /* searh */
 
 .pickup-modal-search {
+  flex: none;
   position: relative;
   padding: 8px;
 }
@@ -79,6 +80,7 @@
 /* ask for geolocation */
 
 .button-ask-geolocation {
+  flex: none;
   padding-bottom: 10px;
   text-align: left;
 }
