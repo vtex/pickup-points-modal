@@ -30,7 +30,8 @@ export class PickupPointsModal extends Component {
       selectedPickupPoint: props.selectedPickupPoint,
       isPickupDetailsActive: null,
       filteredPickupOptions: props.pickupOptions.filter(
-        option => option.id !== props.activePickupPoint.id
+        option =>
+          props.activePickupPoint && option.id !== props.activePickupPoint.id
       ),
       showAskForGeolocation: false,
     }
@@ -40,7 +41,9 @@ export class PickupPointsModal extends Component {
     this.setState({
       selectedPickupPoint: nextProps.selectedPickupPoint,
       filteredPickupOptions: nextProps.pickupOptions.filter(
-        option => option.id !== nextProps.activePickupPoint.id
+        option =>
+          nextProps.activePickupPoint &&
+          option.id !== nextProps.activePickupPoint.id
       ),
     })
   }
@@ -57,6 +60,7 @@ export class PickupPointsModal extends Component {
     ) {
       this.setState({
         isPickupDetailsActive: true,
+        mapStatus: HIDE_MAP,
         isMounted: true,
       })
     } else {
@@ -101,13 +105,26 @@ export class PickupPointsModal extends Component {
     })
 
   togglePickupDetails = () =>
-    this.setState({ isPickupDetailsActive: !this.state.isPickupDetailsActive })
+    this.setState({
+      isPickupDetailsActive: !this.state.isPickupDetailsActive,
+    })
 
-  activatePickupDetails = () => this.setState({ isPickupDetailsActive: true })
+  activatePickupDetails = () =>
+    this.setState({
+      isPickupDetailsActive: true,
+      mapStatus: HIDE_MAP,
+    })
 
   handleAddressChange = address => {
     if (address.postalCode && !address.postalCode.value) return
-    this.props.onAddressChange(address)
+    this.props.onAddressChange({
+      ...address,
+      postalCode: address.postalCode.valid
+        ? address.postalCode
+        : {
+          value: null,
+        },
+    })
   }
 
   render() {
@@ -198,7 +215,10 @@ export class PickupPointsModal extends Component {
                   className={`pickup-modal-info-bar ${mapStatus === SHOW_MAP &&
                     'pickup-modal-info-bar-map'}`}
                 >
-                  <div className="pickup-modal-info-bar-container">
+                  <div
+                    className={`pickup-modal-info-bar-container ${mapStatus ===
+                      SHOW_MAP && 'active'}`}
+                  >
                     <div className="pickup-modal-header">
                       <h4 className="pickup-modal-title">
                         {isPickupDetailsActive
@@ -337,7 +357,7 @@ export class PickupPointsModal extends Component {
 }
 
 PickupPointsModal.propTypes = {
-  activePickupPoint: PropTypes.object.isRequired,
+  activePickupPoint: PropTypes.object,
   changeActivePickupDetails: PropTypes.func.isRequired,
   changeActiveSLAOption: PropTypes.func.isRequired,
   closePickupPointsModal: PropTypes.func.isRequired,
