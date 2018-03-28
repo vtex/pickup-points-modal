@@ -1,6 +1,7 @@
 /* main structue */
 
 .pickup-point {
+  background-color: #fff;
   border: 1px solid #f4f4f4;
   border-radius: 4px;
 }
@@ -47,11 +48,13 @@
   padding: 8px 12px 8px 50px;
 }
 
-.pickup-point-price,
-.pickup-point-sla {
+.pickup-point-availability {
+  color: #E86B60;
   display: inline-block;
 }
 
-.pickup-point-price {
+.pickup-point-price,
+.pickup-point-sla {
+  display: inline-block;
   margin-right: 20px;
 }

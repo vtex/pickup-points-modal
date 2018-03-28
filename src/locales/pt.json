@@ -55,7 +55,7 @@
   "pickupPointsModal.modify": "alterar",
   "pickupPointsModal.details": "Ver detalhes ou altere o ponto de retirada.",
   "pickupPointsModal.searchLocationMap":
-    "Buscar por Lugar, CEP, Bairro ou Cidade",
+    "Buscar por localidade",
   "pickupPointsModal.productsInPoint":
     "Disponibilidade de produtos neste ponto",
   "pickupPointsModal.aditionalInfo": "Outras informações",
