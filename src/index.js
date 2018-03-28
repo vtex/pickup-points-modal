@@ -16,6 +16,7 @@ import Input from './components/Input'
 import Map from './components/Map'
 
 import { getPickupOptionGeolocations } from './utils/pickupUtils'
+import { validateField } from '@vtex/address-form/lib/validateAddress'
 
 import closebutton from './assets/icons/close_icon.svg'
 import './index.css'
@@ -117,10 +118,23 @@ export class PickupPointsModal extends Component {
 
   handleAddressChange = address => {
     if (address.postalCode && !address.postalCode.value) return
-    this.props.onAddressChange({
+    const addressValidated = {
       ...address,
-      postalCode: address.postalCode.valid
-        ? address.postalCode
+      postalCode: {
+        ...address.postalCode,
+        ...validateField(
+          address.postalCode.value,
+          'postalCode',
+          address,
+          this.props.rules
+        ),
+      },
+    }
+
+    this.props.onAddressChange({
+      ...addressValidated,
+      postalCode: addressValidated.postalCode.valid
+        ? addressValidated.postalCode
         : {
           value: null,
         },
