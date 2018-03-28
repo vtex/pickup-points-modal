@@ -17,7 +17,7 @@
     "test:coverage": "jest --env=jsdom --coverage",
     "test:watch": "jest --env=jsdom --watch",
     "prepublishOnly": "npm run build",
-    "develop": "npm link && watch 'npm run build' src"
+    "build:link": "npm link && watch 'npm run build' src"
   },
   "keywords": [
     "react-component",

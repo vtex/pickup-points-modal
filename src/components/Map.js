@@ -90,7 +90,7 @@ class Map extends Component {
       this.createNewMarkers({
         pickups: nextProps.pickupOptionGeolocations,
         pickupOptions: nextProps.pickupOptions,
-        pickupPoint: nextProps.pickupPoint && nextProps.pickupPoint.id,
+        pickupPoint: nextProps.pickupPoint,
         selectedPickupPointGeolocation:
           nextProps.selectedPickupPointGeolocation,
         recenter: false,
@@ -149,11 +149,23 @@ class Map extends Component {
       return
     }
 
-    this.createMap(mapElement)
+    const geoCoordinates =
+      this.props.address.geoCoordinates.value.length > 0
+        ? this.props.address.geoCoordinates.value
+        : this.props.activePickupPoint
+          ? this.props.activePickupPoint.pickupStoreInfo.address.geoCoordinates
+          : []
+
+    this.createMap(mapElement, geoCoordinates)
+
+    if (geoCoordinates.length > 0) {
+      this.recenterMap(this.getLocation(geoCoordinates))
+    }
+
     this.createNewMarkers({
       pickups: this.props.pickupOptionGeolocations,
       pickupOptions: this.props.pickupOptions,
-      pickupPoint: this.props.pickupPoint && this.props.pickupPoint.id,
+      pickupPoint: this.props.pickupPoint,
       selectedPickupPointGeolocation: this.props.selectedPickupPointGeolocation,
       recenter: true,
       ...(this.props.address.geoCoordinates.length > 0
@@ -162,20 +174,13 @@ class Map extends Component {
     })
   }
 
-  createMap = mapElement => {
+  createMap = (mapElement, geoCoordinates) => {
     const { googleMaps, largeScreen } = this.props
 
     this._mapElement = mapElement
 
-    const geoCoordinates = this.props.address.geoCoordinates.value
-
     const mapOptions = {
       zoom: 14,
-      ...(geoCoordinates.length > 0
-        ? {
-          center: this.recenterMap(this.getLocation(geoCoordinates)),
-        }
-        : {}),
       mapTypeControl: false,
       zoomControl: true,
       fullscreenControl: false,
@@ -185,6 +190,11 @@ class Map extends Component {
         position: googleMaps.ControlPosition.CENTER_RIGHT,
         style: googleMaps.ZoomControlStyle.SMALL,
       },
+      ...(geoCoordinates && geoCoordinates.length > 0
+        ? {
+          center: this.getLocation(geoCoordinates),
+        }
+        : {}),
     }
 
     this.map = new googleMaps.Map(this._mapElement, mapOptions)
@@ -206,6 +216,7 @@ class Map extends Component {
       changeActivePickupDetails,
       activatePickupDetails,
       googleMaps,
+      activePickupPoint,
     } = this.props
 
     if (!this.map) return
@@ -225,7 +236,9 @@ class Map extends Component {
           draggable: false,
           map: this.map,
           icon:
-            pickupPoint === pickupOptions[index].id
+            (pickupPoint && pickupPoint.id === pickupOptions[index].id) ||
+            (activePickupPoint &&
+              activePickupPoint.id === pickupOptions[index].id)
               ? this.state.selectedIcon
               : this.state.icon,
         }
