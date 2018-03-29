@@ -1,4 +1,4 @@
-.pickup-view-mode {
+.pkpmodal-pickup-view-mode {
   position: relative;
   width: 100%;
   padding: 8px;
@@ -6,15 +6,15 @@
   box-sizing: border-box;
 }
 
-.pickup-view-map,
-.pickup-view-list {
+.pkpmodal-pickup-view-map,
+.pkpmodal-pickup-view-list {
   width: 50%;
 }
 
-.pickup-view-option-active,
-.pickup-view-option-active:hover,
-.pickup-view-option-active:active,
-.pickup-view-option-active:focus {
+.pkpmodal-pickup-view-option-active,
+.pkpmodal-pickup-view-option-active:hover,
+.pkpmodal-pickup-view-option-active:active,
+.pkpmodal-pickup-view-option-active:focus {
   border: 1px solid #357edd;
   background: #357edd;
   color: #fff;
@@ -22,10 +22,10 @@
   text-shadow: none;
 }
 
-.pickup-view-option-inactive,
-.pickup-view-option-inactive:hover,
-.pickup-view-option-inactive:active,
-.pickup-view-option-inactive:focus {
+.pkpmodal-pickup-view-option-inactive,
+.pkpmodal-pickup-view-option-inactive:hover,
+.pkpmodal-pickup-view-option-inactive:active,
+.pkpmodal-pickup-view-option-inactive:focus {
   border: 1px solid #357edd;
   background: #fff;
   color: #357edd;

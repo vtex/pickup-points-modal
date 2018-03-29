@@ -14,7 +14,7 @@ export class ProductItems extends Component {
     const { itemsByPackages, items, available } = this.props
 
     return itemsByPackages ? (
-      <div className="product-items-group">
+      <div className="pkpmodal-product-items-group">
         {itemsByPackages.map(itemsPackage => {
           const time =
             itemsPackage.selectedSlaItem &&
@@ -44,18 +44,18 @@ export class ProductItems extends Component {
                     })}
                   </p>
                 )}
-              <div className="product-items">
+              <div className="pkpmodal-product-items">
                 {itemsPackage.items.map(item => {
                   return (
                     <span
                       key={item.uniqueId}
                       data-tip={item.name}
-                      className={`product-item ${available ? '' : 'product-item-unavailable'}`}>
+                      className={`pkpmodal-product-item ${available ? '' : 'pkpmodal-product-item-unavailable'}`}>
                       <img
                         src={fixImageUrl(item.imageUrl)}
                         alt={item.name}
                       />
-                      { !available && <span className="product-item-unavailable-slash"></span> }
+                      { !available && <span className="pkpmodal-product-item-unavailable-slash"></span> }
                       <ReactTooltip effect="solid" />
                     </span>
                   )
@@ -67,19 +67,19 @@ export class ProductItems extends Component {
         <ReactTooltip effect="solid" />
       </div>
     ) : (
-      <div className="product-items">
+      <div className="pkpmodal-product-items">
         {items.map(item => {
           return (
             <span
               key={item.uniqueId}
               data-tip={item.name}
-              className={`product-item ${available ? '' : 'product-item-unavailable'}`}>
+              className={`pkpmodal-product-item ${available ? '' : 'pkpmodal-product-item-unavailable'}`}>
               <img
                 src={fixImageUrl(item.imageUrl)}
                 alt={item.name}
                 data-tip={item.name}
               />
-              { !available && <span className="product-item-unavailable-slash"></span> }
+              { !available && <span className="pkpmodal-product-item-unavailable-slash"></span> }
               <ReactTooltip effect="solid" />
             </span>
           )
