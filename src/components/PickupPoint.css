@@ -58,3 +58,14 @@
   display: inline-block;
   margin-right: 20px;
 }
+
+.pickup-point-address .city,
+.pickup-point-address .city-dash,
+.pickup-point-address .postal-code,
+.pickup-point-address .postal-code-dash,
+.pickup-point-address .state,
+.pickup-point-address .state-dash,
+.pickup-point-address .country,
+.pickup-point-address .country-dash {
+  display: none;
+}
