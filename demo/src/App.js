@@ -85,6 +85,7 @@ class App extends Component {
             googleMapsKey={API_KEY}
             intl={this.props.intl}
             items={items}
+            askForGeolocation={false}
             isPickupDetailsActive={isPickupDetailsActive}
             logisticsInfo={logisticsInfo}
             pickupOptions={pickupMock.pickupOptions}

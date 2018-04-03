@@ -11,9 +11,9 @@ import GeolocationInput from '@vtex/address-form/lib/geolocation/GeolocationInpu
 import PickupTabs from './components/PickupTabs'
 import PickupPoint from './components/PickupPoint'
 import PickupPointDetails from './components/PickupPointDetails'
-import UserGeolocation from './components/UserGeolocation'
 import Input from './components/Input'
 import Map from './components/Map'
+import AskForGeolocation from './components/AskForGeolocation'
 
 import { getPickupOptionGeolocations } from './utils/pickupUtils'
 import { validateField } from '@vtex/address-form/lib/validateAddress'
@@ -36,12 +36,13 @@ export class PickupPointsModal extends Component {
             ? option.id !== props.activePickupPoint.id
             : true
       ),
-      showAskForGeolocation: false,
+      showAskForGeolocation: this.props.askForGeolocation,
     }
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
+      showAskForGeolocation: nextProps.askForGeolocation,
       selectedPickupPoint: nextProps.selectedPickupPoint,
       filteredPickupOptions: nextProps.pickupOptions.filter(
         option =>
@@ -75,6 +76,12 @@ export class PickupPointsModal extends Component {
     window.addEventListener('resize', this.resize)
   }
 
+  handleAskForGeolocation = ask => {
+    this.setState({
+      showAskForGeolocation: ask || true,
+    })
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     return (
       this.state.isPickupDetailsActive !== nextState.isPickupDetailsActive ||
@@ -82,7 +89,8 @@ export class PickupPointsModal extends Component {
       this.state.largeScreen !== nextState.largeScreen ||
       this.props.searchAddress !== nextState.searchAddress ||
       this.props.pickupOptions !== nextProps.pickupOptions ||
-      this.props.selectedPickupPoint.id !== nextProps.selectedPickupPoint.id
+      this.props.selectedPickupPoint.id !== nextProps.selectedPickupPoint.id ||
+      this.props.askForGeolocation !== nextProps.askForGeolocation
     )
   }
 
@@ -232,7 +240,16 @@ export class PickupPointsModal extends Component {
               )}
 
               {showAskForGeolocation ? (
-                ''
+                <AskForGeolocation
+                  address={searchAddress}
+                  pickupOptionGeolocations={getPickupOptionGeolocations(
+                    pickupOptions
+                  )}
+                  googleMaps={googleMaps}
+                  onAskForGeolocation={this.handleAskForGeolocation}
+                  onChangeAddress={this.handleAddressChange}
+                  rules={rules}
+                />
               ) : (
                 <div
                   className={`pickup-modal-info-bar ${mapStatus === SHOW_MAP &&
@@ -284,17 +301,14 @@ export class PickupPointsModal extends Component {
                     )}
                     {!isPickupDetailsActive &&
                       navigator.geolocation && (
-                        <UserGeolocation
-                          address={searchAddress}
-                          pickupOptionGeolocations={getPickupOptionGeolocations(
-                            pickupOptions
-                          )}
-                          googleMaps={googleMaps}
-                          onChangeAddress={this.handleAddressChange}
-                          rules={rules}
-                        />
+                        <button
+                          type="button"
+                          className="button-ask-geolocation btn btn-link"
+                          onClick={this.handleAskForGeolocation}
+                        >
+                          {this.translate('askGeolocation')}
+                        </button>
                       )}
-
                     {!isPickupDetailsActive && (
                       <div className="pickup-tabs-container">
                         <PickupTabs

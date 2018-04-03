@@ -90,5 +90,11 @@
   "pickupPointsModal.price":
     "{value, plural, =0 {Free} other {{formattedPrice}}}",
   "pickupPointsModal.askGeolocation": "Search an address with your location",
-  "pickupPointsModal.marker": "Geolocation marker"
+  "pickupPointsModal.marker": "Geolocation marker",
+  "pickupPointsModal.geolocationDiscover": "We'll suggest the pickup point closest to you",
+  "pickupPointsModal.geolocationAsk": "For that, we need your location",
+  "pickupPointsModal.geolocationManual": "Search for an address manually",
+  "pickupPointsModal.geolocationAllow": "Select \"Allow\" in the prompt on your browser",
+  "pickupPointsModal.geolocationWaiting": "Waiting on your authorization",
+  "pickupPointsModal.geolocationSearching": "Searching for your location"
 }

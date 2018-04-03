@@ -8,6 +8,7 @@ import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/Address
 import styles from '../index.css'
 
 import { searchPickupAddressByGeolocationEvent } from '../utils/metrics'
+import { SEARCHING, WAITING, HTTPS } from '../constants'
 
 class UserGeolocation extends Component {
   componentWillUnmount() {
@@ -23,6 +24,12 @@ class UserGeolocation extends Component {
   }
 
   handleGetCurrentPosition = () => {
+    this.props.handleGeolocationStatus(WAITING)
+    if (window.location.protocol !== HTTPS) {
+      this.props.handleAskForGeolocation(false)
+      return
+    }
+    this.props.onGetGeolocation()
     this.props.googleMaps &&
       navigator.geolocation.getCurrentPosition(
         position => {
@@ -30,6 +37,7 @@ class UserGeolocation extends Component {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           })
+          this.props.handleGeolocationStatus(SEARCHING)
           searchPickupAddressByGeolocationEvent({
             searchedAddressByGeolocation: true,
             confirmedGeolocation: true,
@@ -38,23 +46,27 @@ class UserGeolocation extends Component {
         error => {
           switch (error.code) {
             case 0: // UNKNOWN ERROR
+              this.props.handleAskForGeolocation(false)
               searchPickupAddressByGeolocationEvent({
                 confirmedGeolocation: true,
                 browserError: true,
               })
               break
             case 1: // PERMISSION_DENIED
+              this.props.handleAskForGeolocation(false)
               searchPickupAddressByGeolocationEvent({
                 deniedGeolocation: true,
               })
               break
             case 2: // POSITION_UNAVAILABLE
+              this.props.handleAskForGeolocation(false)
               searchPickupAddressByGeolocationEvent({
                 confirmedGeolocation: true,
                 positionUnavailable: true,
               })
               break
             case 3: // TIMEOUT
+              this.props.handleAskForGeolocation(false)
               searchPickupAddressByGeolocationEvent({
                 dismissedGeolocation: true,
               })
@@ -113,7 +125,7 @@ class UserGeolocation extends Component {
     return (
       <button
         type="button"
-        className="button-ask-geolocation btn btn-link"
+        className="btn-ask-for-geolocation-cta btn btn-success btn-large"
         id="ask-geolocation-button"
         onClick={this.handleGetCurrentPosition}
       >
@@ -128,6 +140,8 @@ UserGeolocation.propTypes = {
   googleMaps: PropTypes.object,
   intl: intlShape,
   onChangeAddress: PropTypes.func.isRequired,
+  onGetGeolocation: PropTypes.func.isRequired,
+  handleAskForGeolocation: PropTypes.func.isRequired,
   pickupOptionGeolocations: PropTypes.array,
   rules: PropTypes.object,
 }
