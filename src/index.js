@@ -32,7 +32,9 @@ export class PickupPointsModal extends Component {
       isPickupDetailsActive: null,
       filteredPickupOptions: props.pickupOptions.filter(
         option =>
-          props.activePickupPoint && option.id !== props.activePickupPoint.id
+          props.activePickupPoint
+            ? option.id !== props.activePickupPoint.id
+            : true
       ),
       showAskForGeolocation: false,
     }
@@ -43,8 +45,9 @@ export class PickupPointsModal extends Component {
       selectedPickupPoint: nextProps.selectedPickupPoint,
       filteredPickupOptions: nextProps.pickupOptions.filter(
         option =>
-          nextProps.activePickupPoint &&
-          option.id !== nextProps.activePickupPoint.id
+          nextProps.activePickupPoint
+            ? option.id !== nextProps.activePickupPoint.id
+            : true
       ),
     })
   }
@@ -120,6 +123,12 @@ export class PickupPointsModal extends Component {
     if (address.postalCode && !address.postalCode.value) return
     const addressValidated = {
       ...address,
+      complement: {
+        value: null,
+      },
+      reference: {
+        value: null,
+      },
       postalCode: {
         ...address.postalCode,
         ...validateField(
