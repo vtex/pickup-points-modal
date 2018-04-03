@@ -89,7 +89,15 @@ class UserGeolocation extends Component {
           googleAddress,
           rules
         )
-        onChangeAddress(autoCompletedAddress)
+        onChangeAddress({
+          ...autoCompletedAddress,
+          complement: {
+            value: null,
+          },
+          reference: {
+            value: null,
+          },
+        })
       }
     } else {
       console.warn(`Google Maps Error: ${status}`)
