@@ -88,5 +88,11 @@
   "pickupPointsModal.price":
     "{value, plural, =0 {Grátis} other {{formattedPrice}}}",
   "pickupPointsModal.askGeolocation": "Buscar perto da minha localização atual",
-  "pickupPointsModal.marker": "Pin de geolocalização"
+  "pickupPointsModal.marker": "Pin de geolocalização",
+  "pickupPointsModal.geolocationDiscover": "Vamos sugerir o ponto de retirada mais perto de você",
+  "pickupPointsModal.geolocationAsk": "Para isso, precisamos saber sua localização",
+  "pickupPointsModal.geolocationManual": "Procurar endereço manualmente",
+  "pickupPointsModal.geolocationAllow": "Selecione \"Permitir\" no alerta exibido no seu navegador",
+  "pickupPointsModal.geolocationWaiting": "Aguardando sua autorização",
+  "pickupPointsModal.geolocationSearching": "Buscando sua localização"
 }

@@ -301,13 +301,13 @@ export class PickupPointsModal extends Component {
                     )}
                     {!isPickupDetailsActive &&
                       navigator.geolocation && (
-                        <a
+                        <button
                           type="button"
                           className="button-ask-geolocation btn btn-link"
                           onClick={this.handleAskForGeolocation}
                         >
                           {this.translate('askGeolocation')}
-                        </a>
+                        </button>
                       )}
                     {!isPickupDetailsActive && (
                       <div className="pickup-tabs-container">
