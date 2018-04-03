@@ -1,4 +1,4 @@
-.ask-for-geolocation {
+.pkpmodal-ask-for-geolocation {
   position: relative;
   width: 100%;
   height: 100%;
@@ -8,13 +8,13 @@
   justify-content: center;
 }
 
-.ask-for-geolocation-wrapper {
+.pkpmodal-ask-for-geolocation-wrapper {
   text-align: center;
   flex: none;
   padding: 0 16px;
 }
 
-.ask-for-geolocation-title {
+.pkpmodal-ask-for-geolocation-title {
   font-size: 22px;
   color: #333;
   font-weight: 400;
@@ -22,7 +22,7 @@
   line-height: 1.3;
 }
 
-.ask-for-geolocation-title-small {
+.pkpmodal-ask-for-geolocation-title-small {
   font-size: 20px;
   color: #666;
   font-weight: 400;
@@ -31,7 +31,7 @@
   margin-top: 24px;
 }
 
-.ask-for-geolocation-subtitle {
+.pkpmodal-ask-for-geolocation-subtitle {
   font-size: 14px;
   color: #999;
   font-weight: 400;
@@ -39,10 +39,10 @@
   line-height: 1.3;
 }
 
-.ask-for-geolocation-image-ask {
+.pkpmodal-ask-for-geolocation-image-ask {
   display: inline-block;
   background: #368df7;
-  box-shadow: 0 4px 6px 0 rgba(153, 153, 153, .5);
+  box-shadow: 0 4px 6px 0 rgba(153, 153, 153, 0.5);
   width: 160px;
   height: 160px;
   border-radius: 100%;
@@ -50,37 +50,37 @@
   margin: 48px 0;
 }
 
-.ask-for-geolocation-image-searching-pin {
+.pkpmodal-ask-for-geolocation-image-searching-pin {
   animation: bounce 1s infinite;
 }
 
-.ask-for-geolocation-image-waiting-shadow,
-.ask-for-geolocation-image-searching-shadow {
-    background-color: #ccc;
-    width: 30px;
-    height: 30px;
-    border-radius: 80px;
-    margin-bottom: 30px;
-    margin: -15px auto 0;
+.pkpmodal-ask-for-geolocation-image-waiting-shadow,
+.pkpmodal-ask-for-geolocation-image-searching-shadow {
+  background-color: #ccc;
+  width: 30px;
+  height: 30px;
+  border-radius: 80px;
+  margin-bottom: 30px;
+  margin: -15px auto 0;
 }
 
-.ask-for-geolocation-image-waiting-shadow {
+.pkpmodal-ask-for-geolocation-image-waiting-shadow {
   transform: rotateX(76deg) scale(1);
 }
 
-.ask-for-geolocation-image-searching-shadow {
+.pkpmodal-ask-for-geolocation-image-searching-shadow {
   animation: bounce-shadow 1s infinite;
 }
 
-.ask-for-geolocation-cta {
+.pkpmodal-ask-for-geolocation-cta {
   margin-bottom: 12px;
 }
 
-.btn-ask-for-geolocation-manual {
+.btn-pkpmodal-ask-for-geolocation-manual {
   font-size: 14px;
 }
 
-.ask-for-geolocation-instructions {
+.pkpmodal-ask-for-geolocation-instructions {
   height: 120px;
 }
 
@@ -95,24 +95,24 @@
 }
 
 @media (min-width: 1024px) {
-  .ask-for-geolocation-title {
+  .pkpmodal-ask-for-geolocation-title {
     font-size: 28px;
   }
 
-  .ask-for-geolocation-subtitle {
+  .pkpmodal-ask-for-geolocation-subtitle {
     font-size: 16px;
   }
 
-  .ask-for-geolocation-image {
+  .pkpmodal-ask-for-geolocation-image {
     width: 200px;
     height: 200px;
   }
 
-  .ask-for-geolocation-waiting {
+  .pkpmodal-ask-for-geolocation-waiting {
     padding: 0 220px;
   }
 
-  .ask-for-geolocation-instructions {
+  .pkpmodal-ask-for-geolocation-instructions {
     height: 80px;
   }
 }

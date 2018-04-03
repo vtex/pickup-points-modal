@@ -36,12 +36,13 @@ export class PickupPointsModal extends Component {
             ? option.id !== props.activePickupPoint.id
             : true
       ),
-      showAskForGeolocation: true,
+      showAskForGeolocation: this.props.askForGeolocation,
     }
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
+      showAskForGeolocation: nextProps.askForGeolocation,
       selectedPickupPoint: nextProps.selectedPickupPoint,
       filteredPickupOptions: nextProps.pickupOptions.filter(
         option =>
@@ -75,9 +76,9 @@ export class PickupPointsModal extends Component {
     window.addEventListener('resize', this.resize)
   }
 
-  handleAskForGeolocation = () => {
+  handleAskForGeolocation = ask => {
     this.setState({
-      showAskForGeolocation: true,
+      showAskForGeolocation: ask || true,
     })
   }
 
@@ -88,7 +89,8 @@ export class PickupPointsModal extends Component {
       this.state.largeScreen !== nextState.largeScreen ||
       this.props.searchAddress !== nextState.searchAddress ||
       this.props.pickupOptions !== nextProps.pickupOptions ||
-      this.props.selectedPickupPoint.id !== nextProps.selectedPickupPoint.id
+      this.props.selectedPickupPoint.id !== nextProps.selectedPickupPoint.id ||
+      this.props.askForGeolocation !== nextProps.askForGeolocation
     )
   }
 
@@ -244,6 +246,7 @@ export class PickupPointsModal extends Component {
                     pickupOptions
                   )}
                   googleMaps={googleMaps}
+                  onAskForGeolocation={this.handleAskForGeolocation}
                   onChangeAddress={this.handleAddressChange}
                   rules={rules}
                 />
@@ -252,7 +255,10 @@ export class PickupPointsModal extends Component {
                   className={`pickup-modal-info-bar ${mapStatus === SHOW_MAP &&
                     'pickup-modal-info-bar-map'}`}
                 >
-                  <div className="pickup-modal-info-bar-container">
+                  <div
+                    className={`pickup-modal-info-bar-container ${mapStatus ===
+                      SHOW_MAP && 'active'}`}
+                  >
                     <div className="pickup-modal-header">
                       <h4 className="pickup-modal-title">
                         {isPickupDetailsActive
