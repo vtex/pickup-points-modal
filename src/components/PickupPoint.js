@@ -62,29 +62,29 @@ export class PickupPoint extends Component {
 
     return (
       <div
-        className="pickup-point"
+        className="pkpmodal-pickup-point"
         id={pickupPoint.id
           .replace(/[^\w\s]/gi, '')
           .split(' ')
           .join('-')}
         onClick={this.handleOpenPickupDetails}
       >
-        <div className="pickup-point-main">
-          <div className="pickup-point-marker">
+        <div className="pkpmodal-pickup-point-main">
+          <div className="pkpmodal-pickup-point-marker">
             <img
-              className="pickup-point-marker-image"
+              className="pkpmodal-pickup-point-marker-image"
               src={isSelected ? markerIconSelected : markerIcon}
               alt={this.translate('marker')}
             />
-            <div className="pickup-point-distance hide">
+            <div className="pkpmodal-pickup-point-distance hide">
               {pickupPoint.distance}
             </div>
           </div>
-          <div className="pickup-point-info">
-            <p className="pickup-point-name">
+          <div className="pkpmodal-pickup-point-info">
+            <p className="pkpmodal-pickup-point-name">
               {pickupPoint.pickupStoreInfo.friendlyName}
             </p>
-            <div className="pickup-point-address">
+            <div className="pkpmodal-pickup-point-address">
               <AddressSummary
                 address={pickupPoint.pickupStoreInfo.address}
                 rules={selectedRules}
@@ -93,8 +93,8 @@ export class PickupPoint extends Component {
             </div>
           </div>
         </div>
-        <div className="pickup-point-sla-availability">
-          <span className="pickup-point-price">
+        <div className="pkpmodal-pickup-point-sla-availability">
+          <span className="pkpmodal-pickup-point-price">
             {this.translate('price', {
               value: pickupPoint.price,
               formattedPrice: formatCurrency({
@@ -103,13 +103,13 @@ export class PickupPoint extends Component {
               }),
             })}
           </span>
-          <span className="pickup-point-sla">
+          <span className="pkpmodal-pickup-point-sla">
             {this.translate(`shippingEstimatePickup-${time}`, {
               timeAmount,
             })}
           </span>
           {unavailableItemsAmount > 0 && (
-            <span className="pickup-point-availability">
+            <span className="pkpmodal-pickup-point-availability">
               {this.translate('unavailableItemsAmount', {
                 itemsAmount: unavailableItemsAmount,
               })}

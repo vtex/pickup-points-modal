@@ -1,6 +1,6 @@
 /* main structure */
 
-.pickup-point-details {
+.pkpmodal-pickup-point-details {
   display: flex;
   flex-direction: column;
   z-index: 101;
@@ -8,16 +8,16 @@
   position: relative;
 }
 
-.pickup-point-details-top {
+.pkpmodal-pickup-point-details-top {
   flex: none;
 }
 
-.pickup-point-details-middle {
+.pkpmodal-pickup-point-details-middle {
   overflow: auto;
   flex: 1 1 auto;
 }
 
-.pickup-point-details-bottom {
+.pkpmodal-pickup-point-details-bottom {
   background: white;
   flex: none;
   bottom: 0;
@@ -26,31 +26,31 @@
 
 /* middle section */
 
-.pickup-point-details-store {
+.pkpmodal-pickup-point-details-store {
   padding: 12px;
 }
 
-.pickup-point-details-info {
+.pkpmodal-pickup-point-details-info {
   padding: 15px;
 }
 
-.pickup-point-details-group {
+.pkpmodal-pickup-point-details-group {
   margin-bottom: 20px;
 }
 
-.pickup-point-details-info-title {
+.pkpmodal-pickup-point-details-info-title {
   margin-top: 0;
 }
 
 /* links and icons */
 
-.link-back-pickup-points-list {
+.pkpmodal-link-back-pickup-points-list {
   display: block;
   text-align: left;
   padding: 8px 12px 9px;
 }
 
-.icon-back-pickup-points-list {
+.pkpmodal-icon-back-pickup-points-list {
   font-size: 25px;
   vertical-align: sub;
   margin-right: 12px;

@@ -59,20 +59,20 @@ export class PickupPointDetails extends Component {
     const { unavailableItems, items } = this.state
 
     return (
-      <div className="pickup-point-details">
-        <div className="pickup-point-details-top">
+      <div className="pkpmodal-pickup-point-details">
+        <div className="pkpmodal-pickup-point-details-top">
           <button
             type="button"
-            className="link-back-pickup-points-list btn btn-link"
+            className="pkpmodal-link-back-pickup-points-list btn btn-link"
             onClick={this.handleBackButtonClick}
           >
-            <i className={'icon-back-pickup-points-list icon-angle-left'} />
+            <i className={'pkpmodal-icon-back-pickup-points-list icon-angle-left'} />
             {this.translate('cancelBackList')}
           </button>
         </div>
 
-        <div className="pickup-point-details-middle">
-          <div className="pickup-point-details-store">
+        <div className="pkpmodal-pickup-point-details-middle">
+          <div className="pkpmodal-pickup-point-details-store">
             <PickupPoint
               items={items}
               logisticsInfo={logisticsInfo}
@@ -84,9 +84,9 @@ export class PickupPointDetails extends Component {
             />
           </div>
 
-          <div className="pickup-point-details-info">
-            <div className="pickup-point-details-group">
-              <h3 className="title pickup-point-details-info-title">
+          <div className="pkpmodal-pickup-point-details-info">
+            <div className="pkpmodal-pickup-point-details-group">
+              <h3 className="title pkpmodal-pickup-point-details-info-title">
                 {this.translate('productsInPoint')}
               </h3>
               {items && <ProductItems items={items} />}
@@ -96,8 +96,8 @@ export class PickupPointDetails extends Component {
             </div>
             {pickupPoint.pickupStoreInfo &&
               pickupPoint.pickupStoreInfo.additionalInfo && (
-                <div className="group pickup-point-details-group">
-                  <h3 className="title pickup-point-details-info-title">
+                <div className="pkpmodal-pickup-point-details-group">
+                  <h3 className="pkpmodal-pickup-point-details-info-title">
                     {this.translate('aditionalInfo')}
                   </h3>
                   {pickupPoint.pickupStoreInfo.additionalInfo}
@@ -106,10 +106,10 @@ export class PickupPointDetails extends Component {
           </div>
         </div>
 
-        <div className="pickup-point-details-bottom">
+        <div className="pkpmodal-pickup-point-details-bottom">
           <button
             type="button"
-            className="pickup-point-details-confirm btn btn-success btn-large btn-block"
+            className="pkpmodal-pickup-point-details-confirm btn btn-success btn-large btn-block"
             id={`confirm-pickup-${pickupPoint.id
               .replace(/[^\w\s]/gi, '')
               .split(' ')
