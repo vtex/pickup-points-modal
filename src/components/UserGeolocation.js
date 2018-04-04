@@ -9,7 +9,10 @@ import styles from '../index.css'
 
 import { searchPickupAddressByGeolocationEvent } from '../utils/metrics'
 import { SEARCHING, WAITING, HTTPS } from '../constants'
-
+import {
+  getCurrentPosition,
+  handleGetAddressByGeolocation,
+} from '../utils/CurrentPosition'
 class UserGeolocation extends Component {
   componentWillUnmount() {
     this.setState({ isMounted: false })
@@ -23,6 +26,12 @@ class UserGeolocation extends Component {
     this.address = nextProps.address
   }
 
+  componentDidMount() {
+    if (this.props.askForGeolocation) {
+      this.handleGetCurrentPosition()
+    }
+  }
+
   handleGetCurrentPosition = () => {
     this.props.handleGeolocationStatus(WAITING)
     if (window.location.protocol !== HTTPS) {
@@ -31,11 +40,18 @@ class UserGeolocation extends Component {
     }
     this.props.onGetGeolocation()
     this.props.googleMaps &&
-      navigator.geolocation.getCurrentPosition(
+      getCurrentPosition(
         position => {
-          this.handleGetAddressByGeolocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
+          handleGetAddressByGeolocation({
+            newPosition: {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            },
+            geocoder: this.geocoder,
+            googleMaps: this.props.googleMaps,
+            onChangeAddress: this.props.onChangeAddress,
+            rules: this.props.rules,
+            address: this.address,
           })
           this.props.handleGeolocationStatus(SEARCHING)
           searchPickupAddressByGeolocationEvent({
@@ -77,43 +93,6 @@ class UserGeolocation extends Component {
         },
         { maximumAge: 50000, timeout: 20000, enableHighAccuracy: true }
       )
-  }
-
-  handleGetAddressByGeolocation = newPosition => {
-    if (!this.geocoder) {
-      this.geocoder = new this.props.googleMaps.Geocoder()
-    }
-
-    this.geocoder.geocode(
-      { location: newPosition },
-      this.handleAutocompleteAddress
-    )
-  }
-
-  handleAutocompleteAddress = (results, status) => {
-    const { googleMaps, onChangeAddress, rules } = this.props
-
-    if (status === googleMaps.GeocoderStatus.OK) {
-      if (results[0]) {
-        const googleAddress = results[0]
-        const autoCompletedAddress = geolocationAutoCompleteAddress(
-          this.address,
-          googleAddress,
-          rules
-        )
-        onChangeAddress({
-          ...autoCompletedAddress,
-          complement: {
-            value: null,
-          },
-          reference: {
-            value: null,
-          },
-        })
-      }
-    } else {
-      console.warn(`Google Maps Error: ${status}`)
-    }
   }
 
   translate = id =>

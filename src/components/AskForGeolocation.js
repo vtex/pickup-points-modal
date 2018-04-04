@@ -9,6 +9,8 @@ import SearchingPin from '../assets/components/SearchingPin'
 
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
+import './AskForGeolocation.css'
+
 import { WAITING, SEARCHING, ASK } from '../constants'
 
 export class AskForGeolocation extends Component {
