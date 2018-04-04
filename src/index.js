@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { HIDE_MAP, SHOW_MAP, PICKUP_IN_STORE } from './constants'
+import {
+  HIDE_MAP,
+  SHOW_MAP,
+  PICKUP_IN_STORE,
+  WAITING,
+  SEARCHING,
+  HTTPS,
+} from './constants'
 import debounce from 'lodash/debounce'
 
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
@@ -15,11 +22,18 @@ import Input from './components/Input'
 import Map from './components/Map'
 import AskForGeolocation from './components/AskForGeolocation'
 
-import { getPickupOptionGeolocations } from './utils/pickupUtils'
 import { validateField } from '@vtex/address-form/lib/validateAddress'
+
+import { getPickupOptionGeolocations } from './utils/pickupUtils'
+import {
+  getCurrentPosition,
+  handleGetAddressByGeolocation,
+} from './utils/CurrentPosition'
+import { searchPickupAddressByGeolocationEvent } from './utils/metrics'
 
 import closebutton from './assets/icons/close_icon.svg'
 import './index.css'
+
 export class PickupPointsModal extends Component {
   constructor(props) {
     super(props)
@@ -37,12 +51,14 @@ export class PickupPointsModal extends Component {
             : true
       ),
       showAskForGeolocation: this.props.askForGeolocation,
+      askForGeolocationStatus: this.props.askForGeolocation ? WAITING : null,
     }
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       showAskForGeolocation: nextProps.askForGeolocation,
+      askForGeolocationStatus: nextProps.askForGeolocation ? WAITING : null,
       selectedPickupPoint: nextProps.selectedPickupPoint,
       filteredPickupOptions: nextProps.pickupOptions.filter(
         option =>
@@ -59,6 +75,18 @@ export class PickupPointsModal extends Component {
   }
 
   componentDidMount() {
+    if (this.props.askForGeolocation) {
+      this.setState({ askForGeolocationStatus: WAITING })
+      if (window.location.protocol !== HTTPS) {
+        this.handleAskForGeolocation(false)
+        return
+      }
+      this.props.googleMaps &&
+        getCurrentPosition(
+          this.getCurrentPositionSuccess,
+          this.getCurrentPositionError
+        )
+    }
     if (
       !!this.props.selectedPickupPoint &&
       this.state.isPickupDetailsActive === null
@@ -74,6 +102,58 @@ export class PickupPointsModal extends Component {
       })
     }
     window.addEventListener('resize', this.resize)
+  }
+
+  getCurrentPositionSuccess = position => {
+    handleGetAddressByGeolocation({
+      newPosition: {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      },
+      geocoder: this.geocoder,
+      googleMaps: this.props.googleMaps,
+      onChangeAddress: this.props.onChangeAddress,
+      rules: this.props.rules,
+      address: this.address,
+    })
+    this.setState({ askForGeolocationStatus: SEARCHING })
+    searchPickupAddressByGeolocationEvent({
+      searchedAddressByGeolocation: true,
+      confirmedGeolocation: true,
+    })
+  }
+
+  getCurrentPositionError = error => {
+    switch (error.code) {
+      case 0: // UNKNOWN ERROR
+        this.handleAskForGeolocation(false)
+        searchPickupAddressByGeolocationEvent({
+          confirmedGeolocation: true,
+          browserError: true,
+        })
+        break
+      case 1: // PERMISSION_DENIED
+        this.handleAskForGeolocation(false)
+        searchPickupAddressByGeolocationEvent({
+          deniedGeolocation: true,
+        })
+        break
+      case 2: // POSITION_UNAVAILABLE
+        this.handleAskForGeolocation(false)
+        searchPickupAddressByGeolocationEvent({
+          confirmedGeolocation: true,
+          positionUnavailable: true,
+        })
+        break
+      case 3: // TIMEOUT
+        this.handleAskForGeolocation(false)
+        searchPickupAddressByGeolocationEvent({
+          dismissedGeolocation: true,
+        })
+        break
+      default:
+        return false
+    }
   }
 
   handleAskForGeolocation = ask => {
@@ -182,6 +262,7 @@ export class PickupPointsModal extends Component {
       mapStatus,
       selectedPickupPoint,
       showAskForGeolocation,
+      askForGeolocationStatus,
     } = this.state
 
     const isNotShowingPickupDetailsAndHasPickupOptions =
@@ -249,6 +330,7 @@ export class PickupPointsModal extends Component {
                   onAskForGeolocation={this.handleAskForGeolocation}
                   onChangeAddress={this.handleAddressChange}
                   rules={rules}
+                  status={askForGeolocationStatus}
                 />
               ) : (
                 <div
