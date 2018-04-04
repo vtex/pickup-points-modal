@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 
+import {
+  getCurrentPosition,
+  handleGetAddressByGeolocation,
+} from '../utils/CurrentPosition'
+
 import UserGeolocation from '../components/UserGeolocation'
 import GeolocationPin from '../assets/components/GeolocationPin'
 import WaitingPin from '../assets/components/WaitingPin'
@@ -11,7 +16,7 @@ import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/Address
 
 import './AskForGeolocation.css'
 
-import { WAITING, SEARCHING, ASK } from '../constants'
+import { WAITING, SEARCHING, ASK, HTTPS } from '../constants'
 
 export class AskForGeolocation extends Component {
   constructor(props) {
@@ -19,6 +24,73 @@ export class AskForGeolocation extends Component {
 
     this.state = {
       status: props.status || WAITING,
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.askForGeolocation) {
+      this.setState({ askForGeolocationStatus: WAITING })
+      if (window.location.protocol !== HTTPS) {
+        this.props.onAskForGeolocation(false)
+        return
+      }
+      this.props.googleMaps &&
+        getCurrentPosition(
+          this.getCurrentPositionSuccess,
+          this.getCurrentPositionError
+        )
+    }
+  }
+
+  getCurrentPositionSuccess = position => {
+    handleGetAddressByGeolocation({
+      newPosition: {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      },
+      geocoder: this.geocoder,
+      googleMaps: this.props.googleMaps,
+      onChangeAddress: this.props.onChangeAddress,
+      rules: this.props.rules,
+      address: this.address,
+    })
+    this.setState({ askForGeolocationStatus: SEARCHING })
+    searchPickupAddressByGeolocationEvent({
+      searchedAddressByGeolocation: true,
+      confirmedGeolocation: true,
+    })
+  }
+
+  getCurrentPositionError = error => {
+    switch (error.code) {
+      case 0: // UNKNOWN ERROR
+        this.props.onAskForGeolocation(false)
+        searchPickupAddressByGeolocationEvent({
+          confirmedGeolocation: true,
+          browserError: true,
+        })
+        break
+      case 1: // PERMISSION_DENIED
+        this.props.onAskForGeolocation(false)
+        searchPickupAddressByGeolocationEvent({
+          deniedGeolocation: true,
+        })
+        break
+      case 2: // POSITION_UNAVAILABLE
+        this.props.onAskForGeolocation(false)
+        searchPickupAddressByGeolocationEvent({
+          confirmedGeolocation: true,
+          positionUnavailable: true,
+        })
+        break
+      case 3: // TIMEOUT
+        this.props.onAskForGeolocation(false)
+        searchPickupAddressByGeolocationEvent({
+          dismissedGeolocation: true,
+        })
+        break
+      default:
+        return false
     }
   }
 
@@ -115,6 +187,7 @@ AskForGeolocation.propTypes = {
   intl: intlShape,
   onChangeAddress: PropTypes.func.isRequired,
   onAskForGeolocation: PropTypes.func.isRequired,
+  askForGeolocation: PropTypes.bool.isRequired,
   pickupOptionGeolocations: PropTypes.array,
   rules: PropTypes.object,
 }
