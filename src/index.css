@@ -99,7 +99,7 @@ h4.pickup-modal-title {
   margin-bottom: 12px;
 }
 
-.pickup-modal-points-item:hover .pickup-point {
+.pickup-modal-points-item:hover .pkpmodal-pickup-point {
   border-color: #ccc;
 }
 
