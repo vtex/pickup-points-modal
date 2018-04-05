@@ -8,15 +8,23 @@ import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/Address
 import markerIconBlue from '../assets/icons/marker_blue.svg'
 import markerIconSelected from '../assets/icons/marker_selected.svg'
 
+import { getPickupGeolocationString } from '../utils/GetString'
+
 class Map extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
       icon: markerIconBlue,
       selectedIcon: markerIconSelected,
       isMounted: false,
+      mapStyles: {
+        height: '100%',
+        width: '100%',
+        position: 'absolute',
+        top: 0,
+        zIndex: 0,
+      },
     }
-    this.mapMounted = this.mapMounted.bind(this)
   }
 
   shouldComponentUpdate(prevProps) {
@@ -53,15 +61,6 @@ class Map extends Component {
       )
   }
 
-  getPickupGeolocationString = geolocations =>
-    geolocations.reduce(
-      (accumulatedString, currentGeolocation) =>
-        currentGeolocation.length > 0
-          ? accumulatedString + currentGeolocation[0]
-          : '',
-      ''
-    )
-
   componentWillReceiveProps(nextProps) {
     const { googleMaps, pickupOptionGeolocations, address } = this.props
 
@@ -79,10 +78,10 @@ class Map extends Component {
 
     this.address = nextProps.address
 
-    const thisPickupOptions = this.getPickupGeolocationString(
+    const thisPickupOptions = getPickupGeolocationString(
       pickupOptionGeolocations
     )
-    const nextPickupOptions = this.getPickupGeolocationString(
+    const nextPickupOptions = getPickupGeolocationString(
       nextProps.pickupOptionGeolocations
     )
 
@@ -186,6 +185,9 @@ class Map extends Component {
       fullscreenControl: false,
       streetViewControl: false,
       color: '#00ff00',
+      featureType: 'poi',
+      elementType: 'labels',
+      stylers: [{ visibility: 'off' }],
       zoomControlOptions: {
         position: googleMaps.ControlPosition.CENTER_RIGHT,
         style: googleMaps.ZoomControlStyle.SMALL,
@@ -359,7 +361,7 @@ class Map extends Component {
     return this.props.loadingGoogle ? (
       this.props.loadingElement
     ) : (
-      <div id="map-canvas" ref={this.mapMounted} {...this.props.mapProps} />
+      <div id="map-canvas" ref={this.mapMounted} style={this.state.mapStyles} />
     )
   }
 }
@@ -379,7 +381,6 @@ Map.propTypes = {
   largeScreen: PropTypes.bool,
   loadingElement: PropTypes.node,
   loadingGoogle: PropTypes.bool,
-  mapProps: PropTypes.object,
   onChangeAddress: PropTypes.func.isRequired,
   pickupOptionGeolocations: PropTypes.array,
   pickupOptions: PropTypes.array.isRequired,

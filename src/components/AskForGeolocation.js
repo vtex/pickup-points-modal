@@ -15,15 +15,18 @@ import SearchingPin from '../assets/components/SearchingPin'
 
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
-import './AskForGeolocation.css'
+import './GeolocationStatus.css'
 
 import { WAITING, SEARCHING, ASK, HTTPS } from '../constants'
+import GeolocationStatus from './GeolocationStatus'
 
 export class AskForGeolocation extends Component {
   componentDidMount() {
     if (this.props.askForGeolocation) {
       this.handleGeolocationStatus(WAITING)
-      if (window.location.protocol !== HTTPS) {
+
+      // Hard coded coords for development
+      if (process.env.NODE !== 'production') {
         this.getCurrentPositionSuccess({
           coords: {
             latitude: -22.9432587,
@@ -111,27 +114,24 @@ export class AskForGeolocation extends Component {
     return (
       <div className="pkpmodal-ask-for-geolocation">
         {status === ASK && (
-          <div className="pkpmodal-ask-for-geolocation-wrapper pkpmodal-ask-for-geolocation-ask">
-            <h2 className="pkpmodal-ask-for-geolocation-title">
-              {this.translate('geolocationDiscover')}
-            </h2>
-            <h3 className="pkpmodal-ask-for-geolocation-subtitle">
-              {this.translate('geolocationAsk')}
-            </h3>
-            <div className="pkpmodal-ask-for-geolocation-image-ask">
-              <GeolocationPin />
-            </div>
-            <div className="pkpmodal-ask-for-geolocation-cta">
-              <UserGeolocation
-                address={this.props.address}
-                pickupOptionGeolocations={this.props.pickupOptionGeolocations}
-                googleMaps={this.props.googleMaps}
-                onChangeAddress={this.props.onChangeAddress}
-                onGetGeolocation={this.handleGeolocationStatus}
-                handleAskForGeolocation={this.props.onAskForGeolocation}
-                rules={this.props.rules}
-              />
-            </div>
+          <GeolocationStatus
+            titleTop="geolocationDiscover"
+            subtitleTop="geolocationAsk"
+            Image={() => (
+              <div className="pkpmodal-ask-for-geolocation-image-ask">
+                <GeolocationPin />
+              </div>
+            )}
+          >
+            <UserGeolocation
+              address={this.props.address}
+              pickupOptionGeolocations={this.props.pickupOptionGeolocations}
+              googleMaps={this.props.googleMaps}
+              onChangeAddress={this.props.onChangeAddress}
+              onGetGeolocation={this.handleGeolocationStatus}
+              handleAskForGeolocation={this.props.onAskForGeolocation}
+              rules={this.props.rules}
+            />
             <div className="pkpmodal-ask-for-geolocation-manual">
               <button
                 type="button"
@@ -141,38 +141,36 @@ export class AskForGeolocation extends Component {
                 {this.translate('geolocationManual')}
               </button>
             </div>
-          </div>
+          </GeolocationStatus>
         )}
 
         {status === WAITING && (
-          <div className="pkpmodal-ask-for-geolocation-wrapper pkpmodal-ask-for-geolocation-waiting">
-            <div className="pkpmodal-ask-for-geolocation-image-waiting">
-              <WaitingPin />
-            </div>
-            <div className="pkpmodal-ask-for-geolocation-image-waiting-shadow" />
-            <div className="pkpmodal-ask-for-geolocation-instructions">
-              <h2 className="pkpmodal-ask-for-geolocation-title-small">
-                {this.translate('geolocationWaiting')}
-              </h2>
-              <h3 className="pkpmodal-ask-for-geolocation-subtitle">
-                {this.translate('geolocationAllow')}
-              </h3>
-            </div>
-          </div>
+          <GeolocationStatus
+            titleBottom="geolocationWaiting"
+            subtitleBottom="geolocationAllow"
+            Image={() => (
+              <div>
+                <div className="pkpmodal-ask-for-geolocation-image-waiting">
+                  <WaitingPin />
+                </div>
+                <div className="pkpmodal-ask-for-geolocation-image-waiting-shadow" />
+              </div>
+            )}
+          />
         )}
 
         {status === SEARCHING && (
-          <div className="pkpmodal-ask-for-geolocation-wrapper pkpmodal-ask-for-geolocation-searching">
-            <div className="pkpmodal-ask-for-geolocation-image-searching">
-              <SearchingPin />
-            </div>
-            <div className="pkpmodal-ask-for-geolocation-image-searching-shadow" />
-            <div className="pkpmodal-ask-for-geolocation-instructions">
-              <h2 className="pkpmodal-ask-for-geolocation-title-small">
-                {this.translate('geolocationSearching')}
-              </h2>
-            </div>
-          </div>
+          <GeolocationStatus
+            titleBottom="geolocationSearching"
+            Image={() => (
+              <div>
+                <div className="pkpmodal-ask-for-geolocation-image-searching">
+                  <SearchingPin />
+                </div>
+                <div className="pkpmodal-ask-for-geolocation-image-searching-shadow" />
+              </div>
+            )}
+          />
         )}
       </div>
     )
