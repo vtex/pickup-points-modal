@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { HIDE_MAP, SHOW_MAP, PICKUP_IN_STORE, WAITING } from './constants'
+import {
+  HIDE_MAP,
+  SHOW_MAP,
+  PICKUP_IN_STORE,
+  WAITING,
+  SEARCHING,
+  ASK,
+} from './constants'
 import debounce from 'lodash/debounce'
 
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
@@ -18,7 +25,6 @@ import AskForGeolocation from './components/AskForGeolocation'
 import { validateField } from '@vtex/address-form/lib/validateAddress'
 
 import { getPickupOptionGeolocations } from './utils/pickupUtils'
-import { searchPickupAddressByGeolocationEvent } from './utils/metrics'
 
 import closebutton from './assets/icons/close_icon.svg'
 import './index.css'
@@ -44,10 +50,21 @@ export class PickupPointsModal extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps, nextState) {
+    const thisPickupOptions = this.getPickupSlaString(this.props.pickupOptions)
+    const nextPickupOptions = this.getPickupSlaString(nextProps.pickupOptions)
+
     this.setState({
-      showAskForGeolocation: nextProps.askForGeolocation,
-      askForGeolocationStatus: nextProps.askForGeolocation ? WAITING : null,
+      showAskForGeolocation:
+        thisPickupOptions !== nextPickupOptions &&
+        this.state.askForGeolocationStatus === SEARCHING
+          ? false
+          : nextProps.askForGeolocation,
+      askForGeolocationStatus:
+        thisPickupOptions !== nextPickupOptions &&
+        this.state.askForGeolocationStatus === SEARCHING
+          ? null
+          : this.state.askForGeolocationStatus,
       selectedPickupPoint: nextProps.selectedPickupPoint,
       filteredPickupOptions: nextProps.pickupOptions.filter(
         option =>
@@ -57,6 +74,13 @@ export class PickupPointsModal extends Component {
       ),
     })
   }
+
+  getPickupSlaString = slas =>
+    slas.reduce(
+      (accumulatedString, currentPickupPoint) =>
+        currentPickupPoint.id ? accumulatedString + currentPickupPoint.id : '',
+      ''
+    )
 
   componentWillUnmount() {
     this.setState({ isMounted: false })
@@ -83,7 +107,13 @@ export class PickupPointsModal extends Component {
 
   handleAskForGeolocation = ask => {
     this.setState({
-      showAskForGeolocation: ask || true,
+      showAskForGeolocation: ask,
+    })
+  }
+
+  handleAskForGeolocationStatus = status => {
+    this.setState({
+      askForGeolocationStatus: status,
     })
   }
 
@@ -258,6 +288,9 @@ export class PickupPointsModal extends Component {
                     onChangeAddress={this.handleAddressChange}
                     rules={rules}
                     status={askForGeolocationStatus}
+                    onAskForGeolocationStatus={
+                      this.handleAskForGeolocationStatus
+                    }
                     askForGeolocation={askForGeolocation}
                   />
                 ) : (
