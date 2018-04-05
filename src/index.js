@@ -342,16 +342,6 @@ export class PickupPointsModal extends Component {
                           </svg>
                         </form>
                       )}
-                      {!isPickupDetailsActive &&
-                        navigator.geolocation && (
-                          <button
-                            type="button"
-                            className="button-ask-geolocation btn btn-link"
-                            onClick={this.handleAskForGeolocation}
-                          >
-                            {this.translate('askGeolocation')}
-                          </button>
-                        )}
                       {!isPickupDetailsActive && (
                         <div className="pickup-tabs-container">
                           <PickupTabs
