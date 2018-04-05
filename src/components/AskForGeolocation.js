@@ -6,6 +6,7 @@ import {
   getCurrentPosition,
   handleGetAddressByGeolocation,
 } from '../utils/CurrentPosition'
+import { searchPickupAddressByGeolocationEvent } from '../utils/metrics'
 
 import UserGeolocation from '../components/UserGeolocation'
 import GeolocationPin from '../assets/components/GeolocationPin'
@@ -19,19 +20,16 @@ import './AskForGeolocation.css'
 import { WAITING, SEARCHING, ASK, HTTPS } from '../constants'
 
 export class AskForGeolocation extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      status: props.status || WAITING,
-    }
-  }
-
   componentDidMount() {
     if (this.props.askForGeolocation) {
-      this.setState({ askForGeolocationStatus: WAITING })
+      this.handleGeolocationStatus(WAITING)
       if (window.location.protocol !== HTTPS) {
-        this.props.onAskForGeolocation(false)
+        this.getCurrentPositionSuccess({
+          coords: {
+            latitude: -22.9432587,
+            longitude: -43.1862642,
+          },
+        })
         return
       }
       this.props.googleMaps &&
@@ -52,9 +50,9 @@ export class AskForGeolocation extends Component {
       googleMaps: this.props.googleMaps,
       onChangeAddress: this.props.onChangeAddress,
       rules: this.props.rules,
-      address: this.address,
+      address: this.props.address,
     })
-    this.setState({ askForGeolocationStatus: SEARCHING })
+    this.handleGeolocationStatus(SEARCHING)
     searchPickupAddressByGeolocationEvent({
       searchedAddressByGeolocation: true,
       confirmedGeolocation: true,
@@ -95,7 +93,7 @@ export class AskForGeolocation extends Component {
   }
 
   handleGeolocationStatus = status => {
-    this.setState({ status: status || WAITING })
+    this.props.onAskForGeolocationStatus(status)
   }
 
   handleManualGeolocation = () => {
@@ -108,7 +106,7 @@ export class AskForGeolocation extends Component {
     })
 
   render() {
-    const { status } = this.state
+    const { status } = this.props
 
     return (
       <div className="pkpmodal-ask-for-geolocation">
@@ -183,13 +181,15 @@ export class AskForGeolocation extends Component {
 
 AskForGeolocation.propTypes = {
   address: AddressShapeWithValidation,
+  askForGeolocation: PropTypes.bool.isRequired,
   googleMaps: PropTypes.object,
   intl: intlShape,
   onChangeAddress: PropTypes.func.isRequired,
   onAskForGeolocation: PropTypes.func.isRequired,
-  askForGeolocation: PropTypes.bool.isRequired,
+  onAskForGeolocationStatus: PropTypes.func.isRequired,
   pickupOptionGeolocations: PropTypes.array,
   rules: PropTypes.object,
+  status: PropTypes.string.isRequired,
 }
 
 export default injectIntl(AskForGeolocation)
