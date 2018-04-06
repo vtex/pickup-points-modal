@@ -185,9 +185,7 @@ class Map extends Component {
       fullscreenControl: false,
       streetViewControl: false,
       color: '#00ff00',
-      featureType: 'poi',
-      elementType: 'labels',
-      stylers: [{ visibility: 'off' }],
+      clickableIcons: false,
       zoomControlOptions: {
         position: googleMaps.ControlPosition.CENTER_RIGHT,
         style: googleMaps.ZoomControlStyle.SMALL,
