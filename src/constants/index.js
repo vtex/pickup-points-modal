@@ -15,7 +15,7 @@ export const PAYMENT_HASH = '#/payment'
 export const ASK = 'ask'
 export const WAITING = 'waiting'
 export const SEARCHING = 'searching'
-export const HTTPS = 'https:'
+export const VTEXLOCAL = 'vtexlocal'
 
 export const EEMPTY = 'ERROR_EMPTY_FIELD'
 export const EADDRESSTYPE = 'ERROR_ADDRESS_TYPE'
