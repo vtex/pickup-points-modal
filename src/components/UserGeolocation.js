@@ -33,7 +33,7 @@ class UserGeolocation extends Component {
 
   handleGetCurrentPosition = () => {
     this.props.handleGeolocationStatus(WAITING)
-    if (window.location.protocol !== HTTPS) {
+    if (window.location.host.includes(VTEXLOCAL)) {
       this.props.handleAskForGeolocation(false)
       return
     }
