@@ -33,3 +33,29 @@ export function formatCurrency({
     ? `${currencySymbol} ${value}`
     : `${value} ${currencySymbol}`
 }
+
+export function formatNumber({ value, storePreferencesData }) {
+  const { currencySymbol, currencyFormatInfo } = storePreferencesData
+
+  const {
+    currencyDecimalSeparator,
+    currencyGroupSeparator,
+  } = currencyFormatInfo
+
+  value = value.toFixed(1)
+
+  const valueDividedInParts = value.split('.')
+
+  const decimalPart = valueDividedInParts[1]
+
+  let wholePart = valueDividedInParts[0]
+
+  wholePart = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, currencyGroupSeparator)
+
+  value =
+    decimalPart > 0
+      ? wholePart + currencyDecimalSeparator + decimalPart
+      : wholePart
+
+  return value
+}

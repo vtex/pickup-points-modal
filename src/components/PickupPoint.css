@@ -4,7 +4,7 @@
   background-color: #fff;
   border: 1px solid #f4f4f4;
   border-radius: 4px;
-  box-shadow: 0 1px 1px 0 rgba(204, 204, 204, 0.5);
+  box-shadow: 0 2px 2px 0 rgba(221, 221, 221, 0.5);
 }
 
 .pkpmodal-pickup-point-main {
@@ -16,8 +16,13 @@
   flex: none;
 }
 
+.pkpmodal-pickup-point-marker-image {
+  height: 16px;
+}
+
 .pkpmodal-pickup-point-info {
   flex: 1 1 auto;
+  width: 96px;
 }
 
 /* marker */
@@ -25,7 +30,14 @@
 .pkpmodal-pickup-point-marker {
   vertical-align: top;
   text-align: center;
-  width: 50px;
+  width: 60px;
+}
+
+/* distance */
+
+.pkpmodal-pickup-point-distance {
+  font-size: 10px;
+  margin: 4px 0 0;
 }
 
 /* name */
@@ -39,14 +51,20 @@
 
 .pkpmodal-pickup-point-address {
   color: #666;
-  line-height: 1.pkpmodal-5;
+  line-height: 1.3;
+}
+
+.pkpmodal-pickup-point-address.list .address-summary {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 /* sla info */
 
 .pkpmodal-pickup-point-sla-availability {
   border-top: 1px solid #f4f4f4;
-  padding: 8px 12px 8px 50px;
+  padding: 8px 12px 8px 60px;
 }
 
 .pkpmodal-pickup-point-availability {
@@ -58,6 +76,7 @@
 .pkpmodal-pickup-point-sla {
   display: inline-block;
   margin-right: 20px;
+  font-size: 12px;
 }
 
 .pkpmodal-pickup-point-address .city,
