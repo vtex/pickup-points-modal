@@ -9,9 +9,9 @@ import {
 import { searchPickupAddressByGeolocationEvent } from '../utils/metrics'
 
 import UserGeolocation from '../components/UserGeolocation'
-import GeolocationPin from '../assets/components/GeolocationPin'
-import WaitingPin from '../assets/components/WaitingPin'
-import SearchingPin from '../assets/components/SearchingPin'
+import PinGeolocation from '../assets/components/PinGeolocation'
+import PinWaiting from '../assets/components/PinWaiting'
+import PinSearching from '../assets/components/PinSearching'
 
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
@@ -139,12 +139,12 @@ export class AskForGeolocation extends Component {
             subtitleTop="geolocationAsk"
             Image={() => (
               <div className="pkpmodal-ask-for-geolocation-image-ask">
-                <GeolocationPin />
+                <PinGeolocation />
               </div>
             )}
           >
             <div>
-              <div className="ask-for-geolocation-cta">
+              <div className="pkpmodal-ask-for-geolocation-cta">
                 <button
                   className="btn-ask-for-geolocation-cta btn btn-success btn-large"
                   onClick={this.handleAskForGeolocationButtonClick}
@@ -172,12 +172,22 @@ export class AskForGeolocation extends Component {
             Image={() => (
               <div>
                 <div className="pkpmodal-ask-for-geolocation-image-waiting">
-                  <WaitingPin />
+                  <PinWaiting />
                 </div>
                 <div className="pkpmodal-ask-for-geolocation-image-waiting-shadow" />
               </div>
             )}
-          />
+          >
+            <div className="pkpmodal-ask-for-geolocation-manual">
+              <button
+                type="button"
+                onClick={this.handleManualGeolocation}
+                className="btn-pkpmodal-ask-for-geolocation-manual btn btn-link"
+              >
+                {this.translate('geolocationManual')}
+              </button>
+            </div>
+          </GeolocationStatus>
         )}
 
         {status === SEARCHING && (
@@ -186,12 +196,22 @@ export class AskForGeolocation extends Component {
             Image={() => (
               <div>
                 <div className="pkpmodal-ask-for-geolocation-image-searching">
-                  <SearchingPin />
+                  <PinSearching />
                 </div>
                 <div className="pkpmodal-ask-for-geolocation-image-searching-shadow" />
               </div>
             )}
-          />
+          >
+            <div className="pkpmodal-ask-for-geolocation-manual">
+              <button
+                type="button"
+                onClick={this.handleManualGeolocation}
+                className="btn-pkpmodal-ask-for-geolocation-manual btn btn-link"
+              >
+                {this.translate('geolocationManual')}
+              </button>
+            </div>
+          </GeolocationStatus>
         )}
       </div>
     )

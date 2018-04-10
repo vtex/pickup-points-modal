@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-class SearchingPin extends PureComponent {
+class PinSearching extends PureComponent {
   render() {
     return (
       <svg
@@ -20,4 +20,4 @@ class SearchingPin extends PureComponent {
   }
 }
 
-export default SearchingPin
+export default PinSearching

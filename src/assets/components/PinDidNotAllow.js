@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
 
-class WaitingPin extends PureComponent {
+class PinDidNotAllow extends PureComponent {
   render() {
     return (
       <svg
-        className="pkpmodal-ask-for-geolocation-image-waiting-pin"
+        className="pkpmodal--image-didnotallow-pin"
         width="67px"
         height="96px"
         viewBox="0 0 67 96"
@@ -20,4 +20,4 @@ class WaitingPin extends PureComponent {
   }
 }
 
-export default WaitingPin
+export default PinDidNotAllow

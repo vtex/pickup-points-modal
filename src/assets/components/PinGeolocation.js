@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-class GeolocationPin extends PureComponent {
+class PinGeolocation extends PureComponent {
   render() {
     return (
       <svg
@@ -72,4 +72,4 @@ class GeolocationPin extends PureComponent {
   }
 }
 
-export default GeolocationPin
+export default PinGeolocation

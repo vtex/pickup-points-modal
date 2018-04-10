@@ -13,6 +13,8 @@ import PickupTabs from './PickupTabs'
 import SearchIcon from '../assets/components/SearchIcon'
 import GPS from '../assets/components/GPS'
 
+import AskForGeolocation from './AskForGeolocation'
+
 class Home extends Component {
   onAskGeolocationClick = () => {
     navigator.permissions.query({ name: 'geolocation' }).then(permission => {
@@ -114,6 +116,19 @@ class Home extends Component {
                 updateLocationTab={updateLocationTab}
               />
             </div>
+          )}
+
+          {false && (
+            <AskForGeolocation
+              address={searchAddress}
+              googleMaps={googleMaps}
+              onAskForGeolocation={this.props.handleAskForGeolocation}
+              onChangeAddress={this.props.handleAddressChange}
+              rules={rules}
+              status={this.props.askForGeolocationStatus}
+              onAskForGeolocationStatus={this.props.handleAskForGeolocationStatus}
+              askForGeolocation={this.props.askForGeolocation}
+            />
           )}
 
           {isNotShowingPickupDetailsAndHasPickupOptions && (

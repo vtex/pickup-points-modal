@@ -237,19 +237,21 @@ export class PickupPointsModal extends Component {
           )}
 
           {showAskForGeolocation ? (
-            <AskForGeolocation
-              address={searchAddress}
-              pickupOptionGeolocations={getPickupOptionGeolocations(
-                pickupOptions
-              )}
-              googleMaps={googleMaps}
-              onAskForGeolocation={this.handleAskForGeolocation}
-              onChangeAddress={this.handleAddressChange}
-              rules={rules}
-              status={askForGeolocationStatus}
-              onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
-              askForGeolocation={showAskForGeolocation}
-            />
+            <div className="pkpmodal-full-page">
+              <AskForGeolocation
+                address={searchAddress}
+                pickupOptionGeolocations={getPickupOptionGeolocations(
+                  pickupOptions
+                )}
+                googleMaps={googleMaps}
+                onAskForGeolocation={this.handleAskForGeolocation}
+                onChangeAddress={this.handleAddressChange}
+                rules={rules}
+                status={askForGeolocationStatus}
+                onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
+                askForGeolocation={showAskForGeolocation}
+              />
+            </div>
           ) : (
             <Home
               mapStatus={mapStatus}
@@ -276,6 +278,11 @@ export class PickupPointsModal extends Component {
               updateLocationTab={this.updateLocationTab}
               togglePickupDetails={this.togglePickupDetails}
               changeActivePickupPointId={this.changeActivePickupPointId}
+              askForGeolocationStatus={askForGeolocationStatus}
+              askForGeolocation={askForGeolocation}
+              status={askForGeolocationStatus}
+              onAskForGeolocation={this.handleAskForGeolocation}
+              onChangeAddress={this.handleAddressChange}
             />
           )}
         </div>

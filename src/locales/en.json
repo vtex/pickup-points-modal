@@ -98,7 +98,7 @@
   "pickupPointsModal.geolocationAllow":
     "Select \"Allow\" in the prompt on your browser",
   "pickupPointsModal.geolocationWaiting": "Waiting on your authorization",
-  "pickupPointsModal.geolocationSearching": "Searching for your location",
+  "pickupPointsModal.geolocationSearching": "Searching for points nearby",
   "pickupPointsModal.distance": "{distanceValue} km",
   "pickupPointsModal.askGeolocationAccept": "Use my current location"
 }
