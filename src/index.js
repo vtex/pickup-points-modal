@@ -15,6 +15,7 @@ import debounce from 'lodash/debounce'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 import Map from './components/Map'
 import AskForGeolocation from './components/AskForGeolocation'
+import Error from './components/Error'
 import Home from './components/Home'
 import CloseButton from './components/CloseButton'
 
@@ -201,6 +202,8 @@ export class PickupPointsModal extends Component {
       askForGeolocationStatus,
     } = this.state
 
+    const showError = false
+
     return (
       <div>
         <div
@@ -236,21 +239,24 @@ export class PickupPointsModal extends Component {
             />
           )}
 
-          {showAskForGeolocation ? (
+          {showAskForGeolocation || showError ? (
             <div className="pkpmodal-full-page">
-              <AskForGeolocation
-                address={searchAddress}
-                pickupOptionGeolocations={getPickupOptionGeolocations(
-                  pickupOptions
-                )}
-                googleMaps={googleMaps}
-                onAskForGeolocation={this.handleAskForGeolocation}
-                onChangeAddress={this.handleAddressChange}
-                rules={rules}
-                status={askForGeolocationStatus}
-                onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
-                askForGeolocation={showAskForGeolocation}
-              />
+              {showAskForGeolocation && (
+                <AskForGeolocation
+                  address={searchAddress}
+                  pickupOptionGeolocations={getPickupOptionGeolocations(
+                    pickupOptions
+                  )}
+                  googleMaps={googleMaps}
+                  onAskForGeolocation={this.handleAskForGeolocation}
+                  onChangeAddress={this.handleAddressChange}
+                  rules={rules}
+                  status={askForGeolocationStatus}
+                  onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
+                  askForGeolocation={showAskForGeolocation}
+                />
+              )}
+              {showError && <Error status="notAllowed" />}
             </div>
           ) : (
             <Home

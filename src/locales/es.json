@@ -101,5 +101,10 @@
   "pickupPointsModal.geolocationWaiting": "Esperando su autorización",
   "pickupPointsModal.geolocationSearching": "Buscando puntos cercanos",
   "pickupPointsModal.distance": "{distanceValue} km",
-  "pickupPointsModal.askGeolocationAccept": "Usar mi ubicación actual"
+  "pickupPointsModal.askGeolocationAccept": "Usar mi ubicación actual",
+  "pickupPointsModal.errorNotAllowed": "No se pudo detectar su ubicación",
+  "pickupPointsModal.errorNotFound":
+    "No hay puntos de retirada cerca de su ubicación",
+  "pickupPointsModal.useSearchBar":
+    "Utilice la búsqueda para encontrar otros puntos"
 }

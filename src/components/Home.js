@@ -14,6 +14,7 @@ import SearchIcon from '../assets/components/SearchIcon'
 import GPS from '../assets/components/GPS'
 
 import AskForGeolocation from './AskForGeolocation'
+import Error from './Error'
 
 class Home extends Component {
   onAskGeolocationClick = () => {
@@ -63,6 +64,9 @@ class Home extends Component {
       pickupOptions.length > 0 &&
       !isPickupDetailsActive &&
       (mapStatus === HIDE_MAP || largeScreen)
+
+    const showError = false
+    const showAskForGeolocation = false
 
     return (
       <div
@@ -118,7 +122,13 @@ class Home extends Component {
             </div>
           )}
 
-          {false && (
+          {showError && (
+            <Error
+              status="notFound"
+            />
+          )}
+
+          {showAskForGeolocation && (
             <AskForGeolocation
               address={searchAddress}
               googleMaps={googleMaps}
@@ -131,7 +141,7 @@ class Home extends Component {
             />
           )}
 
-          {isNotShowingPickupDetailsAndHasPickupOptions && (
+          {false && isNotShowingPickupDetailsAndHasPickupOptions && (
             <div className={'pickup-modal-points-list'}>
               {pickupOptions.length > 0 &&
                 activePickupPoint && (

@@ -100,5 +100,8 @@
   "pickupPointsModal.geolocationWaiting": "Waiting on your authorization",
   "pickupPointsModal.geolocationSearching": "Searching for points nearby",
   "pickupPointsModal.distance": "{distanceValue} km",
-  "pickupPointsModal.askGeolocationAccept": "Use my current location"
+  "pickupPointsModal.askGeolocationAccept": "Use my current location",
+  "pickupPointsModal.errorNotAllowed": "We could not detect your location",
+  "pickupPointsModal.errorNotFound": "No pickup points near your location",
+  "pickupPointsModal.useSearchBar": "Use the search bar to find other points"
 }
