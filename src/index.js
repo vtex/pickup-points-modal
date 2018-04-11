@@ -16,15 +16,20 @@ import {
 import debounce from 'lodash/debounce'
 
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
+import GeolocationInput from '@vtex/address-form/lib/geolocation/GeolocationInput'
 import Map from './components/Map'
 import AskForGeolocation from './components/AskForGeolocation'
 import Error from './components/Error'
 import Home from './components/Home'
 import CloseButton from './components/CloseButton'
+import Input from './components/Input'
 
 import { validateField } from '@vtex/address-form/lib/validateAddress'
 import { getPickupOptionGeolocations } from './utils/pickupUtils'
 import { getPickupSlaString } from './utils/GetString'
+
+import SearchIcon from './assets/components/SearchIcon'
+import PinWaiting from './assets/components/PinWaiting'
 
 import './index.css'
 
@@ -247,6 +252,8 @@ export class PickupPointsModal extends Component {
       errorStatus,
     } = this.state
 
+    const showManualSearch = false
+
     return (
       <div>
         <div
@@ -282,8 +289,35 @@ export class PickupPointsModal extends Component {
             />
           )}
 
-          {(showAskForGeolocation || showError) && geolocationFrom === OUTSIDE_MODAL ? (
+          {(showManualSearch || showAskForGeolocation || showError) && geolocationFrom === OUTSIDE_MODAL ? (
             <div className="pkpmodal-full-page">
+              {showManualSearch && (
+                <div className="pkpmodal-search-alone">
+                  <PinWaiting />
+                  <h2 className="pkpmodal-ask-for-geolocation-title">
+                    Encontrar pontos de retirada próximos
+                  </h2>
+                  <h3 className="pkpmodal-ask-for-geolocation-subtitle">
+                    Quanto mais específica for sua busca, melhores serão os resultados!
+                  </h3>
+                  <form
+                    id="pickup-modal-search"
+                    className="pickup-modal-search"
+                    onSubmit={event => event.preventDefault()}
+                  >
+                    <GeolocationInput
+                      Input={Input}
+                      placeholder={this.translate('searchLocationMap')}
+                      loadingGoogle={loading}
+                      googleMaps={googleMaps}
+                      address={searchAddress}
+                      rules={rules}
+                      onChangeAddress={this.handleAddressChange}
+                    />
+                    <SearchIcon />
+                  </form>
+                </div>
+              )}
               {showAskForGeolocation && (
                 <AskForGeolocation
                   address={searchAddress}
