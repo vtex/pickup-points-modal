@@ -100,5 +100,6 @@
     "Seleccione \"Permitir\" en la alerta que aparece en su navegador",
   "pickupPointsModal.geolocationWaiting": "Esperando su autorización",
   "pickupPointsModal.geolocationSearching": "Buscando su ubicación",
-  "pickupPointsModal.distance": "{distanceValue} km"
+  "pickupPointsModal.distance": "{distanceValue} km",
+  "pickupPointsModal.askGeolocationAccept": "Usar mi ubicación actual"
 }

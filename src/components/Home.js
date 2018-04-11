@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { SHOW_MAP, HIDE_MAP } from '../constants'
+import { SHOW_MAP, HIDE_MAP, ASK, WAITING, GRANTED } from '../constants'
 
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 import GeolocationInput from '@vtex/address-form/lib/geolocation/GeolocationInput'
@@ -11,8 +11,20 @@ import Input from './Input'
 import PickupTabs from './PickupTabs'
 
 import SearchIcon from '../assets/components/SearchIcon'
+import GPS from '../assets/components/GPS'
 
 class Home extends Component {
+  onAskGeolocationClick = () => {
+    navigator.permissions.query({ name: 'geolocation' }).then(permission => {
+      this.props.onAskForGeolocationStatus(
+        permission.state === GRANTED || process.env.NODE !== 'production'
+          ? WAITING
+          : ASK
+      )
+      this.props.handleAskForGeolocation(true)
+    })
+  }
+
   translate = id =>
     this.props.intl.formatMessage({
       id: `pickupPointsModal.${id}`,
@@ -82,19 +94,19 @@ class Home extends Component {
                 rules={rules}
                 onChangeAddress={handleAddressChange}
               />
+              {!isPickupDetailsActive &&
+                navigator.geolocation && (
+                  <button
+                    type="button"
+                    className="button-ask-geolocation btn btn-link"
+                    onClick={this.onAskGeolocationClick}
+                  >
+                    <GPS />
+                  </button>
+                )}
               <SearchIcon />
             </form>
           )}
-          {!isPickupDetailsActive &&
-            navigator.geolocation && (
-              <button
-                type="button"
-                className="button-ask-geolocation btn btn-link"
-                onClick={handleAskForGeolocation}
-              >
-                {this.translate('askGeolocation')}
-              </button>
-            )}
           {!isPickupDetailsActive && (
             <div className="pickup-tabs-container">
               <PickupTabs
@@ -111,6 +123,7 @@ class Home extends Component {
                   <div className="pickup-modal-points-item">
                     <PickupPoint
                       items={items}
+                      isList
                       logisticsInfo={logisticsInfo}
                       sellerId={sellerId}
                       togglePickupDetails={togglePickupDetails}
@@ -130,6 +143,7 @@ class Home extends Component {
                 <div key={pickupPoint.id} className="pickup-modal-points-item">
                   <PickupPoint
                     items={items}
+                    isList
                     logisticsInfo={logisticsInfo}
                     sellerId={sellerId}
                     togglePickupDetails={togglePickupDetails}
@@ -185,6 +199,7 @@ Home.propTypes = {
   selectedPickupPoint: PropTypes.object,
   largeScreen: PropTypes.bool,
   handleAddressChange: PropTypes.func.isRequired,
+  onAskForGeolocationStatus: PropTypes.func.isRequired,
   handleAskForGeolocation: PropTypes.func.isRequired,
   updateLocationTab: PropTypes.func.isRequired,
   togglePickupDetails: PropTypes.func.isRequired,
