@@ -33,11 +33,11 @@ export class GeolocationStatus extends Component {
               {this.translate(subtitleTop)}
             </h3>
           )}
-          {Image &&
+          {Image && (
             <div className="pkpmodal-ask-for-geolocation-image">
               <Image />
             </div>
-          }
+          )}
           {(titleBottom || subtitleBottom) && (
             <div className="pkpmodal-ask-for-geolocation-instructions">
               {titleBottom && (
@@ -52,13 +52,10 @@ export class GeolocationStatus extends Component {
               )}
             </div>
           )}
-          {this.props.children}
         </div>
 
-        {(children) && (
-          <div className="pkpmodal-ask-for-geolocation-actions">
-            {children}
-          </div>
+        {children && (
+          <div className="pkpmodal-ask-for-geolocation-actions">{children}</div>
         )}
       </div>
     )

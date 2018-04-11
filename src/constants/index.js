@@ -16,6 +16,14 @@ export const ASK = 'ask'
 export const WAITING = 'waiting'
 export const SEARCHING = 'searching'
 export const GRANTED = 'granted'
+
+export const ERROR_NOT_ALLOWED = 'errorNotAllowed'
+export const ERROR_NOT_FOUND = 'errorNotFound'
+export const ERROR_COULD_NOT_GETLOCATION = 'errorCouldNotGetLocation'
+
+export const OUTSIDE_MODAL = 'outside_modal'
+export const INSIDE_MODAL = 'inside_modal'
+
 export const VTEXLOCAL = 'vtexlocal'
 export const LOCALHOST = 'localhost'
 export const HTTPS = 'https:'

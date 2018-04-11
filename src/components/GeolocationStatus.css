@@ -15,7 +15,6 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  /* height: 100%; */
   justify-content: center;
   padding: 0 16px 16px;
   position: relative;
@@ -101,7 +100,6 @@
 
 .pkpmodal-ask-for-geolocation-actions {
   flex: none;
-  /* height: 120px; */
 }
 
 .close-modal,
@@ -144,10 +142,6 @@
 
   .pkpmodal-full-page .pkpmodal-ask-for-geolocation-actions {
     margin-bottom: 20px;
-  }
-
-  .pkpmodal-ask-for-geolocation-instructions {
-    /* height: 80px; */
   }
 }
 

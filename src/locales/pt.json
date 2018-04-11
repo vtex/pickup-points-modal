@@ -104,5 +104,7 @@
     "Não foi possível detectar sua localização",
   "pickupPointsModal.errorNotFound":
     "Não há pontos de retirada próximos da sua localização",
+  "pickupPointsModal.errorCouldNotGetLocation":
+    "Não foi possível encontrar sua localização",
   "pickupPointsModal.useSearchBar": "Use a busca para encontrar outros pontos"
 }

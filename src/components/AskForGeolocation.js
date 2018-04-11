@@ -17,7 +17,15 @@ import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/Address
 
 import './GeolocationStatus.css'
 
-import { WAITING, SEARCHING, ASK, VTEXLOCAL, LOCALHOST } from '../constants'
+import {
+  WAITING,
+  SEARCHING,
+  ASK,
+  VTEXLOCAL,
+  LOCALHOST,
+  ERROR_NOT_ALLOWED,
+  ERROR_COULD_NOT_GETLOCATION,
+} from '../constants'
 import GeolocationStatus from './GeolocationStatus'
 
 export class AskForGeolocation extends Component {
@@ -81,27 +89,39 @@ export class AskForGeolocation extends Component {
   getCurrentPositionError = error => {
     switch (error.code) {
       case 0: // UNKNOWN ERROR
-        this.props.onAskForGeolocation(false)
+        this.props.onGeolocationError(
+          ERROR_COULD_NOT_GETLOCATION,
+          this.props.geolocationFrom
+        )
         searchPickupAddressByGeolocationEvent({
           confirmedGeolocation: true,
           browserError: true,
         })
         break
       case 1: // PERMISSION_DENIED
-        this.props.onAskForGeolocation(false)
+        this.props.onGeolocationError(
+          ERROR_NOT_ALLOWED,
+          this.props.geolocationFrom
+        )
         searchPickupAddressByGeolocationEvent({
           deniedGeolocation: true,
         })
         break
       case 2: // POSITION_UNAVAILABLE
-        this.props.onAskForGeolocation(false)
+        this.props.onGeolocationError(
+          ERROR_COULD_NOT_GETLOCATION,
+          this.props.geolocationFrom
+        )
         searchPickupAddressByGeolocationEvent({
           confirmedGeolocation: true,
           positionUnavailable: true,
         })
         break
       case 3: // TIMEOUT
-        this.props.onAskForGeolocation(false)
+        this.props.onGeolocationError(
+          ERROR_COULD_NOT_GETLOCATION,
+          this.props.geolocationFrom
+        )
         searchPickupAddressByGeolocationEvent({
           dismissedGeolocation: true,
         })
@@ -112,11 +132,11 @@ export class AskForGeolocation extends Component {
   }
 
   handleGeolocationStatus = status => {
-    this.props.onAskForGeolocationStatus(status)
+    this.props.onAskForGeolocationStatus(status, this.props.geolocationFrom)
   }
 
   handleAskForGeolocationButtonClick = () => {
-    this.props.onAskForGeolocationStatus(WAITING)
+    this.props.onAskForGeolocationStatus(WAITING, this.props.geolocationFrom)
   }
 
   handleManualGeolocation = () => {
@@ -226,6 +246,7 @@ AskForGeolocation.propTypes = {
   onChangeAddress: PropTypes.func.isRequired,
   onAskForGeolocation: PropTypes.func.isRequired,
   onAskForGeolocationStatus: PropTypes.func.isRequired,
+  onGeolocationError: PropTypes.func.isRequired,
   pickupOptionGeolocations: PropTypes.array,
   rules: PropTypes.object,
   status: PropTypes.string.isRequired,

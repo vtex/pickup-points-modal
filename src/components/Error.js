@@ -15,23 +15,12 @@ export class Error extends Component {
     })
 
   render() {
-    const { status } = this.props
-
-    let title
-
-    switch (status) {
-      case 'notFound':
-        title = 'errorNotFound'
-        break
-      default:
-        title = 'errorNotAllowed'
-        break
-    }
+    const { status, onManualGeolocationError } = this.props
 
     return (
       <div className="pkpmodal-ask-for-geolocation">
         <GeolocationStatus
-          titleBottom={title}
+          titleBottom={status}
           subtitleBottom="useSearchBar"
           Image={() => (
             <div>
@@ -45,7 +34,7 @@ export class Error extends Component {
           <div className="pkpmodal-ask-for-geolocation-manual">
             <button
               type="button"
-              onClick={this.handleManualGeolocation}
+              onClick={onManualGeolocationError}
               className="btn-pkpmodal-ask-for-geolocation-manual btn btn-link"
             >
               {this.translate('geolocationManual')}
@@ -60,6 +49,7 @@ export class Error extends Component {
 Error.propTypes = {
   intl: intlShape,
   status: PropTypes.string.isRequired,
+  onManualGeolocationError: PropTypes.func.isRequired,
 }
 
 export default injectIntl(Error)
