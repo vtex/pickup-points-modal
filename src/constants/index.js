@@ -17,6 +17,7 @@ export const WAITING = 'waiting'
 export const SEARCHING = 'searching'
 export const GRANTED = 'granted'
 export const VTEXLOCAL = 'vtexlocal'
+export const LOCALHOST = 'localhost'
 export const HTTPS = 'https:'
 
 export const EEMPTY = 'ERROR_EMPTY_FIELD'
