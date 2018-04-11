@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { formatCurrency } from '../utils/Currency'
+import { formatCurrency, formatNumber } from '../utils/Currency'
 
 import markerIcon from '../assets/icons/marker_blue.svg'
 import markerIconSelected from '../assets/icons/marker_selected_check.svg'
@@ -43,6 +43,7 @@ export class PickupPoint extends Component {
       pickupPoint,
       selectedRules,
       storePreferencesData,
+      isList,
     } = this.props
 
     const { unavailableItemsAmount } = this.state
@@ -76,15 +77,26 @@ export class PickupPoint extends Component {
               src={isSelected ? markerIconSelected : markerIcon}
               alt={this.translate('marker')}
             />
-            <div className="pkpmodal-pickup-point-distance hide">
-              {pickupPoint.distance}
-            </div>
+            {pickupPoint.pickupStoreInfo.distance && (
+              <p className="pkpmodal-pickup-point-distance">
+                {this.translate('distance', {
+                  distanceValue: formatNumber({
+                    value: pickupPoint.pickupStoreInfo.distance,
+                    storePreferencesData,
+                  }),
+                })}
+              </p>
+            )}
           </div>
           <div className="pkpmodal-pickup-point-info">
             <p className="pkpmodal-pickup-point-name">
               {pickupPoint.pickupStoreInfo.friendlyName}
             </p>
-            <div className="pkpmodal-pickup-point-address">
+            <div
+              className={`pkpmodal-pickup-point-address ${
+                isList ? 'list' : ''
+              }`}
+            >
               <AddressSummary
                 address={pickupPoint.pickupStoreInfo.address}
                 rules={selectedRules}

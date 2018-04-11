@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { PickupPointsModal } from '../../src/index'
+import PickupPointsModal from '../../src/index'
 import { newAddress } from '../../src/utils/newAddress'
 import BRA from '@vtex/address-form/lib/country/BRA'
 import { SEARCH, PICKUP_IN_STORE } from '../../src/constants/index'
