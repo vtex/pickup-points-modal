@@ -192,7 +192,7 @@ Home.propTypes = {
   pickupOptions: PropTypes.array.isRequired,
   items: PropTypes.array.isRequired,
   logisticsInfo: PropTypes.array.isRequired,
-  sellerId: PropTypes.string.isRequired,
+  sellerId: PropTypes.string,
   changeActiveSLAOption: PropTypes.func.isRequired,
   storePreferencesData: PropTypes.object.isRequired,
   closePickupPointsModal: PropTypes.func.isRequired,
