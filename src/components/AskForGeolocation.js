@@ -17,7 +17,7 @@ import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/Address
 
 import './GeolocationStatus.css'
 
-import { WAITING, SEARCHING, ASK, VTEXLOCAL } from '../constants'
+import { WAITING, SEARCHING, ASK, VTEXLOCAL, LOCALHOST } from '../constants'
 import GeolocationStatus from './GeolocationStatus'
 
 export class AskForGeolocation extends Component {
@@ -26,7 +26,12 @@ export class AskForGeolocation extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.handleGetCurrentPosition(nextProps)
+    if (
+      this.props.askForGeolocation !== nextProps.askForGeolocation ||
+      this.props.status !== nextProps.status
+    ) {
+      this.handleGetCurrentPosition(nextProps)
+    }
   }
 
   handleGetCurrentPosition = props => {
@@ -34,7 +39,10 @@ export class AskForGeolocation extends Component {
       this.handleGeolocationStatus(WAITING)
 
       // Hard coded coords for development
-      if (window.location.host.includes(VTEXLOCAL)) {
+      if (
+        window.location.host.includes(VTEXLOCAL) ||
+        window.location.host.includes(LOCALHOST)
+      ) {
         this.getCurrentPositionSuccess({
           coords: {
             latitude: -22.9432587,
