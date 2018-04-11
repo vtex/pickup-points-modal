@@ -60,29 +60,53 @@ h4.pickup-modal-title {
 .pickup-modal-search {
   flex: none;
   position: relative;
-  padding: 8px;
+  margin-bottom: 14px;
+}
+
+.pickup-modal-search input::placeholder {
+  color: #cccccc;
 }
 
 .pickup-modal-search input {
   font-size: 16px;
   height: auto;
-  padding: 12px 12px 12px 46px !important;
+  padding: 12px 52px 12px 46px !important;
+  box-shadow: 0 1px 1px 0 rgba(204, 204, 204, 0.5);
+  background-color: #ffffff;
+  border: 0;
+  border-radius: 0;
   width: 100%;
 }
 
 .pickup-modal-search-icon {
   position: absolute;
   z-index: 99;
-  left: 24px;
-  top: 23px;
+  left: 16px;
+  top: 14px;
 }
 
 /* ask for geolocation */
 
+.button-ask-geolocation:hover,
 .button-ask-geolocation {
+  background: white;
   flex: none;
-  padding-bottom: 10px;
   text-align: left;
+  display: flex;
+  align-items: center;
+  padding: 13px 16px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.button-ask-geolocation::before {
+  content: " ";
+  border-left: solid 1px #eeeeee;
+  height: 30px;
+  position: absolute;
+  right: 48px;
+  top: 6px;
 }
 
 /* list of points */

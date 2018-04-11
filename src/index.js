@@ -50,16 +50,10 @@ export class PickupPointsModal extends Component {
     const nextPickupOptions = getPickupSlaString(nextProps.pickupOptions)
 
     this.setState({
-      showAskForGeolocation:
-        thisPickupOptions !== nextPickupOptions &&
-        this.state.askForGeolocationStatus === SEARCHING
-          ? false
-          : nextProps.askForGeolocation,
-      askForGeolocationStatus:
-        thisPickupOptions !== nextPickupOptions &&
-        this.state.askForGeolocationStatus === SEARCHING
-          ? null
-          : this.state.askForGeolocationStatus,
+      showAskForGeolocation: nextProps.isSearching,
+      askForGeolocationStatus: nextProps.isSearching
+        ? SEARCHING
+        : this.state.askForGeolocationStatus,
       selectedPickupPoint: nextProps.selectedPickupPoint,
       filteredPickupOptions: nextProps.pickupOptions.filter(
         option =>
@@ -254,7 +248,7 @@ export class PickupPointsModal extends Component {
               rules={rules}
               status={askForGeolocationStatus}
               onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
-              askForGeolocation={askForGeolocation}
+              askForGeolocation={showAskForGeolocation}
             />
           ) : (
             <Home
@@ -271,6 +265,7 @@ export class PickupPointsModal extends Component {
               sellerId={sellerId}
               pickupOptions={pickupOptions}
               largeScreen={largeScreen}
+              onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
               changeActiveSLAOption={changeActiveSLAOption}
               storePreferencesData={storePreferencesData}
               closePickupPointsModal={closePickupPointsModal}

@@ -99,5 +99,6 @@
     "Select \"Allow\" in the prompt on your browser",
   "pickupPointsModal.geolocationWaiting": "Waiting on your authorization",
   "pickupPointsModal.geolocationSearching": "Searching for your location",
-  "pickupPointsModal.distance": "{distanceValue} km"
+  "pickupPointsModal.distance": "{distanceValue} km",
+  "pickupPointsModal.askGeolocationAccept": "Use my current location"
 }

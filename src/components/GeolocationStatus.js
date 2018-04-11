@@ -45,9 +45,9 @@ export class GeolocationStatus extends Component {
                   {this.translate(subtitleBottom)}
                 </h3>
               )}
-              {this.props.children}
             </div>
           )}
+          {this.props.children}
         </div>
       </div>
     )

@@ -22,7 +22,15 @@ import GeolocationStatus from './GeolocationStatus'
 
 export class AskForGeolocation extends Component {
   componentDidMount() {
-    if (this.props.askForGeolocation) {
+    this.handleGetCurrentPosition(this.props)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.handleGetCurrentPosition(nextProps)
+  }
+
+  handleGetCurrentPosition = props => {
+    if (props.askForGeolocation && props.status === WAITING) {
       this.handleGeolocationStatus(WAITING)
 
       // Hard coded coords for development
@@ -35,7 +43,7 @@ export class AskForGeolocation extends Component {
         })
         return
       }
-      this.props.googleMaps &&
+      props.googleMaps &&
         getCurrentPosition(
           this.getCurrentPositionSuccess,
           this.getCurrentPositionError
@@ -99,6 +107,10 @@ export class AskForGeolocation extends Component {
     this.props.onAskForGeolocationStatus(status)
   }
 
+  handleAskForGeolocationButtonClick = () => {
+    this.props.onAskForGeolocationStatus(WAITING)
+  }
+
   handleManualGeolocation = () => {
     this.props.onAskForGeolocation(false)
   }
@@ -123,23 +135,24 @@ export class AskForGeolocation extends Component {
               </div>
             )}
           >
-            <UserGeolocation
-              address={this.props.address}
-              pickupOptionGeolocations={this.props.pickupOptionGeolocations}
-              googleMaps={this.props.googleMaps}
-              onChangeAddress={this.props.onChangeAddress}
-              onGetGeolocation={this.handleGeolocationStatus}
-              handleAskForGeolocation={this.props.onAskForGeolocation}
-              rules={this.props.rules}
-            />
-            <div className="pkpmodal-ask-for-geolocation-manual">
-              <button
-                type="button"
-                onClick={this.handleManualGeolocation}
-                className="btn-pkpmodal-ask-for-geolocation-manual btn btn-link"
-              >
-                {this.translate('geolocationManual')}
-              </button>
+            <div>
+              <div className="ask-for-geolocation-cta">
+                <button
+                  className="btn-ask-for-geolocation-cta btn btn-success btn-large"
+                  onClick={this.handleAskForGeolocationButtonClick}
+                >
+                  {this.translate('askGeolocationAccept')}
+                </button>
+              </div>
+              <div className="pkpmodal-ask-for-geolocation-manual">
+                <button
+                  type="button"
+                  onClick={this.handleManualGeolocation}
+                  className="btn-pkpmodal-ask-for-geolocation-manual btn btn-link"
+                >
+                  {this.translate('geolocationManual')}
+                </button>
+              </div>
             </div>
           </GeolocationStatus>
         )}
@@ -179,7 +192,7 @@ export class AskForGeolocation extends Component {
 
 AskForGeolocation.propTypes = {
   address: AddressShapeWithValidation,
-  askForGeolocation: PropTypes.bool.isRequired,
+  askForGeolocation: PropTypes.bool,
   googleMaps: PropTypes.object,
   intl: intlShape,
   onChangeAddress: PropTypes.func.isRequired,
