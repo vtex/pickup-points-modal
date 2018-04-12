@@ -68,8 +68,9 @@
 }
 
 .pkpmodal-pickup-point-availability {
-  color: #e86b60;
+  color: #ffb100;
   display: inline-block;
+  margin-top: 12px;
 }
 
 .pkpmodal-pickup-point-price,

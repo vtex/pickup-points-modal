@@ -106,5 +106,7 @@
     "Não há pontos de retirada próximos da sua localização",
   "pickupPointsModal.errorCouldNotGetLocation":
     "Não foi possível encontrar sua localização",
-  "pickupPointsModal.useSearchBar": "Use a busca para encontrar outros pontos"
+  "pickupPointsModal.useSearchBar": "Use a busca para encontrar outros pontos",
+  "pickupPointsModal.geolocationEmpty": "Encontre pontos de retirada próximos",
+  "pickupPointsModal.geolocationEmptyInstructions": "Quanto mais específica for sua busca, melhores serão os resultados!"
 }

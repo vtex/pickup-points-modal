@@ -57,10 +57,22 @@ h4.pickup-modal-title {
 
 /* searh */
 
-.pickup-modal-search {
-  flex: none;
-  position: relative;
+.pkpmodal-search-alone {
+  box-sizing: border-box;
+  flex: auto;
   margin-bottom: 14px;
+  margin-top: 50px;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.pkpmodal-ask-for-geolocation-subtitle + .pickup-modal-search {
+  margin-top: 20px;
+}
+
+.pickup-modal-search {
+  position: relative;
 }
 
 .pickup-modal-search input::placeholder {
@@ -76,6 +88,7 @@ h4.pickup-modal-title {
   border: 0;
   border-radius: 0;
   width: 100%;
+  max-width: 100%;
 }
 
 .pickup-modal-search-icon {
@@ -85,7 +98,16 @@ h4.pickup-modal-title {
   top: 14px;
 }
 
+.pkpmodal-search-alone .pkpmodal-ask-for-geolocation-image-waiting-pin {
+  height: 60px;
+}
+
 /* ask for geolocation */
+
+.button-ask-geolocation:active,
+.button-ask-geolocation:focus {
+  outline: none !important;
+}
 
 .button-ask-geolocation:hover,
 .button-ask-geolocation {
@@ -125,6 +147,24 @@ h4.pickup-modal-title {
 
 .pickup-modal-points-item:hover .pkpmodal-pickup-point {
   border-color: #ccc;
+}
+
+/* Google Maps autocomplete */
+
+.pac-item {
+  padding-bottom: 8px;
+  padding-top: 8px;
+}
+
+.pac-item:hover {
+  background: #f1f8fe;
+  cursor: pointer;
+}
+
+.pac-item,
+.pac-item-query,
+.pac-matched {
+  font-size: 14px;
 }
 
 /* media queries */
@@ -175,7 +215,7 @@ h4.pickup-modal-title {
   }
 
   .pickup-modal-points-list {
-    margin-top: 0;
+    margin-top: 12px;
     overflow: auto;
   }
 
@@ -186,5 +226,18 @@ h4.pickup-modal-title {
     right: 10px;
     top: 10px;
     padding: 10px 14px;
+  }
+
+  .pkpmodal-search-alone .pickup-modal-search input {
+    font-size: 24px;
+    height: auto;
+    padding: 24px 24px 24px 56px !important;
+  }
+
+  .pkpmodal-search-alone .pickup-modal-search-icon {
+    position: absolute;
+    z-index: 99;
+    left: 23px;
+    top: 31px;
   }
 }

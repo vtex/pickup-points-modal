@@ -17,7 +17,9 @@ import PickupPoint from './PickupPoint'
 import PickupPointDetails from './PickupPointDetails'
 import Input from './Input'
 import PickupTabs from './PickupTabs'
+import GeolocationStatus from './GeolocationStatus'
 
+import PinWaiting from '../assets/components/PinWaiting'
 import SearchIcon from '../assets/components/SearchIcon'
 import GPS from '../assets/components/GPS'
 
@@ -78,6 +80,10 @@ class Home extends Component {
       !isPickupDetailsActive &&
       (mapStatus === HIDE_MAP || largeScreen)
 
+    const hasPickups = pickupOptions.length !== 0
+
+    const isInsideModal = geolocationFrom === INSIDE_MODAL
+
     return (
       <div
         className={`pickup-modal-info-bar ${mapStatus === SHOW_MAP &&
@@ -125,23 +131,45 @@ class Home extends Component {
             </form>
           )}
 
-          {!isPickupDetailsActive && (
-            <div className="pickup-tabs-container">
-              <PickupTabs
-                mapStatus={mapStatus}
-                updateLocationTab={updateLocationTab}
-              />
-            </div>
-          )}
+          {!isPickupDetailsActive &&
+            hasPickups && (
+              <div className="pickup-tabs-container">
+                <PickupTabs
+                  mapStatus={mapStatus}
+                  updateLocationTab={updateLocationTab}
+                />
+              </div>
+            )}
+
+          {!showAskForGeolocation &&
+            !showError &&
+            !isPickupDetailsActive &&
+            !hasPickups && (
+              <div className="pkpmodal-ask-for-geolocation">
+                <GeolocationStatus
+                  titleBottom="geolocationEmpty"
+                  subtitleBottom="geolocationEmptyInstructions"
+                  Image={() => (
+                    <div>
+                      <div className="pkpmodal-ask-for-geolocation-image-waiting">
+                        <PinWaiting />
+                      </div>
+                      <div className="pkpmodal-ask-for-geolocation-image-waiting-shadow" />
+                    </div>
+                  )}
+                />
+              </div>
+            )}
 
           {showAskForGeolocation &&
-            geolocationFrom === INSIDE_MODAL && (
+            isInsideModal && (
               <AskForGeolocation
                 address={searchAddress}
                 googleMaps={googleMaps}
                 onAskForGeolocation={this.props.handleAskForGeolocation}
                 onChangeAddress={this.props.handleAddressChange}
                 rules={rules}
+                onManualGeolocation={this.props.onManualGeolocation}
                 onGeolocationError={this.props.onGeolocationError}
                 status={this.props.askForGeolocationStatus}
                 onAskForGeolocationStatus={this.props.onAskForGeolocationStatus}
@@ -151,7 +179,7 @@ class Home extends Component {
             )}
 
           {showError &&
-            geolocationFrom === INSIDE_MODAL && (
+            isInsideModal && (
               <Error
                 onManualGeolocationError={this.props.onManualGeolocationError}
                 status={errorStatus}
@@ -226,7 +254,6 @@ class Home extends Component {
               />
             )}
         </div>
-        )}
       </div>
     )
   }
@@ -262,6 +289,7 @@ Home.propTypes = {
   changeActivePickupPointId: PropTypes.func.isRequired,
   onManualGeolocationError: PropTypes.func.isRequired,
   onGeolocationError: PropTypes.func.isRequired,
+  onManualGeolocation: PropTypes.func.isRequired,
   setGeolocationFrom: PropTypes.func.isRequired,
   togglePickupDetails: PropTypes.func.isRequired,
   changeActivePickupDetails: PropTypes.func.isRequired,
