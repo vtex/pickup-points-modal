@@ -94,7 +94,7 @@
   "pickupPointsModal.geolocationDiscover":
     "We'll suggest the pickup point closest to you",
   "pickupPointsModal.geolocationAsk": "For that, we need your location",
-  "pickupPointsModal.geolocationManual": "Search for an address manually",
+  "pickupPointsModal.geolocationManual": "Search for an address",
   "pickupPointsModal.geolocationAllow":
     "Select \"Allow\" in the prompt on your browser",
   "pickupPointsModal.geolocationWaiting": "Waiting on your authorization",

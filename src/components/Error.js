@@ -35,7 +35,7 @@ export class Error extends Component {
             <button
               type="button"
               onClick={onManualGeolocationError}
-              className="btn-pkpmodal-ask-for-geolocation-manual btn btn-link"
+              className="btn-ask-for-geolocation-cta btn btn-success btn-large"
             >
               {this.translate('geolocationManual')}
             </button>
