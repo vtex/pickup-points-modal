@@ -47,13 +47,14 @@ export class PickupPointsModal extends Component {
         option =>
           props.activePickupPoint
             ? option.id !== props.activePickupPoint.id
-            : true
+            : true,
       ),
-      geolocationFrom: this.props.askForGeolocation ? OUTSIDE_MODAL : null,
+      geolocationFrom: OUTSIDE_MODAL,
       showAskForGeolocation: this.props.askForGeolocation,
       askForGeolocationStatus: this.props.askForGeolocation ? WAITING : '',
       showError: false,
       errorStatus: '',
+      showManualSearch: props.pickupOptions.length === 0,
     }
   }
 
@@ -61,13 +62,19 @@ export class PickupPointsModal extends Component {
     const thisPickupOptions = getPickupSlaString(this.props.pickupOptions)
     const nextPickupOptions = getPickupSlaString(nextProps.pickupOptions)
 
-    const notSearchingAndIsEmptyPickupOptions = !nextProps.isSearching && nextPickupOptions.length === 0
+    const notSearchingAndIsEmptyPickupOptions =
+      !nextProps.isSearching &&
+      this.props.askForGeolocationStatus !== SEARCHING &&
+      nextPickupOptions.length === 0
 
     this.setState({
-      showAskForGeolocation: nextProps.isSearching,
-      askForGeolocationStatus: nextProps.isSearching
-        ? SEARCHING
-        : this.state.askForGeolocationStatus,
+      showAskForGeolocation:
+        nextProps.isSearching ||
+        nextProps.askForGeolocationStatus === SEARCHING,
+      showManualSearch: this.state.showManualSearch
+        ? nextPickupOptions.length !== 0 && !nextProps.isSearching
+        : false,
+      askForGeolocationStatus: nextProps.isSearching ? SEARCHING : null,
       showError: notSearchingAndIsEmptyPickupOptions,
       errorStatus: notSearchingAndIsEmptyPickupOptions ? ERROR_NOT_FOUND : '',
       selectedPickupPoint: nextProps.selectedPickupPoint,
@@ -75,7 +82,7 @@ export class PickupPointsModal extends Component {
         option =>
           nextProps.activePickupPoint
             ? option.id !== nextProps.activePickupPoint.id
-            : true
+            : true,
       ),
     })
   }
@@ -124,14 +131,16 @@ export class PickupPointsModal extends Component {
   handleAskForGeolocation = (ask, geolocationFrom) => {
     this.setState({
       showAskForGeolocation: ask,
-      ...(geolocationFrom ? {geolocationFrom: geolocationFrom} : {})
+      showManualSearch: false,
+      ...(geolocationFrom ? { geolocationFrom: geolocationFrom } : {}),
     })
   }
 
   handleAskForGeolocationStatus = (status, geolocationFrom) => {
     this.setState({
       askForGeolocationStatus: status,
-      ...(geolocationFrom ? {geolocationFrom: geolocationFrom} : {})
+      showManualSearch: false,
+      ...(geolocationFrom ? { geolocationFrom: geolocationFrom } : {}),
     })
   }
 
@@ -141,14 +150,22 @@ export class PickupPointsModal extends Component {
       showAskForGeolocation: false,
       askForGeolocationStatus: null,
       errorStatus: status,
-      ...(geolocationFrom ? {geolocationFrom: geolocationFrom} : {})
+      ...(geolocationFrom ? { geolocationFrom: geolocationFrom } : {}),
     })
   }
 
-  handleManualGeolocationError = () =>{
+  handleManualGeolocationError = () => {
     this.setState({
       showError: false,
       errorStatus: null,
+      showManualSearch: true,
+    })
+  }
+
+  handleManualGeolocation = () => {
+    this.setState({
+      showManualSearch: true,
+      showAskForGeolocation: false,
     })
   }
 
@@ -191,26 +208,33 @@ export class PickupPointsModal extends Component {
       },
       postalCode: {
         ...address.postalCode,
-        ...(address.postalCode ? {
-            ...validateField(
-            address.postalCode.value,
-            'postalCode',
-            address,
-            this.props.rules
-          )
-        } : {
-          value: null
-        }),
+        ...(address.postalCode
+          ? {
+              ...validateField(
+                address.postalCode.value,
+                'postalCode',
+                address,
+                this.props.rules,
+              ),
+            }
+          : {
+              value: null,
+            }),
       },
     }
+
+    this.setState({
+      showAskForGeolocation: true,
+      askForGeolocationStatus: SEARCHING,
+    })
 
     this.props.onAddressChange({
       ...addressValidated,
       postalCode: addressValidated.postalCode.valid
         ? addressValidated.postalCode
         : {
-          value: null,
-        },
+            value: null,
+          },
     })
   }
 
@@ -250,9 +274,8 @@ export class PickupPointsModal extends Component {
       geolocationFrom,
       showError,
       errorStatus,
+      showManualSearch,
     } = this.state
-
-    const showManualSearch = false
 
     return (
       <div>
@@ -278,51 +301,25 @@ export class PickupPointsModal extends Component {
               loadingGoogle={loading}
               onChangeAddress={this.handleAddressChange}
               pickupOptionGeolocations={getPickupOptionGeolocations(
-                pickupOptions
+                pickupOptions,
               )}
               pickupOptions={pickupOptions}
               rules={rules}
               selectedPickupPointGeolocation={getPickupOptionGeolocations(
-                selectedPickupPoint
+                selectedPickupPoint,
               )}
               pickupPoint={selectedPickupPoint}
             />
           )}
 
-          {(showManualSearch || showAskForGeolocation || showError) && geolocationFrom === OUTSIDE_MODAL ? (
+          {(showAskForGeolocation || showError) &&
+          geolocationFrom === OUTSIDE_MODAL ? (
             <div className="pkpmodal-full-page">
-              {showManualSearch && (
-                <div className="pkpmodal-search-alone">
-                  <PinWaiting />
-                  <h2 className="pkpmodal-ask-for-geolocation-title">
-                    {this.translate('geolocationEmpty')}
-                  </h2>
-                  <h3 className="pkpmodal-ask-for-geolocation-subtitle">
-                    {this.translate('geolocationEmptyInstructions')}
-                  </h3>
-                  <form
-                    id="pickup-modal-search"
-                    className="pickup-modal-search"
-                    onSubmit={event => event.preventDefault()}
-                  >
-                    <GeolocationInput
-                      Input={Input}
-                      placeholder={this.translate('searchLocationMap')}
-                      loadingGoogle={loading}
-                      googleMaps={googleMaps}
-                      address={searchAddress}
-                      rules={rules}
-                      onChangeAddress={this.handleAddressChange}
-                    />
-                    <SearchIcon />
-                  </form>
-                </div>
-              )}
               {showAskForGeolocation && (
                 <AskForGeolocation
                   address={searchAddress}
                   pickupOptionGeolocations={getPickupOptionGeolocations(
-                    pickupOptions
+                    pickupOptions,
                   )}
                   onGeolocationError={this.handleGeolocationError}
                   googleMaps={googleMaps}
@@ -331,13 +328,45 @@ export class PickupPointsModal extends Component {
                   rules={rules}
                   status={askForGeolocationStatus}
                   onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
+                  onManualGeolocation={this.handleManualGeolocation}
                   askForGeolocation={showAskForGeolocation}
                   geolocationFrom={OUTSIDE_MODAL}
                 />
               )}
-              {showError && <Error
-                onManualGeolocationError={this.handleManualGeolocationError}
-                status={errorStatus} />}
+              {showError && (
+                <Error
+                  onManualGeolocationError={this.handleManualGeolocationError}
+                  status={errorStatus}
+                />
+              )}
+            </div>
+          ) : showManualSearch && largeScreen ? (
+            <div className="pkpmodal-full-page">
+              <div className="pkpmodal-search-alone">
+                <PinWaiting />
+                <h2 className="pkpmodal-ask-for-geolocation-title">
+                  {this.translate('geolocationEmpty')}
+                </h2>
+                <h3 className="pkpmodal-ask-for-geolocation-subtitle">
+                  {this.translate('geolocationEmptyInstructions')}
+                </h3>
+                <form
+                  id="pickup-modal-search"
+                  className="pickup-modal-search"
+                  onSubmit={event => event.preventDefault()}
+                >
+                  <GeolocationInput
+                    Input={Input}
+                    placeholder={this.translate('searchLocationMap')}
+                    loadingGoogle={loading}
+                    googleMaps={googleMaps}
+                    address={searchAddress}
+                    rules={rules}
+                    onChangeAddress={this.handleAddressChange}
+                  />
+                  <SearchIcon />
+                </form>
+              </div>
             </div>
           ) : (
             <Home
@@ -357,6 +386,7 @@ export class PickupPointsModal extends Component {
               sellerId={sellerId}
               pickupOptions={pickupOptions}
               largeScreen={largeScreen}
+              onManualGeolocation={this.handleManualGeolocation}
               onManualGeolocationError={this.handleManualGeolocationError}
               onGeolocationError={this.handleGeolocationError}
               onAskForGeolocationStatus={this.handleAskForGeolocationStatus}

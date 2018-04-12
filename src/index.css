@@ -67,8 +67,11 @@ h4.pickup-modal-title {
   width: 100%;
 }
 
-.pickup-modal-search {
+.pkpmodal-ask-for-geolocation-subtitle + .pickup-modal-search {
   margin-top: 20px;
+}
+
+.pickup-modal-search {
   position: relative;
 }
 
@@ -100,6 +103,11 @@ h4.pickup-modal-title {
 }
 
 /* ask for geolocation */
+
+.button-ask-geolocation:active,
+.button-ask-geolocation:focus {
+  outline: none !important;
+}
 
 .button-ask-geolocation:hover,
 .button-ask-geolocation {
@@ -149,7 +157,7 @@ h4.pickup-modal-title {
 }
 
 .pac-item:hover {
-  background: #F1F8FE;
+  background: #f1f8fe;
   cursor: pointer;
 }
 
@@ -207,7 +215,7 @@ h4.pickup-modal-title {
   }
 
   .pickup-modal-points-list {
-    margin-top: 0;
+    margin-top: 12px;
     overflow: auto;
   }
 

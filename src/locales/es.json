@@ -108,5 +108,8 @@
   "pickupPointsModal.errorCouldNotGetLocation":
     "No se pudo encontrar su ubicación",
   "pickupPointsModal.useSearchBar":
-    "Utilice la búsqueda para encontrar otros puntos"
+    "Utilice la búsqueda para encontrar otros puntos",
+  "pickupPointsModal.geolocationEmpty": "Encuentre puntos de retirada cercanos",
+  "pickupPointsModal.geolocationEmptyInstructions":
+    "¡Cuanto más específica sea su búsqueda, mejores serán los resultados!"
 }

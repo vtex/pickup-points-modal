@@ -5,6 +5,8 @@ import { formatCurrency, formatNumber } from '../utils/Currency'
 
 import markerIcon from '../assets/icons/marker_blue.svg'
 import markerIconSelected from '../assets/icons/marker_selected_check.svg'
+import IconAlert from '../assets/components/IconAlert'
+
 import { AddressSummary } from '@vtex/address-form'
 import { getUnavailableItemsAmount } from '../utils/pickupUtils'
 
@@ -106,6 +108,13 @@ export class PickupPoint extends Component {
                 onClickMaskedInfoIcon={this.handleClickMaskedInfoIcon}
               />
             </div>
+            {unavailableItemsAmount > 0 && (
+              <span className="pkpmodal-pickup-point-availability">
+                {this.translate('unavailableItemsAmount', {
+                  itemsAmount: unavailableItemsAmount,
+                })}
+              </span>
+            )}
           </div>
         </div>
         <div className="pkpmodal-pickup-point-sla-availability">
@@ -123,13 +132,6 @@ export class PickupPoint extends Component {
               timeAmount,
             })}
           </span>
-          {unavailableItemsAmount > 0 && (
-            <span className="pkpmodal-pickup-point-availability">
-              {this.translate('unavailableItemsAmount', {
-                itemsAmount: unavailableItemsAmount,
-              })}
-            </span>
-          )}
         </div>
       </div>
     )

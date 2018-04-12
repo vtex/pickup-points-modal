@@ -68,6 +68,7 @@ export class AskForGeolocation extends Component {
   }
 
   getCurrentPositionSuccess = position => {
+    this.handleGeolocationStatus(SEARCHING)
     handleGetAddressByGeolocation({
       newPosition: {
         lat: position.coords.latitude,
@@ -79,7 +80,6 @@ export class AskForGeolocation extends Component {
       rules: this.props.rules,
       address: this.props.address,
     })
-    this.handleGeolocationStatus(SEARCHING)
     searchPickupAddressByGeolocationEvent({
       searchedAddressByGeolocation: true,
       confirmedGeolocation: true,
@@ -140,7 +140,7 @@ export class AskForGeolocation extends Component {
   }
 
   handleManualGeolocation = () => {
-    this.props.onAskForGeolocation(false)
+    this.props.onManualGeolocation()
   }
 
   translate = id =>
@@ -246,6 +246,7 @@ AskForGeolocation.propTypes = {
   onChangeAddress: PropTypes.func.isRequired,
   onAskForGeolocation: PropTypes.func.isRequired,
   onAskForGeolocationStatus: PropTypes.func.isRequired,
+  onManualGeolocation: PropTypes.func.isRequired,
   onGeolocationError: PropTypes.func.isRequired,
   pickupOptionGeolocations: PropTypes.array,
   rules: PropTypes.object,
