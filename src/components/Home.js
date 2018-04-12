@@ -17,7 +17,9 @@ import PickupPoint from './PickupPoint'
 import PickupPointDetails from './PickupPointDetails'
 import Input from './Input'
 import PickupTabs from './PickupTabs'
+import GeolocationStatus from './GeolocationStatus'
 
+import PinWaiting from '../assets/components/PinWaiting'
 import SearchIcon from '../assets/components/SearchIcon'
 import GPS from '../assets/components/GPS'
 
@@ -133,6 +135,25 @@ class Home extends Component {
               />
             </div>
           )}
+
+          {!showAskForGeolocation &&
+            !showError &&
+            !isPickupDetailsActive && (
+              <div className="pkpmodal-ask-for-geolocation">
+                <GeolocationStatus
+                  titleBottom="geolocationEmpty"
+                  subtitleBottom="geolocationEmptyInstructions"
+                  Image={() => (
+                    <div>
+                      <div className="pkpmodal-ask-for-geolocation-image-waiting">
+                        <PinWaiting />
+                      </div>
+                      <div className="pkpmodal-ask-for-geolocation-image-waiting-shadow" />
+                    </div>
+                  )}
+                />
+              </div>
+            )}
 
           {showAskForGeolocation &&
             geolocationFrom === INSIDE_MODAL && (
