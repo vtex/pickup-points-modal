@@ -24,15 +24,18 @@ export class PickupPoint extends Component {
     }
   }
   handleOpenPickupDetails = () => {
-    this.props.togglePickupDetails()
-    this.props.handleChangeActivePickupDetails({
-      pickupPoint: this.props.pickupPoint,
-    })
+    this.props.togglePickupDetails && this.props.togglePickupDetails()
+    this.props.handleChangeActivePickupDetails &&
+      this.props.handleChangeActivePickupDetails({
+        pickupPoint: this.props.pickupPoint,
+      })
     this.props.changeActivePickupPointId &&
       this.props.changeActivePickupPointId(this.props.pickupPoint)
   }
 
-  handlePickupModal = () => this.props.onClickPickupModal(this.props.liPackage)
+  handlePickupModal = () =>
+    this.props.onClickPickupModal &&
+    this.props.onClickPickupModal(this.props.liPackage)
 
   translate = (id, values) =>
     this.props.intl.formatMessage({ id: `pickupPointsModal.${id}` }, values)

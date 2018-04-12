@@ -9,15 +9,23 @@ import {
 import { searchPickupAddressByGeolocationEvent } from '../utils/metrics'
 
 import UserGeolocation from '../components/UserGeolocation'
-import GeolocationPin from '../assets/components/GeolocationPin'
-import WaitingPin from '../assets/components/WaitingPin'
-import SearchingPin from '../assets/components/SearchingPin'
+import PinGeolocation from '../assets/components/PinGeolocation'
+import PinWaiting from '../assets/components/PinWaiting'
+import PinSearching from '../assets/components/PinSearching'
 
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
 import './GeolocationStatus.css'
 
-import { WAITING, SEARCHING, ASK, VTEXLOCAL, LOCALHOST } from '../constants'
+import {
+  WAITING,
+  SEARCHING,
+  ASK,
+  VTEXLOCAL,
+  LOCALHOST,
+  ERROR_NOT_ALLOWED,
+  ERROR_COULD_NOT_GETLOCATION,
+} from '../constants'
 import GeolocationStatus from './GeolocationStatus'
 
 export class AskForGeolocation extends Component {
@@ -81,27 +89,39 @@ export class AskForGeolocation extends Component {
   getCurrentPositionError = error => {
     switch (error.code) {
       case 0: // UNKNOWN ERROR
-        this.props.onAskForGeolocation(false)
+        this.props.onGeolocationError(
+          ERROR_COULD_NOT_GETLOCATION,
+          this.props.geolocationFrom
+        )
         searchPickupAddressByGeolocationEvent({
           confirmedGeolocation: true,
           browserError: true,
         })
         break
       case 1: // PERMISSION_DENIED
-        this.props.onAskForGeolocation(false)
+        this.props.onGeolocationError(
+          ERROR_NOT_ALLOWED,
+          this.props.geolocationFrom
+        )
         searchPickupAddressByGeolocationEvent({
           deniedGeolocation: true,
         })
         break
       case 2: // POSITION_UNAVAILABLE
-        this.props.onAskForGeolocation(false)
+        this.props.onGeolocationError(
+          ERROR_COULD_NOT_GETLOCATION,
+          this.props.geolocationFrom
+        )
         searchPickupAddressByGeolocationEvent({
           confirmedGeolocation: true,
           positionUnavailable: true,
         })
         break
       case 3: // TIMEOUT
-        this.props.onAskForGeolocation(false)
+        this.props.onGeolocationError(
+          ERROR_COULD_NOT_GETLOCATION,
+          this.props.geolocationFrom
+        )
         searchPickupAddressByGeolocationEvent({
           dismissedGeolocation: true,
         })
@@ -112,11 +132,11 @@ export class AskForGeolocation extends Component {
   }
 
   handleGeolocationStatus = status => {
-    this.props.onAskForGeolocationStatus(status)
+    this.props.onAskForGeolocationStatus(status, this.props.geolocationFrom)
   }
 
   handleAskForGeolocationButtonClick = () => {
-    this.props.onAskForGeolocationStatus(WAITING)
+    this.props.onAskForGeolocationStatus(WAITING, this.props.geolocationFrom)
   }
 
   handleManualGeolocation = () => {
@@ -139,12 +159,12 @@ export class AskForGeolocation extends Component {
             subtitleTop="geolocationAsk"
             Image={() => (
               <div className="pkpmodal-ask-for-geolocation-image-ask">
-                <GeolocationPin />
+                <PinGeolocation />
               </div>
             )}
           >
             <div>
-              <div className="ask-for-geolocation-cta">
+              <div className="pkpmodal-ask-for-geolocation-cta">
                 <button
                   className="btn-ask-for-geolocation-cta btn btn-success btn-large"
                   onClick={this.handleAskForGeolocationButtonClick}
@@ -172,12 +192,22 @@ export class AskForGeolocation extends Component {
             Image={() => (
               <div>
                 <div className="pkpmodal-ask-for-geolocation-image-waiting">
-                  <WaitingPin />
+                  <PinWaiting />
                 </div>
                 <div className="pkpmodal-ask-for-geolocation-image-waiting-shadow" />
               </div>
             )}
-          />
+          >
+            <div className="pkpmodal-ask-for-geolocation-manual">
+              <button
+                type="button"
+                onClick={this.handleManualGeolocation}
+                className="btn-pkpmodal-ask-for-geolocation-manual btn btn-link"
+              >
+                {this.translate('geolocationManual')}
+              </button>
+            </div>
+          </GeolocationStatus>
         )}
 
         {status === SEARCHING && (
@@ -186,12 +216,22 @@ export class AskForGeolocation extends Component {
             Image={() => (
               <div>
                 <div className="pkpmodal-ask-for-geolocation-image-searching">
-                  <SearchingPin />
+                  <PinSearching />
                 </div>
                 <div className="pkpmodal-ask-for-geolocation-image-searching-shadow" />
               </div>
             )}
-          />
+          >
+            <div className="pkpmodal-ask-for-geolocation-manual">
+              <button
+                type="button"
+                onClick={this.handleManualGeolocation}
+                className="btn-pkpmodal-ask-for-geolocation-manual btn btn-link"
+              >
+                {this.translate('geolocationManual')}
+              </button>
+            </div>
+          </GeolocationStatus>
         )}
       </div>
     )
@@ -206,6 +246,7 @@ AskForGeolocation.propTypes = {
   onChangeAddress: PropTypes.func.isRequired,
   onAskForGeolocation: PropTypes.func.isRequired,
   onAskForGeolocationStatus: PropTypes.func.isRequired,
+  onGeolocationError: PropTypes.func.isRequired,
   pickupOptionGeolocations: PropTypes.array,
   rules: PropTypes.object,
   status: PropTypes.string.isRequired,

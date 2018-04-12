@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { SHOW_MAP, HIDE_MAP, ASK, WAITING, GRANTED } from '../constants'
+import {
+  SHOW_MAP,
+  HIDE_MAP,
+  ASK,
+  WAITING,
+  GRANTED,
+  INSIDE_MODAL,
+  OUTSIDE_MODAL,
+} from '../constants'
 
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 import GeolocationInput from '@vtex/address-form/lib/geolocation/GeolocationInput'
@@ -13,15 +21,19 @@ import PickupTabs from './PickupTabs'
 import SearchIcon from '../assets/components/SearchIcon'
 import GPS from '../assets/components/GPS'
 
+import AskForGeolocation from './AskForGeolocation'
+import Error from './Error'
+
 class Home extends Component {
   onAskGeolocationClick = () => {
     navigator.permissions.query({ name: 'geolocation' }).then(permission => {
       this.props.onAskForGeolocationStatus(
         permission.state === GRANTED || process.env.NODE !== 'production'
           ? WAITING
-          : ASK
+          : ASK,
+        INSIDE_MODAL
       )
-      this.props.handleAskForGeolocation(true)
+      this.props.handleAskForGeolocation(true, INSIDE_MODAL)
     })
   }
 
@@ -55,6 +67,10 @@ class Home extends Component {
       changeActivePickupPointId,
       activePickupPoint,
       changeActivePickupDetails,
+      showAskForGeolocation,
+      errorStatus,
+      showError,
+      geolocationFrom,
     } = this.props
 
     const isNotShowingPickupDetailsAndHasPickupOptions =
@@ -84,6 +100,7 @@ class Home extends Component {
               id="pickup-modal-search"
               className="pickup-modal-search"
               onSubmit={event => event.preventDefault()}
+              onFocus={this.props.setGeolocationFrom}
             >
               <GeolocationInput
                 Input={Input}
@@ -107,6 +124,7 @@ class Home extends Component {
               <SearchIcon />
             </form>
           )}
+
           {!isPickupDetailsActive && (
             <div className="pickup-tabs-container">
               <PickupTabs
@@ -116,11 +134,61 @@ class Home extends Component {
             </div>
           )}
 
-          {isNotShowingPickupDetailsAndHasPickupOptions && (
-            <div className={'pickup-modal-points-list'}>
-              {pickupOptions.length > 0 &&
-                activePickupPoint && (
-                  <div className="pickup-modal-points-item">
+          {showAskForGeolocation &&
+            geolocationFrom === INSIDE_MODAL && (
+              <AskForGeolocation
+                address={searchAddress}
+                googleMaps={googleMaps}
+                onAskForGeolocation={this.props.handleAskForGeolocation}
+                onChangeAddress={this.props.handleAddressChange}
+                rules={rules}
+                onGeolocationError={this.props.onGeolocationError}
+                status={this.props.askForGeolocationStatus}
+                onAskForGeolocationStatus={this.props.onAskForGeolocationStatus}
+                askForGeolocation={this.props.showAskForGeolocation}
+                geolocationFrom={INSIDE_MODAL}
+              />
+            )}
+
+          {showError &&
+            geolocationFrom === INSIDE_MODAL && (
+              <Error
+                onManualGeolocationError={this.props.onManualGeolocationError}
+                status={errorStatus}
+              />
+            )}
+
+          {!showAskForGeolocation &&
+            !showError &&
+            isNotShowingPickupDetailsAndHasPickupOptions && (
+              <div className="pickup-modal-points-list">
+                {pickupOptions.length > 0 &&
+                  activePickupPoint && (
+                    <div className="pickup-modal-points-item">
+                      <PickupPoint
+                        items={items}
+                        isList
+                        logisticsInfo={logisticsInfo}
+                        sellerId={sellerId}
+                        togglePickupDetails={togglePickupDetails}
+                        handleChangeActivePickupDetails={
+                          changeActivePickupDetails
+                        }
+                        changeActivePickupPointId={changeActivePickupPointId}
+                        selectedRules={rules}
+                        pickupPoint={activePickupPoint}
+                        storePreferencesData={storePreferencesData}
+                        pickupPointId={activePickupPoint.id}
+                        isSelected
+                      />
+                    </div>
+                  )}
+
+                {filteredPickupOptions.map(pickupPoint => (
+                  <div
+                    key={pickupPoint.id}
+                    className="pickup-modal-points-item"
+                  >
                     <PickupPoint
                       items={items}
                       isList
@@ -132,48 +200,33 @@ class Home extends Component {
                       }
                       changeActivePickupPointId={changeActivePickupPointId}
                       selectedRules={rules}
-                      pickupPoint={activePickupPoint}
+                      pickupPoint={pickupPoint}
                       storePreferencesData={storePreferencesData}
-                      pickupPointId={activePickupPoint.id}
-                      isSelected
+                      pickupPointId={pickupPoint.id}
+                      isSelected={pickupPoint === activePickupPoint}
                     />
                   </div>
-                )}
-              {filteredPickupOptions.map(pickupPoint => (
-                <div key={pickupPoint.id} className="pickup-modal-points-item">
-                  <PickupPoint
-                    items={items}
-                    isList
-                    logisticsInfo={logisticsInfo}
-                    sellerId={sellerId}
-                    togglePickupDetails={togglePickupDetails}
-                    handleChangeActivePickupDetails={changeActivePickupDetails}
-                    changeActivePickupPointId={changeActivePickupPointId}
-                    selectedRules={rules}
-                    pickupPoint={pickupPoint}
-                    storePreferencesData={storePreferencesData}
-                    pickupPointId={pickupPoint.id}
-                    isSelected={pickupPoint === activePickupPoint}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
 
-          {isPickupDetailsActive && (
-            <PickupPointDetails
-              items={items}
-              logisticsInfo={logisticsInfo}
-              sellerId={sellerId}
-              handleChangeActiveSLAOption={changeActiveSLAOption}
-              togglePickupDetails={togglePickupDetails}
-              storePreferencesData={storePreferencesData}
-              handleClosePickupPointsModal={closePickupPointsModal}
-              pickupPoint={selectedPickupPoint}
-              selectedRules={rules}
-            />
-          )}
+          {!showAskForGeolocation &&
+            !showError &&
+            isPickupDetailsActive && (
+              <PickupPointDetails
+                items={items}
+                logisticsInfo={logisticsInfo}
+                sellerId={sellerId}
+                handleChangeActiveSLAOption={changeActiveSLAOption}
+                togglePickupDetails={togglePickupDetails}
+                storePreferencesData={storePreferencesData}
+                handleClosePickupPointsModal={closePickupPointsModal}
+                pickupPoint={selectedPickupPoint}
+                selectedRules={rules}
+              />
+            )}
         </div>
+        )}
       </div>
     )
   }
@@ -183,6 +236,9 @@ Home.propTypes = {
   intl: intlShape,
   mapStatus: PropTypes.string.isRequired,
   isPickupDetailsActive: PropTypes.bool,
+  showAskForGeolocation: PropTypes.bool,
+  errorStatus: PropTypes.string,
+  showError: PropTypes.bool,
   loading: PropTypes.bool.isRequired,
   googleMaps: PropTypes.object.isRequired,
   activePickupPoint: PropTypes.object,
@@ -204,6 +260,9 @@ Home.propTypes = {
   updateLocationTab: PropTypes.func.isRequired,
   togglePickupDetails: PropTypes.func.isRequired,
   changeActivePickupPointId: PropTypes.func.isRequired,
+  onManualGeolocationError: PropTypes.func.isRequired,
+  onGeolocationError: PropTypes.func.isRequired,
+  setGeolocationFrom: PropTypes.func.isRequired,
   togglePickupDetails: PropTypes.func.isRequired,
   changeActivePickupDetails: PropTypes.func.isRequired,
 }

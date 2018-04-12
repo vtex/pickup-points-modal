@@ -99,7 +99,14 @@
   "pickupPointsModal.geolocationAllow":
     "Seleccione \"Permitir\" en la alerta que aparece en su navegador",
   "pickupPointsModal.geolocationWaiting": "Esperando su autorización",
-  "pickupPointsModal.geolocationSearching": "Buscando su ubicación",
+  "pickupPointsModal.geolocationSearching": "Buscando puntos cercanos",
   "pickupPointsModal.distance": "{distanceValue} km",
-  "pickupPointsModal.askGeolocationAccept": "Usar mi ubicación actual"
+  "pickupPointsModal.askGeolocationAccept": "Usar mi ubicación actual",
+  "pickupPointsModal.errorNotAllowed": "No se pudo detectar su ubicación",
+  "pickupPointsModal.errorNotFound":
+    "No hay puntos de retirada cerca de su ubicación",
+  "pickupPointsModal.errorCouldNotGetLocation":
+    "No se pudo encontrar su ubicación",
+  "pickupPointsModal.useSearchBar":
+    "Utilice la búsqueda para encontrar otros puntos"
 }

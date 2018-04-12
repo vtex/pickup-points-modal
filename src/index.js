@@ -9,12 +9,16 @@ import {
   WAITING,
   SEARCHING,
   ASK,
+  OUTSIDE_MODAL,
+  ERROR_NOT_FOUND,
+  INSIDE_MODAL,
 } from './constants'
 import debounce from 'lodash/debounce'
 
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 import Map from './components/Map'
 import AskForGeolocation from './components/AskForGeolocation'
+import Error from './components/Error'
 import Home from './components/Home'
 import CloseButton from './components/CloseButton'
 
@@ -40,8 +44,11 @@ export class PickupPointsModal extends Component {
             ? option.id !== props.activePickupPoint.id
             : true
       ),
+      geolocationFrom: this.props.askForGeolocation ? OUTSIDE_MODAL : null,
       showAskForGeolocation: this.props.askForGeolocation,
-      askForGeolocationStatus: this.props.askForGeolocation ? WAITING : null,
+      askForGeolocationStatus: this.props.askForGeolocation ? WAITING : '',
+      showError: false,
+      errorStatus: '',
     }
   }
 
@@ -49,11 +56,15 @@ export class PickupPointsModal extends Component {
     const thisPickupOptions = getPickupSlaString(this.props.pickupOptions)
     const nextPickupOptions = getPickupSlaString(nextProps.pickupOptions)
 
+    const notSearchingAndIsEmptyPickupOptions = !nextProps.isSearching && nextPickupOptions.length === 0
+
     this.setState({
       showAskForGeolocation: nextProps.isSearching,
       askForGeolocationStatus: nextProps.isSearching
         ? SEARCHING
         : this.state.askForGeolocationStatus,
+      showError: notSearchingAndIsEmptyPickupOptions,
+      errorStatus: notSearchingAndIsEmptyPickupOptions ? ERROR_NOT_FOUND : '',
       selectedPickupPoint: nextProps.selectedPickupPoint,
       filteredPickupOptions: nextProps.pickupOptions.filter(
         option =>
@@ -99,15 +110,40 @@ export class PickupPointsModal extends Component {
     window.addEventListener('resize', this.resize)
   }
 
-  handleAskForGeolocation = ask => {
+  setGeolocationFrom = () => {
     this.setState({
-      showAskForGeolocation: ask,
+      geolocationFrom: INSIDE_MODAL,
     })
   }
 
-  handleAskForGeolocationStatus = status => {
+  handleAskForGeolocation = (ask, geolocationFrom) => {
+    this.setState({
+      showAskForGeolocation: ask,
+      ...(geolocationFrom ? {geolocationFrom: geolocationFrom} : {})
+    })
+  }
+
+  handleAskForGeolocationStatus = (status, geolocationFrom) => {
     this.setState({
       askForGeolocationStatus: status,
+      ...(geolocationFrom ? {geolocationFrom: geolocationFrom} : {})
+    })
+  }
+
+  handleGeolocationError = (status, geolocationFrom) => {
+    this.setState({
+      showError: true,
+      showAskForGeolocation: false,
+      askForGeolocationStatus: null,
+      errorStatus: status,
+      ...(geolocationFrom ? {geolocationFrom: geolocationFrom} : {})
+    })
+  }
+
+  handleManualGeolocationError = () =>{
+    this.setState({
+      showError: false,
+      errorStatus: null,
     })
   }
 
@@ -145,14 +181,21 @@ export class PickupPointsModal extends Component {
       reference: {
         value: null,
       },
+      neighbourhood: address.neighbourhood || {
+        value: null,
+      },
       postalCode: {
         ...address.postalCode,
-        ...validateField(
-          address.postalCode.value,
-          'postalCode',
-          address,
-          this.props.rules
-        ),
+        ...(address.postalCode ? {
+            ...validateField(
+            address.postalCode.value,
+            'postalCode',
+            address,
+            this.props.rules
+          )
+        } : {
+          value: null
+        }),
       },
     }
 
@@ -199,6 +242,9 @@ export class PickupPointsModal extends Component {
       selectedPickupPoint,
       showAskForGeolocation,
       askForGeolocationStatus,
+      geolocationFrom,
+      showError,
+      errorStatus,
     } = this.state
 
     return (
@@ -236,23 +282,35 @@ export class PickupPointsModal extends Component {
             />
           )}
 
-          {showAskForGeolocation ? (
-            <AskForGeolocation
-              address={searchAddress}
-              pickupOptionGeolocations={getPickupOptionGeolocations(
-                pickupOptions
+          {(showAskForGeolocation || showError) && geolocationFrom === OUTSIDE_MODAL ? (
+            <div className="pkpmodal-full-page">
+              {showAskForGeolocation && (
+                <AskForGeolocation
+                  address={searchAddress}
+                  pickupOptionGeolocations={getPickupOptionGeolocations(
+                    pickupOptions
+                  )}
+                  onGeolocationError={this.handleGeolocationError}
+                  googleMaps={googleMaps}
+                  onAskForGeolocation={this.handleAskForGeolocation}
+                  onChangeAddress={this.handleAddressChange}
+                  rules={rules}
+                  status={askForGeolocationStatus}
+                  onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
+                  askForGeolocation={showAskForGeolocation}
+                  geolocationFrom={OUTSIDE_MODAL}
+                />
               )}
-              googleMaps={googleMaps}
-              onAskForGeolocation={this.handleAskForGeolocation}
-              onChangeAddress={this.handleAddressChange}
-              rules={rules}
-              status={askForGeolocationStatus}
-              onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
-              askForGeolocation={showAskForGeolocation}
-            />
+              {showError && <Error
+                onManualGeolocationError={this.handleManualGeolocationError}
+                status={errorStatus} />}
+            </div>
           ) : (
             <Home
               mapStatus={mapStatus}
+              errorStatus={errorStatus}
+              geolocationFrom={geolocationFrom}
+              showError={showError}
               activePickupPoint={activePickupPoint}
               isPickupDetailsActive={isPickupDetailsActive}
               loading={loading}
@@ -265,6 +323,8 @@ export class PickupPointsModal extends Component {
               sellerId={sellerId}
               pickupOptions={pickupOptions}
               largeScreen={largeScreen}
+              onManualGeolocationError={this.handleManualGeolocationError}
+              onGeolocationError={this.handleGeolocationError}
               onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
               changeActiveSLAOption={changeActiveSLAOption}
               storePreferencesData={storePreferencesData}
@@ -276,6 +336,12 @@ export class PickupPointsModal extends Component {
               updateLocationTab={this.updateLocationTab}
               togglePickupDetails={this.togglePickupDetails}
               changeActivePickupPointId={this.changeActivePickupPointId}
+              askForGeolocationStatus={askForGeolocationStatus}
+              showAskForGeolocation={showAskForGeolocation}
+              status={askForGeolocationStatus}
+              onAskForGeolocation={this.handleAskForGeolocation}
+              onChangeAddress={this.handleAddressChange}
+              setGeolocationFrom={this.setGeolocationFrom}
             />
           )}
         </div>

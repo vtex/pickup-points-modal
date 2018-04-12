@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-class WaitingPin extends PureComponent {
+class PinWaiting extends PureComponent {
   render() {
     return (
       <svg
@@ -20,4 +20,4 @@ class WaitingPin extends PureComponent {
   }
 }
 
-export default WaitingPin
+export default PinWaiting
