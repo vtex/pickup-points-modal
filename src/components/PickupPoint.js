@@ -3,9 +3,8 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { formatCurrency, formatNumber } from '../utils/Currency'
 
-import markerIcon from '../assets/icons/marker_blue.svg'
-import markerIconSelected from '../assets/icons/marker_selected_check.svg'
-import IconAlert from '../assets/components/IconAlert'
+import PinIcon from '../assets/components/PinIcon'
+import PinIconSelected from '../assets/components/PinIconSelected'
 
 import { AddressSummary } from '@vtex/address-form'
 import { getUnavailableItemsAmount } from '../utils/pickupUtils'
@@ -77,11 +76,7 @@ export class PickupPoint extends Component {
       >
         <div className="pkpmodal-pickup-point-main">
           <div className="pkpmodal-pickup-point-marker">
-            <img
-              className="pkpmodal-pickup-point-marker-image"
-              src={isSelected ? markerIconSelected : markerIcon}
-              alt={this.translate('marker')}
-            />
+            {isSelected ? <PinIconSelected /> : <PinIcon />}
             {pickupPoint.pickupStoreInfo.distance && (
               <p className="pkpmodal-pickup-point-distance">
                 {this.translate('distance', {

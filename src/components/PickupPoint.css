@@ -4,6 +4,9 @@
   background-color: #fff;
   border: 1px solid #f4f4f4;
   border-radius: 4px;
+}
+
+.pickup-modal-points-list .pkpmodal-pickup-point {
   box-shadow: 0 2px 2px 0 rgba(221, 221, 221, 0.5);
 }
 
@@ -17,7 +20,7 @@
 }
 
 .pkpmodal-pickup-point-marker-image {
-  height: 16px;
+  height: 26px;
 }
 
 .pkpmodal-pickup-point-info {
@@ -37,6 +40,7 @@
 
 .pkpmodal-pickup-point-distance {
   font-size: 10px;
+  line-height: 1;
   margin: 4px 0 0;
 }
 
@@ -54,7 +58,7 @@
   line-height: 1.3;
 }
 
-.pkpmodal-pickup-point-address.list .address-summary {
+.pickup-modal-points-list .address-summary {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

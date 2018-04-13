@@ -95,7 +95,7 @@
     "Vamos sugerir un punto de recogida cerca de usted",
   "pickupPointsModal.geolocationAsk":
     "Para esto, necesitamos saber su ubicación",
-  "pickupPointsModal.geolocationManual": "Buscar un punto manualmente",
+  "pickupPointsModal.geolocationManual": "Buscar una dirección",
   "pickupPointsModal.geolocationAllow":
     "Seleccione \"Permitir\" en la alerta que aparece en su navegador",
   "pickupPointsModal.geolocationWaiting": "Esperando su autorización",
