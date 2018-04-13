@@ -3,11 +3,8 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { formatCurrency, formatNumber } from '../utils/Currency'
 
-import markerIcon from '../assets/icons/marker_blue.svg'
 import PinIcon from '../assets/components/PinIcon'
 import PinIconSelected from '../assets/components/PinIconSelected'
-import markerIconSelected from '../assets/icons/marker_selected_check.svg'
-import IconAlert from '../assets/components/IconAlert'
 
 import { AddressSummary } from '@vtex/address-form'
 import { getUnavailableItemsAmount } from '../utils/pickupUtils'
