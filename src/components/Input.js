@@ -24,7 +24,6 @@ export class Input extends Component {
         onBlur={onBlur}
         onChange={this.handleChange}
         ref={inputRef}
-        autoFocus
         data-hj-whitelist
       />
     )
