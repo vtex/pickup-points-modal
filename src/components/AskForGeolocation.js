@@ -49,14 +49,18 @@ export class AskForGeolocation extends Component {
         navigator.permissions
           .query({ name: 'geolocation' })
           .then(permission => {
-            this.handleCurrentPosition(permission)
+            this.handleCurrentPosition({
+              permission,
+              googleMaps: props.googleMaps,
+            })
           })
 
-      !navigator.permissions && this.handleCurrentPosition()
+      !navigator.permissions &&
+        this.handleCurrentPosition({ googleMaps: props.googleMaps })
     }
   }
 
-  handleCurrentPosition = permission => {
+  handleCurrentPosition = ({ permission, googleMaps }) => {
     this.handleGeolocationStatus(
       (permission && permission.state === GRANTED) ||
       window.location.host.includes(VTEXLOCAL) ||
@@ -78,7 +82,7 @@ export class AskForGeolocation extends Component {
       })
       return
     }
-    props.googleMaps &&
+    googleMaps &&
       getCurrentPosition(
         this.getCurrentPositionSuccess,
         this.getCurrentPositionError
