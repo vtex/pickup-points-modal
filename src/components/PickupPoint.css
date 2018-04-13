@@ -17,7 +17,7 @@
 }
 
 .pkpmodal-pickup-point-marker-image {
-  height: 16px;
+  height: 26px;
 }
 
 .pkpmodal-pickup-point-info {
@@ -37,6 +37,7 @@
 
 .pkpmodal-pickup-point-distance {
   font-size: 10px;
+  line-height: 1;
   margin: 4px 0 0;
 }
 
