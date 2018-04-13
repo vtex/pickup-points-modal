@@ -111,15 +111,25 @@ h4.pickup-modal-title {
 
 .button-ask-geolocation:hover,
 .button-ask-geolocation {
-  background: white;
-  flex: none;
-  text-align: left;
-  display: flex;
   align-items: center;
+  background: white;
+  border: 0;
+  display: flex;
+  flex: none;
+  outline: none;
   padding: 13px 16px;
   position: absolute;
-  top: 0;
   right: 0;
+  text-align: left;
+  top: 1px;
+}
+
+.button-ask-geolocation {
+  opacity: .9;
+}
+
+.button-ask-geolocation:hover {
+  opacity: 1;
 }
 
 .button-ask-geolocation::before {
