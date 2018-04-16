@@ -25,6 +25,7 @@ import {
   LOCALHOST,
   ERROR_NOT_ALLOWED,
   ERROR_COULD_NOT_GETLOCATION,
+  GRANTED,
 } from '../constants'
 import GeolocationStatus from './GeolocationStatus'
 
@@ -44,27 +45,48 @@ export class AskForGeolocation extends Component {
 
   handleGetCurrentPosition = props => {
     if (props.askForGeolocation && props.status === WAITING) {
-      this.handleGeolocationStatus(WAITING)
+      navigator.permissions &&
+        navigator.permissions
+          .query({ name: 'geolocation' })
+          .then(permission => {
+            this.handleCurrentPosition({
+              permission,
+              googleMaps: props.googleMaps,
+            })
+          })
 
-      // Hard coded coords for development
-      if (
-        window.location.host.includes(VTEXLOCAL) ||
-        window.location.host.includes(LOCALHOST)
-      ) {
-        this.getCurrentPositionSuccess({
-          coords: {
-            latitude: -22.9432587,
-            longitude: -43.1862642,
-          },
-        })
-        return
-      }
-      props.googleMaps &&
-        getCurrentPosition(
-          this.getCurrentPositionSuccess,
-          this.getCurrentPositionError
-        )
+      !navigator.permissions &&
+        this.handleCurrentPosition({ googleMaps: props.googleMaps })
     }
+  }
+
+  handleCurrentPosition = ({ permission, googleMaps }) => {
+    this.handleGeolocationStatus(
+      (permission && permission.state === GRANTED) ||
+      window.location.host.includes(VTEXLOCAL) ||
+      window.location.host.includes(LOCALHOST)
+        ? SEARCHING
+        : WAITING
+    )
+
+    // Hard coded coords for development
+    if (
+      window.location.host.includes(VTEXLOCAL) ||
+      window.location.host.includes(LOCALHOST)
+    ) {
+      this.getCurrentPositionSuccess({
+        coords: {
+          latitude: -22.9432587,
+          longitude: -43.1862642,
+        },
+      })
+      return
+    }
+    googleMaps &&
+      getCurrentPosition(
+        this.getCurrentPositionSuccess,
+        this.getCurrentPositionError
+      )
   }
 
   getCurrentPositionSuccess = position => {
