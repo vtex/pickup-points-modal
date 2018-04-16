@@ -183,15 +183,7 @@ class Map extends Component {
       },
       styles: [
         {
-          featureType: 'administrative',
-          stylers: [{ visibility: 'off' }],
-        },
-        {
           featureType: 'poi',
-          stylers: [{ visibility: 'off' }],
-        },
-        {
-          featureType: 'transit',
           stylers: [{ visibility: 'off' }],
         },
       ],
