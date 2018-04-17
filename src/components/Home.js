@@ -70,15 +70,15 @@ class Home extends Component {
 
     return (
       <div
-        className={`pickup-modal-info-bar ${mapStatus === SHOW_MAP &&
-          'pickup-modal-info-bar-map'}`}
+        className={`pkpmodal-info-bar ${mapStatus === SHOW_MAP &&
+          'pkpmodal-info-bar-map'}`}
       >
         <div
-          className={`pickup-modal-info-bar-container ${mapStatus ===
+          className={`pkpmodal-info-bar-container ${mapStatus ===
             SHOW_MAP && 'active'}`}
         >
-          <div className="pickup-modal-header">
-            <h4 className="pickup-modal-title">
+          <div className="pkpmodal-header">
+            <h4 className="pkpmodal-title">
               {isPickupDetailsActive
                 ? this.translate('pointDetails')
                 : this.translate('selectPickupPoint')}
@@ -157,10 +157,10 @@ class Home extends Component {
           {!showAskForGeolocation &&
             !showError &&
             isNotShowingPickupDetailsAndHasPickupOptions && (
-              <div className="pickup-modal-points-list">
+              <div className="pkpmodal-points-list">
                 {pickupOptions.length > 0 &&
                   activePickupPoint && (
-                    <div className="pickup-modal-points-item">
+                    <div className="pkpmodal-points-item">
                       <PickupPoint
                         items={items}
                         isList
@@ -183,7 +183,7 @@ class Home extends Component {
                 {filteredPickupOptions.map(pickupPoint => (
                   <div
                     key={pickupPoint.id}
-                    className="pickup-modal-points-item"
+                    className="pkpmodal-points-item"
                   >
                     <PickupPoint
                       items={items}

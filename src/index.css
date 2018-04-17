@@ -1,12 +1,12 @@
 /* main structue */
 
-.pickup-modal {
+.pkpmodal {
   background: #fff;
   position: fixed;
   z-index: 100;
 }
 
-.pickup-modal-backdrop {
+.pkpmodal-backdrop {
   background: #fff;
   opacity: 0.8;
   position: fixed;
@@ -17,42 +17,6 @@
   height: 100%;
   width: 100%;
   z-index: 99;
-}
-
-.pickup-modal-close {
-  position: absolute;
-  padding: 14px;
-  right: 0;
-  top: 0;
-  z-index: 999;
-}
-
-/* info bar structue */
-
-.pickup-modal-info-bar {
-  height: 100%;
-  position: relative;
-}
-
-.pickup-modal-info-bar-container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  position: relative;
-}
-
-/* header */
-
-.pickup-modal-header {
-  border-bottom: 1px solid #eee;
-  padding: 5px 0 5px 15px;
-  flex: none;
-  z-index: 1;
-}
-
-h4.pickup-modal-title {
-  font-size: 15px;
 }
 
 /* searh */
@@ -67,120 +31,14 @@ h4.pickup-modal-title {
   width: 100%;
 }
 
-.pkpmodal-ask-for-geolocation-subtitle + .pickup-modal-search {
-  margin-top: 20px;
-}
-
-.pickup-modal-search {
-  position: relative;
-}
-
-.pickup-modal-search input::placeholder {
-  color: #cccccc;
-}
-
-.pickup-modal-search input {
-  font-size: 16px;
-  height: auto;
-  padding: 12px 52px 12px 46px !important;
-  box-shadow: 0 1px 1px 0 rgba(204, 204, 204, 0.5);
-  background-color: #ffffff;
-  border: 0;
-  border-radius: 0;
-  width: 100%;
-  max-width: 100%;
-}
-
-.pickup-modal-search-icon {
-  position: absolute;
-  z-index: 99;
-  left: 16px;
-  top: 14px;
-}
-
 .pkpmodal-search-alone .pkpmodal-ask-for-geolocation-image-waiting-pin {
   height: 60px;
-}
-
-/* ask for geolocation */
-
-.button-ask-geolocation:active,
-.button-ask-geolocation:focus {
-  outline: none !important;
-}
-
-.button-ask-geolocation:hover,
-.button-ask-geolocation {
-  align-items: center;
-  background: white;
-  border: 0;
-  display: flex;
-  flex: none;
-  outline: none;
-  padding: 13px 16px;
-  position: absolute;
-  right: 0;
-  text-align: left;
-  top: 1px;
-}
-
-.button-ask-geolocation {
-  opacity: .9;
-}
-
-.button-ask-geolocation:hover {
-  opacity: 1;
-}
-
-.button-ask-geolocation::before {
-  content: " ";
-  border-left: solid 1px #eeeeee;
-  height: 30px;
-  position: absolute;
-  right: 48px;
-  top: 6px;
-}
-
-/* list of points */
-
-.pickup-modal-points-list {
-  flex: 1 1 auto;
-  position: relative;
-  overflow: auto;
-  padding: 5px 12px;
-}
-
-.pickup-modal-points-item {
-  cursor: pointer;
-  margin-bottom: 12px;
-}
-
-.pickup-modal-points-item:hover .pkpmodal-pickup-point {
-  border-color: #ccc;
-}
-
-/* Google Maps autocomplete */
-
-.pac-item {
-  padding-bottom: 8px;
-  padding-top: 8px;
-}
-
-.pac-item:hover {
-  background: #f1f8fe;
-  cursor: pointer;
-}
-
-.pac-item,
-.pac-item-query,
-.pac-matched {
-  font-size: 14px;
 }
 
 /* media queries */
 
 @media (max-width: 1023px) {
-  .pickup-modal {
+  .pkpmodal {
     top: 0;
     bottom: 0;
     right: 0;
@@ -188,23 +46,10 @@ h4.pickup-modal-title {
     height: 100%;
     width: 100%;
   }
-
-  .pickup-modal-info-bar-container.active {
-    height: auto;
-  }
-
-  .pickup-modal-info-bar-container {
-    background-color: #f4f4f4;
-    height: 100vh;
-  }
-
-  .pickup-modal-info-bar-map {
-    height: auto;
-  }
 }
 
 @media (min-width: 1024px) {
-  .pickup-modal {
+  .pkpmodal {
     border: 1px solid #ccc;
     top: 50%;
     left: 50%;
@@ -212,42 +57,5 @@ h4.pickup-modal-title {
     width: 900px;
     margin-top: -280px;
     margin-left: -450px;
-  }
-
-  .pickup-tabs-container {
-    display: none;
-  }
-
-  .pickup-modal-info-bar {
-    padding: 10px;
-    box-sizing: border-box;
-    width: 340px;
-  }
-
-  .pickup-modal-points-list {
-    margin-top: 8px;
-    overflow: auto;
-  }
-
-  .pickup-modal-close,
-  .pickup-modal-close:hover {
-    border-radius: 20px;
-    background: #fff;
-    right: 10px;
-    top: 10px;
-    padding: 10px 14px;
-  }
-
-  .pkpmodal-search-alone .pickup-modal-search input {
-    font-size: 24px;
-    height: auto;
-    padding: 24px 24px 24px 56px !important;
-  }
-
-  .pkpmodal-search-alone .pickup-modal-search-icon {
-    position: absolute;
-    z-index: 99;
-    left: 23px;
-    top: 31px;
   }
 }

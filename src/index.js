@@ -279,10 +279,10 @@ export class PickupPointsModal extends Component {
     return (
       <div>
         <div
-          className="pickup-modal-backdrop"
+          className="pkpmodal-backdrop"
           onClick={this.props.closePickupPointsModal}
         />
-        <div className="pickup-modal">
+        <div className="pkpmodal">
           <CloseButton
             onClickClose={this.props.closePickupPointsModal}
             alt={this.translate('closeButton')}
