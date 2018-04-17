@@ -206,6 +206,9 @@ export class PickupPointsModal extends Component {
       neighbourhood: address.neighbourhood || {
         value: null,
       },
+      number: address.number || {
+        value: null,
+      },
       postalCode: {
         ...address.postalCode,
         ...(address.postalCode
