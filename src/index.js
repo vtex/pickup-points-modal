@@ -357,6 +357,8 @@ export class PickupPointsModal extends Component {
                     address={searchAddress}
                     rules={rules}
                     onChangeAddress={this.handleAddressChange}
+                    onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
+                    handleAskForGeolocation={this.handleAskForGeolocation}
                   />
                 </div>
               </div>

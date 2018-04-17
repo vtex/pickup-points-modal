@@ -9,7 +9,7 @@ import {
   ASK,
   WAITING,
   GRANTED,
-  INSIDE_MODAL,
+  OUTSIDE_MODAL,
 } from '../constants'
 
 import SearchIcon from '../assets/components/SearchIcon'
@@ -24,11 +24,16 @@ class SearchForm extends Component {
         permission.state === GRANTED || process.env.NODE !== 'production'
           ? WAITING
           : ASK,
-        INSIDE_MODAL
+        OUTSIDE_MODAL
       )
-      this.props.handleAskForGeolocation(true, INSIDE_MODAL)
+      this.props.handleAskForGeolocation(true, OUTSIDE_MODAL)
     })
   }
+
+  translate = id =>
+    this.props.intl.formatMessage({
+      id: `pickupPointsModal.${id}`,
+    })
 
   render() {
     const {
@@ -60,8 +65,9 @@ class SearchForm extends Component {
         />
         {navigator.geolocation && (
           <button
+            title={this.translate('askGeolocationAccept')}
             type="button"
-            className="button-ask-geolocation btn btn-link"
+            className="pkp-modal-ask-geolocation-btn"
             onClick={this.onAskGeolocationClick}
           >
             <GPS />
@@ -74,7 +80,7 @@ class SearchForm extends Component {
 }
 
 SearchForm.propTypes = {
-  Input: PropTypes.node,
+  Input: PropTypes.func,
   placeholder: PropTypes.string,
   loadingGoogle: PropTypes.bool,
   googleMaps: PropTypes.object,
@@ -83,6 +89,8 @@ SearchForm.propTypes = {
   onChangeAddress: PropTypes.func,
   onFocus: PropTypes.func,
   handleAskForGeolocation: PropTypes.func.isRequired,
+  onAskForGeolocationStatus: PropTypes.func.isRequired,
+  intl: intlShape,
 }
 
 export default injectIntl(SearchForm)

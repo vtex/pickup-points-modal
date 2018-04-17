@@ -7,7 +7,7 @@
 }
 
 .pkpmodal-search input::placeholder {
-  color: #cccccc;
+  color: #ccc;
 }
 
 .pkpmodal-search input {
@@ -31,41 +31,30 @@
 
 /* ask for geolocation */
 
-.button-ask-geolocation:active,
-.button-ask-geolocation:focus {
+.pkp-modal-ask-geolocation-btn:active,
+.pkp-modal-ask-geolocation-btn:focus {
   outline: none !important;
 }
 
-.button-ask-geolocation:hover,
-.button-ask-geolocation {
-  align-items: center;
-  background: white;
+.pkp-modal-ask-geolocation-btn:hover,
+.pkp-modal-ask-geolocation-btn {
+  background: #fff;
   border: 0;
+  border-left: 1px solid #eee;
   display: flex;
   flex: none;
-  outline: none;
-  padding: 13px 16px;
+  padding: 10px 16px;
   position: absolute;
   right: 0;
-  text-align: left;
-  top: 1px;
+  top: 4px;
 }
 
-.button-ask-geolocation {
+.pkp-modal-ask-geolocation-btn {
   opacity: .9;
 }
 
-.button-ask-geolocation:hover {
+.pkp-modal-ask-geolocation-btn:hover {
   opacity: 1;
-}
-
-.button-ask-geolocation::before {
-  content: " ";
-  border-left: solid 1px #eeeeee;
-  height: 30px;
-  position: absolute;
-  right: 48px;
-  top: 6px;
 }
 
 /* Google Maps autocomplete */
@@ -90,7 +79,7 @@
   .pkpmodal-search-alone .pkpmodal-search input {
     font-size: 24px;
     height: auto;
-    padding: 24px 24px 24px 56px !important;
+    padding: 24px 56px 24px 56px !important;
   }
 
   .pkpmodal-search-alone .pkpmodal-search-icon {
@@ -98,5 +87,15 @@
     z-index: 99;
     left: 23px;
     top: 31px;
+  }
+
+  .pkpmodal-search-alone .pkp-modal-ask-geolocation-btn {
+    top: 10px;
+    padding: 20px 24px;
+  }
+
+  .pkpmodal-search-alone .pkpmodal-use-geolocation-icon {
+    height: 20px;
+    width: 20px;
   }
 }
