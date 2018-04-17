@@ -96,6 +96,7 @@ class Home extends Component {
               onChangeAddress={handleAddressChange}
               onFocus={this.props.setGeolocationFrom}
               handleAskForGeolocation={this.props.handleAskForGeolocation}
+              onAskForGeolocationStatus={this.props.onAskForGeolocationStatus}
             />
           )}
 

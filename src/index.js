@@ -359,6 +359,7 @@ export class PickupPointsModal extends Component {
                     onChangeAddress={this.handleAddressChange}
                     onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
                     handleAskForGeolocation={this.handleAskForGeolocation}
+                    insideModal={false}
                   />
                 </div>
               </div>

@@ -9,6 +9,7 @@ import {
   ASK,
   WAITING,
   GRANTED,
+  INSIDE_MODAL,
   OUTSIDE_MODAL,
 } from '../constants'
 
@@ -24,9 +25,9 @@ class SearchForm extends Component {
         permission.state === GRANTED || process.env.NODE !== 'production'
           ? WAITING
           : ASK,
-        OUTSIDE_MODAL
+        this.props.insideModal ? INSIDE_MODAL : OUTSIDE_MODAL
       )
-      this.props.handleAskForGeolocation(true, OUTSIDE_MODAL)
+      this.props.handleAskForGeolocation(true, this.props.insideModal ? INSIDE_MODAL : OUTSIDE_MODAL)
     })
   }
 
@@ -79,6 +80,10 @@ class SearchForm extends Component {
   }
 }
 
+SearchForm.defaultProps = {
+  insideModal: true,
+}
+
 SearchForm.propTypes = {
   Input: PropTypes.func,
   placeholder: PropTypes.string,
@@ -91,6 +96,7 @@ SearchForm.propTypes = {
   handleAskForGeolocation: PropTypes.func.isRequired,
   onAskForGeolocationStatus: PropTypes.func.isRequired,
   intl: intlShape,
+  insideModal: PropTypes.bool,
 }
 
 export default injectIntl(SearchForm)
