@@ -8,6 +8,7 @@
 
 .pkpmodal-search input::placeholder {
   color: #ccc;
+  font-weight: 300;
 }
 
 .pkpmodal-search input {
@@ -79,7 +80,7 @@
   .pkpmodal-search-alone .pkpmodal-search input {
     font-size: 24px;
     height: auto;
-    padding: 24px 56px 24px 56px !important;
+    padding: 24px 86px 24px 56px !important;
   }
 
   .pkpmodal-search-alone .pkpmodal-search-icon {
