@@ -6,7 +6,7 @@
   border-radius: 4px;
 }
 
-.pickup-modal-points-list .pkpmodal-pickup-point {
+.pkpmodal-points-list .pkpmodal-pickup-point {
   box-shadow: 0 2px 2px 0 rgba(221, 221, 221, 0.5);
 }
 
@@ -58,7 +58,7 @@
   line-height: 1.3;
 }
 
-.pickup-modal-points-list .address-summary {
+.pkpmodal-points-list .address-summary {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
