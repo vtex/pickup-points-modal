@@ -4,41 +4,25 @@ import { injectIntl, intlShape } from 'react-intl'
 import {
   SHOW_MAP,
   HIDE_MAP,
-  ASK,
-  WAITING,
-  GRANTED,
   INSIDE_MODAL,
-  OUTSIDE_MODAL,
 } from '../constants'
 
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
-import GeolocationInput from '@vtex/address-form/lib/geolocation/GeolocationInput'
 import PickupPoint from './PickupPoint'
 import PickupPointDetails from './PickupPointDetails'
 import Input from './Input'
 import PickupTabs from './PickupTabs'
 import GeolocationStatus from './GeolocationStatus'
+import SearchForm from './SearchForm'
 
 import PinWaiting from '../assets/components/PinWaiting'
-import SearchIcon from '../assets/components/SearchIcon'
-import GPS from '../assets/components/GPS'
 
 import AskForGeolocation from './AskForGeolocation'
 import Error from './Error'
 
-class Home extends Component {
-  onAskGeolocationClick = () => {
-    navigator.permissions.query({ name: 'geolocation' }).then(permission => {
-      this.props.onAskForGeolocationStatus(
-        permission.state === GRANTED || process.env.NODE !== 'production'
-          ? WAITING
-          : ASK,
-        INSIDE_MODAL
-      )
-      this.props.handleAskForGeolocation(true, INSIDE_MODAL)
-    })
-  }
+import './Home.css'
 
+class Home extends Component {
   translate = id =>
     this.props.intl.formatMessage({
       id: `pickupPointsModal.${id}`,
@@ -102,33 +86,17 @@ class Home extends Component {
           </div>
 
           {!isPickupDetailsActive && (
-            <form
-              id="pickup-modal-search"
-              className="pickup-modal-search"
-              onSubmit={event => event.preventDefault()}
+            <SearchForm
+              Input={Input}
+              placeholder={this.translate('searchLocationMap')}
+              loadingGoogle={loading}
+              googleMaps={googleMaps}
+              address={searchAddress}
+              rules={rules}
+              onChangeAddress={handleAddressChange}
               onFocus={this.props.setGeolocationFrom}
-            >
-              <GeolocationInput
-                Input={Input}
-                placeholder={this.translate('searchLocationMap')}
-                loadingGoogle={loading}
-                googleMaps={googleMaps}
-                address={searchAddress}
-                rules={rules}
-                onChangeAddress={handleAddressChange}
-              />
-              {!isPickupDetailsActive &&
-                navigator.geolocation && (
-                  <button
-                    type="button"
-                    className="button-ask-geolocation btn btn-link"
-                    onClick={this.onAskGeolocationClick}
-                  >
-                    <GPS />
-                  </button>
-                )}
-              <SearchIcon />
-            </form>
+              handleAskForGeolocation={this.props.handleAskForGeolocation}
+            />
           )}
 
           {!isPickupDetailsActive &&

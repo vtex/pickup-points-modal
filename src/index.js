@@ -16,19 +16,18 @@ import {
 import debounce from 'lodash/debounce'
 
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
-import GeolocationInput from '@vtex/address-form/lib/geolocation/GeolocationInput'
 import Map from './components/Map'
 import AskForGeolocation from './components/AskForGeolocation'
 import Error from './components/Error'
 import Home from './components/Home'
 import CloseButton from './components/CloseButton'
 import Input from './components/Input'
+import SearchForm from './components/SearchForm'
 
 import { validateField } from '@vtex/address-form/lib/validateAddress'
 import { getPickupOptionGeolocations } from './utils/pickupUtils'
 import { getPickupSlaString } from './utils/GetString'
 
-import SearchIcon from './assets/components/SearchIcon'
 import PinWaiting from './assets/components/PinWaiting'
 
 import './index.css'
@@ -210,16 +209,16 @@ export class PickupPointsModal extends Component {
         ...address.postalCode,
         ...(address.postalCode
           ? {
-              ...validateField(
-                address.postalCode.value,
-                'postalCode',
-                address,
-                this.props.rules,
-              ),
-            }
+            ...validateField(
+              address.postalCode.value,
+              'postalCode',
+              address,
+              this.props.rules,
+            ),
+          }
           : {
-              value: null,
-            }),
+            value: null,
+          }),
       },
     }
 
@@ -233,8 +232,8 @@ export class PickupPointsModal extends Component {
       postalCode: addressValidated.postalCode.valid
         ? addressValidated.postalCode
         : {
-            value: null,
-          },
+          value: null,
+        },
     })
   }
 
@@ -314,48 +313,43 @@ export class PickupPointsModal extends Component {
 
           {(showAskForGeolocation || showError) &&
           geolocationFrom === OUTSIDE_MODAL ? (
-            <div className="pkpmodal-full-page">
-              {showAskForGeolocation && (
-                <AskForGeolocation
-                  address={searchAddress}
-                  pickupOptionGeolocations={getPickupOptionGeolocations(
-                    pickupOptions,
-                  )}
-                  onGeolocationError={this.handleGeolocationError}
-                  googleMaps={googleMaps}
-                  onAskForGeolocation={this.handleAskForGeolocation}
-                  onChangeAddress={this.handleAddressChange}
-                  rules={rules}
-                  status={askForGeolocationStatus}
-                  onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
-                  onManualGeolocation={this.handleManualGeolocation}
-                  askForGeolocation={showAskForGeolocation}
-                  geolocationFrom={OUTSIDE_MODAL}
-                />
-              )}
-              {showError && (
-                <Error
-                  onManualGeolocationError={this.handleManualGeolocationError}
-                  status={errorStatus}
-                />
-              )}
-            </div>
-          ) : showManualSearch && largeScreen ? (
-            <div className="pkpmodal-full-page">
-              <div className="pkpmodal-search-alone">
-                <PinWaiting />
-                <h2 className="pkpmodal-ask-for-geolocation-title">
-                  {this.translate('geolocationEmpty')}
-                </h2>
-                <h3 className="pkpmodal-ask-for-geolocation-subtitle">
-                  {this.translate('geolocationEmptyInstructions')}
-                </h3>
-                <form
-                  id="pickup-modal-search"
-                  className="pickup-modal-search"
-                  onSubmit={event => event.preventDefault()}
-                >
-                  <GeolocationInput
+              <div className="pkpmodal-full-page">
+                {showAskForGeolocation && (
+                  <AskForGeolocation
+                    address={searchAddress}
+                    pickupOptionGeolocations={getPickupOptionGeolocations(
+                      pickupOptions,
+                    )}
+                    onGeolocationError={this.handleGeolocationError}
+                    googleMaps={googleMaps}
+                    onAskForGeolocation={this.handleAskForGeolocation}
+                    onChangeAddress={this.handleAddressChange}
+                    rules={rules}
+                    status={askForGeolocationStatus}
+                    onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
+                    onManualGeolocation={this.handleManualGeolocation}
+                    askForGeolocation={showAskForGeolocation}
+                    geolocationFrom={OUTSIDE_MODAL}
+                  />
+                )}
+                {showError && (
+                  <Error
+                    onManualGeolocationError={this.handleManualGeolocationError}
+                    status={errorStatus}
+                  />
+                )}
+              </div>
+            ) : showManualSearch && largeScreen ? (
+              <div className="pkpmodal-full-page">
+                <div className="pkpmodal-search-alone">
+                  <PinWaiting />
+                  <h2 className="pkpmodal-ask-for-geolocation-title">
+                    {this.translate('geolocationEmpty')}
+                  </h2>
+                  <h3 className="pkpmodal-ask-for-geolocation-subtitle">
+                    {this.translate('geolocationEmptyInstructions')}
+                  </h3>
+                  <SearchForm
                     Input={Input}
                     placeholder={this.translate('searchLocationMap')}
                     loadingGoogle={loading}
@@ -364,50 +358,48 @@ export class PickupPointsModal extends Component {
                     rules={rules}
                     onChangeAddress={this.handleAddressChange}
                   />
-                  <SearchIcon />
-                </form>
+                </div>
               </div>
-            </div>
-          ) : (
-            <Home
-              mapStatus={mapStatus}
-              errorStatus={errorStatus}
-              geolocationFrom={geolocationFrom}
-              showError={showError}
-              activePickupPoint={activePickupPoint}
-              isPickupDetailsActive={isPickupDetailsActive}
-              loading={loading}
-              googleMaps={googleMaps}
-              searchAddress={searchAddress}
-              rules={rules}
-              filteredPickupOptions={filteredPickupOptions}
-              items={items}
-              logisticsInfo={logisticsInfo}
-              sellerId={sellerId}
-              pickupOptions={pickupOptions}
-              largeScreen={largeScreen}
-              onManualGeolocation={this.handleManualGeolocation}
-              onManualGeolocationError={this.handleManualGeolocationError}
-              onGeolocationError={this.handleGeolocationError}
-              onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
-              changeActiveSLAOption={changeActiveSLAOption}
-              storePreferencesData={storePreferencesData}
-              closePickupPointsModal={closePickupPointsModal}
-              selectedPickupPoint={selectedPickupPoint}
-              changeActivePickupDetails={changeActivePickupDetails}
-              handleAddressChange={this.handleAddressChange}
-              handleAskForGeolocation={this.handleAskForGeolocation}
-              updateLocationTab={this.updateLocationTab}
-              togglePickupDetails={this.togglePickupDetails}
-              changeActivePickupPointId={this.changeActivePickupPointId}
-              askForGeolocationStatus={askForGeolocationStatus}
-              showAskForGeolocation={showAskForGeolocation}
-              status={askForGeolocationStatus}
-              onAskForGeolocation={this.handleAskForGeolocation}
-              onChangeAddress={this.handleAddressChange}
-              setGeolocationFrom={this.setGeolocationFrom}
-            />
-          )}
+            ) : (
+              <Home
+                mapStatus={mapStatus}
+                errorStatus={errorStatus}
+                geolocationFrom={geolocationFrom}
+                showError={showError}
+                activePickupPoint={activePickupPoint}
+                isPickupDetailsActive={isPickupDetailsActive}
+                loading={loading}
+                googleMaps={googleMaps}
+                searchAddress={searchAddress}
+                rules={rules}
+                filteredPickupOptions={filteredPickupOptions}
+                items={items}
+                logisticsInfo={logisticsInfo}
+                sellerId={sellerId}
+                pickupOptions={pickupOptions}
+                largeScreen={largeScreen}
+                onManualGeolocation={this.handleManualGeolocation}
+                onManualGeolocationError={this.handleManualGeolocationError}
+                onGeolocationError={this.handleGeolocationError}
+                onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
+                changeActiveSLAOption={changeActiveSLAOption}
+                storePreferencesData={storePreferencesData}
+                closePickupPointsModal={closePickupPointsModal}
+                selectedPickupPoint={selectedPickupPoint}
+                changeActivePickupDetails={changeActivePickupDetails}
+                handleAddressChange={this.handleAddressChange}
+                handleAskForGeolocation={this.handleAskForGeolocation}
+                updateLocationTab={this.updateLocationTab}
+                togglePickupDetails={this.togglePickupDetails}
+                changeActivePickupPointId={this.changeActivePickupPointId}
+                askForGeolocationStatus={askForGeolocationStatus}
+                showAskForGeolocation={showAskForGeolocation}
+                status={askForGeolocationStatus}
+                onAskForGeolocation={this.handleAskForGeolocation}
+                onChangeAddress={this.handleAddressChange}
+                setGeolocationFrom={this.setGeolocationFrom}
+              />
+            )}
         </div>
       </div>
     )
