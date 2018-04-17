@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import closebutton from '../assets/icons/close_icon.svg'
 
+import './CloseButton.css'
+
 export class CloseButton extends PureComponent {
   render() {
     const { onClickClose, alt } = this.props
@@ -10,7 +12,7 @@ export class CloseButton extends PureComponent {
     return (
       <button
         type="button"
-        className={'pickup-modal-close btn btn-link'}
+        className={'pkpmodal-close btn btn-link'}
         onClick={onClickClose}
       >
         <img src={closebutton} alt={alt} />
