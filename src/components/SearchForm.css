@@ -1,9 +1,9 @@
-.pkpmodal-ask-for-geolocation-subtitle + .pkpmodal-search {
-  margin-top: 20px;
-}
-
 .pkpmodal-search {
   position: relative;
+}
+
+.pkpmodal-search-alone .pkpmodal-search {
+  margin-top: 20px;
 }
 
 .pkpmodal-search input::placeholder {

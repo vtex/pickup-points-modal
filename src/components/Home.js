@@ -114,16 +114,16 @@ class Home extends Component {
             !showError &&
             !isPickupDetailsActive &&
             !hasPickups && (
-              <div className="pkpmodal-ask-for-geolocation">
+              <div className="pkpmodal-locating">
                 <GeolocationStatus
                   titleBottom="geolocationEmpty"
                   subtitleBottom="geolocationEmptyInstructions"
                   Image={() => (
                     <div>
-                      <div className="pkpmodal-ask-for-geolocation-image-waiting">
+                      <div className="pkpmodal-locating-image-waiting">
                         <PinWaiting />
                       </div>
-                      <div className="pkpmodal-ask-for-geolocation-image-waiting-shadow" />
+                      <div className="pkpmodal-locating-image-waiting-shadow" />
                     </div>
                   )}
                 />

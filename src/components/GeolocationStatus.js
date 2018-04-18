@@ -21,32 +21,32 @@ export class GeolocationStatus extends Component {
     } = this.props
 
     return (
-      <div className="pkpmodal-ask-for-geolocation-wrapper pkpmodal-ask-for-geolocation-ask">
-        <div className="pkpmodal-ask-for-geolocation-content">
+      <div className="pkpmodal-locating-wrapper pkpmodal-locating-ask">
+        <div className="pkpmodal-locating-content">
           {titleTop && (
-            <h2 className="pkpmodal-ask-for-geolocation-title">
+            <h2 className="pkpmodal-locating-title">
               {this.translate(titleTop)}
             </h2>
           )}
           {subtitleTop && (
-            <h3 className="pkpmodal-ask-for-geolocation-subtitle">
+            <h3 className="pkpmodal-locating-subtitle">
               {this.translate(subtitleTop)}
             </h3>
           )}
           {Image && (
-            <div className="pkpmodal-ask-for-geolocation-image">
+            <div className="pkpmodal-locating-image">
               <Image />
             </div>
           )}
           {(titleBottom || subtitleBottom) && (
-            <div className="pkpmodal-ask-for-geolocation-instructions">
+            <div className="pkpmodal-locating-instructions">
               {titleBottom && (
-                <h2 className="pkpmodal-ask-for-geolocation-title-small">
+                <h2 className="pkpmodal-locating-title-small">
                   {this.translate(titleBottom)}
                 </h2>
               )}
               {subtitleBottom && (
-                <h3 className="pkpmodal-ask-for-geolocation-subtitle">
+                <h3 className="pkpmodal-locating-subtitle">
                   {this.translate(subtitleBottom)}
                 </h3>
               )}
@@ -55,7 +55,7 @@ export class GeolocationStatus extends Component {
         </div>
 
         {children && (
-          <div className="pkpmodal-ask-for-geolocation-actions">{children}</div>
+          <div className="pkpmodal-locating-actions">{children}</div>
         )}
       </div>
     )

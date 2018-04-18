@@ -15,7 +15,7 @@ import PinSearching from '../assets/components/PinSearching'
 
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
-import './GeolocationStatus.css'
+import './AskForGeolocation.css'
 
 import {
   WAITING,
@@ -174,31 +174,31 @@ export class AskForGeolocation extends Component {
     const { status } = this.props
 
     return (
-      <div className="pkpmodal-ask-for-geolocation">
+      <div className="pkpmodal-locating">
         {status === ASK && (
           <GeolocationStatus
             titleTop="geolocationDiscover"
             subtitleTop="geolocationAsk"
             Image={() => (
-              <div className="pkpmodal-ask-for-geolocation-image-ask">
+              <div className="pkpmodal-locating-image-ask">
                 <PinGeolocation />
               </div>
             )}
           >
             <div>
-              <div className="pkpmodal-ask-for-geolocation-cta">
+              <div className="pkpmodal-locating-automatic">
                 <button
-                  className="btn-ask-for-geolocation-cta btn btn-success btn-large"
+                  className="pkpmodal-locating-automatic-btn btn btn-success btn-large"
                   onClick={this.handleAskForGeolocationButtonClick}
                 >
                   {this.translate('askGeolocationAccept')}
                 </button>
               </div>
-              <div className="pkpmodal-ask-for-geolocation-manual">
+              <div className="pkpmodal-locating-manual">
                 <button
                   type="button"
                   onClick={this.handleManualGeolocation}
-                  className="btn-pkpmodal-ask-for-geolocation-manual btn btn-link"
+                  className="pkpmodal-locating-manual-btn btn btn-link"
                 >
                   {this.translate('geolocationManual')}
                 </button>
@@ -213,18 +213,18 @@ export class AskForGeolocation extends Component {
             subtitleBottom="geolocationAllow"
             Image={() => (
               <div>
-                <div className="pkpmodal-ask-for-geolocation-image-waiting">
+                <div className="pkpmodal-locating-image-waiting">
                   <PinWaiting />
                 </div>
-                <div className="pkpmodal-ask-for-geolocation-image-waiting-shadow" />
+                <div className="pkpmodal-locating-image-waiting-shadow" />
               </div>
             )}
           >
-            <div className="pkpmodal-ask-for-geolocation-manual">
+            <div className="pkpmodal-locating-manual">
               <button
                 type="button"
                 onClick={this.handleManualGeolocation}
-                className="btn-pkpmodal-ask-for-geolocation-manual btn btn-link"
+                className="pkpmodal-locating-manual-btn btn btn-link"
               >
                 {this.translate('geolocationManual')}
               </button>
@@ -237,18 +237,18 @@ export class AskForGeolocation extends Component {
             titleBottom="geolocationSearching"
             Image={() => (
               <div>
-                <div className="pkpmodal-ask-for-geolocation-image-searching">
+                <div className="pkpmodal-locating-image-searching">
                   <PinSearching />
                 </div>
-                <div className="pkpmodal-ask-for-geolocation-image-searching-shadow" />
+                <div className="pkpmodal-locating-image-searching-shadow" />
               </div>
             )}
           >
-            <div className="pkpmodal-ask-for-geolocation-manual">
+            <div className="pkpmodal-locating-manual">
               <button
                 type="button"
                 onClick={this.handleManualGeolocation}
-                className="btn-pkpmodal-ask-for-geolocation-manual btn btn-link"
+                className="pkpmodal-locating-manual-btn btn btn-link"
               >
                 {this.translate('geolocationManual')}
               </button>

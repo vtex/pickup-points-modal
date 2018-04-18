@@ -103,7 +103,7 @@ class UserGeolocation extends Component {
     return (
       <button
         type="button"
-        className="btn-ask-for-geolocation-cta btn btn-success btn-large"
+        className="pkpmodal-locating-manual-btn btn btn-success btn-large"
         id="ask-geolocation-button"
         onClick={this.handleGetCurrentPosition}
       >

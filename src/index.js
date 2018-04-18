@@ -343,10 +343,10 @@ export class PickupPointsModal extends Component {
               <div className="pkpmodal-full-page">
                 <div className="pkpmodal-search-alone">
                   <PinWaiting />
-                  <h2 className="pkpmodal-ask-for-geolocation-title">
+                  <h2 className="pkpmodal-search-alone-title">
                     {this.translate('geolocationEmpty')}
                   </h2>
-                  <h3 className="pkpmodal-ask-for-geolocation-subtitle">
+                  <h3 className="pkpmodal-search-alone-subtitle">
                     {this.translate('geolocationEmptyInstructions')}
                   </h3>
                   <SearchForm
