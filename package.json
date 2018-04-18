@@ -1,6 +1,6 @@
 {
   "name": "@vtex/pickup-points-modal",
-  "version": "0.1.38",
+  "version": "0.1.39",
   "description": "Pickup Points Modal React component",
   "main": "lib/index.js",
   "files": [
