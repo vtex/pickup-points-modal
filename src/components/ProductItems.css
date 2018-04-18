@@ -3,14 +3,12 @@
 }
 
 .pkpmodal-product-items {
-  display: flex;
-  overflow: auto;
-  padding: 0 10px 10px 0;
 }
 
 .pkpmodal-product-item {
   border: 1px solid #e7e7e7;
-  margin-right: 5px;
+  display: inline-block;
+  margin: 4px 8px 4px 0;
   padding: 2px;
 }
 
