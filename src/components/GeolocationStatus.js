@@ -21,7 +21,7 @@ export class GeolocationStatus extends Component {
     } = this.props
 
     return (
-      <div className="pkpmodal-locating-wrapper pkpmodal-locating-ask">
+      <div className="pkpmodal-locating">
         <div className="pkpmodal-locating-content">
           {titleTop && (
             <h2 className="pkpmodal-locating-title">

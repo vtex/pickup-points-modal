@@ -174,7 +174,7 @@ export class AskForGeolocation extends Component {
     const { status } = this.props
 
     return (
-      <div className="pkpmodal-locating">
+      <div className="pkpmodal-locating-wrapper">
         {status === ASK && (
           <GeolocationStatus
             titleTop="geolocationDiscover"

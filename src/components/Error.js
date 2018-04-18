@@ -18,7 +18,7 @@ export class Error extends Component {
     const { status, onManualGeolocationError } = this.props
 
     return (
-      <div className="pkpmodal-locating-error">
+      <div className="pkpmodal-locating-wrapper-error">
         <GeolocationStatus
           titleBottom={status}
           subtitleBottom="useSearchBar"
