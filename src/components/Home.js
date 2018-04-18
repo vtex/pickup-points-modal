@@ -94,7 +94,7 @@ class Home extends Component {
               address={searchAddress}
               rules={rules}
               onChangeAddress={handleAddressChange}
-              onFocus={this.props.setGeolocationFrom}
+              setGeolocationFrom={this.props.setGeolocationFrom}
               handleAskForGeolocation={this.props.handleAskForGeolocation}
               onAskForGeolocationStatus={this.props.onAskForGeolocationStatus}
             />

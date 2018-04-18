@@ -9,8 +9,6 @@ import {
   ASK,
   WAITING,
   GRANTED,
-  INSIDE_MODAL,
-  OUTSIDE_MODAL,
 } from '../constants'
 
 import SearchIcon from '../assets/components/SearchIcon'
@@ -24,10 +22,9 @@ class SearchForm extends Component {
       this.props.onAskForGeolocationStatus(
         permission.state === GRANTED || process.env.NODE !== 'production'
           ? WAITING
-          : ASK,
-        this.props.insideModal ? INSIDE_MODAL : OUTSIDE_MODAL
+          : ASK
       )
-      this.props.handleAskForGeolocation(true, this.props.insideModal ? INSIDE_MODAL : OUTSIDE_MODAL)
+      this.props.handleAskForGeolocation(true)
     })
   }
 
@@ -45,7 +42,7 @@ class SearchForm extends Component {
       address,
       rules,
       onChangeAddress,
-      onFocus,
+      setGeolocationFrom,
     } = this.props
 
     return (
@@ -53,6 +50,7 @@ class SearchForm extends Component {
         id="pkpmodal-search"
         className="pkpmodal-search"
         onSubmit={event => event.preventDefault()}
+        onFocus={setGeolocationFrom}
       >
         <GeolocationInput
           Input={Input}
@@ -62,7 +60,6 @@ class SearchForm extends Component {
           address={address}
           rules={rules}
           onChangeAddress={onChangeAddress}
-          onFocus={onFocus}
         />
         {navigator.geolocation && (
           <button
@@ -91,12 +88,11 @@ SearchForm.propTypes = {
   googleMaps: PropTypes.object,
   address: AddressShapeWithValidation,
   rules: PropTypes.object,
+  setGeolocationFrom: PropTypes.func,
   onChangeAddress: PropTypes.func,
-  onFocus: PropTypes.func,
   handleAskForGeolocation: PropTypes.func.isRequired,
   onAskForGeolocationStatus: PropTypes.func.isRequired,
   intl: intlShape,
-  insideModal: PropTypes.bool,
 }
 
 export default injectIntl(SearchForm)
