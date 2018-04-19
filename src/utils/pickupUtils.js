@@ -8,10 +8,7 @@ export function getUnavailableItemsAmount(
 ) {
   return items.filter(
     (item, index) =>
-      item.seller === sellerId &&
-      !!logisticsInfo[index].deliveryChannels.find(
-        channel => channel.id === PICKUP_IN_STORE
-      ) &&
+      (sellerId ? item.seller === sellerId : true) &&
       logisticsInfo[index].slas.find(sla => sla.id === pickupPointId) ===
         undefined
   ).length
@@ -26,9 +23,6 @@ export function getUnavailableItemsByPickup(
   return items.filter(
     (item, index) =>
       (sellerId ? item.seller === sellerId : true) &&
-      logisticsInfo[index].deliveryChannels.find(
-        channel => channel.id === PICKUP_IN_STORE
-      ) &&
       logisticsInfo[index].slas.find(sla => sla.id === pickupPoint.id) ===
         undefined
   )
@@ -38,9 +32,6 @@ export function getItemsByPickup(items, logisticsInfo, pickupPoint, sellerId) {
   return items.filter(
     (item, index) =>
       (sellerId ? item.seller === sellerId : true) &&
-      logisticsInfo[index].deliveryChannels.find(
-        channel => channel.id === PICKUP_IN_STORE
-      ) &&
       logisticsInfo[index].slas.find(sla => sla.id === pickupPoint.id)
   )
 }
