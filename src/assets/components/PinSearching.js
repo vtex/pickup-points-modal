@@ -4,7 +4,7 @@ class PinSearching extends PureComponent {
   render() {
     return (
       <svg
-        className="pkpmodal-ask-for-geolocation-image-searching-pin"
+        className="pkpmodal-locating-image-searching-pin"
         width="67px"
         height="96px"
         viewBox="0 0 67 96"

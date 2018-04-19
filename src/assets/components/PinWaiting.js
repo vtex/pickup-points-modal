@@ -4,7 +4,7 @@ class PinWaiting extends PureComponent {
   render() {
     return (
       <svg
-        className="pkpmodal-ask-for-geolocation-image-waiting-pin"
+        className="pkpmodal-locating-image-waiting-pin"
         width="67px"
         height="96px"
         viewBox="0 0 67 96"

@@ -4,7 +4,7 @@ import { injectIntl, intlShape } from 'react-intl'
 
 import PinError from '../assets/components/PinError'
 
-import './GeolocationStatus.css'
+import './Error.css'
 
 import GeolocationStatus from './GeolocationStatus'
 
@@ -18,24 +18,24 @@ export class Error extends Component {
     const { status, onManualGeolocationError } = this.props
 
     return (
-      <div className="pkpmodal-ask-for-geolocation">
+      <div className="pkpmodal-locating-wrapper-error">
         <GeolocationStatus
           titleBottom={status}
           subtitleBottom="useSearchBar"
           Image={() => (
             <div>
-              <div className="pkpmodal-ask-for-geolocation-image-waiting">
+              <div className="pkpmodal-locating-error-image">
                 <PinError />
               </div>
-              <div className="pkpmodal-ask-for-geolocation-image-waiting-shadow" />
+              <div className="pkpmodal-locating-error-image-shadow" />
             </div>
           )}
         >
-          <div className="pkpmodal-ask-for-geolocation-manual">
+          <div className="pkpmodal-locating-error-manual">
             <button
               type="button"
               onClick={onManualGeolocationError}
-              className="btn-ask-for-geolocation-cta btn btn-success btn-large"
+              className="pkpmodal-locating-error-manual-btn btn btn-success btn-large"
             >
               {this.translate('geolocationManual')}
             </button>
