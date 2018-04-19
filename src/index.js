@@ -131,6 +131,7 @@ export class PickupPointsModal extends Component {
     this.setState({
       showAskForGeolocation: ask,
       showManualSearch: false,
+      showError: false,
       ...(geolocationFrom ? { geolocationFrom: geolocationFrom } : {}),
     })
   }
@@ -139,6 +140,7 @@ export class PickupPointsModal extends Component {
     this.setState({
       askForGeolocationStatus: status,
       showManualSearch: false,
+      showError: false,
       ...(geolocationFrom ? { geolocationFrom: geolocationFrom } : {}),
     })
   }
@@ -165,6 +167,7 @@ export class PickupPointsModal extends Component {
     this.setState({
       showManualSearch: true,
       showAskForGeolocation: false,
+      showError: false,
     })
   }
 
