@@ -8,7 +8,6 @@ import {
 } from '../utils/CurrentPosition'
 import { searchPickupAddressByGeolocationEvent } from '../utils/metrics'
 
-import UserGeolocation from '../components/UserGeolocation'
 import PinGeolocation from '../assets/components/PinGeolocation'
 import PinWaiting from '../assets/components/PinWaiting'
 import PinSearching from '../assets/components/PinSearching'
