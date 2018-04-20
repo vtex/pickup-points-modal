@@ -7,7 +7,7 @@ export class Input extends Component {
   handleChange = event => this.props.onChange(event.target.value)
 
   render() {
-    const { address, placeholder, onBlur, inputRef } = this.props
+    const { address, placeholder, onBlur, inputRef, autoFocus } = this.props
 
     const fieldValue = address.addressQuery
 
@@ -24,6 +24,7 @@ export class Input extends Component {
         onBlur={onBlur}
         onChange={this.handleChange}
         ref={inputRef}
+        autoFocus={autoFocus || false}
         data-hj-whitelist
       />
     )

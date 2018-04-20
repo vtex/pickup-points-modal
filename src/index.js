@@ -362,6 +362,7 @@ export class PickupPointsModal extends Component {
                     googleMaps={googleMaps}
                     address={searchAddress}
                     rules={rules}
+                    autoFocus={true}
                     onChangeAddress={this.handleAddressChange}
                     onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
                     handleAskForGeolocation={this.handleAskForGeolocation}

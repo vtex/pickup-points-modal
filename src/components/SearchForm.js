@@ -43,6 +43,7 @@ class SearchForm extends Component {
       rules,
       onChangeAddress,
       setGeolocationFrom,
+      autoFocus
     } = this.props
 
     return (
@@ -59,6 +60,7 @@ class SearchForm extends Component {
           googleMaps={googleMaps}
           address={address}
           rules={rules}
+          autoFocus={autoFocus}
           onChangeAddress={onChangeAddress}
         />
         {navigator.geolocation && (
@@ -79,9 +81,11 @@ class SearchForm extends Component {
 
 SearchForm.defaultProps = {
   insideModal: true,
+  autoFocus: false,
 }
 
 SearchForm.propTypes = {
+  autoFocus: PropTypes.bool.isRequired,
   Input: PropTypes.func,
   placeholder: PropTypes.string,
   loadingGoogle: PropTypes.bool,
