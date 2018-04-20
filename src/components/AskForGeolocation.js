@@ -249,17 +249,7 @@ export class AskForGeolocation extends Component {
                 <div className="pkpmodal-locating-image-searching-shadow" />
               </div>
             )}
-          >
-            <div className="pkpmodal-locating-manual">
-              <button
-                type="button"
-                onClick={this.handleManualGeolocation}
-                className="pkpmodal-locating-manual-btn btn btn-link"
-              >
-                {this.translate('geolocationManual')}
-              </button>
-            </div>
-          </GeolocationStatus>
+          />
         )}
       </div>
     )
