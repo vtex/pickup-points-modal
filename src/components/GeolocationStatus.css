@@ -115,7 +115,8 @@
   }
 
   .pkpmodal-full-page .pkpmodal-locating-actions {
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
+    width: 300px;
   }
 }
 
