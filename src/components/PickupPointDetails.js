@@ -8,7 +8,8 @@ import {
 } from '../utils/pickupUtils'
 
 import PickupPoint from './PickupPoint'
-import ProductItems from '../components/ProductItems'
+import ProductItems from './ProductItems'
+import Button from './Button'
 
 import './PickupPointDetails.css'
 
