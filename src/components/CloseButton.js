@@ -1,28 +1,27 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import closebutton from '../assets/icons/close_icon.svg'
-
 import './CloseButton.css'
 
 export class CloseButton extends PureComponent {
   render() {
-    const { onClickClose, alt } = this.props
+    const { onClickClose } = this.props
 
     return (
       <button
         type="button"
-        className={'pkpmodal-close btn btn-link'}
+        className="pkpmodal-close"
         onClick={onClickClose}
       >
-        <img src={closebutton} alt={alt} />
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 16 16">
+          <path fill="none" stroke="#111" d="M13.5 2.5l-11 11M2.5 2.5l11 11" />
+        </svg>
       </button>
     )
   }
 }
 
 CloseButton.propTypes = {
-  alt: PropTypes.string.isRequired,
   onClickClose: PropTypes.func.isRequired,
 }
 
