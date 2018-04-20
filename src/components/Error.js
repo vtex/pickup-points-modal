@@ -7,6 +7,7 @@ import PinError from '../assets/components/PinError'
 import './Error.css'
 
 import GeolocationStatus from './GeolocationStatus'
+import Button from './Button'
 
 export class Error extends Component {
   translate = id =>
@@ -32,13 +33,14 @@ export class Error extends Component {
           )}
         >
           <div className="pkpmodal-locating-error-manual">
-            <button
-              type="button"
+            <Button
+              kind="primary"
+              large
+              block
+              title={this.translate('geolocationManual')}
+              moreClassName="pkpmodal-locating-error-manual-btn"
               onClick={onManualGeolocationError}
-              className="pkpmodal-locating-error-manual-btn btn btn-success btn-large"
-            >
-              {this.translate('geolocationManual')}
-            </button>
+            />
           </div>
         </GeolocationStatus>
       </div>
