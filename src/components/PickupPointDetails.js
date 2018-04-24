@@ -8,7 +8,8 @@ import {
 } from '../utils/pickupUtils'
 
 import PickupPoint from './PickupPoint'
-import ProductItems from '../components/ProductItems'
+import ProductItems from './ProductItems'
+import Button from './Button'
 
 import './PickupPointDetails.css'
 
@@ -107,17 +108,18 @@ export class PickupPointDetails extends Component {
         </div>
 
         <div className="pkpmodal-details-bottom">
-          <button
-            type="button"
-            className="pkpmodal-details-confirm-btn btn btn-success btn-large btn-block"
+          <Button
+            kind="primary"
+            block
+            large
+            title={this.translate('confirmPoint')}
+            moreClassName="pkpmodal-details-confirm-btn"
             id={`confirm-pickup-${pickupPoint.id
               .replace(/[^\w\s]/gi, '')
               .split(' ')
               .join('-')}`}
             onClick={this.handleConfirmButtonClick}
-          >
-            {this.translate('confirmPoint')}
-          </button>
+          />
         </div>
       </div>
     )
