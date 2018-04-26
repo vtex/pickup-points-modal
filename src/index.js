@@ -422,7 +422,7 @@ export class PickupPointsModal extends Component {
 }
 
 PickupPointsModal.propTypes = {
-  activePickupPoint: PropTypes.bool,
+  activePickupPoint: PropTypes.object,
   changeActivePickupDetails: PropTypes.func.isRequired,
   changeActiveSLAOption: PropTypes.func.isRequired,
   closePickupPointsModal: PropTypes.func.isRequired,
