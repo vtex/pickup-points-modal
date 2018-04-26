@@ -1,45 +1,44 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
+import { translate } from '../utils/i18nUtils'
+import { get } from 'lodash/get'
 import { fixImageUrl } from '../utils/Images'
 import ReactTooltip from 'react-tooltip'
 
 import './ProductItems.css'
 
 export class ProductItems extends Component {
-  translate = (id, values) =>
-    this.props.intl.formatMessage({ id: `pickupPointsModal.${id}` }, values)
-
   render() {
-    const { itemsByPackages, items, available } = this.props
+    const { itemsByPackages, intl, items, available } = this.props
 
     return itemsByPackages ? (
       <div className="pkpmodal-product-items-group">
         {itemsByPackages.map(itemsPackage => {
           const time =
-            itemsPackage.selectedSlaItem &&
-            itemsPackage.selectedSlaItem.shippingEstimate &&
+            itemsPackage &&
+            get(itemsPackage, 'selectedSlaItem.shippingEstimate') &&
             itemsPackage.selectedSlaItem.shippingEstimate.split(/[0-9]+/)[1]
           const timeAmount =
-            itemsPackage.selectedSlaItem &&
-            itemsPackage.selectedSlaItem.shippingEstimate &&
+            itemsPackage &&
+            get(itemsPackage, 'selectedSlaItem.shippingEstimate') &&
             itemsPackage.selectedSlaItem.shippingEstimate.split(/\D+/)[0]
+
+          const { firstLogisticsInfo, selectedSlaItem } = itemsPackage
 
           return (
             <div
               key={
-                itemsPackage.firstLogisticsInfo.itemIndex +
-                itemsPackage.firstLogisticsInfo.itemId +
-                (itemsPackage.selectedSlaItem &&
-                  itemsPackage.selectedSlaItem.id) +
-                (itemsPackage.selectedSlaItem &&
-                  itemsPackage.selectedSlaItem.shippingEstimate)
+                firstLogisticsInfo.itemIndex +
+                firstLogisticsInfo.itemId +
+                (selectedSlaItem && selectedSlaItem.id) +
+                (selectedSlaItem && selectedSlaItem.shippingEstimate)
               }
             >
               {daysAmount &&
                 itemsByPackages.length > 1 && (
                   <p>
-                    {this.translate(`shippingEstimate-${time}`, {
+                    {translate(intl, `shippingEstimate-${time}`, {
                       timeAmount,
                     })}
                   </p>
@@ -50,12 +49,14 @@ export class ProductItems extends Component {
                     <span
                       key={item.uniqueId}
                       data-tip={item.name}
-                      className={`pkpmodal-product-item ${available ? '' : 'pkpmodal-product-item-unavailable'}`}>
-                      <img
-                        src={fixImageUrl(item.imageUrl)}
-                        alt={item.name}
-                      />
-                      { !available && <span className="pkpmodal-product-item-unavailable-slash"></span> }
+                      className={`pkpmodal-product-item ${
+                        available ? '' : 'pkpmodal-product-item-unavailable'
+                      }`}
+                    >
+                      <img src={fixImageUrl(item.imageUrl)} alt={item.name} />
+                      {!available && (
+                        <span className="pkpmodal-product-item-unavailable-slash" />
+                      )}
                       <ReactTooltip effect="solid" />
                     </span>
                   )
@@ -73,13 +74,18 @@ export class ProductItems extends Component {
             <span
               key={item.uniqueId}
               data-tip={item.name}
-              className={`pkpmodal-product-item ${available ? '' : 'pkpmodal-product-item-unavailable'}`}>
+              className={`pkpmodal-product-item ${
+                available ? '' : 'pkpmodal-product-item-unavailable'
+              }`}
+            >
               <img
                 src={fixImageUrl(item.imageUrl)}
                 alt={item.name}
                 data-tip={item.name}
               />
-              { !available && <span className="pkpmodal-product-item-unavailable-slash"></span> }
+              {!available && (
+                <span className="pkpmodal-product-item-unavailable-slash" />
+              )}
               <ReactTooltip effect="solid" />
             </span>
           )

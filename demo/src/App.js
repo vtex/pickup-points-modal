@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import PickupPointsModal from '../../src/index'
 import { newAddress } from '../../src/utils/newAddress'
 import BRA from '@vtex/address-form/lib/country/BRA'
-import { SEARCH, PICKUP_IN_STORE } from '../../src/constants/index'
+import { SEARCH } from '../../src/constants/index'
 import { addValidation } from '@vtex/address-form/lib/transforms/address'
 
 import '../../src/index.css'
@@ -17,7 +16,6 @@ import pickupMock from './pickup-options'
 import itemsMock from './items'
 import logisticsInfoMock from './logistics-info'
 
-const ACCOUNT_NAME = 'qamarketplace'
 const API_KEY = 'AIzaSyATLp76vkHxfMZqJF_sJbjQqZwvSIBhsTM'
 
 class App extends Component {
@@ -64,7 +62,6 @@ class App extends Component {
   render() {
     const {
       isModalOpen,
-      pickupOptions,
       searchAddress,
       selectedPickupPoint,
       isPickupDetailsActive,

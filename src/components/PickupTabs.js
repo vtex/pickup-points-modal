@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import './PickupTabs.css'
+import { translate } from '../utils/i18nUtils'
 import { HIDE_MAP, SHOW_MAP } from '../constants'
 
 export class PickupTabs extends Component {
@@ -12,11 +13,8 @@ export class PickupTabs extends Component {
     this.setState({ lastMapValue: !this.props.mapStatus })
   }
 
-  translate = id =>
-    this.props.intl.formatMessage({ id: `pickupPointsModal.${id}` })
-
   render() {
-    const { mapStatus } = this.props
+    const { intl, mapStatus } = this.props
 
     return (
       <div className="pkpmodal-pickup-view-mode">
@@ -30,7 +28,7 @@ export class PickupTabs extends Component {
           }`}
           onClick={this.handleLocationTab}
         >
-          {this.translate('list')}
+          {translate(intl, 'list')}
         </button>
         <button
           value={SHOW_MAP}
@@ -42,7 +40,7 @@ export class PickupTabs extends Component {
           }`}
           onClick={this.handleLocationTab}
         >
-          {this.translate('map')}
+          {translate(intl, 'map')}
         </button>
       </div>
     )

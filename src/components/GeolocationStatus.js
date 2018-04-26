@@ -1,15 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
+import { translate } from '../utils/i18nUtils'
 
 import './GeolocationStatus.css'
 
 export class GeolocationStatus extends Component {
-  translate = id =>
-    this.props.intl.formatMessage({
-      id: `pickupPointsModal.${id}`,
-    })
-
   render() {
     const {
       titleTop,
@@ -18,6 +14,7 @@ export class GeolocationStatus extends Component {
       subtitleBottom,
       Image,
       children,
+      intl,
     } = this.props
 
     return (
@@ -25,12 +22,12 @@ export class GeolocationStatus extends Component {
         <div className="pkpmodal-locating-content">
           {titleTop && (
             <h2 className="pkpmodal-locating-title">
-              {this.translate(titleTop)}
+              {translate(intl, titleTop)}
             </h2>
           )}
           {subtitleTop && (
             <h3 className="pkpmodal-locating-subtitle">
-              {this.translate(subtitleTop)}
+              {translate(intl, subtitleTop)}
             </h3>
           )}
           {Image && (
@@ -42,12 +39,12 @@ export class GeolocationStatus extends Component {
             <div className="pkpmodal-locating-instructions">
               {titleBottom && (
                 <h2 className="pkpmodal-locating-title-small">
-                  {this.translate(titleBottom)}
+                  {translate(intl, titleBottom)}
                 </h2>
               )}
               {subtitleBottom && (
                 <h3 className="pkpmodal-locating-subtitle">
-                  {this.translate(subtitleBottom)}
+                  {translate(intl, subtitleBottom)}
                 </h3>
               )}
             </div>
@@ -60,6 +57,16 @@ export class GeolocationStatus extends Component {
       </div>
     )
   }
+}
+
+GeolocationStatus.propTypes = {
+  children: PropTypes.any,
+  Image: PropTypes.any,
+  intl: intlShape,
+  subtitleBottom: PropTypes.any,
+  subtitleTop: PropTypes.any,
+  titleTop: PropTypes.any,
+  titleBottom: PropTypes.any,
 }
 
 export default injectIntl(GeolocationStatus)

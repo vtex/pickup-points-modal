@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-
+import { translate } from '../utils/i18nUtils'
 import PinError from '../assets/components/PinError'
 
 import './Error.css'
@@ -10,13 +10,8 @@ import GeolocationStatus from './GeolocationStatus'
 import Button from './Button'
 
 export class Error extends Component {
-  translate = id =>
-    this.props.intl.formatMessage({
-      id: `pickupPointsModal.${id}`,
-    })
-
   render() {
-    const { status, onManualGeolocationError } = this.props
+    const { intl, status, onManualGeolocationError } = this.props
 
     return (
       <div className="pkpmodal-locating-wrapper-error">
@@ -36,8 +31,7 @@ export class Error extends Component {
             <Button
               kind="primary"
               large
-              block
-              title={this.translate('geolocationManual')}
+              title={translate(intl, 'geolocationManual')}
               moreClassName="pkpmodal-locating-error-manual-btn"
               onClick={onManualGeolocationError}
             />

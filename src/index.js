@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { withGoogleMaps } from './containers/withGoogleMaps'
+import { translate } from './utils/i18nUtils'
 import {
   HIDE_MAP,
   SHOW_MAP,
-  PICKUP_IN_STORE,
   WAITING,
   SEARCHING,
-  ASK,
   OUTSIDE_MODAL,
   ERROR_NOT_FOUND,
   INSIDE_MODAL,
@@ -87,14 +86,27 @@ export class PickupPointsModal extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    const {
+      searchAddress,
+      pickupOptions,
+      selectedPickupPoint,
+      askForGeolocation,
+    } = this.props
+
+    const {
+      isPickupDetailsActive,
+      mapStatus,
+      largeScreen,
+    } = this.state
+
     return (
-      this.state.isPickupDetailsActive !== nextState.isPickupDetailsActive ||
-      this.state.mapStatus !== nextState.mapStatus ||
-      this.state.largeScreen !== nextState.largeScreen ||
-      this.props.searchAddress !== nextState.searchAddress ||
-      this.props.pickupOptions !== nextProps.pickupOptions ||
-      this.props.selectedPickupPoint.id !== nextProps.selectedPickupPoint.id ||
-      this.props.askForGeolocation !== nextProps.askForGeolocation
+      isPickupDetailsActive !== nextState.isPickupDetailsActive ||
+      mapStatus !== nextState.mapStatus ||
+      largeScreen !== nextState.largeScreen ||
+      searchAddress !== nextState.searchAddress ||
+      pickupOptions !== nextProps.pickupOptions ||
+      selectedPickupPoint.id !== nextProps.selectedPickupPoint.id ||
+      askForGeolocation !== nextProps.askForGeolocation
     )
   }
 
@@ -243,29 +255,22 @@ export class PickupPointsModal extends Component {
     })
   }
 
-  translate = id =>
-    this.props.intl.formatMessage({
-      id: `pickupPointsModal.${id}`,
-    })
-
   render() {
     const {
-      googleMapsKey,
-      searchAddress,
-      intl,
-      rules,
+      activePickupPoint,
       changeActivePickupDetails,
-      closePickupPointsModal,
       changeActiveSLAOption,
+      closePickupPointsModal,
+      googleMaps,
+      items,
+      intl,
+      logisticsInfo,
+      loading,
+      pickupOptions,
+      rules,
+      searchAddress,
       sellerId,
       storePreferencesData,
-      items,
-      pickupOptions,
-      logisticsInfo,
-      activePickupPoint,
-      askForGeolocation,
-      googleMaps,
-      loading,
     } = this.props
 
     const {
@@ -291,7 +296,7 @@ export class PickupPointsModal extends Component {
         <div className="pkpmodal">
           <CloseButton
             onClickClose={this.props.closePickupPointsModal}
-            alt={this.translate('closeButton')}
+            alt={translate(intl, 'closeButton')}
           />
           {(largeScreen || mapStatus === SHOW_MAP) && (
             <Map
@@ -350,19 +355,19 @@ export class PickupPointsModal extends Component {
                 <div className="pkpmodal-search-alone">
                   <PinWaiting />
                   <h2 className="pkpmodal-search-alone-title">
-                    {this.translate('geolocationEmpty')}
+                    {translate(intl, 'geolocationEmpty')}
                   </h2>
                   <h3 className="pkpmodal-search-alone-subtitle">
-                    {this.translate('geolocationEmptyInstructions')}
+                    {translate(intl, 'geolocationEmptyInstructions')}
                   </h3>
                   <SearchForm
                     Input={Input}
-                    placeholder={this.translate('searchLocationMap')}
+                    placeholder={translate(intl, 'searchLocationMap')}
                     loadingGoogle={loading}
                     googleMaps={googleMaps}
                     address={searchAddress}
                     rules={rules}
-                    autoFocus={true}
+                    autoFocus
                     onChangeAddress={this.handleAddressChange}
                     onAskForGeolocationStatus={this.handleAskForGeolocationStatus}
                     handleAskForGeolocation={this.handleAskForGeolocation}
@@ -417,7 +422,7 @@ export class PickupPointsModal extends Component {
 }
 
 PickupPointsModal.propTypes = {
-  activePickupPoint: PropTypes.object,
+  activePickupPoint: PropTypes.bool,
   changeActivePickupDetails: PropTypes.func.isRequired,
   changeActiveSLAOption: PropTypes.func.isRequired,
   closePickupPointsModal: PropTypes.func.isRequired,
