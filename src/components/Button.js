@@ -42,7 +42,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   inline: PropTypes.bool,
   kind: PropTypes.string,
-  large: PropTypes.string,
+  large: PropTypes.bool,
   moreClassName: PropTypes.string,
   title: PropTypes.string,
 }

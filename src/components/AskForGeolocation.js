@@ -6,6 +6,7 @@ import {
   getCurrentPosition,
   handleGetAddressByGeolocation,
 } from '../utils/CurrentPosition'
+import { translate } from '../utils/i18nUtils'
 import { searchPickupAddressByGeolocationEvent } from '../utils/metrics'
 
 import PinGeolocation from '../assets/components/PinGeolocation'
@@ -165,13 +166,8 @@ export class AskForGeolocation extends Component {
     this.props.onManualGeolocation()
   }
 
-  translate = id =>
-    this.props.intl.formatMessage({
-      id: `pickupPointsModal.${id}`,
-    })
-
   render() {
-    const { status } = this.props
+    const { intl, status } = this.props
 
     return (
       <div className="pkpmodal-locating-wrapper">
@@ -192,9 +188,8 @@ export class AskForGeolocation extends Component {
               <div className="pkpmodal-locating-automatic">
                 <Button
                   kind="primary"
-                  block
                   large
-                  title={this.translate('askGeolocationAccept')}
+                  title={translate(intl, 'askGeolocationAccept')}
                   moreClassName="pkpmodal-locating-automatic-btn"
                   onClick={this.handleAskForGeolocationButtonClick}
                 />
@@ -202,8 +197,7 @@ export class AskForGeolocation extends Component {
               <div className="pkpmodal-locating-manual">
                 <Button
                   kind="secondary"
-                  block
-                  title={this.translate('geolocationManual')}
+                  title={translate(intl, 'geolocationManual')}
                   moreClassName="pkpmodal-locating-manual-btn"
                   onClick={this.handleManualGeolocation}
                 />
@@ -228,8 +222,7 @@ export class AskForGeolocation extends Component {
             <div className="pkpmodal-locating-manual">
               <Button
                 kind="secondary"
-                block
-                title={this.translate('geolocationManual')}
+                title={translate(intl, 'geolocationManual')}
                 moreClassName="pkpmodal-locating-manual-btn"
                 onClick={this.handleManualGeolocation}
               />

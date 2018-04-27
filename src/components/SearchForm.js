@@ -1,15 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-
+import { translate } from '../utils/i18nUtils'
 import GeolocationInput from '@vtex/address-form/lib/geolocation/GeolocationInput'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
-import {
-  ASK,
-  WAITING,
-  GRANTED,
-} from '../constants'
+import { ASK, WAITING, GRANTED } from '../constants'
 
 import SearchIcon from '../assets/components/SearchIcon'
 import GPS from '../assets/components/GPS'
@@ -28,22 +24,18 @@ class SearchForm extends Component {
     })
   }
 
-  translate = id =>
-    this.props.intl.formatMessage({
-      id: `pickupPointsModal.${id}`,
-    })
-
   render() {
     const {
       Input,
       placeholder,
       loadingGoogle,
+      intl,
       googleMaps,
       address,
       rules,
       onChangeAddress,
       setGeolocationFrom,
-      autoFocus
+      autoFocus,
     } = this.props
 
     return (
@@ -65,7 +57,7 @@ class SearchForm extends Component {
         />
         {navigator.geolocation && (
           <button
-            title={this.translate('askGeolocationAccept')}
+            title={translate(intl, 'askGeolocationAccept')}
             type="button"
             className="pkp-modal-ask-geolocation-btn"
             onClick={this.onAskGeolocationClick}
@@ -86,6 +78,7 @@ SearchForm.defaultProps = {
 
 SearchForm.propTypes = {
   autoFocus: PropTypes.bool.isRequired,
+  askForGeolocation: PropTypes.bool,
   Input: PropTypes.func,
   placeholder: PropTypes.string,
   loadingGoogle: PropTypes.bool,

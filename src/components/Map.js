@@ -27,20 +27,28 @@ class Map extends Component {
   }
 
   shouldComponentUpdate(prevProps) {
-    const rulesChanged = prevProps.rules.country !== this.props.rules.country
-    const loadingChanged = prevProps.loadingGoogle !== this.props.loadingGoogle
-    const screenSizeChanged = prevProps.largeScreen !== this.props.largeScreen
+    const {
+      rules,
+      loadingGoogle,
+      largeScreen,
+      address,
+      pickupOptions,
+      pickupOptionGeolocations,
+      pickupPoint,
+    } = this.props
+
+    const rulesChanged = prevProps.rules.country !== rules.country
+    const loadingChanged = prevProps.loadingGoogle !== loadingGoogle
+    const screenSizeChanged = prevProps.largeScreen !== largeScreen
     const addressChanged =
-      prevProps.address.geoCoordinates.value !==
-      this.props.address.geoCoordinates.value
-    const pickupGeolocationsChanged =
-      prevProps.pickupOptions !== this.props.pickupOptions
+      prevProps.address.geoCoordinates.value !== address.geoCoordinates.value
+    const pickupGeolocationsChanged = prevProps.pickupOptions !== pickupOptions
     const pickupOptionsChanged =
-      prevProps.pickupOptionGeolocations !== this.props.pickupOptionGeolocations
+      prevProps.pickupOptionGeolocations !== pickupOptionGeolocations
     const pickupPointChanged =
       prevProps.pickupPoint &&
-      this.props.pickupPoint &&
-      prevProps.pickupPoint.id !== this.props.pickupPoint.id
+      pickupPoint &&
+      prevProps.pickupPoint.id !== pickupPoint.id
     return (
       rulesChanged ||
       loadingChanged ||
@@ -57,7 +65,7 @@ class Map extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { googleMaps, pickupOptionGeolocations, address } = this.props
+    const { googleMaps, pickupOptionGeolocations } = this.props
 
     const selectedGeolocation = nextProps.pickupOptions.find(
       item => nextProps.pickupPoint && item.id === nextProps.pickupPoint.id

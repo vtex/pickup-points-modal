@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { formatCurrency, formatNumber } from '../utils/Currency'
-
+import { translate } from '../utils/i18nUtils'
 import PinIcon from '../assets/components/PinIcon'
 import PinIconSelected from '../assets/components/PinIconSelected'
 
@@ -38,12 +38,10 @@ export class PickupPoint extends Component {
     this.props.onClickPickupModal &&
     this.props.onClickPickupModal(this.props.liPackage)
 
-  translate = (id, values) =>
-    this.props.intl.formatMessage({ id: `pickupPointsModal.${id}` }, values)
-
   render() {
     const {
       isSelected,
+      intl,
       pickupPoint,
       selectedRules,
       storePreferencesData,
@@ -79,7 +77,7 @@ export class PickupPoint extends Component {
             {isSelected ? <PinIconSelected /> : <PinIcon />}
             {pickupPoint.pickupStoreInfo.distance && (
               <p className="pkpmodal-pickup-point-distance">
-                {this.translate('distance', {
+                {translate(intl, 'distance', {
                   distanceValue: formatNumber({
                     value: pickupPoint.pickupStoreInfo.distance,
                     storePreferencesData,
@@ -105,7 +103,7 @@ export class PickupPoint extends Component {
             </div>
             {unavailableItemsAmount > 0 && (
               <span className="pkpmodal-pickup-point-availability">
-                {this.translate('unavailableItemsAmount', {
+                {translate(intl, 'unavailableItemsAmount', {
                   itemsAmount: unavailableItemsAmount,
                 })}
               </span>
@@ -114,7 +112,7 @@ export class PickupPoint extends Component {
         </div>
         <div className="pkpmodal-pickup-point-sla-availability">
           <span className="pkpmodal-pickup-point-price">
-            {this.translate('price', {
+            {translate(intl, 'price', {
               value: pickupPoint.price,
               formattedPrice: formatCurrency({
                 value: pickupPoint.price,
@@ -123,7 +121,7 @@ export class PickupPoint extends Component {
             })}
           </span>
           <span className="pkpmodal-pickup-point-sla">
-            {this.translate(`shippingEstimatePickup-${time}`, {
+            {translate(intl, `shippingEstimatePickup-${time}`, {
               timeAmount,
             })}
           </span>
@@ -142,6 +140,7 @@ PickupPoint.propTypes = {
   onChangeActivePickupPointId: PropTypes.func,
   togglePickupDetails: PropTypes.func,
   intl: intlShape,
+  isList: PropTypes.bool,
   isSelected: PropTypes.bool,
   liPackage: PropTypes.object,
   onClickPickupModal: PropTypes.func,
@@ -149,6 +148,10 @@ PickupPoint.propTypes = {
   selectedRules: PropTypes.object.isRequired,
   showAddress: PropTypes.bool,
   storePreferencesData: PropTypes.object.isRequired,
+  items: PropTypes.any,
+  logisticsInfo: PropTypes.any,
+  sellerId: PropTypes.any,
+  changeActivePickupPointId: PropTypes.any,
 }
 
 export default injectIntl(PickupPoint)

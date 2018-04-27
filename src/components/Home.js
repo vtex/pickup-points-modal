@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import {
-  SHOW_MAP,
-  HIDE_MAP,
-  INSIDE_MODAL,
-} from '../constants'
+import { SHOW_MAP, HIDE_MAP, INSIDE_MODAL } from '../constants'
 
+import { translate } from '../utils/i18nUtils'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 import PickupPoint from './PickupPoint'
 import PickupPointDetails from './PickupPointDetails'
@@ -23,11 +20,6 @@ import Error from './Error'
 import './Home.css'
 
 class Home extends Component {
-  translate = id =>
-    this.props.intl.formatMessage({
-      id: `pickupPointsModal.${id}`,
-    })
-
   render() {
     const {
       mapStatus,
@@ -47,7 +39,6 @@ class Home extends Component {
       selectedPickupPoint,
       largeScreen,
       handleAddressChange,
-      handleAskForGeolocation,
       updateLocationTab,
       togglePickupDetails,
       changeActivePickupPointId,
@@ -57,6 +48,7 @@ class Home extends Component {
       errorStatus,
       showError,
       geolocationFrom,
+      intl,
     } = this.props
 
     const isNotShowingPickupDetailsAndHasPickupOptions =
@@ -74,21 +66,21 @@ class Home extends Component {
           'pkpmodal-info-bar-map'}`}
       >
         <div
-          className={`pkpmodal-info-bar-container ${mapStatus ===
-            SHOW_MAP && 'active'}`}
+          className={`pkpmodal-info-bar-container ${mapStatus === SHOW_MAP &&
+            'active'}`}
         >
           <div className="pkpmodal-header">
             <h4 className="pkpmodal-title">
               {isPickupDetailsActive
-                ? this.translate('pointDetails')
-                : this.translate('selectPickupPoint')}
+                ? translate(intl, 'pointDetails')
+                : translate(intl, 'selectPickupPoint')}
             </h4>
           </div>
 
           {!isPickupDetailsActive && (
             <SearchForm
               Input={Input}
-              placeholder={this.translate('searchLocationMap')}
+              placeholder={translate(intl, 'searchLocationMap')}
               loadingGoogle={loading}
               googleMaps={googleMaps}
               address={searchAddress}
@@ -182,10 +174,7 @@ class Home extends Component {
                   )}
 
                 {filteredPickupOptions.map(pickupPoint => (
-                  <div
-                    key={pickupPoint.id}
-                    className="pkpmodal-points-item"
-                  >
+                  <div key={pickupPoint.id} className="pkpmodal-points-item">
                     <PickupPoint
                       items={items}
                       isList
@@ -236,6 +225,7 @@ Home.propTypes = {
   errorStatus: PropTypes.string,
   showError: PropTypes.bool,
   loading: PropTypes.bool.isRequired,
+  geolocationFrom: PropTypes.string,
   googleMaps: PropTypes.object.isRequired,
   activePickupPoint: PropTypes.object,
   searchAddress: AddressShapeWithValidation,
