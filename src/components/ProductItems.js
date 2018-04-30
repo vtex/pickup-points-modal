@@ -24,14 +24,9 @@ export class ProductItems extends Component {
     return itemsByPackages ? (
       <div className="pkpmodal-product-items-group">
         {itemsByPackages.map(itemsPackage => {
-          const hasShippingEstimate = get(
-            itemsPackage,
-            'selectedSlaItem.shippingEstimate'
-          )
-
           const time =
             itemsPackage &&
-            hasShippingEstimate &&
+            get(itemsPackage, 'selectedSlaItem.shippingEstimate') &&
             itemsPackage.selectedSlaItem.shippingEstimate.split(/[0-9]+/)[1]
 
           const timeAmount =
