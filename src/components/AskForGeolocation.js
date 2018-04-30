@@ -173,8 +173,6 @@ export class AskForGeolocation extends Component {
       <div className="pkpmodal-locating-wrapper">
         {status === ASK && (
           <GeolocationStatus
-            titleTop="geolocationDiscover"
-            subtitleTop="geolocationAsk"
             Image={() => (
               <div
                 className="pkpmodal-locating-image-ask"
@@ -183,23 +181,25 @@ export class AskForGeolocation extends Component {
                 <PinGeolocation />
               </div>
             )}
+            subtitleTop="geolocationAsk"
+            titleTop="geolocationDiscover"
           >
             <div>
               <div className="pkpmodal-locating-automatic">
                 <Button
                   kind="primary"
                   large
-                  title={translate(intl, 'askGeolocationAccept')}
                   moreClassName="pkpmodal-locating-automatic-btn"
                   onClick={this.handleAskForGeolocationButtonClick}
+                  title={translate(intl, 'askGeolocationAccept')}
                 />
               </div>
               <div className="pkpmodal-locating-manual">
                 <Button
                   kind="secondary"
-                  title={translate(intl, 'geolocationManual')}
                   moreClassName="pkpmodal-locating-manual-btn"
                   onClick={this.handleManualGeolocation}
+                  title={translate(intl, 'geolocationManual')}
                 />
               </div>
             </div>
@@ -208,8 +208,6 @@ export class AskForGeolocation extends Component {
 
         {status === WAITING && (
           <GeolocationStatus
-            titleBottom="geolocationWaiting"
-            subtitleBottom="geolocationAllow"
             Image={() => (
               <div>
                 <div className="pkpmodal-locating-image-waiting">
@@ -218,13 +216,15 @@ export class AskForGeolocation extends Component {
                 <div className="pkpmodal-locating-image-waiting-shadow" />
               </div>
             )}
+            subtitleBottom="geolocationAllow"
+            titleBottom="geolocationWaiting"
           >
             <div className="pkpmodal-locating-manual">
               <Button
                 kind="secondary"
-                title={translate(intl, 'geolocationManual')}
                 moreClassName="pkpmodal-locating-manual-btn"
                 onClick={this.handleManualGeolocation}
+                title={translate(intl, 'geolocationManual')}
               />
             </div>
           </GeolocationStatus>
@@ -232,7 +232,6 @@ export class AskForGeolocation extends Component {
 
         {status === SEARCHING && (
           <GeolocationStatus
-            titleBottom="geolocationSearching"
             Image={() => (
               <div>
                 <div className="pkpmodal-locating-image-searching">
@@ -241,6 +240,7 @@ export class AskForGeolocation extends Component {
                 <div className="pkpmodal-locating-image-searching-shadow" />
               </div>
             )}
+            titleBottom="geolocationSearching"
           />
         )}
       </div>
@@ -250,14 +250,15 @@ export class AskForGeolocation extends Component {
 
 AskForGeolocation.propTypes = {
   address: AddressShapeWithValidation,
-  askForGeolocation: PropTypes.bool,
+  askForGeolocation: PropTypes.bool, // eslint-disable-line
+  geolocationFrom: PropTypes.string,
   googleMaps: PropTypes.object,
   intl: intlShape,
-  onChangeAddress: PropTypes.func.isRequired,
   onAskForGeolocation: PropTypes.func.isRequired,
   onAskForGeolocationStatus: PropTypes.func.isRequired,
-  onManualGeolocation: PropTypes.func.isRequired,
+  onChangeAddress: PropTypes.func.isRequired,
   onGeolocationError: PropTypes.func.isRequired,
+  onManualGeolocation: PropTypes.func.isRequired,
   pickupOptionGeolocations: PropTypes.array,
   rules: PropTypes.object,
   status: PropTypes.string.isRequired,

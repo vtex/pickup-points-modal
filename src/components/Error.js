@@ -16,8 +16,6 @@ export class Error extends Component {
     return (
       <div className="pkpmodal-locating-wrapper-error">
         <GeolocationStatus
-          titleBottom={status}
-          subtitleBottom="useSearchBar"
           Image={() => (
             <div>
               <div className="pkpmodal-locating-error-image">
@@ -26,14 +24,16 @@ export class Error extends Component {
               <div className="pkpmodal-locating-error-image-shadow" />
             </div>
           )}
+          subtitleBottom="useSearchBar"
+          titleBottom={status}
         >
           <div className="pkpmodal-locating-error-manual">
             <Button
               kind="primary"
               large
-              title={translate(intl, 'geolocationManual')}
               moreClassName="pkpmodal-locating-error-manual-btn"
               onClick={onManualGeolocationError}
+              title={translate(intl, 'geolocationManual')}
             />
           </div>
         </GeolocationStatus>
@@ -44,8 +44,8 @@ export class Error extends Component {
 
 Error.propTypes = {
   intl: intlShape,
-  status: PropTypes.string.isRequired,
   onManualGeolocationError: PropTypes.func.isRequired,
+  status: PropTypes.string.isRequired,
 }
 
 export default injectIntl(Error)

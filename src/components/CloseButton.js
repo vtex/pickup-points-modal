@@ -9,12 +9,12 @@ export class CloseButton extends PureComponent {
 
     return (
       <button
-        type="button"
         className="pkpmodal-close"
         onClick={onClickClose}
+        type="button"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 16 16">
-          <path fill="none" stroke="#111" d="M13.5 2.5l-11 11M2.5 2.5l11 11" />
+        <svg height="18" viewBox="0 0 16 16" width="18" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13.5 2.5l-11 11M2.5 2.5l11 11" fill="none" stroke="#111" />
         </svg>
       </button>
     )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import Map from './Map'
 
 describe('Map', () => {
@@ -8,21 +8,21 @@ describe('Map', () => {
   function shallowRenderComponent() {
     shallowWrapper = shallow(
       <Map
-        loadingElement={<div />}
-        rules={{}}
-        isPickupDetailsActive={false}
-        onChangeAddress={jest.fn()}
-        handleAskForGeolocation={jest.fn()}
-        loadingGoogle
-        googleMaps={null}
-        changeActivePickupDetails={jest.fn()}
-        pickupOptions={[]}
-        pickupPointId="1"
         address={{
           geoCoordinates: {
             value: [],
           },
         }}
+        changeActivePickupDetails={jest.fn()}
+        googleMaps={null}
+        handleAskForGeolocation={jest.fn()}
+        isLoadingGoogle
+        isPickupDetailsActive={false}
+        loadingElement={<div />}
+        onChangeAddress={jest.fn()}
+        pickupOptions={[]}
+        pickupPointId="1"
+        rules={{}}
       />
     )
 
@@ -36,21 +36,21 @@ describe('Map', () => {
   it('should render without crashing', () => {
     shallow(
       <Map
-        loadingElement={<div />}
-        rules={{}}
-        onChangeAddress={jest.fn()}
-        handleAskForGeolocation={jest.fn()}
-        loadingGoogle
-        isPickupDetailsActive={false}
-        googleMaps={null}
-        changeActivePickupDetails={jest.fn()}
-        pickupOptions={[]}
         address={{
           geoCoordinates: {
             value: [],
           },
         }}
+        changeActivePickupDetails={jest.fn()}
+        googleMaps={null}
+        handleAskForGeolocation={jest.fn()}
+        isLoadingGoogle
+        isPickupDetailsActive={false}
+        loadingElement={<div />}
+        onChangeAddress={jest.fn()}
+        pickupOptions={[]}
         pickupPointId="1"
+        rules={{}}
       />
     )
   })
@@ -79,12 +79,12 @@ describe('Map', () => {
     expect(shouldUpdate).toBe(true)
   })
 
-  it('should re-render if loadingGoogle changed', () => {
+  it('should re-render if isLoadingGoogle changed', () => {
     const currentProps = shallowInstance.props
     const currentState = shallowInstance.state
 
     const shouldUpdate = shallowInstance.shouldComponentUpdate(
-      { ...currentProps, loadingGoogle: false },
+      { ...currentProps, isLoadingGoogle: false },
       currentState
     )
 

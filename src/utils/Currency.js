@@ -35,7 +35,7 @@ export function formatCurrency({
 }
 
 export function formatNumber({ value, storePreferencesData }) {
-  const { currencySymbol, currencyFormatInfo } = storePreferencesData
+  const { currencyFormatInfo } = storePreferencesData
 
   const {
     currencyDecimalSeparator,

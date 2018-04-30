@@ -1,11 +1,6 @@
 import React from 'react'
 import IntlInput, { Input } from './Input'
-import {
-  mountWithIntl,
-  shallowWithIntl,
-  loadTranslation,
-  setLocale,
-} from 'enzyme-react-intl'
+import { shallowWithIntl, loadTranslation, setLocale } from 'enzyme-react-intl'
 import { Provider } from 'react-redux'
 import IntlContainer from '../containers/IntlContainer'
 import renderer from 'react-test-renderer'

@@ -60,13 +60,13 @@ export class GeolocationStatus extends Component {
 }
 
 GeolocationStatus.propTypes = {
-  children: PropTypes.any,
   Image: PropTypes.any,
+  children: PropTypes.any,
   intl: intlShape,
   subtitleBottom: PropTypes.any,
   subtitleTop: PropTypes.any,
-  titleTop: PropTypes.any,
   titleBottom: PropTypes.any,
+  titleTop: PropTypes.any,
 }
 
 export default injectIntl(GeolocationStatus)

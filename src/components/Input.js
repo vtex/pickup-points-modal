@@ -13,34 +13,35 @@ export class Input extends Component {
 
     return (
       <input
-        type="text"
+        autoFocus={autoFocus || false}
         className="input-reset f6 db w-100 br2 ba b--moon-gray light-silver input-xlarge"
+        data-hj-whitelist
+        onBlur={onBlur}
+        onChange={this.handleChange}
         placeholder={placeholder}
+        ref={inputRef}
         style={{
           boxSizing: 'border-box',
           padding: '.8rem 1rem',
         }}
+        type="text"
         value={fieldValue.value || ''}
-        onBlur={onBlur}
-        onChange={this.handleChange}
-        ref={inputRef}
-        autoFocus={autoFocus || false}
-        data-hj-whitelist
       />
     )
   }
 }
 
 Input.propTypes = {
+  address: AddressShapeWithValidation,
+  autoFocus: PropTypes.bool, // eslint-disable-line
+  disabled: PropTypes.bool, // eslint-disable-line
+  googleMapsKey: PropTypes.string,
+  inputRef: PropTypes.func,
   intl: intlShape,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
   placeholder: PropTypes.string,
   value: PropTypes.string,
-  address: AddressShapeWithValidation,
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  disabled: PropTypes.bool,
-  inputRef: PropTypes.func,
-  googleMapsKey: PropTypes.string,
 }
 
 export default injectIntl(Input)

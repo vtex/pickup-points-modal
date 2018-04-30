@@ -97,8 +97,8 @@ export class PickupPoint extends Component {
             >
               <AddressSummary
                 address={pickupPoint.pickupStoreInfo.address}
-                rules={selectedRules}
                 onClickMaskedInfoIcon={this.handleClickMaskedInfoIcon}
+                rules={selectedRules}
               />
             </div>
             {unavailableItemsAmount > 0 && (
@@ -136,22 +136,22 @@ PickupPoint.defaultProps = {
   isSelected: true,
 }
 PickupPoint.propTypes = {
+  changeActivePickupPointId: PropTypes.any,
   handleChangeActivePickupDetails: PropTypes.func,
-  onChangeActivePickupPointId: PropTypes.func,
-  togglePickupDetails: PropTypes.func,
   intl: intlShape,
   isList: PropTypes.bool,
   isSelected: PropTypes.bool,
+  items: PropTypes.any,
   liPackage: PropTypes.object,
+  logisticsInfo: PropTypes.any,
+  onChangeActivePickupPointId: PropTypes.func,
   onClickPickupModal: PropTypes.func,
   pickupPoint: PropTypes.object.isRequired,
   selectedRules: PropTypes.object.isRequired,
+  sellerId: PropTypes.any,
   showAddress: PropTypes.bool,
   storePreferencesData: PropTypes.object.isRequired,
-  items: PropTypes.any,
-  logisticsInfo: PropTypes.any,
-  sellerId: PropTypes.any,
-  changeActivePickupPointId: PropTypes.any,
+  togglePickupDetails: PropTypes.func,
 }
 
 export default injectIntl(PickupPoint)

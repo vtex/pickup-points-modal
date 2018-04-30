@@ -62,9 +62,9 @@ export class PickupPointDetails extends Component {
       <div className="pkpmodal-details">
         <div className="pkpmodal-details-top">
           <button
-            type="button"
             className="pkpmodal-details-back-lnk btn btn-link"
             onClick={this.handleBackButtonClick}
+            type="button"
           >
             <i
               className={
@@ -78,13 +78,13 @@ export class PickupPointDetails extends Component {
         <div className="pkpmodal-details-middle">
           <div className="pkpmodal-details-store">
             <PickupPoint
+              isSelected={isSelectedSla}
               items={items}
               logisticsInfo={logisticsInfo}
+              pickupPoint={pickupPoint}
+              selectedRules={selectedRules}
               sellerId={sellerId}
               storePreferencesData={storePreferencesData}
-              isSelected={isSelectedSla}
-              selectedRules={selectedRules}
-              pickupPoint={pickupPoint}
             />
           </div>
 
@@ -95,7 +95,7 @@ export class PickupPointDetails extends Component {
               </h3>
               {items && <ProductItems items={items} />}
               {unavailableItems && (
-                <ProductItems items={unavailableItems} available={false} />
+                <ProductItems isAvailable={false} items={unavailableItems} />
               )}
             </div>
             {pickupPoint.pickupStoreInfo &&
@@ -112,15 +112,15 @@ export class PickupPointDetails extends Component {
 
         <div className="pkpmodal-details-bottom">
           <Button
-            kind="primary"
-            large
-            title={translate(intl, 'confirmPoint')}
-            moreClassName="pkpmodal-details-confirm-btn"
             id={`confirm-pickup-${pickupPoint.id
               .replace(/[^\w\s]/gi, '')
               .split(' ')
               .join('-')}`}
+            kind="primary"
+            large
+            moreClassName="pkpmodal-details-confirm-btn"
             onClick={this.handleConfirmButtonClick}
+            title={translate(intl, 'confirmPoint')}
           />
         </div>
       </div>
@@ -130,17 +130,17 @@ export class PickupPointDetails extends Component {
 
 PickupPointDetails.propTypes = {
   handleChangeActiveSLAOption: PropTypes.func.isRequired,
+  handleClosePickupPointsModal: PropTypes.func.isRequired,
   intl: intlShape,
   isSelectedSla: PropTypes.bool,
   items: PropTypes.array.isRequired,
+  logisticsInfo: PropTypes.array.isRequired,
   onClickPickupModal: PropTypes.func,
   pickupPoint: PropTypes.object.isRequired,
   selectedRules: PropTypes.object.isRequired,
-  storePreferencesData: PropTypes.object.isRequired,
   sellerId: PropTypes.string,
+  storePreferencesData: PropTypes.object.isRequired,
   togglePickupDetails: PropTypes.func.isRequired,
-  handleClosePickupPointsModal: PropTypes.func.isRequired,
-  logisticsInfo: PropTypes.array.isRequired,
 }
 
 export default injectIntl(PickupPointDetails)

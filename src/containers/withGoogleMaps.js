@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { intlShape } from 'react-intl'
 
 import GoogleMapsContainer from '@vtex/address-form/lib/geolocation/GoogleMapsContainer'
 
 export function withGoogleMaps(ComponentToWrap) {
-  return class extends Component {
+  return class withGoogleMapsClass extends Component {
+    static propTypes = {
+      googleMapsKey: PropTypes.string,
+      intl: intlShape,
+    }
+
     render() {
       const { googleMapsKey, intl } = this.props
       return (
@@ -12,8 +19,8 @@ export function withGoogleMaps(ComponentToWrap) {
             loading ? null : (
               <ComponentToWrap
                 {...this.props}
-                loading={loading}
                 googleMaps={googleMaps}
+                loading={loading}
               />
             )
           }

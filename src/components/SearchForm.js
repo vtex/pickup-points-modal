@@ -13,14 +13,14 @@ import GPS from '../assets/components/GPS'
 import './SearchForm.css'
 
 class SearchForm extends Component {
-  onAskGeolocationClick = () => {
+  handleAskGeolocationClick = () => {
     navigator.permissions.query({ name: 'geolocation' }).then(permission => {
       this.props.onAskForGeolocationStatus(
         permission.state === GRANTED || process.env.NODE !== 'production'
           ? WAITING
           : ASK
       )
-      this.props.handleAskForGeolocation(true)
+      this.props.onHandleAskForGeolocation(true)
     })
   }
 
@@ -28,39 +28,39 @@ class SearchForm extends Component {
     const {
       Input,
       placeholder,
-      loadingGoogle,
+      isLoadingGoogle,
       intl,
+      isAutoFocus,
       googleMaps,
       address,
       rules,
       onChangeAddress,
       setGeolocationFrom,
-      autoFocus,
     } = this.props
 
     return (
       <form
-        id="pkpmodal-search"
         className="pkpmodal-search"
-        onSubmit={event => event.preventDefault()}
+        id="pkpmodal-search"
         onFocus={setGeolocationFrom}
+        onSubmit={event => event.preventDefault()}
       >
         <GeolocationInput
-          Input={Input}
-          placeholder={placeholder}
-          loadingGoogle={loadingGoogle}
-          googleMaps={googleMaps}
           address={address}
-          rules={rules}
-          autoFocus={autoFocus}
+          autoFocus={isAutoFocus}
+          googleMaps={googleMaps}
+          Input={Input}
+          isLoadingGoogle={isLoadingGoogle}
           onChangeAddress={onChangeAddress}
+          placeholder={placeholder}
+          rules={rules}
         />
         {navigator.geolocation && (
           <button
+            className="pkp-modal-ask-geolocation-btn"
+            onClick={this.handleAskGeolocationClick}
             title={translate(intl, 'askGeolocationAccept')}
             type="button"
-            className="pkp-modal-ask-geolocation-btn"
-            onClick={this.onAskGeolocationClick}
           >
             <GPS />
           </button>
@@ -72,24 +72,23 @@ class SearchForm extends Component {
 }
 
 SearchForm.defaultProps = {
-  insideModal: true,
-  autoFocus: false,
+  isAutoFocus: false,
 }
 
 SearchForm.propTypes = {
-  autoFocus: PropTypes.bool.isRequired,
-  askForGeolocation: PropTypes.bool,
   Input: PropTypes.func,
-  placeholder: PropTypes.string,
-  loadingGoogle: PropTypes.bool,
-  googleMaps: PropTypes.object,
   address: AddressShapeWithValidation,
+  askForGeolocation: PropTypes.bool, // eslint-disable-line
+  googleMaps: PropTypes.object,
+  intl: intlShape,
+  isAutoFocus: PropTypes.bool,
+  isLoadingGoogle: PropTypes.bool,
+  onAskForGeolocationStatus: PropTypes.func.isRequired,
+  onChangeAddress: PropTypes.func,
+  onHandleAskForGeolocation: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
   rules: PropTypes.object,
   setGeolocationFrom: PropTypes.func,
-  onChangeAddress: PropTypes.func,
-  handleAskForGeolocation: PropTypes.func.isRequired,
-  onAskForGeolocationStatus: PropTypes.func.isRequired,
-  intl: intlShape,
 }
 
 export default injectIntl(SearchForm)

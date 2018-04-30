@@ -8,9 +8,18 @@ import ReactTooltip from 'react-tooltip'
 
 import './ProductItems.css'
 
+function createKey(firstLogisticsInfo, selectedSlaItem) {
+  return (
+    firstLogisticsInfo.itemIndex +
+    firstLogisticsInfo.itemId +
+    (selectedSlaItem && selectedSlaItem.id) +
+    (selectedSlaItem && selectedSlaItem.shippingEstimate)
+  )
+}
+
 export class ProductItems extends Component {
   render() {
-    const { itemsByPackages, intl, items, available } = this.props
+    const { itemsByPackages, intl, items, isAvailable } = this.props
 
     return itemsByPackages ? (
       <div className="pkpmodal-product-items-group">
@@ -19,6 +28,7 @@ export class ProductItems extends Component {
             itemsPackage &&
             get(itemsPackage, 'selectedSlaItem.shippingEstimate') &&
             itemsPackage.selectedSlaItem.shippingEstimate.split(/[0-9]+/)[1]
+
           const timeAmount =
             itemsPackage &&
             get(itemsPackage, 'selectedSlaItem.shippingEstimate') &&
@@ -27,15 +37,8 @@ export class ProductItems extends Component {
           const { firstLogisticsInfo, selectedSlaItem } = itemsPackage
 
           return (
-            <div
-              key={
-                firstLogisticsInfo.itemIndex +
-                firstLogisticsInfo.itemId +
-                (selectedSlaItem && selectedSlaItem.id) +
-                (selectedSlaItem && selectedSlaItem.shippingEstimate)
-              }
-            >
-              {daysAmount &&
+            <div key={createKey(firstLogisticsInfo, selectedSlaItem)}>
+              {timeAmount &&
                 itemsByPackages.length > 1 && (
                   <p>
                     {translate(intl, `shippingEstimate-${time}`, {
@@ -47,14 +50,14 @@ export class ProductItems extends Component {
                 {itemsPackage.items.map(item => {
                   return (
                     <span
-                      key={item.uniqueId}
-                      data-tip={item.name}
                       className={`pkpmodal-product-item ${
-                        available ? '' : 'pkpmodal-product-item-unavailable'
+                        isAvailable ? '' : 'pkpmodal-product-item-unavailable'
                       }`}
+                      data-tip={item.name}
+                      key={item.uniqueId}
                     >
-                      <img src={fixImageUrl(item.imageUrl)} alt={item.name} />
-                      {!available && (
+                      <img alt={item.name} src={fixImageUrl(item.imageUrl)} />
+                      {!isAvailable && (
                         <span className="pkpmodal-product-item-unavailable-slash" />
                       )}
                       <ReactTooltip effect="solid" />
@@ -72,18 +75,18 @@ export class ProductItems extends Component {
         {items.map(item => {
           return (
             <span
-              key={item.uniqueId}
-              data-tip={item.name}
               className={`pkpmodal-product-item ${
-                available ? '' : 'pkpmodal-product-item-unavailable'
+                isAvailable ? '' : 'pkpmodal-product-item-unavailable'
               }`}
+              data-tip={item.name}
+              key={item.uniqueId}
             >
               <img
-                src={fixImageUrl(item.imageUrl)}
                 alt={item.name}
                 data-tip={item.name}
+                src={fixImageUrl(item.imageUrl)}
               />
-              {!available && (
+              {!isAvailable && (
                 <span className="pkpmodal-product-item-unavailable-slash" />
               )}
               <ReactTooltip effect="solid" />
@@ -96,14 +99,14 @@ export class ProductItems extends Component {
 }
 
 ProductItems.defaultProps = {
-  available: true,
+  isAvailable: true,
 }
 
 ProductItems.propTypes = {
   intl: intlShape,
-  itemsByPackages: PropTypes.array,
+  isAvailable: PropTypes.bool,
   items: PropTypes.array,
-  available: PropTypes.bool,
+  itemsByPackages: PropTypes.array,
 }
 
 export default injectIntl(ProductItems)
