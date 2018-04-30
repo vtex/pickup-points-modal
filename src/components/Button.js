@@ -31,7 +31,7 @@ class Button extends Component {
     style += disabled ? 'pkp-modal-btn-disabled ' : ''
 
     return (
-      <button disabled={disabled} className={style} {...rest} type="button">
+      <button className={style} disabled={disabled} {...rest} type="button">
         {title}
       </button>
     )
@@ -39,10 +39,10 @@ class Button extends Component {
 }
 
 Button.propTypes = {
-  disabled: PropTypes.bool,
-  inline: PropTypes.bool,
+  disabled: PropTypes.bool, // eslint-disable-line
+  inline: PropTypes.bool, // eslint-disable-line
   kind: PropTypes.string,
-  large: PropTypes.bool,
+  large: PropTypes.bool, // eslint-disable-line
   moreClassName: PropTypes.string,
   title: PropTypes.string,
 }

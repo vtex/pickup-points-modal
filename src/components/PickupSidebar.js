@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { SHOW_MAP, HIDE_MAP, INSIDE_MODAL } from '../constants'
-
+import classNames from 'classnames'
 import { translate } from '../utils/i18nUtils'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 import PickupPoint from './PickupPoint'
+import PickupSidebarHeader from './PickupSidebarHeader'
 import PickupPointDetails from './PickupPointDetails'
 import Input from './Input'
 import PickupTabs from './PickupTabs'
@@ -17,78 +18,72 @@ import PinWaiting from '../assets/components/PinWaiting'
 import AskForGeolocation from './AskForGeolocation'
 import Error from './Error'
 
-import './Home.css'
+import './PickupSidebar.css'
 
-class Home extends Component {
+class PickupSidebar extends Component {
   render() {
     const {
-      mapStatus,
-      isPickupDetailsActive,
-      loading,
-      googleMaps,
-      searchAddress,
-      rules,
-      filteredPickupOptions,
-      pickupOptions,
-      items,
-      logisticsInfo,
-      sellerId,
-      changeActiveSLAOption,
-      storePreferencesData,
-      closePickupPointsModal,
-      selectedPickupPoint,
-      largeScreen,
-      handleAddressChange,
-      updateLocationTab,
-      togglePickupDetails,
-      changeActivePickupPointId,
       activePickupPoint,
       changeActivePickupDetails,
-      showAskForGeolocation,
+      changeActivePickupPointId,
+      changeActiveSLAOption,
+      closePickupPointsModal,
       errorStatus,
-      showError,
+      filteredPickupOptions,
       geolocationFrom,
+      googleMaps,
       intl,
+      isPickupDetailsActive,
+      isLargeScreen,
+      isLoading,
+      items,
+      logisticsInfo,
+      mapStatus,
+      onHandleAddressChange,
+      pickupOptions,
+      rules,
+      searchAddress,
+      sellerId,
+      selectedPickupPoint,
+      showAskForGeolocation,
+      showError,
+      storePreferencesData,
+      togglePickupDetails,
+      updateLocationTab,
     } = this.props
 
     const isNotShowingPickupDetailsAndHasPickupOptions =
       pickupOptions.length > 0 &&
       !isPickupDetailsActive &&
-      (mapStatus === HIDE_MAP || largeScreen)
+      (mapStatus === HIDE_MAP || isLargeScreen)
 
     const hasPickups = pickupOptions.length !== 0
-
     const isInsideModal = geolocationFrom === INSIDE_MODAL
 
     return (
       <div
-        className={`pkpmodal-info-bar ${mapStatus === SHOW_MAP &&
-          'pkpmodal-info-bar-map'}`}
+        className={classNames('pkpmodal-info-bar', {
+          'pkpmodal-info-bar-map': mapStatus === SHOW_MAP,
+        })}
       >
         <div
-          className={`pkpmodal-info-bar-container ${mapStatus === SHOW_MAP &&
-            'active'}`}
+          className={classNames('pkpmodal-info-bar-container', {
+            active: mapStatus === SHOW_MAP,
+          })}
         >
-          <div className="pkpmodal-header">
-            <h4 className="pkpmodal-title">
-              {isPickupDetailsActive
-                ? translate(intl, 'pointDetails')
-                : translate(intl, 'selectPickupPoint')}
-            </h4>
-          </div>
-
+          <PickupSidebarHeader isPickupDetailsActive={isPickupDetailsActive} />
           {!isPickupDetailsActive && (
             <SearchForm
-              Input={Input}
-              placeholder={translate(intl, 'searchLocationMap')}
-              loadingGoogle={loading}
-              googleMaps={googleMaps}
               address={searchAddress}
-              rules={rules}
-              onChangeAddress={handleAddressChange}
-              setGeolocationFrom={this.props.setGeolocationFrom}
-              handleAskForGeolocation={this.props.handleAskForGeolocation}
+              googleMaps={googleMaps}
+              Input={Input}
+              isLoadingGoogle={isLoading}
               onAskForGeolocationStatus={this.props.onAskForGeolocationStatus}
+              onChangeAddress={onHandleAddressChange}
+              onHandleAskForGeolocation={this.props.onHandleAskForGeolocation}
+              placeholder={translate(intl, 'searchLocationMap')}
+              rules={rules}
+              setGeolocationFrom={this.props.setGeolocationFrom}
             />
           )}
 
@@ -108,8 +103,6 @@ class Home extends Component {
             !hasPickups && (
               <div className="pkpmodal-locating">
                 <GeolocationStatus
-                  titleBottom="geolocationEmpty"
-                  subtitleBottom="geolocationEmptyInstructions"
                   Image={() => (
                     <div>
                       <div className="pkpmodal-locating-image-waiting">
@@ -118,6 +111,8 @@ class Home extends Component {
                       <div className="pkpmodal-locating-image-waiting-shadow" />
                     </div>
                   )}
+                  subtitleBottom="geolocationEmptyInstructions"
+                  titleBottom="geolocationEmpty"
                 />
               </div>
             )}
@@ -126,16 +121,16 @@ class Home extends Component {
             isInsideModal && (
               <AskForGeolocation
                 address={searchAddress}
-                googleMaps={googleMaps}
-                onAskForGeolocation={this.props.handleAskForGeolocation}
-                onChangeAddress={this.props.handleAddressChange}
-                rules={rules}
-                onManualGeolocation={this.props.onManualGeolocation}
-                onGeolocationError={this.props.onGeolocationError}
-                status={this.props.askForGeolocationStatus}
-                onAskForGeolocationStatus={this.props.onAskForGeolocationStatus}
                 askForGeolocation={this.props.showAskForGeolocation}
                 geolocationFrom={INSIDE_MODAL}
+                googleMaps={googleMaps}
+                onAskForGeolocation={this.props.onHandleAskForGeolocation}
+                onAskForGeolocationStatus={this.props.onAskForGeolocationStatus}
+                onChangeAddress={this.props.onHandleAddressChange}
+                onGeolocationError={this.props.onGeolocationError}
+                onManualGeolocation={this.props.onManualGeolocation}
+                rules={rules}
+                status={this.props.askForGeolocationStatus}
               />
             )}
 
@@ -155,41 +150,41 @@ class Home extends Component {
                   activePickupPoint && (
                     <div className="pkpmodal-points-item">
                       <PickupPoint
-                        items={items}
-                        isList
-                        logisticsInfo={logisticsInfo}
-                        sellerId={sellerId}
-                        togglePickupDetails={togglePickupDetails}
+                        changeActivePickupPointId={changeActivePickupPointId}
                         handleChangeActivePickupDetails={
                           changeActivePickupDetails
                         }
-                        changeActivePickupPointId={changeActivePickupPointId}
-                        selectedRules={rules}
-                        pickupPoint={activePickupPoint}
-                        storePreferencesData={storePreferencesData}
-                        pickupPointId={activePickupPoint.id}
+                        isList
                         isSelected
+                        items={items}
+                        logisticsInfo={logisticsInfo}
+                        pickupPoint={activePickupPoint}
+                        pickupPointId={activePickupPoint.id}
+                        selectedRules={rules}
+                        sellerId={sellerId}
+                        storePreferencesData={storePreferencesData}
+                        togglePickupDetails={togglePickupDetails}
                       />
                     </div>
                   )}
 
                 {filteredPickupOptions.map(pickupPoint => (
-                  <div key={pickupPoint.id} className="pkpmodal-points-item">
+                  <div className="pkpmodal-points-item" key={pickupPoint.id}>
                     <PickupPoint
-                      items={items}
-                      isList
-                      logisticsInfo={logisticsInfo}
-                      sellerId={sellerId}
-                      togglePickupDetails={togglePickupDetails}
+                      changeActivePickupPointId={changeActivePickupPointId}
                       handleChangeActivePickupDetails={
                         changeActivePickupDetails
                       }
-                      changeActivePickupPointId={changeActivePickupPointId}
-                      selectedRules={rules}
-                      pickupPoint={pickupPoint}
-                      storePreferencesData={storePreferencesData}
-                      pickupPointId={pickupPoint.id}
+                      isList
                       isSelected={pickupPoint === activePickupPoint}
+                      items={items}
+                      logisticsInfo={logisticsInfo}
+                      pickupPoint={pickupPoint}
+                      pickupPointId={pickupPoint.id}
+                      selectedRules={rules}
+                      sellerId={sellerId}
+                      storePreferencesData={storePreferencesData}
+                      togglePickupDetails={togglePickupDetails}
                     />
                   </div>
                 ))}
@@ -200,15 +195,15 @@ class Home extends Component {
             !showError &&
             isPickupDetailsActive && (
               <PickupPointDetails
+                handleChangeActiveSLAOption={changeActiveSLAOption}
+                handleClosePickupPointsModal={closePickupPointsModal}
                 items={items}
                 logisticsInfo={logisticsInfo}
-                sellerId={sellerId}
-                handleChangeActiveSLAOption={changeActiveSLAOption}
-                togglePickupDetails={togglePickupDetails}
-                storePreferencesData={storePreferencesData}
-                handleClosePickupPointsModal={closePickupPointsModal}
                 pickupPoint={selectedPickupPoint}
                 selectedRules={rules}
+                sellerId={sellerId}
+                storePreferencesData={storePreferencesData}
+                togglePickupDetails={togglePickupDetails}
               />
             )}
         </div>
@@ -217,41 +212,41 @@ class Home extends Component {
   }
 }
 
-Home.propTypes = {
-  intl: intlShape,
-  mapStatus: PropTypes.string.isRequired,
-  isPickupDetailsActive: PropTypes.bool,
-  showAskForGeolocation: PropTypes.bool,
+PickupSidebar.propTypes = {
+  activePickupPoint: PropTypes.object,
+  askForGeolocationStatus: PropTypes.string,
+  changeActivePickupDetails: PropTypes.func.isRequired,
+  changeActivePickupPointId: PropTypes.func.isRequired,
+  changeActiveSLAOption: PropTypes.func.isRequired,
+  closePickupPointsModal: PropTypes.func.isRequired,
   errorStatus: PropTypes.string,
-  showError: PropTypes.bool,
-  loading: PropTypes.bool.isRequired,
+  filteredPickupOptions: PropTypes.array.isRequired,
   geolocationFrom: PropTypes.string,
   googleMaps: PropTypes.object.isRequired,
-  activePickupPoint: PropTypes.object,
-  searchAddress: AddressShapeWithValidation,
-  rules: PropTypes.object.isRequired,
-  filteredPickupOptions: PropTypes.array.isRequired,
-  pickupOptions: PropTypes.array.isRequired,
+  intl: intlShape,
+  isLargeScreen: PropTypes.bool,
+  isLoading: PropTypes.bool.isRequired,
+  isPickupDetailsActive: PropTypes.bool,
   items: PropTypes.array.isRequired,
   logisticsInfo: PropTypes.array.isRequired,
-  sellerId: PropTypes.string,
-  changeActiveSLAOption: PropTypes.func.isRequired,
-  storePreferencesData: PropTypes.object.isRequired,
-  closePickupPointsModal: PropTypes.func.isRequired,
-  selectedPickupPoint: PropTypes.object,
-  largeScreen: PropTypes.bool,
-  handleAddressChange: PropTypes.func.isRequired,
+  mapStatus: PropTypes.string.isRequired,
   onAskForGeolocationStatus: PropTypes.func.isRequired,
-  handleAskForGeolocation: PropTypes.func.isRequired,
-  updateLocationTab: PropTypes.func.isRequired,
-  togglePickupDetails: PropTypes.func.isRequired,
-  changeActivePickupPointId: PropTypes.func.isRequired,
-  onManualGeolocationError: PropTypes.func.isRequired,
   onGeolocationError: PropTypes.func.isRequired,
+  onHandleAddressChange: PropTypes.func.isRequired,
+  onHandleAskForGeolocation: PropTypes.func.isRequired,
   onManualGeolocation: PropTypes.func.isRequired,
+  onManualGeolocationError: PropTypes.func.isRequired,
+  pickupOptions: PropTypes.array.isRequired,
+  rules: PropTypes.object.isRequired,
+  searchAddress: AddressShapeWithValidation,
+  selectedPickupPoint: PropTypes.object,
+  sellerId: PropTypes.string,
   setGeolocationFrom: PropTypes.func.isRequired,
+  showAskForGeolocation: PropTypes.bool,
+  showError: PropTypes.bool,
+  storePreferencesData: PropTypes.object.isRequired,
   togglePickupDetails: PropTypes.func.isRequired,
-  changeActivePickupDetails: PropTypes.func.isRequired,
+  updateLocationTab: PropTypes.func.isRequired,
 }
 
-export default injectIntl(Home)
+export default injectIntl(PickupSidebar)

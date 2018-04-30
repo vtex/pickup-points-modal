@@ -1,5 +1,3 @@
-import { PICKUP_IN_STORE } from '../constants'
-
 export function getUnavailableItemsAmount(
   items,
   logisticsInfo,

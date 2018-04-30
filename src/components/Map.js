@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import debounce from 'lodash/debounce'
 
 import geolocationAutoCompleteAddress from '@vtex/address-form/lib/geolocation/geolocationAutoCompleteAddress'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
@@ -29,8 +28,8 @@ class Map extends Component {
   shouldComponentUpdate(prevProps) {
     const {
       rules,
-      loadingGoogle,
-      largeScreen,
+      isLoadingGoogle,
+      isLargeScreen,
       address,
       pickupOptions,
       pickupOptionGeolocations,
@@ -38,8 +37,8 @@ class Map extends Component {
     } = this.props
 
     const rulesChanged = prevProps.rules.country !== rules.country
-    const loadingChanged = prevProps.loadingGoogle !== loadingGoogle
-    const screenSizeChanged = prevProps.largeScreen !== largeScreen
+    const loadingChanged = prevProps.isLoadingGoogle !== isLoadingGoogle
+    const screenSizeChanged = prevProps.isLargeScreen !== isLargeScreen
     const addressChanged =
       prevProps.address.geoCoordinates.value !== address.geoCoordinates.value
     const pickupGeolocationsChanged = prevProps.pickupOptions !== pickupOptions
@@ -49,6 +48,7 @@ class Map extends Component {
       prevProps.pickupPoint &&
       pickupPoint &&
       prevProps.pickupPoint.id !== pickupPoint.id
+
     return (
       rulesChanged ||
       loadingChanged ||
@@ -81,7 +81,6 @@ class Map extends Component {
     )
 
     const nextAddressCoords = nextProps.address.geoCoordinates.value
-
     const thisAddressCoords = this.props.address.geoCoordinates.value
 
     const markerObj =
@@ -173,7 +172,7 @@ class Map extends Component {
   }
 
   createMap = (mapElement, geoCoordinates) => {
-    const { googleMaps, largeScreen } = this.props
+    const { googleMaps } = this.props
 
     this._mapElement = mapElement
 
@@ -212,12 +211,7 @@ class Map extends Component {
       .map(pickup => (pickup.length > 0 ? this.getLocation(pickup) : undefined))
       .filter(item => item)
 
-    const {
-      changeActivePickupDetails,
-      activatePickupDetails,
-      googleMaps,
-      activePickupPoint,
-    } = this.props
+    const { googleMaps, activePickupPoint } = this.props
 
     const hasAddressCoords =
       address && address.geoCoordinates.value.length !== 0
@@ -266,17 +260,6 @@ class Map extends Component {
 
         const marker = new googleMaps.Marker(markerOptions)
 
-        const markerListener = googleMaps.event.addListener(
-          marker,
-          'click',
-          () => {
-            this.resetMarkers()
-            marker.setIcon(markerIconSelected)
-            changeActivePickupDetails({ pickupPoint: pickupOptions[index] })
-            activatePickupDetails(true)
-          }
-        )
-
         this.markers.push({
           marker,
           pickupPoint: pickupOptions[index].id,
@@ -313,7 +296,7 @@ class Map extends Component {
 
     this.map.panTo(location)
 
-    if (!this.props.largeScreen) return
+    if (!this.props.isLargeScreen) return
 
     this.map.panBy(-200, 0)
   }
@@ -365,7 +348,7 @@ class Map extends Component {
   }
 
   render() {
-    return this.props.loadingGoogle ? (
+    return this.props.isLoadingGoogle ? (
       this.props.loadingElement
     ) : (
       <div id="map-canvas" ref={this.mapMounted} style={this.state.mapStyles} />
@@ -378,16 +361,14 @@ Map.defaultProps = {
 }
 
 Map.propTypes = {
-  address: AddressShapeWithValidation,
   activePickupPoint: PropTypes.object,
-  changeActivePickupDetails: PropTypes.func.isRequired,
-  activatePickupDetails: PropTypes.func.isRequired,
+  address: AddressShapeWithValidation,
   geoCoordinates: PropTypes.array,
   googleMaps: PropTypes.object,
+  isLargeScreen: PropTypes.bool,
+  isLoadingGoogle: PropTypes.bool,
   isPickupDetailsActive: PropTypes.bool,
-  largeScreen: PropTypes.bool,
   loadingElement: PropTypes.node,
-  loadingGoogle: PropTypes.bool,
   onChangeAddress: PropTypes.func.isRequired,
   pickupOptionGeolocations: PropTypes.array,
   pickupOptions: PropTypes.array.isRequired,

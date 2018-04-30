@@ -19,26 +19,26 @@ export class PickupTabs extends Component {
     return (
       <div className="pkpmodal-pickup-view-mode">
         <button
-          value={HIDE_MAP}
-          type="button"
           className={`pkpmodal-pickup-view-list btn btn-link ${
             mapStatus === HIDE_MAP
               ? 'pkpmodal-pickup-view-option-active'
               : 'pkpmodal-pickup-view-option-inactive'
           }`}
           onClick={this.handleLocationTab}
+          type="button"
+          value={HIDE_MAP}
         >
           {translate(intl, 'list')}
         </button>
         <button
-          value={SHOW_MAP}
-          type="button"
           className={`pkpmodal-pickup-view-map btn btn-link ${
             mapStatus === SHOW_MAP
               ? 'pkpmodal-pickup-view-option-active'
               : 'pkpmodal-pickup-view-option-inactive'
           }`}
           onClick={this.handleLocationTab}
+          type="button"
+          value={SHOW_MAP}
         >
           {translate(intl, 'map')}
         </button>

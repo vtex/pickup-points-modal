@@ -13,6 +13,7 @@
     "addLocales": "cp -R -f src/locales/ lib/locales/",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
+    "lint": "eslint src/**/*.js",
     "test": "jest --env=jsdom",
     "test:coverage": "jest --env=jsdom --coverage",
     "test:watch": "jest --env=jsdom --watch",
@@ -33,6 +34,7 @@
   "license": "MIT",
   "dependencies": {
     "@vtex/address-form": "1.4.11",
+    "classnames": "2.2.5",
     "lodash": "^4.17.5",
     "react-tooltip": "^3.4.0",
     "watch": "^1.0.2"
@@ -53,6 +55,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.6.1",
+    "husky": "1.0.0-rc.2",
     "i18n-iso-countries": "^3.5.0",
     "jest": "^22.2.2",
     "jest-enzyme": "^4.2.0",
@@ -87,6 +90,11 @@
     },
     "transform": {
       "^.+\\.js$": "<rootDir>/jest.transform.js"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn run lint"
     }
   },
   "bugs": {
