@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { translate } from '../utils/i18nUtils'
+
 import GeolocationInput from '@vtex/address-form/lib/geolocation/GeolocationInput'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
@@ -54,6 +55,7 @@ class SearchForm extends Component {
           onChangeAddress={onChangeAddress}
           placeholder={placeholder}
           rules={rules}
+          useSearchBox
         />
         {navigator.geolocation && (
           <button
