@@ -1,6 +1,6 @@
 {
   "name": "@vtex/pickup-points-modal",
-  "version": "0.1.45",
+  "version": "0.1.46",
   "description": "Pickup Points Modal React component",
   "main": "lib/index.js",
   "files": [
@@ -33,14 +33,11 @@
   "author": "Fernando de Almeida Coelho <nandoacoelho@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@vtex/address-form": "1.4.11",
+    "@vtex/address-form": "1.5.5",
     "classnames": "2.2.5",
     "lodash": "^4.17.5",
     "react-tooltip": "^3.4.0",
     "watch": "^1.0.2"
-  },
-  "peerDependencies": {
-    "react": "16.x"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
@@ -60,8 +57,8 @@
     "jest": "^22.2.2",
     "jest-enzyme": "^4.2.0",
     "nwb": "^0.21.5",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
     "react-hot-loader": "^3.1.3",
     "react-intl": "^2.4.0",
     "react-test-renderer": "^16.2.0"
