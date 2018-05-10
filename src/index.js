@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { withGoogleMaps } from './containers/withGoogleMaps'
@@ -371,7 +371,7 @@ export class PickupPointsModal extends Component {
               </div>
             </div>
           ) : (
-            <div>
+            <Fragment>
               <PickupSidebar
                 activePickupPoint={activePickupPoint}
                 askForGeolocationStatus={askForGeolocationStatus}
@@ -410,7 +410,7 @@ export class PickupPointsModal extends Component {
                 togglePickupDetails={this.togglePickupDetails}
                 updateLocationTab={this.updateLocationTab}
               />
-            </div>
+            </Fragment>
           )}
         </div>
       </div>
