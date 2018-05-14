@@ -25,7 +25,7 @@ class SearchForm extends Component {
         this.props.onHandleAskForGeolocation(true)
       })
     } else {
-      this.props.onAskForGeolocationStatus(ASK)
+      this.props.onAskForGeolocationStatus(WAITING)
       this.props.onHandleAskForGeolocation(true)
     }
   }
