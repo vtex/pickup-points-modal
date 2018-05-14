@@ -62,6 +62,17 @@ export class AskForGeolocation extends Component {
   }
 
   handleCurrentPosition = ({ permission, googleMaps }) => {
+    if (window.mockGeocoordinates) {
+      this.getCurrentPositionSuccess({
+        coords: {
+          latitude: JSON.parse(window.mockGeocoordinates.lat),
+          longitude: JSON.parse(window.mockGeocoordinates.long),
+        },
+      })
+      console.warn('Used mocked geocoordinates', window.mockGeocoordinates)
+      return
+    }
+
     this.handleGeolocationStatus(
       (permission && permission.state === GRANTED) ||
       window.location.host.includes(VTEXLOCAL) ||
