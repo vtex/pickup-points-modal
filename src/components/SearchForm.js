@@ -15,14 +15,19 @@ import './SearchForm.css'
 
 class SearchForm extends Component {
   handleAskGeolocationClick = () => {
-    navigator.permissions.query({ name: 'geolocation' }).then(permission => {
-      this.props.onAskForGeolocationStatus(
-        permission.state === GRANTED || process.env.NODE !== 'production'
-          ? WAITING
-          : ASK
-      )
+    if (navigator.permissions) {
+      navigator.permissions.query({ name: 'geolocation' }).then(permission => {
+        this.props.onAskForGeolocationStatus(
+          permission.state === GRANTED || process.env.NODE !== 'production'
+            ? WAITING
+            : ASK
+        )
+        this.props.onHandleAskForGeolocation(true)
+      })
+    } else {
+      this.props.onAskForGeolocationStatus(ASK)
       this.props.onHandleAskForGeolocation(true)
-    })
+    }
   }
 
   render() {

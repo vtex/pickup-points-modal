@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-
+import get from 'lodash/get'
 import {
   getCurrentPosition,
   handleGetAddressByGeolocation,
@@ -46,7 +46,7 @@ export class AskForGeolocation extends Component {
 
   handleGetCurrentPosition = props => {
     if (props.askForGeolocation && props.status === WAITING) {
-      navigator.permissions &&
+      if (get(navigator, 'permissions')) {
         navigator.permissions
           .query({ name: 'geolocation' })
           .then(permission => {
@@ -55,9 +55,9 @@ export class AskForGeolocation extends Component {
               googleMaps: props.googleMaps,
             })
           })
-
-      !navigator.permissions &&
+      } else {
         this.handleCurrentPosition({ googleMaps: props.googleMaps })
+      }
     }
   }
 
