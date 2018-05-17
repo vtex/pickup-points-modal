@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-
+import get from 'lodash/get'
 import {
   getCurrentPosition,
   handleGetAddressByGeolocation,
@@ -46,7 +46,7 @@ export class AskForGeolocation extends Component {
 
   handleGetCurrentPosition = props => {
     if (props.askForGeolocation && props.status === WAITING) {
-      navigator.permissions &&
+      if (get(navigator, 'permissions')) {
         navigator.permissions
           .query({ name: 'geolocation' })
           .then(permission => {
@@ -55,13 +55,24 @@ export class AskForGeolocation extends Component {
               googleMaps: props.googleMaps,
             })
           })
-
-      !navigator.permissions &&
+      } else {
         this.handleCurrentPosition({ googleMaps: props.googleMaps })
+      }
     }
   }
 
   handleCurrentPosition = ({ permission, googleMaps }) => {
+    if (window.mockGeocoordinates) {
+      this.getCurrentPositionSuccess({
+        coords: {
+          latitude: JSON.parse(window.mockGeocoordinates.lat),
+          longitude: JSON.parse(window.mockGeocoordinates.long),
+        },
+      })
+      console.warn('Used mocked geocoordinates', window.mockGeocoordinates)
+      return
+    }
+
     this.handleGeolocationStatus(
       (permission && permission.state === GRANTED) ||
       window.location.host.includes(VTEXLOCAL) ||
