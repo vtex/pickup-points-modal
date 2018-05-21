@@ -102,11 +102,18 @@
   "pickupPointsModal.geolocationSearching": "Buscando puntos cercanos",
   "pickupPointsModal.distance": "{distanceValue} km",
   "pickupPointsModal.askGeolocationAccept": "Usar mi ubicación actual",
-  "pickupPointsModal.errorNotAllowed": "No se pudo detectar su ubicación",
+  "pickupPointsModal.errorNotAllowed":
+    "No tenemos permiso para ver su ubicación",
+  "pickupPointsModal.errorNotAllowedSubtitle":
+    "Usted todavía puede buscar una dirección",
   "pickupPointsModal.errorNotFound":
-    "No hay puntos de retirada cerca de su ubicación",
+    "No encontramos puntos de retirada cerca de esta dirección",
+  "pickupPointsModal.errorNotFoundSubtitle":
+    "Todavía puedes buscar por otra dirección",
   "pickupPointsModal.errorCouldNotGetLocation":
-    "No se pudo encontrar su ubicación",
+    "No encontramos el punto exacto de esta dirección",
+  "pickupPointsModal.errorCouldNotGetLocationSubtitle":
+    "Busque en este formato: Avenida Jorge Basadre 595",
   "pickupPointsModal.useSearchBar":
     "Utilice la búsqueda para encontrar otros puntos",
   "pickupPointsModal.geolocationEmpty": "Encuentre puntos de retirada cercanos",

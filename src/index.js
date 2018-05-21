@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { withGoogleMaps } from './containers/withGoogleMaps'
 import { translate } from './utils/i18nUtils'
+import isEqual from 'lodash/isEqual'
+import { newAddress } from './utils/newAddress'
 import {
   HIDE_MAP,
   SHOW_MAP,
@@ -48,27 +50,25 @@ export class PickupPointsModal extends Component {
             : true
       ),
       geolocationFrom: OUTSIDE_MODAL,
-      showAskForGeolocation: this.props.askForGeolocation,
-      askForGeolocationStatus: this.props.askForGeolocation ? WAITING : '',
+      showAskForGeolocation: props.askForGeolocation,
+      askForGeolocationStatus: props.askForGeolocation ? WAITING : '',
       showError: false,
       errorStatus: '',
-      showManualSearch: props.pickupOptions.length === 0,
+      showManualSearch:
+        !props.askForGeolocation && props.pickupOptions.length === 0,
     }
   }
 
   componentWillReceiveProps(nextProps, nextState) {
-    const thisPickupOptions = getPickupSlaString(this.props.pickupOptions)
     const nextPickupOptions = getPickupSlaString(nextProps.pickupOptions)
 
     const notSearchingAndIsEmptyPickupOptions =
       !nextProps.isSearching &&
-      this.props.askForGeolocationStatus !== SEARCHING &&
+      this.state.askForGeolocationStatus !== SEARCHING &&
       nextPickupOptions.length === 0
 
     this.setState({
-      showAskForGeolocation:
-        nextProps.isSearching ||
-        nextProps.askForGeolocationStatus === SEARCHING,
+      showAskForGeolocation: nextProps.isSearching,
       showManualSearch: this.state.showManualSearch
         ? nextPickupOptions.length !== 0 && !nextProps.isSearching
         : false,
@@ -99,8 +99,11 @@ export class PickupPointsModal extends Component {
       isPickupDetailsActive !== nextState.isPickupDetailsActive ||
       mapStatus !== nextState.mapStatus ||
       isLargeScreen !== nextState.isLargeScreen ||
-      searchAddress !== nextState.searchAddress ||
-      pickupOptions !== nextProps.pickupOptions ||
+      !isEqual(searchAddress, nextState.searchAddress) ||
+      !isEqual(
+        getPickupSlaString(pickupOptions),
+        getPickupSlaString(nextProps.pickupOptions)
+      ) ||
       selectedPickupPoint.id !== nextProps.selectedPickupPoint.id ||
       askForGeolocation !== nextProps.askForGeolocation
     )
@@ -205,14 +208,8 @@ export class PickupPointsModal extends Component {
 
   handleAddressChange = address => {
     if (address.postalCode && !address.postalCode.value) return
-    const addressValidated = {
+    const addressValidated = newAddress({
       ...address,
-      complement: {
-        value: null,
-      },
-      reference: {
-        value: null,
-      },
       neighbourhood: address.neighbourhood || {
         value: null,
       },
@@ -234,11 +231,6 @@ export class PickupPointsModal extends Component {
               value: null,
             }),
       },
-    }
-
-    this.setState({
-      showAskForGeolocation: true,
-      askForGeolocationStatus: SEARCHING,
     })
 
     this.props.onAddressChange({

@@ -26,7 +26,6 @@ import {
   LOCALHOST,
   ERROR_NOT_ALLOWED,
   ERROR_COULD_NOT_GETLOCATION,
-  GRANTED,
 } from '../constants'
 import GeolocationStatus from './GeolocationStatus'
 
@@ -73,14 +72,6 @@ export class AskForGeolocation extends Component {
       return
     }
 
-    this.handleGeolocationStatus(
-      (permission && permission.state === GRANTED) ||
-      window.location.host.includes(VTEXLOCAL) ||
-      window.location.host.includes(LOCALHOST)
-        ? SEARCHING
-        : WAITING
-    )
-
     // Hard coded coords for development
     if (
       window.location.host.includes(VTEXLOCAL) ||
@@ -102,7 +93,6 @@ export class AskForGeolocation extends Component {
   }
 
   getCurrentPositionSuccess = position => {
-    this.handleGeolocationStatus(SEARCHING)
     handleGetAddressByGeolocation({
       newPosition: {
         lat: position.coords.latitude,
@@ -175,6 +165,10 @@ export class AskForGeolocation extends Component {
 
   handleManualGeolocation = () => {
     this.props.onManualGeolocation()
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.status !== nextProps.status
   }
 
   render() {

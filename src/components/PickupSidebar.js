@@ -101,7 +101,7 @@ class PickupSidebar extends Component {
             !showError &&
             !isPickupDetailsActive &&
             !hasPickups && (
-              <div className="pkpmodal-locating">
+              <div className="pkpmodal-locating-wrapper">
                 <GeolocationStatus
                   Image={() => (
                     <div>

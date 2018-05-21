@@ -43,6 +43,7 @@ class App extends Component {
       searchAddress: addValidation(
         newAddress({
           addressType: SEARCH,
+          geoCoordinates: [-43.185971, -22.943419],
         })
       ),
     }
@@ -74,21 +75,21 @@ class App extends Component {
       <div>
         {isModalOpen && (
           <PickupPointsModal
-            onAddressChange={this.handleAddressChange}
             activePickupPoint={selectedPickupPoint}
-            closePickupPointsModal={this.handleCloseModal}
+            askForGeolocation={false}
             changeActivePickupDetails={this.changeActivePickupDetails}
             changeActiveSLAOption={() => {}}
+            closePickupPointsModal={this.handleCloseModal}
             googleMapsKey={API_KEY}
             intl={this.props.intl}
-            items={items}
-            askForGeolocation={false}
             isPickupDetailsActive={isPickupDetailsActive}
+            items={items}
             logisticsInfo={logisticsInfo}
+            onAddressChange={this.handleAddressChange}
             pickupOptions={pickupMock.pickupOptions}
+            rules={BRA}
             searchAddress={searchAddress}
             selectedPickupPoint={selectedPickupPoint}
-            rules={BRA}
             storePreferencesData={storePreferencesData}
           />
         )}
