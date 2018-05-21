@@ -101,12 +101,19 @@
   "pickupPointsModal.distance": "{distanceValue} km",
   "pickupPointsModal.askGeolocationAccept": "Usar minha localização atual",
   "pickupPointsModal.errorNotAllowed":
-    "Não foi possível detectar sua localização",
+    "Não temos permissão para ver sua localização",
+  "pickupPointsModal.errorNotAllowedSubtitle":
+    "Você ainda pode buscar por um endereço",
   "pickupPointsModal.errorNotFound":
-    "Não há pontos de retirada próximos da sua localização",
+    "Não encontramos pontos de retirada perto deste endereço",
+  "pickupPointsModal.errorNotFoundSubtitle":
+    "Você ainda pode buscar por outro endereço",
   "pickupPointsModal.errorCouldNotGetLocation":
-    "Não foi possível encontrar sua localização",
+    "Não encontramos o ponto exato deste endereço",
+  "pickupPointsModal.errorCouldNotGetLocationSubtitle":
+    "Busque no formato Ex: Rua São Clemente 300",
   "pickupPointsModal.useSearchBar": "Use a busca para encontrar outros pontos",
   "pickupPointsModal.geolocationEmpty": "Encontre pontos de retirada próximos",
-  "pickupPointsModal.geolocationEmptyInstructions": "Quanto mais específica for sua busca, melhores serão os resultados!"
+  "pickupPointsModal.geolocationEmptyInstructions":
+    "Quanto mais específica for sua busca, melhores serão os resultados!"
 }

@@ -101,10 +101,19 @@
   "pickupPointsModal.geolocationSearching": "Searching for points nearby",
   "pickupPointsModal.distance": "{distanceValue} km",
   "pickupPointsModal.askGeolocationAccept": "Use my current location",
-  "pickupPointsModal.errorNotAllowed": "We could not detect your location",
-  "pickupPointsModal.errorNotFound": "No pickup points near your location",
+  "pickupPointsModal.errorNotAllowed":
+    "We do not have permission to view your location",
+  "pickupPointsModal.errorNotAllowedSubtitle":
+    "You can still search for an address",
+  "pickupPointsModal.errorNotFound":
+    "We could not find pickup points near this location",
+  "pickupPointsModal.errorNotFoundSubtitle":
+    "You can still search for another address",
   "pickupPointsModal.useSearchBar": "Use the search bar to find other points",
-  "pickupPointsModal.errorCouldNotGetLocation": "Could not find your location",
+  "pickupPointsModal.errorCouldNotGetLocation":
+    "Could not find the exact location of this address",
+  "pickupPointsModal.errorCouldNotGetLocationSubtitle":
+    "Search in this format: 950 Main Street",
   "pickupPointsModal.geolocationEmpty": "Find nearby pickup points",
   "pickupPointsModal.geolocationEmptyInstructions":
     "The more specific your search, the better the results!"

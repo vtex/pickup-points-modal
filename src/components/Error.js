@@ -17,9 +17,22 @@ import {
 } from '../constants'
 
 export class Error extends Component {
+  getSubtitleString = () => {
+    switch (this.props.status) {
+      case ERROR_NOT_ALLOWED:
+        return `${ERROR_NOT_ALLOWED}Subtitle`
+      case ERROR_NOT_FOUND:
+        return `${ERROR_NOT_FOUND}Subtitle`
+      case ERROR_COULD_NOT_GETLOCATION:
+        return `${ERROR_COULD_NOT_GETLOCATION}Subtitle`
+      default: {
+        return ''
+      }
+    }
+  }
   render() {
     const { intl, status, onManualGeolocationError } = this.props
-
+    const subtitleString = this.getSubtitleString()
     return (
       <div className="pkpmodal-locating-wrapper-error">
         <GeolocationStatus
@@ -34,7 +47,7 @@ export class Error extends Component {
               </div>
             </div>
           )}
-          subtitleBottom="useSearchBar"
+          subtitleBottom={subtitleString}
           titleBottom={status}
         >
           <div className="pkpmodal-locating-error-manual">
