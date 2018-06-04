@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
 import geolocationAutoCompleteAddress from '@vtex/address-form/lib/geolocation/geolocationAutoCompleteAddress'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
@@ -211,7 +210,12 @@ class Map extends Component {
       .map(pickup => (pickup.length > 0 ? this.getLocation(pickup) : undefined))
       .filter(item => item)
 
-    const { googleMaps, activePickupPoint } = this.props
+    const {
+      googleMaps,
+      activePickupPoint,
+      changeActivePickupDetails,
+      activatePickupDetails,
+    } = this.props
 
     const hasAddressCoords =
       address && address.geoCoordinates.value.length !== 0
@@ -260,8 +264,20 @@ class Map extends Component {
 
         const marker = new googleMaps.Marker(markerOptions)
 
+        const markerListener = googleMaps.event.addListener(
+          marker,
+          'click',
+          () => {
+            this.resetMarkers()
+            marker.setIcon(markerIconSelected)
+            changeActivePickupDetails({ pickupPoint: pickupOptions[index] })
+            activatePickupDetails(true)
+          }
+        )
+
         this.markers.push({
           marker,
+          markerListener,
           pickupPoint: pickupOptions[index].id,
         })
 
@@ -361,8 +377,10 @@ Map.defaultProps = {
 }
 
 Map.propTypes = {
+  activatePickupDetails: PropTypes.func.isRequired,
   activePickupPoint: PropTypes.object,
   address: AddressShapeWithValidation,
+  changeActivePickupDetails: PropTypes.func.isRequired,
   geoCoordinates: PropTypes.array,
   googleMaps: PropTypes.object,
   isLargeScreen: PropTypes.bool,
