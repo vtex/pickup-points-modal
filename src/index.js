@@ -288,6 +288,7 @@ export class PickupPointsModal extends Component {
           />
           {(isLargeScreen || mapStatus === SHOW_MAP) && (
             <Map
+              activatePickupDetails={this.activatePickupDetails}
               activePickupPoint={activePickupPoint}
               address={searchAddress}
               changeActivePickupDetails={changeActivePickupDetails}
