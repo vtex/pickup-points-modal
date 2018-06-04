@@ -75,11 +75,11 @@ export class PickupPoint extends Component {
         <div className="pkpmodal-pickup-point-main">
           <div className="pkpmodal-pickup-point-marker">
             {isSelected ? <PinIconSelected /> : <PinIcon />}
-            {pickupPoint.pickupStoreInfo.distance && (
+            {pickupPoint.pickupDistance && (
               <p className="pkpmodal-pickup-point-distance">
                 {translate(intl, 'distance', {
                   distanceValue: formatNumber({
-                    value: pickupPoint.pickupStoreInfo.distance,
+                    value: pickupPoint.pickupDistance,
                     storePreferencesData,
                   }),
                 })}
