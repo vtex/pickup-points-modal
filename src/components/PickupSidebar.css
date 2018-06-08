@@ -33,6 +33,7 @@ h4.pkpmodal-title {
   position: relative;
   overflow: auto;
   padding: 5px 12px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .pkpmodal-points-item {
