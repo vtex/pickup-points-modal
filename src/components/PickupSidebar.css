@@ -33,6 +33,7 @@ h4.pkpmodal-title {
   position: relative;
   overflow: auto;
   padding: 5px 12px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .pkpmodal-points-item {
@@ -53,7 +54,7 @@ h4.pkpmodal-title {
 
   .pkpmodal-info-bar-container {
     background-color: #f4f4f4;
-    height: 100vh;
+    height: 100%;
   }
 
   .pkpmodal-info-bar-map {
