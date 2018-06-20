@@ -108,7 +108,7 @@
   "pickupPointsModal.errorNotFound":
     "We could not find pickup points near this location",
   "pickupPointsModal.errorNotFoundSubtitle":
-    "You can still search for another address",
+    "The more specific your search, the better the results!",
   "pickupPointsModal.useSearchBar": "Use the search bar to find other points",
   "pickupPointsModal.errorCouldNotGetLocation":
     "Could not find the exact location of this address",

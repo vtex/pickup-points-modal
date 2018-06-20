@@ -4,6 +4,7 @@ import { injectIntl, intlShape } from 'react-intl'
 import { withGoogleMaps } from './containers/withGoogleMaps'
 import { translate } from './utils/i18nUtils'
 import isEqual from 'lodash/isEqual'
+import get from 'lodash/get'
 import { newAddress } from './utils/newAddress'
 import {
   HIDE_MAP,
@@ -62,10 +63,14 @@ export class PickupPointsModal extends Component {
   componentWillReceiveProps(nextProps, nextState) {
     const nextPickupOptions = getPickupSlaString(nextProps.pickupOptions)
 
+    const hasGeocoordinates =
+      get(nextProps.searchAddress, 'geoCoordinates.value') &&
+      nextProps.searchAddress.geoCoordinates.value.length > 0
+
     const notSearchingAndIsEmptyPickupOptions =
       !nextProps.isSearching &&
-      this.state.askForGeolocationStatus !== SEARCHING &&
-      nextPickupOptions.length === 0
+      nextPickupOptions.length === 0 &&
+      hasGeocoordinates
 
     this.setState({
       showAskForGeolocation: nextProps.isSearching,
@@ -93,7 +98,12 @@ export class PickupPointsModal extends Component {
       selectedPickupPoint,
     } = this.props
 
-    const { isPickupDetailsActive, mapStatus, isLargeScreen } = this.state
+    const {
+      isPickupDetailsActive,
+      mapStatus,
+      isLargeScreen,
+      showAskForGeolocation,
+    } = this.state
 
     return (
       isPickupDetailsActive !== nextState.isPickupDetailsActive ||
@@ -105,7 +115,8 @@ export class PickupPointsModal extends Component {
         getPickupSlaString(nextProps.pickupOptions)
       ) ||
       selectedPickupPoint.id !== nextProps.selectedPickupPoint.id ||
-      askForGeolocation !== nextProps.askForGeolocation
+      askForGeolocation !== nextProps.askForGeolocation ||
+      showAskForGeolocation !== nextState.showAskForGeolocation
     )
   }
 
@@ -207,7 +218,6 @@ export class PickupPointsModal extends Component {
     })
 
   handleAddressChange = address => {
-    if (address.postalCode && !address.postalCode.value) return
     const addressValidated = newAddress({
       ...address,
       neighbourhood: address.neighbourhood || {

@@ -6,7 +6,7 @@ import { translate } from '../utils/i18nUtils'
 import GeolocationInput from '@vtex/address-form/lib/geolocation/GeolocationInput'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
-import { ASK, WAITING, GRANTED } from '../constants'
+import { ASK, WAITING, GRANTED, VTEXLOCAL, LOCALHOST } from '../constants'
 
 import SearchIcon from '../assets/components/SearchIcon'
 import GPS from '../assets/components/GPS'
@@ -24,6 +24,11 @@ class SearchForm extends Component {
         )
         this.props.onHandleAskForGeolocation(true)
       })
+    } else if (
+      window.location.host.indexOf(VTEXLOCAL) !== -1 ||
+      window.location.host.indexOf(LOCALHOST) !== -1
+    ) {
+      this.props.onHandleAskForGeolocation(true)
     } else {
       this.props.onAskForGeolocationStatus(WAITING)
       this.props.onHandleAskForGeolocation(true)
