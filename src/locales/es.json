@@ -109,7 +109,7 @@
   "pickupPointsModal.errorNotFound":
     "No encontramos puntos de retirada cerca de esta dirección",
   "pickupPointsModal.errorNotFoundSubtitle":
-    "Todavía puedes buscar por otra dirección",
+    "¡Cuanto más específica sea su búsqueda, mejores serán los resultados!",
   "pickupPointsModal.errorCouldNotGetLocation":
     "No encontramos el punto exacto de esta dirección",
   "pickupPointsModal.errorCouldNotGetLocationSubtitle":

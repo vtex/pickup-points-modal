@@ -74,8 +74,8 @@ export class AskForGeolocation extends Component {
 
     // Hard coded coords for development
     if (
-      window.location.host.includes(VTEXLOCAL) ||
-      window.location.host.includes(LOCALHOST)
+      window.location.host.indexOf(VTEXLOCAL) !== -1 ||
+      window.location.host.indexOf(LOCALHOST) !== -1
     ) {
       this.getCurrentPositionSuccess({
         coords: {
@@ -168,7 +168,11 @@ export class AskForGeolocation extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return this.props.status !== nextProps.status
+    const { askForGeolocation, status } = this.props
+    return (
+      askForGeolocation !== nextProps.askForGeolocation ||
+      status !== nextProps.status
+    )
   }
 
   render() {
