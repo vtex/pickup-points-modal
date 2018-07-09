@@ -14,7 +14,6 @@ import GeolocationStatus from './GeolocationStatus'
 import SearchForm from './SearchForm'
 
 import PinWaiting from '../assets/components/PinWaiting'
-
 import AskForGeolocation from './AskForGeolocation'
 import Error from './Error'
 
