@@ -1,15 +1,19 @@
+import get from 'lodash/get'
+import isString from 'lodash/isString'
+
 export function getUnavailableItemsAmount(
   items,
   logisticsInfo,
-  pickupPointId,
+  pickupPoint,
   sellerId
 ) {
-  return items.filter(
-    (item, index) =>
-      (sellerId ? item.seller === sellerId : true) &&
-      logisticsInfo[index].slas.find(sla => sla.id === pickupPointId) ===
-        undefined
-  ).length
+  const unavailableItems = getUnavailableItemsByPickup(
+    items,
+    logisticsInfo,
+    pickupPoint,
+    sellerId
+  )
+  return unavailableItems && unavailableItems.length
 }
 
 export function getUnavailableItemsByPickup(
@@ -18,27 +22,43 @@ export function getUnavailableItemsByPickup(
   pickupPoint,
   sellerId
 ) {
-  return items.filter(
-    (item, index) =>
-      (sellerId ? item.seller === sellerId : true) &&
-      logisticsInfo[index].slas.find(sla => sla.id === pickupPoint.id) ===
-        undefined
-  )
+  const pickupPointId = isString(pickupPoint) ? pickupPoint : pickupPoint.id
+
+  return items.filter((item, index) => {
+    const isSameSeller = sellerId ? item.seller === sellerId : true
+    const hasLogisticsInfo = !!logisticsInfo[index]
+    const hasPickup = logisticsInfo[index].slas.some(
+      sla => sla.id === pickupPointId
+    )
+
+    return (
+      isSameSeller && (!hasLogisticsInfo || (hasLogisticsInfo && !hasPickup))
+    )
+  })
 }
 
 export function getItemsByPickup(items, logisticsInfo, pickupPoint, sellerId) {
-  return items.filter(
-    (item, index) =>
-      (sellerId ? item.seller === sellerId : true) &&
-      logisticsInfo[index].slas.find(sla => sla.id === pickupPoint.id)
-  )
+  const pickupPointId = isString(pickupPoint) ? pickupPoint : pickupPoint.id
+
+  return items.filter((item, index) => {
+    const isSameSeller = sellerId ? item.seller === sellerId : true
+    const hasLogisticsInfo = !!logisticsInfo[index]
+    const hasPickup = logisticsInfo[index].slas.some(
+      sla => sla.id === pickupPointId
+    )
+
+    return isSameSeller && hasLogisticsInfo && hasPickup
+  })
 }
 
 export function getPickupOptionGeolocations(pickupOptions) {
   if (Array.isArray(pickupOptions)) {
     return pickupOptions.map(
-      pickup => pickup.pickupStoreInfo.address.geoCoordinates
+      pickup => pickup && get(pickup, 'pickupStoreInfo.address.geoCoordinates')
     )
   }
-  return pickupOptions && pickupOptions.pickupStoreInfo.address.geoCoordinates
+  return (
+    pickupOptions &&
+    get(pickupOptions, 'pickupStoreInfo.address.geoCoordinates')
+  )
 }

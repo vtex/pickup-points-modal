@@ -79,7 +79,7 @@ export class PickupPointDetails extends Component {
           <div className="pkpmodal-details-store">
             <PickupPoint
               isSelected={isSelectedSla}
-              items={items}
+              items={this.props.items}
               logisticsInfo={logisticsInfo}
               pickupPoint={pickupPoint}
               selectedRules={selectedRules}
