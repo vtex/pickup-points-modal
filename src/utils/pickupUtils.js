@@ -26,13 +26,13 @@ export function getUnavailableItemsByPickup(
 
   return items.filter((item, index) => {
     const isSameSeller = sellerId ? item.seller === sellerId : true
-    const hasLogisticsInfo = !!logisticsInfo[index]
-    const hasPickup = logisticsInfo[index].slas.some(
+    const logisticsInfoItem = logisticsInfo.find(li => li.itemIndex === index)
+    const hasPickup = logisticsInfoItem.slas.some(
       sla => sla.id === pickupPointId
     )
 
     return (
-      isSameSeller && (!hasLogisticsInfo || (hasLogisticsInfo && !hasPickup))
+      isSameSeller && (!logisticsInfoItem || (logisticsInfoItem && !hasPickup))
     )
   })
 }
@@ -42,12 +42,12 @@ export function getItemsByPickup(items, logisticsInfo, pickupPoint, sellerId) {
 
   return items.filter((item, index) => {
     const isSameSeller = sellerId ? item.seller === sellerId : true
-    const hasLogisticsInfo = !!logisticsInfo[index]
-    const hasPickup = logisticsInfo[index].slas.some(
-      sla => sla.id === pickupPointId
-    )
+    const logisticsInfoItem = logisticsInfo.find(li => li.itemIndex === index)
+    const hasPickup =
+      logisticsInfoItem &&
+      logisticsInfoItem.slas.some(sla => sla.id === pickupPointId)
 
-    return isSameSeller && hasLogisticsInfo && hasPickup
+    return isSameSeller && logisticsInfoItem && hasPickup
   })
 }
 
