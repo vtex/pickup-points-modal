@@ -1,6 +1,24 @@
 import get from 'lodash/get'
 import isString from 'lodash/isString'
 
+function checkIfIsSameSeller(sellerId, item) {
+  return sellerId ? item.seller === sellerId : true
+}
+
+function getLogisticsInfoItem(logisticsInfo, index) {
+  return logisticsInfo.find(li => li.itemIndex === index)
+}
+
+function hasPickupPoint(logisticsInfo, pickupPointId) {
+  return (
+    logisticsInfo && logisticsInfo.slas.some(sla => sla.id === pickupPointId)
+  )
+}
+
+function getPickupPointId(pickupPoint) {
+  return isString(pickupPoint) ? pickupPoint : pickupPoint.id
+}
+
 export function getUnavailableItemsAmount(
   items,
   logisticsInfo,
@@ -22,14 +40,12 @@ export function getUnavailableItemsByPickup(
   pickupPoint,
   sellerId
 ) {
-  const pickupPointId = isString(pickupPoint) ? pickupPoint : pickupPoint.id
+  const pickupPointId = getPickupPointId(pickupPoint)
 
   return items.filter((item, index) => {
-    const isSameSeller = sellerId ? item.seller === sellerId : true
-    const logisticsInfoItem = logisticsInfo.find(li => li.itemIndex === index)
-    const hasPickup = logisticsInfoItem.slas.some(
-      sla => sla.id === pickupPointId
-    )
+    const isSameSeller = checkIfIsSameSeller(sellerId, item)
+    const logisticsInfoItem = getLogisticsInfoItem(logisticsInfo, index)
+    const hasPickup = hasPickupPoint(logisticsInfoItem, pickupPointId)
 
     return (
       isSameSeller && (!logisticsInfoItem || (logisticsInfoItem && !hasPickup))
@@ -37,15 +53,18 @@ export function getUnavailableItemsByPickup(
   })
 }
 
-export function getItemsByPickup(items, logisticsInfo, pickupPoint, sellerId) {
-  const pickupPointId = isString(pickupPoint) ? pickupPoint : pickupPoint.id
+export function getItemsWithPickupPoint(
+  items,
+  logisticsInfo,
+  pickupPoint,
+  sellerId
+) {
+  const pickupPointId = getPickupPointId(pickupPoint)
 
   return items.filter((item, index) => {
-    const isSameSeller = sellerId ? item.seller === sellerId : true
-    const logisticsInfoItem = logisticsInfo.find(li => li.itemIndex === index)
-    const hasPickup =
-      logisticsInfoItem &&
-      logisticsInfoItem.slas.some(sla => sla.id === pickupPointId)
+    const isSameSeller = checkIfIsSameSeller(sellerId, item)
+    const logisticsInfoItem = getLogisticsInfoItem(logisticsInfo, index)
+    const hasPickup = hasPickupPoint(logisticsInfoItem, pickupPointId)
 
     return isSameSeller && logisticsInfoItem && hasPickup
   })

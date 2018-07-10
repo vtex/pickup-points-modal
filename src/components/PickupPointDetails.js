@@ -5,7 +5,7 @@ import { translate } from '../utils/i18nUtils'
 
 import {
   getUnavailableItemsByPickup,
-  getItemsByPickup,
+  getItemsWithPickupPoint,
 } from '../utils/pickupUtils'
 
 import PickupPoint from './PickupPoint'
@@ -25,7 +25,7 @@ export class PickupPointDetails extends Component {
         this.props.pickupPoint,
         this.props.sellerId
       ),
-      items: getItemsByPickup(
+      items: getItemsWithPickupPoint(
         this.props.items,
         this.props.logisticsInfo,
         this.props.pickupPoint,
