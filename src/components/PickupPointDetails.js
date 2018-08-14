@@ -156,6 +156,7 @@ PickupPointDetails.propTypes = {
   logisticsInfo: PropTypes.array.isRequired,
   onClickPickupModal: PropTypes.func,
   pickupPoint: PropTypes.object.isRequired,
+  pickupPointInfo: PropTypes.object.isRequired,
   selectedRules: PropTypes.object.isRequired,
   sellerId: PropTypes.string,
   storePreferencesData: PropTypes.object.isRequired,

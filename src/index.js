@@ -265,6 +265,7 @@ export class PickupPointsModal extends Component {
       logisticsInfo,
       loading,
       pickupOptions,
+      pickupPoints,
       rules,
       searchAddress,
       sellerId,
@@ -401,6 +402,7 @@ export class PickupPointsModal extends Component {
                 onManualGeolocation={this.handleManualGeolocation}
                 onManualGeolocationError={this.handleManualGeolocationError}
                 pickupOptions={pickupOptions}
+                pickupPoints={pickupPoints}
                 rules={rules}
                 searchAddress={searchAddress}
                 selectedPickupPoint={selectedPickupPoint}
@@ -437,6 +439,7 @@ PickupPointsModal.propTypes = {
   logisticsInfo: PropTypes.array.isRequired,
   onAddressChange: PropTypes.func.isRequired,
   pickupOptions: PropTypes.array.isRequired,
+  pickupPoints: PropTypes.array.isRequired,
   rules: PropTypes.object,
   searchAddress: AddressShapeWithValidation,
   selectedPickupPoint: PropTypes.object,
