@@ -114,11 +114,11 @@ export class PickupPointDetails extends Component {
               <table className="pkpmodal-details-hours">
                 <tr>
                   <td className="pkpmodal-details-hours-day">Segunda a Sexta-feira</td>
-                  <td className="pkpmodal-details-hours-range">10:00 a 18:00</td>
+                  <td className="pkpmodal-details-hours-range">10:00 às 18:00</td>
                 </tr>
                 <tr>
                   <td className="pkpmodal-details-hours-day">Sábado</td>
-                  <td className="pkpmodal-details-hours-range">11:00 a 17:00</td>
+                  <td className="pkpmodal-details-hours-range">11:00 às 17:00</td>
                 </tr>
                 <tr>
                   <td className="pkpmodal-details-hours-day">Domingo</td>
