@@ -14,7 +14,6 @@ export class Input extends Component {
     return (
       <input
         autoFocus={autoFocus || false}
-        className="input-reset f6 db w-100 br2 ba b--moon-gray light-silver input-xlarge"
         data-hj-whitelist
         onBlur={onBlur}
         onChange={this.handleChange}
