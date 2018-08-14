@@ -63,6 +63,7 @@
   "pickupPointsModal.unavailable": "indisponible",
   "pickupPointsModal.unavailableItemsAmount":
     "{itemsAmount, plural, =0 {} one {# indisponible} other {# no están disponibles}}",
+  "pickupPointsModal.businessHours": "Horas de oficina",
   "pickupPointsModal.confirmPoint": "Recogida en este punto",
   "pickupPointsModal.modifyDeliveryOptions": "Cambiar opciones de entrega",
   "pickupPointsModal.shippingAddress": "Dirección de entrega",

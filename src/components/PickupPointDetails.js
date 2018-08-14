@@ -106,6 +106,26 @@ export class PickupPointDetails extends Component {
                   {pickupPoint.pickupStoreInfo.additionalInfo}
                 </div>
               )}
+
+            <div className="pkpmodal-details-group">
+              <h3 className="pkpmodal-details-info-title">
+                {translate(intl, 'businessHours')}
+              </h3>
+              <table className="pkpmodal-details-hours">
+                <tr>
+                  <td className="pkpmodal-details-hours-day">Segunda a Sexta-feira</td>
+                  <td className="pkpmodal-details-hours-range">10:00 a 18:00</td>
+                </tr>
+                <tr>
+                  <td className="pkpmodal-details-hours-day">Sábado</td>
+                  <td className="pkpmodal-details-hours-range">11:00 a 17:00</td>
+                </tr>
+                <tr>
+                  <td className="pkpmodal-details-hours-day">Domingo</td>
+                  <td className="pkpmodal-details-hours-closed">Fechado</td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
 
