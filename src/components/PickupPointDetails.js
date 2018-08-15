@@ -10,6 +10,7 @@ import {
 
 import PickupPoint from './PickupPoint'
 import ProductItems from './ProductItems'
+import PickupPointHour from './PickupPointHour'
 import Button from './Button'
 
 import './PickupPointDetails.css'
@@ -78,7 +79,11 @@ export class PickupPointDetails extends Component {
           if (number === day.DayOfWeek) {
             closed = false
             dayInfo.hours = bh[j].OpeningTime + bh[j].ClosingTime
-            dayInfo.formattedHours = `${bh[j].OpeningTime} ${translate(intl, 'hourTo')} ${bh[j].ClosingTime}`
+            dayInfo.formattedHours = (
+              <span>
+                <PickupPointHour time={bh[j].OpeningTime} /> {translate(intl, 'hourTo')} <PickupPointHour time={bh[j].ClosingTime} />
+              </span>
+            )
           }
         })
 
