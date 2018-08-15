@@ -81,3 +81,61 @@ export function getPickupOptionGeolocations(pickupOptions) {
     get(pickupOptions, 'pickupStoreInfo.address.geoCoordinates')
   )
 }
+
+export function formatBusinessHoursList(pickupPointInfo) {
+  const bh = pickupPointInfo && pickupPointInfo.businessHours
+  const daysOrder = [1, 2, 3, 4, 5, 6, 0]
+
+  let sameWeekDaysHours
+  let newBh
+
+  if (bh && bh.length > 0) {
+    newBh = []
+    daysOrder.forEach((number, i) => {
+      let closed = true
+      const dayInfo = {
+        number: number,
+      }
+
+      bh.forEach((day, j) => {
+        if (number === day.DayOfWeek) {
+          closed = false
+          dayInfo.openingTime = bh[j].OpeningTime
+          dayInfo.closingTime = bh[j].ClosingTime
+        }
+      })
+
+      dayInfo.closed = closed
+
+      newBh.push(dayInfo)
+    })
+
+    sameWeekDaysHours = true
+    newBh.forEach((day, i) => {
+      if (i > 0 && i < 5 && (day.openingTime !== newBh[i - 1].openingTime || day.closingTime !== newBh[i - 1].closingTime)) {
+        sameWeekDaysHours = false
+      }
+    })
+
+    if (sameWeekDaysHours) {
+      const condensedBusinessHours = []
+      condensedBusinessHours.push({
+        number: '1to5',
+        closed: newBh[0].closed,
+        openingTime: newBh[0].openingTime,
+        closingTime: newBh[0].closingTime,
+      })
+      for (let i = 5; i <= 6; i++) {
+        condensedBusinessHours.push({
+          name: newBh[i].name,
+          closed: newBh[i].closed,
+          openingTime: newBh[i].openingTime,
+          closingTime: newBh[i].closingTime,
+        })
+      }
+      newBh = condensedBusinessHours
+    }
+  }
+
+  return newBh
+}

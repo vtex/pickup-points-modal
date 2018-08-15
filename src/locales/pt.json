@@ -124,7 +124,7 @@
   "pickupPointsModal.weekDay4": "Quinta-feira",
   "pickupPointsModal.weekDay5": "Sexta-feira",
   "pickupPointsModal.weekDay6": "Sábado",
-  "pickupPointsModal.weekDays": "Segunda a Sexta-feira",
+  "pickupPointsModal.weekDay1to5": "Segunda a Sexta-feira",
   "pickupPointsModal.hourTo": "às",
   "pickupPointsModal.closed": "Fechado"
 }
