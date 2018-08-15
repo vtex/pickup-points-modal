@@ -78,17 +78,10 @@ export class PickupPointDetails extends Component {
           if (number === day.DayOfWeek) {
             closed = false
             dayInfo.hours = bh[j].OpeningTime + bh[j].ClosingTime
-            dayInfo.formattedHours = (
-              <span>
-                <PickupPointHour time={bh[j].OpeningTime} /> {translate(intl, 'hourTo')} <PickupPointHour time={bh[j].ClosingTime} />
-              </span>
-            )
+            dayInfo.openingTime = bh[j].OpeningTime
+            dayInfo.closingTime = bh[j].ClosingTime
           }
         })
-
-        if (closed) {
-          dayInfo.formattedHours = translate(intl, 'closed')
-        }
 
         dayInfo.closed = closed
 
@@ -106,14 +99,16 @@ export class PickupPointDetails extends Component {
         const condensedBusinessHours = []
         condensedBusinessHours.push({
           name: translate(intl, 'weekDays'),
-          closed: false,
-          formattedHours: newBh[0].formattedHours,
+          closed: newBh[0].closed,
+          openingTime: newBh[0].openingTime,
+          closingTime: newBh[0].closingTime,
         })
         for (let i = 5; i <= 6; i++) {
           condensedBusinessHours.push({
             name: `${newBh[i].name}`,
             closed: newBh[i].closed,
-            formattedHours: newBh[i].formattedHours,
+            openingTime: newBh[i].openingTime,
+            closingTime: newBh[i].closingTime,
           })
         }
         newBh = condensedBusinessHours
@@ -181,7 +176,19 @@ export class PickupPointDetails extends Component {
                         return (
                           <tr key={i}>
                             <td className="pkpmodal-details-hours-day">{day.name}</td>
-                            <td className={`pkpmodal-details-hours-${day.closed ? 'closed' : 'range'}`}>{day.formattedHours}</td>
+                            {
+                              day.closed
+                              ? (
+                                <td className="pkpmodal-details-hours-closed">
+                                  {translate(intl, 'closed')}
+                                </td>
+                              )
+                              : (
+                                <td className="pkpmodal-details-hours-range">
+                                  <PickupPointHour time={day.openingTime} /> {translate(intl, 'hourTo')} <PickupPointHour time={day.closingTime} />
+                                </td>
+                              )
+                            }
                           </tr>
                         )
                       })
