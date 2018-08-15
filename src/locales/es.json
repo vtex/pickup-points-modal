@@ -119,5 +119,16 @@
     "Utilice la búsqueda para encontrar otros puntos",
   "pickupPointsModal.geolocationEmpty": "Encuentre puntos de retirada cercanos",
   "pickupPointsModal.geolocationEmptyInstructions":
-    "¡Cuanto más específica sea su búsqueda, mejores serán los resultados!"
+    "¡Cuanto más específica sea su búsqueda, mejores serán los resultados!",
+  "pickupPointsModal.weekDay0": "Domingo",
+  "pickupPointsModal.weekDay1": "Lunes",
+  "pickupPointsModal.weekDay2": "Martes",
+  "pickupPointsModal.weekDay3": "Miércoles",
+  "pickupPointsModal.weekDay4": "Jueves",
+  "pickupPointsModal.weekDay5": "Viernes",
+  "pickupPointsModal.weekDay6": "Sábado",
+  "pickupPointsModal.weekDayComplement": "",
+  "pickupPointsModal.dayTo": "a",
+  "pickupPointsModal.hourTo": "a",
+  "pickupPointsModal.closed": "Cierrado"
 }

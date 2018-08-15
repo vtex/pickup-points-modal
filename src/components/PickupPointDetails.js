@@ -48,6 +48,7 @@ export class PickupPointDetails extends Component {
   render() {
     const {
       pickupPoint,
+      pickupPointInfo,
       selectedRules,
       isSelectedSla,
       sellerId,
@@ -57,6 +58,65 @@ export class PickupPointDetails extends Component {
     } = this.props
 
     const { unavailableItems, items } = this.state
+
+    const bh = pickupPointInfo && pickupPointInfo.businessHours
+    const daysOrder = [1, 2, 3, 4, 5, 6, 0]
+
+    let sameWeekDaysHours
+    let newBh
+
+    if (bh && bh.length > 0) {
+      newBh = []
+      daysOrder.forEach((number, i) => {
+        let closed = true
+        const dayInfo = {
+          name: translate(intl, `weekDay${number}`),
+          nameComplement: number > 0 && number < 6 ? translate(intl, 'weekDayComplement') : null,
+        }
+
+        bh.forEach((day, j) => {
+          if (number === day.DayOfWeek) {
+            closed = false
+            dayInfo.hours = bh[j].OpeningTime + bh[j].ClosingTime
+            dayInfo.formattedHours = `${bh[j].OpeningTime} ${translate(intl, 'hourTo')} ${bh[j].ClosingTime}`
+          }
+        })
+
+        if (closed) {
+          dayInfo.formattedHours = translate(intl, 'closed')
+        }
+
+        dayInfo.closed = closed
+
+        newBh.push(dayInfo)
+      })
+
+      sameWeekDaysHours = true
+      newBh.forEach((day, i) => {
+        if (i > 0 && i < 5 && day.hours !== newBh[i - 1].hours) {
+          sameWeekDaysHours = false
+        }
+      })
+
+      if (sameWeekDaysHours) {
+        const condensedBusinessHours = []
+        condensedBusinessHours.push({
+          name: `${newBh[0].name} ${translate(intl, 'dayTo')} ${newBh[4].name}${newBh[4].nameComplement}`,
+          nameComplement: '',
+          closed: false,
+          formattedHours: newBh[0].formattedHours,
+        })
+        for (let i = 5; i <= 6; i++) {
+          condensedBusinessHours.push({
+            name: `${newBh[i].name}`,
+            nameComplement: '',
+            closed: newBh[i].closed,
+            formattedHours: newBh[i].formattedHours,
+          })
+        }
+        newBh = condensedBusinessHours
+      }
+    }
 
     return (
       <div className="pkpmodal-details">
@@ -107,25 +167,27 @@ export class PickupPointDetails extends Component {
                 </div>
               )}
 
-            <div className="pkpmodal-details-group">
-              <h3 className="pkpmodal-details-info-title">
-                {translate(intl, 'businessHours')}
-              </h3>
-              <table className="pkpmodal-details-hours">
-                <tr>
-                  <td className="pkpmodal-details-hours-day">Segunda a Sexta-feira</td>
-                  <td className="pkpmodal-details-hours-range">10:00 às 18:00</td>
-                </tr>
-                <tr>
-                  <td className="pkpmodal-details-hours-day">Sábado</td>
-                  <td className="pkpmodal-details-hours-range">11:00 às 17:00</td>
-                </tr>
-                <tr>
-                  <td className="pkpmodal-details-hours-day">Domingo</td>
-                  <td className="pkpmodal-details-hours-closed">Fechado</td>
-                </tr>
-              </table>
-            </div>
+            {
+              newBh && (
+                <div className="pkpmodal-details-group">
+                  <h3 className="pkpmodal-details-info-title">
+                    {translate(intl, 'businessHours')}
+                  </h3>
+                  <table className="pkpmodal-details-hours">
+                    {
+                      newBh.map((day, i) => {
+                        return (
+                          <tr key={i}>
+                            <td className="pkpmodal-details-hours-day">{day.name}{day.nameComplement}</td>
+                            <td className={`pkpmodal-details-hours-${day.closed ? 'closed' : 'range'}`}>{day.formattedHours}</td>
+                          </tr>
+                        )
+                      })
+                    }
+                  </table>
+                </div>
+              )
+            }
           </div>
         </div>
 

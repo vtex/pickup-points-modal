@@ -117,5 +117,16 @@
     "Search in this format: 950 Main Street",
   "pickupPointsModal.geolocationEmpty": "Find nearby pickup points",
   "pickupPointsModal.geolocationEmptyInstructions":
-    "The more specific your search, the better the results!"
+    "The more specific your search, the better the results!",
+  "pickupPointsModal.weekDay0": "Sunday",
+  "pickupPointsModal.weekDay1": "Monday",
+  "pickupPointsModal.weekDay2": "Tuesday",
+  "pickupPointsModal.weekDay3": "Wednesday",
+  "pickupPointsModal.weekDay4": "Thursday",
+  "pickupPointsModal.weekDay5": "Friday",
+  "pickupPointsModal.weekDay6": "Saturday",
+  "pickupPointsModal.weekDayComplement": "",
+  "pickupPointsModal.dayTo": "to",
+  "pickupPointsModal.hourTo": "-",
+  "pickupPointsModal.closed": "Closed"
 }
