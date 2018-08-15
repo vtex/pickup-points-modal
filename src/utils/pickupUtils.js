@@ -127,7 +127,7 @@ export function formatBusinessHoursList(pickupPointInfo) {
       })
       for (let i = 5; i <= 6; i++) {
         condensedBusinessHours.push({
-          name: newBh[i].name,
+          number: newBh[i].number,
           closed: newBh[i].closed,
           openingTime: newBh[i].openingTime,
           closingTime: newBh[i].closingTime,

@@ -6,6 +6,7 @@ import { translate } from '../utils/i18nUtils'
 import {
   getUnavailableItemsByPickup,
   getItemsWithPickupPoint,
+  formatBusinessHoursList,
 } from '../utils/pickupUtils'
 
 import PickupPoint from './PickupPoint'
@@ -112,7 +113,7 @@ export class PickupPointDetails extends Component {
               )}
 
             {
-              newBh && (
+              businessHours && (
                 <div className="pkpmodal-details-group">
                   <h3 className="pkpmodal-details-info-title">
                     {translate(intl, 'businessHours')}

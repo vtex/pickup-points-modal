@@ -5,7 +5,7 @@ import { FormattedTime } from 'react-intl'
 class PickupPointHour extends Component {
   render() {
     const hoursNumbers = this.props.time.split(':').map((t) => parseInt(t, 10))
-    const time = (new Date()).setHours.apply(new Date, hoursNumbers)
+    const time = (new Date()).setHours.apply(new Date(), hoursNumbers)
 
     return <FormattedTime value={time} />
   }
