@@ -72,7 +72,6 @@ export class PickupPointDetails extends Component {
         let closed = true
         const dayInfo = {
           name: translate(intl, `weekDay${number}`),
-          nameComplement: number > 0 && number < 6 ? translate(intl, 'weekDayComplement') : null,
         }
 
         bh.forEach((day, j) => {
@@ -106,15 +105,13 @@ export class PickupPointDetails extends Component {
       if (sameWeekDaysHours) {
         const condensedBusinessHours = []
         condensedBusinessHours.push({
-          name: `${newBh[0].name} ${translate(intl, 'dayTo')} ${newBh[4].name}${newBh[4].nameComplement}`,
-          nameComplement: '',
+          name: translate(intl, 'weekDays'),
           closed: false,
           formattedHours: newBh[0].formattedHours,
         })
         for (let i = 5; i <= 6; i++) {
           condensedBusinessHours.push({
             name: `${newBh[i].name}`,
-            nameComplement: '',
             closed: newBh[i].closed,
             formattedHours: newBh[i].formattedHours,
           })
@@ -183,7 +180,7 @@ export class PickupPointDetails extends Component {
                       newBh.map((day, i) => {
                         return (
                           <tr key={i}>
-                            <td className="pkpmodal-details-hours-day">{day.name}{day.nameComplement}</td>
+                            <td className="pkpmodal-details-hours-day">{day.name}</td>
                             <td className={`pkpmodal-details-hours-${day.closed ? 'closed' : 'range'}`}>{day.formattedHours}</td>
                           </tr>
                         )

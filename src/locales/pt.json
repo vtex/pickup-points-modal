@@ -118,14 +118,13 @@
   "pickupPointsModal.geolocationEmptyInstructions":
     "Quanto mais específica for sua busca, melhores serão os resultados!",
   "pickupPointsModal.weekDay0": "Domingo",
-  "pickupPointsModal.weekDay1": "Segunda",
-  "pickupPointsModal.weekDay2": "Terça",
-  "pickupPointsModal.weekDay3": "Quarta",
-  "pickupPointsModal.weekDay4": "Quinta",
-  "pickupPointsModal.weekDay5": "Sexta",
+  "pickupPointsModal.weekDay1": "Segunda-feira",
+  "pickupPointsModal.weekDay2": "Terça-feira",
+  "pickupPointsModal.weekDay3": "Quarta-feira",
+  "pickupPointsModal.weekDay4": "Quinta-feira",
+  "pickupPointsModal.weekDay5": "Sexta-feira",
   "pickupPointsModal.weekDay6": "Sábado",
-  "pickupPointsModal.weekDayComplement": "-feira",
-  "pickupPointsModal.dayTo": "a",
+  "pickupPointsModal.weekDays": "Segunda a Sexta-feira",
   "pickupPointsModal.hourTo": "às",
   "pickupPointsModal.closed": "Fechado"
 }
