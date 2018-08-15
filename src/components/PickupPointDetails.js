@@ -77,7 +77,6 @@ export class PickupPointDetails extends Component {
         bh.forEach((day, j) => {
           if (number === day.DayOfWeek) {
             closed = false
-            dayInfo.hours = bh[j].OpeningTime + bh[j].ClosingTime
             dayInfo.openingTime = bh[j].OpeningTime
             dayInfo.closingTime = bh[j].ClosingTime
           }
@@ -90,7 +89,7 @@ export class PickupPointDetails extends Component {
 
       sameWeekDaysHours = true
       newBh.forEach((day, i) => {
-        if (i > 0 && i < 5 && day.hours !== newBh[i - 1].hours) {
+        if (i > 0 && i < 5 && (day.openingTime !== newBh[i - 1].openingTime || day.closingTime !== newBh[i - 1].closingTime)) {
           sameWeekDaysHours = false
         }
       })
@@ -105,7 +104,7 @@ export class PickupPointDetails extends Component {
         })
         for (let i = 5; i <= 6; i++) {
           condensedBusinessHours.push({
-            name: `${newBh[i].name}`,
+            name: newBh[i].name,
             closed: newBh[i].closed,
             openingTime: newBh[i].openingTime,
             closingTime: newBh[i].closingTime,
