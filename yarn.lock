@@ -3275,10 +3275,6 @@ eslint-config-prettier@^3.0.1:
   dependencies:
     get-stdin "^6.0.0"
 
-eslint-config-vtex-react-app@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-vtex-react-app/-/eslint-config-vtex-react-app-3.1.1.tgz#86bb7030252bf17cc469f955102c071c990c40a6"
-
 eslint-config-vtex-react@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/eslint-config-vtex-react/-/eslint-config-vtex-react-3.0.3.tgz#5cccab0353784610ff2f4a517f94d81628ed29ba"
