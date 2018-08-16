@@ -2,7 +2,7 @@ import React from 'react'
 import ConnectedPickupPointDetails, {
   PickupPointDetails,
 } from './PickupPointDetails'
-import { shallowWithIntl, loadTranslation, setLocale } from 'enzyme-react-intl'
+import { mountWithIntl, loadTranslation, setLocale } from 'enzyme-react-intl'
 import { Provider } from 'react-redux'
 import IntlContainer from '../containers/IntlContainer'
 import renderer from 'react-test-renderer'
@@ -20,9 +20,9 @@ describe('PickupPointDetails', () => {
   let state,
     store,
     props,
-    changeActiveSLAOption,
-    closePickupModal,
-    closePickupDetails
+    handleChangeActiveSLAOption,
+    handleClosePickupPointsModal,
+    togglePickupDetails
 
   const address = {
     addressType: 'residential',
@@ -42,9 +42,9 @@ describe('PickupPointDetails', () => {
   }
 
   beforeEach(() => {
-    changeActiveSLAOption = jest.fn()
-    closePickupModal = jest.fn()
-    closePickupDetails = jest.fn()
+    handleChangeActiveSLAOption = jest.fn()
+    handleClosePickupPointsModal = jest.fn()
+    togglePickupDetails = jest.fn()
 
     state = {
       pickup: {
@@ -233,9 +233,6 @@ describe('PickupPointDetails', () => {
     }
 
     props = {
-      changeActiveSLAOption,
-      closePickupModal,
-      closePickupDetails,
       sellerId: '1',
       items: [
         {
@@ -307,6 +304,11 @@ describe('PickupPointDetails', () => {
         },
       },
       selectedRules: BRA,
+      handleChangeActiveSLAOption,
+      handleClosePickupPointsModal,
+      togglePickupDetails,
+      logisticsInfo: [],
+      pickupPointInfo: {},
     }
   })
 
@@ -324,24 +326,24 @@ describe('PickupPointDetails', () => {
   })
 
   it('should simulate go back to list of pickups', () => {
-    const wrapper = shallowWithIntl(<PickupPointDetails {...props} />)
+    const wrapper = mountWithIntl(<PickupPointDetails {...props} />)
 
-    const backLink = wrapper.find('button.link-back-pickup-points-list')
+    const backLink = wrapper.find('button.pkpmodal-details-back-lnk')
 
     backLink.simulate('click')
 
-    expect(closePickupDetails.mock.calls).toHaveLength(1)
+    expect(togglePickupDetails.mock.calls).toHaveLength(1)
   })
 
   it('should simulate confirm a pickupPoint', () => {
-    const wrapper = shallowWithIntl(<PickupPointDetails {...props} />)
+    const wrapper = mountWithIntl(<PickupPointDetails {...props} />)
 
-    const confirmButton = wrapper.find('button.pickup-point-details-confirm')
+    const confirmButton = wrapper.find('.pkpmodal-details-confirm-btn')
 
     confirmButton.simulate('click')
 
-    expect(closePickupDetails.mock.calls).toHaveLength(1)
-    expect(closePickupModal.mock.calls).toHaveLength(1)
-    expect(changeActiveSLAOption.mock.calls).toHaveLength(1)
+    expect(handleChangeActiveSLAOption.mock.calls).toHaveLength(1)
+    expect(togglePickupDetails.mock.calls).toHaveLength(1)
+    expect(handleClosePickupPointsModal.mock.calls).toHaveLength(1)
   })
 })

@@ -13,7 +13,14 @@ loadTranslation('./src/locales/pt.json')
 setLocale('pt')
 
 describe('PickupPoint', () => {
-  let state, store, props, changeActiveSLAOption, closePickupModal
+  let state,
+    store,
+    props,
+    handleChangeActivePickupDetails,
+    onChangeActivePickupPointId,
+    onClickPickupModal,
+    togglePickupDetails
+
   const address = {
     addressType: 'residential',
     receiverName: null,
@@ -32,8 +39,10 @@ describe('PickupPoint', () => {
   }
 
   beforeEach(() => {
-    changeActiveSLAOption = jest.fn()
-    closePickupModal = jest.fn()
+    handleChangeActivePickupDetails = jest.fn()
+    onChangeActivePickupPointId = jest.fn()
+    onClickPickupModal = jest.fn()
+    togglePickupDetails = jest.fn()
 
     state = {
       pickup: {
@@ -73,7 +82,14 @@ describe('PickupPoint', () => {
         clientPreferencesData: {
           locale: 'pt-BR',
         },
-        items: [{ seller: '1' }],
+        items: [
+          {
+            name: 'test',
+            imageUrl: 'test.png',
+            uniqueId: 'xablau',
+            seller: '1',
+          },
+        ],
         activeTab: PICKUP,
         storePreferencesData: {
           countryCode: 'BRA',
@@ -145,6 +161,7 @@ describe('PickupPoint', () => {
 
     props = {
       sellerId: '1',
+      items: state.orderForm.items,
       unavailableItemsAmount: 1,
       storePreferencesData: {
         countryCode: 'BRA',
@@ -177,8 +194,10 @@ describe('PickupPoint', () => {
         geoCoordinates: [],
         addressQuery: 'query',
       }),
-      changeActiveSLAOption,
-      closePickupModal,
+      handleChangeActivePickupDetails,
+      onChangeActivePickupPointId,
+      onClickPickupModal,
+      togglePickupDetails,
       pickupPoint: {
         name: 'test',
         price: 100,
@@ -195,6 +214,10 @@ describe('PickupPoint', () => {
         },
       },
       selectedRules: BRA,
+      handleChangeActiveSLAOption: jest.fn(),
+      handleClosePickupPointsModal: jest.fn(),
+      logisticsInfo: [],
+      pickupPointInfo: {},
     }
   })
 
@@ -212,15 +235,11 @@ describe('PickupPoint', () => {
   })
 
   it('should render self and components in not modal mode', () => {
-    props = {
-      ...props,
-      isModal: false,
-    }
     const wrapper = renderer
       .create(
         <Provider store={store}>
           <IntlContainer store={store}>
-            <IntlPickupPoint {...props} />
+            <IntlPickupPoint {...props} isModal={false} />
           </IntlContainer>
         </Provider>
       )
@@ -229,15 +248,11 @@ describe('PickupPoint', () => {
   })
 
   it('should render self and components with free price', () => {
-    props = {
-      ...props,
-      pickupPointId: '2',
-    }
     const wrapper = renderer
       .create(
         <Provider store={store}>
           <IntlContainer store={store}>
-            <IntlPickupPoint {...props} />
+            <IntlPickupPoint {...props} pickupPointId="2" />
           </IntlContainer>
         </Provider>
       )
