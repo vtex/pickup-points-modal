@@ -10,8 +10,9 @@ function getLogisticsInfoItem(logisticsInfo, index) {
 }
 
 function hasPickupPoint(logisticsInfo, pickupPointId) {
-  return logisticsInfo &&
-    logisticsInfo.slas.some(sla => sla.id === pickupPointId)
+  return (
+    logisticsInfo && logisticsInfo.slas.some(sla => sla.id === pickupPointId)
+  )
 }
 
 function getPickupPointId(pickupPoint) {
@@ -46,8 +47,9 @@ export function getUnavailableItemsByPickup(
     const logisticsInfoItem = getLogisticsInfoItem(logisticsInfo, index)
     const hasPickup = hasPickupPoint(logisticsInfoItem, pickupPointId)
 
-    return isSameSeller &&
-      (!logisticsInfoItem || (logisticsInfoItem && !hasPickup))
+    return (
+      isSameSeller && (!logisticsInfoItem || (logisticsInfoItem && !hasPickup))
+    )
   })
 }
 
@@ -74,8 +76,10 @@ export function getPickupOptionGeolocations(pickupOptions) {
       pickup => pickup && get(pickup, 'pickupStoreInfo.address.geoCoordinates')
     )
   }
-  return pickupOptions &&
+  return (
+    pickupOptions &&
     get(pickupOptions, 'pickupStoreInfo.address.geoCoordinates')
+  )
 }
 
 export function formatBusinessHoursList(businessHours) {
@@ -138,22 +142,19 @@ function doesWeekDaysHaveTheSameHours(businessHours) {
 }
 
 function condenseWeekDaysHours(businessHours) {
-  return businessHours.reduce(
-    (acc, businessHour, index) => {
-      if (index >= MONDAY && index <= FRIDAY) {
-        if (index === MONDAY) {
-          return acc.concat({
-            number: '1to5',
-            closed: businessHour.closed,
-            openingTime: businessHour.openingTime,
-            closingTime: businessHour.closingTime,
-          })
-        }
-        return acc
+  return businessHours.reduce((acc, businessHour, index) => {
+    if (index >= MONDAY && index <= FRIDAY) {
+      if (index === MONDAY) {
+        return acc.concat({
+          number: '1to5',
+          closed: businessHour.closed,
+          openingTime: businessHour.openingTime,
+          closingTime: businessHour.closingTime,
+        })
       }
+      return acc
+    }
 
-      return acc.concat(businessHour)
-    },
-    []
-  )
+    return acc.concat(businessHour)
+  }, [])
 }

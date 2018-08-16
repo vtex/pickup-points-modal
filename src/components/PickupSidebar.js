@@ -198,7 +198,9 @@ class PickupSidebar extends Component {
                 items={items}
                 logisticsInfo={logisticsInfo}
                 pickupPoint={selectedPickupPoint}
-                pickupPointInfo={pickupPoints.find(pickup => pickup.id === selectedPickupPoint.pickupPointId)}
+                pickupPointInfo={pickupPoints.find(
+                  pickup => pickup.id === selectedPickupPoint.pickupPointId
+                )}
                 selectedRules={rules}
                 sellerId={sellerId}
                 storePreferencesData={storePreferencesData}

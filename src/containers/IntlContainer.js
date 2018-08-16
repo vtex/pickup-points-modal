@@ -51,29 +51,31 @@ class IntlContainer extends Component {
       this.importPickupPointsModalTranslations(baseLocale, locale),
       this.importCountryCodeTranslations(baseLocale, locale),
     ])
-      .then(([
-        localeData,
-        translations,
-        addressTranslations,
-        pickupPointsModalTranslations,
-        countryCodeTranslations,
-      ]) => {
-        this.handleNewTranslations(
-          locale,
-          {
-            ...translations,
-            ...addressTranslations,
-            ...pickupPointsModalTranslations,
-            ...countryCodeTranslations,
-          },
-          localeData
-        )
-      })
+      .then(
+        ([
+          localeData,
+          translations,
+          addressTranslations,
+          pickupPointsModalTranslations,
+          countryCodeTranslations,
+        ]) => {
+          this.handleNewTranslations(
+            locale,
+            {
+              ...translations,
+              ...addressTranslations,
+              ...pickupPointsModalTranslations,
+              ...countryCodeTranslations,
+            },
+            localeData
+          )
+        }
+      )
       .catch(event => {
         console.error(event)
         return Promise.reject(event)
       })
-  };
+  }
 
   importTranslations(baseLocale, locale) {
     return Promise.all([
@@ -138,28 +140,25 @@ class IntlContainer extends Component {
       import(`@vtex/pickup-points-modal/lib/locales/${baseLocale}.json`),
       import(`@vtex/pickup-points-modal/lib/locales/${locale}.json`),
     ])
-      .then(([
-        basePickupPointsModalTranslation,
-        pickupPointsModalTranslation,
-      ]) => {
-        return {
-          ...basePickupPointsModalTranslation,
-          ...pickupPointsModalTranslation,
+      .then(
+        ([basePickupPointsModalTranslation, pickupPointsModalTranslation]) => {
+          return {
+            ...basePickupPointsModalTranslation,
+            ...pickupPointsModalTranslation,
+          }
         }
-      })
+      )
       .catch(e => {
         if (process.env.NODE_ENV !== 'production') {
           this.couldNotFindModuleError(e)
         }
-        return import(
-          `@vtex/pickup-points-modal/lib/locales/${baseLocale}`
-        ).then(
+        return import(`@vtex/pickup-points-modal/lib/locales/${baseLocale}`).then(
           basePickupPointsModalTranslation => basePickupPointsModalTranslation
         )
       })
   }
 
-  importCountryCodeTranslations(baseLocale, locale) {
+  importCountryCodeTranslations(baseLocale) {
     return import(`i18n-iso-countries/langs/${baseLocale}.json`).then(
       this.addCountryCodeNameSpace
     )
@@ -190,16 +189,19 @@ class IntlContainer extends Component {
       locale,
       messages,
     })
-  };
+  }
 
   render() {
     const { locale, messages } = this.state
 
-    return locale &&
-      messages &&
-      <IntlProvider key={locale} locale={locale} messages={messages}>
-        {this.props.children}
-      </IntlProvider>
+    return (
+      locale &&
+      messages && (
+        <IntlProvider key={locale} locale={locale} messages={messages}>
+          {this.props.children}
+        </IntlProvider>
+      )
+    )
   }
 }
 

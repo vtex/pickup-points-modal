@@ -27,7 +27,7 @@ class IntlContainer extends Component {
     this.handleLocaleChange({}, this.props.locale)
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.handleLocaleChange({}, nextProps.locale)
   }
 
@@ -78,7 +78,7 @@ class IntlContainer extends Component {
       })
   }
 
-  importCountryCodeTranslations(baseLocale, locale) {
+  importCountryCodeTranslations(baseLocale) {
     return import(`i18n-iso-countries/langs/${baseLocale}.json`).then(
       this.addCountryCodeNameSpace
     )
