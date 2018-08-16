@@ -70,8 +70,7 @@ export class PickupPoint extends Component {
           .replace(/[^\w\s]/gi, '')
           .split(' ')
           .join('-')}
-        onClick={this.handleOpenPickupDetails}
-      >
+        onClick={this.handleOpenPickupDetails}>
         <div className="pkpmodal-pickup-point-main">
           <div className="pkpmodal-pickup-point-marker">
             {isSelected ? <PinIconSelected /> : <PinIcon />}
@@ -93,8 +92,7 @@ export class PickupPoint extends Component {
             <div
               className={`pkpmodal-pickup-point-address ${
                 isList ? 'list' : ''
-              }`}
-            >
+              }`}>
               <AddressSummary
                 address={pickupPoint.pickupStoreInfo.address}
                 onClickMaskedInfoIcon={this.handleClickMaskedInfoIcon}

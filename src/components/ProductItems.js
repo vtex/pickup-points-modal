@@ -54,8 +54,7 @@ export class ProductItems extends Component {
                         isAvailable ? '' : 'pkpmodal-product-item-unavailable'
                       }`}
                       data-tip={item.name}
-                      key={item.uniqueId}
-                    >
+                      key={item.uniqueId}>
                       <img alt={item.name} src={fixImageUrl(item.imageUrl)} />
                       {!isAvailable && (
                         <span className="pkpmodal-product-item-unavailable-slash" />
@@ -79,8 +78,7 @@ export class ProductItems extends Component {
                 isAvailable ? '' : 'pkpmodal-product-item-unavailable'
               }`}
               data-tip={item.name}
-              key={item.uniqueId}
-            >
+              key={item.uniqueId}>
               <img
                 alt={item.name}
                 data-tip={item.name}

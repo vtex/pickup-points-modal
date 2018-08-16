@@ -48,8 +48,7 @@ export class Error extends Component {
             </div>
           )}
           subtitleBottom={subtitleString}
-          titleBottom={status}
-        >
+          titleBottom={status}>
           <div className="pkpmodal-locating-error-manual">
             <Button
               kind="primary"

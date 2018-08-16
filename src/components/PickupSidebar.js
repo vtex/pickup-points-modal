@@ -63,13 +63,11 @@ class PickupSidebar extends Component {
       <div
         className={classNames('pkpmodal-info-bar', {
           'pkpmodal-info-bar-map': mapStatus === SHOW_MAP,
-        })}
-      >
+        })}>
         <div
           className={classNames('pkpmodal-info-bar-container', {
             active: mapStatus === SHOW_MAP,
-          })}
-        >
+          })}>
           <PickupSidebarHeader isPickupDetailsActive={isPickupDetailsActive} />
           {!isPickupDetailsActive && (
             <SearchForm

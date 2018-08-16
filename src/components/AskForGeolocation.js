@@ -34,7 +34,7 @@ export class AskForGeolocation extends Component {
     this.handleGetCurrentPosition(this.props)
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       this.props.askForGeolocation !== nextProps.askForGeolocation ||
       this.props.status !== nextProps.status
@@ -60,7 +60,7 @@ export class AskForGeolocation extends Component {
     }
   }
 
-  handleCurrentPosition = ({ permission, googleMaps }) => {
+  handleCurrentPosition = ({ googleMaps }) => {
     if (window.mockGeocoordinates) {
       this.getCurrentPositionSuccess({
         coords: {
@@ -185,14 +185,12 @@ export class AskForGeolocation extends Component {
             Image={() => (
               <div
                 className="pkpmodal-locating-image-ask"
-                onClick={this.handleAskForGeolocationButtonClick}
-              >
+                onClick={this.handleAskForGeolocationButtonClick}>
                 <PinGeolocation />
               </div>
             )}
             subtitleTop="geolocationAsk"
-            titleTop="geolocationDiscover"
-          >
+            titleTop="geolocationDiscover">
             <div>
               <div className="pkpmodal-locating-automatic">
                 <Button
@@ -226,8 +224,7 @@ export class AskForGeolocation extends Component {
               </div>
             )}
             subtitleBottom="geolocationAllow"
-            titleBottom="geolocationWaiting"
-          >
+            titleBottom="geolocationWaiting">
             <div className="pkpmodal-locating-manual">
               <Button
                 kind="secondary"

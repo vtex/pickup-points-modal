@@ -63,7 +63,7 @@ class Map extends Component {
     this.setState({ isMounted: false })
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { googleMaps, pickupOptionGeolocations } = this.props
 
     const selectedGeolocation = nextProps.pickupOptions.find(
@@ -170,7 +170,7 @@ class Map extends Component {
     })
   }
 
-  createMap = (mapElement, geoCoordinates) => {
+  createMap = mapElement => {
     const { googleMaps } = this.props
 
     this._mapElement = mapElement
@@ -299,7 +299,7 @@ class Map extends Component {
   resetMarkers = location => {
     this.markers &&
       this.markers.forEach(
-        (markerObj, index) =>
+        markerObj =>
           markerObj.pickupPoint
             ? markerObj.marker.setIcon(markerIconBlue)
             : markerObj
