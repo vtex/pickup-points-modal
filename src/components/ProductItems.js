@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { translate } from '../utils/i18nUtils'
-import { get } from 'lodash/get'
+import get from 'lodash/get'
 import { fixImageUrl } from '../utils/Images'
 import ReactTooltip from 'react-tooltip'
 
