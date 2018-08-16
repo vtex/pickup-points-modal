@@ -10,9 +10,8 @@ function getLogisticsInfoItem(logisticsInfo, index) {
 }
 
 function hasPickupPoint(logisticsInfo, pickupPointId) {
-  return (
-    logisticsInfo && logisticsInfo.slas.some(sla => sla.id === pickupPointId)
-  )
+  return logisticsInfo &&
+    logisticsInfo.slas.some(sla => sla.id === pickupPointId)
 }
 
 function getPickupPointId(pickupPoint) {
@@ -47,9 +46,8 @@ export function getUnavailableItemsByPickup(
     const logisticsInfoItem = getLogisticsInfoItem(logisticsInfo, index)
     const hasPickup = hasPickupPoint(logisticsInfoItem, pickupPointId)
 
-    return (
-      isSameSeller && (!logisticsInfoItem || (logisticsInfoItem && !hasPickup))
-    )
+    return isSameSeller &&
+      (!logisticsInfoItem || (logisticsInfoItem && !hasPickup))
   })
 }
 
