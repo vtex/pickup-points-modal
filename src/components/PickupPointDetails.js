@@ -61,7 +61,11 @@ export class PickupPointDetails extends Component {
 
     const { unavailableItems, items } = this.state
 
-    const businessHours = formatBusinessHoursList(pickupPointInfo)
+    const businessHours = !pickupPointInfo ||
+      !pickupPointInfo.businessHours ||
+      pickupPointInfo.businessHours.length === 0
+      ? null
+      : formatBusinessHoursList(pickupPointInfo.businessHours)
 
     return (
       <div className="pkpmodal-details">

@@ -74,66 +74,86 @@ export function getPickupOptionGeolocations(pickupOptions) {
       pickup => pickup && get(pickup, 'pickupStoreInfo.address.geoCoordinates')
     )
   }
-  return (
-    pickupOptions &&
+  return pickupOptions &&
     get(pickupOptions, 'pickupStoreInfo.address.geoCoordinates')
-  )
 }
 
-export function formatBusinessHoursList(pickupPointInfo) {
-  const bh = pickupPointInfo && pickupPointInfo.businessHours
-  const daysOrder = [1, 2, 3, 4, 5, 6, 0]
+export function formatBusinessHoursList(businessHours) {
+  const normalizedBusinessHours = normalizeBusinessHours(businessHours)
 
-  let sameWeekDaysHours
-  let newBh
+  const weekDaysHaveTheSameHours = doesWeekDaysHaveTheSameHours(
+    normalizedBusinessHours
+  )
 
-  if (bh && bh.length > 0) {
-    newBh = []
-    daysOrder.forEach((number, i) => {
-      let closed = true
-      const dayInfo = {
-        number: number,
-      }
-
-      bh.forEach((day, j) => {
-        if (number === day.DayOfWeek) {
-          closed = false
-          dayInfo.openingTime = bh[j].OpeningTime
-          dayInfo.closingTime = bh[j].ClosingTime
-        }
-      })
-
-      dayInfo.closed = closed
-
-      newBh.push(dayInfo)
-    })
-
-    sameWeekDaysHours = true
-    newBh.forEach((day, i) => {
-      if (i > 0 && i < 5 && (day.openingTime !== newBh[i - 1].openingTime || day.closingTime !== newBh[i - 1].closingTime)) {
-        sameWeekDaysHours = false
-      }
-    })
-
-    if (sameWeekDaysHours) {
-      const condensedBusinessHours = []
-      condensedBusinessHours.push({
-        number: '1to5',
-        closed: newBh[0].closed,
-        openingTime: newBh[0].openingTime,
-        closingTime: newBh[0].closingTime,
-      })
-      for (let i = 5; i <= 6; i++) {
-        condensedBusinessHours.push({
-          number: newBh[i].number,
-          closed: newBh[i].closed,
-          openingTime: newBh[i].openingTime,
-          closingTime: newBh[i].closingTime,
-        })
-      }
-      newBh = condensedBusinessHours
-    }
+  if (weekDaysHaveTheSameHours) {
+    return condenseWeekDaysHours(normalizedBusinessHours)
   }
 
-  return newBh
+  return normalizedBusinessHours
+}
+
+const DAYS_ORDER = [1, 2, 3, 4, 5, 6, 0]
+
+function normalizeBusinessHours(businessHours) {
+  return DAYS_ORDER.map(number => {
+    const day = businessHours.find(day => number === day.DayOfWeek)
+
+    return {
+      number,
+      closed: true,
+      ...(day
+        ? {
+            closed: false,
+            openingTime: day.OpeningTime,
+            closingTime: day.ClosingTime,
+          }
+        : {}),
+    }
+  })
+}
+
+const MONDAY = 0
+const FRIDAY = 4
+function doesWeekDaysHaveTheSameHours(businessHours) {
+  const weekDays = businessHours.slice(MONDAY, FRIDAY)
+
+  let previousOpeningTime = weekDays[0].openingTime
+  let previousClosingTime = weekDays[0].closingTime
+
+  for (let i = 1; i < weekDays.length; i++) {
+    const currentDay = weekDays[i]
+
+    if (
+      currentDay.openingTime !== previousOpeningTime ||
+      currentDay.closingTime !== previousClosingTime
+    ) {
+      return false
+    }
+
+    previousOpeningTime = currentDay.openingTime
+    previousClosingTime = currentDay.closingTime
+  }
+
+  return true
+}
+
+function condenseWeekDaysHours(businessHours) {
+  return businessHours.reduce(
+    (acc, businessHour, index) => {
+      if (index >= MONDAY && index <= FRIDAY) {
+        if (index === MONDAY) {
+          return acc.concat({
+            number: '1to5',
+            closed: businessHour.closed,
+            openingTime: businessHour.openingTime,
+            closingTime: businessHour.closingTime,
+          })
+        }
+        return acc
+      }
+
+      return acc.concat(businessHour)
+    },
+    []
+  )
 }
