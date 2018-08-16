@@ -9,7 +9,7 @@ import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/Address
 import { ASK, WAITING, GRANTED, VTEXLOCAL, LOCALHOST } from '../constants'
 
 import SearchIcon from '../assets/components/SearchIcon'
-import GPS from '../assets/components/GPS'
+import Gps from '../assets/components/GPS'
 
 import './SearchForm.css'
 
@@ -54,8 +54,7 @@ class SearchForm extends Component {
         className="pkpmodal-search"
         id="pkpmodal-search"
         onFocus={setGeolocationFrom}
-        onSubmit={event => event.preventDefault()}
-      >
+        onSubmit={event => event.preventDefault()}>
         <GeolocationInput
           address={address}
           autoFocus={isAutoFocus}
@@ -72,9 +71,8 @@ class SearchForm extends Component {
             className="pkp-modal-ask-geolocation-btn"
             onClick={this.handleAskGeolocationClick}
             title={translate(intl, 'askGeolocationAccept')}
-            type="button"
-          >
-            <GPS />
+            type="button">
+            <Gps />
           </button>
         )}
         <SearchIcon />

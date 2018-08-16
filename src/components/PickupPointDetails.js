@@ -64,8 +64,7 @@ export class PickupPointDetails extends Component {
           <button
             className="pkpmodal-details-back-lnk btn btn-link"
             onClick={this.handleBackButtonClick}
-            type="button"
-          >
+            type="button">
             <i
               className={
                 'pkpmodal-icon-back-pickup-points-list icon-angle-left'

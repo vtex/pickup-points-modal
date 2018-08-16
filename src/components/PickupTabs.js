@@ -26,8 +26,7 @@ export class PickupTabs extends Component {
           }`}
           onClick={this.handleLocationTab}
           type="button"
-          value={HIDE_MAP}
-        >
+          value={HIDE_MAP}>
           {translate(intl, 'list')}
         </button>
         <button
@@ -38,8 +37,7 @@ export class PickupTabs extends Component {
           }`}
           onClick={this.handleLocationTab}
           type="button"
-          value={SHOW_MAP}
-        >
+          value={SHOW_MAP}>
           {translate(intl, 'map')}
         </button>
       </div>
