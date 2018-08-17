@@ -63,6 +63,7 @@
   "pickupPointsModal.unavailable": "unavailable",
   "pickupPointsModal.unavailableItemsAmount":
     "{itemsAmount, plural, =0 {} one {# item unavailable} other {# item unavailable}}",
+  "pickupPointsModal.businessHours": "Business Hours",
   "pickupPointsModal.confirmPoint": "Pickup in this point",
   "pickupPointsModal.modifyDeliveryOptions": "Modify delivery options",
   "pickupPointsModal.shippingAddress": "Shipping address",
@@ -116,5 +117,15 @@
     "Search in this format: 950 Main Street",
   "pickupPointsModal.geolocationEmpty": "Find nearby pickup points",
   "pickupPointsModal.geolocationEmptyInstructions":
-    "The more specific your search, the better the results!"
+    "The more specific your search, the better the results!",
+  "pickupPointsModal.weekDay0": "Sunday",
+  "pickupPointsModal.weekDay1": "Monday",
+  "pickupPointsModal.weekDay2": "Tuesday",
+  "pickupPointsModal.weekDay3": "Wednesday",
+  "pickupPointsModal.weekDay4": "Thursday",
+  "pickupPointsModal.weekDay5": "Friday",
+  "pickupPointsModal.weekDay6": "Saturday",
+  "pickupPointsModal.weekDay1to5": "Monday to Friday",
+  "pickupPointsModal.hourTo": "-",
+  "pickupPointsModal.closed": "Closed"
 }

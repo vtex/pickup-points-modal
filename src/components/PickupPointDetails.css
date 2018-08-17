@@ -41,7 +41,29 @@
 }
 
 .pkpmodal-details-info-title {
+  font-weight: 300;
   margin-top: 0;
+}
+
+/* business hours */
+
+.pkpmodal-details-hours {
+  font-size: 12px;
+  width: 100%;
+}
+
+.pkpmodal-details-hours td {
+  border-bottom: 1px solid #F2F4F5;
+  padding-top: 6px;
+}
+
+.pkpmodal-details-hours-range,
+.pkpmodal-details-hours-closed {
+  text-align: right;
+}
+
+.pkpmodal-details-hours-closed {
+  color: #FF4C4C;
 }
 
 /* links and icons */

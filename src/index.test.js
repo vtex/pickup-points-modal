@@ -1,5 +1,5 @@
 import React from 'react'
-import IntlPickupModal, { PickupModal } from './index'
+import IntlPickupModal, { PickupPointsModal } from './index'
 import {
   mountWithIntl,
   shallowWithIntl,
@@ -7,7 +7,7 @@ import {
   setLocale,
 } from 'enzyme-react-intl'
 import { Provider } from 'react-redux'
-import IntlContainer from '../containers/IntlContainer'
+import IntlContainer from './containers/IntlContainer'
 import renderer from 'react-test-renderer'
 import { addValidation } from '@vtex/address-form'
 import BRA from '@vtex/address-form/lib/country/BRA'
@@ -34,6 +34,59 @@ describe('PickupModal', () => {
     reference: null,
     geoCoordinates: [],
     addressQuery: 'query',
+  }
+
+  const defaultProps = {
+    changeActivePickupDetails: jest.fn(),
+    changeActiveSLAOption: jest.fn(),
+    closePickupPointsModal: jest.fn(),
+    updateAddressForm: jest.fn(),
+    handleChangeActiveSLAOption: jest.fn(),
+    handleClosePickupPointsModal: jest.fn(),
+    togglePickupDetails: jest.fn(),
+    onAddressChange: jest.fn(),
+    items: [],
+    logisticsInfo: [],
+    pickupOptions: [
+      {
+        name: 'test',
+        price: 100,
+        shippingEstimate: '1bd',
+        pickupStoreInfo: {
+          friendlyName: 'test',
+          address: {
+            geoCoordinates: [123, 123],
+          },
+        },
+        deliveryChannel: PICKUP_IN_STORE,
+        id: '1',
+      },
+      {
+        name: 'test',
+        price: 100,
+        shippingEstimate: '1bd',
+        pickupStoreInfo: {
+          friendlyName: 'test',
+          address: {
+            geoCoordinates: [123, 123],
+          },
+        },
+        deliveryChannel: PICKUP_IN_STORE,
+        id: '2',
+      },
+    ],
+    pickupPoints: [],
+    rules: BRA,
+    sellerId: '1',
+    activePickupPoint: null,
+    askForGeolocation: false,
+    googleMaps: null,
+    googleMapsKey: '1234',
+    isSearching: false,
+    loading: false,
+    searchAddress: null,
+    selectedPickupPoint: null,
+    storePreferencesData: {},
   }
 
   beforeEach(() => {
@@ -162,11 +215,9 @@ describe('PickupModal', () => {
     }
 
     props = {
-      sellerId: '1',
-      updateAddressForm: jest.fn(),
+      ...defaultProps,
       searchedPickupAddressEvent: jest.fn(),
       validateAddressForm: jest.fn(),
-      togglePickupDetails: jest.fn(),
       changeActivePickupDetails: jest.fn(),
       updateShippingData: jest.fn(),
       isPickupDetailsActive: false,
@@ -215,11 +266,9 @@ describe('PickupModal', () => {
 
   it('should render self and components without Google Maps', () => {
     const props = {
-      sellerId: '1',
-      updateAddressForm: jest.fn(),
+      ...defaultProps,
       searchedPickupAddressEvent: jest.fn(),
       validateAddressForm: jest.fn(),
-      togglePickupDetails: jest.fn(),
       changeActivePickupDetails: jest.fn(),
       updateShippingData: jest.fn(),
       isPickupDetailsActive: false,
@@ -268,13 +317,11 @@ describe('PickupModal', () => {
     const updateShippingDataMock = jest.fn()
 
     const props = {
+      ...defaultProps,
       searchAddress: addValidation(address),
       activeDeliveryChannel: PICKUP_IN_STORE,
-      sellerId: '1',
-      updateAddressForm: jest.fn(),
       searchedPickupAddressEvent: jest.fn(),
       validateAddressForm: jest.fn(),
-      togglePickupDetails: jest.fn(),
       changeActivePickupDetails: jest.fn(),
       isPickupDetailsActive: false,
       pickupOptionGeolocations: [[123, 123], [123, 123]],
@@ -309,11 +356,11 @@ describe('PickupModal', () => {
       updateShippingData: updateShippingDataMock,
     }
 
-    const wrapper = shallowWithIntl(<PickupModal {...props} />)
+    const wrapper = shallowWithIntl(<PickupPointsModal {...props} />)
     process.nextTick(() => {
       try {
         wrapper.update()
-        const closeButton = wrapper.find('button')
+        const closeButton = wrapper.find('button')[0]
 
         closeButton.simulate('click')
 
@@ -329,13 +376,11 @@ describe('PickupModal', () => {
     const mockClosePickupModal = jest.fn()
 
     const props = {
+      ...defaultProps,
       searchAddress: addValidation(address),
       activeDeliveryChannel: PICKUP_IN_STORE,
-      sellerId: '1',
-      updateAddressForm: jest.fn(),
       searchedPickupAddressEvent: jest.fn(),
       validateAddressForm: jest.fn(),
-      togglePickupDetails: jest.fn(),
       changeActivePickupDetails: jest.fn(),
       updateShippingData: jest.fn(),
       isPickupDetailsActive: false,
@@ -369,9 +414,9 @@ describe('PickupModal', () => {
       closePickupModal: mockClosePickupModal,
     }
 
-    const wrapper = shallowWithIntl(<PickupModal {...props} />)
+    const wrapper = shallowWithIntl(<PickupPointsModal {...props} />)
 
-    const closeButton = wrapper.find('button')
+    const closeButton = wrapper.find('button')[0]
 
     closeButton.simulate('click')
 
@@ -382,11 +427,9 @@ describe('PickupModal', () => {
     const mockClosePickupModal = jest.fn()
 
     const props = {
-      sellerId: '1',
-      updateAddressForm: jest.fn(),
+      ...defaultProps,
       searchedPickupAddressEvent: jest.fn(),
       validateAddressForm: jest.fn(),
-      togglePickupDetails: jest.fn(),
       changeActivePickupDetails: jest.fn(),
       updateShippingData: jest.fn(),
       isPickupDetailsActive: false,
@@ -433,7 +476,7 @@ describe('PickupModal', () => {
       </Provider>
     )
 
-    const listButton = wrapper.find('button.pickup-view-list')
+    const listButton = wrapper.find('button.pickup-view-list')[0]
 
     listButton.simulate('click')
     process.nextTick(() => {

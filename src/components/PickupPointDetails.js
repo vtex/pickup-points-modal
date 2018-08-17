@@ -6,10 +6,12 @@ import { translate } from '../utils/i18nUtils'
 import {
   getUnavailableItemsByPickup,
   getItemsWithPickupPoint,
+  formatBusinessHoursList,
 } from '../utils/pickupUtils'
 
 import PickupPoint from './PickupPoint'
 import ProductItems from './ProductItems'
+import PickupPointHour from './PickupPointHour'
 import Button from './Button'
 
 import './PickupPointDetails.css'
@@ -48,6 +50,7 @@ export class PickupPointDetails extends Component {
   render() {
     const {
       pickupPoint,
+      pickupPointInfo,
       selectedRules,
       isSelectedSla,
       sellerId,
@@ -57,6 +60,13 @@ export class PickupPointDetails extends Component {
     } = this.props
 
     const { unavailableItems, items } = this.state
+
+    const businessHours =
+      !pickupPointInfo ||
+      !pickupPointInfo.businessHours ||
+      pickupPointInfo.businessHours.length === 0
+        ? null
+        : formatBusinessHoursList(pickupPointInfo.businessHours)
 
     return (
       <div className="pkpmodal-details">
@@ -106,6 +116,36 @@ export class PickupPointDetails extends Component {
                   {pickupPoint.pickupStoreInfo.additionalInfo}
                 </div>
               )}
+
+            {businessHours && (
+              <div className="pkpmodal-details-group">
+                <h3 className="pkpmodal-details-info-title">
+                  {translate(intl, 'businessHours')}
+                </h3>
+                <table className="pkpmodal-details-hours">
+                  {businessHours.map((day, i) => {
+                    return (
+                      <tr key={i}>
+                        <td className="pkpmodal-details-hours-day">
+                          {translate(intl, `weekDay${day.number}`)}
+                        </td>
+                        {day.closed ? (
+                          <td className="pkpmodal-details-hours-closed">
+                            {translate(intl, 'closed')}
+                          </td>
+                        ) : (
+                          <td className="pkpmodal-details-hours-range">
+                            <PickupPointHour time={day.openingTime} />{' '}
+                            {translate(intl, 'hourTo')}{' '}
+                            <PickupPointHour time={day.closingTime} />
+                          </td>
+                        )}
+                      </tr>
+                    )
+                  })}
+                </table>
+              </div>
+            )}
           </div>
         </div>
 
@@ -136,6 +176,7 @@ PickupPointDetails.propTypes = {
   logisticsInfo: PropTypes.array.isRequired,
   onClickPickupModal: PropTypes.func,
   pickupPoint: PropTypes.object.isRequired,
+  pickupPointInfo: PropTypes.object.isRequired,
   selectedRules: PropTypes.object.isRequired,
   sellerId: PropTypes.string,
   storePreferencesData: PropTypes.object.isRequired,

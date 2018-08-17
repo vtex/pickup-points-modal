@@ -1,6 +1,6 @@
 {
   "name": "@vtex/pickup-points-modal",
-  "version": "0.1.59",
+  "version": "1.0.0",
   "description": "Pickup Points Modal React component",
   "main": "lib/index.js",
   "files": [
@@ -45,7 +45,9 @@
     "babel-eslint": "^8.2.1",
     "babel-jest": "^22.2.2",
     "babel-preset-react-app": "^3.1.1",
-    "enzyme": "^3.3.0",
+    "enzyme": "^3.4.1",
+    "enzyme-adapter-react-16": "^1.2.0",
+    "enzyme-react-intl": "^2.0.0",
     "eslint": "^4.17.0",
     "eslint-config-prettier": "^3.0.1",
     "eslint-config-vtex": "^8.0.0",
@@ -56,15 +58,19 @@
     "eslint-plugin-react": "^7.6.1",
     "husky": "1.0.0-rc.2",
     "i18n-iso-countries": "^3.5.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^22.2.2",
-    "jest-enzyme": "^4.2.0",
+    "jest-enzyme": "^6.0.3",
+    "mockdate": "^2.0.2",
     "nwb": "^0.21.5",
     "prettier": "^1.14.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-hot-loader": "^3.1.3",
     "react-intl": "^2.4.0",
-    "react-test-renderer": "^16.2.0"
+    "react-redux": "^5.0.7",
+    "react-test-renderer": "^16.2.0",
+    "redux": "^4.0.0"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",

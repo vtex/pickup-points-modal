@@ -40,6 +40,7 @@ class PickupSidebar extends Component {
       mapStatus,
       onHandleAddressChange,
       pickupOptions,
+      pickupPoints,
       rules,
       searchAddress,
       sellerId,
@@ -197,6 +198,9 @@ class PickupSidebar extends Component {
                 items={items}
                 logisticsInfo={logisticsInfo}
                 pickupPoint={selectedPickupPoint}
+                pickupPointInfo={pickupPoints.find(
+                  pickup => pickup.id === selectedPickupPoint.pickupPointId
+                )}
                 selectedRules={rules}
                 sellerId={sellerId}
                 storePreferencesData={storePreferencesData}
@@ -234,6 +238,7 @@ PickupSidebar.propTypes = {
   onManualGeolocation: PropTypes.func.isRequired,
   onManualGeolocationError: PropTypes.func.isRequired,
   pickupOptions: PropTypes.array.isRequired,
+  pickupPoints: PropTypes.array.isRequired,
   rules: PropTypes.object.isRequired,
   searchAddress: AddressShapeWithValidation,
   selectedPickupPoint: PropTypes.object,

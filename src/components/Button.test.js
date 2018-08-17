@@ -1,15 +1,10 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount, shallow } from 'enzyme'
 import Button from './Button'
 
 describe('Button', () => {
   it('should render self and subcomponents', () => {
-    const props = {
-      title: 'title',
-    }
-    const wrapper = shallow(<Button {...props} />)
-
-    expect(wrapper.find('button').hasClass('relative')).toBe(true)
+    const wrapper = mount(<Button title="title" />)
 
     expect(wrapper.find('button').text()).toBe('title')
   })
@@ -21,7 +16,7 @@ describe('Button', () => {
     }
     const wrapper = shallow(<Button {...props} />)
 
-    expect(wrapper.nodes[0]).toMatchSnapshot()
+    expect(wrapper.getElements()[0]).toMatchSnapshot()
   })
 
   it('should render primary mode', () => {
@@ -31,7 +26,7 @@ describe('Button', () => {
     }
     const wrapper = shallow(<Button {...props} />)
 
-    expect(wrapper.nodes[0]).toMatchSnapshot()
+    expect(wrapper.getElements()[0]).toMatchSnapshot()
   })
 
   it('should render info mode', () => {
@@ -41,7 +36,7 @@ describe('Button', () => {
     }
     const wrapper = shallow(<Button {...props} />)
 
-    expect(wrapper.nodes[0]).toMatchSnapshot()
+    expect(wrapper.getElements()[0]).toMatchSnapshot()
   })
 
   it('should render alert mode', () => {
@@ -51,7 +46,7 @@ describe('Button', () => {
     }
     const wrapper = shallow(<Button {...props} />)
 
-    expect(wrapper.nodes[0]).toMatchSnapshot()
+    expect(wrapper.getElements()[0]).toMatchSnapshot()
   })
 
   it('should render danger mode', () => {
@@ -61,7 +56,7 @@ describe('Button', () => {
     }
     const wrapper = shallow(<Button {...props} />)
 
-    expect(wrapper.nodes[0]).toMatchSnapshot()
+    expect(wrapper.getElements()[0]).toMatchSnapshot()
   })
 
   it('should render muted mode with size xs and is not inline', () => {
@@ -73,7 +68,7 @@ describe('Button', () => {
     }
     const wrapper = shallow(<Button {...props} />)
 
-    expect(wrapper.nodes[0]).toMatchSnapshot()
+    expect(wrapper.getElements()[0]).toMatchSnapshot()
   })
 
   it('should render link mode with size sm and disabled and is not lonely', () => {
@@ -86,7 +81,7 @@ describe('Button', () => {
     }
     const wrapper = shallow(<Button {...props} />)
 
-    expect(wrapper.nodes[0]).toMatchSnapshot()
+    expect(wrapper.getElements()[0]).toMatchSnapshot()
   })
 
   it('should render light-primary mode with size lg and loading', () => {
@@ -98,7 +93,7 @@ describe('Button', () => {
     }
     const wrapper = shallow(<Button {...props} />)
 
-    expect(wrapper.nodes[0]).toMatchSnapshot()
+    expect(wrapper.getElements()[0]).toMatchSnapshot()
   })
 
   it('should render light-danger mode with size xl not checked with fixed value', () => {
@@ -111,6 +106,6 @@ describe('Button', () => {
     }
     const wrapper = shallow(<Button {...props} />)
 
-    expect(wrapper.nodes[0]).toMatchSnapshot()
+    expect(wrapper.getElements()[0]).toMatchSnapshot()
   })
 })
