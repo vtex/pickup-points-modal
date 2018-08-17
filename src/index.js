@@ -60,7 +60,7 @@ export class PickupPointsModal extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps, nextState) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const nextPickupOptions = getPickupSlaString(nextProps.pickupOptions)
 
     const hasGeocoordinates =
