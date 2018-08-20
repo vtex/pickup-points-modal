@@ -144,28 +144,6 @@ class PickupSidebar extends Component {
             !showError &&
             isNotShowingPickupDetailsAndHasPickupOptions && (
               <div className="pkpmodal-points-list">
-                {pickupOptions.length > 0 &&
-                  activePickupPoint && (
-                    <div className="pkpmodal-points-item">
-                      <PickupPoint
-                        changeActivePickupPointId={changeActivePickupPointId}
-                        handleChangeActivePickupDetails={
-                          changeActivePickupDetails
-                        }
-                        isList
-                        isSelected
-                        items={items}
-                        logisticsInfo={logisticsInfo}
-                        pickupPoint={activePickupPoint}
-                        pickupPointId={activePickupPoint.id}
-                        selectedRules={rules}
-                        sellerId={sellerId}
-                        storePreferencesData={storePreferencesData}
-                        togglePickupDetails={togglePickupDetails}
-                      />
-                    </div>
-                  )}
-
                 {filteredPickupOptions.map(pickupPoint => (
                   <div className="pkpmodal-points-item" key={pickupPoint.id}>
                     <PickupPoint
