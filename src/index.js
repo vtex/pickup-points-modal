@@ -44,12 +44,6 @@ export class PickupPointsModal extends Component {
       isLargeScreen: window.innerWidth > 1023,
       selectedPickupPoint: props.selectedPickupPoint,
       isPickupDetailsActive: null,
-      filteredPickupOptions: props.pickupOptions.filter(
-        option =>
-          props.activePickupPoint
-            ? option.id !== props.activePickupPoint.id
-            : true
-      ),
       geolocationFrom: OUTSIDE_MODAL,
       showAskForGeolocation: props.askForGeolocation,
       askForGeolocationStatus: props.askForGeolocation ? WAITING : '',
@@ -81,12 +75,6 @@ export class PickupPointsModal extends Component {
       showError: notSearchingAndIsEmptyPickupOptions,
       errorStatus: notSearchingAndIsEmptyPickupOptions ? ERROR_NOT_FOUND : '',
       selectedPickupPoint: nextProps.selectedPickupPoint,
-      filteredPickupOptions: nextProps.pickupOptions.filter(
-        option =>
-          nextProps.activePickupPoint
-            ? option.id !== nextProps.activePickupPoint.id
-            : true
-      ),
     })
   }
 
@@ -275,7 +263,6 @@ export class PickupPointsModal extends Component {
     const {
       askForGeolocationStatus,
       errorStatus,
-      filteredPickupOptions,
       geolocationFrom,
       isLargeScreen,
       isPickupDetailsActive,
@@ -384,7 +371,6 @@ export class PickupPointsModal extends Component {
                 changeActiveSLAOption={changeActiveSLAOption}
                 closePickupPointsModal={closePickupPointsModal}
                 errorStatus={errorStatus}
-                filteredPickupOptions={filteredPickupOptions}
                 geolocationFrom={geolocationFrom}
                 googleMaps={googleMaps}
                 isLargeScreen={isLargeScreen}
