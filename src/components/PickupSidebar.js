@@ -28,7 +28,6 @@ class PickupSidebar extends Component {
       changeActiveSLAOption,
       closePickupPointsModal,
       errorStatus,
-      filteredPickupOptions,
       geolocationFrom,
       googleMaps,
       intl,
@@ -144,7 +143,7 @@ class PickupSidebar extends Component {
             !showError &&
             isNotShowingPickupDetailsAndHasPickupOptions && (
               <div className="pkpmodal-points-list">
-                {filteredPickupOptions.map(pickupPoint => (
+                {pickupOptions.map(pickupPoint => (
                   <div className="pkpmodal-points-item" key={pickupPoint.id}>
                     <PickupPoint
                       changeActivePickupPointId={changeActivePickupPointId}
