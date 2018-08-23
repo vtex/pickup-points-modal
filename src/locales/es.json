@@ -63,7 +63,7 @@
   "pickupPointsModal.unavailable": "indisponible",
   "pickupPointsModal.unavailableItemsAmount":
     "{itemsAmount, plural, =0 {} one {# indisponible} other {# no están disponibles}}",
-  "pickupPointsModal.businessHours": "Horas de oficina",
+  "pickupPointsModal.businessHours": "Horarios de atención",
   "pickupPointsModal.confirmPoint": "Recogida en este punto",
   "pickupPointsModal.modifyDeliveryOptions": "Cambiar opciones de entrega",
   "pickupPointsModal.shippingAddress": "Dirección de entrega",
@@ -127,7 +127,7 @@
   "pickupPointsModal.weekDay4": "Jueves",
   "pickupPointsModal.weekDay5": "Viernes",
   "pickupPointsModal.weekDay6": "Sábado",
-  "pickupPointsModal.weekDay1to5": "Lunes to Viernes",
+  "pickupPointsModal.weekDay1to5": "Lunes a Viernes",
   "pickupPointsModal.hourTo": "a",
-  "pickupPointsModal.closed": "Cierrado"
+  "pickupPointsModal.closed": "Cerrado"
 }
