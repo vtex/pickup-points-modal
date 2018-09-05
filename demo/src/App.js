@@ -91,6 +91,7 @@ class App extends Component {
             searchAddress={searchAddress}
             selectedPickupPoint={selectedPickupPoint}
             storePreferencesData={storePreferencesData}
+            pickupPoints={[]}
           />
         )}
         <a onClick={this.handleOpenModal}>Open Modal</a>
