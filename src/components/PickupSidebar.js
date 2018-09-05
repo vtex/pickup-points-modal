@@ -198,7 +198,6 @@ PickupSidebar.propTypes = {
   changeActiveSLAOption: PropTypes.func.isRequired,
   closePickupPointsModal: PropTypes.func.isRequired,
   errorStatus: PropTypes.string,
-  filteredPickupOptions: PropTypes.array.isRequired,
   geolocationFrom: PropTypes.string,
   googleMaps: PropTypes.object.isRequired,
   intl: intlShape,

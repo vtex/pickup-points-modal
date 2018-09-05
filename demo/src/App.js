@@ -15,6 +15,7 @@ import '../../src/components/ProductItems.css'
 import pickupMock from './pickup-options'
 import itemsMock from './items'
 import logisticsInfoMock from './logistics-info'
+import pickupPointsMock from './pickup-points'
 
 const API_KEY = 'AIzaSyATLp76vkHxfMZqJF_sJbjQqZwvSIBhsTM'
 
@@ -27,6 +28,7 @@ class App extends Component {
       selectedPickupPoint: pickupMock.pickupOptions[0],
       pickupOptions: pickupMock.pickupOptions,
       logisticsInfo: logisticsInfoMock.logisticsInfo,
+      pickupPoints: pickupPointsMock.pickupPoints,
       items: itemsMock.items,
       storePreferencesData: {
         countryCode: 'BRA',
@@ -68,6 +70,7 @@ class App extends Component {
       isPickupDetailsActive,
       storePreferencesData,
       logisticsInfo,
+      pickupPoints,
       items,
     } = this.state
 
@@ -91,6 +94,7 @@ class App extends Component {
             searchAddress={searchAddress}
             selectedPickupPoint={selectedPickupPoint}
             storePreferencesData={storePreferencesData}
+            pickupPoints={pickupPoints}
           />
         )}
         <a onClick={this.handleOpenModal}>Open Modal</a>
