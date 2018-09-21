@@ -49,18 +49,27 @@ export class AskForGeolocation extends Component {
         navigator.permissions
           .query({ name: 'geolocation' })
           .then(permission => {
-            this.handleCurrentPosition({
-              permission,
-              googleMaps: props.googleMaps,
-            })
+            switch (permission.state) {
+              case 'denied':
+                this.getCurrentPositionError({ code: 1 })
+                break
+
+              case 'granted':
+                props.onAskForGeolocationStatus({ status: SEARCHING })
+                this.handleCurrentPosition(props.googleMaps)
+                break
+
+              default:
+                this.handleCurrentPosition(props.googleMaps)
+            }
           })
       } else {
-        this.handleCurrentPosition({ googleMaps: props.googleMaps })
+        this.handleCurrentPosition(props.googleMaps)
       }
     }
   }
 
-  handleCurrentPosition = ({ googleMaps }) => {
+  handleCurrentPosition = googleMaps => {
     if (window.mockGeocoordinates) {
       this.getCurrentPositionSuccess({
         coords: {
