@@ -18,14 +18,22 @@ class SearchForm extends Component {
     super(props)
 
     this.state = {
-      showAskForGeolocationButton: true,
+      isMyLocationButtonVisible: true,
     }
   }
 
-  handleToggleAskForGeolocation = () => {
+  setMyLocationButtonVisibility = visibility => {
     this.setState({
-      showAskForGeolocationButton: !this.state.showAskForGeolocationButton,
+      isMyLocationButtonVisible: visibility,
     })
+  }
+
+  handleInputBlurs = () => {
+    this.setMyLocationButtonVisibility(true)
+  }
+
+  handleInputFocus = () => {
+    this.setMyLocationButtonVisibility(false)
   }
 
   handleAskGeolocationClick = () => {
@@ -75,8 +83,8 @@ class SearchForm extends Component {
           googleMaps={googleMaps}
           Input={Input}
           inputProps={{
-            onBlur: this.handleToggleAskForGeolocation,
-            onFocus: this.handleToggleAskForGeolocation,
+            onBlur: this.handleInputBlurs,
+            onFocus: this.handleInputFocus,
           }}
           isLoadingGoogle={isLoadingGoogle}
           onChangeAddress={onChangeAddress}
@@ -85,7 +93,7 @@ class SearchForm extends Component {
           useSearchBox
         />
         {navigator.geolocation &&
-          this.state.showAskForGeolocationButton && (
+          this.state.isMyLocationButtonVisible && (
             <button
               className="pkp-modal-ask-geolocation-btn"
               onClick={this.handleAskGeolocationClick}
