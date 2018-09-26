@@ -28,7 +28,7 @@ class SearchForm extends Component {
     })
   }
 
-  handleInputBlurs = () => {
+  handleInputBlur = () => {
     this.setMyLocationButtonVisibility(true)
   }
 
@@ -83,7 +83,7 @@ class SearchForm extends Component {
           googleMaps={googleMaps}
           Input={Input}
           inputProps={{
-            onBlur: this.handleInputBlurs,
+            onBlur: this.handleInputBlur,
             onFocus: this.handleInputFocus,
           }}
           isLoadingGoogle={isLoadingGoogle}
