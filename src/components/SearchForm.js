@@ -14,6 +14,28 @@ import Gps from '../assets/components/GPS'
 import './SearchForm.css'
 
 class SearchForm extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isMyLocationButtonVisible: true,
+    }
+  }
+
+  setMyLocationButtonVisibility = visibility => {
+    this.setState({
+      isMyLocationButtonVisible: visibility,
+    })
+  }
+
+  handleInputBlur = () => {
+    this.setMyLocationButtonVisibility(true)
+  }
+
+  handleInputFocus = () => {
+    this.setMyLocationButtonVisibility(false)
+  }
+
   handleAskGeolocationClick = () => {
     if (navigator.permissions) {
       navigator.permissions.query({ name: 'geolocation' }).then(permission => {
@@ -60,21 +82,26 @@ class SearchForm extends Component {
           autoFocus={isAutoFocus}
           googleMaps={googleMaps}
           Input={Input}
+          inputProps={{
+            onBlur: this.handleInputBlur,
+            onFocus: this.handleInputFocus,
+          }}
           isLoadingGoogle={isLoadingGoogle}
           onChangeAddress={onChangeAddress}
           placeholder={placeholder}
           rules={rules}
           useSearchBox
         />
-        {navigator.geolocation && (
-          <button
-            className="pkp-modal-ask-geolocation-btn"
-            onClick={this.handleAskGeolocationClick}
-            title={translate(intl, 'askGeolocationAccept')}
-            type="button">
-            <Gps />
-          </button>
-        )}
+        {navigator.geolocation &&
+          this.state.isMyLocationButtonVisible && (
+            <button
+              className="pkp-modal-ask-geolocation-btn"
+              onClick={this.handleAskGeolocationClick}
+              title={translate(intl, 'askGeolocationAccept')}
+              type="button">
+              <Gps />
+            </button>
+          )}
         <SearchIcon />
       </form>
     )
