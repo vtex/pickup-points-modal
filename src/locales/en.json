@@ -20,7 +20,7 @@
   "pickupPointsModal.slaOptionSimple": "{price} - {shippingEstimate}{scheduled}",
   "pickupPointsModal.shippingEstimate-bd": "{timeAmount, plural, =0 {Same day} one {# business day} other {Up to # business days}}",
   "pickupPointsModal.shippingEstimate-d": "{timeAmount, plural, =0 {Same day} one {# day} other {Up to # days}}",
-  "pickupPointsModal.shippingEstimate-h": "{timeAmount, plural, =0 {Now} one {# hours} other {Up to # hours}}",
+  "pickupPointsModal.shippingEstimate-h": "{timeAmount, plural, =0 {Now} one {# hour} other {Up to # hours}}",
   "pickupPointsModal.shippingEstimate-m": "{timeAmount, plural, =0 {Now} one {# minute} other {Up to # minutes}}",
   "pickupPointsModal.free": "Free",
   "pickupPointsModal.shippingEstimatePickup-bd": "{timeAmount, plural, =0 {Ready on the same day} one {Ready in up to # business day} other {Ready in up to # business days}}",
