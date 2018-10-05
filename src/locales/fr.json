@@ -70,7 +70,7 @@
   "pickupPointsModal.geolocationDiscover": "Nous vous proposerons le point de retrait le plus proche de chez vous",
   "pickupPointsModal.geolocationAsk": "Pour cela, nous avons besoin de votre emplacement",
   "pickupPointsModal.geolocationManual": "Rechercher une adresse",
-  "pickupPointsModal.geolocationAllow": "Sélectionnez \ "Autoriser \" dans l'invitation de votre navigateur.",
+  "pickupPointsModal.geolocationAllow": "Sélectionnez \"Autoriser\" dans l'invitation de votre navigateur.",
   "pickupPointsModal.geolocationWaiting": "En attente de votre autorisation",
   "pickupPointsModal.geolocationSearching": "Recherche de points à proximité",
   "pickupPointsModal.distance": "{distanceValue} km",
