@@ -16,7 +16,7 @@
 .pkpmodal-details-middle {
   overflow: auto;
   flex: 1 1 auto;
-  min-height: 0; /* fix firebox overflow bug */
+  min-height: 0; /* fix firefox overflow bug */
   -webkit-overflow-scrolling: touch;
 }
 
