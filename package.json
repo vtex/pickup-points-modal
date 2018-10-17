@@ -35,7 +35,7 @@
   "author": "Fernando de Almeida Coelho <nandoacoelho@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@vtex/address-form": "1.5.5",
+    "@vtex/address-form": "2.5.3",
     "babel-plugin-add-react-displayname": "^0.0.5",
     "classnames": "2.2.5",
     "lodash": "^4.17.5",

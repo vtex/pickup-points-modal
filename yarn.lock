@@ -96,24 +96,28 @@
   version "10.7.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.7.1.tgz#b704d7c259aa40ee052eec678758a68d07132a2e"
 
-"@vtex/address-form@1.5.5":
-  version "1.5.5"
-  resolved "https://registry.yarnpkg.com/@vtex/address-form/-/address-form-1.5.5.tgz#903d68450872984668b438060a459ead3be0e846"
+"@vtex/address-form@2.5.3":
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/@vtex/address-form/-/address-form-2.5.3.tgz#0106d872acbdfd8632d2095623780e60e27fa5b4"
   dependencies:
-    "@vtex/styleguide" "^2.0.0-rc.41"
+    "@vtex/styleguide" "^5.6.2"
     axios "^0.16.2"
+    babel-plugin-add-react-displayname "^0.0.5"
     classnames "^2.2.5"
+    enzyme-adapter-react-16 "^1.2.0"
+    enzyme-to-json "^3.3.4"
     load-google-maps-api "^1.0.0"
     lodash "^4.17.4"
-    msk "^1.0.2"
-    vtex-tachyons "^2.4.0"
+    msk "1.0.3"
+    recompose "^0.27.1"
 
-"@vtex/styleguide@^2.0.0-rc.41":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@vtex/styleguide/-/styleguide-2.3.0.tgz#2f43d9c5aef58af56457c12d069c839c0497f0e0"
+"@vtex/styleguide@^5.6.2":
+  version "5.6.2"
+  resolved "https://registry.yarnpkg.com/@vtex/styleguide/-/styleguide-5.6.2.tgz#133ac2d7847b148f4b1bdb836b999cb90d667c22"
   dependencies:
     react-responsive-modal "^2.0.1"
-    vtex-tachyons "^2.3.0"
+    react-virtualized "^9.19.1"
+    vtex-tachyons "^2.6.0"
 
 JSONStream@^1.0.3:
   version "1.3.4"
@@ -1951,6 +1955,10 @@ chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.4.1:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
+change-emitter@^0.1.2:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/change-emitter/-/change-emitter-0.1.6.tgz#e8b2fe3d7f1ab7d69a32199aff91ea6931409515"
+
 chardet@^0.4.0:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.4.2.tgz#b5473b33dc97c424e5d98dc87d55d4d8a29c8bf2"
@@ -2046,7 +2054,7 @@ classnames@2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
-classnames@^2.2.5:
+classnames@^2.2.3, classnames@^2.2.5:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
 
@@ -2856,7 +2864,7 @@ dom-converter@~0.1:
   dependencies:
     utila "~0.3"
 
-dom-helpers@^3.3.1:
+"dom-helpers@^2.4.0 || ^3.0.0", dom-helpers@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.3.1.tgz#fc1a4e15ffdf60ddde03a480a9c0fece821dd4a6"
 
@@ -3094,7 +3102,7 @@ enzyme-react-intl@^2.0.0:
   dependencies:
     jsonfile "^4.0.0"
 
-enzyme-to-json@^3.3.0:
+enzyme-to-json@^3.3.0, enzyme-to-json@^3.3.4:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/enzyme-to-json/-/enzyme-to-json-3.3.4.tgz#67c6040e931182f183418af2eb9f4323258aa77f"
   dependencies:
@@ -3696,7 +3704,7 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-fbjs@^0.8.16:
+fbjs@^0.8.1, fbjs@^0.8.16:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   dependencies:
@@ -4306,7 +4314,7 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
-hoist-non-react-statics@^2.5.0:
+hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
 
@@ -6029,7 +6037,7 @@ longest@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/longest/-/longest-1.0.1.tgz#30a0b2da38f73770e8294a0d22e6625ed77d0097"
 
-loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1:
+loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.0, loose-envify@^1.3.1:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   dependencies:
@@ -6374,7 +6382,7 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
-msk@^1.0.2:
+msk@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/msk/-/msk-1.0.3.tgz#8eeb462edb48ca7965ee576b1c8faa6296cd0044"
 
@@ -7867,7 +7875,7 @@ react-jss@^8.1.0:
     prop-types "^15.6.0"
     theming "^1.3.0"
 
-react-lifecycles-compat@^3.0.4:
+react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
 
@@ -7955,6 +7963,17 @@ react-transition-group@^2.2.1:
     dom-helpers "^3.3.1"
     loose-envify "^1.3.1"
     prop-types "^15.6.2"
+    react-lifecycles-compat "^3.0.4"
+
+react-virtualized@^9.19.1:
+  version "9.20.1"
+  resolved "https://registry.yarnpkg.com/react-virtualized/-/react-virtualized-9.20.1.tgz#02dc08fe9070386b8c48e2ac56bce7af0208d22d"
+  dependencies:
+    babel-runtime "^6.26.0"
+    classnames "^2.2.3"
+    dom-helpers "^2.4.0 || ^3.0.0"
+    loose-envify "^1.3.0"
+    prop-types "^15.6.0"
     react-lifecycles-compat "^3.0.4"
 
 react@^16.3.2:
@@ -8065,6 +8084,17 @@ realpath-native@^1.0.0:
   resolved "https://registry.yarnpkg.com/realpath-native/-/realpath-native-1.0.1.tgz#07f40a0cce8f8261e2e8b7ebebf5c95965d7b633"
   dependencies:
     util.promisify "^1.0.0"
+
+recompose@^0.27.1:
+  version "0.27.1"
+  resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.27.1.tgz#1a49e931f183634516633bbb4f4edbfd3f38a7ba"
+  dependencies:
+    babel-runtime "^6.26.0"
+    change-emitter "^0.1.2"
+    fbjs "^0.8.1"
+    hoist-non-react-statics "^2.3.1"
+    react-lifecycles-compat "^3.0.2"
+    symbol-observable "^1.0.4"
 
 redbox-noreact@1.1.0:
   version "1.1.0"
@@ -9158,7 +9188,7 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
-symbol-observable@^1.1.0, symbol-observable@^1.2.0:
+symbol-observable@^1.0.4, symbol-observable@^1.1.0, symbol-observable@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
 
@@ -9657,9 +9687,9 @@ void-elements@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
-vtex-tachyons@^2.3.0, vtex-tachyons@^2.4.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/vtex-tachyons/-/vtex-tachyons-2.7.0.tgz#a4dcb53d09f80fb5ce2a583d77e09c33b4e48805"
+vtex-tachyons@^2.6.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/vtex-tachyons/-/vtex-tachyons-2.8.0.tgz#85f3ddf132ec876ee12a32b6585972c47718326b"
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"
