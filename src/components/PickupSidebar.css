@@ -33,6 +33,7 @@ h4.pkpmodal-title {
   position: relative;
   overflow: auto;
   padding: 5px 12px;
+  min-height: 0; /* fix firefox overflow bug */
   -webkit-overflow-scrolling: touch;
 }
 
