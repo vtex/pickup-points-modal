@@ -45,3 +45,12 @@ export const ERROR_TYPES = [
   EPOSTALCODE,
   EGOOGLEADDRESS,
 ]
+
+export const KM_TO_MILE = 1.609
+
+export const UNITED_KINGDOM = 'en-GB'
+export const USA = 'en-US'
+export const MYANMAR = 'en-MM'
+export const LIBERIA = 'en-LR'
+
+export const MILE_COUNTRY_LOCALES = [UNITED_KINGDOM, USA, MYANMAR, LIBERIA]
