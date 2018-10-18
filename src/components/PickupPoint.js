@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { formatCurrency, formatNumber } from '../utils/Currency'
+import { formatDistance } from '../utils/Distance'
 import { translate } from '../utils/i18nUtils'
 import PinIcon from '../assets/components/PinIcon'
 import PinIconSelected from '../assets/components/PinIconSelected'
@@ -78,7 +79,10 @@ export class PickupPoint extends Component {
               <p className="pkpmodal-pickup-point-distance">
                 {translate(intl, 'distance', {
                   distanceValue: formatNumber({
-                    value: pickupPoint.pickupDistance,
+                    value: formatDistance(
+                      pickupPoint.pickupDistance,
+                      intl.locale
+                    ),
                     storePreferencesData,
                   }),
                 })}
