@@ -84,13 +84,9 @@
   font-size: 12px;
 }
 
-.pkpmodal-pickup-point-address .city,
-.pkpmodal-pickup-point-address .city-dash,
-.pkpmodal-pickup-point-address .postal-code,
-.pkpmodal-pickup-point-address .postal-code-dash,
-.pkpmodal-pickup-point-address .state,
-.pkpmodal-pickup-point-address .state-dash,
+.pkpmodal-pickup-point-address .postalCode,
+.pkpmodal-pickup-point-address .postalCode-delimiter,
 .pkpmodal-pickup-point-address .country,
-.pkpmodal-pickup-point-address .country-dash {
+.pkpmodal-pickup-point-address .country-delimiter {
   display: none;
 }
