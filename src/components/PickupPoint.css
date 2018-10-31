@@ -87,6 +87,8 @@
 .pkpmodal-pickup-point-address .postalCode,
 .pkpmodal-pickup-point-address .postalCode-delimiter,
 .pkpmodal-pickup-point-address .country,
-.pkpmodal-pickup-point-address .country-delimiter {
+.pkpmodal-pickup-point-address .country-delimiter,
+.pkpmodal-pickup-point-address .line2-delimiter,
+.pkpmodal-pickup-point-address .line3-delimiter {
   display: none;
 }
