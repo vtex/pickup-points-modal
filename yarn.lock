@@ -96,16 +96,13 @@
   version "10.7.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.7.1.tgz#b704d7c259aa40ee052eec678758a68d07132a2e"
 
-"@vtex/address-form@2.5.3":
-  version "2.5.3"
-  resolved "https://registry.yarnpkg.com/@vtex/address-form/-/address-form-2.5.3.tgz#0106d872acbdfd8632d2095623780e60e27fa5b4"
+"@vtex/address-form@2.5.6":
+  version "2.5.6"
+  resolved "https://registry.yarnpkg.com/@vtex/address-form/-/address-form-2.5.6.tgz#93fcd41479a9e09f1015b7edf50a74deb53928fb"
   dependencies:
     "@vtex/styleguide" "^5.6.2"
     axios "^0.16.2"
-    babel-plugin-add-react-displayname "^0.0.5"
     classnames "^2.2.5"
-    enzyme-adapter-react-16 "^1.2.0"
-    enzyme-to-json "^3.3.4"
     load-google-maps-api "^1.0.0"
     lodash "^4.17.4"
     msk "1.0.3"
@@ -3102,7 +3099,7 @@ enzyme-react-intl@^2.0.0:
   dependencies:
     jsonfile "^4.0.0"
 
-enzyme-to-json@^3.3.0, enzyme-to-json@^3.3.4:
+enzyme-to-json@^3.3.0:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/enzyme-to-json/-/enzyme-to-json-3.3.4.tgz#67c6040e931182f183418af2eb9f4323258aa77f"
   dependencies:
