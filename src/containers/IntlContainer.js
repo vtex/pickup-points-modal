@@ -152,7 +152,7 @@ class IntlContainer extends Component {
         if (process.env.NODE_ENV !== 'production') {
           this.couldNotFindModuleError(e)
         }
-        return import(`@vtex/pickup-points-modal/lib/locales/${baseLocale}`).then(
+        return import(`@vtex/pickup-points-modal/lib/locales/${baseLocale}.json`).then(
           basePickupPointsModalTranslation => basePickupPointsModalTranslation
         )
       })
