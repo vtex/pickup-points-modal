@@ -70,7 +70,7 @@
   "pickupPointsModal.geolocationDiscover": "Anem a suggerir un punt de recollida a prop teu",
   "pickupPointsModal.geolocationAsk": "Per això, necessitem saber la seva ubicació",
   "pickupPointsModal.geolocationManual": "Cercar per una adreça",
-  "pickupPointsModal.geolocationAllow": "Seleccioneu \ "Permet \" en l'alerta que apareix al seu navegador",
+  "pickupPointsModal.geolocationAllow": "Seleccioneu \"Permet \" en l'alerta que apareix al seu navegador",
   "pickupPointsModal.geolocationWaiting": "Esperant la seva autorització",
   "pickupPointsModal.geolocationSearching": "Buscant punts propers",
   "pickupPointsModal.distance": "{distanceValue} km",
