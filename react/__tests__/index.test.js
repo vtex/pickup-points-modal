@@ -1,5 +1,5 @@
 import React from 'react'
-import IntlPickupModal, { PickupPointsModal } from './index'
+import IntlPickupModal, { PickupPointsModal } from '../PickupPointsModal'
 import {
   mountWithIntl,
   shallowWithIntl,
@@ -7,14 +7,14 @@ import {
   setLocale,
 } from 'enzyme-react-intl'
 import { Provider } from 'react-redux'
-import IntlContainer from './containers/IntlContainer'
+import IntlContainer from '../containers/IntlContainer'
 import renderer from 'react-test-renderer'
 import { addValidation } from '@vtex/address-form'
 import BRA from '@vtex/address-form/lib/country/BRA'
-import { PICKUP, DELIVERY } from './constants'
-import { PICKUP_IN_STORE } from './constants/index'
+import { PICKUP, DELIVERY } from '../constants'
+import { PICKUP_IN_STORE } from '../constants/index'
 
-loadTranslation('./src/locales/pt.json')
+loadTranslation('./react/locales/pt.json')
 setLocale('pt')
 
 describe('PickupModal', () => {

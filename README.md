@@ -33,9 +33,9 @@ This component renders the modal with a list of pickup points and a map with mar
 * **`logisticsInfo`**: LogisticsInfo array from `orderForm` to get sla information
 * **`onAddressChange`**: Callback function to be called when a the search field has changed
 * **`pickupOptions`**: Array of pickup points (SLAs of type `pickup-in-point`)
-* **`searchAddress`**: The current address used for the search input in the shape of [`AddressShapeWithValidation`](https://github.com/vtex/address-form/blob/master/src/propTypes/AddressShapeWithValidation.js)
+* **`searchAddress`**: The current address used for the search input in the shape of [`AddressShapeWithValidation`](https://github.com/vtex/address-form/blob/master/react/propTypes/AddressShapeWithValidation.js)
 * **`selectedPickupPoint`**: Current selected SLA of type `pickup-in-point`
-* **`rules`**: The selected country rules from [`AddressForm`](https://github.com/vtex/address-form/tree/master/src/country)
+* **`rules`**: The selected country rules from [`AddressForm`](https://github.com/vtex/address-form/tree/master/react/country)
 * **`sellerId`**: The Id of the seller when the list of pickups is filtered by seller
 * **`storePreferencesData`**: Object from `orderForm` to get currency preferences from store
 
