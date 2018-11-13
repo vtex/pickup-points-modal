@@ -4,8 +4,22 @@
 
 ## Setup
 
+Through **NPM**:
+
 ```sh
 $ npm install @vtex/pickup-points-modal
+```
+
+```js
+import PickupPointsModal from '@vtex/pickup-points-modal/PickupPointsModal'
+```
+
+Through **vtex.io**:
+
+Add `vtex.pickup-points-modal` to your `manifest.json` dependencies
+
+```js
+import { PickupPointsModal } from 'vtex.pickup-points-modal'
 ```
 
 ## API
