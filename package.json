@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "nwb build-react-component --copy-files --no-demo && nwb build-react-app && npm run css && npm run removeMocks && npm run addLocales",
-    "css": "mv dist/styles.css lib/styles.css && mv dist/styles.css.map lib/styles.css.map ",
+    "css": "mv dist/0.styles.css lib/0.styles.css && mv dist/0.styles.css.map lib/0.styles.css.map ",
     "removeMocks": "rm -rf lib/**/__mocks__ && rm -rf lib/__mocks__ && rm -rf dist",
     "addLocales": "cp -R -f react/locales/ lib/locales/",
     "clean": "nwb clean-module && nwb clean-demo",
@@ -20,7 +20,7 @@
     "test": "jest --env=jsdom",
     "test:coverage": "jest --env=jsdom --coverage",
     "test:watch": "jest --env=jsdom --watch",
-    "prepublishOnly": "npm run symlink && npm run build && npm run symlink:remove",
+    "prepublishOnly": "npm run symlink:remove && npm run symlink && npm run build && npm run symlink:remove",
     "build:link": "npm link && watch 'npm run build' src",
     "postreleasy": "npm publish --access public"
   },
@@ -55,6 +55,7 @@
     "eslint-config-vtex": "^8.0.0",
     "eslint-config-vtex-react": "^3.0.3",
     "eslint-plugin-cypress": "^2.0.1",
+    "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jest": "^21.21.0",
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.6.1",
