@@ -40,12 +40,12 @@ export class ProductItems extends Component {
             <div key={createKey(firstLogisticsInfo, selectedSlaItem)}>
               {timeAmount &&
                 itemsByPackages.length > 1 && (
-                  <p>
-                    {translate(intl, `shippingEstimate-${time}`, {
-                      timeAmount,
-                    })}
-                  </p>
-                )}
+                <p>
+                  {translate(intl, `shippingEstimate-${time}`, {
+                    timeAmount,
+                  })}
+                </p>
+              )}
               <div className="pkpmodal-product-items">
                 {itemsPackage.items.map(item => {
                   return (

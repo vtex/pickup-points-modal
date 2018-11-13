@@ -1,21 +1,28 @@
 {
+  "parser": "babel-eslint",
   "extends": [
-    "eslint-config-vtex",
-    "eslint-config-vtex-react",
-    "plugin:jest/recommended",
-    "plugin:prettier/recommended"
+    "vtex",
+    "vtex-react",
+    "plugin:import/recommended"
   ],
+  "plugins": ["import"],
   "rules": {
-    "no-restricted-globals": [2, "fetch"],
-    "camelcase": 0,
-    // rules that conflict with Prettier
-    // to verify conflicting rules, run
-    // $ npm run prettier-conflict-check
-    "react/jsx-curly-spacing": 0,
-    "react/jsx-equals-spacing": 0,
-    "react/jsx-indent": 0,
-    "react/jsx-indent-props": 0,
-    "react/jsx-tag-spacing": 0,
-    "react/jsx-wrap-multilines": 0
+    "import/no-unresolved": [
+      "error",
+      {
+        "commonjs": true,
+        "amd": true,
+        "ignore": ["^([a-zA-Z@]+[-\\.]?)+"]
+      }
+    ]
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "jest": true
+  },
+  "globals": {
+    "__DEV__": true
   }
 }

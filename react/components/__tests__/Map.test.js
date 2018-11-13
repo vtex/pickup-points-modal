@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import Map from './Map'
-import { PICKUP_IN_STORE } from '../constants/index'
+import Map from '../Map'
+import { PICKUP_IN_STORE } from '../../constants/index'
 
 describe('Map', () => {
   let shallowWrapper, shallowInstance

@@ -34,6 +34,7 @@ export class AskForGeolocation extends Component {
     this.handleGetCurrentPosition(this.props)
   }
 
+  // eslint-disable-next-line
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       this.props.askForGeolocation !== nextProps.askForGeolocation ||

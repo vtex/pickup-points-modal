@@ -16,12 +16,12 @@ module.exports = {
     esModules: false,
   },
   webpack: {
-    extractText: {
+    extractCSS: {
       allChunks: true,
       filename: 'styles.css',
     },
     html: {
-      template: 'src/index.html',
+      template: 'react/index.html',
     },
   },
 }

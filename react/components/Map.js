@@ -63,6 +63,7 @@ class Map extends Component {
     this.setState({ isMounted: false })
   }
 
+  // eslint-disable-next-line
   UNSAFE_componentWillReceiveProps(nextProps) {
     const { googleMaps, pickupOptionGeolocations } = this.props
 

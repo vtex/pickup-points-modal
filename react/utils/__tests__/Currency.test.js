@@ -1,4 +1,4 @@
-import { formatCurrency } from './Currency'
+import { formatCurrency } from '../Currency'
 
 describe('formatCurrency', () => {
   it('should format the currency of a value', () => {

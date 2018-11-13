@@ -1,4 +1,4 @@
-import { formatBusinessHoursList } from './pickupUtils'
+import { formatBusinessHoursList } from '../pickupUtils'
 
 describe('Format business hours', () => {
   it('should return all days', () => {

@@ -107,10 +107,10 @@ function normalizeBusinessHours(businessHours) {
       closed: true,
       ...(day
         ? {
-            closed: false,
-            openingTime: day.OpeningTime,
-            closingTime: day.ClosingTime,
-          }
+          closed: false,
+          openingTime: day.OpeningTime,
+          closingTime: day.ClosingTime,
+        }
         : {}),
     }
   })

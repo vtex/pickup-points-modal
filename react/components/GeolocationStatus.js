@@ -5,7 +5,7 @@ import { translate } from '../utils/i18nUtils'
 
 import './GeolocationStatus.css'
 
-export class GeolocationStatus extends Component {
+class GeolocationStatus extends Component {
   render() {
     const {
       titleTop,

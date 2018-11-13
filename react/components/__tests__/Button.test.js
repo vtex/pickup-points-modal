@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
-import Button from './Button'
+import Button from '../Button'
 
 describe('Button', () => {
   it('should render self and subcomponents', () => {
