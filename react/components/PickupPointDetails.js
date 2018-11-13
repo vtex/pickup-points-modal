@@ -109,13 +109,13 @@ export class PickupPointDetails extends Component {
             </div>
             {pickupPoint.pickupStoreInfo &&
               pickupPoint.pickupStoreInfo.additionalInfo && (
-                <div className="pkpmodal-details-group">
-                  <h3 className="pkpmodal-details-info-title">
-                    {translate(intl, 'aditionalInfo')}
-                  </h3>
-                  {pickupPoint.pickupStoreInfo.additionalInfo}
-                </div>
-              )}
+              <div className="pkpmodal-details-group">
+                <h3 className="pkpmodal-details-info-title">
+                  {translate(intl, 'aditionalInfo')}
+                </h3>
+                {pickupPoint.pickupStoreInfo.additionalInfo}
+              </div>
+            )}
 
             {businessHours && (
               <div className="pkpmodal-details-group">

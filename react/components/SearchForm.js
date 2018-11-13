@@ -94,14 +94,14 @@ class SearchForm extends Component {
         />
         {navigator.geolocation &&
           this.state.isMyLocationButtonVisible && (
-            <button
-              className="pkp-modal-ask-geolocation-btn"
-              onClick={this.handleAskGeolocationClick}
-              title={translate(intl, 'askGeolocationAccept')}
-              type="button">
-              <Gps />
-            </button>
-          )}
+          <button
+            className="pkp-modal-ask-geolocation-btn"
+            onClick={this.handleAskGeolocationClick}
+            title={translate(intl, 'askGeolocationAccept')}
+            type="button">
+            <Gps />
+          </button>
+        )}
         <SearchIcon />
       </form>
     )

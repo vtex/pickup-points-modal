@@ -86,104 +86,104 @@ class PickupSidebar extends Component {
 
           {!isPickupDetailsActive &&
             hasPickups && (
-              <div className="pickup-tabs-container">
-                <PickupTabs
-                  mapStatus={mapStatus}
-                  updateLocationTab={updateLocationTab}
-                />
-              </div>
-            )}
+            <div className="pickup-tabs-container">
+              <PickupTabs
+                mapStatus={mapStatus}
+                updateLocationTab={updateLocationTab}
+              />
+            </div>
+          )}
 
           {!showAskForGeolocation &&
             !showError &&
             !isPickupDetailsActive &&
             !hasPickups && (
-              <div className="pkpmodal-locating-wrapper">
-                <GeolocationStatus
-                  Image={() => (
-                    <div>
-                      <div className="pkpmodal-locating-image-waiting">
-                        <PinWaiting />
-                      </div>
-                      <div className="pkpmodal-locating-image-waiting-shadow" />
+            <div className="pkpmodal-locating-wrapper">
+              <GeolocationStatus
+                Image={() => (
+                  <div>
+                    <div className="pkpmodal-locating-image-waiting">
+                      <PinWaiting />
                     </div>
-                  )}
-                  subtitleBottom="geolocationEmptyInstructions"
-                  titleBottom="geolocationEmpty"
-                />
-              </div>
-            )}
+                    <div className="pkpmodal-locating-image-waiting-shadow" />
+                  </div>
+                )}
+                subtitleBottom="geolocationEmptyInstructions"
+                titleBottom="geolocationEmpty"
+              />
+            </div>
+          )}
 
           {showAskForGeolocation &&
             isInsideModal && (
-              <AskForGeolocation
-                address={searchAddress}
-                askForGeolocation={this.props.showAskForGeolocation}
-                geolocationFrom={INSIDE_MODAL}
-                googleMaps={googleMaps}
-                onAskForGeolocation={this.props.onHandleAskForGeolocation}
-                onAskForGeolocationStatus={this.props.onAskForGeolocationStatus}
-                onChangeAddress={this.props.onHandleAddressChange}
-                onGeolocationError={this.props.onGeolocationError}
-                onManualGeolocation={this.props.onManualGeolocation}
-                rules={rules}
-                status={this.props.askForGeolocationStatus}
-              />
-            )}
+            <AskForGeolocation
+              address={searchAddress}
+              askForGeolocation={this.props.showAskForGeolocation}
+              geolocationFrom={INSIDE_MODAL}
+              googleMaps={googleMaps}
+              onAskForGeolocation={this.props.onHandleAskForGeolocation}
+              onAskForGeolocationStatus={this.props.onAskForGeolocationStatus}
+              onChangeAddress={this.props.onHandleAddressChange}
+              onGeolocationError={this.props.onGeolocationError}
+              onManualGeolocation={this.props.onManualGeolocation}
+              rules={rules}
+              status={this.props.askForGeolocationStatus}
+            />
+          )}
 
           {showError &&
             isInsideModal && (
-              <Error
-                onManualGeolocationError={this.props.onManualGeolocationError}
-                status={errorStatus}
-              />
-            )}
+            <Error
+              onManualGeolocationError={this.props.onManualGeolocationError}
+              status={errorStatus}
+            />
+          )}
 
           {!showAskForGeolocation &&
             !showError &&
             isNotShowingPickupDetailsAndHasPickupOptions && (
-              <div className="pkpmodal-points-list">
-                {pickupOptions.map(pickupPoint => (
-                  <div className="pkpmodal-points-item" key={pickupPoint.id}>
-                    <PickupPoint
-                      changeActivePickupPointId={changeActivePickupPointId}
-                      handleChangeActivePickupDetails={
-                        changeActivePickupDetails
-                      }
-                      isList
-                      isSelected={pickupPoint === activePickupPoint}
-                      items={items}
-                      logisticsInfo={logisticsInfo}
-                      pickupPoint={pickupPoint}
-                      pickupPointId={pickupPoint.id}
-                      selectedRules={rules}
-                      sellerId={sellerId}
-                      storePreferencesData={storePreferencesData}
-                      togglePickupDetails={togglePickupDetails}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
+            <div className="pkpmodal-points-list">
+              {pickupOptions.map(pickupPoint => (
+                <div className="pkpmodal-points-item" key={pickupPoint.id}>
+                  <PickupPoint
+                    changeActivePickupPointId={changeActivePickupPointId}
+                    handleChangeActivePickupDetails={
+                      changeActivePickupDetails
+                    }
+                    isList
+                    isSelected={pickupPoint === activePickupPoint}
+                    items={items}
+                    logisticsInfo={logisticsInfo}
+                    pickupPoint={pickupPoint}
+                    pickupPointId={pickupPoint.id}
+                    selectedRules={rules}
+                    sellerId={sellerId}
+                    storePreferencesData={storePreferencesData}
+                    togglePickupDetails={togglePickupDetails}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
 
           {!showAskForGeolocation &&
             !showError &&
             isPickupDetailsActive && (
-              <PickupPointDetails
-                handleChangeActiveSLAOption={changeActiveSLAOption}
-                handleClosePickupPointsModal={closePickupPointsModal}
-                items={items}
-                logisticsInfo={logisticsInfo}
-                pickupPoint={selectedPickupPoint}
-                pickupPointInfo={pickupPoints.find(
-                  pickup => pickup.id === selectedPickupPoint.pickupPointId
-                )}
-                selectedRules={rules}
-                sellerId={sellerId}
-                storePreferencesData={storePreferencesData}
-                togglePickupDetails={togglePickupDetails}
-              />
-            )}
+            <PickupPointDetails
+              handleChangeActiveSLAOption={changeActiveSLAOption}
+              handleClosePickupPointsModal={closePickupPointsModal}
+              items={items}
+              logisticsInfo={logisticsInfo}
+              pickupPoint={selectedPickupPoint}
+              pickupPointInfo={pickupPoints.find(
+                pickup => pickup.id === selectedPickupPoint.pickupPointId
+              )}
+              selectedRules={rules}
+              sellerId={sellerId}
+              storePreferencesData={storePreferencesData}
+              togglePickupDetails={togglePickupDetails}
+            />
+          )}
         </div>
       </div>
     )
