@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import geolocationAutoCompleteAddress from '@vtex/address-form/lib/geolocation/geolocationAutoCompleteAddress'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
-import markerIconBlue from '../assets/icons/marker_blue.svg'
+import markerIconBlue from '../assets/icons/marker.svg'
 import markerIconSelected from '../assets/icons/marker_selected.svg'
 import personPin from '../assets/icons/person_pin.svg'
 
