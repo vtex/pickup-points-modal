@@ -4,20 +4,17 @@
   "version": "2.0.0",
   "title": "Pickup Points Modal React component",
   "description": "Pickup Points Modal React component",
-  "defaultLocale": "pt-BR",
+  "defaultLocale": "en",
   "mustUpdateAt": "2019-01-08",
   "categories": [],
-  "registries": [
-    "smartcheckout"
-  ],
+  "registries": ["smartcheckout"],
   "settingsSchema": {},
   "dependencies": {
     "vtex.checkout": "0.x",
     "vtex.country-codes": "1.x"
   },
   "builders": {
-    "react": "2.x",
-    "pages": "0.x"
+    "react": "2.x"
   },
   "scripts": {
     "postreleasy": "vtex publish --public"
