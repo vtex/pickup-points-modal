@@ -50,7 +50,7 @@ export class PickupPointsModal extends Component {
       showError: false,
       errorStatus: '',
       showManualSearch:
-        !props.askForGeolocation && props.pickupOptions.length === 0,
+        !props.askForGeolocation && props.pickupOptions.length === 0 && !props.activePickupPoint,
     }
   }
 
@@ -65,11 +65,11 @@ export class PickupPointsModal extends Component {
       !nextProps.isSearching &&
       nextPickupOptions.length === 0 &&
       hasGeocoordinates
-
+        
     this.setState({
       showAskForGeolocation: nextProps.isSearching,
       showManualSearch: this.state.showManualSearch
-        ? nextPickupOptions.length !== 0 && !nextProps.isSearching
+        ? nextPickupOptions.length === 0 && !nextProps.isSearching
         : false,
       askForGeolocationStatus: nextProps.isSearching ? SEARCHING : null,
       showError: notSearchingAndIsEmptyPickupOptions,

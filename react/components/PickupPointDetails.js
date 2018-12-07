@@ -98,15 +98,16 @@ export class PickupPointDetails extends Component {
           </div>
 
           <div className="pkpmodal-details-info">
-            <div className="pkpmodal-details-group">
-              <h3 className="title pkpmodal-details-info-title">
-                {translate(intl, 'productsInPoint')}
-              </h3>
-              {items && <ProductItems items={items} />}
-              {unavailableItems && (
-                <ProductItems isAvailable={false} items={unavailableItems} />
-              )}
-            </div>
+            {!!items || !!unavailableItems && (
+              <div className="pkpmodal-details-group">
+                <h3 className="title pkpmodal-details-info-title">
+                  {translate(intl, 'productsInPoint')}
+                </h3>
+                {items && <ProductItems items={items} />}
+                {unavailableItems && (
+                  <ProductItems isAvailable={false} items={unavailableItems} />
+                )}
+            </div> )}
             {pickupPoint.pickupStoreInfo &&
               pickupPoint.pickupStoreInfo.additionalInfo && (
               <div className="pkpmodal-details-group">

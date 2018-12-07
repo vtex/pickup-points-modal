@@ -112,22 +112,24 @@ export class PickupPoint extends Component {
             )}
           </div>
         </div>
-        <div className="pkpmodal-pickup-point-sla-availability">
-          <span className="pkpmodal-pickup-point-price">
-            {translate(intl, 'price', {
-              value: pickupPoint.price,
-              formattedPrice: formatCurrency({
+        {this.props.items.length > 0 && (
+          <div className="pkpmodal-pickup-point-sla-availability">
+            <span className="pkpmodal-pickup-point-price">
+              {translate(intl, 'price', {
                 value: pickupPoint.price,
-                storePreferencesData,
-              }),
-            })}
-          </span>
-          <span className="pkpmodal-pickup-point-sla">
-            {translate(intl, `shippingEstimatePickup-${time}`, {
-              timeAmount,
-            })}
-          </span>
-        </div>
+                formattedPrice: formatCurrency({
+                  value: pickupPoint.price,
+                  storePreferencesData,
+                }),
+              })}
+            </span>
+            <span className="pkpmodal-pickup-point-sla">
+              {translate(intl, `shippingEstimatePickup-${time}`, {
+                timeAmount,
+              })}
+            </span>
+          </div>
+        )}
       </div>
     )
   }
