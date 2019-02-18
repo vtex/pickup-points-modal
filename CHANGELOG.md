@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Bump React builder version to 3.x
+- Remove checkout dependency
+- Bump country-codes dependency major 
+
 ## [2.0.1] - 2018-11-26
 
 ## [2.0.0] - 2018-11-13
