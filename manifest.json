@@ -12,8 +12,7 @@
   ],
   "settingsSchema": {},
   "dependencies": {
-    "vtex.checkout": "0.x",
-    "vtex.country-codes": "1.x"
+    "vtex.country-codes": "2.x"
   },
   "builders": {
     "react": "3.x"
