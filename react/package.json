@@ -39,6 +39,7 @@
     "babel-plugin-add-react-displayname": "^0.0.5",
     "classnames": "2.2.5",
     "lodash": "^4.17.5",
+    "react-intl": "^2.8.0",
     "react-tooltip": "^3.4.0",
     "watch": "^1.0.2"
   },
