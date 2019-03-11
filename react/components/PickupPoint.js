@@ -6,7 +6,7 @@ import { formatDistance } from '../utils/Distance'
 import { translate } from '../utils/i18nUtils'
 import PinIcon from '../assets/components/PinIcon'
 import PinIconSelected from '../assets/components/PinIconSelected'
-
+import TranslateEstimate from 'vtex.shipping-estimate-translator/TranslateEstimate'
 import { AddressSummary } from '@vtex/address-form'
 import { getUnavailableItemsAmount } from '../utils/pickupUtils'
 
@@ -39,6 +39,12 @@ export class PickupPoint extends Component {
     this.props.onClickPickupModal &&
     this.props.onClickPickupModal(this.props.liPackage)
 
+  getCleanId = () =>
+    this.props.pickupPoint.id
+      .replace(/[^\w\s]/gi, '')
+      .split(' ')
+      .join('-')
+
   render() {
     const {
       isSelected,
@@ -51,26 +57,16 @@ export class PickupPoint extends Component {
 
     const { unavailableItemsAmount } = this.state
 
+    const pickupId = this.getCleanId()
+
     if (!pickupPoint) {
       return <div />
     }
 
-    const time =
-      pickupPoint &&
-      pickupPoint.shippingEstimate &&
-      pickupPoint.shippingEstimate.split(/[0-9]+/)[1]
-    const timeAmount =
-      pickupPoint &&
-      pickupPoint.shippingEstimate &&
-      pickupPoint.shippingEstimate.split(/\D+/)[0]
-
     return (
       <div
         className="pkpmodal-pickup-point"
-        id={pickupPoint.id
-          .replace(/[^\w\s]/gi, '')
-          .split(' ')
-          .join('-')}
+        id={pickupId}
         onClick={this.handleOpenPickupDetails}>
         <div className="pkpmodal-pickup-point-main">
           <div className="pkpmodal-pickup-point-marker">
@@ -123,9 +119,10 @@ export class PickupPoint extends Component {
             })}
           </span>
           <span className="pkpmodal-pickup-point-sla">
-            {translate(intl, `shippingEstimatePickup-${time}`, {
-              timeAmount,
-            })}
+            <TranslateEstimate
+              shippingEstimate={pickupPoint && pickupPoint.shippingEstimate}
+              isPickup
+            />
           </span>
         </div>
       </div>

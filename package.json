@@ -17,6 +17,7 @@
     "start": "nwb serve-react-demo",
     "lint": "eslint react/**/*.js",
     "lint-fix": "eslint --fix react/**/*.js",
+    "lint:locales": "intl-equalizer",
     "test": "jest --env=jsdom",
     "test:coverage": "jest --env=jsdom --coverage",
     "test:watch": "jest --env=jsdom --watch",
@@ -38,7 +39,9 @@
   "license": "MIT",
   "dependencies": {
     "@vtex/address-form": "2.5.6",
+    "@vtex/intl-equalizer": "^2.2.0",
     "classnames": "2.2.5",
+    "import-fresh": "^3.0.0",
     "lodash": "^4.17.5",
     "react-tooltip": "^3.4.0"
   },
@@ -105,7 +108,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn run lint"
+      "pre-push": "yarn run lint && yarn lint:locales && yarn test"
     }
   },
   "bugs": {
