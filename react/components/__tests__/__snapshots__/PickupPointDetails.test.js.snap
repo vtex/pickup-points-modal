@@ -70,11 +70,16 @@ exports[`PickupPointDetails should render self and components 1`] = `
               className="pkpmodal-pickup-point-address "
             >
               <div
-                className="address-summary"
+                className="address-summary address-summary-BRA"
               >
-                <span
-                  className="postal-code"
+                <br
+                  className="line1-delimiter"
                 />
+                <span
+                  className="country"
+                >
+                  BRA
+                </span>
               </div>
             </div>
             <span
@@ -95,7 +100,7 @@ exports[`PickupPointDetails should render self and components 1`] = `
           <span
             className="pkpmodal-pickup-point-sla"
           >
-            Ready in up to 1 business day
+            TranslateEstimate
           </span>
         </div>
       </div>
@@ -132,9 +137,8 @@ exports[`PickupPointDetails should render self and components 1`] = `
             <div
               className="__react_component_tooltip place-top type-dark "
               data-id="tooltip"
-            >
-              
-            </div>
+              id={undefined}
+            />
           </span>
           <span
             className="pkpmodal-product-item pkpmodal-product-item-unavailable"
@@ -151,9 +155,8 @@ exports[`PickupPointDetails should render self and components 1`] = `
             <div
               className="__react_component_tooltip place-top type-dark "
               data-id="tooltip"
-            >
-              
-            </div>
+              id={undefined}
+            />
           </span>
         </div>
       </div>

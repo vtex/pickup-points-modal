@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { IntlProvider, addLocaleData } from 'react-intl'
-import enTranslation from '../locales/en.json'
+import enTranslation from '../../messages/en.json'
 import enLocale from 'react-intl/locale-data/en'
 import reduce from 'lodash/reduce'
 import getCountryISO2 from '@vtex/address-form/lib/countryISOMap'

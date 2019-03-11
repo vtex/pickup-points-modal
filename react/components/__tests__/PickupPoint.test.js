@@ -9,7 +9,7 @@ import BRA from '@vtex/address-form/lib/country/BRA'
 import { PICKUP, DELIVERY } from '../../constants'
 import { PICKUP_IN_STORE } from '../../constants/index'
 
-loadTranslation('./react/locales/pt.json')
+loadTranslation('./messages/pt.json')
 setLocale('pt')
 
 describe('PickupPoint', () => {
