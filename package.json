@@ -87,7 +87,8 @@
       "/node_modules/",
       "<rootDir>/es/",
       "<rootDir>/lib/",
-      "<rootDir>/umd/"
+      "<rootDir>/umd/",
+      "__mocks__"
     ],
     "modulePathIgnorePatterns": [
       "<rootDir>/es/",
