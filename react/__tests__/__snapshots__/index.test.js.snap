@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`PickupModal should render self and components 1`] = `null`;
-
-exports[`PickupModal should render self and components without Google Maps 1`] = `null`;

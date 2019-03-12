@@ -2,7 +2,7 @@ import React from 'react'
 import { ProductItems } from '../ProductItems'
 import { shallowWithIntl, loadTranslation } from 'enzyme-react-intl'
 
-loadTranslation('./react/locales/pt.json')
+loadTranslation('./messages/pt.json')
 
 describe('ProductItems', () => {
   it('should render self and subcomponents', () => {

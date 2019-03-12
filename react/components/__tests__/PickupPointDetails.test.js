@@ -1,18 +1,15 @@
 import React from 'react'
-import ConnectedPickupPointDetails, {
-  PickupPointDetails,
-} from '../PickupPointDetails'
-import { mountWithIntl, loadTranslation, setLocale } from 'enzyme-react-intl'
+import PickupPointDetails from '../PickupPointDetails'
+
+import { mount } from 'enzyme'
 import { Provider } from 'react-redux'
-import IntlContainer from '../../containers/IntlContainer'
+import { IntlProvider } from 'react-intl'
 import renderer from 'react-test-renderer'
 import { addValidation } from '@vtex/address-form'
 import BRA from '@vtex/address-form/lib/country/BRA'
 import { PICKUP, DELIVERY, PICKUP_IN_STORE } from '../../constants'
-
-loadTranslation('./react/locales/pt.json')
-setLocale('pt')
-jest.mock('../utils/Images', () => ({
+import messages from '../../../messages/en.json'
+jest.mock('../../utils/Images', () => ({
   fixImageUrl: () => 'teste.png',
 }))
 describe('PickupPointDetails', () => {
@@ -315,9 +312,11 @@ describe('PickupPointDetails', () => {
     const wrapper = renderer
       .create(
         <Provider store={store}>
-          <IntlContainer store={store}>
-            <ConnectedPickupPointDetails {...props} />
-          </IntlContainer>
+          <IntlProvider
+            locale="pt"
+            messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
+            <PickupPointDetails {...props} />
+          </IntlProvider>
         </Provider>
       )
       .toJSON()
@@ -325,7 +324,15 @@ describe('PickupPointDetails', () => {
   })
 
   it('should simulate go back to list of pickups', () => {
-    const wrapper = mountWithIntl(<PickupPointDetails {...props} />)
+    const wrapper = mount(
+      <Provider store={store}>
+        <IntlProvider
+          locale="pt"
+          messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
+          <PickupPointDetails {...props} />
+        </IntlProvider>
+      </Provider>
+    )
 
     const backLink = wrapper.find('button.pkpmodal-details-back-lnk')
 
@@ -335,7 +342,15 @@ describe('PickupPointDetails', () => {
   })
 
   it('should simulate confirm a pickupPoint', () => {
-    const wrapper = mountWithIntl(<PickupPointDetails {...props} />)
+    const wrapper = mount(
+      <Provider store={store}>
+        <IntlProvider
+          locale="pt"
+          messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
+          <PickupPointDetails {...props} />
+        </IntlProvider>
+      </Provider>
+    )
 
     const confirmButton = wrapper.find('.pkpmodal-details-confirm-btn')
 
