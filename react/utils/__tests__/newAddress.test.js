@@ -23,12 +23,10 @@ describe('newAddress', () => {
       addressQuery: '',
     }
 
-    const resultAddress = JSON.stringify(
-      newAddress({
-        country,
-      })
-    )
+    const resultAddress = newAddress({
+      country,
+    })
 
-    expect(resultAddress).toEqual(JSON.stringify(expectedResultAddress))
+    expect(resultAddress).toEqual(expectedResultAddress)
   })
 })
