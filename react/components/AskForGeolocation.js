@@ -16,7 +16,7 @@ import Button from './Button'
 
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
-import './AskForGeolocation.css'
+import styles from './AskForGeolocation.css'
 
 import {
   WAITING,
@@ -189,7 +189,7 @@ export class AskForGeolocation extends Component {
     const { intl, status } = this.props
 
     return (
-      <div className="pkpmodal-locating-wrapper">
+      <div className={`'pkpmodal-locating-wrapper' ${styles.wrapper}`}>
         {status === ASK && (
           <GeolocationStatus
             Image={() => (
@@ -202,7 +202,7 @@ export class AskForGeolocation extends Component {
             subtitleTop="geolocationAsk"
             titleTop="geolocationDiscover">
             <div>
-              <div className="pkpmodal-locating-automatic">
+              <div className={`'pkpmodal-locating-automatic' ${styles.automatic}`}>
                 <Button
                   kind="primary"
                   large
@@ -211,7 +211,7 @@ export class AskForGeolocation extends Component {
                   title={translate(intl, 'askGeolocationAccept')}
                 />
               </div>
-              <div className="pkpmodal-locating-manual">
+              <div className={`'pkpmodal-locating-manual' ${styles.manual}`}>
                 <Button
                   kind="secondary"
                   moreClassName="pkpmodal-locating-manual-btn"
