@@ -1,4 +1,4 @@
-.pkpmodal-close {
+.close {
   background: transparent;
   border: 0;
   padding: 14px;
@@ -8,13 +8,13 @@
   z-index: 999;
 }
 
-.pkpmodal-close svg {
+.close svg {
   display: block;
 }
 
 @media (min-width: 1024px) {
-  .pkpmodal-close,
-  .pkpmodal-close:hover {
+  .close,
+  .close:hover {
     background: #fff;
     border-radius: 100%;
     padding: 12px;

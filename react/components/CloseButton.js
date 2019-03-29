@@ -8,7 +8,7 @@ export class CloseButton extends PureComponent {
     const { onClickClose } = this.props
 
     return (
-      <button className="pkpmodal-close" onClick={onClickClose} type="button">
+      <button className={`pkpmodal-close ${StyleSheet.close}`} onClick={onClickClose} type="button">
         <svg
           height="18"
           viewBox="0 0 16 16"
