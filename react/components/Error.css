@@ -1,10 +1,10 @@
-.pkpmodal-locating-wrapper-error {
+.wrapper {
   display: flex;
   flex: auto;
 }
 
 /* actions */
 
-.pkpmodal-locating-error-manual {
+.manual {
   font-size: 14px;
 }
