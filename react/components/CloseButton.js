@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import './CloseButton.css'
+import styles from './CloseButton.css'
 
 export class CloseButton extends PureComponent {
   render() {
