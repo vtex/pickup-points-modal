@@ -1,0 +1,12 @@
+/* header */
+
+.header {
+  border-bottom: 1px solid #eee;
+  padding: 5px 0 5px 15px;
+  flex: none;
+  z-index: 1;
+}
+
+.title {
+  font-size: 15px;
+}
