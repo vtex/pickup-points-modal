@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Changed all css classes to use CSS Modules instead of external CSS
+
 ## [2.1.1] - 2019-03-19
 
 ### Fix
