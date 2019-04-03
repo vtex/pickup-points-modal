@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProductItems } from '../ProductItems'
+import ProductItems from '../ProductItems'
 import { shallowWithIntl, loadTranslation } from 'enzyme-react-intl'
 
 loadTranslation('./messages/pt.json')

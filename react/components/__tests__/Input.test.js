@@ -1,5 +1,5 @@
 import React from 'react'
-import IntlInput, { Input } from '../Input'
+import Input from '../Input'
 import { shallowWithIntl, loadTranslation, setLocale } from 'enzyme-react-intl'
 import { Provider } from 'react-redux'
 import IntlContainer from '../../containers/IntlContainer'
@@ -83,7 +83,7 @@ describe('Input', () => {
       .create(
         <Provider store={store}>
           <IntlContainer store={store}>
-            <IntlInput {...props} />
+            <Input {...props} />
           </IntlContainer>
         </Provider>
       )
@@ -155,7 +155,7 @@ describe('Input', () => {
       .create(
         <Provider store={store}>
           <IntlContainer store={store}>
-            <IntlInput {...props} />
+            <Input {...props} />
           </IntlContainer>
         </Provider>
       )
