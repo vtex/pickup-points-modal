@@ -61,13 +61,17 @@ class PickupSidebar extends Component {
 
     return (
       <div
-        className={classNames('pkpmodal-info-bar', styles.infoBar, {
+        className={classNames(styles.infoBar, 'pkpmodal-info-bar', {
           'pkpmodal-info-bar-map': mapStatus === SHOW_MAP,
         })}>
         <div
-          className={classNames('pkpmodal-info-bar-container', styles.infoBarContainer, {
-            infoBarContainerActive: mapStatus === SHOW_MAP,
-          })}>
+          className={classNames(
+            styles.infoBarContainer,
+            'pkpmodal-info-bar-container',
+            {
+              infoBarContainerActive: mapStatus === SHOW_MAP,
+            }
+          )}>
           <PickupSidebarHeader isPickupDetailsActive={isPickupDetailsActive} />
           {!isPickupDetailsActive && (
             <SearchForm
@@ -86,7 +90,7 @@ class PickupSidebar extends Component {
 
           {!isPickupDetailsActive &&
             hasPickups && (
-            <div className={`pickup-tabs-container ${styles.tabsContainer}`}>
+            <div className={`${styles.tabsContainer} pickup-tabs-container`}>
               <PickupTabs
                 mapStatus={mapStatus}
                 updateLocationTab={updateLocationTab}
@@ -98,7 +102,10 @@ class PickupSidebar extends Component {
             !showError &&
             !isPickupDetailsActive &&
             !hasPickups && (
-            <div className={`pkpmodal-locating-wrapper ${styles.locatingWrapper}`}>
+            <div
+              className={`${
+                styles.locatingWrapper
+              } pkpmodal-locating-wrapper`}>
               <GeolocationStatus
                 Image={() => (
                   <div>
@@ -142,9 +149,11 @@ class PickupSidebar extends Component {
           {!showAskForGeolocation &&
             !showError &&
             isNotShowingPickupDetailsAndHasPickupOptions && (
-            <div className={`pkpmodal-points-list ${styles.pointsList}`}>
+            <div className={`${styles.pointsList} pkpmodal-points-list`}>
               {pickupOptions.map(pickupPoint => (
-                <div className={`pkpmodal-points-item ${styles.pointsItem}`} key={pickupPoint.id}>
+                <div
+                  className={`${styles.pointsItem} pkpmodal-points-item`}
+                  key={pickupPoint.id}>
                   <PickupPoint
                     changeActivePickupPointId={changeActivePickupPointId}
                     handleChangeActivePickupDetails={

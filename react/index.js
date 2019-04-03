@@ -1,3 +1,3 @@
-import { PickupPointsModal } from './PickupPointsModal'
+import PickupPointsModal from './PickupPointsModal'
 
 export default { PickupPointsModal }

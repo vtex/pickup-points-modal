@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
-export class Input extends Component {
+class Input extends Component {
   handleChange = event => this.props.onChange(event.target.value)
 
   render() {

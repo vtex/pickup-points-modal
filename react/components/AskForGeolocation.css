@@ -1,14 +1,14 @@
-.wrapper {
+.locatingWrapper {
   display: flex;
   flex: auto;
 }
 
 /* actions */
 
-.automatic {
+.locatingAutomatic {
   margin-bottom: 12px;
 }
 
-.manual {
+.locatingManual {
   font-size: 14px;
 }

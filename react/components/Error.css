@@ -1,10 +1,10 @@
-.wrapper {
+.locatingWrapperError {
   display: flex;
   flex: auto;
 }
 
 /* actions */
 
-.manual {
+.locatingErrorManual {
   font-size: 14px;
 }

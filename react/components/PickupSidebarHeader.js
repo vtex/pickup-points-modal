@@ -5,13 +5,13 @@ import { translate } from '../utils/i18nUtils'
 
 import styles from './PickupSidebarHeader.css'
 
-export class PickupSidebarHeader extends PureComponent {
+class PickupSidebarHeader extends PureComponent {
   render() {
     const { intl, isPickupDetailsActive } = this.props
 
     return (
-      <div className={`pkpmodal-header ${styles.header}`}>
-        <h4 className={`pkpmodal-title ${styles.title}`}>
+      <div className={`${styles.modalHeader} pkpmodal-header`}>
+        <h4 className={`${styles.modalTitle} pkpmodal-title`}>
           {isPickupDetailsActive
             ? translate(intl, 'pointDetails')
             : translate(intl, 'selectPickupPoint')}

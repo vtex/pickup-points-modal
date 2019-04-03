@@ -29,7 +29,7 @@ import {
 } from '../constants'
 import GeolocationStatus from './GeolocationStatus'
 
-export class AskForGeolocation extends Component {
+class AskForGeolocation extends Component {
   componentDidMount() {
     this.handleGetCurrentPosition(this.props)
   }
@@ -189,7 +189,7 @@ export class AskForGeolocation extends Component {
     const { intl, status } = this.props
 
     return (
-      <div className={`pkpmodal-locating-wrapper ${styles.wrapper}`}>
+      <div className={`${styles.locatingWrapper} pkpmodal-locating-wrapper`}>
         {status === ASK && (
           <GeolocationStatus
             Image={() => (
@@ -202,7 +202,10 @@ export class AskForGeolocation extends Component {
             subtitleTop="geolocationAsk"
             titleTop="geolocationDiscover">
             <div>
-              <div className={`pkpmodal-locating-automatic ${styles.automatic}`}>
+              <div
+                className={`${
+                  styles.locatingAutomatic
+                }pkpmodal-locating-automatic`}>
                 <Button
                   kind="primary"
                   large
@@ -211,7 +214,8 @@ export class AskForGeolocation extends Component {
                   title={translate(intl, 'askGeolocationAccept')}
                 />
               </div>
-              <div className={`pkpmodal-locating-manual ${styles.manual}`}>
+              <div
+                className={`${styles.locatingManual} pkpmodal-locating-manual`}>
                 <Button
                   kind="secondary"
                   moreClassName="pkpmodal-locating-manual-btn"

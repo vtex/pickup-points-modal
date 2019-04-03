@@ -24,14 +24,14 @@
 /* primary button */
 
 .primary {
-  background: #368DF7;
-  border: 1px solid #368DF7;
+  background: #368df7;
+  border: 1px solid #368df7;
   color: #fff;
 }
 
 .primary:hover {
-  background: #2C7DE0;
-  border-color: #2C7DE0;
+  background: #2c7de0;
+  border-color: #2c7de0;
 }
 
 /* secondary button */
@@ -43,6 +43,6 @@
 }
 
 .secondary:hover {
-  border-color: #2C7DE0;
-  color: #2C7DE0;
+  border-color: #2c7de0;
+  color: #2c7de0;
 }

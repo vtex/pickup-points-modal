@@ -1,6 +1,6 @@
 /* main structure */
 
-.pkpmodal-details {
+.modalDetails {
   display: flex;
   flex-direction: column;
   z-index: 101;
@@ -8,19 +8,19 @@
   position: relative;
 }
 
-.pkpmodal-details-top {
+.modalDetailsTop {
   flex: none;
   margin-bottom: 1px;
 }
 
-.pkpmodal-details-middle {
+.modalDetailsMiddle {
   overflow: auto;
   flex: 1 1 auto;
   min-height: 0; /* fix firefox overflow bug */
   -webkit-overflow-scrolling: touch;
 }
 
-.pkpmodal-details-bottom {
+.modalDetailsBottom {
   background: white;
   flex: none;
   bottom: 0;
@@ -29,53 +29,53 @@
 
 /* middle section */
 
-.pkpmodal-details-store {
+.modalDetailsStore {
   padding: 12px;
 }
 
-.pkpmodal-details-info {
+.modalDetailsInfo {
   padding: 15px;
 }
 
-.pkpmodal-details-group {
+.modalDetailsGroup {
   margin-bottom: 20px;
 }
 
-.pkpmodal-details-info-title {
+.modalDetailsInfoTitle {
   font-weight: 300;
   margin-top: 0;
 }
 
 /* business hours */
 
-.pkpmodal-details-hours {
+.modalDetailsHours {
   font-size: 12px;
   width: 100%;
 }
 
-.pkpmodal-details-hours td {
-  border-bottom: 1px solid #F2F4F5;
+.modalDetailsHours td {
+  border-bottom: 1px solid #f2f4f5;
   padding-top: 6px;
 }
 
-.pkpmodal-details-hours-range,
-.pkpmodal-details-hours-closed {
+.modalDetailsHoursRange,
+.modalDetailsHoursClosed {
   text-align: right;
 }
 
-.pkpmodal-details-hours-closed {
-  color: #FF4C4C;
+.modalDetailsHoursClosed {
+  color: #ff4c4c;
 }
 
 /* links and icons */
 
-.pkpmodal-details-back-lnk {
+.modalDetailsBackLnk {
   display: block;
   text-align: left;
   padding: 8px 12px 9px;
 }
 
-.pkpmodal-icon-back-pickup-points-list {
+.iconBackPickupPointsList {
   font-size: 25px;
   vertical-align: sub;
   margin-right: 12px;

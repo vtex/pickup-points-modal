@@ -16,7 +16,7 @@ import {
   ERROR_NOT_FOUND,
 } from '../constants'
 
-export class Error extends Component {
+class Error extends Component {
   getSubtitleString = () => {
     switch (this.props.status) {
       case ERROR_NOT_ALLOWED:
@@ -34,7 +34,10 @@ export class Error extends Component {
     const { intl, status, onManualGeolocationError } = this.props
     const subtitleString = this.getSubtitleString()
     return (
-      <div className={`pkpmodal-locating-wrapper-error ${styles.wrapper}`}>
+      <div
+        className={`${
+          styles.locatingWrapperError
+        } pkpmodal-locating-wrapper-error`}>
         <GeolocationStatus
           Image={() => (
             <div>
@@ -49,7 +52,10 @@ export class Error extends Component {
           )}
           subtitleBottom={subtitleString}
           titleBottom={status}>
-          <div className={`pkpmodal-locating-error-manual ${styles.manual}`}>
+          <div
+            className={`${
+              styles.locatingErrorManual
+            } pkpmodal-locating-error-manual`}>
             <Button
               kind="primary"
               large
