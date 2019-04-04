@@ -1,10 +1,17 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import styles from './SearchIcon.css'
 class SearchIcon extends PureComponent {
   render() {
     return (
       <svg
-        className={`${styles.modalSearchIcon} pkpmodal-search-icon`}
+        className={
+          this.props.isGeolocation
+            ? `${styles.modalSearchIcon} pkpmodal-search-icon`
+            : `${styles.modalSearchIcon} ${
+              styles.modalSearchIconPostalCode
+            } pkpmodal-search-icon postal-code`
+        }
         height="16"
         version="1.1"
         viewBox="0 0 16 16"
@@ -19,6 +26,14 @@ class SearchIcon extends PureComponent {
       </svg>
     )
   }
+}
+
+SearchIcon.propTypes = {
+  isGeolocation: PropTypes.bool,
+}
+
+SearchIcon.defaultProps = {
+  isGeolocation: true,
 }
 
 export default SearchIcon

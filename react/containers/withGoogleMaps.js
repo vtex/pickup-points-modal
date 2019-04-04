@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { intlShape } from 'react-intl'
 
-import GoogleMapsContainer from '@vtex/address-form/lib/geolocation/GoogleMapsContainer'
+import { components } from 'vtex.address-form'
+
+const { GoogleMapsContainer } = components
 
 export function withGoogleMaps(ComponentToWrap) {
   return class withGoogleMapsClass extends Component {
@@ -13,6 +15,18 @@ export function withGoogleMaps(ComponentToWrap) {
 
     render() {
       const { googleMapsKey, intl } = this.props
+
+      if (!googleMapsKey) {
+        return (
+          <ComponentToWrap
+            {...this.props}
+            googleMaps={null}
+            loading={false}
+            shouldUseMaps={false}
+          />
+        )
+      }
+
       return (
         <GoogleMapsContainer apiKey={googleMapsKey} locale={intl.locale}>
           {({ loading, googleMaps }) =>
@@ -21,6 +35,7 @@ export function withGoogleMaps(ComponentToWrap) {
                 {...this.props}
                 googleMaps={googleMaps}
                 loading={loading}
+                shouldUseMaps={googleMapsKey && googleMaps}
               />
             )
           }

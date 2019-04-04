@@ -63,6 +63,11 @@ class PickupPoint extends Component {
       return <div />
     }
 
+    const distanceValue = formatNumber({
+      value: formatDistance(pickupPoint.pickupDistance, intl.locale),
+      storePreferencesData,
+    })
+
     return (
       <div
         className={`${styles.pickupPoint} pkpmodal-pickup-point`}
@@ -80,13 +85,8 @@ class PickupPoint extends Component {
                   styles.pickupPointDistance
                 } pkpmodal-pickup-point-distance`}>
                 {translate(intl, 'distance', {
-                  distanceValue: formatNumber({
-                    value: formatDistance(
-                      pickupPoint.pickupDistance,
-                      intl.locale
-                    ),
-                    storePreferencesData,
-                  }),
+                  distanceValue:
+                    pickupPoint.pickupDistance > 1000 ? '1000+' : distanceValue,
                 })}
               </p>
             )}

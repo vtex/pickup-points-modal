@@ -4,6 +4,7 @@ import { injectIntl, intlShape } from 'react-intl'
 import { SHOW_MAP, HIDE_MAP, INSIDE_MODAL } from '../constants'
 import classNames from 'classnames'
 import { translate } from '../utils/i18nUtils'
+import { getShipsTo } from '../utils/AddressUtils'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 import PickupPoint from './PickupPoint'
 import PickupSidebarHeader from './PickupSidebarHeader'
@@ -44,6 +45,7 @@ class PickupSidebar extends Component {
       searchAddress,
       sellerId,
       selectedPickupPoint,
+      shouldUseMaps,
       showAskForGeolocation,
       showError,
       storePreferencesData,
@@ -79,11 +81,13 @@ class PickupSidebar extends Component {
               googleMaps={googleMaps}
               Input={Input}
               isLoadingGoogle={isLoading}
+              isGeolocation={shouldUseMaps}
               onAskForGeolocationStatus={this.props.onAskForGeolocationStatus}
               onChangeAddress={onHandleAddressChange}
               onHandleAskForGeolocation={this.props.onHandleAskForGeolocation}
               placeholder={translate(intl, 'searchLocationMap')}
               rules={rules}
+              shipsTo={getShipsTo(intl, logisticsInfo)}
               setGeolocationFrom={this.props.setGeolocationFrom}
             />
           )}
@@ -208,7 +212,7 @@ PickupSidebar.propTypes = {
   closePickupPointsModal: PropTypes.func.isRequired,
   errorStatus: PropTypes.string,
   geolocationFrom: PropTypes.string,
-  googleMaps: PropTypes.object.isRequired,
+  googleMaps: PropTypes.object,
   intl: intlShape,
   isLargeScreen: PropTypes.bool,
   isLoading: PropTypes.bool.isRequired,
@@ -229,6 +233,7 @@ PickupSidebar.propTypes = {
   selectedPickupPoint: PropTypes.object,
   sellerId: PropTypes.string,
   setGeolocationFrom: PropTypes.func.isRequired,
+  shouldUseMaps: PropTypes.bool,
   showAskForGeolocation: PropTypes.bool,
   showError: PropTypes.bool,
   storePreferencesData: PropTypes.object.isRequired,
