@@ -22,7 +22,7 @@ class Button extends Component {
         style += `${styles.secondary} pkp-modal-btn-secondary `
         break
       default:
-        style += `${styles.secondary} pkp-modal-btn-primary `
+        style += `${styles.primary} pkp-modal-btn-primary `
         break
     }
 
