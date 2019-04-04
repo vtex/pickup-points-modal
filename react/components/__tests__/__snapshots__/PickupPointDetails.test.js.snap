@@ -176,7 +176,7 @@ exports[`PickupPointDetails should render self and components 1`] = `
     className="modalDetailsBottom pkpmodal-details-bottom"
   >
     <button
-      className="modalDetailConfirmBtn pkpmodal-details-confirm-btn btn pkp-modal-btn secondary pkp-modal-btn-primary block pkp-modal-btn-block lg pkp-modal-btn-lg "
+      className="modalDetailConfirmBtn pkpmodal-details-confirm-btn btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block lg pkp-modal-btn-lg "
       disabled={undefined}
       id="confirm-pickup-1"
       onClick={[Function]}
