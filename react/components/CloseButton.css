@@ -13,8 +13,8 @@
 }
 
 @media (min-width: 1024px) {
-  .close,
-  .close:hover {
+  .closeButton,
+  .closeButton:hover {
     background: #fff;
     border-radius: 100%;
     padding: 12px;
