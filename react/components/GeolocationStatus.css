@@ -1,4 +1,4 @@
-.pkpmodal-locating {
+.locating {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
 
 /* images */
 
-.pkpmodal-locating-image-ask {
+.imageAsk {
   background: #368df7;
   border-radius: 100%;
   box-shadow: 0 4px 6px 0 rgba(153, 153, 153, 0.5);
@@ -23,13 +23,13 @@
   width: 130px;
 }
 
-.pkpmodal-locating-image-searching-pin {
+.imageSearchingPin {
   animation: bounce 1s infinite;
 }
 
-.pkpmodal-locating-image-waiting-shadow,
-.pkpmodal-locating-image-searching-shadow,
-.pkpmodal-locating-error-image-shadow {
+.imageWaitingShadow,
+.imageSearchingShadow,
+.errorImageShadow {
   background-color: #ccc;
   width: 30px;
   height: 30px;
@@ -38,30 +38,29 @@
   margin: -15px auto 0;
 }
 
-.pkpmodal-locating-image-waiting-shadow,
-.pkpmodal-locating-error-image-shadow {
+.imageWaitingShadow,
+.errorImageShadow {
   transform: rotateX(76deg) scale(1);
 }
 
-.pkpmodal-locating-image-searching-shadow {
+.imageSearchingShadow {
   animation: bounce-shadow 1s infinite;
 }
 
-.pkpmodal-search-alone .pkpmodal-locating-image-waiting-pin {
+:global .pkpmodal-search-alone .imageWaitingPin {
   height: 60px;
 }
 
-
 /* texts */
 
-.pkpmodal-locating-content {
+.locatingContent {
   display: flex;
   flex: auto;
   flex-direction: column;
   justify-content: center;
 }
 
-.pkpmodal-locating-title {
+.locatingTitle {
   color: #333;
   flex: none;
   font-size: 22px;
@@ -70,7 +69,7 @@
   margin: 0 0 12px;
 }
 
-.pkpmodal-locating-title-small {
+.locatingTitleSmall {
   font-size: 20px;
   color: #666;
   font-weight: 400;
@@ -79,7 +78,7 @@
   margin-top: 24px;
 }
 
-.pkpmodal-locating-subtitle {
+.locatingSubtitle {
   color: #999;
   flex: none;
   font-size: 14px;
@@ -90,31 +89,31 @@
 
 /* actions */
 
-.pkpmodal-locating-actions {
+.locatingActions {
   flex: none;
   display: none;
 }
 
-.pkpmodal-full-page .pkpmodal-locating-actions {
+:global .pkpmodal-full-page .locatingActions {
   display: block;
 }
 
 /* media queries */
 
 @media (min-width: 1024px) {
-  .pkpmodal-full-page .pkpmodal-locating-title {
+  :global .pkpmodal-full-page .locatingTitle {
     font-size: 28px;
   }
 
-  .pkpmodal-full-page .pkpmodal-locating-subtitle {
+  :global .pkpmodal-full-page .locatingSubtitle {
     font-size: 16px;
   }
 
-  .pkpmodal-full-page .pkpmodal-locating-title-small {
+  :global .pkpmodal-full-page .locatingTitleSmall {
     font-size: 24px;
   }
 
-  .pkpmodal-full-page .pkpmodal-locating-actions {
+  :global .pkpmodal-full-page .locatingActions {
     margin: 0 auto 20px;
     width: 300px;
   }

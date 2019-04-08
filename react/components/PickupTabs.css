@@ -1,4 +1,4 @@
-.pkpmodal-pickup-view-mode {
+.pickupViewMode {
   position: relative;
   width: 100%;
   padding: 8px;
@@ -6,15 +6,15 @@
   box-sizing: border-box;
 }
 
-.pkpmodal-pickup-view-map,
-.pkpmodal-pickup-view-list {
+.pickupViewMap,
+.pickupViewList {
   width: 50%;
 }
 
-.pkpmodal-pickup-view-option-active,
-.pkpmodal-pickup-view-option-active:hover,
-.pkpmodal-pickup-view-option-active:active,
-.pkpmodal-pickup-view-option-active:focus {
+.pickupViewOptionActive,
+.pickupViewOptionActive:hover,
+.pickupViewOptionActive:active,
+.pickupViewOptionActive:focus {
   border: 1px solid #357edd;
   background: #357edd;
   color: #fff;
@@ -22,10 +22,10 @@
   text-shadow: none;
 }
 
-.pkpmodal-pickup-view-option-inactive,
-.pkpmodal-pickup-view-option-inactive:hover,
-.pkpmodal-pickup-view-option-inactive:active,
-.pkpmodal-pickup-view-option-inactive:focus {
+.pickupViewOptionInctive,
+.pickupViewOptionInctive:hover,
+.pickupViewOptionInctive:active,
+.pickupViewOptionInctive:focus {
   border: 1px solid #357edd;
   background: #fff;
   color: #357edd;

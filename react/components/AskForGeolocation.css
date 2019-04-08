@@ -1,14 +1,14 @@
-.pkpmodal-locating-wrapper {
+.locatingWrapper {
   display: flex;
   flex: auto;
 }
 
 /* actions */
 
-.pkpmodal-locating-automatic {
+.locatingAutomatic {
   margin-bottom: 12px;
 }
 
-.pkpmodal-locating-manual {
+.locatingManual {
   font-size: 14px;
 }

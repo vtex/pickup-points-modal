@@ -1,17 +1,17 @@
-.pkpmodal-search {
+.modalSearch {
   position: relative;
 }
 
-.pkpmodal-search-alone .pkpmodal-search {
+.searchAlone .modalSearch {
   margin-top: 20px;
 }
 
-.pkpmodal-search input::placeholder {
+.modalSearch input::placeholder {
   color: #ccc;
   font-weight: 300;
 }
 
-.pkpmodal-search input {
+.modalSearch input {
   font-size: 16px;
   height: auto;
   padding: 12px 52px 12px 46px !important;
@@ -23,22 +23,15 @@
   max-width: 100%;
 }
 
-.pkpmodal-search-icon {
-  position: absolute;
-  z-index: 99;
-  left: 16px;
-  top: 14px;
-}
-
 /* ask for geolocation */
 
-.pkp-modal-ask-geolocation-btn:active,
-.pkp-modal-ask-geolocation-btn:focus {
+.askGeolocationBtn:active,
+.askGeolocationBtn:focus {
   outline: none !important;
 }
 
-.pkp-modal-ask-geolocation-btn:hover,
-.pkp-modal-ask-geolocation-btn {
+.askGeolocationBtn:hover,
+.askGeolocationBtn {
   background: #fff;
   border: 0;
   border-left: 1px solid #eee;
@@ -50,11 +43,11 @@
   top: 4px;
 }
 
-.pkp-modal-ask-geolocation-btn {
-  opacity: .9;
+.askGeolocationBtn {
+  opacity: 0.9;
 }
 
-.pkp-modal-ask-geolocation-btn:hover {
+.askGeolocationBtn:hover {
   opacity: 1;
 }
 
@@ -77,25 +70,25 @@
 }
 
 @media (min-width: 1024px) {
-  .pkpmodal-search-alone .pkpmodal-search input {
+  .searchAlone .modalSearch input {
     font-size: 24px;
     height: auto;
     padding: 24px 86px 24px 56px !important;
   }
 
-  .pkpmodal-search-alone .pkpmodal-search-icon {
+  .searchAlone .modalSearchIcon {
     position: absolute;
     z-index: 99;
     left: 23px;
     top: 31px;
   }
 
-  .pkpmodal-search-alone .pkp-modal-ask-geolocation-btn {
+  .searchAlone .askGeolocationBtn {
     top: 10px;
     padding: 20px 24px;
   }
 
-  .pkpmodal-search-alone .pkpmodal-use-geolocation-icon {
+  .searchAlone .pkpmodal-use-geolocationIcon {
     height: 20px;
     width: 20px;
   }

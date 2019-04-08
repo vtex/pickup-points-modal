@@ -10,9 +10,9 @@ import TranslateEstimate from 'vtex.shipping-estimate-translator/TranslateEstima
 import { AddressSummary } from '@vtex/address-form'
 import { getUnavailableItemsAmount } from '../utils/pickupUtils'
 
-import './PickupPoint.css'
+import styles from './PickupPoint.css'
 
-export class PickupPoint extends Component {
+class PickupPoint extends Component {
   constructor(props) {
     super(props)
 
@@ -65,14 +65,20 @@ export class PickupPoint extends Component {
 
     return (
       <div
-        className="pkpmodal-pickup-point"
+        className={`${styles.pickupPoint} pkpmodal-pickup-point`}
         id={pickupId}
         onClick={this.handleOpenPickupDetails}>
-        <div className="pkpmodal-pickup-point-main">
-          <div className="pkpmodal-pickup-point-marker">
+        <div className={`${styles.pickupPointMain} pkpmodal-pickup-point-main`}>
+          <div
+            className={`${
+              styles.pickupPointMarker
+            } pkpmodal-pickup-point-marker`}>
             {isSelected ? <PinIconSelected /> : <PinIcon />}
             {pickupPoint.pickupDistance && (
-              <p className="pkpmodal-pickup-point-distance">
+              <p
+                className={`${
+                  styles.pickupPointDistance
+                } pkpmodal-pickup-point-distance`}>
                 {translate(intl, 'distance', {
                   distanceValue: formatNumber({
                     value: formatDistance(
@@ -85,14 +91,18 @@ export class PickupPoint extends Component {
               </p>
             )}
           </div>
-          <div className="pkpmodal-pickup-point-info">
-            <p className="pkpmodal-pickup-point-name">
+          <div
+            className={`${styles.pickupPointInfo} pkpmodal-pickup-point-info`}>
+            <p
+              className={`${
+                styles.pickupPointName
+              } pkpmodal-pickup-point-name`}>
               {pickupPoint.pickupStoreInfo.friendlyName}
             </p>
             <div
-              className={`pkpmodal-pickup-point-address ${
-                isList ? 'list' : ''
-              }`}>
+              className={`pkpmodal${
+                styles.pickupPointAddress
+              } -pickup-point-address ${isList ? 'list' : ''}`}>
               <AddressSummary
                 address={pickupPoint.pickupStoreInfo.address}
                 onClickMaskedInfoIcon={this.handleClickMaskedInfoIcon}
@@ -100,7 +110,10 @@ export class PickupPoint extends Component {
               />
             </div>
             {unavailableItemsAmount > 0 && (
-              <span className="pkpmodal-pickup-point-availability">
+              <span
+                className={`${
+                  styles.pickupPointAvailability
+                } pkpmodal-pickup-point-availability`}>
                 {translate(intl, 'unavailableItemsAmount', {
                   itemsAmount: unavailableItemsAmount,
                 })}
@@ -108,8 +121,14 @@ export class PickupPoint extends Component {
             )}
           </div>
         </div>
-        <div className="pkpmodal-pickup-point-sla-availability">
-          <span className="pkpmodal-pickup-point-price">
+        <div
+          className={`${
+            styles.pickupPointSlaAvailability
+          } pkpmodal-pickup-point-sla-availability`}>
+          <span
+            className={`${
+              styles.pickupPointPrice
+            } pkpmodal-pickup-point-price`}>
             {translate(intl, 'price', {
               value: pickupPoint.price,
               formattedPrice: formatCurrency({
@@ -118,7 +137,8 @@ export class PickupPoint extends Component {
               }),
             })}
           </span>
-          <span className="pkpmodal-pickup-point-sla">
+          <span
+            className={`${styles.pickupPointSla} pkpmodal-pickup-point-sla`}>
             <TranslateEstimate
               shippingEstimate={pickupPoint && pickupPoint.shippingEstimate}
               isPickup

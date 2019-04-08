@@ -1,11 +1,11 @@
 /* info bar structure */
 
-.pkpmodal-info-bar {
+.infoBar {
   height: 100%;
   position: relative;
 }
 
-.pkpmodal-info-bar-container {
+.infoBarContainer {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -13,22 +13,9 @@
   position: relative;
 }
 
-/* header */
-
-.pkpmodal-header {
-  border-bottom: 1px solid #eee;
-  padding: 5px 0 5px 15px;
-  flex: none;
-  z-index: 1;
-}
-
-h4.pkpmodal-title {
-  font-size: 15px;
-}
-
 /* list of points */
 
-.pkpmodal-points-list {
+.pointsList {
   flex: 1 1 auto;
   position: relative;
   overflow: auto;
@@ -37,45 +24,53 @@ h4.pkpmodal-title {
   -webkit-overflow-scrolling: touch;
 }
 
-.pkpmodal-points-item {
+.pointsItem {
   cursor: pointer;
   margin-bottom: 12px;
 }
 
-.pkpmodal-points-item:hover .pkpmodal-pickup-point {
+/* TO DO: FIND COMPONENT */
+:global .pkpmodal-points-item:hover .pkpmodal-pickup-point {
   border-color: #ccc;
 }
 
 /* media queries */
 
 @media (max-width: 1023px) {
-  .pkpmodal-info-bar-container.active {
+  .infoBarContainerActive {
     height: auto;
   }
 
-  .pkpmodal-info-bar-container {
+  .infoBarContainer {
     background-color: #f4f4f4;
     height: 100%;
   }
 
+  /* TO DO: CREATE NEW CSS MODULE CLASS */
   .pkpmodal-info-bar-map {
     height: auto;
   }
 }
 
 @media (min-width: 1024px) {
-  .pickup-tabs-container {
+  .tabsContainer {
     display: none;
   }
 
-  .pkpmodal-info-bar {
+  .infoBar {
     padding: 10px;
     box-sizing: border-box;
     width: 340px;
   }
 
-  .pkpmodal-points-list {
+  .pointsList {
     margin-top: 8px;
     overflow: auto;
   }
+}
+
+/* Locating */
+.locatingWrapper {
+  display: flex;
+  flex: auto;
 }

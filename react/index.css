@@ -6,7 +6,7 @@
   z-index: 100;
 }
 
-.pkpmodal-backdrop {
+.modalBackdrop {
   background: #fff;
   opacity: 0.8;
   position: fixed;
@@ -19,7 +19,7 @@
   z-index: 99;
 }
 
-.pkpmodal-full-page {
+.modalfullPage {
   background-color: rgba(249, 249, 249, 0.9);
   display: flex;
   height: 100%;
@@ -29,7 +29,7 @@
 
 /* searh */
 
-.pkpmodal-search-alone {
+.searchAlone {
   box-sizing: border-box;
   flex: auto;
   margin-bottom: 14px;
@@ -39,7 +39,7 @@
   width: 100%;
 }
 
-.pkpmodal-search-alone-title {
+.searchAloneTitle {
   color: #333;
   flex: none;
   font-size: 22px;
@@ -48,7 +48,7 @@
   margin: 0 0 12px;
 }
 
-.pkpmodal-search-alone-subtitle {
+.searchAloneSubtitle {
   color: #999;
   flex: none;
   font-size: 14px;
@@ -81,11 +81,11 @@
     margin-left: -450px;
   }
 
-  .pkpmodal-full-page .pkpmodal-search-alone-title {
+  .modalfullPage .searchAloneTitle {
     font-size: 28px;
   }
 
-  .pkpmodal-full-page .pkpmodal-search-alone-subtitle {
+  .modalfullPage .searchAloneSubtitle {
     font-size: 16px;
   }
 }

@@ -1,6 +1,6 @@
 /* basic style */
 
-.pkp-modal-btn {
+.btn {
   border-radius: 4px;
   font-size: 12px;
   padding: 6px 8px;
@@ -9,40 +9,40 @@
 
 /* block */
 
-.pkp-modal-btn-block {
+.block {
   display: block;
   width: 100%;
 }
 
 /* large */
 
-.pkp-modal-btn-lg {
+.lg {
   font-size: 14px;
   padding: 12px 16px;
 }
 
 /* primary button */
 
-.pkp-modal-btn-primary {
-  background: #368DF7;
-  border: 1px solid #368DF7;
+.primary {
+  background: #368df7;
+  border: 1px solid #368df7;
   color: #fff;
 }
 
-.pkp-modal-btn-primary:hover {
-  background: #2C7DE0;
-  border-color: #2C7DE0;
+.primary:hover {
+  background: #2c7de0;
+  border-color: #2c7de0;
 }
 
 /* secondary button */
 
-.pkp-modal-btn-secondary {
+.secondary {
   background: none;
   border: 1px solid #368df7;
   color: #368df7;
 }
 
-.pkp-modal-btn-secondary:hover {
-  border-color: #2C7DE0;
-  color: #2C7DE0;
+.secondary:hover {
+  border-color: #2c7de0;
+  color: #2c7de0;
 }

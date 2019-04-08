@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import './Button.css'
+import styles from './Button.css'
 
 class Button extends Component {
   render() {
@@ -15,20 +15,20 @@ class Button extends Component {
       ...rest
     } = this.props
 
-    let style = `${moreClassName} pkp-modal-btn `
+    let style = `${moreClassName} ${styles.btn} pkp-modal-btn `
 
     switch (kind) {
       case 'secondary':
-        style += 'pkp-modal-btn-secondary '
+        style += `${styles.secondary} pkp-modal-btn-secondary `
         break
       default:
-        style += 'pkp-modal-btn-primary '
+        style += `${styles.primary} pkp-modal-btn-primary `
         break
     }
 
-    style += !inline ? 'pkp-modal-btn-block ' : ''
-    style += large ? 'pkp-modal-btn-lg ' : ''
-    style += disabled ? 'pkp-modal-btn-disabled ' : ''
+    style += !inline ? `${styles.block} pkp-modal-btn-block ` : ''
+    style += large ? `${styles.lg} pkp-modal-btn-lg ` : ''
+    style += disabled ? `${styles.disabled} pkp-modal-btn-block ` : ''
 
     return (
       <button className={style} disabled={disabled} {...rest} type="button">

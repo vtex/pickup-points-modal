@@ -2,7 +2,7 @@
 
 exports[`Button should render alert mode 1`] = `
 <button
-  className=" pkp-modal-btn pkp-modal-btn-primary pkp-modal-btn-block "
+  className=" btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block "
   disabled={undefined}
   type="button"
 >
@@ -12,7 +12,7 @@ exports[`Button should render alert mode 1`] = `
 
 exports[`Button should render danger mode 1`] = `
 <button
-  className=" pkp-modal-btn pkp-modal-btn-primary pkp-modal-btn-block "
+  className=" btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block "
   disabled={undefined}
   type="button"
 >
@@ -22,7 +22,7 @@ exports[`Button should render danger mode 1`] = `
 
 exports[`Button should render info mode 1`] = `
 <button
-  className=" pkp-modal-btn pkp-modal-btn-primary pkp-modal-btn-block "
+  className=" btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block "
   disabled={undefined}
   type="button"
 >
@@ -32,7 +32,7 @@ exports[`Button should render info mode 1`] = `
 
 exports[`Button should render light-danger mode with size xl not checked with fixed value 1`] = `
 <button
-  className=" pkp-modal-btn pkp-modal-btn-primary pkp-modal-btn-block "
+  className=" btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block "
   disabled={undefined}
   fixedValue={false}
   notChecked={false}
@@ -45,7 +45,7 @@ exports[`Button should render light-danger mode with size xl not checked with fi
 
 exports[`Button should render light-primary mode with size lg and loading 1`] = `
 <button
-  className=" pkp-modal-btn pkp-modal-btn-primary pkp-modal-btn-block "
+  className=" btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block "
   disabled={undefined}
   isLoading={true}
   size="lg"
@@ -57,7 +57,7 @@ exports[`Button should render light-primary mode with size lg and loading 1`] = 
 
 exports[`Button should render link mode with size sm and disabled and is not lonely 1`] = `
 <button
-  className=" pkp-modal-btn pkp-modal-btn-primary pkp-modal-btn-block pkp-modal-btn-disabled "
+  className=" btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block disabled pkp-modal-btn-block "
   disabled={true}
   lonely={true}
   size="sm"
@@ -69,7 +69,7 @@ exports[`Button should render link mode with size sm and disabled and is not lon
 
 exports[`Button should render muted mode with size xs and is not inline 1`] = `
 <button
-  className=" pkp-modal-btn pkp-modal-btn-primary "
+  className=" btn pkp-modal-btn primary pkp-modal-btn-primary "
   disabled={undefined}
   size="xs"
   type="button"
@@ -80,7 +80,7 @@ exports[`Button should render muted mode with size xs and is not inline 1`] = `
 
 exports[`Button should render primary mode 1`] = `
 <button
-  className=" pkp-modal-btn pkp-modal-btn-primary pkp-modal-btn-block "
+  className=" btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block "
   disabled={undefined}
   type="button"
 >
@@ -90,7 +90,7 @@ exports[`Button should render primary mode 1`] = `
 
 exports[`Button should render success mode 1`] = `
 <button
-  className=" pkp-modal-btn pkp-modal-btn-primary pkp-modal-btn-block "
+  className=" btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block "
   disabled={undefined}
   type="button"
 >

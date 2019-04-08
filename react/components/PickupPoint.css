@@ -1,36 +1,36 @@
 /* main structue */
 
-.pkpmodal-pickup-point {
+.pickupPoint {
   background-color: #fff;
   border: 1px solid #f4f4f4;
   border-radius: 4px;
 }
 
-.pkpmodal-points-list .pkpmodal-pickup-point {
+:global .pkpmodal-points-list .pickupPoint {
   box-shadow: 0 2px 2px 0 rgba(221, 221, 221, 0.5);
 }
 
-.pkpmodal-pickup-point-main {
+.pickupPointMain {
   display: flex;
   padding: 12px 10px 12px 0;
 }
 
-.pkpmodal-pickup-point-marker {
+.pickupPointMarker {
   flex: none;
 }
 
-.pkpmodal-pickup-point-marker-image {
+:global .marker-image {
   height: 26px;
 }
 
-.pkpmodal-pickup-point-info {
+.pickupPointInfo {
   flex: 1 1 auto;
   width: 96px;
 }
 
 /* marker */
 
-.pkpmodal-pickup-point-marker {
+.pickupPointMarker {
   vertical-align: top;
   text-align: center;
   width: 60px;
@@ -38,7 +38,7 @@
 
 /* distance */
 
-.pkpmodal-pickup-point-distance {
+.pickupPointDistance {
   font-size: 10px;
   line-height: 1;
   margin: 4px 0 0;
@@ -46,19 +46,19 @@
 
 /* name */
 
-.pkpmodal-pickup-point-name {
+.pickupPointName {
   font-size: 16px;
   font-weight: 700;
 }
 
 /* address */
 
-.pkpmodal-pickup-point-address {
+.pickupPointAddress {
   color: #666;
   line-height: 1.3;
 }
 
-.pkpmodal-points-list .address-summary {
+:global .pkpmodal-points-list :global .address-summary {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -66,29 +66,29 @@
 
 /* sla info */
 
-.pkpmodal-pickup-point-sla-availability {
+.pickupPointSlaAvailability {
   border-top: 1px solid #f4f4f4;
   padding: 8px 12px 8px 60px;
 }
 
-.pkpmodal-pickup-point-availability {
+.pickupPointAvailability {
   color: #ffb100;
   display: inline-block;
   margin-top: 12px;
 }
 
-.pkpmodal-pickup-point-price,
-.pkpmodal-pickup-point-sla {
+.pickupPointPrice,
+.pickupPointSla {
   display: inline-block;
   margin-right: 20px;
   font-size: 12px;
 }
 
-.pkpmodal-pickup-point-address .postalCode,
-.pkpmodal-pickup-point-address .postalCode-delimiter,
-.pkpmodal-pickup-point-address .country,
-.pkpmodal-pickup-point-address .country-delimiter,
-.pkpmodal-pickup-point-address .line2-delimiter,
-.pkpmodal-pickup-point-address .line3-delimiter {
+.address :global .postalCode,
+.address :global .postalCode-delimiter,
+.address :global .country,
+.address :global .country-delimiter,
+.address :global .line2-delimiter,
+.address :global .line3-delimiter {
   display: none;
 }

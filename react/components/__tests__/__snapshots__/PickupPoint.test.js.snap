@@ -2,15 +2,15 @@
 
 exports[`PickupPoint should render self and components 1`] = `
 <div
-  className="pkpmodal-pickup-point"
+  className="pickupPoint pkpmodal-pickup-point"
   id="1"
   onClick={[Function]}
 >
   <div
-    className="pkpmodal-pickup-point-main"
+    className="pickupPointMain pkpmodal-pickup-point-main"
   >
     <div
-      className="pkpmodal-pickup-point-marker"
+      className="pickupPointMarker pkpmodal-pickup-point-marker"
     >
       <svg
         className="pkpmodal-pickup-point-marker-image"
@@ -36,15 +36,15 @@ exports[`PickupPoint should render self and components 1`] = `
       </svg>
     </div>
     <div
-      className="pkpmodal-pickup-point-info"
+      className="pickupPointInfo pkpmodal-pickup-point-info"
     >
       <p
-        className="pkpmodal-pickup-point-name"
+        className="pickupPointName pkpmodal-pickup-point-name"
       >
         test
       </p>
       <div
-        className="pkpmodal-pickup-point-address "
+        className="pkpmodalpickupPointAddress -pickup-point-address "
       >
         <div
           className="address-summary address-summary-BRA"
@@ -60,22 +60,22 @@ exports[`PickupPoint should render self and components 1`] = `
         </div>
       </div>
       <span
-        className="pkpmodal-pickup-point-availability"
+        className="pickupPointAvailability pkpmodal-pickup-point-availability"
       >
         1 item unavailable
       </span>
     </div>
   </div>
   <div
-    className="pkpmodal-pickup-point-sla-availability"
+    className="pickupPointSlaAvailability pkpmodal-pickup-point-sla-availability"
   >
     <span
-      className="pkpmodal-pickup-point-price"
+      className="pickupPointPrice pkpmodal-pickup-point-price"
     >
       R$ 1,00
     </span>
     <span
-      className="pkpmodal-pickup-point-sla"
+      className="pickupPointSla pkpmodal-pickup-point-sla"
     >
       TranslateEstimate
     </span>
@@ -85,15 +85,15 @@ exports[`PickupPoint should render self and components 1`] = `
 
 exports[`PickupPoint should render self and components in not modal mode 1`] = `
 <div
-  className="pkpmodal-pickup-point"
+  className="pickupPoint pkpmodal-pickup-point"
   id="1"
   onClick={[Function]}
 >
   <div
-    className="pkpmodal-pickup-point-main"
+    className="pickupPointMain pkpmodal-pickup-point-main"
   >
     <div
-      className="pkpmodal-pickup-point-marker"
+      className="pickupPointMarker pkpmodal-pickup-point-marker"
     >
       <svg
         className="pkpmodal-pickup-point-marker-image"
@@ -119,15 +119,15 @@ exports[`PickupPoint should render self and components in not modal mode 1`] = `
       </svg>
     </div>
     <div
-      className="pkpmodal-pickup-point-info"
+      className="pickupPointInfo pkpmodal-pickup-point-info"
     >
       <p
-        className="pkpmodal-pickup-point-name"
+        className="pickupPointName pkpmodal-pickup-point-name"
       >
         test
       </p>
       <div
-        className="pkpmodal-pickup-point-address "
+        className="pkpmodalpickupPointAddress -pickup-point-address "
       >
         <div
           className="address-summary address-summary-BRA"
@@ -143,22 +143,22 @@ exports[`PickupPoint should render self and components in not modal mode 1`] = `
         </div>
       </div>
       <span
-        className="pkpmodal-pickup-point-availability"
+        className="pickupPointAvailability pkpmodal-pickup-point-availability"
       >
         1 item unavailable
       </span>
     </div>
   </div>
   <div
-    className="pkpmodal-pickup-point-sla-availability"
+    className="pickupPointSlaAvailability pkpmodal-pickup-point-sla-availability"
   >
     <span
-      className="pkpmodal-pickup-point-price"
+      className="pickupPointPrice pkpmodal-pickup-point-price"
     >
       R$ 1,00
     </span>
     <span
-      className="pkpmodal-pickup-point-sla"
+      className="pickupPointSla pkpmodal-pickup-point-sla"
     >
       TranslateEstimate
     </span>
@@ -168,15 +168,15 @@ exports[`PickupPoint should render self and components in not modal mode 1`] = `
 
 exports[`PickupPoint should render self and components with free price 1`] = `
 <div
-  className="pkpmodal-pickup-point"
+  className="pickupPoint pkpmodal-pickup-point"
   id="1"
   onClick={[Function]}
 >
   <div
-    className="pkpmodal-pickup-point-main"
+    className="pickupPointMain pkpmodal-pickup-point-main"
   >
     <div
-      className="pkpmodal-pickup-point-marker"
+      className="pickupPointMarker pkpmodal-pickup-point-marker"
     >
       <svg
         className="pkpmodal-pickup-point-marker-image"
@@ -202,15 +202,15 @@ exports[`PickupPoint should render self and components with free price 1`] = `
       </svg>
     </div>
     <div
-      className="pkpmodal-pickup-point-info"
+      className="pickupPointInfo pkpmodal-pickup-point-info"
     >
       <p
-        className="pkpmodal-pickup-point-name"
+        className="pickupPointName pkpmodal-pickup-point-name"
       >
         test
       </p>
       <div
-        className="pkpmodal-pickup-point-address "
+        className="pkpmodalpickupPointAddress -pickup-point-address "
       >
         <div
           className="address-summary address-summary-BRA"
@@ -226,22 +226,22 @@ exports[`PickupPoint should render self and components with free price 1`] = `
         </div>
       </div>
       <span
-        className="pkpmodal-pickup-point-availability"
+        className="pickupPointAvailability pkpmodal-pickup-point-availability"
       >
         1 item unavailable
       </span>
     </div>
   </div>
   <div
-    className="pkpmodal-pickup-point-sla-availability"
+    className="pickupPointSlaAvailability pkpmodal-pickup-point-sla-availability"
   >
     <span
-      className="pkpmodal-pickup-point-price"
+      className="pickupPointPrice pkpmodal-pickup-point-price"
     >
       R$ 1,00
     </span>
     <span
-      className="pkpmodal-pickup-point-sla"
+      className="pickupPointSla pkpmodal-pickup-point-sla"
     >
       TranslateEstimate
     </span>

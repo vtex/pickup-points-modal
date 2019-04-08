@@ -32,9 +32,9 @@ import { getPickupSlaString } from './utils/GetString'
 
 import PinWaiting from './assets/components/PinWaiting'
 
-import './index.css'
+import styles from './index.css'
 
-export class PickupPointsModal extends Component {
+class PickupPointsModal extends Component {
   constructor(props) {
     super(props)
 
@@ -218,16 +218,16 @@ export class PickupPointsModal extends Component {
         ...address.postalCode,
         ...(address.postalCode
           ? {
-              ...validateField(
-                address.postalCode.value,
-                'postalCode',
-                address,
-                this.props.rules
-              ),
-            }
+            ...validateField(
+              address.postalCode.value,
+              'postalCode',
+              address,
+              this.props.rules
+            ),
+          }
           : {
-              value: null,
-            }),
+            value: null,
+          }),
       },
     })
 
@@ -236,8 +236,8 @@ export class PickupPointsModal extends Component {
       postalCode: addressValidated.postalCode.valid
         ? addressValidated.postalCode
         : {
-            value: null,
-          },
+          value: null,
+        },
     })
   }
 
@@ -273,13 +273,16 @@ export class PickupPointsModal extends Component {
       showManualSearch,
     } = this.state
 
+    const shouldShowFullPage =
+      (showAskForGeolocation || showError) && geolocationFrom === OUTSIDE_MODAL
+
     return (
       <div>
         <div
-          className="pkpmodal-backdrop"
+          className={`${styles.modalBackdrop} pkpmodal-backdrop`}
           onClick={this.props.closePickupPointsModal}
         />
-        <div className="pkpmodal">
+        <div className={`${styles.pkpmodal} pkpmodal`}>
           <CloseButton
             alt={translate(intl, 'closeButton')}
             onClickClose={this.props.closePickupPointsModal}
@@ -308,9 +311,8 @@ export class PickupPointsModal extends Component {
             />
           )}
 
-          {(showAskForGeolocation || showError) &&
-          geolocationFrom === OUTSIDE_MODAL ? (
-            <div className="pkpmodal-full-page">
+          {shouldShowFullPage ? (
+            <div className={`${styles.modalfullPage} pkpmodal-full-page`}>
               {showAskForGeolocation && (
                 <AskForGeolocation
                   address={searchAddress}
@@ -337,13 +339,19 @@ export class PickupPointsModal extends Component {
               )}
             </div>
           ) : showManualSearch && isLargeScreen ? (
-            <div className="pkpmodal-full-page">
-              <div className="pkpmodal-search-alone">
+            <div className={`${styles.modalfullPage} pkpmodal-full-page`}>
+              <div className={`${styles.searchAlone} pkpmodal-search-alone`}>
                 <PinWaiting />
-                <h2 className="pkpmodal-search-alone-title">
+                <h2
+                  className={`${
+                    styles.searchAloneTitle
+                  } pkpmodal-search-alone-title`}>
                   {translate(intl, 'geolocationEmpty')}
                 </h2>
-                <h3 className="pkpmodal-search-alone-subtitle">
+                <h3
+                  className={`${
+                    styles.searchAloneSubtitle
+                  } pkpmodal-search-alone-subtitle`}>
                   {translate(intl, 'geolocationEmptyInstructions')}
                 </h3>
                 <SearchForm

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import './PickupTabs.css'
 import { translate } from '../utils/i18nUtils'
 import { HIDE_MAP, SHOW_MAP } from '../constants'
+import styles from './PickupTabs.css'
 
-export class PickupTabs extends Component {
+class PickupTabs extends Component {
   handleLocationTab = event => {
     if (event.target.value === !this.props.mapStatus) return
 
@@ -17,12 +17,18 @@ export class PickupTabs extends Component {
     const { intl, mapStatus } = this.props
 
     return (
-      <div className="pkpmodal-pickup-view-mode">
+      <div className={`${styles.pickupViewMode} pkpmodal-pickup-view-mode`}>
         <button
-          className={`pkpmodal-pickup-view-list btn btn-link ${
+          className={`${
+            styles.pickupViewList
+          } pkpmodal-pickup-view-list btn btn-link ${
             mapStatus === HIDE_MAP
-              ? 'pkpmodal-pickup-view-option-active'
-              : 'pkpmodal-pickup-view-option-inactive'
+              ? `${
+                styles.pickupViewOptionActive
+              } pkpmodal-pickup-view-option-active`
+              : `${
+                styles.pickupViewOptionInctive
+              } pkpmodal-pickup-view-option-inactive`
           }`}
           onClick={this.handleLocationTab}
           type="button"
@@ -30,10 +36,16 @@ export class PickupTabs extends Component {
           {translate(intl, 'list')}
         </button>
         <button
-          className={`pkpmodal-pickup-view-map btn btn-link ${
+          className={`${
+            styles.pickupViewMap
+          } pkpmodal-pickup-view-map btn btn-link ${
             mapStatus === SHOW_MAP
-              ? 'pkpmodal-pickup-view-option-active'
-              : 'pkpmodal-pickup-view-option-inactive'
+              ? `${
+                styles.pickupViewOptionActive
+              } pkpmodal-pickup-view-option-active`
+              : `${
+                styles.pickupViewOptionInctive
+              } pkpmodal-pickup-view-option-inactive`
           }`}
           onClick={this.handleLocationTab}
           type="button"

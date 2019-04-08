@@ -1,14 +1,17 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import './CloseButton.css'
+import styles from './CloseButton.css'
 
-export class CloseButton extends PureComponent {
+class CloseButton extends PureComponent {
   render() {
     const { onClickClose } = this.props
 
     return (
-      <button className="pkpmodal-close" onClick={onClickClose} type="button">
+      <button
+        className={`${styles.closeButton} pkpmodal-close`}
+        onClick={onClickClose}
+        type="button">
         <svg
           height="18"
           viewBox="0 0 16 16"

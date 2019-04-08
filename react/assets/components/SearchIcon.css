@@ -1,0 +1,20 @@
+.modalSearchIcon {
+  position: absolute;
+  z-index: 99;
+  left: 16px;
+  top: 14px;
+}
+
+@media (min-width: 1024px) {
+  .searchAlone .modalSearchIcon {
+    position: absolute;
+    z-index: 99;
+    left: 23px;
+    top: 31px;
+  }
+
+  .searchAlone .pkpmodal-use-geolocationIcon {
+    height: 20px;
+    width: 20px;
+  }
+}
