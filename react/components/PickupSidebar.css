@@ -1,6 +1,7 @@
 /* info bar structure */
 
-.infoBar {
+.infoBar,
+.infoBarPostalCode {
   height: 100%;
   position: relative;
 }
@@ -63,6 +64,10 @@
     width: 340px;
   }
 
+  .infoBarPostalCode {
+    box-sizing: border-box;
+  }
+
   .pointsList {
     margin-top: 8px;
     overflow: auto;
@@ -73,4 +78,10 @@
 .locatingWrapper {
   display: flex;
   flex: auto;
+}
+
+.locatingPostalCodeWrapper {
+  display: flex;
+  flex: none;
+  margin-top: 16px;
 }

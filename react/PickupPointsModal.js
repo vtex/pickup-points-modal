@@ -369,7 +369,7 @@ class PickupPointsModal extends Component {
                     className={`${
                       styles.searchAloneSubtitle
                     } pkpmodal-search-alone-subtitle`}>
-                    {translate(intl, 'geolocationEmptyInstructions')}
+                    {translate(intl, shouldUseMaps ? 'geolocationEmptyInstructions' : 'postalCodeEmptyInstructions')}
                   </h3>
                   <SearchForm
                     address={searchAddress}

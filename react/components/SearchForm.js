@@ -75,7 +75,7 @@ class SearchForm extends Component {
 
     return (
       <form
-        className={`${styles.modalSearch} pkpmodal-search`}
+        className={`${isGeolocation ? styles.modalSearch : styles.modalPostalCode} ${isGeolocation ? 'pkpmodal-search' : 'pkpmodal-postal-code'}`}
         id="pkpmodal-search"
         onFocus={setGeolocationFrom}
         onSubmit={event => event.preventDefault()}>
@@ -119,7 +119,7 @@ class SearchForm extends Component {
             />
           </Fragment>
         )}
-        {navigator.geolocation &&
+        {isGeolocation && navigator.geolocation &&
           this.state.isMyLocationButtonVisible && (
           <button
             className={
@@ -135,7 +135,7 @@ class SearchForm extends Component {
             <Gps />
           </button>
         )}
-        <SearchIcon isGeolocation={isGeolocation} />
+        {isGeolocation && <SearchIcon isGeolocation={isGeolocation} />}
       </form>
     )
   }

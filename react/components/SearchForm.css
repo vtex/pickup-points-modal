@@ -2,6 +2,12 @@
   position: relative;
 }
 
+.modalPostalCode {
+  margin: 20px auto;
+  max-width: 300px;
+  text-align: left;
+}
+
 :global .pkpmodal-search #ship-postalCode {
   width: auto;
 }
@@ -25,6 +31,18 @@
   border-radius: 0;
   width: 100%;
   max-width: 100%;
+}
+
+.modalPostalCode input {
+  font-size: 16px;
+  height: auto;
+  padding: 12px !important;
+  box-shadow: 0 1px 1px 0 rgba(204, 204, 204, 0.5);
+  background-color: #ffffff;
+  border: 0;
+  border-radius: 0;
+  width: 100px;
+  margin-right: 8px;
 }
 
 :global .pkpmodal-search input {
@@ -96,6 +114,15 @@
     font-size: 24px;
     height: auto;
     padding: 24px 86px 24px 56px !important;
+  }
+
+  .searchAlone .modalPostalCode {
+    margin-top: 32px;
+  }
+
+  .searchAlone .modalPostalCode input {
+    font-size: 24px;
+    width: 130px;
   }
 
   .searchAlone .modalSearchIcon {
