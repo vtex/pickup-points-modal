@@ -4,8 +4,8 @@
 
 .modalPostalCode {
   margin: 20px auto;
-  max-width: 300px;
   text-align: left;
+  width: 280px;
 }
 
 :global .pkpmodal-search #ship-postalCode {
@@ -43,6 +43,14 @@
   border-radius: 0;
   width: 100px;
   margin-right: 8px;
+}
+
+.modalPostalCode :global .input {
+  float: none;
+}
+
+.modalPostalCode select {
+  width: 100%;
 }
 
 :global .pkpmodal-search input {
