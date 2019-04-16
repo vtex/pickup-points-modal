@@ -18,7 +18,6 @@ import PinWaiting from '../assets/components/PinWaiting'
 import AskForGeolocation from './AskForGeolocation'
 import Error from './Error'
 
-import PinIcon from '../assets/components/PinIcon'
 import styles from './PickupSidebar.css'
 
 class PickupSidebar extends Component {
