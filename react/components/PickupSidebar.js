@@ -18,6 +18,7 @@ import PinWaiting from '../assets/components/PinWaiting'
 import AskForGeolocation from './AskForGeolocation'
 import Error from './Error'
 
+import PinIcon from '../assets/components/PinIcon'
 import styles from './PickupSidebar.css'
 
 class PickupSidebar extends Component {
@@ -95,7 +96,8 @@ class PickupSidebar extends Component {
           )}
 
           {!isPickupDetailsActive &&
-            hasPickups && (
+            hasPickups &&
+            shouldUseMaps && (
             <div className={`${styles.tabsContainer} pickup-tabs-container`}>
               <PickupTabs
                 mapStatus={mapStatus}
@@ -169,6 +171,21 @@ class PickupSidebar extends Component {
               onManualGeolocationError={this.props.onManualGeolocationError}
               status={errorStatus}
             />
+          )}
+
+          {!showAskForGeolocation &&
+            !showError &&
+            isNotShowingPickupDetailsAndHasPickupOptions && (
+            <div className={`${styles.locationSummary} pkpmodal-location-summary`}>
+              <svg className={`${styles.locationSummaryIcon} pkpmodal-location-summary-icon`} height="16" version="1.1" viewBox="0 0 48 48" width="16" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px">
+                <path d="M24,1.11224c-9.38879,0-17,7.61115-17,17 c0,10.1424,12.87262,23.22955,16.2149,26.4566c0.44031,0.42517,1.12988,0.42517,1.57025,0C28.12744,41.3418,41,28.25464,41,18.11224 C41,8.72339,33.38879,1.11224,24,1.11224z" fill="#999" stroke="#ffffff"></path>
+                <circle cx="24" cy="18" fill="#FFFFFF" r="6"></circle>
+              </svg>
+              <div className={`${styles.locationSummaryText} pkpmodal-location-summary-btn`}>
+                {translate(intl, 'nearTo')} Praia de Botafogo
+              </div>
+              <button type="button" className={`${styles.locationReset} pkpmodal-location-reset btn btn-link`}>alterar</button>
+            </div>
           )}
 
           {!showAskForGeolocation &&
