@@ -41,7 +41,7 @@
   "pickupPointsModal.geolocationEmpty": "Trova punti di ritiro nella vicinanza",
   "pickupPointsModal.geolocationEmptyInstructions": "Più specifica è la tua ricerca, migliori sono i risultati!",
   "pickupPointsModal.postalCodeEmptyInstructions": "Si prega di inserire un indirizzo",
-  "pickupPointsModal.nearTo": "Vicino a",
+  "pickupPointsModal.nearTo": "Vicino a {address}",
   "pickupPointsModal.weekDay0": "Domenica",
   "pickupPointsModal.weekDay1": "lunedì",
   "pickupPointsModal.weekDay2": "martedì",

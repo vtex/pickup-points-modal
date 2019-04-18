@@ -25,11 +25,6 @@
   padding-left: 15px;
 }
 
-.locationSummaryIcon {
-  flex: none;
-  margin-right: 6px;
-}
-
 .locationReset {
   border: none;
   flex: none;

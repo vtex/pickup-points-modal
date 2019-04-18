@@ -144,35 +144,37 @@ class PickupPointDetails extends Component {
                   className={`${
                     styles.modalDetailsHours
                   } pkpmodal-details-hours`}>
-                  {businessHours.map((day, i) => {
-                    return (
-                      <tr key={i}>
-                        <td
-                          className={`${
-                            styles.modalDetailsHoursDay
-                          } pkpmodal-details-hours-day`}>
-                          {translate(intl, `weekDay${day.number}`)}
-                        </td>
-                        {day.closed ? (
+                  <tbody>
+                    {businessHours.map((day, i) => {
+                      return (
+                        <tr key={i}>
                           <td
                             className={`${
-                              styles.modalDetailsHoursClosed
-                            } pkpmodal-details-hours-closed`}>
-                            {translate(intl, 'closed')}
+                              styles.modalDetailsHoursDay
+                            } pkpmodal-details-hours-day`}>
+                            {translate(intl, `weekDay${day.number}`)}
                           </td>
-                        ) : (
-                          <td
-                            className={`${
-                              styles.modalDetailsHoursRange
-                            } pkpmodal-details-hours-range`}>
-                            <PickupPointHour time={day.openingTime} />{' '}
-                            {translate(intl, 'hourTo')}{' '}
-                            <PickupPointHour time={day.closingTime} />
-                          </td>
-                        )}
-                      </tr>
-                    )
-                  })}
+                          {day.closed ? (
+                            <td
+                              className={`${
+                                styles.modalDetailsHoursClosed
+                              } pkpmodal-details-hours-closed`}>
+                              {translate(intl, 'closed')}
+                            </td>
+                          ) : (
+                            <td
+                              className={`${
+                                styles.modalDetailsHoursRange
+                              } pkpmodal-details-hours-range`}>
+                              <PickupPointHour time={day.openingTime} />{' '}
+                              {translate(intl, 'hourTo')}{' '}
+                              <PickupPointHour time={day.closingTime} />
+                            </td>
+                          )}
+                        </tr>
+                      )
+                    })}
+                  </tbody>
                 </table>
               </div>
             )}

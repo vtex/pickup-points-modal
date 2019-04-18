@@ -72,10 +72,14 @@ class PickupPointsModal extends Component {
       nextPickupOptions.length === 0 &&
       hasGeocoordinates
 
+    const hasPickupsAndSearch = nextProps.googleMapsKey
+      ? nextPickupOptions.length !== 0 && !nextProps.isSearching
+      : !nextProps.isSearching
+
     this.setState({
       showAskForGeolocation: nextProps.isSearching,
       showManualSearch: this.state.showManualSearch
-        ? nextPickupOptions.length !== 0 || !nextProps.isSearching
+        ? hasPickupsAndSearch
         : false,
       askForGeolocationStatus: nextProps.isSearching ? SEARCHING : null,
       showError: notSearchingAndIsEmptyPickupOptions,
@@ -369,7 +373,12 @@ class PickupPointsModal extends Component {
                     className={`${
                       styles.searchAloneSubtitle
                     } pkpmodal-search-alone-subtitle`}>
-                    {translate(intl, shouldUseMaps ? 'geolocationEmptyInstructions' : 'postalCodeEmptyInstructions')}
+                    {translate(
+                      intl,
+                      shouldUseMaps
+                        ? 'geolocationEmptyInstructions'
+                        : 'postalCodeEmptyInstructions'
+                    )}
                   </h3>
                   <SearchForm
                     address={searchAddress}
