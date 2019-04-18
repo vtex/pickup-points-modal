@@ -77,7 +77,9 @@ class PickupPoint extends Component {
         <div className={`${styles.pickupPointMain} pkpmodal-pickup-point-main`}>
           <div
             className={`${
-              shouldUseMaps ? styles.pickupPointMarker : styles.pickupPointMarkerPostalCode
+              shouldUseMaps
+                ? styles.pickupPointMarker
+                : styles.pickupPointMarkerPostalCode
             } pkpmodal-pickup-point-marker`}>
             {isSelected ? <PinIconSelected /> : <PinIcon />}
             {pickupPoint.pickupDistance && (
@@ -124,7 +126,9 @@ class PickupPoint extends Component {
         </div>
         <div
           className={`${
-            shouldUseMaps ? styles.pickupPointSlaAvailability : styles.pickupPointSlaAvailabilityPostalCode
+            shouldUseMaps
+              ? styles.pickupPointSlaAvailability
+              : styles.pickupPointSlaAvailabilityPostalCode
           } pkpmodal-pickup-point-sla-availability`}>
           <span
             className={`${

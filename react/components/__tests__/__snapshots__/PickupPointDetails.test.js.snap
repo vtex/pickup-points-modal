@@ -33,7 +33,7 @@ exports[`PickupPointDetails should render self and components 1`] = `
           className="pickupPointMain pkpmodal-pickup-point-main"
         >
           <div
-            className="pickupPointMarker pkpmodal-pickup-point-marker"
+            className="pickupPointMarkerPostalCode pkpmodal-pickup-point-marker"
           >
             <svg
               className="pkpmodal-pickup-point-marker-image"
@@ -57,6 +57,11 @@ exports[`PickupPointDetails should render self and components 1`] = `
                 r="6"
               />
             </svg>
+            <p
+              className="pickupPointDistance pkpmodal-pickup-point-distance"
+            >
+              1000+ km
+            </p>
           </div>
           <div
             className="pickupPointInfo pkpmodal-pickup-point-info"
@@ -67,7 +72,7 @@ exports[`PickupPointDetails should render self and components 1`] = `
               test
             </p>
             <div
-              className="pkpmodalpickupPointAddress -pickup-point-address "
+              className="pickupPointAddress pkpmodal-pickup-point-address "
             >
               <div
                 className="address-summary address-summary-BRA"
@@ -90,7 +95,7 @@ exports[`PickupPointDetails should render self and components 1`] = `
           </div>
         </div>
         <div
-          className="pickupPointSlaAvailability pkpmodal-pickup-point-sla-availability"
+          className="pickupPointSlaAvailabilityPostalCode pkpmodal-pickup-point-sla-availability"
         >
           <span
             className="pickupPointPrice pkpmodal-pickup-point-price"

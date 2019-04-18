@@ -290,6 +290,7 @@ describe('PickupPointDetails', () => {
         shippingEstimate: '1bd',
         deliveryChannel: PICKUP_IN_STORE,
         id: '1',
+        pickupDistance: 10000,
         pickupStoreInfo: {
           friendlyName: 'test',
           address: {
@@ -343,13 +344,11 @@ describe('PickupPointDetails', () => {
 
   it('should simulate confirm a pickupPoint', () => {
     const wrapper = mount(
-      <Provider store={store}>
-        <IntlProvider
-          locale="pt"
-          messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
-          <PickupPointDetails {...props} />
-        </IntlProvider>
-      </Provider>
+      <IntlProvider
+        locale="pt"
+        messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
+        <PickupPointDetails {...props} />
+      </IntlProvider>
     )
 
     const confirmButton = wrapper.find('.pkpmodal-details-confirm-btn')
