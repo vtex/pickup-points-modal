@@ -40,6 +40,8 @@
   "pickupPointsModal.errorCouldNotGetLocationSubtitle": "Rechercher dans ce format: 950 rue Dupont",
   "pickupPointsModal.geolocationEmpty": "Trouver des points de retrait à proximité",
   "pickupPointsModal.geolocationEmptyInstructions": "Plus votre recherche est précise, meilleurs sont les résultats !",
+  "pickupPointsModal.postalCodeEmptyInstructions": "Entrez une adresse s'il vous plait",
+  "pickupPointsModal.nearTo": "Près de {address}",
   "pickupPointsModal.weekDay0": "Dimanche",
   "pickupPointsModal.weekDay1": "Lundi",
   "pickupPointsModal.weekDay2": "Mardi",

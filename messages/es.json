@@ -40,6 +40,8 @@
   "pickupPointsModal.errorCouldNotGetLocationSubtitle": "Busque en este formato: Avenida Jorge Basadre 595",
   "pickupPointsModal.geolocationEmpty": "Encuentre puntos de retirada cercanos",
   "pickupPointsModal.geolocationEmptyInstructions": "¡Cuanto más específica sea su búsqueda, mejores serán los resultados!",
+  "pickupPointsModal.postalCodeEmptyInstructions": "Por favor ingrese una Direccion",
+  "pickupPointsModal.nearTo": "Cerca {address}",
   "pickupPointsModal.weekDay0": "Domingo",
   "pickupPointsModal.weekDay1": "Lunes",
   "pickupPointsModal.weekDay2": "Martes",

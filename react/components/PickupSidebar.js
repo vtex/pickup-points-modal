@@ -4,6 +4,7 @@ import { injectIntl, intlShape } from 'react-intl'
 import { SHOW_MAP, HIDE_MAP, INSIDE_MODAL } from '../constants'
 import classNames from 'classnames'
 import { translate } from '../utils/i18nUtils'
+import { getShipsTo } from '../utils/AddressUtils'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 import PickupPoint from './PickupPoint'
 import PickupSidebarHeader from './PickupSidebarHeader'
@@ -18,8 +19,27 @@ import AskForGeolocation from './AskForGeolocation'
 import Error from './Error'
 
 import styles from './PickupSidebar.css'
+import LocationSummaryIcon from '../assets/components/LocationSummaryIcon'
 
 class PickupSidebar extends Component {
+  handleInitialState = () => {
+    this.props.onManualGeolocation()
+  }
+
+  getAddress = () => {
+    const { searchAddress } = this.props
+    const { city, postalCode, neighborhood, street } = searchAddress
+
+    return (
+      (street && street.value) ||
+      (city.value &&
+        neighborhood.value &&
+        `${city.value} > ${neighborhood.value}`) ||
+      (city && city.value) ||
+      (postalCode && postalCode.value)
+    )
+  }
+
   render() {
     const {
       activePickupPoint,
@@ -44,6 +64,7 @@ class PickupSidebar extends Component {
       searchAddress,
       sellerId,
       selectedPickupPoint,
+      shouldUseMaps,
       showAskForGeolocation,
       showError,
       storePreferencesData,
@@ -61,9 +82,13 @@ class PickupSidebar extends Component {
 
     return (
       <div
-        className={classNames(styles.infoBar, 'pkpmodal-info-bar', {
-          'pkpmodal-info-bar-map': mapStatus === SHOW_MAP,
-        })}>
+        className={classNames(
+          shouldUseMaps ? styles.infoBar : styles.infoBarPostalCode,
+          'pkpmodal-info-bar',
+          {
+            'pkpmodal-info-bar-map': mapStatus === SHOW_MAP,
+          }
+        )}>
         <div
           className={classNames(
             styles.infoBarContainer,
@@ -73,23 +98,27 @@ class PickupSidebar extends Component {
             }
           )}>
           <PickupSidebarHeader isPickupDetailsActive={isPickupDetailsActive} />
-          {!isPickupDetailsActive && (
+          {!isPickupDetailsActive &&
+            shouldUseMaps && (
             <SearchForm
               address={searchAddress}
               googleMaps={googleMaps}
               Input={Input}
               isLoadingGoogle={isLoading}
+              isGeolocation={shouldUseMaps}
               onAskForGeolocationStatus={this.props.onAskForGeolocationStatus}
               onChangeAddress={onHandleAddressChange}
               onHandleAskForGeolocation={this.props.onHandleAskForGeolocation}
               placeholder={translate(intl, 'searchLocationMap')}
               rules={rules}
+              shipsTo={getShipsTo(intl, logisticsInfo)}
               setGeolocationFrom={this.props.setGeolocationFrom}
             />
           )}
 
           {!isPickupDetailsActive &&
-            hasPickups && (
+            hasPickups &&
+            shouldUseMaps && (
             <div className={`${styles.tabsContainer} pickup-tabs-container`}>
               <PickupTabs
                 mapStatus={mapStatus}
@@ -104,7 +133,9 @@ class PickupSidebar extends Component {
             !hasPickups && (
             <div
               className={`${
-                styles.locatingWrapper
+                shouldUseMaps
+                  ? styles.locatingWrapper
+                  : styles.locatingPostalCodeWrapper
               } pkpmodal-locating-wrapper`}>
               <GeolocationStatus
                 Image={() => (
@@ -115,10 +146,33 @@ class PickupSidebar extends Component {
                     <div className="pkpmodal-locating-image-waiting-shadow" />
                   </div>
                 )}
-                subtitleBottom="geolocationEmptyInstructions"
+                subtitleBottom={
+                  shouldUseMaps
+                    ? 'geolocationEmptyInstructions'
+                    : 'postalCodeEmptyInstructions'
+                }
                 titleBottom="geolocationEmpty"
               />
             </div>
+          )}
+
+          {!isPickupDetailsActive &&
+            !hasPickups &&
+            !shouldUseMaps && (
+            <SearchForm
+              address={searchAddress}
+              googleMaps={googleMaps}
+              Input={Input}
+              isLoadingGoogle={isLoading}
+              isGeolocation={shouldUseMaps}
+              onAskForGeolocationStatus={this.props.onAskForGeolocationStatus}
+              onChangeAddress={onHandleAddressChange}
+              onHandleAskForGeolocation={this.props.onHandleAskForGeolocation}
+              placeholder={translate(intl, 'searchLocationMap')}
+              rules={rules}
+              shipsTo={getShipsTo(intl, logisticsInfo)}
+              setGeolocationFrom={this.props.setGeolocationFrom}
+            />
           )}
 
           {showAskForGeolocation &&
@@ -149,6 +203,33 @@ class PickupSidebar extends Component {
           {!showAskForGeolocation &&
             !showError &&
             isNotShowingPickupDetailsAndHasPickupOptions && (
+            <div
+              className={`${
+                styles.locationSummary
+              } pkpmodal-location-summary`}>
+              <LocationSummaryIcon />
+              <div
+                className={`${
+                  styles.locationSummaryText
+                } pkpmodal-location-summary-btn`}>
+                {translate(intl, 'nearTo', {
+                  address: this.getAddress(),
+                })}
+              </div>
+              <button
+                type="button"
+                onClick={this.handleInitialState}
+                className={`${
+                  styles.locationReset
+                } pkpmodal-location-reset btn btn-link`}>
+                  alterar
+              </button>
+            </div>
+          )}
+
+          {!showAskForGeolocation &&
+            !showError &&
+            isNotShowingPickupDetailsAndHasPickupOptions && (
             <div className={`${styles.pointsList} pkpmodal-points-list`}>
               {pickupOptions.map(pickupPoint => (
                 <div
@@ -167,6 +248,7 @@ class PickupSidebar extends Component {
                     pickupPointId={pickupPoint.id}
                     selectedRules={rules}
                     sellerId={sellerId}
+                    shouldUseMaps={shouldUseMaps}
                     storePreferencesData={storePreferencesData}
                     togglePickupDetails={togglePickupDetails}
                   />
@@ -208,7 +290,7 @@ PickupSidebar.propTypes = {
   closePickupPointsModal: PropTypes.func.isRequired,
   errorStatus: PropTypes.string,
   geolocationFrom: PropTypes.string,
-  googleMaps: PropTypes.object.isRequired,
+  googleMaps: PropTypes.object,
   intl: intlShape,
   isLargeScreen: PropTypes.bool,
   isLoading: PropTypes.bool.isRequired,
@@ -229,6 +311,7 @@ PickupSidebar.propTypes = {
   selectedPickupPoint: PropTypes.object,
   sellerId: PropTypes.string,
   setGeolocationFrom: PropTypes.func.isRequired,
+  shouldUseMaps: PropTypes.bool,
   showAskForGeolocation: PropTypes.bool,
   showError: PropTypes.bool,
   storePreferencesData: PropTypes.object.isRequired,

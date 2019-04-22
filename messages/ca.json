@@ -40,6 +40,8 @@
   "pickupPointsModal.errorCouldNotGetLocationSubtitle": "Busqui en aquest format: Avinguda Diagonal 405",
   "pickupPointsModal.geolocationEmpty": "Trobi punts de recollida propers",
   "pickupPointsModal.geolocationEmptyInstructions": "Com més específica sigui la seva recerca, millors seran els resultats!",
+  "pickupPointsModal.postalCodeEmptyInstructions": "Introduïu una adreça",
+  "pickupPointsModal.nearTo": "A prop de {address}",
   "pickupPointsModal.weekDay0": "Diumenge",
   "pickupPointsModal.weekDay1": "Dilluns",
   "pickupPointsModal.weekDay2": "Dimarts",

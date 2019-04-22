@@ -40,6 +40,8 @@
   "pickupPointsModal.errorCouldNotGetLocationSubtitle": "Caută folosind formatul următor: Calea Victoriei 121",
   "pickupPointsModal.geolocationEmpty": "Găsește puncte de ridicare în apropiere",
   "pickupPointsModal.geolocationEmptyInstructions": "Cu cat este mai specifică căutarea ta, cu atât mai bune vor fi rezultatele!",
+  "pickupPointsModal.postalCodeEmptyInstructions": "Introduceți o adresă",
+  "pickupPointsModal.nearTo": "Aproape de  {address}",
   "pickupPointsModal.weekDay0": "Duminică",
   "pickupPointsModal.weekDay1": "Luni",
   "pickupPointsModal.weekDay2": "Marţi",

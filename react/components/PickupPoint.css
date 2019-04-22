@@ -30,7 +30,8 @@
 
 /* marker */
 
-.pickupPointMarker {
+.pickupPointMarker,
+.pickupPointMarkerPostalCode {
   vertical-align: top;
   text-align: center;
   width: 60px;
@@ -55,7 +56,7 @@
 
 .pickupPointAddress {
   color: #666;
-  line-height: 1.3;
+  line-height: 1.5;
 }
 
 :global .pkpmodal-points-list :global .address-summary {
@@ -66,7 +67,8 @@
 
 /* sla info */
 
-.pickupPointSlaAvailability {
+.pickupPointSlaAvailability,
+.pickupPointSlaAvailabilityPostalCode {
   border-top: 1px solid #f4f4f4;
   padding: 8px 12px 8px 60px;
 }
@@ -84,11 +86,21 @@
   font-size: 12px;
 }
 
-.address :global .postalCode,
-.address :global .postalCode-delimiter,
-.address :global .country,
-.address :global .country-delimiter,
-.address :global .line2-delimiter,
-.address :global .line3-delimiter {
+.pickupPointAddress :global .postalCode,
+.pickupPointAddress :global .postalCode-delimiter,
+.pickupPointAddress :global .country,
+.pickupPointAddress :global .country-delimiter,
+.pickupPointAddress :global .line2-delimiter,
+.pickupPointAddress :global .line3-delimiter {
   display: none;
+}
+
+@media (min-width: 1024px) {
+  .pickupPointSlaAvailabilityPostalCode {
+    padding-left: 100px;
+  }
+
+  .pickupPointMarkerPostalCode {
+    width: 100px;
+  }  
 }

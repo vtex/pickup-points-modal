@@ -51,6 +51,7 @@ class PickupPoint extends Component {
       intl,
       pickupPoint,
       selectedRules,
+      shouldUseMaps,
       storePreferencesData,
       isList,
     } = this.props
@@ -63,6 +64,11 @@ class PickupPoint extends Component {
       return <div />
     }
 
+    const distanceValue = formatNumber({
+      value: formatDistance(pickupPoint.pickupDistance, intl.locale),
+      storePreferencesData,
+    })
+
     return (
       <div
         className={`${styles.pickupPoint} pkpmodal-pickup-point`}
@@ -71,7 +77,9 @@ class PickupPoint extends Component {
         <div className={`${styles.pickupPointMain} pkpmodal-pickup-point-main`}>
           <div
             className={`${
-              styles.pickupPointMarker
+              shouldUseMaps
+                ? styles.pickupPointMarker
+                : styles.pickupPointMarkerPostalCode
             } pkpmodal-pickup-point-marker`}>
             {isSelected ? <PinIconSelected /> : <PinIcon />}
             {pickupPoint.pickupDistance && (
@@ -80,13 +88,8 @@ class PickupPoint extends Component {
                   styles.pickupPointDistance
                 } pkpmodal-pickup-point-distance`}>
                 {translate(intl, 'distance', {
-                  distanceValue: formatNumber({
-                    value: formatDistance(
-                      pickupPoint.pickupDistance,
-                      intl.locale
-                    ),
-                    storePreferencesData,
-                  }),
+                  distanceValue:
+                    pickupPoint.pickupDistance > 1000 ? '1000+' : distanceValue,
                 })}
               </p>
             )}
@@ -100,9 +103,9 @@ class PickupPoint extends Component {
               {pickupPoint.pickupStoreInfo.friendlyName}
             </p>
             <div
-              className={`pkpmodal${
+              className={`${
                 styles.pickupPointAddress
-              } -pickup-point-address ${isList ? 'list' : ''}`}>
+              } pkpmodal-pickup-point-address ${isList ? 'list' : ''}`}>
               <AddressSummary
                 address={pickupPoint.pickupStoreInfo.address}
                 onClickMaskedInfoIcon={this.handleClickMaskedInfoIcon}
@@ -123,7 +126,9 @@ class PickupPoint extends Component {
         </div>
         <div
           className={`${
-            styles.pickupPointSlaAvailability
+            shouldUseMaps
+              ? styles.pickupPointSlaAvailability
+              : styles.pickupPointSlaAvailabilityPostalCode
           } pkpmodal-pickup-point-sla-availability`}>
           <span
             className={`${
@@ -168,6 +173,7 @@ PickupPoint.propTypes = {
   pickupPoint: PropTypes.object.isRequired,
   selectedRules: PropTypes.object.isRequired,
   sellerId: PropTypes.any,
+  shouldUseMaps: PropTypes.bool,
   showAddress: PropTypes.bool,
   storePreferencesData: PropTypes.object.isRequired,
   togglePickupDetails: PropTypes.func,

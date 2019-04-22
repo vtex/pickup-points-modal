@@ -1,6 +1,7 @@
 /* info bar structure */
 
-.infoBar {
+.infoBar,
+.infoBarPostalCode {
   height: 100%;
   position: relative;
 }
@@ -11,6 +12,23 @@
   flex-direction: column;
   background: #fff;
   position: relative;
+}
+
+/* links and icons */
+
+.locationSummary {
+  align-items: center;
+  display: flex;
+  flex: none;
+  font-size: 12px;
+  margin-bottom: 6px;
+  padding-left: 15px;
+}
+
+.locationReset {
+  border: none;
+  flex: none;
+  padding: 13px 12px;
 }
 
 /* list of points */
@@ -63,9 +81,17 @@
     width: 340px;
   }
 
+  .infoBarPostalCode {
+    box-sizing: border-box;
+  }
+
   .pointsList {
     margin-top: 8px;
     overflow: auto;
+  }
+
+  .locationSummary {
+    margin-bottom: 0;
   }
 }
 
@@ -73,4 +99,10 @@
 .locatingWrapper {
   display: flex;
   flex: auto;
+}
+
+.locatingPostalCodeWrapper {
+  display: flex;
+  flex: none;
+  margin-top: 16px;
 }

@@ -40,6 +40,8 @@
   "pickupPointsModal.errorCouldNotGetLocationSubtitle": "Search in this format: 950 Main Street",
   "pickupPointsModal.geolocationEmpty": "Find nearby pickup points",
   "pickupPointsModal.geolocationEmptyInstructions": "The more specific your search, the better the results!",
+  "pickupPointsModal.postalCodeEmptyInstructions": "Please enter an Address",
+  "pickupPointsModal.nearTo": "Near to {address}",
   "pickupPointsModal.weekDay0": "Sunday",
   "pickupPointsModal.weekDay1": "Monday",
   "pickupPointsModal.weekDay2": "Tuesday",

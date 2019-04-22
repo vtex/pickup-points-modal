@@ -204,6 +204,7 @@ describe('PickupPoint', () => {
         shippingEstimate: '1bd',
         deliveryChannel: PICKUP_IN_STORE,
         id: '1',
+        pickupDistance: 1000,
         pickupStoreInfo: {
           friendlyName: 'test',
           address: {

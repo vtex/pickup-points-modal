@@ -10,7 +10,7 @@ exports[`PickupPoint should render self and components 1`] = `
     className="pickupPointMain pkpmodal-pickup-point-main"
   >
     <div
-      className="pickupPointMarker pkpmodal-pickup-point-marker"
+      className="pickupPointMarkerPostalCode pkpmodal-pickup-point-marker"
     >
       <svg
         className="pkpmodal-pickup-point-marker-image"
@@ -34,6 +34,11 @@ exports[`PickupPoint should render self and components 1`] = `
           r="6"
         />
       </svg>
+      <p
+        className="pickupPointDistance pkpmodal-pickup-point-distance"
+      >
+        1.000 km
+      </p>
     </div>
     <div
       className="pickupPointInfo pkpmodal-pickup-point-info"
@@ -44,7 +49,7 @@ exports[`PickupPoint should render self and components 1`] = `
         test
       </p>
       <div
-        className="pkpmodalpickupPointAddress -pickup-point-address "
+        className="pickupPointAddress pkpmodal-pickup-point-address "
       >
         <div
           className="address-summary address-summary-BRA"
@@ -67,7 +72,7 @@ exports[`PickupPoint should render self and components 1`] = `
     </div>
   </div>
   <div
-    className="pickupPointSlaAvailability pkpmodal-pickup-point-sla-availability"
+    className="pickupPointSlaAvailabilityPostalCode pkpmodal-pickup-point-sla-availability"
   >
     <span
       className="pickupPointPrice pkpmodal-pickup-point-price"
@@ -93,7 +98,7 @@ exports[`PickupPoint should render self and components in not modal mode 1`] = `
     className="pickupPointMain pkpmodal-pickup-point-main"
   >
     <div
-      className="pickupPointMarker pkpmodal-pickup-point-marker"
+      className="pickupPointMarkerPostalCode pkpmodal-pickup-point-marker"
     >
       <svg
         className="pkpmodal-pickup-point-marker-image"
@@ -117,6 +122,11 @@ exports[`PickupPoint should render self and components in not modal mode 1`] = `
           r="6"
         />
       </svg>
+      <p
+        className="pickupPointDistance pkpmodal-pickup-point-distance"
+      >
+        1.000 km
+      </p>
     </div>
     <div
       className="pickupPointInfo pkpmodal-pickup-point-info"
@@ -127,7 +137,7 @@ exports[`PickupPoint should render self and components in not modal mode 1`] = `
         test
       </p>
       <div
-        className="pkpmodalpickupPointAddress -pickup-point-address "
+        className="pickupPointAddress pkpmodal-pickup-point-address "
       >
         <div
           className="address-summary address-summary-BRA"
@@ -150,7 +160,7 @@ exports[`PickupPoint should render self and components in not modal mode 1`] = `
     </div>
   </div>
   <div
-    className="pickupPointSlaAvailability pkpmodal-pickup-point-sla-availability"
+    className="pickupPointSlaAvailabilityPostalCode pkpmodal-pickup-point-sla-availability"
   >
     <span
       className="pickupPointPrice pkpmodal-pickup-point-price"
@@ -176,7 +186,7 @@ exports[`PickupPoint should render self and components with free price 1`] = `
     className="pickupPointMain pkpmodal-pickup-point-main"
   >
     <div
-      className="pickupPointMarker pkpmodal-pickup-point-marker"
+      className="pickupPointMarkerPostalCode pkpmodal-pickup-point-marker"
     >
       <svg
         className="pkpmodal-pickup-point-marker-image"
@@ -200,6 +210,11 @@ exports[`PickupPoint should render self and components with free price 1`] = `
           r="6"
         />
       </svg>
+      <p
+        className="pickupPointDistance pkpmodal-pickup-point-distance"
+      >
+        1.000 km
+      </p>
     </div>
     <div
       className="pickupPointInfo pkpmodal-pickup-point-info"
@@ -210,7 +225,7 @@ exports[`PickupPoint should render self and components with free price 1`] = `
         test
       </p>
       <div
-        className="pkpmodalpickupPointAddress -pickup-point-address "
+        className="pickupPointAddress pkpmodal-pickup-point-address "
       >
         <div
           className="address-summary address-summary-BRA"
@@ -233,7 +248,7 @@ exports[`PickupPoint should render self and components with free price 1`] = `
     </div>
   </div>
   <div
-    className="pickupPointSlaAvailability pkpmodal-pickup-point-sla-availability"
+    className="pickupPointSlaAvailabilityPostalCode pkpmodal-pickup-point-sla-availability"
   >
     <span
       className="pickupPointPrice pkpmodal-pickup-point-price"

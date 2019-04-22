@@ -5,6 +5,10 @@
   top: 14px;
 }
 
+.modalSearchIconPostalCode {
+  top: 33px;
+}
+
 @media (min-width: 1024px) {
   .searchAlone .modalSearchIcon {
     position: absolute;
