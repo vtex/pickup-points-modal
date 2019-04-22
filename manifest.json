@@ -1,13 +1,15 @@
 {
   "name": "pickup-points-modal",
   "vendor": "vtex",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "title": "Pickup Points Modal React component",
   "description": "Pickup Points Modal React component",
   "defaultLocale": "en",
   "mustUpdateAt": "2019-01-08",
   "categories": [],
-  "registries": ["smartcheckout"],
+  "registries": [
+    "smartcheckout"
+  ],
   "settingsSchema": {},
   "dependencies": {
     "vtex.country-codes": "1.x",
