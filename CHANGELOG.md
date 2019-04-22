@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Showing maps on mobile
+
 ## [2.3.0] - 2019-04-22
 
 ### Added

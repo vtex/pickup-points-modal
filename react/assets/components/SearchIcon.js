@@ -7,8 +7,8 @@ class SearchIcon extends PureComponent {
       <svg
         className={`${styles.modalSearchIcon} pkpmodal-search-icon ${
           this.props.isGeolocation
-            ? `${styles.modalSearchIconPostalCode} postal-code`
-            : ''
+            ? ''
+            : `${styles.modalSearchIconPostalCode} postal-code`
         }`}
         height="16"
         version="1.1"
