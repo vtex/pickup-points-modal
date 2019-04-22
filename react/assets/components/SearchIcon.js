@@ -5,13 +5,11 @@ class SearchIcon extends PureComponent {
   render() {
     return (
       <svg
-        className={
+        className={`${styles.modalSearchIcon} pkpmodal-search-icon ${
           this.props.isGeolocation
-            ? `${styles.modalSearchIcon} pkpmodal-search-icon`
-            : `${styles.modalSearchIcon} ${
-              styles.modalSearchIconPostalCode
-            } pkpmodal-search-icon postal-code`
-        }
+            ? `${styles.modalSearchIconPostalCode} postal-code`
+            : ''
+        }`}
         height="16"
         version="1.1"
         viewBox="0 0 16 16"
