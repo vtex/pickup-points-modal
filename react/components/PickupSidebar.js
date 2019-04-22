@@ -84,6 +84,7 @@ class PickupSidebar extends Component {
       <div
         className={classNames(
           shouldUseMaps ? styles.infoBar : styles.infoBarPostalCode,
+          mapStatus === SHOW_MAP && styles.infoBarMap,
           'pkpmodal-info-bar',
           {
             'pkpmodal-info-bar-map': mapStatus === SHOW_MAP,
@@ -200,7 +201,7 @@ class PickupSidebar extends Component {
             />
           )}
 
-          {!showAskForGeolocation &&
+          {!shouldUseMaps && !showAskForGeolocation &&
             !showError &&
             isNotShowingPickupDetailsAndHasPickupOptions && (
             <div
