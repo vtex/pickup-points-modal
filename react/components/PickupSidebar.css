@@ -58,6 +58,9 @@
   .infoBarContainerActive {
     height: auto;
   }
+  .infoBar {
+    height: 145px;
+  }
 
   .infoBarContainer {
     background-color: #f4f4f4;
