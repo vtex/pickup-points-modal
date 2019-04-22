@@ -17,14 +17,7 @@ export function withGoogleMaps(ComponentToWrap) {
       const { googleMapsKey, intl } = this.props
 
       if (!googleMapsKey) {
-        return (
-          <ComponentToWrap
-            {...this.props}
-            googleMaps={null}
-            loading={false}
-            shouldUseMaps={false}
-          />
-        )
+        return <ComponentToWrap {...this.props} googleMaps={null} />
       }
 
       return (
