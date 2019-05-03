@@ -359,7 +359,7 @@ class PickupPointsModal extends Component {
                   />
                 )}
               </div>
-            ) : showManualSearch && isLargeScreen ? (
+            ) : showManualSearch && (isLargeScreen || !shouldUseMaps) ? (
               <div className={`${styles.modalfullPage} pkpmodal-full-page`}>
                 <div className={`${styles.searchAlone} pkpmodal-search-alone`}>
                   <PinWaiting />
