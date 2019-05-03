@@ -201,7 +201,8 @@ class PickupSidebar extends Component {
             />
           )}
 
-          {!shouldUseMaps && !showAskForGeolocation &&
+          {!shouldUseMaps &&
+            !showAskForGeolocation &&
             !showError &&
             isNotShowingPickupDetailsAndHasPickupOptions && (
             <div
@@ -223,7 +224,7 @@ class PickupSidebar extends Component {
                 className={`${
                   styles.locationReset
                 } pkpmodal-location-reset btn btn-link`}>
-                  alterar
+                {translate(intl, 'pickupPoint.modify')}
               </button>
             </div>
           )}
@@ -294,7 +295,7 @@ PickupSidebar.propTypes = {
   googleMaps: PropTypes.object,
   intl: intlShape,
   isLargeScreen: PropTypes.bool,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   isPickupDetailsActive: PropTypes.bool,
   items: PropTypes.array.isRequired,
   logisticsInfo: PropTypes.array.isRequired,
