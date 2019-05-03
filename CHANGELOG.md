@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Modify button for geolocation fallback
+
 ## [2.3.2] - 2019-04-22
 
 ### Fixed
