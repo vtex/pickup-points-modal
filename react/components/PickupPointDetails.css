@@ -6,6 +6,7 @@
   z-index: 101;
   flex: 1 1 auto;
   position: relative;
+  height: 90%;
 }
 
 .modalDetailsTop {
