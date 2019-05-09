@@ -42,7 +42,9 @@ export function formatNumber({ value, storePreferencesData }) {
     currencyGroupSeparator,
   } = currencyFormatInfo
 
-  value = value.toFixed(1)
+  if (!value) return null
+
+  value = value && value.toFixed(1)
 
   const valueDividedInParts = value.split('.')
 

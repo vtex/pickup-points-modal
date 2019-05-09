@@ -65,7 +65,7 @@ class PickupPoint extends Component {
     }
 
     const distanceValue = formatNumber({
-      value: formatDistance(pickupPoint.pickupDistance, intl.locale),
+      value: pickupPoint && pickupPoint.pickupDistance && formatDistance(pickupPoint.pickupDistance, intl.locale),
       storePreferencesData,
     })
 
