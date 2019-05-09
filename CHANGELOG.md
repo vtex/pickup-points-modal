@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixes
+
+- Formatting null values
+
 ## [2.3.4] - 2019-05-08
+
+### Fix
+
+- Modal details viewport
 
 ## [2.3.3] - 2019-05-03
 
