@@ -20,7 +20,7 @@ export function newAddress(address) {
 
   return {
     addressId: addressId || getGGUID(),
-    addressType: addressType || 'residential',
+    addressType: addressType || 'search',
     city: city || null,
     complement: complement || null,
     country: country || null,
