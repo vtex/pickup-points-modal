@@ -242,16 +242,22 @@ class PickupPointsModal extends Component {
   }
 
   handleAddressChange = address => {
+    const { searchAddress } = this.props
     const addressValidated = {
       ...addValidation(
         newAddress({
           ...address,
+          country:
+            searchAddress &&
+            searchAddress.country &&
+            searchAddress.country.value,
         })
       ),
       neighbourhood: address.neighbourhood || NULL_VALUE,
       number: address.number || NULL_VALUE,
       postalCode: this.getValidPostalCode(address),
     }
+
     this.props.onAddressChange(addressValidated)
   }
 
