@@ -8,7 +8,7 @@ describe('newAddress', () => {
 
     const expectedResultAddress = {
       addressId: (new Date().getTime() * -1).toString(),
-      addressType: 'residential',
+      addressType: 'search',
       city: null,
       complement: null,
       country: 'ARG',
