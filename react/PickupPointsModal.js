@@ -216,14 +216,37 @@ class PickupPointsModal extends Component {
       mapStatus: HIDE_MAP,
     })
 
+  getPostalCodeValue = address => {
+    // TODO move this to Address Form
+    if (
+      address &&
+      address.country &&
+      address.country.value === 'ARG' &&
+      address.postalCode &&
+      address.postalCode.value
+    ) {
+      const corePostalCode = address.postalCode.value.match(/([0-9]{4})/g)
+
+      return (
+        (corePostalCode.length > 0 && corePostalCode[0]) ||
+        address.postalCode.value
+      )
+    }
+
+    return address.postalCode && address.postalCode.value
+  }
+
   getValidPostalCode = address => {
     if (address.postalCode) {
+      const postalCodevalue = this.getPostalCodeValue(address)
+
       const validatedPostalCode = validateField(
-        address.postalCode.value,
+        postalCodevalue,
         'postalCode',
         address,
         this.props.rules
       )
+
       if (this.props.isAPIEnabled) {
         return {
           ...address.postalCode,
@@ -232,8 +255,10 @@ class PickupPointsModal extends Component {
             : NULL_VALUE),
         }
       }
+
       return {
         ...address.postalCode,
+        value: postalCodevalue,
         valid: validatedPostalCode.valid,
         visited: null,
       }
@@ -243,6 +268,7 @@ class PickupPointsModal extends Component {
 
   handleAddressChange = address => {
     const { searchAddress } = this.props
+
     const addressValidated = {
       ...addValidation(
         newAddress({
@@ -253,7 +279,7 @@ class PickupPointsModal extends Component {
             searchAddress.country.value,
         })
       ),
-      neighbourhood: address.neighbourhood || NULL_VALUE,
+      neighborhood: address.neighborhood || NULL_VALUE,
       number: address.number || NULL_VALUE,
       postalCode: this.getValidPostalCode(address),
     }
