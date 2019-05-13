@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Invalid postalCode removal
+
 ## [2.3.7] - 2019-05-10
 
 ### Added

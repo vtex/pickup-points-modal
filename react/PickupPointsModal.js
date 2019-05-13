@@ -36,7 +36,7 @@ import { getShipsTo } from './utils/AddressUtils'
 const { AddressShapeWithValidation } = shapes
 const { validateField, addValidation } = helpers
 const NULL_VALUE = {
-  value: null,
+  value: '',
 }
 
 class PickupPointsModal extends Component {
@@ -258,7 +258,6 @@ class PickupPointsModal extends Component {
 
       return {
         ...address.postalCode,
-        value: postalCodevalue,
         valid: validatedPostalCode.valid,
         visited: null,
       }
