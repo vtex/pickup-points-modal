@@ -67,10 +67,12 @@ class PickupPointsModal extends Component {
       get(nextProps.searchAddress, 'geoCoordinates.value') &&
       nextProps.searchAddress.geoCoordinates.value.length > 0
 
+    const hasValidPostalCode = get(nextProps.searchAddress, 'postalCode.valid')
+
     const notSearchingAndIsEmptyPickupOptions =
       !nextProps.isSearching &&
       nextPickupOptions.length === 0 &&
-      hasGeocoordinates
+      (!!nextProps.googleMapsKey ? hasGeocoordinates : hasValidPostalCode)
 
     const hasPickupsAndSearch = nextProps.googleMapsKey
       ? nextPickupOptions.length !== 0 && !nextProps.isSearching
@@ -240,12 +242,15 @@ class PickupPointsModal extends Component {
     if (address.postalCode) {
       const postalCodevalue = this.getPostalCodeValue(address)
 
-      const validatedPostalCode = validateField(
-        postalCodevalue,
-        'postalCode',
-        address,
-        this.props.rules
-      )
+      const validatedPostalCode = {
+        value: postalCodevalue,
+        ...validateField(
+          postalCodevalue,
+          'postalCode',
+          address,
+          this.props.rules
+        ),
+      }
 
       if (this.props.isAPIEnabled) {
         return {
