@@ -1,7 +1,7 @@
 {
   "name": "pickup-points-modal",
   "vendor": "vtex",
-  "version": "2.3.9",
+  "version": "2.3.10",
   "title": "Pickup Points Modal React component",
   "description": "Pickup Points Modal React component",
   "defaultLocale": "en",
