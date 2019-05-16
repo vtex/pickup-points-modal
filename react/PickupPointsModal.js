@@ -240,12 +240,15 @@ class PickupPointsModal extends Component {
     if (address.postalCode) {
       const postalCodevalue = this.getPostalCodeValue(address)
 
-      const validatedPostalCode = validateField(
-        postalCodevalue,
-        'postalCode',
-        address,
-        this.props.rules
-      )
+      const validatedPostalCode = {
+        value: postalCodevalue,
+        ...validateField(
+          postalCodevalue,
+          'postalCode',
+          address,
+          this.props.rules
+        ),
+      }
 
       if (this.props.isAPIEnabled) {
         return {
