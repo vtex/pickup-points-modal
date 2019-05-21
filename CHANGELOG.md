@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- location button when does not have pickups
+
 ## [2.3.10] - 2019-05-16
 
 ### Fixed
