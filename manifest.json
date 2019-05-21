@@ -1,7 +1,7 @@
 {
   "name": "pickup-points-modal",
   "vendor": "vtex",
-  "version": "2.3.10",
+  "version": "2.3.11",
   "title": "Pickup Points Modal React component",
   "description": "Pickup Points Modal React component",
   "defaultLocale": "en",
@@ -22,5 +22,6 @@
   },
   "scripts": {
     "postreleasy": "vtex publish --public"
-  }
+  },
+  "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
