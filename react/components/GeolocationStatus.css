@@ -91,7 +91,6 @@
 
 .locatingActions {
   flex: none;
-  display: none;
 }
 
 :global .pkpmodal-full-page .locatingActions {
