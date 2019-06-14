@@ -32,6 +32,7 @@ import PinWaiting from './assets/components/PinWaiting'
 import styles from './index.css'
 import { helpers, shapes } from 'vtex.address-form'
 import { getShipsTo } from './utils/AddressUtils'
+import ZoomControls from './components/ZoomControls'
 
 const { AddressShapeWithValidation } = shapes
 const { validateField, addValidation } = helpers
@@ -331,6 +332,9 @@ class PickupPointsModal extends Component {
     const shouldShowMap =
       shouldUseMaps && (isLargeScreen || mapStatus === SHOW_MAP)
 
+    const shouldShowZoomControls =
+      !showAskForGeolocation || !showManualSearch || mapStatus === SHOW_MAP
+
     return (
       !loading && (
         <div>
@@ -343,6 +347,7 @@ class PickupPointsModal extends Component {
               alt={translate(intl, 'closeButton')}
               onClickClose={this.props.closePickupPointsModal}
             />
+            <ZoomControls shouldShow={shouldShowZoomControls} />
             {shouldShowMap && (
               <Map
                 activatePickupDetails={this.activatePickupDetails}

@@ -8,6 +8,7 @@ import markerIconSelected from '../assets/icons/marker_selected.svg'
 import personPin from '../assets/icons/person_pin.svg'
 
 import { getPickupGeolocationString } from '../utils/GetString'
+import GPSDenied from '../assets/components/GPSDenied'
 
 class Map extends Component {
   constructor() {
@@ -178,16 +179,12 @@ class Map extends Component {
 
     const mapOptions = {
       zoom: 14,
+      disableDefaultUI: true,
       mapTypeControl: false,
-      zoomControl: true,
       fullscreenControl: false,
       streetViewControl: false,
       color: '#00ff00',
       clickableIcons: false,
-      zoomControlOptions: {
-        position: googleMaps.ControlPosition.CENTER_RIGHT,
-        style: googleMaps.ZoomControlStyle.SMALL,
-      },
       styles: [
         {
           featureType: 'poi',
@@ -197,6 +194,16 @@ class Map extends Component {
     }
 
     this.map = new googleMaps.Map(this._mapElement, mapOptions)
+
+    const zoomIn = document.querySelector('.pkpmodal-zoom-in')
+    const zoomOut = document.querySelector('.pkpmodal-zoom-out')
+
+    zoomIn.onclick = () => this.map.setZoom(this.map.getZoom() + 1)
+    zoomOut.onclick = () => this.map.setZoom(this.map.getZoom() - 1)
+
+    this.map.controls[googleMaps.ControlPosition.RIGHT_BOTTOM].push(
+      document.querySelector('.zoom-control')
+    )
   }
 
   createNewMarkers = ({
