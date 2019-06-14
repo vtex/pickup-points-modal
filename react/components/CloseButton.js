@@ -13,11 +13,28 @@ class CloseButton extends PureComponent {
         onClick={onClickClose}
         type="button">
         <svg
-          height="18"
-          viewBox="0 0 16 16"
-          width="18"
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
           xmlns="http://www.w3.org/2000/svg">
-          <path d="M13.5 2.5l-11 11M2.5 2.5l11 11" fill="none" stroke="#111" />
+          <rect
+            x="0.0341797"
+            y="12.4351"
+            width="17.8693"
+            height="2"
+            rx="1"
+            transform="rotate(-45 0.0341797 12.4351)"
+            fill="currentColor"
+          />
+          <rect
+            x="1.41422"
+            width="17.8693"
+            height="2"
+            rx="1"
+            transform="rotate(45 1.41422 0)"
+            fill="currentColor"
+          />
         </svg>
       </button>
     )
