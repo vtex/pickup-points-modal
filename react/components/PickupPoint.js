@@ -11,6 +11,7 @@ import { AddressSummary } from '@vtex/address-form'
 import { getUnavailableItemsAmount } from '../utils/pickupUtils'
 
 import styles from './PickupPoint.css'
+import { DETAILS } from '../constants'
 
 class PickupPoint extends Component {
   constructor(props) {
@@ -26,13 +27,14 @@ class PickupPoint extends Component {
     }
   }
   handleOpenPickupDetails = () => {
-    this.props.togglePickupDetails && this.props.togglePickupDetails()
     this.props.handleChangeActivePickupDetails &&
       this.props.handleChangeActivePickupDetails({
         pickupPoint: this.props.pickupPoint,
       })
-    this.props.changeActivePickupPointId &&
-      this.props.changeActivePickupPointId(this.props.pickupPoint)
+    this.props.setSelectedPickupPoint &&
+      this.props.setSelectedPickupPoint(this.props.pickupPoint)
+    this.props.setActiveSidebarState &&
+      this.props.setActiveSidebarState(DETAILS)
   }
 
   handlePickupModal = () =>
@@ -49,6 +51,7 @@ class PickupPoint extends Component {
     const {
       isSelected,
       intl,
+      items,
       pickupPoint,
       selectedRules,
       shouldUseMaps,
@@ -65,7 +68,10 @@ class PickupPoint extends Component {
     }
 
     const distanceValue = formatNumber({
-      value: pickupPoint && pickupPoint.pickupDistance && formatDistance(pickupPoint.pickupDistance, intl.locale),
+      value:
+        pickupPoint &&
+        pickupPoint.pickupDistance &&
+        formatDistance(pickupPoint.pickupDistance, intl.locale),
       storePreferencesData,
     })
 
@@ -112,14 +118,22 @@ class PickupPoint extends Component {
                 rules={selectedRules}
               />
             </div>
-            {unavailableItemsAmount > 0 && (
+            {unavailableItemsAmount > 0 ? (
               <span
                 className={`${
                   styles.pickupPointAvailability
                 } pkpmodal-pickup-point-availability`}>
                 {translate(intl, 'unavailableItemsAmount', {
-                  itemsAmount: unavailableItemsAmount,
+                  unavailableItemsAmount: unavailableItemsAmount,
+                  itemsAmount: items.length,
                 })}
+              </span>
+            ) : (
+              <span
+                className={`${
+                  styles.pickupPointAllAvailable
+                } pkpmodal-pickup-point-available`}>
+                {translate(intl, 'allItemsAvailable')}
               </span>
             )}
           </div>
@@ -160,7 +174,7 @@ PickupPoint.defaultProps = {
   isSelected: true,
 }
 PickupPoint.propTypes = {
-  changeActivePickupPointId: PropTypes.any,
+  setSelectedPickupPoint: PropTypes.any,
   handleChangeActivePickupDetails: PropTypes.func,
   intl: intlShape,
   isList: PropTypes.bool,

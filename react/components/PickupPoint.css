@@ -74,7 +74,7 @@
 }
 
 .pickupPointAvailability {
-  color: #ffb100;
+  color: #c6840c;
   display: inline-block;
   margin-top: 12px;
 }
@@ -102,5 +102,5 @@
 
   .pickupPointMarkerPostalCode {
     width: 100px;
-  }  
+  }
 }
