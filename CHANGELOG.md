@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Customized zoom controls
+
+### Changed
+
+- Pickup point pin styles
+- Sidebar styles
+- Initial state styles
+- Searching styles
+- State handling using new react context
+
 ## [2.3.11] - 2019-05-21
 
 ### Fixed
