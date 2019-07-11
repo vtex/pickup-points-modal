@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { translate } from '../utils/i18nUtils'
 
@@ -82,6 +83,11 @@ class EmptySearch extends PureComponent {
 }
 
 EmptySearch.propTypes = {
+  geolocationStatus: PropTypes.string,
+  handleAddressChange: PropTypes.func.isRequired,
+  setGeolocationStatus: PropTypes.func.isRequired,
+  setActiveState: PropTypes.func.isRequired,
+  askForGeolocation: PropTypes.bool,
   googleMaps: PropTypes.object,
   intl: intlShape,
   loading: PropTypes.bool,

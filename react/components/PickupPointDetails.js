@@ -72,6 +72,9 @@ class PickupPointDetails extends Component {
         ? null
         : formatBusinessHoursList(pickupPointInfo.businessHours)
 
+    const hasAditionalInfo =
+      pickupPoint.pickupStoreInfo && pickupPoint.pickupStoreInfo.additionalInfo
+
     return (
       <div className={`${styles.modalDetails} pkpmodal-details`}>
         <div className={`${styles.modalDetailsTop} pkpmodal-details-top`}>
@@ -118,21 +121,20 @@ class PickupPointDetails extends Component {
                 <ProductItems isAvailable={false} items={unavailableItems} />
               )}
             </div>
-            {pickupPoint.pickupStoreInfo &&
-              pickupPoint.pickupStoreInfo.additionalInfo && (
-                <div
+            {hasAditionalInfo && (
+              <div
+                className={`${
+                  styles.modalDetailsGroup
+                } pkpmodal-details-group`}>
+                <h3
                   className={`${
-                    styles.modalDetailsGroup
-                  } pkpmodal-details-group`}>
-                  <h3
-                    className={`${
-                      styles.modalDetailsInfoTitle
-                    } pkpmodal-details-info-title`}>
-                    {translate(intl, 'aditionalInfo')}
-                  </h3>
-                  {pickupPoint.pickupStoreInfo.additionalInfo}
-                </div>
-              )}
+                    styles.modalDetailsInfoTitle
+                  } pkpmodal-details-info-title`}>
+                  {translate(intl, 'aditionalInfo')}
+                </h3>
+                {pickupPoint.pickupStoreInfo.additionalInfo}
+              </div>
+            )}
 
             {businessHours && (
               <div
@@ -219,6 +221,8 @@ PickupPointDetails.propTypes = {
   selectedRules: PropTypes.object.isRequired,
   sellerId: PropTypes.string,
   storePreferencesData: PropTypes.object.isRequired,
+  setActiveSidebarState: PropTypes.func.isRequired,
+  shouldUseMaps: PropTypes.bool.isRequired,
 }
 
 export default injectState(injectIntl(PickupPointDetails))

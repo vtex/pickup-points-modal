@@ -56,6 +56,13 @@ class SearchForm extends Component {
       permissionStatus,
     } = this.props
 
+    const geolocationStyle = `${
+      styles.askGeolocationBtn
+    } pkp-modal-ask-geolocation-btn`
+    const postalCodeStyle = `${styles.askGeolocationBtn} ${
+      styles.askGeolocationBtnPostalCode
+    } pkp-modal-ask-geolocation-btn postal-code`
+
     return (
       <form
         className={`${
@@ -111,14 +118,8 @@ class SearchForm extends Component {
             <button
               data-tip
               data-for="GPSDenied"
-              className={
-                isGeolocation
-                  ? `${styles.askGeolocationBtn} pkp-modal-ask-geolocation-btn`
-                  : `${styles.askGeolocationBtn} ${
-                      styles.askGeolocationBtnPostalCode
-                    } pkp-modal-ask-geolocation-btn postal-code`
-              }
-              onClick={this.props.getCurrentPosition}
+              className={isGeolocation ? geolocationStyle : postalCodeStyle}
+              onClick={() => this.props.getCurrentPosition()}
               title={translate(intl, 'askGeolocationAccept')}
               type="button">
               {navigator.geolocation && permissionStatus !== DENIED ? (
@@ -150,6 +151,7 @@ SearchForm.propTypes = {
   address: AddressShapeWithValidation,
   askForGeolocation: PropTypes.bool, // eslint-disable-line
   googleMaps: PropTypes.object,
+  getCurrentPosition: PropTypes.object,
   intl: intlShape,
   isAutoFocus: PropTypes.bool,
   isGeolocation: PropTypes.bool,
@@ -157,9 +159,11 @@ SearchForm.propTypes = {
   isSidebar: PropTypes.bool,
   onChangeAddress: PropTypes.func,
   placeholder: PropTypes.string,
+  permissionStatus: PropTypes.string,
   rules: PropTypes.object,
   setActiveState: PropTypes.func,
   setGeolocationStatus: PropTypes.func,
+  setGeolocationFrom: PropTypes.func,
   status: PropTypes.string,
   shipsTo: PropTypes.array,
 }

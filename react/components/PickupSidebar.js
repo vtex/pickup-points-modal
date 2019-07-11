@@ -1,29 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { injectIntl, intlShape } from 'react-intl'
-import {
-  SHOW_MAP,
-  HIDE_MAP,
-  INSIDE_MODAL,
-  LIST,
-  INITIAL,
-  ERROR_NOT_FOUND,
-  DETAILS,
-  SEARCHING,
-  ERROR_COULD_NOT_GETLOCATION,
-} from '../constants'
 import classNames from 'classnames'
-import { translate } from '../utils/i18nUtils'
-import { getShipsTo } from '../utils/AddressUtils'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 import PickupSidebarHeader from './PickupSidebarHeader'
 import Input from './Input'
 import PickupTabs from './PickupTabs'
 import SearchForm from './SearchForm'
-
 import styles from './PickupSidebar.css'
 import SidebarStateHandler from './SidebarStateHandler'
-import { handleState } from '../utils/StateUtils'
+import { injectIntl, intlShape } from 'react-intl'
+import { SHOW_MAP, DETAILS } from '../constants'
+import { translate } from '../utils/i18nUtils'
+import { getShipsTo } from '../utils/AddressUtils'
 import { injectState } from '../modalStateContext'
 
 class PickupSidebar extends Component {
@@ -45,7 +33,6 @@ class PickupSidebar extends Component {
     const {
       activePickupPoint,
       activeSidebarState,
-      setSelectedPickupPoint,
       changeActiveSLAOption,
       closePickupPointsModal,
       googleMaps,
@@ -71,6 +58,11 @@ class PickupSidebar extends Component {
 
     const isPickupDetailsActive = activeSidebarState === DETAILS
 
+    const shouldShowPickupTabs =
+      !isPickupDetailsActive && hasPickups && shouldUseMaps
+
+    const shouldShowSearchForm = !isPickupDetailsActive && shouldUseMaps
+
     return (
       <div
         className={classNames(
@@ -90,34 +82,31 @@ class PickupSidebar extends Component {
             }
           )}>
           <PickupSidebarHeader isPickupDetailsActive={isPickupDetailsActive} />
-          {!isPickupDetailsActive &&
-            shouldUseMaps && (
-              <SearchForm
-                address={searchAddress}
-                googleMaps={googleMaps}
-                Input={Input}
-                isLoadingGoogle={isLoading}
-                isGeolocation={shouldUseMaps}
-                isSidebar
-                onChangeAddress={onHandleAddressChange}
-                placeholder={translate(intl, 'searchLocationMap')}
-                rules={rules}
-                setGeolocationStatus={setGeolocationStatus}
-                shipsTo={getShipsTo(intl, logisticsInfo)}
-              />
-            )}
+          {shouldShowSearchForm && (
+            <SearchForm
+              address={searchAddress}
+              googleMaps={googleMaps}
+              Input={Input}
+              isLoadingGoogle={isLoading}
+              isGeolocation={shouldUseMaps}
+              isSidebar
+              onChangeAddress={onHandleAddressChange}
+              placeholder={translate(intl, 'searchLocationMap')}
+              rules={rules}
+              setGeolocationStatus={setGeolocationStatus}
+              shipsTo={getShipsTo(intl, logisticsInfo)}
+            />
+          )}
 
-          {!isPickupDetailsActive &&
-            hasPickups &&
-            shouldUseMaps && (
-              <div className={`${styles.tabsContainer} pickup-tabs-container`}>
-                <PickupTabs
-                  mapStatus={mapStatus}
-                  updateLocationTab={updateLocationTab}
-                  setActiveSidebarState={this.setActiveSidebarState}
-                />
-              </div>
-            )}
+          {shouldShowPickupTabs && (
+            <div className={`${styles.tabsContainer} pickup-tabs-container`}>
+              <PickupTabs
+                mapStatus={mapStatus}
+                updateLocationTab={updateLocationTab}
+                setActiveSidebarState={this.setActiveSidebarState}
+              />
+            </div>
+          )}
 
           <SidebarStateHandler
             changeActiveSLAOption={changeActiveSLAOption}
@@ -144,6 +133,7 @@ class PickupSidebar extends Component {
 }
 
 PickupSidebar.propTypes = {
+  activeSidebarState: PropTypes.string,
   activePickupPoint: PropTypes.object,
   setSelectedPickupPoint: PropTypes.func.isRequired,
   changeActiveSLAOption: PropTypes.func.isRequired,
@@ -161,6 +151,8 @@ PickupSidebar.propTypes = {
   searchAddress: AddressShapeWithValidation,
   selectedPickupPoint: PropTypes.object,
   sellerId: PropTypes.string,
+  setGeolocationStatus: PropTypes.func.isRequired,
+  setActiveSidebarState: PropTypes.func.isRequired,
   shouldUseMaps: PropTypes.bool,
   storePreferencesData: PropTypes.object.isRequired,
   updateLocationTab: PropTypes.func.isRequired,

@@ -45,4 +45,8 @@ class ZoomControls extends PureComponent {
   }
 }
 
+ZoomControls.propTypes = {
+  shouldShow: PropTypes.bool,
+}
+
 export default injectState(ZoomControls)

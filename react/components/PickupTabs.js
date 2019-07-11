@@ -20,19 +20,21 @@ class PickupTabs extends Component {
   render() {
     const { intl, mapStatus } = this.props
 
+    const buttonActive = `${
+      styles.pickupViewOptionActive
+    } pkpmodal-pickup-view-option-active`
+
+    const buttonInactive = `${
+      styles.pickupViewOptionInctive
+    } pkpmodal-pickup-view-option-inactive`
+
     return (
       <div className={`${styles.pickupViewMode} pkpmodal-pickup-view-mode`}>
         <button
           className={`${
             styles.pickupViewList
           } pkpmodal-pickup-view-list btn btn-link ${
-            mapStatus === HIDE_MAP
-              ? `${
-                  styles.pickupViewOptionActive
-                } pkpmodal-pickup-view-option-active`
-              : `${
-                  styles.pickupViewOptionInctive
-                } pkpmodal-pickup-view-option-inactive`
+            mapStatus === HIDE_MAP ? buttonActive : buttonInactive
           }`}
           onClick={this.handleLocationTab}
           type="button"
@@ -43,13 +45,7 @@ class PickupTabs extends Component {
           className={`${
             styles.pickupViewMap
           } pkpmodal-pickup-view-map btn btn-link ${
-            mapStatus === SHOW_MAP
-              ? `${
-                  styles.pickupViewOptionActive
-                } pkpmodal-pickup-view-option-active`
-              : `${
-                  styles.pickupViewOptionInctive
-                } pkpmodal-pickup-view-option-inactive`
+            mapStatus === SHOW_MAP ? buttonActive : buttonInactive
           }`}
           onClick={this.handleLocationTab}
           type="button"
@@ -65,6 +61,7 @@ PickupTabs.propTypes = {
   intl: intlShape,
   mapStatus: PropTypes.string.isRequired,
   updateLocationTab: PropTypes.func.isRequired,
+  setActiveSidebarState: PropTypes.func.isRequired,
 }
 
 export default injectState(injectIntl(PickupTabs))

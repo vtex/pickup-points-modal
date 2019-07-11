@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import geolocationAutoCompleteAddress from '@vtex/address-form/lib/geolocation/geolocationAutoCompleteAddress'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
-import markerIconBlue from '../assets/icons/marker.svg'
-import markerIconSelected from '../assets/icons/marker_selected.svg'
+import markerIcon from '../assets/icons/marker.svg'
 import personPin from '../assets/icons/person_pin.svg'
 
 import { getPickupGeolocationString } from '../utils/GetString'
-import GPSDenied from '../assets/components/GPSDenied'
+import { injectState } from '../modalStateContext'
+import { DETAILS, LIST, SIDEBAR } from '../constants'
 
 class Map extends Component {
   constructor() {
@@ -119,7 +119,7 @@ class Map extends Component {
       this.resetMarkers(this.getLocation(nextAddressCoords))
       activeMarkerObj &&
         activeMarkerObj.marker.setIcon({
-          url: markerIconBlue,
+          url: markerIcon,
           size: new googleMaps.Size(38, 49),
           scaledSize: new googleMaps.Size(38, 49),
         })
@@ -152,7 +152,7 @@ class Map extends Component {
       )
       this.resetMarkers()
       markerObj.marker.setIcon({
-        url: markerIconBlue,
+        url: markerIcon,
         size: new googleMaps.Size(38, 49),
         scaledSize: new googleMaps.Size(38, 49),
       })
@@ -272,6 +272,16 @@ class Map extends Component {
 
       this.addressMarker = new googleMaps.Marker(markerOptions)
     }
+    const icon = {
+      url: markerIcon,
+      size: new googleMaps.Size(25, 31),
+      scaledSize: new googleMaps.Size(25, 31),
+    }
+    const selectedIcon = {
+      url: markerIcon,
+      size: new googleMaps.Size(38, 49),
+      scaledSize: new googleMaps.Size(38, 49),
+    }
 
     locations &&
       locations.forEach((location, index) => {
@@ -283,16 +293,8 @@ class Map extends Component {
             (pickupPoint && pickupPoint.id === pickupOptions[index].id) ||
             (selectedPickupPoint &&
               selectedPickupPoint.id === pickupOptions[index].id)
-              ? {
-                  url: markerIconBlue,
-                  size: new googleMaps.Size(38, 49),
-                  scaledSize: new googleMaps.Size(38, 49),
-                }
-              : {
-                  url: markerIconBlue,
-                  size: new googleMaps.Size(25, 31),
-                  scaledSize: new googleMaps.Size(25, 31),
-                },
+              ? selectedIcon
+              : icon,
         }
 
         if (index < 2 && this.addressMarker && hasAddressCoords) {
@@ -307,7 +309,7 @@ class Map extends Component {
           () => {
             this.resetMarkers()
             marker.setIcon({
-              url: markerIconBlue,
+              url: markerIcon,
               size: new googleMaps.Size(38, 49),
               scaledSize: new googleMaps.Size(38, 49),
             })
@@ -322,7 +324,7 @@ class Map extends Component {
           'mouseover',
           () => {
             marker.setIcon({
-              url: markerIconBlue,
+              url: markerIcon,
               size: new googleMaps.Size(38, 49),
               scaledSize: new googleMaps.Size(38, 49),
             })
@@ -340,7 +342,7 @@ class Map extends Component {
               return
             }
             marker.setIcon({
-              url: markerIconBlue,
+              url: markerIcon,
               size: new googleMaps.Size(25, 31),
               scaledSize: new googleMaps.Size(25, 31),
             })
@@ -377,16 +379,15 @@ class Map extends Component {
 
   resetMarkers = location => {
     this.markers &&
-      this.markers.forEach(
-        markerObj =>
-          markerObj.pickupPoint
-            ? markerObj.marker.setIcon({
-                url: markerIconBlue,
-                size: new this.props.googleMaps.Size(25, 31),
-                scaledSize: new this.props.googleMaps.Size(25, 31),
-              })
-            : markerObj
-      )
+      this.markers.forEach(markerObj => {
+        if (markerObj.pickupPoint) {
+          markerObj.marker.setIcon({
+            url: markerIcon,
+            size: new this.props.googleMaps.Size(25, 31),
+            scaledSize: new this.props.googleMaps.Size(25, 31),
+          })
+        }
+      })
     location && this.addressMarker && this.addressMarker.setPosition(location)
   }
 
@@ -460,6 +461,8 @@ Map.defaultProps = {
 }
 
 Map.propTypes = {
+  activePickupPoint: PropTypes.object,
+  activeState: PropTypes.string,
   activatePickupDetails: PropTypes.func.isRequired,
   selectedPickupPoint: PropTypes.object,
   address: AddressShapeWithValidation,
@@ -473,8 +476,11 @@ Map.propTypes = {
   onChangeAddress: PropTypes.func.isRequired,
   pickupOptionGeolocations: PropTypes.array,
   pickupOptions: PropTypes.array.isRequired,
+  pickupPoint: PropTypes.object,
   rules: PropTypes.object.isRequired,
   selectedPickupPointGeolocation: PropTypes.array,
+  setActiveSidebarState: PropTypes.func.isRequired,
+  setSelectedPickupPoint: PropTypes.func.isRequired,
 }
 
 export default injectState(Map)

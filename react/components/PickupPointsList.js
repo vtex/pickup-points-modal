@@ -1,4 +1,5 @@
-import react, { PureComponent } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import styles from './PickupSidebar.css'
 import PickupPoint from './PickupPoint'
 import { injectState } from '../modalStateContext'
@@ -44,6 +45,20 @@ class PickupPointsList extends PureComponent {
       </div>
     )
   }
+}
+
+PickupPointsList.propTypes = {
+  activePickupPoint: PropTypes.object.isRequired,
+  changeActivePickupDetails: PropTypes.func.isRequired,
+  logisticsInfo: PropTypes.array.isRequired,
+  items: PropTypes.array.isRequired,
+  pickupOptions: PropTypes.array.isRequired,
+  rules: PropTypes.object.isRequired,
+  sellerId: PropTypes.string,
+  setActiveSidebarState: PropTypes.func.isRequired,
+  setSelectedPickupPoint: PropTypes.func.isRequired,
+  shouldUseMaps: PropTypes.bool.isRequired,
+  storePreferencesData: PropTypes.object.isRequired,
 }
 
 export default injectState(PickupPointsList)

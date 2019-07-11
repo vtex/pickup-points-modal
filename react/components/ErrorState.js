@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
-import { injectIntl, intlShape } from 'react-intl'
+import PropTypes from 'prop-types'
+import Button from './Button'
 import styles from '../index.css'
 import errorStyles from './ErrorState.css'
-import PinLocationUnknown from '../assets/components/PinLocationUnknown'
+import { injectIntl, intlShape } from 'react-intl'
 import { INITIAL } from '../constants'
-import Button from './Button'
 import { translate } from '../utils/i18nUtils'
 import { injectState } from '../modalStateContext'
 
@@ -54,6 +54,11 @@ ErrorState.defaultProps = {
 
 ErrorState.propTypes = {
   intl: intlShape,
+  setActiveState: PropTypes.func.isRequired,
+  subtitle: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  Icon: PropTypes.node.isRequired,
+  isFullPage: PropTypes.bool,
 }
 
 export default injectState(injectIntl(ErrorState))

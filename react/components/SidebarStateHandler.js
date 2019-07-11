@@ -1,4 +1,11 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import PickupPointsList from './PickupPointsList'
+import PickupPointDetails from './PickupPointDetails'
+import SearchingState from './SearchingState'
+import ErrorState from './ErrorState'
+import PinLocationUnknown from '../assets/components/PinLocationUnknown'
+import PinNoPickups from '../assets/components/PinNoPickups'
 import {
   DETAILS,
   LIST,
@@ -6,12 +13,6 @@ import {
   ERROR_COULD_NOT_GETLOCATION,
   ERROR_NOT_FOUND,
 } from '../constants'
-import PickupPointsList from './PickupPointsList'
-import PickupPointDetails from './PickupPointDetails'
-import SearchingState from './SearchingState'
-import ErrorState from './ErrorState'
-import PinLocationUnknown from '../assets/components/PinLocationUnknown'
-import PinNoPickups from '../assets/components/PinNoPickups'
 import { injectState } from '../modalStateContext'
 
 class SidebarStateHandler extends PureComponent {
@@ -105,6 +106,23 @@ class SidebarStateHandler extends PureComponent {
         return <div />
     }
   }
+}
+
+SidebarStateHandler.propTypes = {
+  activeSidebarState: PropTypes.string.isRequired,
+  activePickupPoint: PropTypes.object,
+  changeActiveSLAOption: PropTypes.func.isRequired,
+  closePickupPointsModal: PropTypes.func.isRequired,
+  logisticsInfo: PropTypes.array.isRequired,
+  items: PropTypes.array.isRequired,
+  pickupOptions: PropTypes.array.isRequired,
+  rules: PropTypes.object.isRequired,
+  styles: PropTypes.object.isRequired,
+  sellerId: PropTypes.string,
+  shouldUseMaps: PropTypes.bool.isRequired,
+  pickupPoints: PropTypes.array.isRequired,
+  selectedPickupPoint: PropTypes.object,
+  storePreferencesData: PropTypes.object.isRequired,
 }
 
 export default injectState(SidebarStateHandler)

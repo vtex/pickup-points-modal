@@ -174,7 +174,6 @@ PickupPoint.defaultProps = {
   isSelected: true,
 }
 PickupPoint.propTypes = {
-  setSelectedPickupPoint: PropTypes.any,
   handleChangeActivePickupDetails: PropTypes.func,
   intl: intlShape,
   isList: PropTypes.bool,
@@ -187,6 +186,8 @@ PickupPoint.propTypes = {
   pickupPoint: PropTypes.object.isRequired,
   selectedRules: PropTypes.object.isRequired,
   sellerId: PropTypes.any,
+  setSelectedPickupPoint: PropTypes.func.isRequired,
+  setActiveSidebarState: PropTypes.func.isRequired,
   shouldUseMaps: PropTypes.bool,
   showAddress: PropTypes.bool,
   storePreferencesData: PropTypes.object.isRequired,

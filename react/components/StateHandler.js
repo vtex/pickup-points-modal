@@ -1,20 +1,21 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import EmptySearch from './EmptySearch'
-import {
-  INITIAL,
-  SEARCHING,
-  ERROR_COULD_NOT_GETLOCATION,
-  ERROR_NOT_ALLOWED,
-  ERROR_NOT_FOUND,
-  SIDEBAR,
-  GEOLOCATION_SEARCHING,
-} from '../constants'
 import SearchingState from './SearchingState'
 import ErrorState from './ErrorState'
 import PickupSidebar from './PickupSidebar'
 import PinLocationUnknown from '../assets/components/PinLocationUnknown'
 import PinNoPickups from '../assets/components/PinNoPickups'
+import {
+  INITIAL,
+  SEARCHING,
+  ERROR_COULD_NOT_GETLOCATION,
+  ERROR_NOT_FOUND,
+  SIDEBAR,
+  GEOLOCATION_SEARCHING,
+} from '../constants'
 import { injectState } from '../modalStateContext'
+import { intlShape } from 'react-intl'
 
 class StateHandler extends PureComponent {
   render() {
@@ -112,6 +113,31 @@ class StateHandler extends PureComponent {
       }
     }
   }
+}
+
+StateHandler.propTypes = {
+  activeState: PropTypes.string.isRequired,
+  activePickupPoint: PropTypes.object,
+  askForGeolocation: PropTypes.bool,
+  changeActiveSLAOption: PropTypes.func.isRequired,
+  closePickupPointsModal: PropTypes.func.isRequired,
+  googleMaps: PropTypes.object.isRequired,
+  intl: intlShape,
+  isLargeScreen: PropTypes.bool.isRequired,
+  isSearching: PropTypes.bool,
+  items: PropTypes.array.isRequired,
+  loading: PropTypes.bool,
+  logisticsInfo: PropTypes.array.isRequired,
+  mapStatus: PropTypes.string,
+  onAddressChange: PropTypes.func.isRequired,
+  pickupOptions: PropTypes.array.isRequired,
+  pickupPoints: PropTypes.array.isRequired,
+  rules: PropTypes.object.isRequired,
+  searchAddress: PropTypes.object.isRequired,
+  sellerId: PropTypes.string,
+  shouldUseMaps: PropTypes.bool,
+  storePreferencesData: PropTypes.object.isRequired,
+  updateLocationTab: PropTypes.func,
 }
 
 export default injectState(StateHandler)
