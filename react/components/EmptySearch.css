@@ -1,0 +1,17 @@
+.permissionDenied {
+  align-items: center;
+  bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 50px;
+  position: absolute;
+  width: 100%;
+}
+
+.permissionDenied span {
+  color: #666666;
+  font-size: 16px;
+  line-height: 24px;
+  margin-left: 16px;
+}

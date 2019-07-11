@@ -1,14 +1,16 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { injectIntl, intlShape } from 'react-intl'
-import { translate } from '../utils/i18nUtils'
-import { hasPostalCodeOnlyNumber } from '../utils/AddressUtils'
-import { ASK, WAITING, GRANTED, VTEXLOCAL, LOCALHOST } from '../constants'
 import SearchIcon from '../assets/components/SearchIcon'
 import Gps from '../assets/components/GPS'
+import GPSDenied from '../assets/components/GPSDenied'
+import ReactTooltip from 'react-tooltip'
 import styles from './SearchForm.css'
 import { components, inputs, shapes } from 'vtex.address-form'
-
+import { injectIntl, intlShape } from 'react-intl'
+import { hasPostalCodeOnlyNumber } from '../utils/AddressUtils'
+import { translate } from '../utils/i18nUtils'
+import { DENIED } from '../constants'
+import { injectGeolocation } from '../geolocationContext'
 const { PostalCodeGetter, CountrySelector } = components
 const { GeolocationInput, DefaultInput } = inputs
 const { AddressShapeWithValidation } = shapes
@@ -36,46 +38,31 @@ class SearchForm extends Component {
     this.setMyLocationButtonVisibility(false)
   }
 
-  handleAskGeolocationClick = () => {
-    if (navigator.permissions) {
-      navigator.permissions.query({ name: 'geolocation' }).then(permission => {
-        this.props.onAskForGeolocationStatus(
-          permission.state === GRANTED || process.env.NODE !== 'production'
-            ? WAITING
-            : ASK
-        )
-        this.props.onHandleAskForGeolocation(true)
-      })
-    } else if (
-      window.location.host.indexOf(VTEXLOCAL) !== -1 ||
-      window.location.host.indexOf(LOCALHOST) !== -1
-    ) {
-      this.props.onHandleAskForGeolocation(true)
-    } else {
-      this.props.onAskForGeolocationStatus(WAITING)
-      this.props.onHandleAskForGeolocation(true)
-    }
-  }
-
   render() {
     const {
-      Input,
-      placeholder,
-      isLoadingGoogle,
-      intl,
-      isGeolocation,
-      isAutoFocus,
-      googleMaps,
       address,
-      rules,
+      googleMaps,
+      Input,
+      intl,
+      isAutoFocus,
+      isGeolocation,
+      isLoadingGoogle,
+      isSidebar,
       onChangeAddress,
+      rules,
+      placeholder,
       setGeolocationFrom,
       shipsTo,
+      permissionStatus,
     } = this.props
 
     return (
       <form
-        className={`${isGeolocation ? styles.modalSearch : styles.modalPostalCode} ${isGeolocation ? 'pkpmodal-search' : 'pkpmodal-postal-code'}`}
+        className={`${
+          isGeolocation ? styles.modalSearch : styles.modalPostalCode
+        } ${isGeolocation ? 'pkpmodal-search' : 'pkpmodal-postal-code'} ${
+          isSidebar ? '' : 'full'
+        }`}
         id="pkpmodal-search"
         onFocus={setGeolocationFrom}
         onSubmit={event => event.preventDefault()}>
@@ -119,22 +106,34 @@ class SearchForm extends Component {
             />
           </Fragment>
         )}
-        {isGeolocation && navigator.geolocation &&
-          this.state.isMyLocationButtonVisible && (
-          <button
-            className={
-              isGeolocation
-                ? `${styles.askGeolocationBtn} pkp-modal-ask-geolocation-btn`
-                : `${styles.askGeolocationBtn} ${
-                  styles.askGeolocationBtnPostalCode
-                } pkp-modal-ask-geolocation-btn postal-code`
-            }
-            onClick={this.handleAskGeolocationClick}
-            title={translate(intl, 'askGeolocationAccept')}
-            type="button">
-            <Gps />
-          </button>
-        )}
+        {
+          <Fragment>
+            <button
+              data-tip
+              data-for="GPSDenied"
+              className={
+                isGeolocation
+                  ? `${styles.askGeolocationBtn} pkp-modal-ask-geolocation-btn`
+                  : `${styles.askGeolocationBtn} ${
+                      styles.askGeolocationBtnPostalCode
+                    } pkp-modal-ask-geolocation-btn postal-code`
+              }
+              onClick={this.props.getCurrentPosition}
+              title={translate(intl, 'askGeolocationAccept')}
+              type="button">
+              {navigator.geolocation && permissionStatus !== DENIED ? (
+                <Gps />
+              ) : (
+                <GPSDenied />
+              )}
+            </button>
+            {(!navigator.geolocation || permissionStatus === DENIED) && (
+              <ReactTooltip id="GPSDenied" effect="float">
+                <span>{translate(intl, 'askGeolocationDenied')}</span>
+              </ReactTooltip>
+            )}
+          </Fragment>
+        }
         {isGeolocation && <SearchIcon isGeolocation={isGeolocation} />}
       </form>
     )
@@ -155,13 +154,14 @@ SearchForm.propTypes = {
   isAutoFocus: PropTypes.bool,
   isGeolocation: PropTypes.bool,
   isLoadingGoogle: PropTypes.bool,
-  onAskForGeolocationStatus: PropTypes.func.isRequired,
+  isSidebar: PropTypes.bool,
   onChangeAddress: PropTypes.func,
-  onHandleAskForGeolocation: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   rules: PropTypes.object,
-  setGeolocationFrom: PropTypes.func,
+  setActiveState: PropTypes.func,
+  setGeolocationStatus: PropTypes.func,
+  status: PropTypes.string,
   shipsTo: PropTypes.array,
 }
 
-export default injectIntl(SearchForm)
+export default injectGeolocation(injectIntl(SearchForm))

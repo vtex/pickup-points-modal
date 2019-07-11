@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import styles from './ZoomControls.css'
+import { injectState } from '../modalStateContext'
 
 class ZoomControls extends PureComponent {
   render() {
@@ -44,4 +45,4 @@ class ZoomControls extends PureComponent {
   }
 }
 
-export default ZoomControls
+export default injectState(ZoomControls)

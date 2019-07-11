@@ -2,14 +2,18 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { translate } from '../utils/i18nUtils'
-import { HIDE_MAP, SHOW_MAP } from '../constants'
+import { HIDE_MAP, SHOW_MAP, LIST } from '../constants'
 import styles from './PickupTabs.css'
+import { injectState } from '../modalStateContext'
 
 class PickupTabs extends Component {
   handleLocationTab = event => {
     if (event.target.value === !this.props.mapStatus) return
 
     this.props.updateLocationTab(event.target.value)
+    this.props.setActiveSidebarState(
+      event.target.value === HIDE_MAP ? LIST : ''
+    )
     this.setState({ lastMapValue: !this.props.mapStatus })
   }
 
@@ -24,11 +28,11 @@ class PickupTabs extends Component {
           } pkpmodal-pickup-view-list btn btn-link ${
             mapStatus === HIDE_MAP
               ? `${
-                styles.pickupViewOptionActive
-              } pkpmodal-pickup-view-option-active`
+                  styles.pickupViewOptionActive
+                } pkpmodal-pickup-view-option-active`
               : `${
-                styles.pickupViewOptionInctive
-              } pkpmodal-pickup-view-option-inactive`
+                  styles.pickupViewOptionInctive
+                } pkpmodal-pickup-view-option-inactive`
           }`}
           onClick={this.handleLocationTab}
           type="button"
@@ -41,11 +45,11 @@ class PickupTabs extends Component {
           } pkpmodal-pickup-view-map btn btn-link ${
             mapStatus === SHOW_MAP
               ? `${
-                styles.pickupViewOptionActive
-              } pkpmodal-pickup-view-option-active`
+                  styles.pickupViewOptionActive
+                } pkpmodal-pickup-view-option-active`
               : `${
-                styles.pickupViewOptionInctive
-              } pkpmodal-pickup-view-option-inactive`
+                  styles.pickupViewOptionInctive
+                } pkpmodal-pickup-view-option-inactive`
           }`}
           onClick={this.handleLocationTab}
           type="button"
@@ -63,4 +67,4 @@ PickupTabs.propTypes = {
   updateLocationTab: PropTypes.func.isRequired,
 }
 
-export default injectIntl(PickupTabs)
+export default injectState(injectIntl(PickupTabs))

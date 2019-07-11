@@ -11,11 +11,11 @@ class PickupSidebarHeader extends PureComponent {
 
     return (
       <div className={`${styles.modalHeader} pkpmodal-header`}>
-        <h4 className={`${styles.modalTitle} pkpmodal-title`}>
+        <p className={`${styles.modalTitle} pkpmodal-title`}>
           {isPickupDetailsActive
             ? translate(intl, 'pointDetails')
             : translate(intl, 'selectPickupPoint')}
-        </h4>
+        </p>
       </div>
     )
   }

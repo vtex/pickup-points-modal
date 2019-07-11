@@ -6,7 +6,7 @@
   z-index: 101;
   flex: 1 1 auto;
   position: relative;
-  height: 90%;
+  height: 80%;
 }
 
 .modalDetailsTop {
@@ -43,7 +43,8 @@
 }
 
 .modalDetailsInfoTitle {
-  font-weight: 300;
+  font-weight: 500;
+  color: #666666;
   margin-top: 0;
 }
 

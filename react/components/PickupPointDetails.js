@@ -15,6 +15,8 @@ import PickupPointHour from './PickupPointHour'
 import Button from './Button'
 
 import styles from './PickupPointDetails.css'
+import { LIST } from '../constants'
+import { injectState } from '../modalStateContext'
 
 class PickupPointDetails extends Component {
   constructor(props) {
@@ -35,7 +37,9 @@ class PickupPointDetails extends Component {
       ),
     }
   }
-  handleBackButtonClick = () => this.props.togglePickupDetails()
+  handleBackButtonClick = () => {
+    this.props.setActiveSidebarState(LIST)
+  }
 
   handleConfirmButtonClick = () => {
     this.props.handleChangeActiveSLAOption({
@@ -43,7 +47,6 @@ class PickupPointDetails extends Component {
       sellerId: this.props.sellerId,
       shouldUpdateShippingData: false,
     })
-    this.props.togglePickupDetails()
     this.props.handleClosePickupPointsModal()
   }
 
@@ -54,6 +57,7 @@ class PickupPointDetails extends Component {
       selectedRules,
       isSelectedSla,
       sellerId,
+      shouldUseMaps,
       intl,
       storePreferencesData,
       logisticsInfo,
@@ -89,6 +93,7 @@ class PickupPointDetails extends Component {
         <div className={`${styles.modalDetailsMiddle} pkpmodal-details-middle`}>
           <div className={`${styles.modalDetailsStore} pkpmodal-details-store`}>
             <PickupPoint
+              shouldUseMaps={shouldUseMaps}
               isSelected={isSelectedSla}
               items={this.props.items}
               logisticsInfo={logisticsInfo}
@@ -115,19 +120,19 @@ class PickupPointDetails extends Component {
             </div>
             {pickupPoint.pickupStoreInfo &&
               pickupPoint.pickupStoreInfo.additionalInfo && (
-              <div
-                className={`${
-                  styles.modalDetailsGroup
-                } pkpmodal-details-group`}>
-                <h3
+                <div
                   className={`${
-                    styles.modalDetailsInfoTitle
-                  } pkpmodal-details-info-title`}>
-                  {translate(intl, 'aditionalInfo')}
-                </h3>
-                {pickupPoint.pickupStoreInfo.additionalInfo}
-              </div>
-            )}
+                    styles.modalDetailsGroup
+                  } pkpmodal-details-group`}>
+                  <h3
+                    className={`${
+                      styles.modalDetailsInfoTitle
+                    } pkpmodal-details-info-title`}>
+                    {translate(intl, 'aditionalInfo')}
+                  </h3>
+                  {pickupPoint.pickupStoreInfo.additionalInfo}
+                </div>
+              )}
 
             {businessHours && (
               <div
@@ -214,7 +219,6 @@ PickupPointDetails.propTypes = {
   selectedRules: PropTypes.object.isRequired,
   sellerId: PropTypes.string,
   storePreferencesData: PropTypes.object.isRequired,
-  togglePickupDetails: PropTypes.func.isRequired,
 }
 
-export default injectIntl(PickupPointDetails)
+export default injectState(injectIntl(PickupPointDetails))

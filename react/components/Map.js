@@ -34,6 +34,7 @@ class Map extends Component {
       pickupOptions,
       pickupOptionGeolocations,
       pickupPoint,
+      selectedPickupPoint,
     } = this.props
 
     const rulesChanged = prevProps.rules.country !== rules.country
@@ -42,6 +43,8 @@ class Map extends Component {
     const addressChanged =
       prevProps.address.geoCoordinates.value !== address.geoCoordinates.value
     const pickupGeolocationsChanged = prevProps.pickupOptions !== pickupOptions
+    const selectedPickupPointChanged =
+      prevProps.selectedPickupPoint !== selectedPickupPoint
     const pickupOptionsChanged =
       prevProps.pickupOptionGeolocations !== pickupOptionGeolocations
     const pickupPointChanged =
@@ -56,7 +59,8 @@ class Map extends Component {
       addressChanged ||
       pickupOptionsChanged ||
       pickupPointChanged ||
-      pickupGeolocationsChanged
+      pickupGeolocationsChanged ||
+      selectedPickupPointChanged
     )
   }
 
@@ -64,66 +68,78 @@ class Map extends Component {
     this.setState({ isMounted: false })
   }
 
-  // eslint-disable-next-line
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     const { googleMaps, pickupOptionGeolocations } = this.props
 
-    const selectedGeolocation = nextProps.pickupOptions.find(
-      item => nextProps.pickupPoint && item.id === nextProps.pickupPoint.id
+    this.center = this.getLocation(this.props.address.geoCoordinates.value)
+
+    const selectedGeolocation = this.props.pickupOptions.find(
+      item =>
+        this.props.selectedPickupPoint &&
+        item.id === this.props.selectedPickupPoint.id
     )
 
-    this.address = nextProps.address
+    this.address = this.props.address
 
     const thisPickupOptions = getPickupGeolocationString(
+      prevProps.pickupOptionGeolocations
+    )
+    const prevPickupOptions = getPickupGeolocationString(
       pickupOptionGeolocations
     )
-    const nextPickupOptions = getPickupGeolocationString(
-      nextProps.pickupOptionGeolocations
-    )
 
-    const nextAddressCoords = nextProps.address.geoCoordinates.value
-    const thisAddressCoords = this.props.address.geoCoordinates.value
+    const nextAddressCoords =
+      this.props.geoCoordinates && this.props.geoCoordinates.value
+    const thisAddressCoords = prevProps.address.geoCoordinates.value
 
     const markerObj =
       this.markers &&
       this.markers.find(
         item =>
-          nextProps.pickupPoint && item.pickupPoint === nextProps.pickupPoint.id
+          this.props.selectedPickupPoint &&
+          item.pickupPoint === this.props.selectedPickupPoint.id
       )
 
     const activeMarkerObj =
       this.markers &&
       this.markers.find(
         item =>
-          nextProps.activePickupPoint &&
-          item.pickupPoint === nextProps.activePickupPoint.id
+          this.props.activePickupPoint &&
+          item.pickupPoint === this.props.activePickupPoint.id
       )
 
     if (
-      ((nextAddressCoords.length > 0 && nextProps.pickupOptions.length > 1) ||
-        nextAddressCoords !== thisAddressCoords) &&
+      ((nextAddressCoords &&
+        nextAddressCoords.length > 0 &&
+        this.props.pickupOptions.length > 1) ||
+        (nextAddressCoords && nextAddressCoords !== thisAddressCoords)) &&
       googleMaps
     ) {
       this.recenterMap(this.getLocation(nextAddressCoords))
       this.resetMarkers(this.getLocation(nextAddressCoords))
-      activeMarkerObj && activeMarkerObj.marker.setIcon(markerIconSelected)
+      activeMarkerObj &&
+        activeMarkerObj.marker.setIcon({
+          url: markerIconBlue,
+          size: new googleMaps.Size(38, 49),
+          scaledSize: new googleMaps.Size(38, 49),
+        })
     }
 
-    if (thisPickupOptions !== nextPickupOptions) {
+    if (thisPickupOptions !== prevPickupOptions) {
       this.markers.map(markerObj => markerObj.marker.setMap(null))
       this.createNewMarkers({
-        pickups: nextProps.pickupOptionGeolocations,
-        address: nextProps.address,
-        pickupOptions: nextProps.pickupOptions,
-        pickupPoint: nextProps.pickupPoint,
-        selectedPickupPointGeolocation:
-          nextProps.selectedPickupPointGeolocation,
+        pickups: this.props.pickupOptionGeolocations,
+        address: this.props.address,
+        pickupOptions: this.props.pickupOptions,
+        pickupPoint: this.props.selectedPickupPoint,
+        selectedPickupPointGeolocation: this.props
+          .selectedPickupPointGeolocation,
         recenter: false,
       })
     }
 
     if (
-      nextProps.isPickupDetailsActive &&
+      this.props.activeState === SIDEBAR &&
       selectedGeolocation &&
       selectedGeolocation.pickupStoreInfo.address.geoCoordinates.length > 0 &&
       googleMaps &&
@@ -135,7 +151,11 @@ class Map extends Component {
         )
       )
       this.resetMarkers()
-      markerObj.marker.setIcon(markerIconSelected)
+      markerObj.marker.setIcon({
+        url: markerIconBlue,
+        size: new googleMaps.Size(38, 49),
+        scaledSize: new googleMaps.Size(38, 49),
+      })
       return
     }
   }
@@ -163,8 +183,8 @@ class Map extends Component {
     this.createNewMarkers({
       pickups: this.props.pickupOptionGeolocations,
       pickupOptions: this.props.pickupOptions,
-      pickupPoint: this.props.pickupPoint,
-      selectedPickupPointGeolocation: this.props.selectedPickupPointGeolocation,
+      pickupPoint: this.props.selectedPickupPoint,
+      selectedPickupPointGeolocation: this.props.selectedPickupPoint,
       recenter: true,
       ...(this.props.address.geoCoordinates.value.length > 0
         ? { address: this.props.address }
@@ -219,10 +239,11 @@ class Map extends Component {
       .filter(item => item)
 
     const {
-      googleMaps,
-      activePickupPoint,
+      selectedPickupPoint,
       changeActivePickupDetails,
-      activatePickupDetails,
+      googleMaps,
+      setActiveSidebarState,
+      setSelectedPickupPoint,
     } = this.props
 
     const hasAddressCoords =
@@ -260,10 +281,18 @@ class Map extends Component {
           map: this.map,
           icon:
             (pickupPoint && pickupPoint.id === pickupOptions[index].id) ||
-            (activePickupPoint &&
-              activePickupPoint.id === pickupOptions[index].id)
-              ? markerIconSelected
-              : markerIconBlue,
+            (selectedPickupPoint &&
+              selectedPickupPoint.id === pickupOptions[index].id)
+              ? {
+                  url: markerIconBlue,
+                  size: new googleMaps.Size(38, 49),
+                  scaledSize: new googleMaps.Size(38, 49),
+                }
+              : {
+                  url: markerIconBlue,
+                  size: new googleMaps.Size(25, 31),
+                  scaledSize: new googleMaps.Size(25, 31),
+                },
         }
 
         if (index < 2 && this.addressMarker && hasAddressCoords) {
@@ -272,20 +301,62 @@ class Map extends Component {
 
         const marker = new googleMaps.Marker(markerOptions)
 
-        const markerListener = googleMaps.event.addListener(
+        const markerClickListener = googleMaps.event.addListener(
           marker,
           'click',
           () => {
             this.resetMarkers()
-            marker.setIcon(markerIconSelected)
+            marker.setIcon({
+              url: markerIconBlue,
+              size: new googleMaps.Size(38, 49),
+              scaledSize: new googleMaps.Size(38, 49),
+            })
             changeActivePickupDetails({ pickupPoint: pickupOptions[index] })
-            activatePickupDetails(true)
+            setSelectedPickupPoint(pickupOptions[index])
+            setActiveSidebarState(DETAILS)
           }
         )
 
+        const markerHoverListener = googleMaps.event.addListener(
+          marker,
+          'mouseover',
+          () => {
+            marker.setIcon({
+              url: markerIconBlue,
+              size: new googleMaps.Size(38, 49),
+              scaledSize: new googleMaps.Size(38, 49),
+            })
+          }
+        )
+
+        const markerHoverOutListener = googleMaps.event.addListener(
+          marker,
+          'mouseout',
+          () => {
+            if (
+              this.props.selectedPickupPoint &&
+              this.props.selectedPickupPoint.id === pickupOptions[index].id
+            ) {
+              return
+            }
+            marker.setIcon({
+              url: markerIconBlue,
+              size: new googleMaps.Size(25, 31),
+              scaledSize: new googleMaps.Size(25, 31),
+            })
+          }
+        )
+
+        googleMaps.event.addListener(this.map, 'click', () => {
+          setActiveSidebarState(LIST)
+          this.resetMarkers()
+        })
+
         this.markers.push({
           marker,
-          markerListener,
+          markerClickListener,
+          markerHoverListener,
+          markerHoverOutListener,
           pickupPoint: pickupOptions[index].id,
         })
 
@@ -309,7 +380,11 @@ class Map extends Component {
       this.markers.forEach(
         markerObj =>
           markerObj.pickupPoint
-            ? markerObj.marker.setIcon(markerIconBlue)
+            ? markerObj.marker.setIcon({
+                url: markerIconBlue,
+                size: new this.props.googleMaps.Size(25, 31),
+                scaledSize: new this.props.googleMaps.Size(25, 31),
+              })
             : markerObj
       )
     location && this.addressMarker && this.addressMarker.setPosition(location)
@@ -332,7 +407,7 @@ class Map extends Component {
   }
 
   getLocation = geoCoordinates => {
-    if (!this.props.googleMaps) return
+    if (!this.props.googleMaps || !geoCoordinates) return
     const [lng, lat] = geoCoordinates
     const location = new this.props.googleMaps.LatLng(lat, lng)
     return location
@@ -386,7 +461,7 @@ Map.defaultProps = {
 
 Map.propTypes = {
   activatePickupDetails: PropTypes.func.isRequired,
-  activePickupPoint: PropTypes.object,
+  selectedPickupPoint: PropTypes.object,
   address: AddressShapeWithValidation,
   changeActivePickupDetails: PropTypes.func.isRequired,
   geoCoordinates: PropTypes.array,
@@ -398,9 +473,8 @@ Map.propTypes = {
   onChangeAddress: PropTypes.func.isRequired,
   pickupOptionGeolocations: PropTypes.array,
   pickupOptions: PropTypes.array.isRequired,
-  pickupPoint: PropTypes.object,
   rules: PropTypes.object.isRequired,
   selectedPickupPointGeolocation: PropTypes.array,
 }
 
-export default Map
+export default injectState(Map)

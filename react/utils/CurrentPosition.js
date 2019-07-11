@@ -4,7 +4,7 @@ export function getCurrentPosition(successCallback, errorCallback) {
   return navigator.geolocation.getCurrentPosition(
     position => successCallback(position),
     error => errorCallback(error),
-    { maximumAge: 50000, timeout: 20000, enableHighAccuracy: true }
+    { maximumAge: Infinity, timeout: 2000, enableHighAccuracy: true }
   )
 }
 
