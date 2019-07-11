@@ -7,8 +7,9 @@ import { IntlProvider } from 'react-intl'
 import renderer from 'react-test-renderer'
 import { addValidation } from '@vtex/address-form'
 import BRA from '@vtex/address-form/lib/country/BRA'
-import { PICKUP, DELIVERY, PICKUP_IN_STORE } from '../../constants'
+import { PICKUP, DELIVERY, PICKUP_IN_STORE, SIDEBAR } from '../../constants'
 import messages from '../../../messages/en.json'
+import { ModalStateContext } from '../../modalStateContext'
 jest.mock('../../utils/Images', () => ({
   fixImageUrl: () => 'teste.png',
 }))
@@ -313,11 +314,19 @@ describe('PickupPointDetails', () => {
     const wrapper = renderer
       .create(
         <Provider store={store}>
-          <IntlProvider
-            locale="pt"
-            messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
-            <PickupPointDetails {...props} />
-          </IntlProvider>
+          <ModalStateContext.Provider
+            value={{
+              activeState: SIDEBAR,
+              setActiveSidebarState: jest.fn(),
+              shouldUseMaps: false,
+              setSelectedPickupPoint: jest.fn(),
+            }}>
+            <IntlProvider
+              locale="pt"
+              messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
+              <PickupPointDetails {...props} />
+            </IntlProvider>
+          </ModalStateContext.Provider>
         </Provider>
       )
       .toJSON()
@@ -325,13 +334,22 @@ describe('PickupPointDetails', () => {
   })
 
   it('should simulate go back to list of pickups', () => {
+    const setActiveSidebarState = jest.fn()
     const wrapper = mount(
       <Provider store={store}>
-        <IntlProvider
-          locale="pt"
-          messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
-          <PickupPointDetails {...props} />
-        </IntlProvider>
+        <ModalStateContext.Provider
+          value={{
+            activeState: SIDEBAR,
+            setActiveSidebarState,
+            shouldUseMaps: false,
+            setSelectedPickupPoint: jest.fn(),
+          }}>
+          <IntlProvider
+            locale="pt"
+            messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
+            <PickupPointDetails {...props} />
+          </IntlProvider>
+        </ModalStateContext.Provider>
       </Provider>
     )
 
@@ -339,16 +357,24 @@ describe('PickupPointDetails', () => {
 
     backLink.simulate('click')
 
-    expect(togglePickupDetails.mock.calls).toHaveLength(1)
+    expect(setActiveSidebarState.mock.calls).toHaveLength(1)
   })
 
   it('should simulate confirm a pickupPoint', () => {
     const wrapper = mount(
-      <IntlProvider
-        locale="pt"
-        messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
-        <PickupPointDetails {...props} />
-      </IntlProvider>
+      <ModalStateContext.Provider
+        value={{
+          activeState: SIDEBAR,
+          setActiveSidebarState: jest.fn(),
+          shouldUseMaps: false,
+          setSelectedPickupPoint: jest.fn(),
+        }}>
+        <IntlProvider
+          locale="pt"
+          messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
+          <PickupPointDetails {...props} />
+        </IntlProvider>
+      </ModalStateContext.Provider>
     )
 
     const confirmButton = wrapper.find('.pkpmodal-details-confirm-btn')
@@ -356,7 +382,6 @@ describe('PickupPointDetails', () => {
     confirmButton.simulate('click')
 
     expect(handleChangeActiveSLAOption.mock.calls).toHaveLength(1)
-    expect(togglePickupDetails.mock.calls).toHaveLength(1)
     expect(handleClosePickupPointsModal.mock.calls).toHaveLength(1)
   })
 })
