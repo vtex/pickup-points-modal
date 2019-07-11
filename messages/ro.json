@@ -18,6 +18,7 @@
   "pickupPointsModal.aditionalInfo": "Alte informații",
   "pickupPointsModal.unavailable": "indisponibil",
   "pickupPointsModal.unavailableItemsAmount": "{itemsAmount, plural, =0 {} one {# produs indisponibil} other {# produse indisponibile}}",
+  "pickupPointsModal.allItemsAvailable": "Toate produsele disponibile",
   "pickupPointsModal.businessHours": "Program de lucru",
   "pickupPointsModal.confirmPoint": "Ridicare în acest punct",
   "pickupPointsModal.price": "{value, plural, =0 {Gratuit} other {{formattedPrice}}}",
@@ -31,6 +32,7 @@
   "pickupPointsModal.geolocationSearching": "Căutăm puncte de ridicare în apropiere",
   "pickupPointsModal.distance": "{distanceValue} km",
   "pickupPointsModal.askGeolocationAccept": "Folosește locația mea curentă",
+  "pickupPointsModal.askGeolocationDenied": "Nu ni se permite să obțină locația dvs.",
   "pickupPointsModal.errorNotAllowed": "Nu avem permisiunea să vă vedem locația",
   "pickupPointsModal.errorNotAllowedSubtitle": "Poți căuta după adresă",
   "pickupPointsModal.errorNotFound": "Nu am putut găsi puncte de ridicare în apropierea acestei locații",
@@ -51,5 +53,6 @@
   "pickupPointsModal.weekDay6": "Sâmbătă",
   "pickupPointsModal.weekDay1to5": "Luni până Vineri",
   "pickupPointsModal.hourTo": "-",
-  "pickupPointsModal.closed": "Închis"
+  "pickupPointsModal.closed": "Închis",
+  "pickupPointsModal.backToSearch": "Înapoi la căutare"
 }

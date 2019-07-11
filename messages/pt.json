@@ -54,6 +54,5 @@
   "pickupPointsModal.weekDay1to5": "Segunda a Sexta-feira",
   "pickupPointsModal.hourTo": "às",
   "pickupPointsModal.closed": "Fechado",
-  "pickupPointsModal.backToSearch": "Voltar para a busca",
-  "pickupPointsModal.permissionDenied": "Não temos permissão para obter sua localização."
+  "pickupPointsModal.backToSearch": "Voltar para a busca"
 }

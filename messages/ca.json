@@ -18,6 +18,7 @@
   "pickupPointsModal.aditionalInfo": "Altres informacions",
   "pickupPointsModal.unavailable": "No disponible",
   "pickupPointsModal.unavailableItemsAmount": "{itemsAmount, plural, =0 {} one {# no disponible} other {# no estan disponibles}}",
+  "pickupPointsModal.allItemsAvailable": "Tots els productes disponibles",
   "pickupPointsModal.businessHours": "Horaris d'atenció",
   "pickupPointsModal.confirmPoint": "Recollida en aquest punt",
   "pickupPointsModal.price": "{value, plural, =0 {Gratis} other {{formattedPrice}}}",
@@ -31,6 +32,7 @@
   "pickupPointsModal.geolocationSearching": "Buscant punts propers",
   "pickupPointsModal.distance": "{distanceValue} km",
   "pickupPointsModal.askGeolocationAccept": "Utilitza la meva ubicació actual",
+  "pickupPointsModal.askGeolocationDenied": "No tenim permís per obtenir la vostra ubicació.",
   "pickupPointsModal.errorNotAllowed": "No tenim permís per veure la seva ubicació",
   "pickupPointsModal.errorNotAllowedSubtitle": "Vostè encara pot buscar una adreça",
   "pickupPointsModal.errorNotFound": "No trobem punts de recollida a prop d'aquesta adreça",
@@ -51,5 +53,6 @@
   "pickupPointsModal.weekDay6": "Dissabte",
   "pickupPointsModal.weekDay1to5": "De dilluns a divendres",
   "pickupPointsModal.hourTo": "a",
-  "pickupPointsModal.closed": "Tancat"
+  "pickupPointsModal.closed": "Tancat",
+  "pickupPointsModal.backToSearch": "Torna a cercar"
 }

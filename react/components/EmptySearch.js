@@ -73,7 +73,7 @@ class EmptySearch extends PureComponent {
           {geolocationStatus === ERROR_NOT_ALLOWED && (
             <div className={emptyStyles.permissionDenied}>
               <GPSDenied />
-              <span>{translate(intl, 'permissionDenied')}</span>
+              <span>{translate(intl, 'askGeolocationDenied')}</span>
             </div>
           )}
         </div>

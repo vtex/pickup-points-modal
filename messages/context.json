@@ -18,6 +18,7 @@
   "pickupPointsModal.aditionalInfo": "Other information",
   "pickupPointsModal.unavailable": "unavailable",
   "pickupPointsModal.unavailableItemsAmount": "{itemsAmount, plural, =0 {} one {# item unavailable} other {# item unavailable}}",
+  "pickupPointsModal.allItemsAvailable": "All products available",
   "pickupPointsModal.businessHours": "Business Hours",
   "pickupPointsModal.confirmPoint": "Pickup in this point",
   "pickupPointsModal.price": "{value, plural, =0 {Free} other {{formattedPrice}}}",
@@ -31,6 +32,7 @@
   "pickupPointsModal.geolocationSearching": "Searching for points nearby",
   "pickupPointsModal.distance": "{distanceValue} km",
   "pickupPointsModal.askGeolocationAccept": "Use my current location",
+  "pickupPointsModal.askGeolocationDenied": "We're not allowed to get your location.",
   "pickupPointsModal.errorNotAllowed": "We do not have permission to view your location",
   "pickupPointsModal.errorNotAllowedSubtitle": "You can still search for an address",
   "pickupPointsModal.errorNotFound": "We could not find pickup points near this location",
@@ -51,5 +53,6 @@
   "pickupPointsModal.weekDay6": "Saturday",
   "pickupPointsModal.weekDay1to5": "Monday to Friday",
   "pickupPointsModal.hourTo": "-",
-  "pickupPointsModal.closed": "Closed"
+  "pickupPointsModal.closed": "Closed",
+  "pickupPointsModal.backToSearch": "Go back to search"
 }

@@ -18,6 +18,7 @@
   "pickupPointsModal.aditionalInfo": "Autres informations",
   "pickupPointsModal.unavailable": "indisponible",
   "pickupPointsModal.unavailableItemsAmount": "{itemsAmount, plural, =0 {} one {# article non disponible} other {# articles non disponible}}",
+  "pickupPointsModal.allItemsAvailable": "Tous les produits disponibles",
   "pickupPointsModal.businessHours": "Horaire commercial",
   "pickupPointsModal.confirmPoint": "Retrait à ce point",
   "pickupPointsModal.price": "{value, plural, =0 {Gratuit} other {{formattedPrice}}}",
@@ -31,6 +32,7 @@
   "pickupPointsModal.geolocationSearching": "Recherche de points à proximité",
   "pickupPointsModal.distance": "{distanceValue} km",
   "pickupPointsModal.askGeolocationAccept": "Utiliser ma position actuelle",
+  "pickupPointsModal.askGeolocationDenied": "Nous ne sommes pas autorisés à obtenir votre position.",
   "pickupPointsModal.errorNotAllowed": "Nous n'avons pas la permission de voir votre position",
   "pickupPointsModal.errorNotAllowedSubtitle": "Vous pouvez toujours rechercher une adresse",
   "pickupPointsModal.errorNotFound": "Nous n'avons pas trouvé de point de retrait près de cet endroit.",
@@ -51,5 +53,6 @@
   "pickupPointsModal.weekDay6": "Samedi",
   "pickupPointsModal.weekDay1to5": "Lundo à Vendredi",
   "pickupPointsModal.hourTo": "-",
-  "pickupPointsModal.closed": "Fermé"
+  "pickupPointsModal.closed": "Fermé",
+  "pickupPointsModal.backToSearch": "Retour à la recherche"
 }
