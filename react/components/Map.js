@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import geolocationAutoCompleteAddress from '@vtex/address-form/lib/geolocation/geolocationAutoCompleteAddress'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
-
+import isEqual from 'lodash/isEqual'
 import markerIcon from '../assets/icons/marker.svg'
 import personPin from '../assets/icons/person_pin.svg'
 
@@ -11,8 +11,11 @@ import { injectState } from '../modalStateContext'
 import { DETAILS, LIST, SIDEBAR } from '../constants'
 
 class Map extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+
+    this.center = this.getLocation(props.address.geoCoordinates.value)
+
     this.state = {
       isMounted: false,
       mapStyles: {
@@ -89,7 +92,9 @@ class Map extends Component {
     )
 
     const nextAddressCoords =
-      this.props.geoCoordinates && this.props.geoCoordinates.value
+      this.props.address &&
+      this.props.address.geoCoordinates &&
+      this.props.address.geoCoordinates.value
     const thisAddressCoords = prevProps.address.geoCoordinates.value
 
     const markerObj =
@@ -112,7 +117,8 @@ class Map extends Component {
       ((nextAddressCoords &&
         nextAddressCoords.length > 0 &&
         this.props.pickupOptions.length > 1) ||
-        (nextAddressCoords && nextAddressCoords !== thisAddressCoords)) &&
+        (nextAddressCoords &&
+          this.isDifferentGeoCoords(nextAddressCoords, thisAddressCoords))) &&
       googleMaps
     ) {
       this.recenterMap(this.getLocation(nextAddressCoords))
@@ -125,7 +131,10 @@ class Map extends Component {
         })
     }
 
-    if (thisPickupOptions !== prevPickupOptions) {
+    if (
+      thisPickupOptions !== prevPickupOptions ||
+      this.isDifferentGeoCoords(nextAddressCoords, thisAddressCoords)
+    ) {
       this.markers.map(markerObj => markerObj.marker.setMap(null))
       this.createNewMarkers({
         pickups: this.props.pickupOptionGeolocations,
@@ -192,6 +201,23 @@ class Map extends Component {
     })
   }
 
+  toggleSearchArea = () => {
+    const newCenter = this.map && this.map.getCenter()
+
+    if (!newCenter || !this.center) return
+
+    const differenceLat = (this.center.lat() - newCenter.lat()) * 1000
+    const differenceLng = (this.center.lng() - newCenter.lng()) * 1000
+
+    const DISTANCE = 50
+
+    const outerLat = differenceLat > DISTANCE || differenceLat < -DISTANCE
+    const outerLng = differenceLng > DISTANCE || differenceLng < -DISTANCE
+
+    this.props.setShouldSearchArea(outerLat || outerLng)
+    this.props.setMapCenterLatLng(newCenter)
+  }
+
   createMap = mapElement => {
     const { googleMaps } = this.props
 
@@ -214,6 +240,14 @@ class Map extends Component {
     }
 
     this.map = new googleMaps.Map(this._mapElement, mapOptions)
+
+    const centerChanged = new googleMaps.event.addListener(
+      this.map,
+      'dragend',
+      () => {
+        this.toggleSearchArea()
+      }
+    )
 
     const zoomIn = document.querySelector('.pkpmodal-zoom-in')
     const zoomOut = document.querySelector('.pkpmodal-zoom-out')
@@ -244,6 +278,7 @@ class Map extends Component {
       googleMaps,
       setActiveSidebarState,
       setSelectedPickupPoint,
+      setShouldSearchArea,
     } = this.props
 
     const hasAddressCoords =
@@ -297,8 +332,9 @@ class Map extends Component {
               : icon,
         }
 
-        if (index < 2 && this.addressMarker && hasAddressCoords) {
+        if (index <= 2 && this.addressMarker && hasAddressCoords) {
           this.bounds.extend(location)
+          this.map.panBy(-200, 0)
         }
 
         const marker = new googleMaps.Marker(markerOptions)
@@ -316,6 +352,7 @@ class Map extends Component {
             changeActivePickupDetails({ pickupPoint: pickupOptions[index] })
             setSelectedPickupPoint(pickupOptions[index])
             setActiveSidebarState(DETAILS)
+            setShouldSearchArea(false)
           }
         )
 
@@ -396,6 +433,9 @@ class Map extends Component {
 
     this.map.panTo(location)
 
+    this.props.setMapCenterLatLng(this.map.getCenter())
+    this.toggleSearchArea()
+
     if (!this.props.isLargeScreen) return
 
     this.map.panBy(-200, 0)
@@ -466,7 +506,7 @@ Map.propTypes = {
   activatePickupDetails: PropTypes.func.isRequired,
   selectedPickupPoint: PropTypes.object,
   address: AddressShapeWithValidation,
-  changeActivePickupDetails: PropTypes.func.isRequired,
+  changeActivePickupDetails: PropTypes.func,
   geoCoordinates: PropTypes.array,
   googleMaps: PropTypes.object,
   isLargeScreen: PropTypes.bool,

@@ -17,20 +17,26 @@ class ModalState extends Component {
     super(props)
 
     this.state = {
-      geolocationStatus: PROMPT,
       askForGeolocation: props.askForGeolocation,
-      selectedPickupPoint: props.selectedPickupPoint,
       activeState: props.pickupPoints.length > 0 ? SIDEBAR : INITIAL,
-      activeSidebarState: props.askForGeolocation
-        ? GEOLOCATION_SEARCHING
-        : props.selectedPickupPoint
-          ? DETAILS
-          : props.pickupPoints.length > 0
-            ? LIST
-            : ERROR_NOT_FOUND,
+      activeSidebarState: this.getInitialActiveState(props),
+      geolocationStatus: PROMPT,
       lastState: '',
       lastSidebarState: '',
+      lastMapCenterLatLng: null,
+      selectedPickupPoint: props.selectedPickupPoint,
+      shouldSearchArea: false,
     }
+  }
+
+  getInitialActiveState = props => {
+    return props.askForGeolocation
+      ? GEOLOCATION_SEARCHING
+      : props.selectedPickupPoint
+        ? DETAILS
+        : props.pickupPoints.length > 0
+          ? LIST
+          : ERROR_NOT_FOUND
   }
 
   componentDidUpdate() {
@@ -104,8 +110,13 @@ class ModalState extends Component {
     return state === activeState
   }
 
+  setMapCenterLatLng = lastMapCenterLatLng =>
+    this.setState({ lastMapCenterLatLng })
+
   setAskForGeolocation = askForGeolocation =>
     this.setState({ askForGeolocation })
+
+  setShouldSearchArea = shouldSearchArea => this.setState({ shouldSearchArea })
 
   setGeolocationStatus = status => this.setState({ geolocationStatus: status })
 
@@ -130,7 +141,9 @@ class ModalState extends Component {
       geolocationStatus,
       lastState,
       lastSidebarState,
+      lastMapCenterLatLng,
       selectedPickupPoint,
+      shouldSearchArea,
     } = this.state
 
     return (
@@ -141,12 +154,16 @@ class ModalState extends Component {
           activeSidebarState,
           lastState,
           lastSidebarState,
+          lastMapCenterLatLng,
           selectedPickupPoint,
           setActiveState: this.setActiveState,
           setAskForGeolocation: this.setAskForGeolocation,
           setActiveSidebarState: this.setActiveSidebarState,
           setGeolocationStatus: this.setGeolocationStatus,
+          setMapCenterLatLng: this.setMapCenterLatLng,
           setSelectedPickupPoint: this.setSelectedPickupPoint,
+          shouldSearchArea,
+          setShouldSearchArea: this.setShouldSearchArea,
         }}>
         {children}
       </ModalStateContext.Provider>

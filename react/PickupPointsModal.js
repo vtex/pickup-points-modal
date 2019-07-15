@@ -15,6 +15,8 @@ import { HIDE_MAP, SHOW_MAP } from './constants'
 import { getPickupOptionGeolocations } from './utils/pickupUtils'
 import { helpers } from 'vtex.address-form'
 import Geolocation from './Geolocation'
+import SearchArea from './components/SearchArea'
+import SearchOverlay from './assets/components/SearchOverlay'
 
 const { validateField, addValidation } = helpers
 const NULL_VALUE = {
@@ -148,7 +150,6 @@ class PickupPointsModal extends Component {
 
   render() {
     const {
-      address,
       activePickupPoint,
       askForGeolocation,
       changeActivePickupDetails,
@@ -202,8 +203,17 @@ class PickupPointsModal extends Component {
                 googleMaps={googleMaps}
                 onChangeAddress={this.handleAddressChange}
                 rules={rules}
-                address={address}
+                address={searchAddress}
                 askForGeolocation={askForGeolocation}>
+                <SearchArea
+                  isLargeScreen={isLargeScreen}
+                  shouldShow={shouldShowMap}
+                  mapStatus={mapStatus}
+                  googleMaps={googleMaps}
+                  onChangeAddress={this.handleAddressChange}
+                  rules={rules}
+                  address={searchAddress}
+                />
                 <ZoomControls
                   isLargeScreen={isLargeScreen}
                   shouldShow={shouldShowMap}
@@ -232,6 +242,7 @@ class PickupPointsModal extends Component {
                     )}
                   />
                 )}
+                <SearchOverlay />
                 <StateHandler
                   activePickupPoint={activePickupPoint}
                   askForGeolocation={askForGeolocation}

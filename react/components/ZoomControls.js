@@ -1,44 +1,26 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-
+import PlusIcon from '../assets/icons/plus_icon.svg'
+import MinusIcon from '../assets/icons/minus_icon.svg'
 import styles from './ZoomControls.css'
+import { SIDEBAR } from '../constants'
 import { injectState } from '../modalStateContext'
 
 class ZoomControls extends PureComponent {
   render() {
-    const { shouldShow } = this.props
+    const { shouldShow, activeState } = this.props
 
     return (
-      <div className={`${styles.zoomWrapper} ${shouldShow ? '' : styles.hide}`}>
+      <div
+        className={`${styles.zoomWrapper} ${
+          shouldShow && activeState === SIDEBAR ? '' : styles.hide
+        }`}>
         <button className={`pkpmodal-zoom-in ${styles.zoomIn}`} type="button">
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 18 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <rect
-              x="8"
-              y="18"
-              width="18"
-              height="2"
-              rx="1"
-              transform="rotate(-90 8 18)"
-              fill="currentColor"
-            />
-            <rect y="8" width="18" height="2" rx="1" fill="currentColor" />
-          </svg>
+          <img src={PlusIcon} />
         </button>
         <hr className={styles.hr} />
         <button className={`pkpmodal-zoom-out ${styles.zoomOut}`} type="button">
-          <svg
-            width="18"
-            height="2"
-            viewBox="0 0 18 2"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <rect width="18" height="2" rx="1" fill="currentColor" />
-          </svg>
+          <img src={MinusIcon} />
         </button>
       </div>
     )

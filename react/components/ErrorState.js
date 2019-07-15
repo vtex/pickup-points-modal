@@ -57,7 +57,7 @@ ErrorState.propTypes = {
   setActiveState: PropTypes.func.isRequired,
   subtitle: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  Icon: PropTypes.node.isRequired,
+  Icon: PropTypes.element.isRequired,
   isFullPage: PropTypes.bool,
 }
 

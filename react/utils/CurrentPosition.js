@@ -10,15 +10,12 @@ export function getCurrentPosition(successCallback, errorCallback) {
 
 export function handleGetAddressByGeolocation({
   newPosition,
-  geocoder,
   googleMaps,
   onChangeAddress,
   rules,
   address,
 }) {
-  if (!geocoder) {
-    geocoder = new googleMaps.Geocoder()
-  }
+  const geocoder = new googleMaps.Geocoder()
 
   geocoder.geocode({ location: newPosition }, (results, status) => {
     if (status === googleMaps.GeocoderStatus.OK) {

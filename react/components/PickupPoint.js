@@ -12,6 +12,7 @@ import { getUnavailableItemsAmount } from '../utils/pickupUtils'
 
 import styles from './PickupPoint.css'
 import { DETAILS } from '../constants'
+import { injectState } from '../modalStateContext'
 
 class PickupPoint extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class PickupPoint extends Component {
       this.props.setSelectedPickupPoint(this.props.pickupPoint)
     this.props.setActiveSidebarState &&
       this.props.setActiveSidebarState(DETAILS)
+    this.props.setShouldSearchArea && this.props.setShouldSearchArea(false)
   }
 
   handlePickupModal = () =>
@@ -194,4 +196,4 @@ PickupPoint.propTypes = {
   togglePickupDetails: PropTypes.func,
 }
 
-export default injectIntl(PickupPoint)
+export default injectState(injectIntl(PickupPoint))
