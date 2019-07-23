@@ -19,6 +19,7 @@
   "pickupPointsModal.unavailable": "indisponibil",
   "pickupPointsModal.unavailableItemsAmount": "{itemsAmount, plural, =0 {} one {# produs indisponibil} other {# produse indisponibile}}",
   "pickupPointsModal.allItemsAvailable": "Toate produsele disponibile",
+  "pickupPointsModal.noneItemsAvailable": "Nu există produse disponibile",
   "pickupPointsModal.businessHours": "Program de lucru",
   "pickupPointsModal.confirmPoint": "Ridicare în acest punct",
   "pickupPointsModal.price": "{value, plural, =0 {Gratuit} other {{formattedPrice}}}",

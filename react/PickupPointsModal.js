@@ -161,9 +161,11 @@ class PickupPointsModal extends Component {
       isSearching,
       loading,
       logisticsInfo,
+      orderFormId,
       pickupOptions,
       pickupPoints,
       rules,
+      salesChannel,
       searchAddress,
       sellerId,
       selectedPickupPoint,
@@ -194,30 +196,35 @@ class PickupPointsModal extends Component {
               onClickClose={closePickupPointsModal}
             />
             <ModalState
+              address={searchAddress}
+              askForGeolocation={askForGeolocation}
               googleMapsKey={googleMapsKey}
               isSearching={isSearching}
+              logisticsInfo={logisticsInfo}
               pickupPoints={pickupPoints}
-              askForGeolocation={askForGeolocation}
+              pickupOptions={pickupOptions}
+              salesChannel={salesChannel}
+              orderFormId={orderFormId}
               selectedPickupPoint={selectedPickupPoint}>
               <Geolocation
+                address={searchAddress}
+                askForGeolocation={askForGeolocation}
                 googleMaps={googleMaps}
                 onChangeAddress={this.handleAddressChange}
-                rules={rules}
-                address={searchAddress}
-                askForGeolocation={askForGeolocation}>
+                rules={rules}>
                 <SearchArea
-                  isLargeScreen={isLargeScreen}
-                  shouldShow={shouldShowMap}
-                  mapStatus={mapStatus}
+                  address={searchAddress}
                   googleMaps={googleMaps}
+                  shouldShow={shouldShowMap}
+                  isLargeScreen={isLargeScreen}
+                  mapStatus={mapStatus}
                   onChangeAddress={this.handleAddressChange}
                   rules={rules}
-                  address={searchAddress}
                 />
                 <ZoomControls
                   isLargeScreen={isLargeScreen}
-                  shouldShow={shouldShowMap}
                   mapStatus={mapStatus}
+                  shouldShow={shouldShowMap}
                 />
 
                 {shouldShowMap && (
@@ -231,11 +238,6 @@ class PickupPointsModal extends Component {
                     isLoadingGoogle={loading}
                     isPickupDetailsActive={isPickupDetailsActive}
                     onChangeAddress={this.handleAddressChange}
-                    pickupOptionGeolocations={getPickupOptionGeolocations(
-                      pickupOptions
-                    )}
-                    pickupOptions={pickupOptions}
-                    pickupPoint={selectedPickupPoint}
                     rules={rules}
                     selectedPickupPointGeolocation={getPickupOptionGeolocations(
                       selectedPickupPoint
@@ -255,11 +257,8 @@ class PickupPointsModal extends Component {
                   isSearching={isSearching}
                   handleAddressChange={this.handleAddressChange}
                   loading={loading}
-                  logisticsInfo={logisticsInfo}
                   mapStatus={mapStatus}
                   onAddressChange={this.handleAddressChange}
-                  pickupOptions={pickupOptions}
-                  pickupPoints={pickupPoints}
                   rules={rules}
                   searchAddress={searchAddress}
                   shouldUseMaps={shouldUseMaps}

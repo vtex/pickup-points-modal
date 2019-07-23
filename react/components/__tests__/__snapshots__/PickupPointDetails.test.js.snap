@@ -57,11 +57,6 @@ exports[`PickupPointDetails should render self and components 1`] = `
                 r="6"
               />
             </svg>
-            <p
-              className="pickupPointDistance pkpmodal-pickup-point-distance"
-            >
-              1000+ km
-            </p>
           </div>
           <div
             className="pickupPointInfo pkpmodal-pickup-point-info"
@@ -88,9 +83,9 @@ exports[`PickupPointDetails should render self and components 1`] = `
               </div>
             </div>
             <span
-              className="pickupPointAvailability pkpmodal-pickup-point-availability"
+              className="pickupPointAllAvailable pkpmodal-pickup-point-available"
             >
-              2 item unavailable
+              All products available
             </span>
           </div>
         </div>
@@ -123,21 +118,15 @@ exports[`PickupPointDetails should render self and components 1`] = `
         </h3>
         <div
           className="productItems pkpmodal-product-items"
-        />
-        <div
-          className="productItems pkpmodal-product-items"
         >
           <span
-            className="productItem pkpmodal-product-item productItemUnavailable pkpmodal-product-item-unavailable"
+            className="productItem pkpmodal-product-item "
             data-tip="test"
           >
             <img
               alt="test"
               data-tip="test"
               src="teste.png"
-            />
-            <span
-              className="productItemUnavailableSlash pkpmodal-product-item-unavailable-slash"
             />
             <div
               className="__react_component_tooltip place-top type-dark "
@@ -146,16 +135,13 @@ exports[`PickupPointDetails should render self and components 1`] = `
             />
           </span>
           <span
-            className="productItem pkpmodal-product-item productItemUnavailable pkpmodal-product-item-unavailable"
+            className="productItem pkpmodal-product-item "
             data-tip="test2"
           >
             <img
               alt="test2"
               data-tip="test2"
               src="teste.png"
-            />
-            <span
-              className="productItemUnavailableSlash pkpmodal-product-item-unavailable-slash"
             />
             <div
               className="__react_component_tooltip place-top type-dark "
@@ -164,16 +150,9 @@ exports[`PickupPointDetails should render self and components 1`] = `
             />
           </span>
         </div>
-      </div>
-      <div
-        className="modalDetailsGroup pkpmodal-details-group"
-      >
-        <h3
-          className="modalDetailsInfoTitle pkpmodal-details-info-title"
-        >
-          Other information
-        </h3>
-        test aditionalInfo
+        <div
+          className="productItems pkpmodal-product-items"
+        />
       </div>
     </div>
   </div>

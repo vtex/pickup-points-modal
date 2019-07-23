@@ -19,6 +19,7 @@
   "pickupPointsModal.unavailable": "indisponível",
   "pickupPointsModal.unavailableItemsAmount": "{unavailableItemsAmount} de {itemsAmount} disponíveis",
   "pickupPointsModal.allItemsAvailable": "Todos os produtos disponíveis",
+  "pickupPointsModal.noneItemsAvailable": "Nenhum produto disponível",
   "pickupPointsModal.businessHours": "Horário de funcionamento",
   "pickupPointsModal.confirmPoint": "Retirar neste ponto",
   "pickupPointsModal.price": "{value, plural, =0 {Grátis} other {{formattedPrice}}}",

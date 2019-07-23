@@ -49,6 +49,12 @@ class SearchArea extends PureComponent {
 
 SearchArea.propTypes = {
   shouldShow: PropTypes.bool,
+  lastMapCenterLatLng: PropTypes.object,
+  googleMaps: PropTypes.object,
+  onChangeAddress: PropTypes.func.isRequired,
+  rules: PropTypes.object,
+  address: PropTypes.object,
+  shouldSearchArea: PropTypes.bool,
 }
 
 export default injectState(SearchArea)
