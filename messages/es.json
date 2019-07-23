@@ -19,6 +19,7 @@
   "pickupPointsModal.unavailable": "indisponible",
   "pickupPointsModal.unavailableItemsAmount": "{itemsAmount, plural, =0 {} one {# indisponible} other {# no están disponibles}}",
   "pickupPointsModal.allItemsAvailable": "Todos los productos disponibles",
+  "pickupPointsModal.noneItemsAvailable": "No hay producto disponible",
   "pickupPointsModal.businessHours": "Horarios de atención",
   "pickupPointsModal.confirmPoint": "Recogida en este punto",
   "pickupPointsModal.price": "{value, plural, =0 {Gratis} other {{formattedPrice}}}",
@@ -54,5 +55,6 @@
   "pickupPointsModal.weekDay1to5": "Lunes a Viernes",
   "pickupPointsModal.hourTo": "a",
   "pickupPointsModal.closed": "Cerrado",
-  "pickupPointsModal.backToSearch": "Volver a buscar"
+  "pickupPointsModal.backToSearch": "Volver a buscar",
+  "pickupPointsModal.searchArea": "Buscar en esta área"
 }

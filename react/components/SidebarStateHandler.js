@@ -19,18 +19,13 @@ class SidebarStateHandler extends PureComponent {
   render() {
     const {
       activeSidebarState,
-      activePickupPoint,
       changeActiveSLAOption,
       closePickupPointsModal,
-      logisticsInfo,
       items,
-      pickupOptions,
       rules,
       styles,
       sellerId,
       shouldUseMaps,
-      pickupPoints,
-      selectedPickupPoint,
       storePreferencesData,
     } = this.props
 
@@ -69,9 +64,6 @@ class SidebarStateHandler extends PureComponent {
       case LIST: {
         return (
           <PickupPointsList
-            activePickupPoint={activePickupPoint}
-            pickupOptions={pickupOptions}
-            logisticsInfo={logisticsInfo}
             items={items}
             rules={rules}
             styles={styles}
@@ -88,13 +80,6 @@ class SidebarStateHandler extends PureComponent {
             handleChangeActiveSLAOption={changeActiveSLAOption}
             handleClosePickupPointsModal={closePickupPointsModal}
             items={items}
-            logisticsInfo={logisticsInfo}
-            pickupPoint={selectedPickupPoint}
-            pickupPointInfo={pickupPoints.find(
-              pickup =>
-                pickup.id === selectedPickupPoint.pickupPointId ||
-                pickup.id === selectedPickupPoint.id
-            )}
             selectedRules={rules}
             sellerId={sellerId}
             shouldUseMaps={shouldUseMaps}
@@ -110,17 +95,14 @@ class SidebarStateHandler extends PureComponent {
 
 SidebarStateHandler.propTypes = {
   activeSidebarState: PropTypes.string.isRequired,
-  activePickupPoint: PropTypes.object,
   changeActiveSLAOption: PropTypes.func.isRequired,
   closePickupPointsModal: PropTypes.func.isRequired,
-  logisticsInfo: PropTypes.array.isRequired,
   items: PropTypes.array.isRequired,
   pickupOptions: PropTypes.array.isRequired,
   rules: PropTypes.object.isRequired,
-  styles: PropTypes.object.isRequired,
   sellerId: PropTypes.string,
   shouldUseMaps: PropTypes.bool.isRequired,
-  pickupPoints: PropTypes.array.isRequired,
+  styles: PropTypes.object.isRequired,
   selectedPickupPoint: PropTypes.object,
   storePreferencesData: PropTypes.object.isRequired,
 }

@@ -1,17 +1,17 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styles from './PickupSidebar.css'
-import PickupPoint from './PickupPoint'
+import PickupPointInfo from './PickupPointInfo'
 import { injectState } from '../modalStateContext'
 
 class PickupPointsList extends PureComponent {
   render() {
     const {
       changeActivePickupDetails,
-      activePickupPoint,
-      pickupOptions,
+      externalPickupPoints,
       logisticsInfo,
       items,
+      pickupOptions,
       rules,
       sellerId,
       setActiveSidebarState,
@@ -24,11 +24,10 @@ class PickupPointsList extends PureComponent {
         {pickupOptions.map(pickupPoint => (
           <div
             className={`${styles.pointsItem} pkpmodal-points-item`}
-            key={pickupPoint.id}>
-            <PickupPoint
+            key={`pickupPoint-${pickupPoint.id}`}>
+            <PickupPointInfo
               handleChangeActivePickupDetails={changeActivePickupDetails}
               isList
-              isSelected={pickupPoint === activePickupPoint}
               items={items}
               logisticsInfo={logisticsInfo}
               pickupPoint={pickupPoint}
@@ -42,16 +41,37 @@ class PickupPointsList extends PureComponent {
             />
           </div>
         ))}
+        {externalPickupPoints &&
+          externalPickupPoints.map(pickupPoint => (
+            <div
+              className={`${styles.pointsItem} pkpmodal-points-item`}
+              key={`external-pickupPoint-${pickupPoint.id}`}>
+              <PickupPointInfo
+                handleChangeActivePickupDetails={changeActivePickupDetails}
+                isList
+                items={items}
+                logisticsInfo={logisticsInfo}
+                pickupPoint={pickupPoint}
+                pickupPointId={pickupPoint.id}
+                selectedRules={rules}
+                sellerId={sellerId}
+                setActiveSidebarState={setActiveSidebarState}
+                setSelectedPickupPoint={setSelectedPickupPoint}
+                shouldUseMaps={shouldUseMaps}
+                storePreferencesData={storePreferencesData}
+              />
+            </div>
+          ))}
       </div>
     )
   }
 }
 
 PickupPointsList.propTypes = {
-  activePickupPoint: PropTypes.object.isRequired,
   changeActivePickupDetails: PropTypes.func,
-  logisticsInfo: PropTypes.array.isRequired,
+  externalPickupPoints: PropTypes.array,
   items: PropTypes.array.isRequired,
+  logisticsInfo: PropTypes.array.isRequired,
   pickupOptions: PropTypes.array.isRequired,
   rules: PropTypes.object.isRequired,
   sellerId: PropTypes.string,

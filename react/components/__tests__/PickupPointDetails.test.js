@@ -19,7 +19,9 @@ describe('PickupPointDetails', () => {
     props,
     handleChangeActiveSLAOption,
     handleClosePickupPointsModal,
-    togglePickupDetails
+    togglePickupDetails,
+    setActiveSidebarState,
+    modalState
 
   const address = {
     addressType: 'residential',
@@ -42,6 +44,118 @@ describe('PickupPointDetails', () => {
     handleChangeActiveSLAOption = jest.fn()
     handleClosePickupPointsModal = jest.fn()
     togglePickupDetails = jest.fn()
+    setActiveSidebarState = jest.fn()
+
+    modalState = {
+      activeState: SIDEBAR,
+      shouldUseMaps: true,
+      setActiveSidebarState,
+      shouldUseMaps: false,
+      setShouldSearchArea: jest.fn(),
+      setSelectedPickupPoint: jest.fn(),
+      selectedPickupPoint: {
+        name: 'test',
+        price: 100,
+        shippingEstimate: '1bd',
+        pickupStoreInfo: {
+          friendlyName: 'test',
+          address: {
+            geoCoordinates: [123, 123],
+          },
+        },
+        deliveryChannel: PICKUP_IN_STORE,
+        id: '1',
+      },
+      logisticsInfo: [
+        {
+          itemIndex: 0,
+          deliveryChannels: [{ id: DELIVERY }],
+          selectedSla: '2',
+          slas: [
+            {
+              name: 'test',
+              price: 100,
+              shippingEstimate: '1bd',
+              deliveryChannel: PICKUP_IN_STORE,
+              id: '1',
+              pickupStoreInfo: {
+                friendlyName: 'test',
+                address,
+              },
+            },
+            {
+              name: 'test',
+              price: 100,
+              shippingEstimate: '1bd',
+              deliveryChannel: PICKUP_IN_STORE,
+              id: '2',
+              pickupStoreInfo: {
+                friendlyName: 'test',
+                address,
+              },
+            },
+          ],
+        },
+        {
+          itemIndex: 1,
+          deliveryChannels: [{ id: PICKUP_IN_STORE }],
+          selectedSla: '2',
+          slas: [
+            {
+              name: 'test',
+              price: 100,
+              shippingEstimate: '1bd',
+              deliveryChannel: PICKUP_IN_STORE,
+              id: '1',
+              pickupStoreInfo: {
+                friendlyName: 'test',
+                address,
+              },
+            },
+            {
+              name: 'test',
+              price: 100,
+              shippingEstimate: '1bd',
+              deliveryChannel: PICKUP_IN_STORE,
+              id: '2',
+              pickupStoreInfo: {
+                friendlyName: 'test',
+                address,
+              },
+            },
+          ],
+        },
+        {
+          itemIndex: 2,
+          deliveryChannels: [{ id: PICKUP_IN_STORE }],
+          selectedSla: '2',
+          slas: [
+            {
+              name: 'test',
+              price: 100,
+              shippingEstimate: '1bd',
+              deliveryChannel: PICKUP_IN_STORE,
+              id: '1',
+              pickupStoreInfo: {
+                friendlyName: 'test',
+                address,
+              },
+            },
+            {
+              name: 'test',
+              price: 100,
+              shippingEstimate: '1bd',
+              deliveryChannel: PICKUP_IN_STORE,
+              id: '3',
+              pickupStoreInfo: {
+                friendlyName: 'test',
+                address,
+              },
+            },
+          ],
+        },
+      ],
+    }
 
     state = {
       pickup: {
@@ -314,13 +428,7 @@ describe('PickupPointDetails', () => {
     const wrapper = renderer
       .create(
         <Provider store={store}>
-          <ModalStateContext.Provider
-            value={{
-              activeState: SIDEBAR,
-              setActiveSidebarState: jest.fn(),
-              shouldUseMaps: false,
-              setSelectedPickupPoint: jest.fn(),
-            }}>
+          <ModalStateContext.Provider value={modalState}>
             <IntlProvider
               locale="pt"
               messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
@@ -334,16 +442,9 @@ describe('PickupPointDetails', () => {
   })
 
   it('should simulate go back to list of pickups', () => {
-    const setActiveSidebarState = jest.fn()
     const wrapper = mount(
       <Provider store={store}>
-        <ModalStateContext.Provider
-          value={{
-            activeState: SIDEBAR,
-            setActiveSidebarState,
-            shouldUseMaps: false,
-            setSelectedPickupPoint: jest.fn(),
-          }}>
+        <ModalStateContext.Provider value={modalState}>
           <IntlProvider
             locale="pt"
             messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
@@ -362,13 +463,7 @@ describe('PickupPointDetails', () => {
 
   it('should simulate confirm a pickupPoint', () => {
     const wrapper = mount(
-      <ModalStateContext.Provider
-        value={{
-          activeState: SIDEBAR,
-          setActiveSidebarState: jest.fn(),
-          shouldUseMaps: false,
-          setSelectedPickupPoint: jest.fn(),
-        }}>
+      <ModalStateContext.Provider value={modalState}>
         <IntlProvider
           locale="pt"
           messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
@@ -381,7 +476,6 @@ describe('PickupPointDetails', () => {
 
     confirmButton.simulate('click')
 
-    expect(handleChangeActiveSLAOption.mock.calls).toHaveLength(1)
     expect(handleClosePickupPointsModal.mock.calls).toHaveLength(1)
   })
 })

@@ -22,7 +22,7 @@ class PickupSidebarHeader extends PureComponent {
 }
 
 PickupSidebarHeader.propTypes = {
-  intl: intlShape,
+  intl: intlShape.isRequired,
   isPickupDetailsActive: PropTypes.bool,
 }
 

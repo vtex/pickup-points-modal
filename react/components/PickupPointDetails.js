@@ -9,7 +9,7 @@ import {
   formatBusinessHoursList,
 } from '../utils/pickupUtils'
 
-import PickupPoint from './PickupPoint'
+import PickupPointInfo from './PickupPointInfo'
 import ProductItems from './ProductItems'
 import PickupPointHour from './PickupPointHour'
 import Button from './Button'
@@ -17,6 +17,7 @@ import Button from './Button'
 import styles from './PickupPointDetails.css'
 import { LIST } from '../constants'
 import { injectState } from '../modalStateContext'
+import { updateShippingData } from '../fetchers'
 
 class PickupPointDetails extends Component {
   constructor(props) {
@@ -24,36 +25,40 @@ class PickupPointDetails extends Component {
 
     this.state = {
       unavailableItems: getUnavailableItemsByPickup(
-        this.props.items,
-        this.props.logisticsInfo,
-        this.props.pickupPoint,
-        this.props.sellerId
+        props.items,
+        props.logisticsInfo,
+        props.selectedPickupPoint,
+        props.sellerId
       ),
       items: getItemsWithPickupPoint(
-        this.props.items,
-        this.props.logisticsInfo,
-        this.props.pickupPoint,
-        this.props.sellerId
+        props.items,
+        props.logisticsInfo,
+        props.selectedPickupPoint,
+        props.sellerId
       ),
+      pickupPointInfo:
+        props.selectedPickupPoint.pickupStoreInfo || props.selectedPickupPoint,
     }
   }
+
+  componentDidMount() {
+    if (!this.props.selectedPickupPoint) {
+      this.props.setActiveSidebarState(LIST)
+    }
+  }
+
   handleBackButtonClick = () => {
     this.props.setActiveSidebarState(LIST)
   }
 
   handleConfirmButtonClick = () => {
-    this.props.handleChangeActiveSLAOption({
-      slaOption: this.props.pickupPoint.id,
-      sellerId: this.props.sellerId,
-      shouldUpdateShippingData: false,
-    })
+    updateShippingData(this.props.logisticsInfo, this.props.selectedPickupPoint)
     this.props.handleClosePickupPointsModal()
   }
 
   render() {
     const {
-      pickupPoint,
-      pickupPointInfo,
+      selectedPickupPoint,
       selectedRules,
       isSelectedSla,
       sellerId,
@@ -63,7 +68,7 @@ class PickupPointDetails extends Component {
       logisticsInfo,
     } = this.props
 
-    const { unavailableItems, items } = this.state
+    const { unavailableItems, items, pickupPointInfo } = this.state
 
     const businessHours =
       !pickupPointInfo ||
@@ -73,7 +78,11 @@ class PickupPointDetails extends Component {
         : formatBusinessHoursList(pickupPointInfo.businessHours)
 
     const hasAditionalInfo =
-      pickupPoint.pickupStoreInfo && pickupPoint.pickupStoreInfo.additionalInfo
+      selectedPickupPoint.pickupStoreInfo &&
+      selectedPickupPoint.pickupStoreInfo.additionalInfo
+
+    const shouldShowSelectPickupButton =
+      selectedPickupPoint && selectedPickupPoint.pickupStoreInfo
 
     return (
       <div className={`${styles.modalDetails} pkpmodal-details`}>
@@ -95,12 +104,12 @@ class PickupPointDetails extends Component {
 
         <div className={`${styles.modalDetailsMiddle} pkpmodal-details-middle`}>
           <div className={`${styles.modalDetailsStore} pkpmodal-details-store`}>
-            <PickupPoint
+            <PickupPointInfo
               shouldUseMaps={shouldUseMaps}
               isSelected={isSelectedSla}
               items={this.props.items}
               logisticsInfo={logisticsInfo}
-              pickupPoint={pickupPoint}
+              pickupPoint={selectedPickupPoint}
               selectedRules={selectedRules}
               sellerId={sellerId}
               storePreferencesData={storePreferencesData}
@@ -132,7 +141,7 @@ class PickupPointDetails extends Component {
                   } pkpmodal-details-info-title`}>
                   {translate(intl, 'aditionalInfo')}
                 </h3>
-                {pickupPoint.pickupStoreInfo.additionalInfo}
+                {selectedPickupPoint.pickupStoreInfo.additionalInfo}
               </div>
             )}
 
@@ -188,21 +197,24 @@ class PickupPointDetails extends Component {
           </div>
         </div>
 
-        <div className={`${styles.modalDetailsBottom} pkpmodal-details-bottom`}>
-          <Button
-            id={`confirm-pickup-${pickupPoint.id
-              .replace(/[^\w\s]/gi, '')
-              .split(' ')
-              .join('-')}`}
-            kind="primary"
-            large
-            moreClassName={`${
-              styles.modalDetailConfirmBtn
-            } pkpmodal-details-confirm-btn`}
-            onClick={this.handleConfirmButtonClick}
-            title={translate(intl, 'confirmPoint')}
-          />
-        </div>
+        {shouldShowSelectPickupButton && (
+          <div
+            className={`${styles.modalDetailsBottom} pkpmodal-details-bottom`}>
+            <Button
+              id={`confirm-pickup-${selectedPickupPoint.id
+                .replace(/[^\w\s]/gi, '')
+                .split(' ')
+                .join('-')}`}
+              kind="primary"
+              large
+              moreClassName={`${
+                styles.modalDetailConfirmBtn
+              } pkpmodal-details-confirm-btn`}
+              onClick={this.handleConfirmButtonClick}
+              title={translate(intl, 'confirmPoint')}
+            />
+          </div>
+        )}
       </div>
     )
   }
@@ -211,14 +223,13 @@ class PickupPointDetails extends Component {
 PickupPointDetails.propTypes = {
   handleChangeActiveSLAOption: PropTypes.func.isRequired,
   handleClosePickupPointsModal: PropTypes.func.isRequired,
-  intl: intlShape,
+  intl: intlShape.isRequired,
   isSelectedSla: PropTypes.bool,
   items: PropTypes.array.isRequired,
   logisticsInfo: PropTypes.array.isRequired,
   onClickPickupModal: PropTypes.func,
-  pickupPoint: PropTypes.object.isRequired,
-  pickupPointInfo: PropTypes.object.isRequired,
   selectedRules: PropTypes.object.isRequired,
+  selectedPickupPoint: PropTypes.object.isRequired,
   sellerId: PropTypes.string,
   storePreferencesData: PropTypes.object.isRequired,
   setActiveSidebarState: PropTypes.func.isRequired,

@@ -9,10 +9,15 @@ export function injectState(Component) {
         {({
           activeState,
           activeSidebarState,
+          externalPickupPoints,
           geolocationStatus,
+          isSearching,
           lastState,
           lastSidebarState,
           lastMapCenterLatLng,
+          logisticsInfo,
+          pickupOptions,
+          pickupPoints,
           selectedPickupPoint,
           setGeolocationStatus,
           setActiveState,
@@ -27,11 +32,16 @@ export function injectState(Component) {
             {...props}
             activeState={activeState}
             activeSidebarState={activeSidebarState}
+            externalPickupPoints={externalPickupPoints}
             geolocationStatus={geolocationStatus}
+            isSearching={isSearching}
             lastState={lastState}
             lastSidebarState={lastSidebarState}
             lastMapCenterLatLng={lastMapCenterLatLng}
+            logisticsInfo={logisticsInfo}
             selectedPickupPoint={selectedPickupPoint}
+            pickupOptions={pickupOptions}
+            pickupPoints={pickupPoints}
             setGeolocationStatus={setGeolocationStatus}
             setActiveState={setActiveState}
             setActiveSidebarState={setActiveSidebarState}

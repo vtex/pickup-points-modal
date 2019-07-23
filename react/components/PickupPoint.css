@@ -79,6 +79,16 @@
   margin-top: 12px;
 }
 
+.pickupPointNoneAvailable {
+  color: #666666;
+  display: inline-block;
+  margin-top: 12px;
+}
+
+.searchMarkerIcon {
+  height: 32px;
+}
+
 .pickupPointPrice,
 .pickupPointSla {
   display: inline-block;

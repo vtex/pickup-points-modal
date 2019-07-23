@@ -19,6 +19,7 @@
   "pickupPointsModal.unavailable": "No disponible",
   "pickupPointsModal.unavailableItemsAmount": "{itemsAmount, plural, =0 {} one {# no disponible} other {# no estan disponibles}}",
   "pickupPointsModal.allItemsAvailable": "Tots els productes disponibles",
+  "pickupPointsModal.noneItemsAvailable": "Cap producte disponible",
   "pickupPointsModal.businessHours": "Horaris d'atenció",
   "pickupPointsModal.confirmPoint": "Recollida en aquest punt",
   "pickupPointsModal.price": "{value, plural, =0 {Gratis} other {{formattedPrice}}}",
@@ -54,5 +55,6 @@
   "pickupPointsModal.weekDay1to5": "De dilluns a divendres",
   "pickupPointsModal.hourTo": "a",
   "pickupPointsModal.closed": "Tancat",
-  "pickupPointsModal.backToSearch": "Torna a cercar"
+  "pickupPointsModal.backToSearch": "Torna a cercar",
+  "pickupPointsModal.searchArea": "Cerca aquesta zona"
 }
