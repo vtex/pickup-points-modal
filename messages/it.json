@@ -56,5 +56,8 @@
   "pickupPointsModal.hourTo": "-",
   "pickupPointsModal.closed": "Chiuso",
   "pickupPointsModal.backToSearch": "Torna alla ricerca",
-  "pickupPointsModal.searchArea": "Cerca in quest'area"
+  "pickupPointsModal.searchArea": "Cerca in quest'area",
+  "pickupPointsModal.showPickupPointsList": "Visualizza tutti i punti di prelievo",
+  "pickupPointsModal.bestResults": "Migliori risultati",
+  "pickupPointsModal.resultsOrderedByDistance": "Risultati ordinati per distanza"
 }

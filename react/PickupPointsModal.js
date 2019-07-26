@@ -200,6 +200,7 @@ class PickupPointsModal extends Component {
               askForGeolocation={askForGeolocation}
               googleMapsKey={googleMapsKey}
               isSearching={isSearching}
+              items={items}
               logisticsInfo={logisticsInfo}
               pickupPoints={pickupPoints}
               pickupOptions={pickupOptions}

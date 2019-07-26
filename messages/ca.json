@@ -56,5 +56,8 @@
   "pickupPointsModal.hourTo": "a",
   "pickupPointsModal.closed": "Tancat",
   "pickupPointsModal.backToSearch": "Torna a cercar",
-  "pickupPointsModal.searchArea": "Cerca aquesta zona"
+  "pickupPointsModal.searchArea": "Cerca aquesta zona",
+  "pickupPointsModal.showPickupPointsList": "Veure tots els punts de retirada",
+  "pickupPointsModal.bestResults": "Els millors resultats",
+  "pickupPointsModal.resultsOrderedByDistance": "Resultats ordenats per distància"
 }

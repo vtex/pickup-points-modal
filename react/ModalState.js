@@ -16,6 +16,7 @@ import {
 import { getExternalPickupPoints, getAvailablePickup } from './fetchers'
 import { getPickupOptions } from './utils/pickupUtils'
 import { getPickupSlaString } from './utils/GetString'
+import { getBestPickupPoints } from './utils/bestPickups'
 
 class ModalState extends Component {
   constructor(props) {
@@ -24,6 +25,11 @@ class ModalState extends Component {
     this.state = {
       askForGeolocation: props.askForGeolocation,
       activeState: props.pickupPoints.length > 0 ? SIDEBAR : INITIAL,
+      bestPickupOptions: getBestPickupPoints(
+        props.pickupOptions,
+        props.items,
+        props.logisticsInfo
+      ),
       activeSidebarState: this.getInitialActiveState(props),
       geolocationStatus: PROMPT,
       lastState: '',
@@ -53,7 +59,14 @@ class ModalState extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { address, pickupPoints, pickupOptions, isSearching } = this.props
+    const {
+      address,
+      pickupPoints,
+      items,
+      logisticsInfo,
+      pickupOptions,
+      isSearching,
+    } = this.props
     const {
       activeState,
       activeSidebarState,
@@ -78,6 +91,11 @@ class ModalState extends Component {
       this.setState({
         pickupOptions: pickupOptions,
         pickupPoints: pickupPoints,
+        bestPickupOptions: getBestPickupPoints(
+          pickupOptions,
+          items,
+          logisticsInfo
+        ),
       })
     }
 
@@ -282,6 +300,7 @@ class ModalState extends Component {
     const {
       activeState,
       activeSidebarState,
+      bestPickupOptions,
       externalPickupPoints,
       geolocationStatus,
       isSearching,
@@ -298,10 +317,11 @@ class ModalState extends Component {
     return (
       <ModalStateContext.Provider
         value={{
-          geolocationStatus,
           activeState,
           activeSidebarState,
+          bestPickupOptions,
           externalPickupPoints,
+          geolocationStatus,
           isSearching,
           lastState,
           lastSidebarState,

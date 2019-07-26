@@ -9,6 +9,7 @@ export function injectState(Component) {
         {({
           activeState,
           activeSidebarState,
+          bestPickupOptions,
           externalPickupPoints,
           geolocationStatus,
           isSearching,
@@ -32,6 +33,7 @@ export function injectState(Component) {
             {...props}
             activeState={activeState}
             activeSidebarState={activeSidebarState}
+            bestPickupOptions={bestPickupOptions}
             externalPickupPoints={externalPickupPoints}
             geolocationStatus={geolocationStatus}
             isSearching={isSearching}

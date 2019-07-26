@@ -56,5 +56,8 @@
   "pickupPointsModal.hourTo": "às",
   "pickupPointsModal.closed": "Fechado",
   "pickupPointsModal.backToSearch": "Voltar para a busca",
-  "pickupPointsModal.searchArea": "Buscar nessa área"
+  "pickupPointsModal.searchArea": "Buscar nessa área",
+  "pickupPointsModal.showPickupPointsList": "Ver todos os pontos de retirada",
+  "pickupPointsModal.bestResults": "Melhores resultados",
+  "pickupPointsModal.resultsOrderedByDistance": "Resultados ordenados por distância"
 }
