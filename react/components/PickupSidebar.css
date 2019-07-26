@@ -54,6 +54,17 @@
   border-color: #ccc;
 }
 
+.pickupListTitle {
+  font-size: 13px;
+  line-height: 24px;
+  color: #666666;
+  margin: 15px 0 12px;
+}
+
+.showListButton {
+  margin: 0 0 15px;
+}
+
 /* media queries */
 
 @media (max-width: 1023px) {
