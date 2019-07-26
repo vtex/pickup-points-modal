@@ -15,6 +15,7 @@ import {
   SEARCHING,
   ERROR_NOT_ALLOWED,
   SIDEBAR,
+  DENIED,
 } from './constants'
 
 class Geolocation extends Component {
@@ -56,7 +57,7 @@ class Geolocation extends Component {
     if (get(navigator, 'permissions')) {
       navigator.permissions.query({ name: 'geolocation' }).then(permission => {
         switch (permission.state) {
-          case 'denied':
+          case DENIED:
             this.getCurrentPositionError({ code: 1 })
             break
 
@@ -135,7 +136,7 @@ class Geolocation extends Component {
         } else {
           setActiveState(INITIAL)
         }
-        this.setState({ permissionStatus: 'denied' })
+        this.setState({ permissionStatus: DENIED })
         searchPickupAddressByGeolocationEvent({
           deniedGeolocation: true,
         })

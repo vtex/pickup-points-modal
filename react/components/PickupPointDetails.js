@@ -223,7 +223,7 @@ class PickupPointDetails extends Component {
 PickupPointDetails.propTypes = {
   handleChangeActiveSLAOption: PropTypes.func.isRequired,
   handleClosePickupPointsModal: PropTypes.func.isRequired,
-  intl: intlShape,
+  intl: intlShape.isRequired,
   isSelectedSla: PropTypes.bool,
   items: PropTypes.array.isRequired,
   logisticsInfo: PropTypes.array.isRequired,

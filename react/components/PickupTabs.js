@@ -58,7 +58,7 @@ class PickupTabs extends Component {
 }
 
 PickupTabs.propTypes = {
-  intl: intlShape,
+  intl: intlShape.isRequired,
   mapStatus: PropTypes.string.isRequired,
   updateLocationTab: PropTypes.func.isRequired,
   setActiveSidebarState: PropTypes.func.isRequired,

@@ -122,7 +122,7 @@ StateHandler.propTypes = {
   changeActiveSLAOption: PropTypes.func.isRequired,
   closePickupPointsModal: PropTypes.func.isRequired,
   googleMaps: PropTypes.object.isRequired,
-  intl: intlShape,
+  intl: intlShape.isRequired,
   isLargeScreen: PropTypes.bool.isRequired,
   isSearching: PropTypes.bool,
   items: PropTypes.array.isRequired,

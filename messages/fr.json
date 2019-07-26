@@ -55,5 +55,9 @@
   "pickupPointsModal.weekDay1to5": "Lundo à Vendredi",
   "pickupPointsModal.hourTo": "-",
   "pickupPointsModal.closed": "Fermé",
-  "pickupPointsModal.backToSearch": "Retour à la recherche"
+  "pickupPointsModal.backToSearch": "Retour à la recherche",
+  "pickupPointsModal.searchArea": "Rechercher dans cette zone",
+  "pickupPointsModal.showPickupPointsList": "Afficher tous les points de retrait",
+  "pickupPointsModal.bestResults": "Meilleurs résultats",
+  "pickupPointsModal.resultsOrderedByDistance": "Résultats triés par distance"
 }

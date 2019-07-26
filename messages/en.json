@@ -18,7 +18,7 @@
   "pickupPointsModal.aditionalInfo": "Other information",
   "pickupPointsModal.unavailable": "unavailable",
   "pickupPointsModal.unavailableItemsAmount": "{itemsAmount, plural, =0 {} one {# item unavailable} other {# item unavailable}}",
-  "pickupPointsModal.allItemsAvailable": "All products available",
+  "pickupPointsModal.allItemsAvailable": "All products are available",
   "pickupPointsModal.noneItemsAvailable": "No product available",
   "pickupPointsModal.businessHours": "Business Hours",
   "pickupPointsModal.confirmPoint": "Pickup in this point",
@@ -55,5 +55,9 @@
   "pickupPointsModal.weekDay1to5": "Monday to Friday",
   "pickupPointsModal.hourTo": "-",
   "pickupPointsModal.closed": "Closed",
-  "pickupPointsModal.backToSearch": "Go back to search"
+  "pickupPointsModal.backToSearch": "Go back to search",
+  "pickupPointsModal.searchArea": "Search this area",
+  "pickupPointsModal.showPickupPointsList": "View all pickup points",
+  "pickupPointsModal.bestResults": "Best results",
+  "pickupPointsModal.resultsOrderedByDistance": "Results sorted by distance"
 }

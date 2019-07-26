@@ -55,5 +55,9 @@
   "pickupPointsModal.weekDay1to5": "Lunes a Viernes",
   "pickupPointsModal.hourTo": "a",
   "pickupPointsModal.closed": "Cerrado",
-  "pickupPointsModal.backToSearch": "Volver a buscar"
+  "pickupPointsModal.backToSearch": "Volver a buscar",
+  "pickupPointsModal.searchArea": "Buscar en esta área",
+  "pickupPointsModal.showPickupPointsList": "Ver todos los puntos de retiro",
+  "pickupPointsModal.bestResults": "Mejores resultados",
+  "pickupPointsModal.resultsOrderedByDistance": "Resultados ordenados por distancia"
 }

@@ -55,5 +55,9 @@
   "pickupPointsModal.weekDay1to5": "Luni până Vineri",
   "pickupPointsModal.hourTo": "-",
   "pickupPointsModal.closed": "Închis",
-  "pickupPointsModal.backToSearch": "Înapoi la căutare"
+  "pickupPointsModal.backToSearch": "Înapoi la căutare",
+  "pickupPointsModal.searchArea": "Căutați această zonă",
+  "pickupPointsModal.showPickupPointsList": "Vizualizați toate punctele de retragere",
+  "pickupPointsModal.bestResults": "Cele mai bune rezultate",
+  "pickupPointsModal.resultsOrderedByDistance": "Rezultatele sortate după distanță"
 }

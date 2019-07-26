@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 import markerIcon from '../assets/icons/marker.svg'
+import bestMarkerIcon from '../assets/icons/best_marker.svg'
 import personPin from '../assets/icons/person_pin.svg'
 import searchMarkerIcon from '../assets/icons/search_marker_icon.svg'
 // import searchMarkerIcon from '../assets/icons/unavailable_marker_icon.svg'
@@ -287,7 +288,7 @@ class Map extends Component {
       setSelectedPickupPoint,
       setShouldSearchArea,
       pickupPoints,
-      pickupOptions,
+      bestPickupOptions,
       externalPickupPoints,
       address,
     } = this.props
@@ -418,14 +419,14 @@ class Map extends Component {
         })
       })
 
-    pickupOptions &&
-      pickupOptions
+    bestPickupOptions &&
+      bestPickupOptions
         .filter(pickupPoint => {
           return !this.markers.some(
             markerObj => markerObj.pickupPoint.id === pickupPoint.id
           )
         })
-        .forEach(pickupPoint => {
+        .forEach((pickupPoint, index) => {
           const location = this.getLocation(
             pickupPoint.pickupStoreInfo.address.geoCoordinates
           )
@@ -437,7 +438,10 @@ class Map extends Component {
             draggable: false,
             map: this.map,
             icon: {
-              url: markerIcon,
+              url:
+                index < 3 && bestPickupOptions.length > 3
+                  ? bestMarkerIcon
+                  : markerIcon,
               size: isScaledMarker
                 ? new googleMaps.Size(38, 49)
                 : new googleMaps.Size(25, 31),
@@ -590,6 +594,7 @@ Map.propTypes = {
   activePickupPoint: PropTypes.object,
   activeState: PropTypes.string,
   activatePickupDetails: PropTypes.func.isRequired,
+  bestPickupOptions: PropTypes.array,
   selectedPickupPoint: PropTypes.object,
   address: AddressShapeWithValidation,
   changeActivePickupDetails: PropTypes.func,

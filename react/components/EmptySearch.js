@@ -89,7 +89,7 @@ EmptySearch.propTypes = {
   setActiveState: PropTypes.func.isRequired,
   askForGeolocation: PropTypes.bool,
   googleMaps: PropTypes.object,
-  intl: intlShape,
+  intl: intlShape.isRequired,
   loading: PropTypes.bool,
   logisticsInfo: PropTypes.array,
   rules: PropTypes.object,

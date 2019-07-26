@@ -40,7 +40,7 @@ SearchingState.defaultProps = {
 SearchingState.propTypes = {
   isFullPage: PropTypes.bool.isRequired,
   activeState: PropTypes.string,
-  intl: intlShape,
+  intl: intlShape.isRequired,
 }
 
 export default injectIntl(SearchingState)

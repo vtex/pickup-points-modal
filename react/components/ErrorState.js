@@ -53,7 +53,7 @@ ErrorState.defaultProps = {
 }
 
 ErrorState.propTypes = {
-  intl: intlShape,
+  intl: intlShape.isRequired,
   setActiveState: PropTypes.func.isRequired,
   subtitle: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,

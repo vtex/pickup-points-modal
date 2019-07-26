@@ -152,7 +152,7 @@ SearchForm.propTypes = {
   askForGeolocation: PropTypes.bool, // eslint-disable-line
   googleMaps: PropTypes.object,
   getCurrentPosition: PropTypes.func,
-  intl: intlShape,
+  intl: intlShape.isRequired,
   isAutoFocus: PropTypes.bool,
   isGeolocation: PropTypes.bool,
   isLoadingGoogle: PropTypes.bool,

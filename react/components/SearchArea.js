@@ -4,6 +4,8 @@ import styles from './SearchArea.css'
 import RefreshIcon from '../assets/components/RefreshIcon'
 import { injectState } from '../modalStateContext'
 import { handleGetAddressByGeolocation } from '../utils/CurrentPosition'
+import { injectIntl, intlShape } from 'react-intl'
+import { translate } from '../utils/i18nUtils'
 
 class SearchArea extends PureComponent {
   handleSearchArea = () => {
@@ -28,7 +30,7 @@ class SearchArea extends PureComponent {
   }
 
   render() {
-    const { shouldSearchArea } = this.props
+    const { shouldSearchArea, intl } = this.props
 
     return (
       <div
@@ -40,7 +42,7 @@ class SearchArea extends PureComponent {
           className={`pkpmodal-search-area ${styles.searchArea}`}
           type="button">
           <RefreshIcon classes={styles.refreshIcon} />
-          Buscar nessa área
+          {translate(intl, 'searchArea')}
         </button>
       </div>
     )
@@ -48,6 +50,13 @@ class SearchArea extends PureComponent {
 }
 
 SearchArea.propTypes = {
+  address: PropTypes.object,
+  googleMaps: PropTypes.object,
+  intl: intlShape.isRequired,
+  lastMapCenterLatLng: PropTypes.object,
+  onChangeAddress: PropTypes.func.isRequired,
+  rules: PropTypes.object,
+  shouldSearchArea: PropTypes.bool,
   shouldShow: PropTypes.bool,
   lastMapCenterLatLng: PropTypes.object,
   googleMaps: PropTypes.object,
@@ -57,4 +66,4 @@ SearchArea.propTypes = {
   shouldSearchArea: PropTypes.bool,
 }
 
-export default injectState(SearchArea)
+export default injectState(injectIntl(SearchArea))

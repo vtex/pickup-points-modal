@@ -10,6 +10,7 @@ import TranslateEstimate from 'vtex.shipping-estimate-translator/TranslateEstima
 import { AddressSummary } from '@vtex/address-form'
 import { getUnavailableItemsAmount } from '../utils/pickupUtils'
 import unavailableMarkerIcon from '../assets/icons/unavailable_marker_icon.svg'
+import bestMarkerIcon from '../assets/icons/best_marker.svg'
 import searchMarkerIcon from '../assets/icons/search_marker_icon.svg'
 import styles from './PickupPoint.css'
 import { injectState } from '../modalStateContext'
@@ -70,6 +71,7 @@ class PickupPointInfo extends Component {
       shouldUseMaps,
       storePreferencesData,
       isList,
+      isBestPickupPoint,
     } = this.props
 
     const { info, unavailableItemsAmount, distance } = this.state
@@ -87,6 +89,8 @@ class PickupPointInfo extends Component {
     const sholdShowUnavailableMarker = !isList && !pickupPoint.pickupStoreInfo
     const sholdShowSearchMarker = isList && !pickupPoint.pickupStoreInfo
     const shouldShowEstimate = pickupPoint && pickupPoint.shippingEstimate
+    const isBestPickupPointAndAvailable =
+      pickupPoint.pickupStoreInfo && isBestPickupPoint
 
     return (
       <div
@@ -104,7 +108,8 @@ class PickupPointInfo extends Component {
             {sholdShowSearchMarker && (
               <img className={styles.searchMarkerIcon} src={searchMarkerIcon} />
             )}
-            {pickupPoint.pickupStoreInfo && isSelected && <PinIconSelected />}
+            {isBestPickupPointAndAvailable && <img src={bestMarkerIcon} />}
+            {!isBestPickupPointAndAvailable && <PinIconSelected />}
             {pickupPoint.pickupStoreInfo && !isSelected && <PinIcon />}
             {distance && (
               <p
@@ -211,7 +216,8 @@ PickupPointInfo.defaultProps = {
 
 PickupPointInfo.propTypes = {
   handleChangeActivePickupDetails: PropTypes.func,
-  intl: intlShape,
+  intl: intlShape.isRequired,
+  isBestPickupPoint: PropTypes.bool,
   isList: PropTypes.bool,
   isSelected: PropTypes.bool,
   items: PropTypes.any,

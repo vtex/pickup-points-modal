@@ -200,6 +200,7 @@ class PickupPointsModal extends Component {
               askForGeolocation={askForGeolocation}
               googleMapsKey={googleMapsKey}
               isSearching={isSearching}
+              items={items}
               logisticsInfo={logisticsInfo}
               pickupPoints={pickupPoints}
               pickupOptions={pickupOptions}
@@ -283,7 +284,7 @@ PickupPointsModal.propTypes = {
   changeActiveSLAOption: PropTypes.func.isRequired,
   closePickupPointsModal: PropTypes.func.isRequired,
   googleMaps: PropTypes.object.isRequired,
-  intl: intlShape,
+  intl: intlShape.isRequired,
   items: PropTypes.array.isRequired,
   isSearching: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
