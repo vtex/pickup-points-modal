@@ -293,7 +293,7 @@ PickupPointsModal.propTypes = {
   pickupPoints: PropTypes.array.isRequired,
   rules: PropTypes.object.isRequired,
   searchAddress: PropTypes.object.isRequired,
-  sellerId: PropTypes.string.isRequired,
+  sellerId: PropTypes.string,
   selectedPickupPoint: PropTypes.object,
   storePreferencesData: PropTypes.object.isRequired,
 }
