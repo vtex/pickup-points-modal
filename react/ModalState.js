@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import sortBy from 'lodash/sortBy'
-import uniqBy from 'lodash/uniqBy'
 import { ModalStateContext } from './modalStateContext'
 import {
   PROMPT,
@@ -14,7 +13,7 @@ import {
   GEOLOCATION_SEARCHING,
 } from './constants'
 import { getExternalPickupPoints, getAvailablePickup } from './fetchers'
-import { getPickupOptions } from './utils/pickupUtils'
+import { getPickupOptions, getUniquePickupPoints } from './utils/pickupUtils'
 import { getPickupSlaString } from './utils/GetString'
 import { getBestPickupPoints } from './utils/bestPickups'
 
@@ -24,13 +23,14 @@ class ModalState extends Component {
 
     this.state = {
       askForGeolocation: props.askForGeolocation,
-      activeState: props.pickupPoints.length > 0 ? SIDEBAR : INITIAL,
+      activeState: props.pickupOptions.length > 0 ? SIDEBAR : INITIAL,
       bestPickupOptions: getBestPickupPoints(
         props.pickupOptions,
         props.items,
         props.logisticsInfo
       ),
       activeSidebarState: this.getInitialActiveState(props),
+      externalPickupPoints: [],
       geolocationStatus: PROMPT,
       lastState: '',
       lastSidebarState: '',
@@ -41,7 +41,6 @@ class ModalState extends Component {
       pickupOptions: props.pickupOptions,
       selectedPickupPoint: props.selectedPickupPoint,
       shouldSearchArea: false,
-      externalPickupPoints: [],
     }
   }
 
@@ -105,7 +104,7 @@ class ModalState extends Component {
       )
     }
 
-    const hasPickups = pickupPoints.length > 0
+    const hasPickups = pickupOptions.length > 0
 
     const isDetailsNoSelectedPickupPoint =
       this.isCurrentState(DETAILS, activeSidebarState) && !selectedPickupPoint
@@ -177,7 +176,7 @@ class ModalState extends Component {
       ? GEOLOCATION_SEARCHING
       : props.selectedPickupPoint
         ? DETAILS
-        : props.pickupPoints.length > 0
+        : props.pickupOptions.length > 0
           ? LIST
           : ERROR_NOT_FOUND
   }
@@ -270,19 +269,19 @@ class ModalState extends Component {
         })
       )
 
-      const newPickupOptions = uniqBy(
-        [...pickupOptions, ...availablePickupOptionsWithoutDistance],
-        'id'
+      const newPickupOptions = getUniquePickupPoints(
+        pickupOptions,
+        availablePickupOptionsWithoutDistance
       )
 
-      const newBestPickupOptions = uniqBy(
-        [...bestPickupOptions, ...availablePickupOptionsWithoutDistance],
-        'id'
+      const newBestPickupOptions = getUniquePickupPoints(
+        bestPickupOptions,
+        availablePickupOptionsWithoutDistance
       )
 
-      const newPickupPoints = uniqBy(
-        [...pickupPoints, ...availablePickupPointsWithoutDistance],
-        'id'
+      const newPickupPoints = getUniquePickupPoints(
+        pickupPoints,
+        availablePickupPointsWithoutDistance
       )
 
       const newLogisticsInfo = logisticsInfo.map((li, index) => ({

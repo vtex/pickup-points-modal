@@ -198,3 +198,7 @@ function condenseWeekDaysHours(businessHours) {
     return acc.concat(businessHour)
   }, [])
 }
+
+export function getUniquePickupPoints(pickupArray, newPickupArray) {
+  return uniqBy([...pickupArray, ...newPickupArray], 'id')
+}
