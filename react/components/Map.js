@@ -16,8 +16,8 @@ const BIG_MARKER_HEIGHT = 49
 const MARKER_WIDTH = 25
 const MARKER_HEIGHT = 31
 const STANDARD_ZOOM = 14
-const PAN_LEFT_LAT = -200
-const PAN_LEFT_LNG = 0
+const PAN_LEFT_LAT = -160
+const PAN_LEFT_LNG = -30
 
 class Map extends Component {
   constructor(props) {
@@ -328,7 +328,11 @@ class Map extends Component {
     const addressLocation =
       hasAddressCoords && this.getLocation(address.geoCoordinates.value)
 
-    if (!this.addressMarker && hasAddressCoords) {
+    if (
+      !this.addressMarker &&
+      hasAddressCoords &&
+      bestPickupOptions.length > 0
+    ) {
       const markerOptions = {
         position: addressLocation,
         draggable: false,

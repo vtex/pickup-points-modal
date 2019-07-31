@@ -19,6 +19,7 @@ export function injectState(Component) {
           logisticsInfo,
           pickupOptions,
           pickupPoints,
+          searchedAreaNoPickups,
           selectedPickupPoint,
           setGeolocationStatus,
           setActiveState,
@@ -44,14 +45,15 @@ export function injectState(Component) {
             selectedPickupPoint={selectedPickupPoint}
             pickupOptions={pickupOptions}
             pickupPoints={pickupPoints}
+            searchedAreaNoPickups={searchedAreaNoPickups}
             setGeolocationStatus={setGeolocationStatus}
             setActiveState={setActiveState}
             setActiveSidebarState={setActiveSidebarState}
             setAskForGeolocation={setAskForGeolocation}
             setMapCenterLatLng={setMapCenterLatLng}
             setSelectedPickupPoint={setSelectedPickupPoint}
-            shouldSearchArea={shouldSearchArea}
             setShouldSearchArea={setShouldSearchArea}
+            shouldSearchArea={shouldSearchArea}
           />
         )}
       </ModalStateContext.Consumer>
