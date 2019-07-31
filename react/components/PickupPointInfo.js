@@ -15,6 +15,7 @@ import searchMarkerIcon from '../assets/icons/search_marker_icon.svg'
 import styles from './PickupPoint.css'
 import { injectState } from '../modalStateContext'
 
+const MAX_KILOMETERS = 1000
 class PickupPointInfo extends Component {
   constructor(props) {
     super(props)
@@ -44,9 +45,6 @@ class PickupPointInfo extends Component {
   }
 
   handleOpenPickupDetails = () => {
-    this.props.handleChangeActivePickupDetails({
-      pickupPoint: this.props.pickupPoint,
-    })
     this.props.setSelectedPickupPoint(this.props.pickupPoint)
     this.props.setShouldSearchArea(false)
   }
@@ -117,7 +115,8 @@ class PickupPointInfo extends Component {
                   styles.pickupPointDistance
                 } pkpmodal-pickup-point-distance`}>
                 {translate(intl, 'distance', {
-                  distanceValue: distance > 1000 ? '1000+' : distanceValue,
+                  distanceValue:
+                    distance > MAX_KILOMETERS ? '1000+' : distanceValue,
                 })}
               </p>
             )}
@@ -215,7 +214,6 @@ PickupPointInfo.defaultProps = {
 }
 
 PickupPointInfo.propTypes = {
-  handleChangeActivePickupDetails: PropTypes.func,
   intl: intlShape.isRequired,
   isBestPickupPoint: PropTypes.bool,
   isList: PropTypes.bool,

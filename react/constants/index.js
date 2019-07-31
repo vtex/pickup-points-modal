@@ -60,3 +60,5 @@ export const MYANMAR = 'en-MM'
 export const LIBERIA = 'en-LR'
 
 export const MILE_COUNTRY_LOCALES = [UNITED_KINGDOM, USA, MYANMAR, LIBERIA]
+
+export const BEST_PICKUPS_AMOUNT = 3

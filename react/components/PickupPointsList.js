@@ -6,6 +6,7 @@ import { injectState } from '../modalStateContext'
 import { translate } from '../utils/i18nUtils'
 import { injectIntl, intlShape } from 'react-intl'
 import Button from './Button'
+import { BEST_PICKUPS_AMOUNT } from '../constants'
 
 class PickupPointsList extends PureComponent {
   constructor(props) {
@@ -24,7 +25,6 @@ class PickupPointsList extends PureComponent {
   render() {
     const {
       bestPickupOptions,
-      changeActivePickupDetails,
       externalPickupPoints,
       logisticsInfo,
       items,
@@ -48,13 +48,12 @@ class PickupPointsList extends PureComponent {
               {translate(intl, 'bestResults')}
             </p>
             {bestPickupOptions
-              .filter((_, index) => index < 3)
+              .filter((_, index) => index < BEST_PICKUPS_AMOUNT)
               .map(pickupPoint => (
                 <div
                   className={`${styles.pointsItem} pkpmodal-points-item`}
                   key={`best-pickupPoint-${pickupPoint.id}`}>
                   <PickupPointInfo
-                    handleChangeActivePickupDetails={changeActivePickupDetails}
                     isList
                     isBestPickupPoint
                     items={items}
@@ -94,7 +93,6 @@ class PickupPointsList extends PureComponent {
                 className={`${styles.pointsItem} pkpmodal-points-item`}
                 key={`pickupPoint-${pickupPoint.id}`}>
                 <PickupPointInfo
-                  handleChangeActivePickupDetails={changeActivePickupDetails}
                   isList
                   items={items}
                   logisticsInfo={logisticsInfo}
@@ -114,7 +112,6 @@ class PickupPointsList extends PureComponent {
                 className={`${styles.pointsItem} pkpmodal-points-item`}
                 key={`external-pickupPoint-${pickupPoint.id}`}>
                 <PickupPointInfo
-                  handleChangeActivePickupDetails={changeActivePickupDetails}
                   isList
                   items={items}
                   logisticsInfo={logisticsInfo}

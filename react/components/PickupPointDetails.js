@@ -84,6 +84,13 @@ class PickupPointDetails extends Component {
     const shouldShowSelectPickupButton =
       selectedPickupPoint && selectedPickupPoint.pickupStoreInfo
 
+    const confirmButtonId =
+      selectedPickupPoint &&
+      `confirm-pickup-${selectedPickupPoint.id
+        .replace(/[^\w\s]/gi, '')
+        .split(' ')
+        .join('-')}`
+
     return (
       <div className={`${styles.modalDetails} pkpmodal-details`}>
         <div className={`${styles.modalDetailsTop} pkpmodal-details-top`}>
@@ -201,10 +208,7 @@ class PickupPointDetails extends Component {
           <div
             className={`${styles.modalDetailsBottom} pkpmodal-details-bottom`}>
             <Button
-              id={`confirm-pickup-${selectedPickupPoint.id
-                .replace(/[^\w\s]/gi, '')
-                .split(' ')
-                .join('-')}`}
+              id={confirmButtonId}
               kind="primary"
               large
               moreClassName={`${

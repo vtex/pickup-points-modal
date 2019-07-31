@@ -5,12 +5,19 @@ import markerIcon from '../assets/icons/marker.svg'
 import bestMarkerIcon from '../assets/icons/best_marker.svg'
 import personPin from '../assets/icons/person_pin.svg'
 import searchMarkerIcon from '../assets/icons/search_marker_icon.svg'
-// import searchMarkerIcon from '../assets/icons/unavailable_marker_icon.svg'
 
 import { getPickupGeolocationString } from '../utils/GetString'
 import { injectState } from '../modalStateContext'
-import { LIST } from '../constants'
+import { LIST, BEST_PICKUPS_AMOUNT } from '../constants'
 import { getPickupPointGeolocations } from '../utils/pickupUtils'
+
+const BIG_MARKER_WIDTH = 38
+const BIG_MARKER_HEIGHT = 49
+const MARKER_WIDTH = 25
+const MARKER_HEIGHT = 31
+const STANDARD_ZOOM = 14
+const PAN_LEFT_LAT = -200
+const PAN_LEFT_LNG = 0
 
 class Map extends Component {
   constructor(props) {
@@ -147,8 +154,8 @@ class Map extends Component {
       markerObj &&
         markerObj.marker.setIcon({
           url: markerIcon,
-          size: new googleMaps.Size(38, 49),
-          scaledSize: new googleMaps.Size(38, 49),
+          size: new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT),
+          scaledSize: new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT),
         })
     }
 
@@ -350,11 +357,11 @@ class Map extends Component {
           icon: {
             url: searchMarkerIcon,
             size: isScaledMarker
-              ? new googleMaps.Size(38, 49)
-              : new googleMaps.Size(25, 31),
+              ? new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT)
+              : new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
             scaledSize: isScaledMarker
-              ? new googleMaps.Size(38, 49)
-              : new googleMaps.Size(25, 31),
+              ? new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT)
+              : new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
           },
         }
 
@@ -368,8 +375,11 @@ class Map extends Component {
             this.resetMarkers()
             marker.setIcon({
               url: searchMarkerIcon,
-              size: new googleMaps.Size(38, 49),
-              scaledSize: new googleMaps.Size(38, 49),
+              size: new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT),
+              scaledSize: new googleMaps.Size(
+                BIG_MARKER_WIDTH,
+                BIG_MARKER_HEIGHT
+              ),
             })
             changeActivePickupDetails({
               pickupPoint: filteredExternalPickupPoints[index],
@@ -385,8 +395,11 @@ class Map extends Component {
           () => {
             marker.setIcon({
               url: searchMarkerIcon,
-              size: new googleMaps.Size(38, 49),
-              scaledSize: new googleMaps.Size(38, 49),
+              size: new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT),
+              scaledSize: new googleMaps.Size(
+                BIG_MARKER_WIDTH,
+                BIG_MARKER_HEIGHT
+              ),
             })
           }
         )
@@ -404,8 +417,8 @@ class Map extends Component {
             }
             marker.setIcon({
               url: searchMarkerIcon,
-              size: new googleMaps.Size(25, 31),
-              scaledSize: new googleMaps.Size(25, 31),
+              size: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
+              scaledSize: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
             })
           }
         )
@@ -430,6 +443,11 @@ class Map extends Component {
           const location = this.getLocation(
             pickupPoint.pickupStoreInfo.address.geoCoordinates
           )
+          const markerIconImage =
+            index < BEST_PICKUPS_AMOUNT &&
+            bestPickupOptions.length > BEST_PICKUPS_AMOUNT
+              ? bestMarkerIcon
+              : markerIcon
           const isScaledMarker =
             selectedPickupPoint && selectedPickupPoint.id === pickupPoint.id
 
@@ -438,24 +456,21 @@ class Map extends Component {
             draggable: false,
             map: this.map,
             icon: {
-              url:
-                index < 3 && bestPickupOptions.length > 3
-                  ? bestMarkerIcon
-                  : markerIcon,
+              url: markerIconImage,
               size: isScaledMarker
-                ? new googleMaps.Size(38, 49)
-                : new googleMaps.Size(25, 31),
+                ? new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT)
+                : new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
               scaledSize: isScaledMarker
-                ? new googleMaps.Size(38, 49)
-                : new googleMaps.Size(25, 31),
+                ? new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT)
+                : new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
             },
           }
 
           if (this.addressMarker && hasAddressCoords && shouldResetBounds) {
             this.bounds.extend(location)
-            if (this.map.getZoom() < 14) {
-              this.setZoom(14)
-              this.map.panBy(-200, 0)
+            if (this.map.getZoom() < STANDARD_ZOOM) {
+              this.setZoom(STANDARD_ZOOM)
+              this.map.panBy(PAN_LEFT_LAT, PAN_LEFT_LNG)
             }
           }
 
@@ -468,9 +483,12 @@ class Map extends Component {
               this.recenterMap(location)
               this.resetMarkers()
               marker.setIcon({
-                url: markerIcon,
-                size: new googleMaps.Size(38, 49),
-                scaledSize: new googleMaps.Size(38, 49),
+                url: markerIconImage,
+                size: new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT),
+                scaledSize: new googleMaps.Size(
+                  BIG_MARKER_WIDTH,
+                  BIG_MARKER_HEIGHT
+                ),
               })
               changeActivePickupDetails({ pickupPoint: pickupPoint })
               setSelectedPickupPoint(pickupPoint)
@@ -483,9 +501,12 @@ class Map extends Component {
             'mouseover',
             () => {
               marker.setIcon({
-                url: markerIcon,
-                size: new googleMaps.Size(38, 49),
-                scaledSize: new googleMaps.Size(38, 49),
+                url: markerIconImage,
+                size: new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT),
+                scaledSize: new googleMaps.Size(
+                  BIG_MARKER_WIDTH,
+                  BIG_MARKER_HEIGHT
+                ),
               })
             }
           )
@@ -501,9 +522,9 @@ class Map extends Component {
                 return
               }
               marker.setIcon({
-                url: markerIcon,
-                size: new googleMaps.Size(25, 31),
-                scaledSize: new googleMaps.Size(25, 31),
+                url: markerIconImage,
+                size: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
+                scaledSize: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
               })
             }
           )
@@ -518,19 +539,28 @@ class Map extends Component {
 
           if (this.addressMarker && hasAddressCoords && shouldResetBounds) {
             this.map.fitBounds(this.bounds)
-            this.map.panBy(-200, 0)
+            this.map.panBy(PAN_LEFT_LAT, PAN_LEFT_LNG)
           }
         })
   }
 
   resetMarkers = location => {
     this.markers &&
-      this.markers.forEach(markerObj => {
+      this.markers.forEach((markerObj, index) => {
+        const markerIconImage =
+          index < BEST_PICKUPS_AMOUNT &&
+          this.markers.length > BEST_PICKUPS_AMOUNT
+            ? bestMarkerIcon
+            : markerIcon
+
         if (markerObj.pickupPoint) {
           markerObj.marker.setIcon({
-            url: markerIcon,
-            size: new this.props.googleMaps.Size(25, 31),
-            scaledSize: new this.props.googleMaps.Size(25, 31),
+            url: markerIconImage,
+            size: new this.props.googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
+            scaledSize: new this.props.googleMaps.Size(
+              MARKER_WIDTH,
+              MARKER_HEIGHT
+            ),
           })
         }
       })
@@ -539,8 +569,11 @@ class Map extends Component {
         if (searchMarkerObj.pickupPoint) {
           searchMarkerObj.marker.setIcon({
             url: searchMarkerIcon,
-            size: new this.props.googleMaps.Size(25, 31),
-            scaledSize: new this.props.googleMaps.Size(25, 31),
+            size: new this.props.googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
+            scaledSize: new this.props.googleMaps.Size(
+              MARKER_WIDTH,
+              MARKER_HEIGHT
+            ),
           })
         }
       })
@@ -557,7 +590,7 @@ class Map extends Component {
 
     if (!this.props.isLargeScreen) return
 
-    this.map.panBy(-200, 0)
+    this.map.panBy(PAN_LEFT_LAT, PAN_LEFT_LNG)
   }
 
   setZoom = zoom => {
