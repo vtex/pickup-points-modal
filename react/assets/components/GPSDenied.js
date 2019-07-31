@@ -11,7 +11,7 @@ class GPSDenied extends PureComponent {
         fill="none"
         xmlns="http://www.w3.org/2000/svg">
         <circle cx="8" cy="9" r="3" fill="#C4C4C4" />
-        <circle cx="8" cy="9" r="5.75" stroke="#8EB8F5" strokeWidth="1.5" />
+        <circle cx="8" cy="9" r="5.75" stroke="#C4C4C4" strokeWidth="1.5" />
         <rect x="7" y="1" width="2" height="3" fill="#C4C4C4" />
         <rect x="7" y="14" width="2" height="3" fill="#C4C4C4" />
         <rect
