@@ -81,7 +81,7 @@ class PickupSidebar extends Component {
               infoBarContainerActive: mapStatus === SHOW_MAP,
             }
           )}>
-          <PickupSidebarHeader isPickupDetailsActive={isPickupDetailsActive} />
+          {!isPickupDetailsActive && <PickupSidebarHeader />}
           {shouldShowSearchForm && (
             <SearchForm
               address={searchAddress}

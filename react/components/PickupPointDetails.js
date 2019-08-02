@@ -13,7 +13,9 @@ import PickupPointInfo from './PickupPointInfo'
 import ProductItems from './ProductItems'
 import PickupPointHour from './PickupPointHour'
 import Button from './Button'
-
+import ArrowPrevious from '../assets/components/ArrowPrevious'
+import ArrowNext from '../assets/components/ArrowNext'
+import BackChevron from '../assets/components/BackChevron'
 import styles from './PickupPointDetails.css'
 import { LIST } from '../constants'
 import { injectState } from '../modalStateContext'
@@ -36,8 +38,7 @@ class PickupPointDetails extends Component {
         props.selectedPickupPoint,
         props.sellerId
       ),
-      pickupPointInfo:
-        props.selectedPickupPoint.pickupStoreInfo || props.selectedPickupPoint,
+      pickupPointInfo: this.getPickupInfo(props),
     }
   }
 
@@ -45,6 +46,12 @@ class PickupPointDetails extends Component {
     if (!this.props.selectedPickupPoint) {
       this.props.setActiveSidebarState(LIST)
     }
+  }
+
+  getPickupInfo(props) {
+    return props.pickupPoints.find(
+      pickupPoint => pickupPoint.id === props.selectedPickupPoint.pickupPointId
+    )
   }
 
   handleBackButtonClick = () => {
@@ -100,13 +107,38 @@ class PickupPointDetails extends Component {
             } pkpmodal-details-back-lnk btn btn-link`}
             onClick={this.handleBackButtonClick}
             type="button">
-            <i
-              className={`${
-                styles.iconBackPickupPointsList
-              } pkpmodal-icon-back-pickup-points-list icon-angle-left`}
-            />
+            <BackChevron />
             {translate(intl, 'cancelBackList')}
           </button>
+        </div>
+
+        <div
+          className={`${styles.pickupDetailsHeader} pkpmodal-details-header`}>
+          <p
+            className={`${
+              styles.pickupDetailsHeaderTitle
+            } pkpmodal-details-header-title`}>
+            {translate(intl, 'pointDetails')}
+          </p>
+          <div
+            className={`${
+              styles.pickupDetailsHeaderButtons
+            } pkpmodal-details-header-buttons`}>
+            <button
+              className={`${
+                styles.pickupDetailsHeaderButton
+              } pkpmodal-details-header-button`}
+              onClick={this.props.selectPreviousPickupPoint}>
+              <ArrowPrevious />
+            </button>
+            <button
+              className={`${
+                styles.pickupDetailsHeaderButton
+              } pkpmodal-details-header-button`}
+              onClick={this.props.selectNextPickupPoint}>
+              <ArrowNext />
+            </button>
+          </div>
         </div>
 
         <div className={`${styles.modalDetailsMiddle} pkpmodal-details-middle`}>
@@ -237,6 +269,8 @@ PickupPointDetails.propTypes = {
   sellerId: PropTypes.string,
   storePreferencesData: PropTypes.object.isRequired,
   setActiveSidebarState: PropTypes.func.isRequired,
+  selectNextPickupPoint: PropTypes.func,
+  selectPreviousPickupPoint: PropTypes.func,
   shouldUseMaps: PropTypes.bool.isRequired,
 }
 

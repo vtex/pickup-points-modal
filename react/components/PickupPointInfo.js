@@ -5,7 +5,7 @@ import { formatCurrency, formatNumber } from '../utils/Currency'
 import { formatDistance } from '../utils/Distance'
 import { translate } from '../utils/i18nUtils'
 import PinIcon from '../assets/components/PinIcon'
-import PinIconSelected from '../assets/components/PinIconSelected'
+import markerIcon from '../assets/icons/marker.svg'
 import TranslateEstimate from 'vtex.shipping-estimate-translator/TranslateEstimate'
 import { AddressSummary } from '@vtex/address-form'
 import { getUnavailableItemsAmount } from '../utils/pickupUtils'
@@ -45,8 +45,18 @@ class PickupPointInfo extends Component {
   }
 
   handleOpenPickupDetails = () => {
-    this.props.setSelectedPickupPoint(this.props.pickupPoint)
-    this.props.setShouldSearchArea(false)
+    const {
+      isBestPickupPoint,
+      pickupPoint,
+      setSelectedPickupPoint,
+      setShouldSearchArea,
+    } = this.props
+
+    setSelectedPickupPoint({
+      pickupPoint,
+      isBestPickupPoint,
+    })
+    setShouldSearchArea(false)
   }
 
   handlePickupModal = () =>
@@ -70,6 +80,7 @@ class PickupPointInfo extends Component {
       storePreferencesData,
       isList,
       isBestPickupPoint,
+      isSelectedBestPickupPoint,
     } = this.props
 
     const { info, unavailableItemsAmount, distance } = this.state
@@ -88,7 +99,8 @@ class PickupPointInfo extends Component {
     const sholdShowSearchMarker = isList && !pickupPoint.pickupStoreInfo
     const shouldShowEstimate = pickupPoint && pickupPoint.shippingEstimate
     const isBestPickupPointAndAvailable =
-      pickupPoint.pickupStoreInfo && isBestPickupPoint
+      pickupPoint.pickupStoreInfo &&
+      (isBestPickupPoint || isSelectedBestPickupPoint)
 
     return (
       <div
@@ -108,7 +120,7 @@ class PickupPointInfo extends Component {
             )}
             {isBestPickupPointAndAvailable && <img src={bestMarkerIcon} />}
             {!sholdShowUnavailableMarker &&
-              !isBestPickupPointAndAvailable && <PinIconSelected />}
+              !isBestPickupPointAndAvailable && <img src={markerIcon} />}
             {pickupPoint.pickupStoreInfo && !isSelected && <PinIcon />}
             {distance && (
               <p
@@ -217,6 +229,7 @@ PickupPointInfo.defaultProps = {
 PickupPointInfo.propTypes = {
   intl: intlShape.isRequired,
   isBestPickupPoint: PropTypes.bool,
+  isSelectedBestPickupPoint: PropTypes.bool,
   isList: PropTypes.bool,
   isSelected: PropTypes.bool,
   items: PropTypes.any,
