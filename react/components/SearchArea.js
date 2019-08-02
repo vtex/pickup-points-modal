@@ -3,30 +3,14 @@ import PropTypes from 'prop-types'
 import styles from './SearchArea.css'
 import RefreshIcon from '../assets/components/RefreshIcon'
 import { injectState } from '../modalStateContext'
-import { handleGetAddressByGeolocation } from '../utils/CurrentPosition'
 import { injectIntl, intlShape } from 'react-intl'
 import { translate } from '../utils/i18nUtils'
 
 class SearchArea extends PureComponent {
   handleSearchArea = () => {
-    const {
-      lastMapCenterLatLng,
-      googleMaps,
-      onChangeAddress,
-      rules,
-      address,
-    } = this.props
+    const { lastMapCenterLatLng, address, searchPickupsInArea } = this.props
 
-    handleGetAddressByGeolocation({
-      newPosition: {
-        lat: lastMapCenterLatLng.lat(),
-        lng: lastMapCenterLatLng.lng(),
-      },
-      googleMaps,
-      onChangeAddress,
-      rules,
-      address,
-    })
+    searchPickupsInArea(lastMapCenterLatLng, address)
   }
 
   render() {
@@ -51,12 +35,10 @@ class SearchArea extends PureComponent {
 
 SearchArea.propTypes = {
   address: PropTypes.object,
-  googleMaps: PropTypes.object,
   intl: intlShape.isRequired,
   lastMapCenterLatLng: PropTypes.object,
-  onChangeAddress: PropTypes.func.isRequired,
-  rules: PropTypes.object,
   shouldSearchArea: PropTypes.bool,
+  searchPickupsInArea: PropTypes.func.isRequired,
   shouldShow: PropTypes.bool,
 }
 

@@ -17,3 +17,11 @@ export function isPickup(deliveryChannelSource) {
   const deliveryChannel = getDeliveryChannel(deliveryChannelSource)
   return deliveryChannel === PICKUP_IN_STORE
 }
+
+export function findSla(li, pickupPoint) {
+  return li.slas.find(simulationPickupPoint =>
+    simulationPickupPoint.id.includes(
+      pickupPoint && (pickupPoint.id || pickupPoint.pickupPointId)
+    )
+  )
+}

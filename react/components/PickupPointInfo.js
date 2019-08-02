@@ -5,15 +5,14 @@ import { formatCurrency, formatNumber } from '../utils/Currency'
 import { formatDistance } from '../utils/Distance'
 import { translate } from '../utils/i18nUtils'
 import PinIcon from '../assets/components/PinIcon'
-import markerIcon from '../assets/icons/marker.svg'
 import TranslateEstimate from 'vtex.shipping-estimate-translator/TranslateEstimate'
 import { AddressSummary } from '@vtex/address-form'
 import { getUnavailableItemsAmount } from '../utils/pickupUtils'
-import unavailableMarkerIcon from '../assets/icons/unavailable_marker_icon.svg'
 import bestMarkerIcon from '../assets/icons/best_marker.svg'
 import searchMarkerIcon from '../assets/icons/search_marker_icon.svg'
 import styles from './PickupPoint.css'
 import { injectState } from '../modalStateContext'
+import UnavailableMarker from '../assets/components/UnavailableMarker'
 
 const MAX_KILOMETERS = 1000
 class PickupPointInfo extends Component {
@@ -114,13 +113,13 @@ class PickupPointInfo extends Component {
                 ? styles.pickupPointMarker
                 : styles.pickupPointMarkerPostalCode
             } pkpmodal-pickup-point-marker`}>
-            {sholdShowUnavailableMarker && <img src={unavailableMarkerIcon} />}
+            {sholdShowUnavailableMarker && <UnavailableMarker />}
             {sholdShowSearchMarker && (
               <img className={styles.searchMarkerIcon} src={searchMarkerIcon} />
             )}
             {isBestPickupPointAndAvailable && <img src={bestMarkerIcon} />}
             {!sholdShowUnavailableMarker &&
-              !isBestPickupPointAndAvailable && <img src={markerIcon} />}
+              !isBestPickupPointAndAvailable && <PinIcon />}
             {pickupPoint.pickupStoreInfo && !isSelected && <PinIcon />}
             {distance && (
               <p

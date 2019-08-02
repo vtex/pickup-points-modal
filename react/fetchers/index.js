@@ -9,7 +9,7 @@ export function getExternalPickupPoints(geoCoordinates) {
   ).then(response => response.json())
 }
 
-export function getAvailablePickup({
+export function getAvailablePickups({
   logisticsInfo,
   salesChannel,
   orderFormId,

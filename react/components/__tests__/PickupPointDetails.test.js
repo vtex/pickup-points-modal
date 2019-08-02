@@ -53,6 +53,15 @@ describe('PickupPointDetails', () => {
       shouldUseMaps: false,
       setShouldSearchArea: jest.fn(),
       setSelectedPickupPoint: jest.fn(),
+      pickupPoints: [
+        {
+          id: '1',
+          friendlyName: 'test',
+          address: {
+            geoCoordinates: [123, 123],
+          },
+        },
+      ],
       selectedPickupPoint: {
         name: 'test',
         price: 100,
@@ -65,6 +74,7 @@ describe('PickupPointDetails', () => {
         },
         deliveryChannel: PICKUP_IN_STORE,
         id: '1',
+        pickupPointId: '1',
       },
       logisticsInfo: [
         {

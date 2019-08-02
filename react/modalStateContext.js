@@ -13,6 +13,8 @@ export function injectState(Component) {
           externalPickupPoints,
           geolocationStatus,
           isSearching,
+          isSelectedBestPickupPoint,
+          searchPickupsInArea,
           lastState,
           lastSidebarState,
           lastMapCenterLatLng,
@@ -20,6 +22,8 @@ export function injectState(Component) {
           pickupOptions,
           pickupPoints,
           searchedAreaNoPickups,
+          selectNextPickupPoint,
+          selectPreviousPickupPoint,
           selectedPickupPoint,
           setGeolocationStatus,
           setActiveState,
@@ -38,6 +42,7 @@ export function injectState(Component) {
             externalPickupPoints={externalPickupPoints}
             geolocationStatus={geolocationStatus}
             isSearching={isSearching}
+            isSelectedBestPickupPoint={isSelectedBestPickupPoint}
             lastState={lastState}
             lastSidebarState={lastSidebarState}
             lastMapCenterLatLng={lastMapCenterLatLng}
@@ -46,6 +51,9 @@ export function injectState(Component) {
             pickupOptions={pickupOptions}
             pickupPoints={pickupPoints}
             searchedAreaNoPickups={searchedAreaNoPickups}
+            searchPickupsInArea={searchPickupsInArea}
+            selectNextPickupPoint={selectNextPickupPoint}
+            selectPreviousPickupPoint={selectPreviousPickupPoint}
             setGeolocationStatus={setGeolocationStatus}
             setActiveState={setActiveState}
             setActiveSidebarState={setActiveSidebarState}

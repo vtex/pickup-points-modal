@@ -128,14 +128,14 @@ class PickupPointDetails extends Component {
               className={`${
                 styles.pickupDetailsHeaderButton
               } pkpmodal-details-header-button`}
-              onClick={this.props.selectPreviousPickupPoint}>
+              onClick={() => this.props.selectPreviousPickupPoint()}>
               <ArrowPrevious />
             </button>
             <button
               className={`${
                 styles.pickupDetailsHeaderButton
               } pkpmodal-details-header-button`}
-              onClick={this.props.selectNextPickupPoint}>
+              onClick={() => this.props.selectNextPickupPoint()}>
               <ArrowNext />
             </button>
           </div>

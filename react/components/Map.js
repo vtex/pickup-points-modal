@@ -136,27 +136,23 @@ class Map extends Component {
       this.props.address.geoCoordinates.value
     const thisAddressCoords = prevProps.address.geoCoordinates.value
 
-    const markerObj =
-      this.markers &&
-      this.markers.find(
-        item =>
-          this.props.selectedPickupPoint &&
-          item.pickupPoint === this.props.selectedPickupPoint.id
-      )
-
     if (
       nextAddressCoords &&
       this.isDifferentGeoCoords(nextAddressCoords, thisAddressCoords) &&
       googleMaps
     ) {
+      const markerObj =
+        this.markers &&
+        this.markers.find(
+          item =>
+            this.props.selectedPickupPoint &&
+            item.pickupPoint === this.props.selectedPickupPoint.id
+        )
+
       this.recenterMap(this.getLocation(nextAddressCoords))
       this.resetMarkers(this.getLocation(nextAddressCoords))
       markerObj &&
-        markerObj.marker.setIcon({
-          url: markerIcon,
-          size: new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT),
-          scaledSize: new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT),
-        })
+        this.setIcon(markerObj.marker, BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT)
     }
 
     if (
@@ -290,10 +286,7 @@ class Map extends Component {
   createNewMarkers = (shouldResetBounds = true) => {
     const {
       selectedPickupPoint,
-      changeActivePickupDetails,
       googleMaps,
-      setSelectedPickupPoint,
-      setShouldSearchArea,
       pickupPoints,
       bestPickupOptions,
       externalPickupPoints,
@@ -371,68 +364,12 @@ class Map extends Component {
 
         const marker = new googleMaps.Marker(markerOptions)
 
-        const markerClickListener = googleMaps.event.addListener(
+        this.setupListeners({
+          markersList: this.searchMarkers,
           marker,
-          'click',
-          () => {
-            this.recenterMap(location)
-            this.resetMarkers()
-            marker.setIcon({
-              url: searchMarkerIcon,
-              size: new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT),
-              scaledSize: new googleMaps.Size(
-                BIG_MARKER_WIDTH,
-                BIG_MARKER_HEIGHT
-              ),
-            })
-            changeActivePickupDetails({
-              pickupPoint: filteredExternalPickupPoints[index],
-            })
-            setSelectedPickupPoint(filteredExternalPickupPoints[index])
-            setShouldSearchArea(false)
-          }
-        )
-
-        const markerHoverListener = googleMaps.event.addListener(
-          marker,
-          'mouseover',
-          () => {
-            marker.setIcon({
-              url: searchMarkerIcon,
-              size: new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT),
-              scaledSize: new googleMaps.Size(
-                BIG_MARKER_WIDTH,
-                BIG_MARKER_HEIGHT
-              ),
-            })
-          }
-        )
-
-        const markerHoverOutListener = googleMaps.event.addListener(
-          marker,
-          'mouseout',
-          () => {
-            if (
-              this.props.selectedPickupPoint &&
-              this.props.selectedPickupPoint.id ===
-                filteredExternalPickupPoints[index].id
-            ) {
-              return
-            }
-            marker.setIcon({
-              url: searchMarkerIcon,
-              size: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
-              scaledSize: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
-            })
-          }
-        )
-
-        this.searchMarkers.push({
-          marker,
-          markerClickListener,
-          markerHoverListener,
-          markerHoverOutListener,
-          pickupPoint: filteredExternalPickupPoints[index].id,
+          pickupPointsList: filteredExternalPickupPoints,
+          location,
+          index,
         })
       })
 
@@ -480,65 +417,12 @@ class Map extends Component {
 
           const marker = new googleMaps.Marker(markerOptions)
 
-          const markerClickListener = googleMaps.event.addListener(
+          this.setupListeners({
+            markersList: this.markers,
             marker,
-            'click',
-            () => {
-              this.recenterMap(location)
-              this.resetMarkers()
-              marker.setIcon({
-                url: markerIconImage,
-                size: new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT),
-                scaledSize: new googleMaps.Size(
-                  BIG_MARKER_WIDTH,
-                  BIG_MARKER_HEIGHT
-                ),
-              })
-              changeActivePickupDetails({ pickupPoint: pickupPoint })
-              setSelectedPickupPoint(pickupPoint)
-              setShouldSearchArea(false)
-            }
-          )
-
-          const markerHoverListener = googleMaps.event.addListener(
-            marker,
-            'mouseover',
-            () => {
-              marker.setIcon({
-                url: markerIconImage,
-                size: new googleMaps.Size(BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT),
-                scaledSize: new googleMaps.Size(
-                  BIG_MARKER_WIDTH,
-                  BIG_MARKER_HEIGHT
-                ),
-              })
-            }
-          )
-
-          const markerHoverOutListener = googleMaps.event.addListener(
-            marker,
-            'mouseout',
-            () => {
-              if (
-                this.props.selectedPickupPoint &&
-                this.props.selectedPickupPoint.id === pickupPoint.id
-              ) {
-                return
-              }
-              marker.setIcon({
-                url: markerIconImage,
-                size: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
-                scaledSize: new googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
-              })
-            }
-          )
-
-          this.markers.push({
-            marker,
-            markerClickListener,
-            markerHoverListener,
-            markerHoverOutListener,
-            pickupPoint: pickupPoint.id,
+            pickupPoint,
+            location,
+            index,
           })
 
           if (this.addressMarker && hasAddressCoords && shouldResetBounds) {
@@ -550,38 +434,94 @@ class Map extends Component {
 
   resetMarkers = location => {
     this.markers &&
-      this.markers.forEach((markerObj, index) => {
-        const markerIconImage =
-          index < BEST_PICKUPS_AMOUNT &&
-          this.markers.length > BEST_PICKUPS_AMOUNT
-            ? bestMarkerIcon
-            : markerIcon
-
+      this.markers.forEach(markerObj => {
         if (markerObj.pickupPoint) {
-          markerObj.marker.setIcon({
-            url: markerIconImage,
-            size: new this.props.googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
-            scaledSize: new this.props.googleMaps.Size(
-              MARKER_WIDTH,
-              MARKER_HEIGHT
-            ),
-          })
+          this.setIcon(markerObj.marker, MARKER_WIDTH, MARKER_HEIGHT)
         }
       })
     this.searchMarkers &&
       this.searchMarkers.forEach(searchMarkerObj => {
         if (searchMarkerObj.pickupPoint) {
-          searchMarkerObj.marker.setIcon({
-            url: searchMarkerIcon,
-            size: new this.props.googleMaps.Size(MARKER_WIDTH, MARKER_HEIGHT),
-            scaledSize: new this.props.googleMaps.Size(
-              MARKER_WIDTH,
-              MARKER_HEIGHT
-            ),
-          })
+          this.setIcon(searchMarkerObj.marker, MARKER_WIDTH, MARKER_HEIGHT)
         }
       })
     location && this.addressMarker && this.addressMarker.setPosition(location)
+  }
+
+  setIcon(marker, width, height) {
+    const { googleMaps } = this.props
+
+    marker.setIcon({
+      url: marker.icon.url,
+      size: new googleMaps.Size(width, height),
+      scaledSize: new googleMaps.Size(width, height),
+    })
+  }
+
+  setupListeners = ({
+    markersList,
+    marker,
+    pickupPoint,
+    pickupPointsList,
+    index,
+  }) => {
+    const {
+      selectedPickupPoint,
+      changeActivePickupDetails,
+      setSelectedPickupPoint,
+      setShouldSearchArea,
+      googleMaps,
+    } = this.props
+
+    const markerClickListener = googleMaps.event.addListener(
+      marker,
+      'click',
+      () => {
+        this.resetMarkers()
+        this.setIcon(marker, BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT)
+        changeActivePickupDetails({
+          pickupPoint: pickupPointsList ? pickupPointsList[index] : pickupPoint,
+        })
+        setSelectedPickupPoint({
+          pickupPoint: pickupPointsList ? pickupPointsList[index] : pickupPoint,
+          isBestPickupPoint: index < BEST_PICKUPS_AMOUNT,
+        })
+        setShouldSearchArea(false)
+      }
+    )
+
+    const markerHoverListener = googleMaps.event.addListener(
+      marker,
+      'mouseover',
+      () => {
+        this.setIcon(marker, BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT)
+      }
+    )
+
+    const markerHoverOutListener = googleMaps.event.addListener(
+      marker,
+      'mouseout',
+      () => {
+        if (
+          selectedPickupPoint &&
+          selectedPickupPoint.id ===
+            (pickupPointsList ? pickupPointsList[index].id : pickupPoint.id)
+        ) {
+          return
+        }
+        this.setIcon(marker, MARKER_WIDTH, MARKER_HEIGHT)
+      }
+    )
+
+    markersList.push({
+      marker,
+      markerClickListener,
+      markerHoverListener,
+      markerHoverOutListener,
+      pickupPoint: pickupPointsList
+        ? pickupPointsList[index].id
+        : pickupPoint.id,
+    })
   }
 
   recenterMap = location => {
