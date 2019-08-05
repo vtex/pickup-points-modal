@@ -62,11 +62,13 @@ class ModalState extends Component {
       this.props.address.geoCoordinates &&
       this.props.address.geoCoordinates.value
 
-    getExternalPickupPoints(thisAddressCoords).then(data =>
-      this.setState({
-        externalPickupPoints: data.items,
-      })
-    )
+    if (thisAddressCoords.length > 0) {
+      getExternalPickupPoints(thisAddressCoords).then(data =>
+        this.setState({
+          externalPickupPoints: data.items,
+        })
+      )
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
