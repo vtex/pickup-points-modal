@@ -6,11 +6,12 @@ export function injectGeolocation(Component) {
   return function StateInjectedComponent(props) {
     return (
       <GeolocationContext.Consumer>
-        {({ permissionStatus, getCurrentPosition }) => (
+        {({ getCurrentPosition, isLoadingGeolocation, permissionStatus }) => (
           <Component
             {...props}
-            permissionStatus={permissionStatus}
             getCurrentPosition={getCurrentPosition}
+            isLoadingGeolocation={isLoadingGeolocation}
+            permissionStatus={permissionStatus}
           />
         )}
       </GeolocationContext.Consumer>

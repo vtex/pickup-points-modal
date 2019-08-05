@@ -38,6 +38,10 @@ class SearchForm extends Component {
     this.setMyLocationButtonVisibility(false)
   }
 
+  handleGeolocationClick = () => {
+    this.props.getCurrentPosition()
+  }
+
   render() {
     const {
       address,
@@ -47,6 +51,7 @@ class SearchForm extends Component {
       isAutoFocus,
       isGeolocation,
       isLoadingGoogle,
+      isLoadingGeolocation,
       isSidebar,
       onChangeAddress,
       rules,
@@ -118,8 +123,10 @@ class SearchForm extends Component {
             <button
               data-tip
               data-for="GPSDenied"
-              className={isGeolocation ? geolocationStyle : postalCodeStyle}
-              onClick={() => this.props.getCurrentPosition()}
+              className={`${
+                isGeolocation ? geolocationStyle : postalCodeStyle
+              } ${isLoadingGeolocation ? styles.isLoadingGeolocation : ''}`}
+              onClick={this.handleGeolocationClick}
               title={translate(intl, 'askGeolocationAccept')}
               type="button">
               {navigator.geolocation && permissionStatus !== DENIED ? (
@@ -155,6 +162,7 @@ SearchForm.propTypes = {
   intl: intlShape.isRequired,
   isAutoFocus: PropTypes.bool,
   isGeolocation: PropTypes.bool,
+  isLoadingGeolocation: PropTypes.bool,
   isLoadingGoogle: PropTypes.bool,
   isSidebar: PropTypes.bool,
   onChangeAddress: PropTypes.func,

@@ -4,8 +4,8 @@
   color: #666666;
   padding: 14px;
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 4px;
+  top: 10px;
   z-index: 999;
   transition: 0.256s ease-in;
 }

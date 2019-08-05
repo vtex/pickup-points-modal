@@ -32,7 +32,7 @@ class PickupTabs extends Component {
       <div className={`${styles.pickupViewMode} pkpmodal-pickup-view-mode`}>
         <button
           className={`${
-            styles.pickupViewList
+            styles.pickupViewItem
           } pkpmodal-pickup-view-list btn btn-link ${
             mapStatus === HIDE_MAP ? buttonActive : buttonInactive
           }`}
@@ -43,7 +43,7 @@ class PickupTabs extends Component {
         </button>
         <button
           className={`${
-            styles.pickupViewMap
+            styles.pickupViewItem
           } pkpmodal-pickup-view-map btn btn-link ${
             mapStatus === SHOW_MAP ? buttonActive : buttonInactive
           }`}

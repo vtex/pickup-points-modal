@@ -96,8 +96,9 @@ class ModalState extends Component {
     const prevActiveSidebarState = prevState.activeSidebarState
 
     if (
-      this.state.localSearching &&
-      isCurrentState(SEARCHING, activeSidebarState)
+      (this.state.localSearching &&
+        isCurrentState(SEARCHING, activeSidebarState)) ||
+      isCurrentState('', activeSidebarState)
     ) {
       return
     }

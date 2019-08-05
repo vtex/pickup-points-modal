@@ -8,12 +8,14 @@ import { injectState } from '../modalStateContext'
 
 class ZoomControls extends PureComponent {
   render() {
-    const { shouldShow, activeState } = this.props
+    const { shouldShow, activeState, isLargeScreen } = this.props
 
     return (
       <div
         className={`${styles.zoomWrapper} ${
-          shouldShow && activeState === SIDEBAR ? '' : styles.hide
+          shouldShow && activeState === SIDEBAR && isLargeScreen
+            ? ''
+            : styles.hide
         }`}>
         <button className={`pkpmodal-zoom-in ${styles.zoomIn}`} type="button">
           <img src={PlusIcon} />
@@ -29,6 +31,7 @@ class ZoomControls extends PureComponent {
 
 ZoomControls.propTypes = {
   shouldShow: PropTypes.bool,
+  isLargeScreen: PropTypes.bool,
   activeState: PropTypes.string,
 }
 

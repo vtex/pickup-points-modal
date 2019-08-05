@@ -158,3 +158,20 @@
     width: 20px;
   }
 }
+
+.isLoadingGeolocation {
+  animation: blink 1s ease-in-out forwards;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}

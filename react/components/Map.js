@@ -8,7 +8,7 @@ import searchMarkerIcon from '../assets/icons/search_marker_icon.svg'
 
 import { getPickupGeolocationString } from '../utils/GetString'
 import { injectState } from '../modalStateContext'
-import { LIST, BEST_PICKUPS_AMOUNT } from '../constants'
+import { LIST, BEST_PICKUPS_AMOUNT, HIDE_MAP } from '../constants'
 import { getPickupPointGeolocations } from '../utils/pickupUtils'
 
 const BIG_MARKER_WIDTH = 38
@@ -466,11 +466,12 @@ class Map extends Component {
     index,
   }) => {
     const {
-      selectedPickupPoint,
       changeActivePickupDetails,
+      googleMaps,
+      selectedPickupPoint,
       setSelectedPickupPoint,
       setShouldSearchArea,
-      googleMaps,
+      updateLocationTab,
     } = this.props
 
     const markerClickListener = googleMaps.event.addListener(
@@ -486,6 +487,7 @@ class Map extends Component {
           pickupPoint: pickupPointsList ? pickupPointsList[index] : pickupPoint,
           isBestPickupPoint: index < BEST_PICKUPS_AMOUNT,
         })
+        updateLocationTab(HIDE_MAP)
         setShouldSearchArea(false)
       }
     )
@@ -571,9 +573,8 @@ Map.propTypes = {
   activePickupPoint: PropTypes.object,
   activeState: PropTypes.string,
   activatePickupDetails: PropTypes.func.isRequired,
-  bestPickupOptions: PropTypes.array,
-  selectedPickupPoint: PropTypes.object,
   address: AddressShapeWithValidation,
+  bestPickupOptions: PropTypes.array,
   changeActivePickupDetails: PropTypes.func,
   externalPickupPoints: PropTypes.array,
   geoCoordinates: PropTypes.array,
@@ -584,14 +585,16 @@ Map.propTypes = {
   loadingElement: PropTypes.node,
   onChangeAddress: PropTypes.func.isRequired,
   pickupOptions: PropTypes.array,
-  pickupPoints: PropTypes.array,
   pickupPoint: PropTypes.object,
+  pickupPoints: PropTypes.array,
   rules: PropTypes.object.isRequired,
+  selectedPickupPoint: PropTypes.object,
   selectedPickupPointGeolocation: PropTypes.array,
   setActiveSidebarState: PropTypes.func.isRequired,
   setMapCenterLatLng: PropTypes.func.isRequired,
   setSelectedPickupPoint: PropTypes.func.isRequired,
   setShouldSearchArea: PropTypes.func.isRequired,
+  updateLocationTab: PropTypes.func.isRequired,
 }
 
 export default injectState(Map)

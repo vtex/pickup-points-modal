@@ -5,7 +5,6 @@ import RefreshIcon from '../assets/components/RefreshIcon'
 import { injectState } from '../modalStateContext'
 import { injectIntl, intlShape } from 'react-intl'
 import { translate } from '../utils/i18nUtils'
-
 class SearchArea extends PureComponent {
   handleSearchArea = () => {
     const { lastMapCenterLatLng, address, searchPickupsInArea } = this.props
@@ -14,16 +13,18 @@ class SearchArea extends PureComponent {
   }
 
   render() {
-    const { shouldSearchArea, intl } = this.props
+    const { intl, isLargeScreen, shouldSearchArea } = this.props
 
     return (
       <div
-        className={`${styles.zoomWrapper} ${
-          shouldSearchArea ? '' : styles.hide
+        className={`${styles.searchAreaWrapper} ${
+          isLargeScreen ? styles.searchAreaWrapperDesktop : ''
         }`}>
         <button
           onClick={this.handleSearchArea}
-          className={`pkpmodal-search-area ${styles.searchArea}`}
+          className={`pkpmodal-search-area ${
+            isLargeScreen ? styles.searchAreaDesktop : styles.searchArea
+          } ${shouldSearchArea ? '' : styles.hide}`}
           type="button">
           <RefreshIcon classes={styles.refreshIcon} />
           {translate(intl, 'searchArea')}
@@ -36,6 +37,7 @@ class SearchArea extends PureComponent {
 SearchArea.propTypes = {
   address: PropTypes.object,
   intl: intlShape.isRequired,
+  isLargeScreen: PropTypes.bool.isRequired,
   lastMapCenterLatLng: PropTypes.object,
   shouldSearchArea: PropTypes.bool,
   searchPickupsInArea: PropTypes.func.isRequired,

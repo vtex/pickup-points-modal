@@ -7,6 +7,9 @@ import styles from './index.css'
 import ZoomControls from './components/ZoomControls'
 import StateHandler from './components/StateHandler'
 import ModalState from './ModalState'
+import Geolocation from './Geolocation'
+import SearchArea from './components/SearchArea'
+import SearchOverlay from './assets/components/SearchOverlay'
 import { injectIntl, intlShape } from 'react-intl'
 import { withGoogleMaps } from './containers/withGoogleMaps'
 import { translate } from './utils/i18nUtils'
@@ -14,9 +17,6 @@ import { newAddress } from './utils/newAddress'
 import { HIDE_MAP, SHOW_MAP } from './constants'
 import { getPickupOptionGeolocations } from './utils/pickupUtils'
 import { helpers } from 'vtex.address-form'
-import Geolocation from './Geolocation'
-import SearchArea from './components/SearchArea'
-import SearchOverlay from './assets/components/SearchOverlay'
 
 const { validateField, addValidation } = helpers
 const NULL_VALUE = {
@@ -215,12 +215,8 @@ class PickupPointsModal extends Component {
                 rules={rules}>
                 <SearchArea
                   address={searchAddress}
-                  googleMaps={googleMaps}
                   shouldShow={shouldShowMap}
                   isLargeScreen={isLargeScreen}
-                  mapStatus={mapStatus}
-                  onChangeAddress={this.handleAddressChange}
-                  rules={rules}
                 />
                 <ZoomControls
                   isLargeScreen={isLargeScreen}
@@ -237,6 +233,7 @@ class PickupPointsModal extends Component {
                     handleAskForGeolocation={this.onAskForGeolocation}
                     isLargeScreen={isLargeScreen}
                     isLoadingGoogle={loading}
+                    updateLocationTab={this.updateLocationTab}
                     isPickupDetailsActive={isPickupDetailsActive}
                     onChangeAddress={this.handleAddressChange}
                     rules={rules}

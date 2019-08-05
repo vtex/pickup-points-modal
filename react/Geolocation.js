@@ -24,6 +24,7 @@ class Geolocation extends Component {
 
     this.state = {
       permissionStatus: null,
+      isLoadingGeolocation: false,
       isMyLocationButtonVisible: true,
     }
   }
@@ -76,6 +77,7 @@ class Geolocation extends Component {
   }
 
   handleCurrentPosition = () => {
+    this.setState({ isLoadingGeolocation: true })
     this.props.googleMaps &&
       getCurrentPosition(
         this.getCurrentPositionSuccess,
@@ -84,6 +86,7 @@ class Geolocation extends Component {
   }
 
   getCurrentPositionSuccess = position => {
+    this.setState({ isLoadingGeolocation: false })
     if (activeState === SIDEBAR) {
       this.props.setActiveSidebarState(SEARCHING)
     } else {
@@ -107,6 +110,7 @@ class Geolocation extends Component {
   }
 
   getCurrentPositionError = error => {
+    this.setState({ isLoadingGeolocation: false })
     const {
       activeState,
       setActiveState,
@@ -171,13 +175,14 @@ class Geolocation extends Component {
 
   render() {
     const { children } = this.props
-    const { permissionStatus } = this.state
+    const { isLoadingGeolocation, permissionStatus } = this.state
 
     return (
       <GeolocationContext.Provider
         value={{
-          permissionStatus,
           getCurrentPosition: this.handleCurrentPosition,
+          isLoadingGeolocation,
+          permissionStatus,
         }}>
         {children}
       </GeolocationContext.Provider>
