@@ -17,10 +17,7 @@ class PickupPointsList extends PureComponent {
     }
   }
 
-  handleShowList = () =>
-    this.setState({
-      showList: true,
-    })
+  handleShowList = () => this.props.setShowOtherPickupPoints(true)
 
   render() {
     const {
@@ -35,10 +32,9 @@ class PickupPointsList extends PureComponent {
       setActiveSidebarState,
       setSelectedPickupPoint,
       shouldUseMaps,
+      showOtherPickupPoints,
       storePreferencesData,
     } = this.props
-
-    const { showList } = this.state
 
     return (
       <div className={`${styles.pointsList} pkpmodal-points-list`}>
@@ -69,7 +65,7 @@ class PickupPointsList extends PureComponent {
                   />
                 </div>
               ))}
-            {!showList && (
+            {!showOtherPickupPoints && (
               <Button
                 id="pkpmodal-show-list-btn"
                 kind="secondary"
@@ -83,7 +79,7 @@ class PickupPointsList extends PureComponent {
             )}
           </Fragment>
         )}
-        {showList && (
+        {showOtherPickupPoints && (
           <Fragment>
             <p className={styles.pickupListTitle}>
               {translate(intl, 'resultsOrderedByDistance')}
@@ -146,6 +142,7 @@ PickupPointsList.propTypes = {
   setActiveSidebarState: PropTypes.func.isRequired,
   setSelectedPickupPoint: PropTypes.func.isRequired,
   shouldUseMaps: PropTypes.bool.isRequired,
+  showOtherPickupPoints: PropTypes.bool.isRequired,
   storePreferencesData: PropTypes.object.isRequired,
 }
 

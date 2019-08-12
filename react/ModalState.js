@@ -53,6 +53,12 @@ class ModalState extends Component {
       searchedAreaNoPickups: false,
       selectedPickupPoint: props.selectedPickupPoint,
       shouldSearchArea: false,
+      showOtherPickupPoints:
+        getBestPickupPoints(
+          props.pickupOptions,
+          props.items,
+          props.logisticsInfo
+        ).length <= 3,
     }
   }
 
@@ -218,6 +224,9 @@ class ModalState extends Component {
 
   setMapCenterLatLng = lastMapCenterLatLng =>
     this.setState({ lastMapCenterLatLng })
+
+  setShowOtherPickupPoints = showOtherPickupPoints =>
+    this.setState({ showOtherPickupPoints })
 
   setAskForGeolocation = askForGeolocation =>
     this.setState({ askForGeolocation })
@@ -424,6 +433,7 @@ class ModalState extends Component {
       searchedAreaNoPickups,
       selectedPickupPoint,
       shouldSearchArea,
+      showOtherPickupPoints,
     } = this.state
 
     return (
@@ -455,6 +465,8 @@ class ModalState extends Component {
           setSelectedPickupPoint: this.setSelectedPickupPoint,
           shouldSearchArea,
           setShouldSearchArea: this.setShouldSearchArea,
+          setShowOtherPickupPoints: this.setShowOtherPickupPoints,
+          showOtherPickupPoints,
         }}>
         {children}
       </ModalStateContext.Provider>

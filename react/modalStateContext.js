@@ -31,8 +31,10 @@ export function injectState(Component) {
           setAskForGeolocation,
           setSelectedPickupPoint,
           setMapCenterLatLng,
-          shouldSearchArea,
           setShouldSearchArea,
+          setShowOtherPickupPoints,
+          shouldSearchArea,
+          showOtherPickupPoints,
         }) => (
           <Component
             {...props}
@@ -61,7 +63,9 @@ export function injectState(Component) {
             setMapCenterLatLng={setMapCenterLatLng}
             setSelectedPickupPoint={setSelectedPickupPoint}
             setShouldSearchArea={setShouldSearchArea}
+            setShowOtherPickupPoints={setShowOtherPickupPoints}
             shouldSearchArea={shouldSearchArea}
+            showOtherPickupPoints={showOtherPickupPoints}
           />
         )}
       </ModalStateContext.Consumer>
