@@ -7,14 +7,50 @@ import { translate } from '../utils/i18nUtils'
 import { injectIntl, intlShape } from 'react-intl'
 import Button from './Button'
 import { BEST_PICKUPS_AMOUNT } from '../constants'
+import InfiniteScroll from 'react-infinite-scroller'
 
 class PickupPointsList extends PureComponent {
   constructor(props) {
     super(props)
 
     this.state = {
-      showList: props.bestPickupOptions.length === 0,
+      pickupPoints: [...props.pickupOptions, ...props.externalPickupPoints],
+      currentPickupPoints: [
+        ...props.pickupOptions,
+        ...props.externalPickupPoints,
+      ].filter((_, index) => index < 20),
+      currentAmount: 20,
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { pickupOptions, externalPickupPoints } = this.props
+    const { currentAmount } = this.state
+    if (
+      pickupOptions !== prevProps.pickupOptions ||
+      externalPickupPoints !== prevProps.externalPickupPoints
+    ) {
+      const pickupPoints = [...pickupOptions, ...externalPickupPoints]
+      this.setState({
+        pickupPoints,
+        currentPickupPoints: pickupPoints.filter(
+          (_, index) => index < currentAmount
+        ),
+      })
+    }
+  }
+
+  loadMorePickupPoints = () => {
+    const { currentAmount, pickupPoints } = this.state
+
+    const updatedAmount = currentAmount + 20
+
+    this.setState({
+      currentPickupPoints: pickupPoints.filter(
+        (_, index) => index < updatedAmount
+      ),
+      currentAmount: updatedAmount,
+    })
   }
 
   handleShowList = () => this.props.setShowOtherPickupPoints(true)
@@ -22,11 +58,9 @@ class PickupPointsList extends PureComponent {
   render() {
     const {
       bestPickupOptions,
-      externalPickupPoints,
       logisticsInfo,
       items,
       intl,
-      pickupOptions,
       rules,
       sellerId,
       setActiveSidebarState,
@@ -35,6 +69,10 @@ class PickupPointsList extends PureComponent {
       showOtherPickupPoints,
       storePreferencesData,
     } = this.props
+
+    const { currentAmount, currentPickupPoints, pickupPoints } = this.state
+
+    const hasMorePickupPoints = currentAmount <= pickupPoints.length
 
     return (
       <div className={`${styles.pointsList} pkpmodal-points-list`}>
@@ -84,44 +122,36 @@ class PickupPointsList extends PureComponent {
             <p className={styles.pickupListTitle}>
               {translate(intl, 'resultsOrderedByDistance')}
             </p>
-            {pickupOptions.map(pickupPoint => (
-              <div
-                className={`${styles.pointsItem} pkpmodal-points-item`}
-                key={`pickupPoint-${pickupPoint.id}`}>
-                <PickupPointInfo
-                  isList
-                  items={items}
-                  logisticsInfo={logisticsInfo}
-                  pickupPoint={pickupPoint}
-                  pickupPointId={pickupPoint.id}
-                  selectedRules={rules}
-                  sellerId={sellerId}
-                  setActiveSidebarState={setActiveSidebarState}
-                  setSelectedPickupPoint={setSelectedPickupPoint}
-                  shouldUseMaps={shouldUseMaps}
-                  storePreferencesData={storePreferencesData}
-                />
-              </div>
-            ))}
-            {externalPickupPoints.map(pickupPoint => (
-              <div
-                className={`${styles.pointsItem} pkpmodal-points-item`}
-                key={`external-pickupPoint-${pickupPoint.id}`}>
-                <PickupPointInfo
-                  isList
-                  items={items}
-                  logisticsInfo={logisticsInfo}
-                  pickupPoint={pickupPoint}
-                  pickupPointId={pickupPoint.id}
-                  selectedRules={rules}
-                  sellerId={sellerId}
-                  setActiveSidebarState={setActiveSidebarState}
-                  setSelectedPickupPoint={setSelectedPickupPoint}
-                  shouldUseMaps={shouldUseMaps}
-                  storePreferencesData={storePreferencesData}
-                />
-              </div>
-            ))}
+            <InfiniteScroll
+              hasMore={hasMorePickupPoints}
+              loadMore={this.loadMorePickupPoints}
+              loader={
+                <div className="loader" key={0}>
+                  Loading ...
+                </div>
+              }
+              useWindow={false}
+              threshold={10}>
+              {currentPickupPoints.map(pickupPoint => (
+                <div
+                  className={`${styles.pointsItem} pkpmodal-points-item`}
+                  key={`pickupPoint-${pickupPoint.id}`}>
+                  <PickupPointInfo
+                    isList
+                    items={items}
+                    logisticsInfo={logisticsInfo}
+                    pickupPoint={pickupPoint}
+                    pickupPointId={pickupPoint.id}
+                    selectedRules={rules}
+                    sellerId={sellerId}
+                    setActiveSidebarState={setActiveSidebarState}
+                    setSelectedPickupPoint={setSelectedPickupPoint}
+                    shouldUseMaps={shouldUseMaps}
+                    storePreferencesData={storePreferencesData}
+                  />
+                </div>
+              ))}
+            </InfiniteScroll>
           </Fragment>
         )}
       </div>
@@ -141,6 +171,7 @@ PickupPointsList.propTypes = {
   sellerId: PropTypes.string,
   setActiveSidebarState: PropTypes.func.isRequired,
   setSelectedPickupPoint: PropTypes.func.isRequired,
+  setShowOtherPickupPoints: PropTypes.func.isRequired,
   shouldUseMaps: PropTypes.bool.isRequired,
   showOtherPickupPoints: PropTypes.bool.isRequired,
   storePreferencesData: PropTypes.object.isRequired,
