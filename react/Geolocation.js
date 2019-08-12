@@ -53,7 +53,7 @@ class Geolocation extends Component {
   }
 
   handleGetCurrentPosition = () => {
-    const { setGeolocationStatus } = this.props
+    const { activeState, setGeolocationStatus } = this.props
 
     if (get(navigator, 'permissions')) {
       navigator.permissions.query({ name: 'geolocation' }).then(permission => {
@@ -64,6 +64,12 @@ class Geolocation extends Component {
 
           case 'granted':
             setGeolocationStatus(SEARCHING)
+            if (activeState === SIDEBAR) {
+              this.props.setActiveSidebarState(SEARCHING)
+            } else {
+              this.props.setActiveState(SEARCHING)
+            }
+
             this.handleCurrentPosition()
             break
 
@@ -86,11 +92,21 @@ class Geolocation extends Component {
   }
 
   getCurrentPositionSuccess = position => {
+    const {
+      activeState,
+      address,
+      googleMaps,
+      onChangeAddress,
+      rules,
+      setActiveSidebarState,
+      setActiveState,
+    } = this.props
+    console.log('eita')
     this.setState({ isLoadingGeolocation: false })
     if (activeState === SIDEBAR) {
-      this.props.setActiveSidebarState(SEARCHING)
+      setActiveSidebarState(SEARCHING)
     } else {
-      this.props.setActiveState(SEARCHING)
+      setActiveState(SEARCHING)
     }
     handleGetAddressByGeolocation({
       newPosition: {
@@ -98,10 +114,10 @@ class Geolocation extends Component {
         lng: position.coords.longitude,
       },
       geocoder: this.geocoder,
-      googleMaps: this.props.googleMaps,
-      onChangeAddress: this.props.onChangeAddress,
-      rules: this.props.rules,
-      address: this.props.address,
+      googleMaps: googleMaps,
+      onChangeAddress: onChangeAddress,
+      rules: rules,
+      address: address,
     })
     searchPickupAddressByGeolocationEvent({
       searchedAddressByGeolocation: true,

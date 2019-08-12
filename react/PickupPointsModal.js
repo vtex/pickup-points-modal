@@ -239,24 +239,22 @@ class PickupPointsModal extends Component {
                   shouldShow={shouldShowMap}
                 />
 
-                {shouldShowMap && (
-                  <Map
-                    activatePickupDetails={this.activatePickupDetails}
-                    address={searchAddress}
-                    changeActivePickupDetails={changeActivePickupDetails}
-                    googleMaps={googleMaps}
-                    handleAskForGeolocation={this.onAskForGeolocation}
-                    isLargeScreen={isLargeScreen}
-                    isLoadingGoogle={loading}
-                    updateLocationTab={this.updateLocationTab}
-                    isPickupDetailsActive={isPickupDetailsActive}
-                    onChangeAddress={this.handleAddressChange}
-                    rules={rules}
-                    selectedPickupPointGeolocation={getPickupOptionGeolocations(
-                      selectedPickupPoint
-                    )}
-                  />
-                )}
+                <Map
+                  activatePickupDetails={this.activatePickupDetails}
+                  address={searchAddress}
+                  changeActivePickupDetails={changeActivePickupDetails}
+                  googleMaps={googleMaps}
+                  handleAskForGeolocation={this.onAskForGeolocation}
+                  isLargeScreen={isLargeScreen}
+                  isLoadingGoogle={loading}
+                  updateLocationTab={this.updateLocationTab}
+                  isPickupDetailsActive={isPickupDetailsActive}
+                  onChangeAddress={this.handleAddressChange}
+                  rules={rules}
+                  selectedPickupPointGeolocation={getPickupOptionGeolocations(
+                    selectedPickupPoint
+                  )}
+                />
                 <SearchOverlay />
                 <StateHandler
                   activePickupPoint={activePickupPoint}
