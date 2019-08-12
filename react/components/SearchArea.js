@@ -25,7 +25,11 @@ class SearchArea extends PureComponent {
           onClick={this.handleSearchArea}
           className={`pkpmodal-search-area ${
             isLargeScreen ? styles.searchAreaDesktop : styles.searchArea
-          } ${shouldSearchArea && mapStatus === SHOW_MAP ? '' : styles.hide}`}
+          } ${
+            shouldSearchArea && (isLargeScreen || mapStatus === SHOW_MAP)
+              ? ''
+              : styles.hide
+          }`}
           type="button">
           <RefreshIcon classes={styles.refreshIcon} />
           {translate(intl, 'searchArea')}

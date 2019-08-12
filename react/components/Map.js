@@ -155,6 +155,11 @@ class Map extends Component {
       googleMaps
     ) {
       this.recenterMap(this.getLocation(nextAddressCoords))
+      if (this.props.pickupOptions.length === 0) {
+        this.addressMarker &&
+          this.addressMarker.setPosition(this.getLocation(nextAddressCoords))
+        return
+      }
       this.resetMarkers(this.getLocation(nextAddressCoords))
       markerObj &&
         this.setIcon({
@@ -162,6 +167,27 @@ class Map extends Component {
           width: BIG_MARKER_WIDTH,
           height: BIG_MARKER_HEIGHT,
         })
+    }
+
+    if (
+      this.props.pickupOptions.length === 0 ||
+      this.props.externalPickupPoints.length === 0
+    ) {
+      this.searchMarkers.forEach(markerObj => {
+        markerObj.marker.setMap(null)
+        googleMaps.event.removeListener(markerObj.markerClickListener)
+        googleMaps.event.removeListener(markerObj.markerHoverListener)
+        googleMaps.event.removeListener(markerObj.markerHoverOutListener)
+      })
+      this.searchMarkers = []
+      this.markers.forEach(markerObj => {
+        markerObj.marker.setMap(null)
+        googleMaps.event.removeListener(markerObj.markerClickListener)
+        googleMaps.event.removeListener(markerObj.markerHoverListener)
+        googleMaps.event.removeListener(markerObj.markerHoverOutListener)
+      })
+      this.markers = []
+      return
     }
 
     if (

@@ -101,7 +101,6 @@ class Geolocation extends Component {
       setActiveSidebarState,
       setActiveState,
     } = this.props
-    console.log('eita')
     this.setState({ isLoadingGeolocation: false })
     if (activeState === SIDEBAR) {
       setActiveSidebarState(SEARCHING)

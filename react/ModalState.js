@@ -127,10 +127,30 @@ class ModalState extends Component {
       activeSidebarState === ERROR_NOT_FOUND
     ) {
       this.setState({ searchedAreaNoPickups: true })
+      return
     }
 
     if (isSearching !== prevIsSearching) {
       this.setState({ isSearching })
+
+      const isSearchingState =
+        isSearching &&
+        !isCurrentState(SEARCHING, activeState) &&
+        !isCurrentState(SEARCHING, activeSidebarState)
+
+      if (isSearchingState) {
+        if (isCurrentState(SIDEBAR, activeState)) {
+          this.setActiveSidebarState(SEARCHING)
+        } else {
+          this.setActiveState(SEARCHING)
+        }
+      }
+    }
+
+    if (isDifferentGeoCoords(thisAddressCoords, prevAddressCoords)) {
+      getExternalPickupPoints(thisAddressCoords).then(data =>
+        this.setState({ externalPickupPoints: data.items })
+      )
     }
 
     if (thisPickupOptions !== prevPickupOptions) {
@@ -145,12 +165,10 @@ class ModalState extends Component {
           logisticsInfo
         ),
       })
-    }
 
-    if (isDifferentGeoCoords(thisAddressCoords, prevAddressCoords)) {
-      getExternalPickupPoints(thisAddressCoords).then(data =>
-        this.setState({ externalPickupPoints: data.items })
-      )
+      if (thisPickupOptions.length > 0) {
+        this.setActiveSidebarState(LIST)
+      }
     }
 
     const hasPickups = pickupOptions.length > 0
@@ -163,22 +181,6 @@ class ModalState extends Component {
       hasPickups &&
       isCurrentState(SEARCHING, activeState) &&
       !isCurrentState(SIDEBAR, activeState)
-
-    const isListState =
-      !isSearching &&
-      hasPickups &&
-      !isCurrentState(LIST, activeSidebarState) &&
-      !isCurrentState(DETAILS, activeSidebarState) &&
-      isCurrentState(SIDEBAR, activeState)
-
-    const isSearchingState =
-      this.state.isSearching &&
-      !isCurrentState(SEARCHING, activeState) &&
-      !isCurrentState(SEARCHING, activeSidebarState)
-
-    const isLocalSearchingState =
-      this.state.localSearching &&
-      !isCurrentState(SEARCHING, activeSidebarState)
 
     const isGeolocationSearchingState =
       askForGeolocation &&
@@ -193,22 +195,6 @@ class ModalState extends Component {
       !isCurrentState(ERROR_NOT_FOUND, activeSidebarState)
 
     switch (true) {
-      case isLocalSearchingState:
-        this.setActiveSidebarState(SEARCHING)
-        return
-
-      case isSearchingState:
-        if (isCurrentState(SIDEBAR, activeState)) {
-          this.setActiveSidebarState(SEARCHING)
-        } else {
-          this.setActiveState(SEARCHING)
-        }
-        return
-
-      case isListState:
-        this.setActiveSidebarState(LIST)
-        return
-
       case isGeolocationSearchingState:
         this.setActiveState(GEOLOCATION_SEARCHING)
         this.setActiveSidebarState(LIST)
@@ -345,7 +331,7 @@ class ModalState extends Component {
 
     this.setShouldSearchArea(false)
     this.setActiveSidebarState(LIST)
-    this.setState({ localSearching: true })
+    this.setActiveSidebarState(SEARCHING)
 
     const newAreaAddress = newAddress({
       geoCoordinates: [geoCoordinates.lng(), geoCoordinates.lat()],
@@ -414,18 +400,22 @@ class ModalState extends Component {
           pickupOptions: sortBy(newPickupOptions, 'pickupDistance'),
           bestPickupOptions: newBestPickupOptions,
           logisticsInfo: newLogisticsInfo,
-          localSearching: false,
         },
         () => this.setActiveSidebarState(DETAILS)
       )
     } else {
-      this.setState({
-        pickupPoints: sortBy(newPickupPoints, 'distance'),
-        pickupOptions: sortBy(newPickupOptions, 'pickupDistance'),
-        bestPickupOptions: newBestPickupOptions,
-        logisticsInfo: newLogisticsInfo,
-        localSearching: false,
-      })
+      this.setState(
+        {
+          pickupPoints: sortBy(newPickupPoints, 'distance'),
+          pickupOptions: sortBy(newPickupOptions, 'pickupDistance'),
+          bestPickupOptions: newBestPickupOptions,
+          logisticsInfo: newLogisticsInfo,
+        },
+        () =>
+          this.setActiveSidebarState(
+            newPickupPoints.length > 0 ? LIST : ERROR_NOT_FOUND
+          )
+      )
     }
   }
 
