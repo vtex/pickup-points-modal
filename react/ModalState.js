@@ -335,6 +335,10 @@ class ModalState extends Component {
     const { orderFormId, salesChannel } = this.props
     const { logisticsInfo } = this.state
 
+    this.setShouldSearchArea(false)
+    this.setActiveSidebarState(LIST)
+    this.setState({ localSearching: true })
+
     const newAreaAddress = newAddress({
       geoCoordinates: [geoCoordinates.lng(), geoCoordinates.lat()],
       country: address.country.value,
