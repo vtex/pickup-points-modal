@@ -51,7 +51,7 @@
 
 /* TO DO: FIND COMPONENT */
 :global .pkpmodal-points-item:hover .pkpmodal-pickup-point {
-  border-color: #ccc;
+  border-color: #c4c4c4;
 }
 
 .pickupListTitle {
