@@ -104,7 +104,12 @@ class Map extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { googleMaps, pickupPoints, externalPickupPoints } = this.props
+    const {
+      googleMaps,
+      pickupPoints,
+      externalPickupPoints,
+      selectedPickupPoint,
+    } = this.props
 
     this.center = this.getLocation(this.props.address.geoCoordinates.value)
 
@@ -135,20 +140,19 @@ class Map extends Component {
       this.props.address.geoCoordinates &&
       this.props.address.geoCoordinates.value
     const thisAddressCoords = prevProps.address.geoCoordinates.value
+    const markerObj =
+      this.markers &&
+      this.markers.find(
+        item =>
+          this.props.selectedPickupPoint &&
+          item.pickupPoint === this.props.selectedPickupPoint.id
+      )
 
     if (
       nextAddressCoords &&
       this.isDifferentGeoCoords(nextAddressCoords, thisAddressCoords) &&
       googleMaps
     ) {
-      const markerObj =
-        this.markers &&
-        this.markers.find(
-          item =>
-            this.props.selectedPickupPoint &&
-            item.pickupPoint === this.props.selectedPickupPoint.id
-        )
-
       this.recenterMap(this.getLocation(nextAddressCoords))
       this.resetMarkers(this.getLocation(nextAddressCoords))
       markerObj &&
@@ -168,6 +172,19 @@ class Map extends Component {
       this.searchMarkers = []
       this.resetMarkers()
       this.createNewMarkers(false)
+    }
+
+    const isInBounds =
+      markerObj && this.map.getBounds().contains(markerObj.marker.getPosition())
+
+    if (selectedPickupPoint !== prevProps.selectedPickupPoint && !isInBounds) {
+      const geoCoordinates = selectedPickupPoint.pickupStoreInfo
+        ? selectedPickupPoint.pickupStoreInfo.address.geoCoordinates
+        : selectedPickupPoint.address.geoCoordinates
+      this.recenterMap(this.getLocation(geoCoordinates))
+      this.resetMarkers()
+      this.setIcon(markerObj.marker, BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT)
+      return
     }
   }
 
