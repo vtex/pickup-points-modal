@@ -37,6 +37,7 @@
   flex: none;
   bottom: 0;
   padding: 10px;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 10px);
 }
 
 /* middle section */
