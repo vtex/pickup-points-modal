@@ -176,7 +176,7 @@ class Map extends Component {
       })
       this.searchMarkers = []
       this.resetMarkers()
-      this.createNewMarkers(false)
+      this.createNewMarkers()
     }
 
     const isInBounds =
