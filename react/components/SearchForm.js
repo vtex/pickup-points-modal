@@ -39,6 +39,10 @@ class SearchForm extends Component {
   }
 
   handleGeolocationClick = () => {
+    const { permissionStatus } = this.props
+
+    if (navigator.geolocation && permissionStatus === DENIED) return
+
     this.props.getCurrentPosition()
   }
 
@@ -50,6 +54,7 @@ class SearchForm extends Component {
       intl,
       isAutoFocus,
       isGeolocation,
+      isLargeScreen,
       isLoadingGoogle,
       isLoadingGeolocation,
       isSidebar,
@@ -123,6 +128,7 @@ class SearchForm extends Component {
             <button
               data-tip
               data-for="GPSDenied"
+              data-event={isLargeScreen ? 'mouseover' : 'click'}
               className={`${
                 isGeolocation ? geolocationStyle : postalCodeStyle
               } ${isLoadingGeolocation ? styles.isLoadingGeolocation : ''}`}
@@ -136,7 +142,10 @@ class SearchForm extends Component {
               )}
             </button>
             {(!navigator.geolocation || permissionStatus === DENIED) && (
-              <ReactTooltip id="GPSDenied" effect="float">
+              <ReactTooltip
+                globalEventOff={isLargeScreen ? 'mouseout' : 'click'}
+                id="GPSDenied"
+                effect={isLargeScreen ? 'float' : 'solid'}>
                 <span>{translate(intl, 'askGeolocationDenied')}</span>
               </ReactTooltip>
             )}
@@ -162,6 +171,7 @@ SearchForm.propTypes = {
   intl: intlShape.isRequired,
   isAutoFocus: PropTypes.bool,
   isGeolocation: PropTypes.bool,
+  isLargeScreen: PropTypes.bool,
   isLoadingGeolocation: PropTypes.bool,
   isLoadingGoogle: PropTypes.bool,
   isSidebar: PropTypes.bool,

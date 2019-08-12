@@ -51,6 +51,7 @@ class StateHandler extends PureComponent {
             askForGeolocation={askForGeolocation}
             googleMaps={googleMaps}
             intl={intl}
+            isLargeScreen={isLargeScreen}
             handleAddressChange={onAddressChange}
             loading={loading}
             logisticsInfo={logisticsInfo}

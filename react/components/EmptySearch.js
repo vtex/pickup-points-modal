@@ -22,6 +22,7 @@ class EmptySearch extends PureComponent {
       geolocationStatus,
       googleMaps,
       intl,
+      isLargeScreen,
       handleAddressChange,
       loading,
       logisticsInfo,
@@ -60,6 +61,7 @@ class EmptySearch extends PureComponent {
             googleMaps={googleMaps}
             Input={Input}
             insideModal={false}
+            isLargeScreen={isLargeScreen}
             isLoadingGoogle={loading}
             isGeolocation={shouldUseMaps}
             status={geolocationStatus}
@@ -90,6 +92,7 @@ EmptySearch.propTypes = {
   askForGeolocation: PropTypes.bool,
   googleMaps: PropTypes.object,
   intl: intlShape.isRequired,
+  isLargeScreen: PropTypes.bool,
   loading: PropTypes.bool,
   logisticsInfo: PropTypes.array,
   rules: PropTypes.object,

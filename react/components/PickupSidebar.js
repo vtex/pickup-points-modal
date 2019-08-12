@@ -37,6 +37,7 @@ class PickupSidebar extends Component {
       closePickupPointsModal,
       googleMaps,
       intl,
+      isLargeScreen,
       isLoading,
       items,
       logisticsInfo,
@@ -88,6 +89,7 @@ class PickupSidebar extends Component {
               googleMaps={googleMaps}
               Input={Input}
               isLoadingGoogle={isLoading}
+              isLargeScreen={isLargeScreen}
               isGeolocation={shouldUseMaps}
               isSidebar
               onChangeAddress={onHandleAddressChange}
@@ -140,6 +142,7 @@ PickupSidebar.propTypes = {
   closePickupPointsModal: PropTypes.func.isRequired,
   googleMaps: PropTypes.object,
   intl: intlShape.isRequired,
+  isLargeScreen: PropTypes.bool,
   isLoading: PropTypes.bool,
   items: PropTypes.array.isRequired,
   logisticsInfo: PropTypes.array.isRequired,
