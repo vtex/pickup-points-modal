@@ -40,7 +40,7 @@ SearchArea.propTypes = {
   intl: intlShape.isRequired,
   isLargeScreen: PropTypes.bool.isRequired,
   lastMapCenterLatLng: PropTypes.object,
-  mapStatus: PropTypes.bool.isRequired,
+  mapStatus: PropTypes.string.isRequired,
   shouldSearchArea: PropTypes.bool,
   searchPickupsInArea: PropTypes.func.isRequired,
   shouldShow: PropTypes.bool,

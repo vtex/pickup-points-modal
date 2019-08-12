@@ -65,14 +65,15 @@ class PickupPointDetails extends Component {
 
   render() {
     const {
+      bestPickupOptions,
+      isSelectedSla,
+      logisticsInfo,
+      intl,
       selectedPickupPoint,
       selectedRules,
-      isSelectedSla,
       sellerId,
       shouldUseMaps,
-      intl,
       storePreferencesData,
-      logisticsInfo,
     } = this.props
 
     const { unavailableItems, items, pickupPointInfo } = this.state
@@ -97,6 +98,16 @@ class PickupPointDetails extends Component {
         .replace(/[^\w\s]/gi, '')
         .split(' ')
         .join('-')}`
+
+    const pickupIndex =
+      bestPickupOptions &&
+      bestPickupOptions
+        .map(pickupPoint => pickupPoint.pickupPointId || pickupPoint.id)
+        .indexOf(selectedPickupPoint.pickupPointId || selectedPickupPoint.id)
+
+    const isFirst = pickupIndex === 0
+    const isLast =
+      bestPickupOptions && pickupIndex === bestPickupOptions.length - 1
 
     return (
       <div className={`${styles.modalDetails} pkpmodal-details`}>
@@ -125,15 +136,15 @@ class PickupPointDetails extends Component {
               styles.pickupDetailsHeaderButtons
             } pkpmodal-details-header-buttons`}>
             <button
-              className={`${
-                styles.pickupDetailsHeaderButton
+              className={`${styles.pickupDetailsHeaderButton} ${
+                isFirst ? styles.firstOrLast : ''
               } pkpmodal-details-header-button`}
               onClick={() => this.props.selectPreviousPickupPoint()}>
               <ArrowPrevious />
             </button>
             <button
-              className={`${
-                styles.pickupDetailsHeaderButton
+              className={`${styles.pickupDetailsHeaderButton} ${
+                isLast ? styles.firstOrLast : ''
               } pkpmodal-details-header-button`}
               onClick={() => this.props.selectNextPickupPoint()}>
               <ArrowNext />
@@ -257,6 +268,7 @@ class PickupPointDetails extends Component {
 }
 
 PickupPointDetails.propTypes = {
+  bestPickupOptions: PropTypes.array.isRequired,
   handleChangeActiveSLAOption: PropTypes.func.isRequired,
   handleClosePickupPointsModal: PropTypes.func.isRequired,
   intl: intlShape.isRequired,

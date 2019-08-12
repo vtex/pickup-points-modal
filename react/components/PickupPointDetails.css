@@ -118,9 +118,14 @@
 
 .pickupDetailsHeaderButton {
   background: transparent;
+  color: #4c8eef;
   height: 45px;
   width: 45px;
   outline: none;
   border: none;
   border-left: 1px solid #eeeeee;
+}
+
+.firstOrLast {
+  color: #666666;
 }
