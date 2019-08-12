@@ -36,6 +36,12 @@ class PickupPointsModal extends Component {
   }
 
   componentDidMount() {
+    const style = document.body.style
+    // when popup open
+    style.overflow = 'hidden'
+    style.position = 'fixed'
+    style.width = '100%'
+
     if (
       !!this.props.selectedPickupPoint &&
       this.state.isPickupDetailsActive === null
@@ -148,13 +154,20 @@ class PickupPointsModal extends Component {
     this.props.onAddressChange(addressValidated)
   }
 
+  handleCloseModal = () => {
+    const style = document.body.style
+    // when popup close
+    style.overflow = 'auto'
+    style.position = ''
+    this.props.closePickupPointsModal()
+  }
+
   render() {
     const {
       activePickupPoint,
       askForGeolocation,
       changeActivePickupDetails,
       changeActiveSLAOption,
-      closePickupPointsModal,
       googleMaps,
       intl,
       items,
@@ -188,12 +201,12 @@ class PickupPointsModal extends Component {
         <div>
           <div
             className={`${styles.modalBackdrop} pkpmodal-backdrop`}
-            onClick={closePickupPointsModal}
+            onClick={this.handleCloseModal}
           />
           <div className={`${styles.pkpmodal} pkpmodal`}>
             <CloseButton
               alt={translate(intl, 'closeButton')}
-              onClickClose={closePickupPointsModal}
+              onClickClose={this.handleCloseModal}
             />
             <ModalState
               address={searchAddress}
@@ -249,7 +262,7 @@ class PickupPointsModal extends Component {
                   activePickupPoint={activePickupPoint}
                   askForGeolocation={askForGeolocation}
                   changeActiveSLAOption={changeActiveSLAOption}
-                  closePickupPointsModal={closePickupPointsModal}
+                  closePickupPointsModal={this.handleCloseModal}
                   googleMaps={googleMaps}
                   intl={intl}
                   items={items}
