@@ -118,9 +118,9 @@ class PickupPointInfo extends Component {
               <img className={styles.searchMarkerIcon} src={searchMarkerIcon} />
             )}
             {isBestPickupPointAndAvailable && <img src={bestMarkerIcon} />}
-            {!sholdShowUnavailableMarker &&
+            {!sholdShowSearchMarker &&
+              !sholdShowUnavailableMarker &&
               !isBestPickupPointAndAvailable && <PinIcon />}
-            {pickupPoint.pickupStoreInfo && !isSelected && <PinIcon />}
             {distance && (
               <p
                 className={`${
