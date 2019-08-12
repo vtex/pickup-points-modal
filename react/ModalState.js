@@ -83,15 +83,17 @@ class ModalState extends Component {
   componentDidUpdate(prevProps, prevState) {
     const {
       address,
-      pickupPoints,
       items,
+      isSearching,
+      mapStatus,
       logisticsInfo,
       pickupOptions,
-      isSearching,
+      pickupPoints,
     } = this.props
+
     const {
-      activeState,
       activeSidebarState,
+      activeState,
       askForGeolocation,
       selectedPickupPoint,
     } = this.state
@@ -112,6 +114,10 @@ class ModalState extends Component {
       isCurrentState('', activeSidebarState)
     ) {
       return
+    }
+
+    if (mapStatus !== prevProps.mapStatus) {
+      this.setShouldSearchArea(false)
     }
 
     if (

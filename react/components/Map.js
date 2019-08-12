@@ -315,12 +315,13 @@ class Map extends Component {
 
   createNewMarkers = (shouldResetBounds = true) => {
     const {
-      selectedPickupPoint,
-      googleMaps,
-      pickupPoints,
+      address,
       bestPickupOptions,
       externalPickupPoints,
-      address,
+      googleMaps,
+      isLargeScreen,
+      pickupPoints,
+      selectedPickupPoint,
     } = this.props
 
     const filteredExternalPickupPoints =
@@ -441,7 +442,7 @@ class Map extends Component {
             this.bounds.extend(location)
             if (this.map.getZoom() < STANDARD_ZOOM) {
               this.setZoom(STANDARD_ZOOM)
-              this.map.panBy(PAN_LEFT_LAT, PAN_LEFT_LNG)
+              isLargeScreen && this.map.panBy(PAN_LEFT_LAT, PAN_LEFT_LNG)
             }
           }
 
@@ -457,7 +458,7 @@ class Map extends Component {
 
           if (this.addressMarker && hasAddressCoords && shouldResetBounds) {
             this.map.fitBounds(this.bounds)
-            this.map.panBy(PAN_LEFT_LAT, PAN_LEFT_LNG)
+            isLargeScreen && this.map.panBy(PAN_LEFT_LAT, PAN_LEFT_LNG)
           }
         })
   }

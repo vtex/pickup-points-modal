@@ -202,6 +202,7 @@ class PickupPointsModal extends Component {
               isSearching={isSearching}
               items={items}
               logisticsInfo={logisticsInfo}
+              mapStatus={mapStatus}
               pickupPoints={pickupPoints}
               pickupOptions={pickupOptions}
               salesChannel={salesChannel}
@@ -215,6 +216,7 @@ class PickupPointsModal extends Component {
                 rules={rules}>
                 <SearchArea
                   address={searchAddress}
+                  mapStatus={mapStatus}
                   shouldShow={shouldShowMap}
                   isLargeScreen={isLargeScreen}
                 />
