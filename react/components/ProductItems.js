@@ -43,16 +43,22 @@ class ProductItems extends Component {
                 {itemsPackage.items.map(item => {
                   return (
                     <span
-                      className={`${styles.productItem} pkpmodal-product-item ${
-                        isAvailable
-                          ? ''
-                          : `${
-                            styles.productItemUnavailable
-                          } pkpmodal-product-item-unavailable`
-                      }`}
+                      className={`${
+                        styles.productItem
+                      } pkpmodal-product-item ${!isAvailable &&
+                        `${
+                          styles.productItemUnavailable
+                        } pkpmodal-product-item-unavailable`}`}
+                      height="50"
+                      width="50"
                       data-tip={item.name}
                       key={item.uniqueId}>
-                      <img alt={item.name} src={fixImageUrl(item.imageUrl)} />
+                      <img
+                        alt={item.name}
+                        height="50"
+                        width="50"
+                        src={fixImageUrl(item.imageUrl)}
+                      />
                       {!isAvailable && (
                         <span
                           className={`${
@@ -75,13 +81,12 @@ class ProductItems extends Component {
         {items.map(item => {
           return (
             <span
-              className={`${styles.productItem} pkpmodal-product-item ${
-                isAvailable
-                  ? ''
-                  : `${
-                    styles.productItemUnavailable
-                  } pkpmodal-product-item-unavailable`
-              }`}
+              className={`${
+                styles.productItem
+              } pkpmodal-product-item ${!isAvailable &&
+                `${
+                  styles.productItemUnavailable
+                } pkpmodal-product-item-unavailable`}`}
               data-tip={item.name}
               key={item.uniqueId}>
               <img

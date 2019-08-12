@@ -70,7 +70,6 @@ class PickupPointInfo extends Component {
 
   render() {
     const {
-      isSelected,
       intl,
       items,
       pickupPoint,
@@ -222,7 +221,6 @@ class PickupPointInfo extends Component {
 
 PickupPointInfo.defaultProps = {
   showAddress: true,
-  isSelected: true,
 }
 
 PickupPointInfo.propTypes = {
@@ -230,7 +228,6 @@ PickupPointInfo.propTypes = {
   isBestPickupPoint: PropTypes.bool,
   isSelectedBestPickupPoint: PropTypes.bool,
   isList: PropTypes.bool,
-  isSelected: PropTypes.bool,
   items: PropTypes.any,
   liPackage: PropTypes.object,
   logisticsInfo: PropTypes.any,
