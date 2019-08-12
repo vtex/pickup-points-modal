@@ -3,11 +3,20 @@ import React, { PureComponent } from 'react'
 class PinIcon extends PureComponent {
   render() {
     return (
-      <svg className="pkpmodal-pickup-point-marker-image" height="32" version="1.1" viewBox="0 0 48 48" width="32" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px">
-        <path d="M24,1.11224c-9.38879,0-17,7.61115-17,17 c0,10.1424,12.87262,23.22955,16.2149,26.4566c0.44031,0.42517,1.12988,0.42517,1.57025,0C28.12744,41.3418,41,28.25464,41,18.11224 C41,8.72339,33.38879,1.11224,24,1.11224z" fill="#0176ff" stroke="#ffffff"></path>
-        <circle cx="24" cy="18" fill="#FFFFFF" r="6"></circle>
+      <svg
+        className="pkpmodal-pickup-point-marker-image"
+        width="25"
+        height="31"
+        viewBox="0 0 25 31"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M19.4917 21.8169L19.4918 21.8169L19.4967 21.8096C19.5843 21.6782 19.6709 21.5485 19.7564 21.4204C22.0478 17.9883 23.5645 15.7165 23.5645 12.0323C23.5645 5.66317 18.4013 0.5 12.0323 0.5C5.66317 0.5 0.5 5.66317 0.5 12.0323C0.5 16.0417 3.05396 20.0158 5.20313 22.7599C6.56216 24.4952 9.21424 27.6986 11.703 29.8763L12.0323 30.1644L12.3615 29.8763C14.8402 27.7075 16.7075 25.8386 19.4917 21.8169Z"
+          fill="#42597D"
+          stroke="white"
+        />
+        <circle cx="12.3386" cy="12.3387" r="3.98387" fill="white" />
       </svg>
-
     )
   }
 }

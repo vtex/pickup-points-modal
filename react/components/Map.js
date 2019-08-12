@@ -5,6 +5,7 @@ import markerIcon from '../assets/icons/marker.svg'
 import bestMarkerIcon from '../assets/icons/best_marker.svg'
 import personPin from '../assets/icons/person_pin.svg'
 import searchMarkerIcon from '../assets/icons/search_marker_icon.svg'
+import searchingMarkerIcon from '../assets/icons/searching_marker_icon.svg'
 
 import { getPickupGeolocationString } from '../utils/GetString'
 import { injectState } from '../modalStateContext'
@@ -156,7 +157,11 @@ class Map extends Component {
       this.recenterMap(this.getLocation(nextAddressCoords))
       this.resetMarkers(this.getLocation(nextAddressCoords))
       markerObj &&
-        this.setIcon(markerObj.marker, BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT)
+        this.setIcon({
+          marker: markerObj.marker,
+          width: BIG_MARKER_WIDTH,
+          height: BIG_MARKER_HEIGHT,
+        })
     }
 
     if (
@@ -177,13 +182,21 @@ class Map extends Component {
     const isInBounds =
       markerObj && this.map.getBounds().contains(markerObj.marker.getPosition())
 
-    if (selectedPickupPoint !== prevProps.selectedPickupPoint && !isInBounds) {
+    if (
+      markerObj &&
+      selectedPickupPoint !== prevProps.selectedPickupPoint &&
+      !isInBounds
+    ) {
       const geoCoordinates = selectedPickupPoint.pickupStoreInfo
         ? selectedPickupPoint.pickupStoreInfo.address.geoCoordinates
         : selectedPickupPoint.address.geoCoordinates
       this.recenterMap(this.getLocation(geoCoordinates))
       this.resetMarkers()
-      this.setIcon(markerObj.marker, BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT)
+      this.setIcon({
+        marker: markerObj.marker,
+        width: BIG_MARKER_WIDTH,
+        height: BIG_MARKER_HEIGHT,
+      })
       return
     }
   }
@@ -453,23 +466,31 @@ class Map extends Component {
     this.markers &&
       this.markers.forEach(markerObj => {
         if (markerObj.pickupPoint) {
-          this.setIcon(markerObj.marker, MARKER_WIDTH, MARKER_HEIGHT)
+          this.setIcon({
+            marker: markerObj.marker,
+            width: MARKER_WIDTH,
+            height: MARKER_HEIGHT,
+          })
         }
       })
     this.searchMarkers &&
       this.searchMarkers.forEach(searchMarkerObj => {
         if (searchMarkerObj.pickupPoint) {
-          this.setIcon(searchMarkerObj.marker, MARKER_WIDTH, MARKER_HEIGHT)
+          this.setIcon({
+            marker: searchMarkerObj.marker,
+            width: MARKER_WIDTH,
+            height: MARKER_HEIGHT,
+          })
         }
       })
     location && this.addressMarker && this.addressMarker.setPosition(location)
   }
 
-  setIcon(marker, width, height) {
+  setIcon({ marker, width, height, isSearching }) {
     const { googleMaps } = this.props
 
     marker.setIcon({
-      url: marker.icon.url,
+      url: isSearching ? searchingMarkerIcon : marker.icon.url,
       size: new googleMaps.Size(width, height),
       scaledSize: new googleMaps.Size(width, height),
     })
@@ -496,7 +517,12 @@ class Map extends Component {
       'click',
       () => {
         this.resetMarkers()
-        this.setIcon(marker, BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT)
+        this.setIcon({
+          marker,
+          width: BIG_MARKER_WIDTH,
+          height: BIG_MARKER_HEIGHT,
+          isSearching: !!pickupPointsList,
+        })
         changeActivePickupDetails({
           pickupPoint: pickupPointsList ? pickupPointsList[index] : pickupPoint,
         })
@@ -513,7 +539,11 @@ class Map extends Component {
       marker,
       'mouseover',
       () => {
-        this.setIcon(marker, BIG_MARKER_WIDTH, BIG_MARKER_HEIGHT)
+        this.setIcon({
+          marker,
+          width: BIG_MARKER_WIDTH,
+          height: BIG_MARKER_HEIGHT,
+        })
       }
     )
 
@@ -528,7 +558,7 @@ class Map extends Component {
         ) {
           return
         }
-        this.setIcon(marker, MARKER_WIDTH, MARKER_HEIGHT)
+        this.setIcon({ marker, width: MARKER_WIDTH, height: MARKER_HEIGHT })
       }
     )
 

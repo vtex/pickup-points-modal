@@ -221,6 +221,7 @@ class PickupPointInfo extends Component {
 
 PickupPointInfo.defaultProps = {
   showAddress: true,
+  isBestPickupPoint: false,
 }
 
 PickupPointInfo.propTypes = {
