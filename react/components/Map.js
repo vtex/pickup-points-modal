@@ -169,10 +169,7 @@ class Map extends Component {
         })
     }
 
-    if (
-      this.props.pickupOptions.length === 0 ||
-      this.props.externalPickupPoints.length === 0
-    ) {
+    if (prevPickupOptions.length > 0 && this.props.pickupOptions.length === 0) {
       this.searchMarkers.forEach(markerObj => {
         markerObj.marker.setMap(null)
         googleMaps.event.removeListener(markerObj.markerClickListener)
