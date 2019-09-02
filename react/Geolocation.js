@@ -42,6 +42,16 @@ class Geolocation extends Component {
     }
   }
 
+  setCurrentActiveState = state => {
+    const { activeState, setActiveSidebarState, setActiveState } = this.props
+
+    if (activeState === SIDEBAR) {
+      setActiveSidebarState(state)
+    } else {
+      setActiveState(state)
+    }
+  }
+
   getPermissionStatus = () => {
     if (navigator.permissions) {
       navigator.permissions.query({ name: 'geolocation' }).then(permission => {
@@ -55,30 +65,24 @@ class Geolocation extends Component {
   handleGetCurrentPosition = () => {
     const { activeState, setGeolocationStatus } = this.props
 
-    if (get(navigator, 'permissions')) {
-      navigator.permissions.query({ name: 'geolocation' }).then(permission => {
-        switch (permission.state) {
-          case DENIED:
-            this.getCurrentPositionError({ code: 1 })
-            break
+    switch (permission.state) {
+      case DENIED:
+        this.getCurrentPositionError({ code: 1 })
+        break
 
-          case 'granted':
-            setGeolocationStatus(SEARCHING)
-            if (activeState === SIDEBAR) {
-              this.props.setActiveSidebarState(SEARCHING)
-            } else {
-              this.props.setActiveState(SEARCHING)
-            }
-
-            this.handleCurrentPosition()
-            break
-
-          default:
-            this.handleCurrentPosition()
+      case 'granted':
+        setGeolocationStatus(SEARCHING)
+        if (activeState === SIDEBAR) {
+          this.props.setActiveSidebarState(SEARCHING)
+        } else {
+          this.props.setActiveState(SEARCHING)
         }
-      })
-    } else {
-      this.handleCurrentPosition()
+
+        this.handleCurrentPosition()
+        break
+
+      default:
+        this.handleCurrentPosition()
     }
   }
 
@@ -102,11 +106,7 @@ class Geolocation extends Component {
       setActiveState,
     } = this.props
     this.setState({ isLoadingGeolocation: false })
-    if (activeState === SIDEBAR) {
-      setActiveSidebarState(SEARCHING)
-    } else {
-      setActiveState(SEARCHING)
-    }
+    this.setCurrentActiveState(SEARCHING)
     handleGetAddressByGeolocation({
       newPosition: {
         lat: position.coords.latitude,
@@ -137,11 +137,7 @@ class Geolocation extends Component {
       case 0: // UNKNOWN ERROR
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_COULD_NOT_GETLOCATION)
-        if (activeState === SIDEBAR) {
-          setActiveSidebarState(ERROR_COULD_NOT_GETLOCATION)
-        } else {
-          setActiveState(ERROR_COULD_NOT_GETLOCATION)
-        }
+        this.setCurrentActiveState(ERROR_COULD_NOT_GETLOCATION)
         searchPickupAddressByGeolocationEvent({
           confirmedGeolocation: true,
           browserError: true,
@@ -150,11 +146,7 @@ class Geolocation extends Component {
       case 1: // PERMISSION_DENIED
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_NOT_ALLOWED)
-        if (activeState === SIDEBAR) {
-          setActiveSidebarState(INITIAL)
-        } else {
-          setActiveState(INITIAL)
-        }
+        this.setCurrentActiveState(INITIAL)
         this.setState({ permissionStatus: DENIED })
         searchPickupAddressByGeolocationEvent({
           deniedGeolocation: true,
@@ -163,11 +155,7 @@ class Geolocation extends Component {
       case 2: // POSITION_UNAVAILABLE
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_NOT_FOUND)
-        if (activeState === SIDEBAR) {
-          setActiveSidebarState(ERROR_NOT_FOUND)
-        } else {
-          setActiveState(ERROR_NOT_FOUND)
-        }
+        this.setCurrentActiveState(ERROR_NOT_FOUND)
         searchPickupAddressByGeolocationEvent({
           confirmedGeolocation: true,
           positionUnavailable: true,
@@ -176,11 +164,7 @@ class Geolocation extends Component {
       case 3: // TIMEOUT
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_COULD_NOT_GETLOCATION)
-        if (activeState === SIDEBAR) {
-          setActiveSidebarState(ERROR_COULD_NOT_GETLOCATION)
-        } else {
-          setActiveState(ERROR_COULD_NOT_GETLOCATION)
-        }
+        this.setCurrentActiveState(ERROR_COULD_NOT_GETLOCATION)
         searchPickupAddressByGeolocationEvent({ dismissedGeolocation: true })
         break
       default:

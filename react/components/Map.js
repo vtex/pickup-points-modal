@@ -687,6 +687,7 @@ Map.propTypes = {
   rules: PropTypes.object.isRequired,
   selectedPickupPoint: PropTypes.object,
   selectedPickupPointGeolocation: PropTypes.array,
+  setActiveState: PropTypes.func.isRequired,
   setActiveSidebarState: PropTypes.func.isRequired,
   setMapCenterLatLng: PropTypes.func.isRequired,
   setSelectedPickupPoint: PropTypes.func.isRequired,
