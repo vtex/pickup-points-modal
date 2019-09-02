@@ -44,7 +44,6 @@ class Geolocation extends Component {
 
   setCurrentActiveState = state => {
     const { activeState, setActiveSidebarState, setActiveState } = this.props
-
     if (activeState === SIDEBAR) {
       setActiveSidebarState(state)
     } else {

@@ -9,11 +9,11 @@ import SearchForm from './SearchForm'
 import styles from './PickupSidebar.css'
 import SidebarStateHandler from './SidebarStateHandler'
 import { injectIntl, intlShape } from 'react-intl'
-import { SHOW_MAP, DETAILS } from '../constants'
+import { SHOW_MAP, DETAILS, INITIAL } from '../constants'
 import { translate } from '../utils/i18nUtils'
 import { getShipsTo } from '../utils/AddressUtils'
 import { injectState } from '../modalStateContext'
-
+import LocationSummaryIcon from '../assets/components/LocationSummaryIcon'
 class PickupSidebar extends Component {
   getAddress = () => {
     const { searchAddress } = this.props
@@ -27,6 +27,10 @@ class PickupSidebar extends Component {
       (city && city.value) ||
       (postalCode && postalCode.value)
     )
+  }
+
+  handleInitialState = () => {
+    this.props.setActiveState(INITIAL)
   }
 
   render() {
@@ -100,6 +104,29 @@ class PickupSidebar extends Component {
             />
           )}
 
+          {!shouldShowSearchForm && (
+            <div
+              className={`${styles.locationSummary} pkpmodal-location-summary`}>
+              <LocationSummaryIcon />
+              <div
+                className={`${
+                  styles.locationSummaryText
+                } pkpmodal-location-summary-btn`}>
+                {translate(intl, 'nearTo', {
+                  address: this.getAddress(),
+                })}
+              </div>
+              <button
+                type="button"
+                onClick={this.handleInitialState}
+                className={`${
+                  styles.locationReset
+                } pkpmodal-location-reset btn btn-link`}>
+                {translate(intl, 'pickupPoint.modify')}
+              </button>
+            </div>
+          )}
+
           {shouldShowPickupTabs && (
             <div className={`${styles.tabsContainer} pickup-tabs-container`}>
               <PickupTabs
@@ -155,6 +182,7 @@ PickupSidebar.propTypes = {
   selectedPickupPoint: PropTypes.object,
   sellerId: PropTypes.string,
   setGeolocationStatus: PropTypes.func.isRequired,
+  setActiveState: PropTypes.func.isRequired,
   setActiveSidebarState: PropTypes.func.isRequired,
   shouldUseMaps: PropTypes.bool,
   storePreferencesData: PropTypes.object.isRequired,

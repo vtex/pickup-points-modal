@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import PickupPointsList from './PickupPointsList'
 import PickupPointDetails from './PickupPointDetails'
+import PickupPointsList from './PickupPointsList'
 import SearchingState from './SearchingState'
 import ErrorState from './ErrorState'
 import PinLocationUnknown from '../assets/components/PinLocationUnknown'
