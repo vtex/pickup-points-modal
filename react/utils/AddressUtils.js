@@ -23,3 +23,17 @@ function addCountryLabel(intl, countries) {
     value: countryCode,
   }))
 }
+
+export function unifyAddress(address, newAddress) {
+  const keys = Object.keys(address || newAddress)
+  const resultAddress = {}
+
+  keys.forEach(key => {
+    resultAddress[key] = {
+      ...(address ? address[key] : {}),
+      ...(newAddress ? newAddress[key] : {}),
+    }
+  })
+
+  return resultAddress
+}

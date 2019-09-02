@@ -313,6 +313,21 @@ class Map extends Component {
       this.resetMarkers()
     })
 
+    this.mapPanEvent = googleMaps.event.addListener(
+      this.map,
+      'zoom_changed',
+      () => {
+        this.props.setActiveState(this.props.activeState)
+      }
+    )
+    this.mapPanEvent = googleMaps.event.addListener(
+      this.map,
+      'dragstart',
+      () => {
+        this.props.setActiveState(this.props.activeState)
+      }
+    )
+
     zoomIn.onclick = () => this.map.setZoom(this.map.getZoom() + 1)
     zoomOut.onclick = () => this.map.setZoom(this.map.getZoom() - 1)
 
@@ -376,9 +391,18 @@ class Map extends Component {
       hasAddressCoords && this.getLocation(address.geoCoordinates.value)
 
     if (
+      this.addressMarker &&
+      bestPickupOptions.length > 0 &&
+      !bestPickupOptions.some(pickup => !!pickup.pickupDistance)
+    ) {
+      this.addressMarker.setMap(null)
+    }
+
+    if (
       !this.addressMarker &&
       hasAddressCoords &&
-      bestPickupOptions.length > 0
+      bestPickupOptions.length > 0 &&
+      bestPickupOptions.some(pickup => !!pickup.pickupDistance)
     ) {
       const markerOptions = {
         position: addressLocation,
@@ -404,6 +428,7 @@ class Map extends Component {
         const markerOptions = {
           position: location,
           draggable: false,
+          zIndex: 1,
           map: this.map,
           icon: {
             url: searchMarkerIcon,
@@ -450,6 +475,7 @@ class Map extends Component {
             position: location,
             draggable: false,
             map: this.map,
+            zIndex: index < BEST_PICKUPS_AMOUNT ? 4 : 3,
             icon: {
               url: markerIconImage,
               size: isScaledMarker

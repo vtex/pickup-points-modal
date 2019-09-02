@@ -12,8 +12,6 @@ import {
   SEARCHING,
   GEOLOCATION_SEARCHING,
   BEST_PICKUPS_AMOUNT,
-  ERROR_COULD_NOT_GETLOCATION,
-  ERROR_NOT_ALLOWED,
 } from './constants'
 import { getExternalPickupPoints, getAvailablePickups } from './fetchers'
 import { getPickupOptions, getUniquePickupPoints } from './utils/pickupUtils'
@@ -346,6 +344,7 @@ class ModalState extends Component {
     })
       .then(data => this.updatePickupPoints({ data }))
       .catch(error => {
+        this.setActiveSidebarState(LIST)
         this.setState({ localSearching: false })
       })
   }
@@ -396,9 +395,13 @@ class ModalState extends Component {
         {
           selectedPickupPoint: availablePickupSLA || pickupPoint,
           isSelectedBestPickupPoint: isBestPickupPoint,
-          pickupPoints: sortBy(newPickupPoints, 'distance'),
-          pickupOptions: sortBy(newPickupOptions, 'pickupDistance'),
-          bestPickupOptions: newBestPickupOptions,
+          pickupPoints: this.removePickupDistance(
+            sortBy(newPickupPoints, 'distance')
+          ),
+          pickupOptions: this.removePickupDistance(
+            sortBy(newPickupOptions, 'pickupDistance')
+          ),
+          bestPickupOptions: this.removePickupDistance(newBestPickupOptions),
           logisticsInfo: newLogisticsInfo,
         },
         () => this.setActiveSidebarState(DETAILS)
@@ -406,9 +409,13 @@ class ModalState extends Component {
     } else {
       this.setState(
         {
-          pickupPoints: sortBy(newPickupPoints, 'distance'),
-          pickupOptions: sortBy(newPickupOptions, 'pickupDistance'),
-          bestPickupOptions: newBestPickupOptions,
+          pickupPoints: this.removePickupDistance(
+            sortBy(newPickupPoints, 'distance')
+          ),
+          pickupOptions: this.removePickupDistance(
+            sortBy(newPickupOptions, 'pickupDistance')
+          ),
+          bestPickupOptions: this.removePickupDistance(newBestPickupOptions),
           logisticsInfo: newLogisticsInfo,
         },
         () =>
@@ -417,6 +424,14 @@ class ModalState extends Component {
           )
       )
     }
+  }
+
+  removePickupDistance = pickupPoints => {
+    return pickupPoints.map(pickup => ({
+      ...pickup,
+      distance: null,
+      pickupDistance: null,
+    }))
   }
 
   render() {

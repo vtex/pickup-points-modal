@@ -46,6 +46,19 @@ class PickupPointDetails extends Component {
     if (!this.props.selectedPickupPoint) {
       this.props.setActiveSidebarState(LIST)
     }
+
+    this.keyListener = document.addEventListener('keydown', event => {
+      if (event.code === 'ArrowLeft') {
+        this.props.selectPreviousPickupPoint()
+      }
+      if (event.code === 'ArrowRight') {
+        this.props.selectNextPickupPoint()
+      }
+    })
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.keyListener)
   }
 
   getPickupInfo(props) {

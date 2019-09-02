@@ -8,6 +8,8 @@ import { injectIntl, intlShape } from 'react-intl'
 import Button from './Button'
 import { BEST_PICKUPS_AMOUNT } from '../constants'
 import InfiniteScroll from 'react-infinite-scroller'
+import debounce from 'lodash/debounce'
+import Spinner from '../assets/components/Spinner'
 
 class PickupPointsList extends PureComponent {
   constructor(props) {
@@ -40,7 +42,7 @@ class PickupPointsList extends PureComponent {
     }
   }
 
-  loadMorePickupPoints = () => {
+  loadMorePickupPoints = debounce(() => {
     const { currentAmount, pickupPoints } = this.state
 
     const updatedAmount = currentAmount + 20
@@ -51,7 +53,7 @@ class PickupPointsList extends PureComponent {
       ),
       currentAmount: updatedAmount,
     })
-  }
+  }, 300)
 
   handleShowList = () => this.props.setShowOtherPickupPoints(true)
 
@@ -126,12 +128,12 @@ class PickupPointsList extends PureComponent {
               hasMore={hasMorePickupPoints}
               loadMore={this.loadMorePickupPoints}
               loader={
-                <div className="loader" key={0}>
-                  Loading ...
-                </div>
+                <p className={`${styles.listLoading} loader`} key={0}>
+                  <Spinner size={24} />
+                </p>
               }
               useWindow={false}
-              threshold={10}>
+              threshold={1}>
               {currentPickupPoints.map(pickupPoint => (
                 <div
                   className={`${styles.pointsItem} pkpmodal-points-item`}

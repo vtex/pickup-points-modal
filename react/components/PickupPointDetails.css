@@ -10,9 +10,11 @@
 }
 
 .modalDetailsTop {
-  margin-bottom: 1px;
-  height: 67px;
   display: flex;
+  flex-shrink: 0;
+  flex-grow: 0;
+  height: 67px;
+  margin-bottom: 1px;
 }
 
 .modalDetailsMiddle {
@@ -128,4 +130,5 @@
 
 .firstOrLast {
   color: #666666;
+  cursor: unset;
 }

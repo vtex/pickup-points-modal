@@ -28,6 +28,13 @@ class PickupPointsModal extends Component {
     super(props)
 
     this.state = {
+      addressQuery: {
+        value:
+          (props.searchAddress &&
+            props.searchAddress.street &&
+            props.searchAddress.street.value) ||
+          '',
+      },
       isMounted: false,
       mapStatus: HIDE_MAP,
       isLargeScreen: window.innerWidth > 1023,
@@ -151,6 +158,7 @@ class PickupPointsModal extends Component {
       postalCode: this.getValidPostalCode(address),
     }
 
+    this.setState({ addressQuery: addressValidated.addressQuery })
     this.props.onAddressChange(addressValidated)
   }
 
@@ -191,10 +199,16 @@ class PickupPointsModal extends Component {
       isPickupDetailsActive,
       mapStatus,
       shouldUseMaps,
+      addressQuery,
     } = this.state
 
     const shouldShowMap =
       shouldUseMaps && (isLargeScreen || mapStatus === SHOW_MAP)
+
+    const searchAddressWithAddressQuery = {
+      ...searchAddress,
+      addressQuery,
+    }
 
     return (
       !loading && (
@@ -209,7 +223,7 @@ class PickupPointsModal extends Component {
               onClickClose={this.handleCloseModal}
             />
             <ModalState
-              address={searchAddress}
+              address={searchAddressWithAddressQuery}
               askForGeolocation={askForGeolocation}
               googleMapsKey={googleMapsKey}
               isSearching={isSearching}
@@ -222,13 +236,13 @@ class PickupPointsModal extends Component {
               orderFormId={orderFormId}
               selectedPickupPoint={selectedPickupPoint}>
               <Geolocation
-                address={searchAddress}
+                address={searchAddressWithAddressQuery}
                 askForGeolocation={askForGeolocation}
                 googleMaps={googleMaps}
                 onChangeAddress={this.handleAddressChange}
                 rules={rules}>
                 <SearchArea
-                  address={searchAddress}
+                  address={searchAddressWithAddressQuery}
                   mapStatus={mapStatus}
                   shouldShow={shouldShowMap}
                   isLargeScreen={isLargeScreen}
@@ -241,7 +255,7 @@ class PickupPointsModal extends Component {
 
                 <Map
                   activatePickupDetails={this.activatePickupDetails}
-                  address={searchAddress}
+                  address={searchAddressWithAddressQuery}
                   changeActivePickupDetails={changeActivePickupDetails}
                   googleMaps={googleMaps}
                   handleAskForGeolocation={this.onAskForGeolocation}
@@ -271,7 +285,7 @@ class PickupPointsModal extends Component {
                   mapStatus={mapStatus}
                   onAddressChange={this.handleAddressChange}
                   rules={rules}
-                  searchAddress={searchAddress}
+                  searchAddress={searchAddressWithAddressQuery}
                   shouldUseMaps={shouldUseMaps}
                   sellerId={sellerId}
                   selectedPickupPoint={selectedPickupPoint}
