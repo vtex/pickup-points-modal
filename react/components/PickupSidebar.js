@@ -68,6 +68,9 @@ class PickupSidebar extends Component {
 
     const shouldShowSearchForm = !isPickupDetailsActive && shouldUseMaps
 
+    const shouldShowAddressChange =
+      !shouldShowSearchForm && !isPickupDetailsActive
+
     return (
       <div
         className={classNames(
@@ -104,7 +107,7 @@ class PickupSidebar extends Component {
             />
           )}
 
-          {!shouldShowSearchForm && (
+          {shouldShowAddressChange && (
             <div
               className={`${styles.locationSummary} pkpmodal-location-summary`}>
               <LocationSummaryIcon />

@@ -456,7 +456,7 @@ class Map extends Component {
       bestPickupOptions
         .filter(pickupPoint => {
           return !this.markers.some(
-            markerObj => markerObj.pickupPoint.id === pickupPoint.id
+            markerObj => markerObj.pickupPoint === pickupPoint.id
           )
         })
         .forEach((pickupPoint, index) => {
