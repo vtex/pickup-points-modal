@@ -49,11 +49,6 @@
   margin-bottom: 12px;
 }
 
-/* TO DO: FIND COMPONENT */
-:global .pkpmodal-points-item:hover .pkpmodal-pickup-point {
-  border-color: #c4c4c4;
-}
-
 .pickupListTitle {
   font-size: 13px;
   line-height: 24px;

@@ -44,7 +44,6 @@ class PickupPointsModal extends Component {
 
   componentDidMount() {
     const style = document.body.style
-    // when popup open
     style.overflow = 'hidden'
     style.position = 'fixed'
     style.width = '100%'
@@ -164,7 +163,6 @@ class PickupPointsModal extends Component {
 
   handleCloseModal = () => {
     const style = document.body.style
-    // when popup close
     style.overflow = 'auto'
     style.position = ''
     this.props.closePickupPointsModal()

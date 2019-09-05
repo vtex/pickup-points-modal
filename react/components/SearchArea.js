@@ -6,6 +6,7 @@ import { injectState } from '../modalStateContext'
 import { injectIntl, intlShape } from 'react-intl'
 import { translate } from '../utils/i18nUtils'
 import { SHOW_MAP } from '../constants'
+
 class SearchArea extends PureComponent {
   handleSearchArea = () => {
     const { lastMapCenterLatLng, address, searchPickupsInArea } = this.props

@@ -114,3 +114,7 @@
     width: 100px;
   }
 }
+
+:global .pkpmodal-points-item:hover .pkpmodal-pickup-point {
+  border-color: #c4c4c4;
+}

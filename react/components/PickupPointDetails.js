@@ -17,7 +17,7 @@ import ArrowPrevious from '../assets/components/ArrowPrevious'
 import ArrowNext from '../assets/components/ArrowNext'
 import BackChevron from '../assets/components/BackChevron'
 import styles from './PickupPointDetails.css'
-import { LIST } from '../constants'
+import { LIST, ARROW_LEFT, ARROW_RIGHT } from '../constants'
 import { injectState } from '../modalStateContext'
 import { updateShippingData } from '../fetchers'
 
@@ -48,10 +48,9 @@ class PickupPointDetails extends Component {
     }
 
     this.keyListener = document.addEventListener('keydown', event => {
-      if (event.code === 'ArrowLeft') {
+      if (event.code === ARROW_LEFT) {
         this.props.selectPreviousPickupPoint()
-      }
-      if (event.code === 'ArrowRight') {
+      } else if (event.code === ARROW_RIGHT) {
         this.props.selectNextPickupPoint()
       }
     })

@@ -19,6 +19,8 @@ const MARKER_HEIGHT = 31
 const STANDARD_ZOOM = 14
 const PAN_LEFT_LAT = -160
 const PAN_LEFT_LNG = -30
+const THIRD_ZINDEX = 3
+const FORTH_ZINDEX = 4
 
 class Map extends Component {
   constructor(props) {
@@ -475,7 +477,7 @@ class Map extends Component {
             position: location,
             draggable: false,
             map: this.map,
-            zIndex: index < BEST_PICKUPS_AMOUNT ? 4 : 3,
+            zIndex: index < BEST_PICKUPS_AMOUNT ? FORTH_ZINDEX : THIRD_ZINDEX,
             icon: {
               url: markerIconImage,
               size: isScaledMarker

@@ -16,6 +16,7 @@ import {
   ERROR_NOT_ALLOWED,
   SIDEBAR,
   DENIED,
+  GRANTED,
 } from './constants'
 
 class Geolocation extends Component {
@@ -69,7 +70,7 @@ class Geolocation extends Component {
         this.getCurrentPositionError({ code: 1 })
         break
 
-      case 'granted':
+      case GRANTED:
         setGeolocationStatus(SEARCHING)
         if (activeState === SIDEBAR) {
           this.props.setActiveSidebarState(SEARCHING)
