@@ -36,11 +36,13 @@
   "license": "MIT",
   "dependencies": {
     "@vtex/address-form": "2.5.6",
+    "@vtex/estimate-calculator": "^1.1.0",
     "babel-plugin-add-react-displayname": "^0.0.5",
     "classnames": "2.2.5",
     "lodash": "^4.17.5",
+    "react-infinite-scroller": "^1.2.4",
     "react-intl": "^2.8.0",
-    "react-tooltip": "^3.4.0",
+    "react-tooltip": "^3.10.0",
     "watch": "^1.0.2"
   },
   "jest": {
@@ -82,12 +84,12 @@
     "lib": "lib"
   },
   "devDependencies": {
+    "@vtex/address-form": "^3.5.8",
     "eslint": "^5.15.1",
     "eslint-config-vtex": "^10.1.0",
     "eslint-utils": "^1.3.1",
+    "vtex.country-codes": "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.country-codes@1.1.2/public/_types/react",
     "vtex.render-runtime": "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.render-runtime@7.39.1/public/_types/react",
-    "vtex.shipping-estimate-translator": "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.shipping-estimate-translator@1.0.4/public/_types/react",
-    "@vtex/address-form": "^3.5.8",
-    "vtex.country-codes": "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.country-codes@1.1.2/public/_types/react"
+    "vtex.shipping-estimate-translator": "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.shipping-estimate-translator@1.0.4/public/_types/react"
   }
 }

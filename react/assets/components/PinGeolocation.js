@@ -9,8 +9,7 @@ class PinGeolocation extends PureComponent {
         version="1.1"
         viewBox="0 0 212 212"
         width="106%"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+        xmlns="http://www.w3.org/2000/svg">
         <g stroke="#FFFFFF" strokeWidth="2">
           <rect
             height="146.594378"

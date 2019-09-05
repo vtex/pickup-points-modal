@@ -7,8 +7,9 @@ import { IntlProvider } from 'react-intl'
 import renderer from 'react-test-renderer'
 import { addValidation } from '@vtex/address-form'
 import BRA from '@vtex/address-form/lib/country/BRA'
-import { PICKUP, DELIVERY, PICKUP_IN_STORE } from '../../constants'
+import { PICKUP, DELIVERY, PICKUP_IN_STORE, SIDEBAR } from '../../constants'
 import messages from '../../../messages/en.json'
+import { ModalStateContext } from '../../modalStateContext'
 jest.mock('../../utils/Images', () => ({
   fixImageUrl: () => 'teste.png',
 }))
@@ -18,7 +19,9 @@ describe('PickupPointDetails', () => {
     props,
     handleChangeActiveSLAOption,
     handleClosePickupPointsModal,
-    togglePickupDetails
+    togglePickupDetails,
+    setActiveSidebarState,
+    modalState
 
   const address = {
     addressType: 'residential',
@@ -41,6 +44,128 @@ describe('PickupPointDetails', () => {
     handleChangeActiveSLAOption = jest.fn()
     handleClosePickupPointsModal = jest.fn()
     togglePickupDetails = jest.fn()
+    setActiveSidebarState = jest.fn()
+
+    modalState = {
+      activeState: SIDEBAR,
+      shouldUseMaps: true,
+      setActiveSidebarState,
+      shouldUseMaps: false,
+      setShouldSearchArea: jest.fn(),
+      setSelectedPickupPoint: jest.fn(),
+      pickupPoints: [
+        {
+          id: '1',
+          friendlyName: 'test',
+          address: {
+            geoCoordinates: [123, 123],
+          },
+        },
+      ],
+      selectedPickupPoint: {
+        name: 'test',
+        price: 100,
+        shippingEstimate: '1bd',
+        pickupStoreInfo: {
+          friendlyName: 'test',
+          address: {
+            geoCoordinates: [123, 123],
+          },
+        },
+        deliveryChannel: PICKUP_IN_STORE,
+        id: '1',
+        pickupPointId: '1',
+      },
+      logisticsInfo: [
+        {
+          itemIndex: 0,
+          deliveryChannels: [{ id: DELIVERY }],
+          selectedSla: '2',
+          slas: [
+            {
+              name: 'test',
+              price: 100,
+              shippingEstimate: '1bd',
+              deliveryChannel: PICKUP_IN_STORE,
+              id: '1',
+              pickupStoreInfo: {
+                friendlyName: 'test',
+                address,
+              },
+            },
+            {
+              name: 'test',
+              price: 100,
+              shippingEstimate: '1bd',
+              deliveryChannel: PICKUP_IN_STORE,
+              id: '2',
+              pickupStoreInfo: {
+                friendlyName: 'test',
+                address,
+              },
+            },
+          ],
+        },
+        {
+          itemIndex: 1,
+          deliveryChannels: [{ id: PICKUP_IN_STORE }],
+          selectedSla: '2',
+          slas: [
+            {
+              name: 'test',
+              price: 100,
+              shippingEstimate: '1bd',
+              deliveryChannel: PICKUP_IN_STORE,
+              id: '1',
+              pickupStoreInfo: {
+                friendlyName: 'test',
+                address,
+              },
+            },
+            {
+              name: 'test',
+              price: 100,
+              shippingEstimate: '1bd',
+              deliveryChannel: PICKUP_IN_STORE,
+              id: '2',
+              pickupStoreInfo: {
+                friendlyName: 'test',
+                address,
+              },
+            },
+          ],
+        },
+        {
+          itemIndex: 2,
+          deliveryChannels: [{ id: PICKUP_IN_STORE }],
+          selectedSla: '2',
+          slas: [
+            {
+              name: 'test',
+              price: 100,
+              shippingEstimate: '1bd',
+              deliveryChannel: PICKUP_IN_STORE,
+              id: '1',
+              pickupStoreInfo: {
+                friendlyName: 'test',
+                address,
+              },
+            },
+            {
+              name: 'test',
+              price: 100,
+              shippingEstimate: '1bd',
+              deliveryChannel: PICKUP_IN_STORE,
+              id: '3',
+              pickupStoreInfo: {
+                friendlyName: 'test',
+                address,
+              },
+            },
+          ],
+        },
+      ],
+    }
 
     state = {
       pickup: {
@@ -313,11 +438,13 @@ describe('PickupPointDetails', () => {
     const wrapper = renderer
       .create(
         <Provider store={store}>
-          <IntlProvider
-            locale="pt"
-            messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
-            <PickupPointDetails {...props} />
-          </IntlProvider>
+          <ModalStateContext.Provider value={modalState}>
+            <IntlProvider
+              locale="pt"
+              messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
+              <PickupPointDetails {...props} />
+            </IntlProvider>
+          </ModalStateContext.Provider>
         </Provider>
       )
       .toJSON()
@@ -327,11 +454,13 @@ describe('PickupPointDetails', () => {
   it('should simulate go back to list of pickups', () => {
     const wrapper = mount(
       <Provider store={store}>
-        <IntlProvider
-          locale="pt"
-          messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
-          <PickupPointDetails {...props} />
-        </IntlProvider>
+        <ModalStateContext.Provider value={modalState}>
+          <IntlProvider
+            locale="pt"
+            messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
+            <PickupPointDetails {...props} />
+          </IntlProvider>
+        </ModalStateContext.Provider>
       </Provider>
     )
 
@@ -339,24 +468,24 @@ describe('PickupPointDetails', () => {
 
     backLink.simulate('click')
 
-    expect(togglePickupDetails.mock.calls).toHaveLength(1)
+    expect(setActiveSidebarState.mock.calls).toHaveLength(1)
   })
 
   it('should simulate confirm a pickupPoint', () => {
     const wrapper = mount(
-      <IntlProvider
-        locale="pt"
-        messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
-        <PickupPointDetails {...props} />
-      </IntlProvider>
+      <ModalStateContext.Provider value={modalState}>
+        <IntlProvider
+          locale="pt"
+          messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
+          <PickupPointDetails {...props} />
+        </IntlProvider>
+      </ModalStateContext.Provider>
     )
 
     const confirmButton = wrapper.find('.pkpmodal-details-confirm-btn')
 
     confirmButton.simulate('click')
 
-    expect(handleChangeActiveSLAOption.mock.calls).toHaveLength(1)
-    expect(togglePickupDetails.mock.calls).toHaveLength(1)
     expect(handleClosePickupPointsModal.mock.calls).toHaveLength(1)
   })
 })

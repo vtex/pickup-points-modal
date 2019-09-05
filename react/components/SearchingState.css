@@ -1,0 +1,13 @@
+.searchingWrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.searching {
+  color: #727273;
+  font-size: 17px;
+  margin-top: 16px;
+  width: 288px;
+}

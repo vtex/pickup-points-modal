@@ -10,7 +10,7 @@ export function withGoogleMaps(ComponentToWrap) {
   return class withGoogleMapsClass extends Component {
     static propTypes = {
       googleMapsKey: PropTypes.string,
-      intl: intlShape,
+      intl: intlShape.isRequired,
     }
 
     render() {

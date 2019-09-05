@@ -1,0 +1,45 @@
+.zoomWrapper {
+  align-items: center;
+  background: white;
+  border-radius: 5px;
+  bottom: 25px;
+  box-shadow: 0px 3px 9px rgba(61, 62, 64, 0.25);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 11px;
+  z-index: 999;
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.zoomIn,
+.zoomOut {
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: #666666;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  outline: none;
+  transition: 0.256s ease-in;
+  width: 40px;
+}
+
+.hr {
+  background-color: #e6e6e6;
+  margin: 0;
+  border: none;
+  height: 1px;
+  width: 32px;
+}
+
+.zoomIn:hover,
+.zoomOut:hover {
+  color: #333333;
+}

@@ -26,7 +26,7 @@ import { PickupPointsModal } from 'vtex.pickup-points-modal'
 
 ### Base Component
 
-* [PickupPointsModal](#PickupPointsModal)
+- [PickupPointsModal](#PickupPointsModal)
 
 ---
 
@@ -38,20 +38,22 @@ This component renders the modal with a list of pickup points and a map with mar
 
 #### Props
 
-* **`closePickupPointsModal`**: Callback function to be called when PickupPointsModal is closed
-* **`changeActiveSLAOption`**: Callback function to be called when a pickup is selected
-* **`changeActivePickupDetails`**: Callback function to be called when PickupPointDetails state is changed
-* **`googleMapsKey`**: The Google Maps API Key
-* **`items`**: Items array from `orderForm` to get the products information
-* **`isPickupDetailsActive`**: (default: `false`) If the PickupPointDetails is active and should be rendered
-* **`logisticsInfo`**: LogisticsInfo array from `orderForm` to get sla information
-* **`onAddressChange`**: Callback function to be called when a the search field has changed
-* **`pickupOptions`**: Array of pickup points (SLAs of type `pickup-in-point`)
-* **`searchAddress`**: The current address used for the search input in the shape of [`AddressShapeWithValidation`](https://github.com/vtex/address-form/blob/master/react/propTypes/AddressShapeWithValidation.js)
-* **`selectedPickupPoint`**: Current selected SLA of type `pickup-in-point`
-* **`rules`**: The selected country rules from [`AddressForm`](https://github.com/vtex/address-form/tree/master/react/country)
-* **`sellerId`**: The Id of the seller when the list of pickups is filtered by seller
-* **`storePreferencesData`**: Object from `orderForm` to get currency preferences from store
+- **`closePickupPointsModal`**: Callback function to be called when PickupPointsModal is closed
+- **`changeActiveSLAOption`**: Callback function to be called when a pickup is selected
+- **`changeActivePickupDetails`**: Callback function to be called when PickupPointDetails state is changed
+- **`googleMapsKey`**: The Google Maps API Key
+- **`items`**: Items array from `orderForm` to get the products information
+- **`isPickupDetailsActive`**: (default: `false`) If the PickupPointDetails is active and should be rendered
+- **`logisticsInfo`**: LogisticsInfo array from `orderForm` to get sla information
+- **`onAddressChange`**: Callback function to be called when a the search field has changed
+- **`pickupOptions`**: Array of pickup points (SLAs of type `pickup-in-point`)
+- **`searchAddress`**: The current address used for the search input in the shape of [`AddressShapeWithValidation`](https://github.com/vtex/address-form/blob/master/react/propTypes/AddressShapeWithValidation.js)
+- **`selectedPickupPoint`**: Current selected SLA of type `pickup-in-point`
+- **`rules`**: The selected country rules from [`AddressForm`](https://github.com/vtex/address-form/tree/master/react/country)
+- **`sellerId`**: The Id of the seller when the list of pickups is filtered by seller
+- **`storePreferencesData`**: Object from `orderForm` to get currency preferences from store
+- **`salesChannel`**: String from `orderForm` to get the sales channel used in the checkout simulation
+- **`orderFormId`**: String from `orderForm` used in the checkout simulation
 
 ```js
 PickupPointsModal.propTypes = {
@@ -69,6 +71,8 @@ PickupPointsModal.propTypes = {
   rules: PropTypes.object,
   sellerId: PropTypes.string,
   storePreferencesData: PropTypes.object.isRequired,
+  salesChannel: PropTypes.string.isRequired,
+  orderFormId: PropTypes.string.isRequired,
 };
 ```
 
@@ -85,11 +89,13 @@ PickupPointsModal.propTypes = {
   isPickupDetailsActive={isPickupDetailsActive}
   logisticsInfo={logisticsInfo}
   onAddressChange={this.handleAddressChange}
+  orderFormId={orderFormId}
   pickupOptions={pickupOptions}
   searchAddress={searchAddress}
   selectedPickupPoint={selectedPickupPoint}
   selectedRules={selectedRules}
   sellerId={sellerId}
   storePreferencesData={storePreferencesData}
+  salesChannel={salesChannel}
 />
 ```

@@ -9,12 +9,17 @@ import {
   formatBusinessHoursList,
 } from '../utils/pickupUtils'
 
-import PickupPoint from './PickupPoint'
+import PickupPointInfo from './PickupPointInfo'
 import ProductItems from './ProductItems'
 import PickupPointHour from './PickupPointHour'
 import Button from './Button'
-
+import ArrowPrevious from '../assets/components/ArrowPrevious'
+import ArrowNext from '../assets/components/ArrowNext'
+import BackChevron from '../assets/components/BackChevron'
 import styles from './PickupPointDetails.css'
+import { LIST, ARROW_LEFT, ARROW_RIGHT } from '../constants'
+import { injectState } from '../modalStateContext'
+import { updateShippingData } from '../fetchers'
 
 class PickupPointDetails extends Component {
   constructor(props) {
@@ -22,44 +27,68 @@ class PickupPointDetails extends Component {
 
     this.state = {
       unavailableItems: getUnavailableItemsByPickup(
-        this.props.items,
-        this.props.logisticsInfo,
-        this.props.pickupPoint,
-        this.props.sellerId
+        props.items,
+        props.logisticsInfo,
+        props.selectedPickupPoint,
+        props.sellerId
       ),
       items: getItemsWithPickupPoint(
-        this.props.items,
-        this.props.logisticsInfo,
-        this.props.pickupPoint,
-        this.props.sellerId
+        props.items,
+        props.logisticsInfo,
+        props.selectedPickupPoint,
+        props.sellerId
       ),
+      pickupPointInfo: this.getPickupInfo(props),
     }
   }
-  handleBackButtonClick = () => this.props.togglePickupDetails()
+
+  componentDidMount() {
+    if (!this.props.selectedPickupPoint) {
+      this.props.setActiveSidebarState(LIST)
+    }
+
+    this.keyListener = document.addEventListener('keydown', event => {
+      if (event.code === ARROW_LEFT) {
+        this.props.selectPreviousPickupPoint()
+      } else if (event.code === ARROW_RIGHT) {
+        this.props.selectNextPickupPoint()
+      }
+    })
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.keyListener)
+  }
+
+  getPickupInfo(props) {
+    return props.pickupPoints.find(
+      pickupPoint => pickupPoint.id === props.selectedPickupPoint.pickupPointId
+    )
+  }
+
+  handleBackButtonClick = () => {
+    this.props.setActiveSidebarState(LIST)
+  }
 
   handleConfirmButtonClick = () => {
-    this.props.handleChangeActiveSLAOption({
-      slaOption: this.props.pickupPoint.id,
-      sellerId: this.props.sellerId,
-      shouldUpdateShippingData: false,
-    })
-    this.props.togglePickupDetails()
+    updateShippingData(this.props.logisticsInfo, this.props.selectedPickupPoint)
     this.props.handleClosePickupPointsModal()
   }
 
   render() {
     const {
-      pickupPoint,
-      pickupPointInfo,
-      selectedRules,
+      bestPickupOptions,
       isSelectedSla,
-      sellerId,
-      intl,
-      storePreferencesData,
       logisticsInfo,
+      intl,
+      selectedPickupPoint,
+      selectedRules,
+      sellerId,
+      shouldUseMaps,
+      storePreferencesData,
     } = this.props
 
-    const { unavailableItems, items } = this.state
+    const { unavailableItems, items, pickupPointInfo } = this.state
 
     const businessHours =
       !pickupPointInfo ||
@@ -67,6 +96,30 @@ class PickupPointDetails extends Component {
       pickupPointInfo.businessHours.length === 0
         ? null
         : formatBusinessHoursList(pickupPointInfo.businessHours)
+
+    const hasAditionalInfo =
+      selectedPickupPoint.pickupStoreInfo &&
+      selectedPickupPoint.pickupStoreInfo.additionalInfo
+
+    const shouldShowSelectPickupButton =
+      selectedPickupPoint && selectedPickupPoint.pickupStoreInfo
+
+    const confirmButtonId =
+      selectedPickupPoint &&
+      `confirm-pickup-${selectedPickupPoint.id
+        .replace(/[^\w\s]/gi, '')
+        .split(' ')
+        .join('-')}`
+
+    const pickupIndex =
+      bestPickupOptions &&
+      bestPickupOptions
+        .map(pickupPoint => pickupPoint.pickupPointId || pickupPoint.id)
+        .indexOf(selectedPickupPoint.pickupPointId || selectedPickupPoint.id)
+
+    const isFirst = pickupIndex === 0
+    const isLast =
+      bestPickupOptions && pickupIndex === bestPickupOptions.length - 1
 
     return (
       <div className={`${styles.modalDetails} pkpmodal-details`}>
@@ -77,22 +130,48 @@ class PickupPointDetails extends Component {
             } pkpmodal-details-back-lnk btn btn-link`}
             onClick={this.handleBackButtonClick}
             type="button">
-            <i
-              className={`${
-                styles.iconBackPickupPointsList
-              } pkpmodal-icon-back-pickup-points-list icon-angle-left`}
-            />
+            <BackChevron />
             {translate(intl, 'cancelBackList')}
           </button>
         </div>
 
+        <div
+          className={`${styles.pickupDetailsHeader} pkpmodal-details-header`}>
+          <p
+            className={`${
+              styles.pickupDetailsHeaderTitle
+            } pkpmodal-details-header-title`}>
+            {translate(intl, 'pointDetails')}
+          </p>
+          <div
+            className={`${
+              styles.pickupDetailsHeaderButtons
+            } pkpmodal-details-header-buttons`}>
+            <button
+              className={`${styles.pickupDetailsHeaderButton} ${
+                isFirst ? styles.firstOrLast : ''
+              } pkpmodal-details-header-button`}
+              onClick={() => this.props.selectPreviousPickupPoint()}>
+              <ArrowPrevious />
+            </button>
+            <button
+              className={`${styles.pickupDetailsHeaderButton} ${
+                isLast ? styles.firstOrLast : ''
+              } pkpmodal-details-header-button`}
+              onClick={() => this.props.selectNextPickupPoint()}>
+              <ArrowNext />
+            </button>
+          </div>
+        </div>
+
         <div className={`${styles.modalDetailsMiddle} pkpmodal-details-middle`}>
           <div className={`${styles.modalDetailsStore} pkpmodal-details-store`}>
-            <PickupPoint
+            <PickupPointInfo
+              shouldUseMaps={shouldUseMaps}
               isSelected={isSelectedSla}
               items={this.props.items}
               logisticsInfo={logisticsInfo}
-              pickupPoint={pickupPoint}
+              pickupPoint={selectedPickupPoint}
               selectedRules={selectedRules}
               sellerId={sellerId}
               storePreferencesData={storePreferencesData}
@@ -113,8 +192,7 @@ class PickupPointDetails extends Component {
                 <ProductItems isAvailable={false} items={unavailableItems} />
               )}
             </div>
-            {pickupPoint.pickupStoreInfo &&
-              pickupPoint.pickupStoreInfo.additionalInfo && (
+            {hasAditionalInfo && (
               <div
                 className={`${
                   styles.modalDetailsGroup
@@ -125,7 +203,7 @@ class PickupPointDetails extends Component {
                   } pkpmodal-details-info-title`}>
                   {translate(intl, 'aditionalInfo')}
                 </h3>
-                {pickupPoint.pickupStoreInfo.additionalInfo}
+                {selectedPickupPoint.pickupStoreInfo.additionalInfo}
               </div>
             )}
 
@@ -181,40 +259,43 @@ class PickupPointDetails extends Component {
           </div>
         </div>
 
-        <div className={`${styles.modalDetailsBottom} pkpmodal-details-bottom`}>
-          <Button
-            id={`confirm-pickup-${pickupPoint.id
-              .replace(/[^\w\s]/gi, '')
-              .split(' ')
-              .join('-')}`}
-            kind="primary"
-            large
-            moreClassName={`${
-              styles.modalDetailConfirmBtn
-            } pkpmodal-details-confirm-btn`}
-            onClick={this.handleConfirmButtonClick}
-            title={translate(intl, 'confirmPoint')}
-          />
-        </div>
+        {shouldShowSelectPickupButton && (
+          <div
+            className={`${styles.modalDetailsBottom} pkpmodal-details-bottom`}>
+            <Button
+              id={confirmButtonId}
+              kind="primary"
+              large
+              moreClassName={`${
+                styles.modalDetailConfirmBtn
+              } pkpmodal-details-confirm-btn`}
+              onClick={this.handleConfirmButtonClick}
+              title={translate(intl, 'confirmPoint')}
+            />
+          </div>
+        )}
       </div>
     )
   }
 }
 
 PickupPointDetails.propTypes = {
+  bestPickupOptions: PropTypes.array.isRequired,
   handleChangeActiveSLAOption: PropTypes.func.isRequired,
   handleClosePickupPointsModal: PropTypes.func.isRequired,
-  intl: intlShape,
+  intl: intlShape.isRequired,
   isSelectedSla: PropTypes.bool,
   items: PropTypes.array.isRequired,
   logisticsInfo: PropTypes.array.isRequired,
   onClickPickupModal: PropTypes.func,
-  pickupPoint: PropTypes.object.isRequired,
-  pickupPointInfo: PropTypes.object.isRequired,
   selectedRules: PropTypes.object.isRequired,
+  selectedPickupPoint: PropTypes.object.isRequired,
   sellerId: PropTypes.string,
   storePreferencesData: PropTypes.object.isRequired,
-  togglePickupDetails: PropTypes.func.isRequired,
+  setActiveSidebarState: PropTypes.func.isRequired,
+  selectNextPickupPoint: PropTypes.func,
+  selectPreviousPickupPoint: PropTypes.func,
+  shouldUseMaps: PropTypes.bool.isRequired,
 }
 
-export default injectIntl(PickupPointDetails)
+export default injectState(injectIntl(PickupPointDetails))

@@ -1,5 +1,8 @@
 import get from 'lodash/get'
 import isString from 'lodash/isString'
+import uniqBy from 'lodash/uniqBy'
+import flatten from 'lodash/flatten'
+import { isPickup } from './SlasUtils'
 
 function checkIfIsSameSeller(sellerId, item) {
   return sellerId ? item.seller === sellerId : true
@@ -40,6 +43,8 @@ export function getUnavailableItemsByPickup(
   pickupPoint,
   sellerId
 ) {
+  if (!pickupPoint) return []
+
   const pickupPointId = getPickupPointId(pickupPoint)
 
   return items.filter((item, index) => {
@@ -59,6 +64,8 @@ export function getItemsWithPickupPoint(
   pickupPoint,
   sellerId
 ) {
+  if (!pickupPoint) return []
+
   const pickupPointId = getPickupPointId(pickupPoint)
 
   return items.filter((item, index) => {
@@ -82,6 +89,39 @@ export function getPickupOptionGeolocations(pickupOptions) {
   )
 }
 
+export function getPickupPointGeolocations(pickupPoint) {
+  if (Array.isArray(pickupPoint)) {
+    return pickupPoint.map(
+      pickup => pickup && get(pickup, 'address.geoCoordinates')
+    )
+  }
+  return pickupPoint && get(pickupPoint, 'address.geoCoordinates')
+}
+
+export function getPickupOptions(logisticsInfo) {
+  if (!logisticsInfo) return []
+
+  const pickupPoints = uniqBy(
+    flatten(logisticsInfo.map(li => li.slas.filter(sla => isPickup(sla)))),
+    'id'
+  )
+
+  return pickupPoints.map(pickupPoint => {
+    const price = logisticsInfo.reduce((accPrice, currLi) => {
+      const currentPickupPoint = currLi.slas.find(
+        sla => sla.id === pickupPoint.id
+      )
+
+      return currentPickupPoint ? accPrice + currentPickupPoint.price : 0
+    }, 0)
+
+    return {
+      ...pickupPoint,
+      price,
+    }
+  })
+}
+
 export function formatBusinessHoursList(businessHours) {
   const normalizedBusinessHours = normalizeBusinessHours(businessHours)
 
@@ -102,16 +142,16 @@ function normalizeBusinessHours(businessHours) {
   return DAYS_ORDER.map(number => {
     const day = businessHours.find(day => number === day.DayOfWeek)
 
+    const dayObject = day && {
+      closed: false,
+      openingTime: day.OpeningTime,
+      closingTime: day.ClosingTime,
+    }
+
     return {
       number,
       closed: true,
-      ...(day
-        ? {
-          closed: false,
-          openingTime: day.OpeningTime,
-          closingTime: day.ClosingTime,
-        }
-        : {}),
+      ...(dayObject || {}),
     }
   })
 }
@@ -157,4 +197,8 @@ function condenseWeekDaysHours(businessHours) {
 
     return acc.concat(businessHour)
   }, [])
+}
+
+export function getUniquePickupPoints(pickupArray, newPickupArray) {
+  return uniqBy([...pickupArray, ...newPickupArray], 'id')
 }

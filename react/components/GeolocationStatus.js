@@ -77,7 +77,7 @@ class GeolocationStatus extends Component {
 GeolocationStatus.propTypes = {
   Image: PropTypes.any,
   children: PropTypes.any,
-  intl: intlShape,
+  intl: intlShape.isRequired,
   subtitleBottom: PropTypes.any,
   subtitleTop: PropTypes.any,
   titleBottom: PropTypes.any,

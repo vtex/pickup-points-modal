@@ -6,9 +6,16 @@
   box-sizing: border-box;
 }
 
-.pickupViewMap,
-.pickupViewList {
+.pickupViewItem {
   width: 50%;
+}
+.pickupViewItem:first-of-type {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.pickupViewItem:last-of-type {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .pickupViewOptionActive,

@@ -12,11 +12,17 @@ export const AVAILABLE = 'available'
 export const SHIPPING_HASH = '#/shipping'
 export const PAYMENT_HASH = '#/payment'
 
+export const INITIAL = 'initial'
+export const DETAILS = 'details'
+export const LIST = 'list'
 export const ASK = 'ask'
 export const WAITING = 'waiting'
+export const SIDEBAR = 'sidebar'
 export const SEARCHING = 'searching'
+export const GEOLOCATION_SEARCHING = 'geolocation_searching'
 export const GRANTED = 'granted'
-
+export const DENIED = 'denied'
+export const PROMPT = 'prompt'
 export const ERROR_NOT_ALLOWED = 'errorNotAllowed'
 export const ERROR_NOT_FOUND = 'errorNotFound'
 export const ERROR_COULD_NOT_GETLOCATION = 'errorCouldNotGetLocation'
@@ -54,3 +60,8 @@ export const MYANMAR = 'en-MM'
 export const LIBERIA = 'en-LR'
 
 export const MILE_COUNTRY_LOCALES = [UNITED_KINGDOM, USA, MYANMAR, LIBERIA]
+
+export const BEST_PICKUPS_AMOUNT = 3
+
+export const ARROW_LEFT = 'ArrowLeft'
+export const ARROW_RIGHT = 'ArrowRight'

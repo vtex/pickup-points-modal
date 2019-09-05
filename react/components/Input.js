@@ -44,7 +44,7 @@ Input.propTypes = {
   disabled: PropTypes.bool, // eslint-disable-line
   googleMapsKey: PropTypes.string,
   inputRef: PropTypes.func,
-  intl: intlShape,
+  intl: intlShape.isRequired,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,

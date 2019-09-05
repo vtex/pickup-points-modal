@@ -70,13 +70,23 @@
 .pickupPointSlaAvailability,
 .pickupPointSlaAvailabilityPostalCode {
   border-top: 1px solid #f4f4f4;
-  padding: 8px 12px 8px 60px;
+  padding: 8px 8px 8px 60px;
 }
 
 .pickupPointAvailability {
-  color: #ffb100;
+  color: #c6840c;
   display: inline-block;
   margin-top: 12px;
+}
+
+.pickupPointNoneAvailable {
+  color: #666666;
+  display: inline-block;
+  margin-top: 12px;
+}
+
+.searchMarkerIcon {
+  height: 32px;
 }
 
 .pickupPointPrice,
@@ -102,5 +112,9 @@
 
   .pickupPointMarkerPostalCode {
     width: 100px;
-  }  
+  }
+}
+
+:global .pkpmodal-points-item:hover .pkpmodal-pickup-point {
+  border-color: #c4c4c4;
 }

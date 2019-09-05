@@ -1,0 +1,13 @@
+.searchOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
