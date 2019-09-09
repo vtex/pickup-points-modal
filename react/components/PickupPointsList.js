@@ -76,6 +76,13 @@ class PickupPointsList extends PureComponent {
 
     const hasMorePickupPoints = currentAmount <= pickupPoints.length
 
+    const hasMinimumPickupPoints =
+      bestPickupOptions.length > BEST_PICKUPS_AMOUNT
+
+    const showOtherList = hasMinimumPickupPoints && showOtherPickupPoints
+
+    const showOtherButton = hasMinimumPickupPoints && !showOtherPickupPoints
+
     return (
       <div className={`${styles.pointsList} pkpmodal-points-list`}>
         {bestPickupOptions.length > 0 && (
@@ -107,7 +114,7 @@ class PickupPointsList extends PureComponent {
                   />
                 </div>
               ))}
-            {!showOtherPickupPoints && (
+            {showOtherButton && (
               <Button
                 id="pkpmodal-show-list-btn"
                 kind="secondary"
@@ -121,7 +128,7 @@ class PickupPointsList extends PureComponent {
             )}
           </Fragment>
         )}
-        {showOtherPickupPoints && (
+        {showOtherList && (
           <Fragment>
             <p className={styles.pickupListTitle}>
               {translate(intl, 'resultsOrderedByDistance')}

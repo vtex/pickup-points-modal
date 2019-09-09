@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Pickups list to only show button if has more than three pickup points
+
 ## [3.0.2] - 2019-09-09
 
 ### Changed
