@@ -63,20 +63,23 @@ class ModalState extends Component {
   }
 
   componentDidMount() {
+    const { externalPickupPoints } = this.state
     const thisAddressCoords =
       this.props.address &&
       this.props.address.geoCoordinates &&
       this.props.address.geoCoordinates.value
 
     if (thisAddressCoords.length > 0) {
-      getExternalPickupPoints(thisAddressCoords).then(data =>
-        this.setState({
-          externalPickupPoints: data.items.map(item => ({
-            ...item,
-            distance: null,
-          })),
-        })
-      )
+      getExternalPickupPoints(thisAddressCoords)
+        .then(data =>
+          this.setState({
+            externalPickupPoints: data.items.map(item => ({
+              ...item.pickupPoint,
+              distance: null,
+            })),
+          })
+        )
+        .catch(() => this.setState({ externalPickupPoints }))
     }
   }
 
@@ -96,6 +99,7 @@ class ModalState extends Component {
       activeState,
       askForGeolocation,
       selectedPickupPoint,
+      externalPickupPoints,
     } = this.state
 
     const thisAddressCoords =
@@ -146,9 +150,16 @@ class ModalState extends Component {
     }
 
     if (isDifferentGeoCoords(thisAddressCoords, prevAddressCoords)) {
-      getExternalPickupPoints(thisAddressCoords).then(data =>
-        this.setState({ externalPickupPoints: data.items })
-      )
+      getExternalPickupPoints(thisAddressCoords)
+        .then(data =>
+          this.setState({
+            externalPickupPoints: data.items.map(item => ({
+              ...item.pickupPoint,
+              distance: null,
+            })),
+          })
+        )
+        .catch(() => this.setState({ externalPickupPoints }))
     }
 
     if (thisPickupOptions !== prevPickupOptions) {
