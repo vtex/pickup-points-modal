@@ -1,10 +1,10 @@
 import { newAddress } from '../utils/newAddress'
 import { PICKUP_IN_STORE, SEARCH } from '../constants'
 
-export function getExternalPickupPoints(geoCoordinates) {
+export function fetchExternalPickupPoints(geoCoordinates) {
   return fetch(
-    `/api/checkout/pub/pickup-points?lat=${geoCoordinates[1]}&lon=${
-      geoCoordinates[0]
+    `/api/checkout/pub/pickup-points?geoCoordinates=${geoCoordinates[0]};${
+      geoCoordinates[1]
     }&page=1&pageSize=100`
   ).then(response => response.json())
 }

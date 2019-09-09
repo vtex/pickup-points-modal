@@ -13,7 +13,7 @@ import {
   GEOLOCATION_SEARCHING,
   BEST_PICKUPS_AMOUNT,
 } from './constants'
-import { getExternalPickupPoints, getAvailablePickups } from './fetchers'
+import { fetchExternalPickupPoints, getAvailablePickups } from './fetchers'
 import { getPickupOptions, getUniquePickupPoints } from './utils/pickupUtils'
 import { getPickupSlaString } from './utils/GetString'
 import { getBestPickupPoints } from './utils/bestPickups'
@@ -69,14 +69,7 @@ class ModalState extends Component {
       this.props.address.geoCoordinates.value
 
     if (thisAddressCoords.length > 0) {
-      getExternalPickupPoints(thisAddressCoords).then(data =>
-        this.setState({
-          externalPickupPoints: data.items.map(item => ({
-            ...item,
-            distance: null,
-          })),
-        })
-      )
+      this.getExternalPickupOptions(thisAddressCoords)
     }
   }
 
@@ -96,6 +89,7 @@ class ModalState extends Component {
       activeState,
       askForGeolocation,
       selectedPickupPoint,
+      externalPickupPoints,
     } = this.state
 
     const thisAddressCoords =
@@ -146,9 +140,7 @@ class ModalState extends Component {
     }
 
     if (isDifferentGeoCoords(thisAddressCoords, prevAddressCoords)) {
-      getExternalPickupPoints(thisAddressCoords).then(data =>
-        this.setState({ externalPickupPoints: data.items })
-      )
+      this.getExternalPickupOptions(thisAddressCoords)
     }
 
     if (thisPickupOptions !== prevPickupOptions) {
@@ -263,7 +255,7 @@ class ModalState extends Component {
 
     this.setSelectedPickupPoint({
       pickupPoint: bestPickupOptions[previousIndex],
-      isBestPickupPoint: previousIndex < BEST_PICKUPS_AMOUNT,
+      isSelectedBestPickupPoint: previousIndex < BEST_PICKUPS_AMOUNT,
     })
   }
 
@@ -278,7 +270,7 @@ class ModalState extends Component {
 
     this.setSelectedPickupPoint({
       pickupPoint: bestPickupOptions[nextIndex],
-      isBestPickupPoint: nextIndex < BEST_PICKUPS_AMOUNT,
+      isSelectedBestPickupPoint: nextIndex < BEST_PICKUPS_AMOUNT,
     })
   }
 
@@ -432,6 +424,21 @@ class ModalState extends Component {
       distance: null,
       pickupDistance: null,
     }))
+  }
+
+  getExternalPickupOptions = geoCoordinates => {
+    const { externalPickupPoints } = this.state
+
+    fetchExternalPickupPoints(geoCoordinates)
+      .then(data =>
+        this.setState({
+          externalPickupPoints: data.items.map(item => ({
+            ...item.pickupPoint,
+            distance: null,
+          })),
+        })
+      )
+      .catch(() => this.setState({ externalPickupPoints }))
   }
 
   render() {

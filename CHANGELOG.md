@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- External pickup points endpoint.
+
+## Added
+
+- Fallback if external pickup points promise failed.
+
 ## [3.0.1] - 2019-09-05
 
 ### Changed

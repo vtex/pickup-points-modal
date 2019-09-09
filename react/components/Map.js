@@ -467,7 +467,8 @@ class Map extends Component {
           )
           const markerIconImage =
             index < BEST_PICKUPS_AMOUNT &&
-            bestPickupOptions.length > BEST_PICKUPS_AMOUNT
+            bestPickupOptions.length > BEST_PICKUPS_AMOUNT &&
+            this.markers.length === 0
               ? bestMarkerIcon
               : markerIcon
           const isScaledMarker =
