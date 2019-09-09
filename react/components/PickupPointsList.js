@@ -87,7 +87,9 @@ class PickupPointsList extends PureComponent {
               .filter((_, index) => index < BEST_PICKUPS_AMOUNT)
               .map(pickupPoint => (
                 <div
-                  className={`${styles.pointsItem} pkpmodal-points-item`}
+                  className={`${
+                    styles.pointsItem
+                  } pkpmodal-points-item best-pickupPoint-${pickupPoint.id}`}
                   key={`best-pickupPoint-${pickupPoint.id}`}>
                   <PickupPointInfo
                     isList
@@ -136,10 +138,13 @@ class PickupPointsList extends PureComponent {
               threshold={1}>
               {currentPickupPoints.map(pickupPoint => (
                 <div
-                  className={`${styles.pointsItem} pkpmodal-points-item`}
+                  className={`${
+                    styles.pointsItem
+                  } pkpmodal-points-item pickupPoint-${pickupPoint.id}`}
                   key={`pickupPoint-${pickupPoint.id}`}>
                   <PickupPointInfo
                     isList
+                    isBestPickupPoint={false}
                     items={items}
                     logisticsInfo={logisticsInfo}
                     pickupPoint={pickupPoint}

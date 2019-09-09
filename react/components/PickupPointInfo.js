@@ -98,7 +98,7 @@ class PickupPointInfo extends Component {
     const shouldShowEstimate = pickupPoint && pickupPoint.shippingEstimate
     const isBestPickupPointAndAvailable =
       pickupPoint.pickupStoreInfo &&
-      (isBestPickupPoint || isSelectedBestPickupPoint)
+      (isBestPickupPoint || (isSelectedBestPickupPoint && !isList))
 
     return (
       <div
