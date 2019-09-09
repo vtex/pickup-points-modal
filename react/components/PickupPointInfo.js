@@ -166,8 +166,7 @@ class PickupPointInfo extends Component {
                   styles.pickupPointAvailability
                 } pkpmodal-pickup-point-availability`}>
                 {translate(intl, 'unavailableItemsAmount', {
-                  unavailableItemsAmount: unavailableItemsAmount,
-                  itemsAmount: items.length,
+                  itemsAmount: unavailableItemsAmount,
                 })}
               </span>
             )}

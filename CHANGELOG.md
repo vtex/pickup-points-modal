@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Unavailable items amount which previously showed wrongly the items amount
+
 ## [3.0.4] - 2019-09-09
 
 ### Fixed
