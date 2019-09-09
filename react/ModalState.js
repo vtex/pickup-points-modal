@@ -13,7 +13,7 @@ import {
   GEOLOCATION_SEARCHING,
   BEST_PICKUPS_AMOUNT,
 } from './constants'
-import { getExternalPickupPoints, getAvailablePickups } from './fetchers'
+import { fetchExternalPickupPoints, getAvailablePickups } from './fetchers'
 import { getPickupOptions, getUniquePickupPoints } from './utils/pickupUtils'
 import { getPickupSlaString } from './utils/GetString'
 import { getBestPickupPoints } from './utils/bestPickups'
@@ -63,23 +63,13 @@ class ModalState extends Component {
   }
 
   componentDidMount() {
-    const { externalPickupPoints } = this.state
     const thisAddressCoords =
       this.props.address &&
       this.props.address.geoCoordinates &&
       this.props.address.geoCoordinates.value
 
     if (thisAddressCoords.length > 0) {
-      getExternalPickupPoints(thisAddressCoords)
-        .then(data =>
-          this.setState({
-            externalPickupPoints: data.items.map(item => ({
-              ...item.pickupPoint,
-              distance: null,
-            })),
-          })
-        )
-        .catch(() => this.setState({ externalPickupPoints }))
+      this.getExternalPickupOptions(thisAddressCoords)
     }
   }
 
@@ -150,16 +140,7 @@ class ModalState extends Component {
     }
 
     if (isDifferentGeoCoords(thisAddressCoords, prevAddressCoords)) {
-      getExternalPickupPoints(thisAddressCoords)
-        .then(data =>
-          this.setState({
-            externalPickupPoints: data.items.map(item => ({
-              ...item.pickupPoint,
-              distance: null,
-            })),
-          })
-        )
-        .catch(() => this.setState({ externalPickupPoints }))
+      this.getExternalPickupOptions(thisAddressCoords)
     }
 
     if (thisPickupOptions !== prevPickupOptions) {
@@ -443,6 +424,21 @@ class ModalState extends Component {
       distance: null,
       pickupDistance: null,
     }))
+  }
+
+  getExternalPickupOptions = geoCoordinates => {
+    const { externalPickupPoints } = this.state
+
+    fetchExternalPickupPoints(geoCoordinates)
+      .then(data =>
+        this.setState({
+          externalPickupPoints: data.items.map(item => ({
+            ...item.pickupPoint,
+            distance: null,
+          })),
+        })
+      )
+      .catch(() => this.setState({ externalPickupPoints }))
   }
 
   render() {
