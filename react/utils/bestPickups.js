@@ -1,7 +1,21 @@
 import estimateCalculator from '@vtex/estimate-calculator'
 import { getUnavailableItemsAmount } from './pickupUtils'
 import sortBy from 'lodash/sortBy'
+
 export function getBestPickupPoints(pickupOptions, items, logisticsInfo) {
+  const result = getOptionsWithAvailability({
+    items,
+    logisticsInfo,
+    pickupOptions,
+  })
+
+  return calculatePickupPointsScore({
+    calcParams: result.calcParams,
+    pickupOptions: result.optionsWithAvailability,
+  })
+}
+
+function getOptionsWithAvailability({ items, logisticsInfo, pickupOptions }) {
   const calcParams = {
     numberOfProducts: items.length,
     multipliers: {
@@ -12,31 +26,12 @@ export function getBestPickupPoints(pickupOptions, items, logisticsInfo) {
       missing: 3,
       missingEach: 1.5,
     },
-    priceLimit: 0,
+    priceLimit: 1,
     shippingEstimateLimit: 0,
     missingLimit: items.length / 2,
   }
 
-  const optionsWithAvailability = getOptionsWithAvailability({
-    calcParams,
-    items,
-    logisticsInfo,
-    pickupOptions,
-  })
-
-  return calculatePickupPointsScore({
-    calcParams,
-    pickupOptions: optionsWithAvailability,
-  })
-}
-
-function getOptionsWithAvailability({
-  pickupOptions,
-  items,
-  logisticsInfo,
-  calcParams,
-}) {
-  return pickupOptions.map(pickupOption => {
+  const optionsWithAvailability = pickupOptions.map(pickupOption => {
     const unavailableAmount = getUnavailableItemsAmount(
       items,
       logisticsInfo,
@@ -55,8 +50,8 @@ function getOptionsWithAvailability({
       calcParams.shippingEstimateLimit = estimateInSeconds
     }
 
-    if (pickupOption.availability < calcParams.missingLimit) {
-      calcParams.missingLimit = pickupOption.availability
+    if (unavailableAmount < calcParams.missingLimit) {
+      calcParams.missingLimit = unavailableAmount
     }
 
     return {
@@ -64,6 +59,11 @@ function getOptionsWithAvailability({
       availability: calcParams.numberOfProducts - unavailableAmount,
     }
   })
+
+  return {
+    calcParams,
+    optionsWithAvailability,
+  }
 }
 
 function calculatePickupPointsScore({ calcParams, pickupOptions }) {
@@ -75,9 +75,7 @@ function calculatePickupPointsScore({ calcParams, pickupOptions }) {
     missingLimit,
   } = calcParams
 
-  const newPickupOptions = []
-
-  pickupOptions.forEach(pickup => {
+  const newPickupOptions = pickupOptions.map(pickup => {
     let points
 
     const shippingEstimate = estimateCalculator.getShippingEstimateQuantityInSeconds(
@@ -108,11 +106,11 @@ function calculatePickupPointsScore({ calcParams, pickupOptions }) {
         multipliers.missingEach
     }
 
-    newPickupOptions.push({
+    return {
       ...pickup,
       score: points.toFixed(2),
-    })
+    }
   })
 
-  return sortBy(newPickupOptions, 'score').reverse()
+  return sortBy(newPickupOptions, 'score')
 }
