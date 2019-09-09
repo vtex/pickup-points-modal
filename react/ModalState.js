@@ -105,7 +105,8 @@ class ModalState extends Component {
     if (
       (this.state.localSearching &&
         isCurrentState(SEARCHING, activeSidebarState)) ||
-      isCurrentState('', activeSidebarState)
+      isCurrentState('', activeSidebarState) ||
+      isCurrentState(ERROR_NOT_FOUND, activeState)
     ) {
       return
     }

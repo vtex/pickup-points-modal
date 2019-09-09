@@ -64,8 +64,9 @@ class Geolocation extends Component {
 
   handleGetCurrentPosition = () => {
     const { activeState, setGeolocationStatus } = this.props
+    const { permissionStatus } = this.state
 
-    switch (permission.state) {
+    switch (permissionStatus) {
       case DENIED:
         this.getCurrentPositionError({ code: 1 })
         break
