@@ -468,7 +468,7 @@ class Map extends Component {
           const markerIconImage =
             index < BEST_PICKUPS_AMOUNT &&
             bestPickupOptions.length > BEST_PICKUPS_AMOUNT &&
-            this.markers.length === 0
+            this.markers.length < BEST_PICKUPS_AMOUNT
               ? bestMarkerIcon
               : markerIcon
           const isScaledMarker =
@@ -581,7 +581,9 @@ class Map extends Component {
         })
         setSelectedPickupPoint({
           pickupPoint: pickupPointsList ? pickupPointsList[index] : pickupPoint,
-          isBestPickupPoint: index < BEST_PICKUPS_AMOUNT,
+          isBestPickupPoint: pickupPointsList
+            ? false
+            : index < BEST_PICKUPS_AMOUNT,
         })
         updateLocationTab(HIDE_MAP)
         setShouldSearchArea(false)

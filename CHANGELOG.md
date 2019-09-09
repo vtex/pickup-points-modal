@@ -7,23 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Best pickups algorithm, it was returning score as NaN resulting in wrong order;
+- Best pickup markers since it was counting only the first pickup point.
+
 ## [3.0.5] - 2019-09-09
 
 ### Fixed
 
-- Unavailable items amount which previously showed wrongly the items amount
+- Unavailable items amount which previously showed wrongly the items amount.
 
 ## [3.0.4] - 2019-09-09
 
 ### Fixed
 
-- Permission status from state which prevented users from select geolocation
+- Permission status from state which prevented users from select geolocation.
 
 ## [3.0.3] - 2019-09-09
 
 ### Fixed
 
-- Pickups list to only show button if has more than three pickup points
+- Pickups list to only show button if has more than three pickup points.
 
 ## [3.0.2] - 2019-09-09
 
