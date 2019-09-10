@@ -108,7 +108,7 @@ function calculatePickupPointsScore({ calcParams, pickupOptions }) {
 
     return {
       ...pickup,
-      score: points.toFixed(2),
+      score: parseFloat(points.toFixed(2)),
     }
   })
 
