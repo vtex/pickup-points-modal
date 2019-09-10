@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Pickup points order since before it was sorting strings and sometime it would give different results.
+
 ## [3.0.6] - 2019-09-09
 
 ### Fixed
