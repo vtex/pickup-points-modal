@@ -39,6 +39,7 @@ class PickupPointsModal extends Component {
       mapStatus: HIDE_MAP,
       isLargeScreen: window.innerWidth > 1023,
       shouldUseMaps: !!props.googleMapsKey,
+      innerWidth: window.innerWidth,
     }
   }
 
@@ -71,10 +72,14 @@ class PickupPointsModal extends Component {
   }
 
   resize = debounce(() => {
-    if (!this.state.isMounted) return
+    // On mobile browsers trigger the resize event when keyboard is opened
+    // even though the screen size itself is the same
+    const isWidthEqual = this.state.innerWidth === window.innerWidth
+    if (!this.state.isMounted || isWidthEqual) return
     this.setState({
       isLargeScreen: window.innerWidth > 1023,
       mapStatus: window.innerWidth > 1023 ? SHOW_MAP : HIDE_MAP,
+      innerWidth: window.innerWidth,
     })
   }, 200)
 
