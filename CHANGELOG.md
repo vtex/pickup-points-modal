@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.7] - 2019-09-10
+
 ### Fixed
 
 - Pickup points order by strings now by floating point number.
