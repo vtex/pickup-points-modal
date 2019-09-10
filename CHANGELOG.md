@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Fixed
+
+- Map breaking if did not find bounds.
+
 ## [3.0.8] - 2019-09-10
 
 ### Fixed

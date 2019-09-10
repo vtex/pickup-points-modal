@@ -204,8 +204,10 @@ class Map extends Component {
       this.createNewMarkers()
     }
 
+    const bounds = this.map.getBounds()
+
     const isInBounds =
-      markerObj && this.map.getBounds().contains(markerObj.marker.getPosition())
+      markerObj && bounds && bounds.contains(markerObj.marker.getPosition())
 
     if (
       markerObj &&
