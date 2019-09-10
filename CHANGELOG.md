@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Searching on mobile through the map would return list mode.
+
 ## [3.0.7] - 2019-09-10
 
 ### Fixed
