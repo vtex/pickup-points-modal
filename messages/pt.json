@@ -17,7 +17,7 @@
   "pickupPointsModal.productsInPoint": "Disponibilidade de produtos neste ponto",
   "pickupPointsModal.aditionalInfo": "Outras informações",
   "pickupPointsModal.unavailable": "indisponível",
-  "pickupPointsModal.unavailableItemsAmount": "{unavailableItemsAmount} de {itemsAmount} disponíveis",
+  "pickupPointsModal.unavailableItemsAmount": "{itemsAmount, plural, =0 {} one {# item indisponível} other {# itens indisponíveis}}",
   "pickupPointsModal.allItemsAvailable": "Todos os produtos disponíveis",
   "pickupPointsModal.noneItemsAvailable": "Nenhum produto disponível",
   "pickupPointsModal.businessHours": "Horário de funcionamento",
