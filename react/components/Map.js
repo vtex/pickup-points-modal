@@ -393,17 +393,16 @@ class Map extends Component {
       this.bounds = new googleMaps.LatLngBounds()
     }
 
-    const addressLocation =
-      hasAddressCoords && this.getLocation(address.geoCoordinates.value)
+    const addressLocation = hasAddressCoords
+      ? this.getLocation(address.geoCoordinates.value)
+      : null
     const bestPickupLocation =
       hasPickupPoints &&
       this.getLocation(
         bestPickupOptions[0].pickupStoreInfo.address.geoCoordinates
       )
 
-    const mapCenterLocation = addressLocation
-      ? addressLocation
-      : bestPickupLocation
+    const mapCenterLocation = addressLocation || bestPickupLocation
 
     if (
       this.addressMarker &&
