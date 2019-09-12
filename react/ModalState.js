@@ -22,6 +22,7 @@ import {
   isDifferentGeoCoords,
   getInitialActiveState,
   getInitialActiveSidebarState,
+  isCurrentStateFromAllStates,
 } from './utils/StateUtils'
 import { findSla } from './utils/SlasUtils'
 import { newAddress } from './utils/newAddress'
@@ -89,7 +90,6 @@ class ModalState extends Component {
       activeState,
       askForGeolocation,
       selectedPickupPoint,
-      externalPickupPoints,
     } = this.state
 
     const thisAddressCoords =
@@ -101,15 +101,6 @@ class ModalState extends Component {
 
     const prevIsSearching = prevProps.isSearching
     const prevActiveSidebarState = prevState.activeSidebarState
-
-    if (
-      (this.state.localSearching &&
-        isCurrentState(SEARCHING, activeSidebarState)) ||
-      isCurrentState('', activeSidebarState) ||
-      isCurrentState(ERROR_NOT_FOUND, activeState)
-    ) {
-      return
-    }
 
     if (mapStatus !== prevProps.mapStatus) {
       this.setShouldSearchArea(false)
@@ -163,41 +154,51 @@ class ModalState extends Component {
     }
 
     const hasPickups = pickupOptions.length > 0
+    const previousHasPickups = prevProps.pickupOptions.length > 0
 
     const isDetailsNoSelectedPickupPoint =
       isCurrentState(DETAILS, activeSidebarState) && !selectedPickupPoint
 
     const isSidebarState =
+      !isSearching && hasPickups && isCurrentState(SEARCHING, activeState)
+
+    const isListState =
       !isSearching &&
       hasPickups &&
-      isCurrentState(SEARCHING, activeState) &&
-      !isCurrentState(SIDEBAR, activeState)
+      isCurrentState(SEARCHING, activeSidebarState)
 
     const isGeolocationSearchingState =
-      askForGeolocation &&
-      !isCurrentState(SIDEBAR, activeState) &&
-      !isCurrentState(GEOLOCATION_SEARCHING, activeState)
+      askForGeolocation && !isCurrentState(SIDEBAR, activeState)
 
     const isErrorNopickupsState =
       !isSearching &&
       !hasPickups &&
+      !previousHasPickups &&
       !isCurrentState(INITIAL, activeState) &&
-      !isCurrentState(ERROR_NOT_FOUND, activeState) &&
-      !isCurrentState(ERROR_NOT_FOUND, activeSidebarState)
+      !isCurrentState(GEOLOCATION_SEARCHING, activeState)
 
     switch (true) {
       case isGeolocationSearchingState:
+        if (activeState === GEOLOCATION_SEARCHING) return
         this.setActiveState(GEOLOCATION_SEARCHING)
         this.setActiveSidebarState(LIST)
         return
 
+      case isListState:
+        if (activeSidebarState === LIST) return
+        this.setActiveSidebarState(LIST)
+
       case isDetailsNoSelectedPickupPoint:
       case isSidebarState:
+        if (activeState === SIDEBAR) return
         this.setActiveState(SIDEBAR)
         this.setActiveSidebarState(LIST)
         return
 
       case isErrorNopickupsState:
+        if (isCurrentStateFromAllStates(ERROR_NOT_FOUND, this.state)) {
+          return
+        }
         if (activeState === SIDEBAR) {
           this.setActiveSidebarState(ERROR_NOT_FOUND)
         } else {

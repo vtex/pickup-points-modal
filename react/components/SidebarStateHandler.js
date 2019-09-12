@@ -12,6 +12,7 @@ import {
   SEARCHING,
   ERROR_COULD_NOT_GETLOCATION,
   ERROR_NOT_FOUND,
+  GEOLOCATION_SEARCHING,
 } from '../constants'
 import { injectState } from '../modalStateContext'
 
@@ -30,6 +31,7 @@ class SidebarStateHandler extends PureComponent {
     } = this.props
 
     switch (activeSidebarState) {
+      case GEOLOCATION_SEARCHING:
       case SEARCHING: {
         return (
           <SearchingState

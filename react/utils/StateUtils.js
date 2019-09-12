@@ -14,6 +14,13 @@ export function isCurrentState(state, activeState) {
   return state === activeState
 }
 
+export function isCurrentStateFromAllStates(currentState, states) {
+  return (
+    currentState === states.activeState ||
+    currentState === states.activeSidebarState
+  )
+}
+
 export const getInitialActiveState = props => {
   if (props.askForGeolocation) {
     return GEOLOCATION_SEARCHING

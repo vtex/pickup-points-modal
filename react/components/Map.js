@@ -384,15 +384,25 @@ class Map extends Component {
     const hasAddressCoords =
       address && address.geoCoordinates.value.length !== 0
 
+    const hasPickupPoints = bestPickupOptions.length > 0
+
     if (!this.map) return
     this.bounds = null
 
-    if (hasAddressCoords && shouldResetBounds) {
+    if ((hasAddressCoords || hasPickupPoints) && shouldResetBounds) {
       this.bounds = new googleMaps.LatLngBounds()
     }
 
-    const addressLocation =
-      hasAddressCoords && this.getLocation(address.geoCoordinates.value)
+    const addressLocation = hasAddressCoords
+      ? this.getLocation(address.geoCoordinates.value)
+      : null
+    const bestPickupLocation =
+      hasPickupPoints &&
+      this.getLocation(
+        bestPickupOptions[0].pickupStoreInfo.address.geoCoordinates
+      )
+
+    const mapCenterLocation = addressLocation || bestPickupLocation
 
     if (
       this.addressMarker &&
@@ -404,24 +414,27 @@ class Map extends Component {
 
     if (
       !this.addressMarker &&
-      hasAddressCoords &&
+      (hasAddressCoords || bestPickupLocation) &&
       bestPickupOptions.length > 0 &&
       bestPickupOptions.some(pickup => !!pickup.pickupDistance)
     ) {
       const markerOptions = {
-        position: addressLocation,
+        position: mapCenterLocation,
         draggable: false,
         map: this.map,
         icon: personPin,
       }
 
+      this.map.setCenter(mapCenterLocation)
+      this.recenterMap(mapCenterLocation)
+
       if (shouldResetBounds) {
-        this.bounds.extend(addressLocation)
+        this.bounds.extend(mapCenterLocation)
       }
 
       this.addressMarker = new googleMaps.Marker(markerOptions)
     } else if (hasAddressCoords && shouldResetBounds) {
-      this.bounds.extend(addressLocation)
+      this.bounds.extend(mapCenterLocation)
     }
 
     externalLocations &&

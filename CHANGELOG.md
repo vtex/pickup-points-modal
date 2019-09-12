@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Map not loading on second purchase;
+- Searching pickup points with geolocation which would be stuck in a loading screen
+
 ## [3.0.11] - 2019-09-12
 
 ### Added

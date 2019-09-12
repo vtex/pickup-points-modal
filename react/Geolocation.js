@@ -97,15 +97,8 @@ class Geolocation extends Component {
   }
 
   getCurrentPositionSuccess = position => {
-    const {
-      activeState,
-      address,
-      googleMaps,
-      onChangeAddress,
-      rules,
-      setActiveSidebarState,
-      setActiveState,
-    } = this.props
+    const { address, googleMaps, onChangeAddress, rules } = this.props
+
     this.setState({ isLoadingGeolocation: false })
     this.setCurrentActiveState(SEARCHING)
     handleGetAddressByGeolocation({
@@ -113,7 +106,6 @@ class Geolocation extends Component {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       },
-      geocoder: this.geocoder,
       googleMaps: googleMaps,
       onChangeAddress: onChangeAddress,
       rules: rules,
@@ -127,13 +119,7 @@ class Geolocation extends Component {
 
   getCurrentPositionError = error => {
     this.setState({ isLoadingGeolocation: false })
-    const {
-      activeState,
-      setActiveState,
-      setActiveSidebarState,
-      setAskForGeolocation,
-      setGeolocationStatus,
-    } = this.props
+    const { setAskForGeolocation, setGeolocationStatus } = this.props
     switch (error.code) {
       case 0: // UNKNOWN ERROR
         setAskForGeolocation(false)
