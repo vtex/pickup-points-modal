@@ -61,6 +61,7 @@ export function updateShippingData(logisticsInfo, pickupPoint) {
     logisticsInfo: logisticsInfo.map(li => {
       const hasSla = li.slas.some(sla => sla.id === pickupPoint.id)
       return {
+        itemIndex: li.itemIndex,
         addressId: hasSla ? pickupAddressWithAddressId.addressId : li.addressId,
         selectedSla: hasSla ? pickupPoint.id : li.selectedSla,
         selectedDeliveryChannel: hasSla
