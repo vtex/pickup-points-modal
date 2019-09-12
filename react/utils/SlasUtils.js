@@ -19,9 +19,15 @@ export function isPickup(deliveryChannelSource) {
 }
 
 export function findSla(li, pickupPoint) {
-  return li.slas.find(simulationPickupPoint =>
-    simulationPickupPoint.id.includes(
-      pickupPoint && (pickupPoint.id || pickupPoint.pickupPointId)
-    )
+  return li.slas.find(
+    simulationPickupPoint =>
+      (simulationPickupPoint.id &&
+        simulationPickupPoint.id.includes(
+          pickupPoint && (pickupPoint.id || pickupPoint.pickupPointId)
+        )) ||
+      (simulationPickupPoint.pickupPointId &&
+        simulationPickupPoint.pickupPointId.includes(
+          pickupPoint && (pickupPoint.id || pickupPoint.pickupPointId)
+        ))
   )
 }
