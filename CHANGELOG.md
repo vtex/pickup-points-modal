@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `shippingData` request adding missing `itemIndex` from the body.
+
 ## [3.0.9] - 2019-09-11
 
-## Fixed
+### Fixed
 
 - Map breaking if did not find bounds.
 
