@@ -194,10 +194,7 @@ class Map extends Component {
       this.createNewMarkers()
     }
 
-    if (
-      thisPickupOptions !== prevPickupOptions ||
-      thisExternalPickupPoints !== prevExternalPickupPoints
-    ) {
+    if (thisExternalPickupPoints !== prevExternalPickupPoints) {
       this.searchMarkers.forEach(markerObj => {
         markerObj.marker.setMap(null)
         googleMaps.event.removeListener(markerObj.markerClickListener)

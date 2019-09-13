@@ -51,12 +51,16 @@ export function updateShippingData(logisticsInfo, pickupPoint) {
     ? pickupPoint.pickupStoreInfo.address
     : pickupPoint.address
 
+  const hasGeocoordinates =
+    pickupAddress && pickupAddress.geoCoordinates.length > 0
+
   const pickupAddressWithAddressId = newAddress({
     ...pickupAddress,
     addressId: undefined,
     addressType: SEARCH,
   })
   const shippingData = {
+    ...(hasGeocoordinates ? { clearAddressIfPostalCodeNotFound: false } : {}),
     selectedAddresses: [pickupAddressWithAddressId],
     logisticsInfo: logisticsInfo.map(li => {
       const hasSla = li.slas.some(sla => sla.id === pickupPoint.id)

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Parameter to shippingData not to clear address if postalCode not found
+
 ### Changed
 
 - Moment to reset markers only if pickup options changed
