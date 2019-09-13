@@ -52,7 +52,7 @@ class ModalState extends Component {
       pickupOptions: props.pickupOptions,
       pickupPoints: props.pickupPoints,
       searchedAreaNoPickups: false,
-      selectedPickupPoint: props.selectedPickupPoint,
+      selectedPickupPoint: props.selectedPickupPoint || props.activePickupPoint,
       shouldSearchArea: false,
       showOtherPickupPoints:
         getBestPickupPoints(

@@ -226,6 +226,7 @@ class PickupPointsModal extends Component {
               onClickClose={this.handleCloseModal}
             />
             <ModalState
+              activePickupPoint={activePickupPoint}
               address={searchAddressWithAddressQuery}
               askForGeolocation={askForGeolocation}
               googleMapsKey={googleMapsKey}

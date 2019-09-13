@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Parameter to shippingData not to clear address if postalCode not found
+- Axios retry to retry if simulation gives errors
+
+### Changed
+
+- Moment to reset markers only if pickup options changed
+
+### Fixed
+
+- Getting selected pickup point from active pickup and selected pickup point
+
 ## [3.0.12] - 2019-09-12
 
 ### Fixed

@@ -1,5 +1,9 @@
 import { newAddress } from '../utils/newAddress'
 import { PICKUP_IN_STORE, SEARCH } from '../constants'
+import axios from 'axios'
+import axiosRetry from 'axios-retry'
+
+axiosRetry(axios, { retries: 2 })
 
 export function fetchExternalPickupPoints(geoCoordinates) {
   return fetch(
@@ -34,16 +38,14 @@ export function getAvailablePickups({
     },
   }
 
-  return fetch(
-    `/api/checkout/pub/orderForms/simulation?sc=${salesChannel}&rnbBehavior=0`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(dataRequest),
-    }
-  ).then(response => response.json())
+  return axios({
+    url: `/api/checkout/pub/orderForms/simulation?sc=${salesChannel}&rnbBehavior=0`,
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: JSON.stringify(dataRequest),
+  })
 }
 
 export function updateShippingData(logisticsInfo, pickupPoint) {
@@ -51,12 +53,16 @@ export function updateShippingData(logisticsInfo, pickupPoint) {
     ? pickupPoint.pickupStoreInfo.address
     : pickupPoint.address
 
+  const hasGeocoordinates =
+    pickupAddress && pickupAddress.geoCoordinates.length > 0
+
   const pickupAddressWithAddressId = newAddress({
     ...pickupAddress,
     addressId: undefined,
     addressType: SEARCH,
   })
   const shippingData = {
+    ...(hasGeocoordinates ? { clearAddressIfPostalCodeNotFound: false } : {}),
     selectedAddresses: [pickupAddressWithAddressId],
     logisticsInfo: logisticsInfo.map(li => {
       const hasSla = li.slas.some(sla => sla.id === pickupPoint.id)
