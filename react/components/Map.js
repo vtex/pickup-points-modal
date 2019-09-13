@@ -189,6 +189,11 @@ class Map extends Component {
       return
     }
 
+    if (thisPickupOptions !== prevPickupOptions) {
+      this.resetMarkers()
+      this.createNewMarkers()
+    }
+
     if (
       thisPickupOptions !== prevPickupOptions ||
       thisExternalPickupPoints !== prevExternalPickupPoints
@@ -200,7 +205,6 @@ class Map extends Component {
         googleMaps.event.removeListener(markerObj.markerHoverOutListener)
       })
       this.searchMarkers = []
-      this.resetMarkers()
       this.createNewMarkers()
     }
 
