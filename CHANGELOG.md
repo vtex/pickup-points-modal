@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Parameter to shippingData not to clear address if postalCode not found
+- Axios retry to retry if simulation gives errors
 
 ### Changed
 
