@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Geolocation stuck on loading
+- Getting pickup points from simulation
+
 ## [3.0.13] - 2019-09-13
 
 ### Added

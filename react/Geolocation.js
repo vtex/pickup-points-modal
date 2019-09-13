@@ -63,26 +63,17 @@ class Geolocation extends Component {
   }
 
   handleGetCurrentPosition = () => {
-    const { activeState, setGeolocationStatus } = this.props
+    const { setGeolocationStatus } = this.props
     const { permissionStatus } = this.state
-
     switch (permissionStatus) {
       case DENIED:
         this.getCurrentPositionError({ code: 1 })
         break
 
       case GRANTED:
-        setGeolocationStatus(SEARCHING)
-        if (activeState === SIDEBAR) {
-          this.props.setActiveSidebarState(SEARCHING)
-        } else {
-          this.props.setActiveState(SEARCHING)
-        }
-
-        this.handleCurrentPosition()
-        break
-
       default:
+        setGeolocationStatus(SEARCHING)
+        this.setCurrentActiveState(SEARCHING)
         this.handleCurrentPosition()
     }
   }
