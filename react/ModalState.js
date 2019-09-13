@@ -160,7 +160,10 @@ class ModalState extends Component {
       isCurrentState(DETAILS, activeSidebarState) && !selectedPickupPoint
 
     const isSidebarState =
-      !isSearching && hasPickups && isCurrentState(SEARCHING, activeState)
+      !isSearching &&
+      hasPickups &&
+      (isCurrentState(SEARCHING, activeState) ||
+        isCurrentState(GEOLOCATION_SEARCHING, activeState))
 
     const isListState =
       !isSearching &&
@@ -178,12 +181,6 @@ class ModalState extends Component {
       !isCurrentState(GEOLOCATION_SEARCHING, activeState)
 
     switch (true) {
-      case isGeolocationSearchingState:
-        if (activeState === GEOLOCATION_SEARCHING) return
-        this.setActiveState(GEOLOCATION_SEARCHING)
-        this.setActiveSidebarState(LIST)
-        return
-
       case isListState:
         if (activeSidebarState === LIST) return
         this.setActiveSidebarState(LIST)
@@ -192,6 +189,12 @@ class ModalState extends Component {
       case isSidebarState:
         if (activeState === SIDEBAR) return
         this.setActiveState(SIDEBAR)
+        this.setActiveSidebarState(LIST)
+        return
+
+      case isGeolocationSearchingState:
+        if (activeState === GEOLOCATION_SEARCHING) return
+        this.setActiveState(GEOLOCATION_SEARCHING)
         this.setActiveSidebarState(LIST)
         return
 
@@ -302,8 +305,12 @@ class ModalState extends Component {
       orderFormId,
       pickupAddress,
     })
-      .then(data =>
-        this.updatePickupPoints({ data, pickupPoint, isBestPickupPoint })
+      .then(response =>
+        this.updatePickupPoints({
+          data: response.data,
+          pickupPoint,
+          isBestPickupPoint,
+        })
       )
       .catch(error => {
         this.setState(
@@ -336,7 +343,7 @@ class ModalState extends Component {
       orderFormId,
       pickupAddress: newAreaAddress,
     })
-      .then(data => this.updatePickupPoints({ data }))
+      .then(response => this.updatePickupPoints({ data: response.data }))
       .catch(error => {
         this.setActiveSidebarState(LIST)
         this.setState({ localSearching: false })
