@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.13] - 2019-09-13
+
 ### Added
 
 - Parameter to shippingData not to clear address if postalCode not found
