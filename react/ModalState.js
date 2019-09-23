@@ -353,6 +353,7 @@ class ModalState extends Component {
   updatePickupPoints = ({ data, pickupPoint, isBestPickupPoint }) => {
     const {
       bestPickupOptions,
+      externalPickupPoints,
       logisticsInfo,
       pickupOptions,
       pickupPoints,
@@ -375,6 +376,13 @@ class ModalState extends Component {
     const newPickupPoints = getUniquePickupPoints(
       pickupPoints,
       availablePickupPoints
+    )
+
+    const newExternalPickupPoints = externalPickupPoints.filter(
+      externalPickup =>
+        !newBestPickupOptions.some(
+          option => option.pickupPointId === externalPickup.id
+        )
     )
 
     const newLogisticsInfo = logisticsInfo.map((li, index) => ({
@@ -403,6 +411,7 @@ class ModalState extends Component {
             sortBy(newPickupOptions, 'pickupDistance')
           ),
           bestPickupOptions: this.removePickupDistance(newBestPickupOptions),
+          externalPickupPoints: newExternalPickupPoints,
           logisticsInfo: newLogisticsInfo,
         },
         () => this.setActiveSidebarState(DETAILS)
@@ -417,6 +426,7 @@ class ModalState extends Component {
             sortBy(newPickupOptions, 'pickupDistance')
           ),
           bestPickupOptions: this.removePickupDistance(newBestPickupOptions),
+          externalPickupPoints: newExternalPickupPoints,
           logisticsInfo: newLogisticsInfo,
         },
         () =>
@@ -436,15 +446,22 @@ class ModalState extends Component {
   }
 
   getExternalPickupOptions = geoCoordinates => {
-    const { externalPickupPoints } = this.state
+    const { bestPickupOptions, externalPickupPoints } = this.state
 
     fetchExternalPickupPoints(geoCoordinates)
       .then(data =>
         this.setState({
-          externalPickupPoints: data.items.map(item => ({
-            ...item.pickupPoint,
-            distance: null,
-          })),
+          externalPickupPoints: data.items
+            .filter(
+              item =>
+                !bestPickupOptions.some(
+                  option => option.pickupPointId === item.pickupPoint.id
+                )
+            )
+            .map(item => ({
+              ...item.pickupPoint,
+              distance: null,
+            })),
         })
       )
       .catch(() => this.setState({ externalPickupPoints }))

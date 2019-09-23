@@ -90,15 +90,19 @@ class PickupPointInfo extends Component {
       storePreferencesData,
     })
 
-    const shouldShowUnavailableAmount =
-      unavailableItemsAmount !== items.length && unavailableItemsAmount > 0
-
     const sholdShowUnavailableMarker = !isList && !pickupPoint.pickupStoreInfo
     const sholdShowSearchMarker = isList && !pickupPoint.pickupStoreInfo
     const shouldShowEstimate = pickupPoint && pickupPoint.shippingEstimate
     const isBestPickupPointAndAvailable =
       pickupPoint.pickupStoreInfo &&
       (isBestPickupPoint || (isSelectedBestPickupPoint && !isList))
+    const shouldShowUnavailableAmount =
+      unavailableItemsAmount !== items.length &&
+      unavailableItemsAmount > 0 &&
+      !sholdShowSearchMarker
+
+    const shouldShowAllUnavailable =
+      unavailableItemsAmount === items.length && !sholdShowSearchMarker
 
     return (
       <div
@@ -151,7 +155,7 @@ class PickupPointInfo extends Component {
               />
             </div>
 
-            {unavailableItemsAmount === items.length && (
+            {shouldShowAllUnavailable && (
               <span
                 className={`${
                   styles.pickupPointNoneAvailable

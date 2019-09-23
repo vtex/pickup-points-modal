@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Showing availability only if not an external pickup point
+
+### Changed
+
+- External pickup points to show only the ones which are not SLAs
+
 ## [3.0.14] - 2019-09-13
 
 ### Fixed
