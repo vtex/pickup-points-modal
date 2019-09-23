@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.15] - 2019-09-23
+
 ### Fixed
 
 - Showing availability only if not an external pickup point
