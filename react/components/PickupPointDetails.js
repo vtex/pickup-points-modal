@@ -67,6 +67,7 @@ class PickupPointDetails extends Component {
   }
 
   handleBackButtonClick = () => {
+    this.props.setSelectedPickupPoint({ pickupPoint: null })
     this.props.setActiveSidebarState(LIST)
   }
 
@@ -281,7 +282,6 @@ class PickupPointDetails extends Component {
 
 PickupPointDetails.propTypes = {
   bestPickupOptions: PropTypes.array.isRequired,
-  handleChangeActiveSLAOption: PropTypes.func.isRequired,
   handleClosePickupPointsModal: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
   isSelectedSla: PropTypes.bool,
@@ -292,9 +292,10 @@ PickupPointDetails.propTypes = {
   selectedPickupPoint: PropTypes.object.isRequired,
   sellerId: PropTypes.string,
   storePreferencesData: PropTypes.object.isRequired,
-  setActiveSidebarState: PropTypes.func.isRequired,
   selectNextPickupPoint: PropTypes.func,
   selectPreviousPickupPoint: PropTypes.func,
+  setActiveSidebarState: PropTypes.func.isRequired,
+  setSelectedPickupPoint: PropTypes.func.isRequired,
   shouldUseMaps: PropTypes.bool.isRequired,
 }
 

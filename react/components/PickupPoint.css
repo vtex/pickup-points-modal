@@ -85,10 +85,6 @@
   margin-top: 12px;
 }
 
-.searchMarkerIcon {
-  height: 32px;
-}
-
 .pickupPointPrice,
 .pickupPointSla {
   display: inline-block;

@@ -12,6 +12,7 @@ export function injectState(Component) {
           bestPickupOptions,
           externalPickupPoints,
           geolocationStatus,
+          hoverPickupPoint,
           isSearching,
           isSelectedBestPickupPoint,
           searchPickupsInArea,
@@ -26,6 +27,7 @@ export function injectState(Component) {
           selectPreviousPickupPoint,
           selectedPickupPoint,
           setGeolocationStatus,
+          setHoverPickupPoint,
           setActiveState,
           setActiveSidebarState,
           setAskForGeolocation,
@@ -43,6 +45,7 @@ export function injectState(Component) {
             bestPickupOptions={bestPickupOptions}
             externalPickupPoints={externalPickupPoints}
             geolocationStatus={geolocationStatus}
+            hoverPickupPoint={hoverPickupPoint}
             isSearching={isSearching}
             isSelectedBestPickupPoint={isSelectedBestPickupPoint}
             lastState={lastState}
@@ -57,6 +60,7 @@ export function injectState(Component) {
             selectNextPickupPoint={selectNextPickupPoint}
             selectPreviousPickupPoint={selectPreviousPickupPoint}
             setGeolocationStatus={setGeolocationStatus}
+            setHoverPickupPoint={setHoverPickupPoint}
             setActiveState={setActiveState}
             setActiveSidebarState={setActiveSidebarState}
             setAskForGeolocation={setAskForGeolocation}

@@ -4,6 +4,7 @@ class UnavailableMarker extends PureComponent {
   render() {
     return (
       <svg
+        className="pkpmodal-pickup-point-best-marker-image"
         width="25"
         height="31"
         viewBox="0 0 25 31"

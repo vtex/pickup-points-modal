@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Marker changes size on hover and when a pickup point in the list is selected
+
 ## [3.0.15] - 2019-09-23
 
 ### Fixed

@@ -8,11 +8,11 @@ import PinIcon from '../assets/components/PinIcon'
 import TranslateEstimate from 'vtex.shipping-estimate-translator/TranslateEstimate'
 import { AddressSummary } from '@vtex/address-form'
 import { getUnavailableItemsAmount } from '../utils/pickupUtils'
-import bestMarkerIcon from '../assets/icons/best_marker.svg'
-import searchMarkerIcon from '../assets/icons/search_marker_icon.svg'
 import styles from './PickupPoint.css'
 import { injectState } from '../modalStateContext'
 import UnavailableMarker from '../assets/components/UnavailableMarker'
+import SearchMarkerIcon from '../assets/components/SearchMarkerIcon'
+import BestMarkerIcon from '../assets/components/BestMarkerIcon'
 
 const MAX_KILOMETERS = 1000
 class PickupPointInfo extends Component {
@@ -41,6 +41,14 @@ class PickupPointInfo extends Component {
           this.props.pickupPoint,
       })
     }
+  }
+
+  handlePickupEnter = () => {
+    this.props.setHoverPickupPoint(this.props.pickupPoint)
+  }
+
+  handlePickupLeave = () => {
+    this.props.setHoverPickupPoint(null)
   }
 
   handleOpenPickupDetails = () => {
@@ -109,7 +117,10 @@ class PickupPointInfo extends Component {
         className={`${styles.pickupPoint} pkpmodal-pickup-point`}
         id={pickupId}
         onClick={this.handleOpenPickupDetails}>
-        <div className={`${styles.pickupPointMain} pkpmodal-pickup-point-main`}>
+        <div
+          className={`${styles.pickupPointMain} pkpmodal-pickup-point-main`}
+          onMouseLeave={this.handlePickupLeave}
+          onMouseEnter={this.handlePickupEnter}>
           <div
             className={`${
               shouldUseMaps
@@ -117,10 +128,8 @@ class PickupPointInfo extends Component {
                 : styles.pickupPointMarkerPostalCode
             } pkpmodal-pickup-point-marker`}>
             {sholdShowUnavailableMarker && <UnavailableMarker />}
-            {sholdShowSearchMarker && (
-              <img className={styles.searchMarkerIcon} src={searchMarkerIcon} />
-            )}
-            {isBestPickupPointAndAvailable && <img src={bestMarkerIcon} />}
+            {sholdShowSearchMarker && <SearchMarkerIcon />}
+            {isBestPickupPointAndAvailable && <BestMarkerIcon />}
             {!sholdShowSearchMarker &&
               !sholdShowUnavailableMarker &&
               !isBestPickupPointAndAvailable && <PinIcon />}
@@ -244,6 +253,7 @@ PickupPointInfo.propTypes = {
   setActiveSidebarState: PropTypes.func.isRequired,
   shouldUseMaps: PropTypes.bool,
   setShouldSearchArea: PropTypes.func.isRequired,
+  setHoverPickupPoint: PropTypes.func.isRequired,
   showAddress: PropTypes.bool,
   storePreferencesData: PropTypes.object.isRequired,
   togglePickupDetails: PropTypes.func,
