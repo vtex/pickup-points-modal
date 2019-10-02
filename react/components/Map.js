@@ -604,7 +604,9 @@ class Map extends Component {
     const { googleMaps } = this.props
 
     marker.setIcon({
-      url: isSearching ? searchingMarkerIcon : marker.icon.url,
+      url: isSearching
+        ? searchingMarkerIcon
+        : marker && marker.icon && marker.icon.url,
       size: new googleMaps.Size(width, height),
       scaledSize: new googleMaps.Size(width, height),
     })
