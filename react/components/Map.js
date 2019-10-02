@@ -46,6 +46,7 @@ class Map extends Component {
       isLargeScreen,
       isLoadingGoogle,
       externalPickupPoints,
+      hoverPickupPoint,
       pickupPoints,
       pickupPoint,
       rules,
@@ -88,6 +89,8 @@ class Map extends Component {
       prevProps.pickupPoint &&
       pickupPoint &&
       prevProps.pickupPoint.id !== pickupPoint.id
+    const hoverPickupPointChanged =
+      prevProps.hoverPickupPoint !== hoverPickupPoint
 
     return (
       rulesChanged ||
@@ -97,7 +100,8 @@ class Map extends Component {
       pickupPointChanged ||
       pickupGeolocationsChanged ||
       selectedPickupPointChanged ||
-      externalPickupPointsChanged
+      externalPickupPointsChanged ||
+      hoverPickupPointChanged
     )
   }
 
@@ -112,7 +116,16 @@ class Map extends Component {
       pickupPoints,
       externalPickupPoints,
       selectedPickupPoint,
+      hoverPickupPoint,
     } = this.props
+
+    const prevHoverPickupPoint = prevProps.hoverPickupPoint
+
+    if (hoverPickupPoint !== prevHoverPickupPoint) {
+      this.setSelectedPickupPoint(hoverPickupPoint)
+    }
+
+    const prevSelectedPickupPoint = prevProps.selectedPickupPoint
 
     this.center = this.getLocation(this.props.address.geoCoordinates.value)
 
@@ -189,9 +202,13 @@ class Map extends Component {
       return
     }
 
-    if (thisPickupOptions !== prevPickupOptions) {
+    if (
+      thisPickupOptions !== prevPickupOptions ||
+      selectedPickupPoint !== prevSelectedPickupPoint
+    ) {
       this.resetMarkers()
       this.createNewMarkers()
+      this.setSelectedPickupPoint()
     }
 
     if (thisExternalPickupPoints !== prevExternalPickupPoints) {
@@ -422,6 +439,7 @@ class Map extends Component {
       const markerOptions = {
         position: mapCenterLocation,
         draggable: false,
+        zIndex: 1,
         map: this.map,
         icon: personPin,
       }
@@ -446,7 +464,7 @@ class Map extends Component {
         const markerOptions = {
           position: location,
           draggable: false,
-          zIndex: 1,
+          zIndex: 2,
           map: this.map,
           icon: {
             url: searchMarkerIcon,
@@ -529,6 +547,33 @@ class Map extends Component {
             isLargeScreen && this.map.panBy(PAN_LEFT_LAT, PAN_LEFT_LNG)
           }
         })
+
+    this.setSelectedPickupPoint()
+  }
+
+  setSelectedPickupPoint = hoverPickupPoint => {
+    const { selectedPickupPoint } = this.props
+
+    const pickupPointToMatch = hoverPickupPoint || selectedPickupPoint
+
+    this.markers.forEach(markerObj => {
+      const isScaledMarker =
+        pickupPointToMatch && pickupPointToMatch.id === markerObj.pickupPoint
+      this.setIcon({
+        marker: markerObj.marker,
+        width: isScaledMarker ? BIG_MARKER_WIDTH : MARKER_WIDTH,
+        height: isScaledMarker ? BIG_MARKER_HEIGHT : MARKER_HEIGHT,
+      })
+    })
+    this.searchMarkers.forEach(markerObj => {
+      const isScaledMarker =
+        pickupPointToMatch && pickupPointToMatch.id === markerObj.pickupPoint
+      this.setIcon({
+        marker: markerObj.marker,
+        width: isScaledMarker ? BIG_MARKER_WIDTH : MARKER_WIDTH,
+        height: isScaledMarker ? BIG_MARKER_HEIGHT : MARKER_HEIGHT,
+      })
+    })
   }
 
   resetMarkers = location => {
@@ -575,7 +620,6 @@ class Map extends Component {
     const {
       changeActivePickupDetails,
       googleMaps,
-      selectedPickupPoint,
       setSelectedPickupPoint,
       setShouldSearchArea,
       updateLocationTab,
@@ -623,8 +667,8 @@ class Map extends Component {
       'mouseout',
       () => {
         if (
-          selectedPickupPoint &&
-          selectedPickupPoint.id ===
+          this.props.selectedPickupPoint &&
+          this.props.selectedPickupPoint.id ===
             (pickupPointsList ? pickupPointsList[index].id : pickupPoint.id)
         ) {
           return
@@ -697,6 +741,7 @@ Map.propTypes = {
   externalPickupPoints: PropTypes.array,
   geoCoordinates: PropTypes.array,
   googleMaps: PropTypes.object,
+  hoverPickupPoint: PropTypes.object,
   isLargeScreen: PropTypes.bool,
   isLoadingGoogle: PropTypes.bool,
   isPickupDetailsActive: PropTypes.bool,

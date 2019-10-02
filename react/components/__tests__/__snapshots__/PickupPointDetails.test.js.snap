@@ -88,6 +88,8 @@ exports[`PickupPointDetails should render self and components 1`] = `
       >
         <div
           className="pickupPointMain pkpmodal-pickup-point-main"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="pickupPointMarkerPostalCode pkpmodal-pickup-point-marker"

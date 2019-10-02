@@ -52,14 +52,10 @@ class ModalState extends Component {
       pickupOptions: props.pickupOptions,
       pickupPoints: props.pickupPoints,
       searchedAreaNoPickups: false,
+      hoverPickupPoint: null,
       selectedPickupPoint: props.selectedPickupPoint || props.activePickupPoint,
       shouldSearchArea: false,
-      showOtherPickupPoints:
-        getBestPickupPoints(
-          props.pickupOptions,
-          props.items,
-          props.logisticsInfo
-        ).length <= 3,
+      showOtherPickupPoints: false,
     }
   }
 
@@ -279,9 +275,22 @@ class ModalState extends Component {
     })
   }
 
+  setHoverPickupPoint = pickupPoint => {
+    this.setState({ hoverPickupPoint: pickupPoint })
+  }
+
   setSelectedPickupPoint = ({ pickupPoint, isBestPickupPoint }) => {
     const { orderFormId, salesChannel } = this.props
     const { logisticsInfo } = this.state
+
+    if (!pickupPoint) {
+      this.setState({
+        selectedPickupPoint: null,
+        activeSidebarState: LIST,
+        isSelectedBestPickupPoint: false,
+      })
+      return
+    }
 
     const pickupAddress = pickupPoint.pickupStoreInfo
       ? pickupPoint.pickupStoreInfo.address
@@ -475,6 +484,7 @@ class ModalState extends Component {
       bestPickupOptions,
       externalPickupPoints,
       geolocationStatus,
+      hoverPickupPoint,
       isSearching,
       isSelectedBestPickupPoint,
       lastState,
@@ -499,6 +509,7 @@ class ModalState extends Component {
           geolocationStatus,
           isSearching,
           isSelectedBestPickupPoint,
+          hoverPickupPoint,
           lastState,
           lastSidebarState,
           lastMapCenterLatLng,
@@ -514,6 +525,7 @@ class ModalState extends Component {
           setAskForGeolocation: this.setAskForGeolocation,
           setActiveSidebarState: this.setActiveSidebarState,
           setGeolocationStatus: this.setGeolocationStatus,
+          setHoverPickupPoint: this.setHoverPickupPoint,
           setMapCenterLatLng: this.setMapCenterLatLng,
           setSelectedPickupPoint: this.setSelectedPickupPoint,
           shouldSearchArea,
