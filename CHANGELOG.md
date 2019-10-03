@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.17] - 2019-10-03
+
 ### Fixed
 
 - Modal breaking if map does not load due to billing issues
