@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Not showing best pickup point markers in the remaining pickup points list
+
 ## [3.0.17] - 2019-10-03
 
 ### Fixed
