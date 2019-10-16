@@ -17,27 +17,34 @@ class PickupPointsList extends PureComponent {
 
     this.state = {
       pickupPoints: [...props.pickupOptions, ...props.externalPickupPoints],
+      bestPickupOptions: props.bestPickupOptions.slice(0, BEST_PICKUPS_AMOUNT),
       currentPickupPoints: [
         ...props.pickupOptions,
         ...props.externalPickupPoints,
-      ].filter((_, index) => index < 20),
+      ].slice(0, 20),
       currentAmount: 20,
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { pickupOptions, externalPickupPoints } = this.props
+    const {
+      bestPickupOptions,
+      externalPickupPoints,
+      pickupOptions,
+    } = this.props
+
     const { currentAmount } = this.state
+
     if (
       pickupOptions !== prevProps.pickupOptions ||
       externalPickupPoints !== prevProps.externalPickupPoints
     ) {
       const pickupPoints = [...pickupOptions, ...externalPickupPoints]
+
       this.setState({
         pickupPoints,
-        currentPickupPoints: pickupPoints.filter(
-          (_, index) => index < currentAmount
-        ),
+        bestPickupOptions: bestPickupOptions.slice(0, BEST_PICKUPS_AMOUNT),
+        currentPickupPoints: pickupPoints.slice(0, currentAmount),
       })
     }
   }
@@ -59,7 +66,6 @@ class PickupPointsList extends PureComponent {
 
   render() {
     const {
-      bestPickupOptions,
       logisticsInfo,
       items,
       intl,
@@ -72,12 +78,16 @@ class PickupPointsList extends PureComponent {
       storePreferencesData,
     } = this.props
 
-    const { currentAmount, currentPickupPoints, pickupPoints } = this.state
+    const {
+      bestPickupOptions,
+      currentAmount,
+      currentPickupPoints,
+      pickupPoints,
+    } = this.state
 
     const hasMorePickupPoints = currentAmount <= pickupPoints.length
 
-    const hasMinimumPickupPoints =
-      bestPickupOptions.length > BEST_PICKUPS_AMOUNT
+    const hasMinimumPickupPoints = pickupPoints.length > BEST_PICKUPS_AMOUNT
 
     const showOtherList = hasMinimumPickupPoints && showOtherPickupPoints
 
@@ -90,30 +100,28 @@ class PickupPointsList extends PureComponent {
             <p className={styles.pickupListTitle}>
               {translate(intl, 'bestResults')}
             </p>
-            {bestPickupOptions
-              .filter((_, index) => index < BEST_PICKUPS_AMOUNT)
-              .map(pickupPoint => (
-                <div
-                  className={`${
-                    styles.pointsItem
-                  } pkpmodal-points-item best-pickupPoint-${pickupPoint.id}`}
-                  key={`best-pickupPoint-${pickupPoint.id}`}>
-                  <PickupPointInfo
-                    isList
-                    isBestPickupPoint
-                    items={items}
-                    logisticsInfo={logisticsInfo}
-                    pickupPoint={pickupPoint}
-                    pickupPointId={pickupPoint.id}
-                    selectedRules={rules}
-                    sellerId={sellerId}
-                    setActiveSidebarState={setActiveSidebarState}
-                    setSelectedPickupPoint={setSelectedPickupPoint}
-                    shouldUseMaps={shouldUseMaps}
-                    storePreferencesData={storePreferencesData}
-                  />
-                </div>
-              ))}
+            {bestPickupOptions.map(pickupPoint => (
+              <div
+                className={`${
+                  styles.pointsItem
+                } pkpmodal-points-item best-pickupPoint-${pickupPoint.id}`}
+                key={`best-pickupPoint-${pickupPoint.id}`}>
+                <PickupPointInfo
+                  isList
+                  isBestPickupPoint
+                  items={items}
+                  logisticsInfo={logisticsInfo}
+                  pickupPoint={pickupPoint}
+                  pickupPointId={pickupPoint.id}
+                  selectedRules={rules}
+                  sellerId={sellerId}
+                  setActiveSidebarState={setActiveSidebarState}
+                  setSelectedPickupPoint={setSelectedPickupPoint}
+                  shouldUseMaps={shouldUseMaps}
+                  storePreferencesData={storePreferencesData}
+                />
+              </div>
+            ))}
             {showOtherButton && (
               <Button
                 id="pkpmodal-show-list-btn"
@@ -151,7 +159,9 @@ class PickupPointsList extends PureComponent {
                   key={`pickupPoint-${pickupPoint.id}`}>
                   <PickupPointInfo
                     isList
-                    isBestPickupPoint={false}
+                    isBestPickupPoint={bestPickupOptions.some(
+                      localPickupPoint => localPickupPoint.id === pickupPoint.id
+                    )}
                     items={items}
                     logisticsInfo={logisticsInfo}
                     pickupPoint={pickupPoint}
