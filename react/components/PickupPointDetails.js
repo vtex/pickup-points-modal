@@ -20,6 +20,7 @@ import styles from './PickupPointDetails.css'
 import { LIST, ARROW_LEFT, ARROW_RIGHT } from '../constants'
 import { injectState } from '../modalStateContext'
 import { updateShippingData } from '../fetchers'
+import { getCleanId } from '../utils/StateUtils'
 
 class PickupPointDetails extends Component {
   constructor(props) {
@@ -67,8 +68,18 @@ class PickupPointDetails extends Component {
   }
 
   handleBackButtonClick = () => {
-    this.props.setSelectedPickupPoint({ pickupPoint: null })
     this.props.setActiveSidebarState(LIST)
+
+    setTimeout(() => {
+      const id = getCleanId(this.props.selectedPickupPoint.id)
+      const selectedPickupPointElement = document.querySelector(`#${id}`)
+
+      if (selectedPickupPointElement) {
+        selectedPickupPointElement.scrollIntoView()
+      }
+    }, 100)
+
+    this.props.setSelectedPickupPoint({ pickupPoint: null })
   }
 
   handleConfirmButtonClick = () => {

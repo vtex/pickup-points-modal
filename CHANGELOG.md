@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Behavior to when going back to the list from details to scroll to the last pickup point selected.
+
 ## [3.0.18] - 2019-10-16
 
 ### Fixed
