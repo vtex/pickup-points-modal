@@ -44,3 +44,13 @@ export const getInitialActiveSidebarState = props => {
 
   return LIST
 }
+
+export function getCleanId(id) {
+  return (
+    id &&
+    id
+      .replace(/[^\w\s]/gi, '')
+      .split(' ')
+      .join('-')
+  )
+}

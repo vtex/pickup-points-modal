@@ -13,6 +13,7 @@ import { injectState } from '../modalStateContext'
 import UnavailableMarker from '../assets/components/UnavailableMarker'
 import SearchMarkerIcon from '../assets/components/SearchMarkerIcon'
 import BestMarkerIcon from '../assets/components/BestMarkerIcon'
+import { getCleanId } from '../utils/StateUtils'
 
 const MAX_KILOMETERS = 1000
 class PickupPointInfo extends Component {
@@ -70,12 +71,6 @@ class PickupPointInfo extends Component {
     this.props.onClickPickupModal &&
     this.props.onClickPickupModal(this.props.liPackage)
 
-  getCleanId = () =>
-    this.props.pickupPoint.id
-      .replace(/[^\w\s]/gi, '')
-      .split(' ')
-      .join('-')
-
   render() {
     const {
       intl,
@@ -91,7 +86,7 @@ class PickupPointInfo extends Component {
 
     const { info, unavailableItemsAmount, distance } = this.state
 
-    const pickupId = this.getCleanId()
+    const pickupId = getCleanId(pickupPoint.id)
 
     const distanceValue = formatNumber({
       value: distance && formatDistance(distance, intl.locale),
