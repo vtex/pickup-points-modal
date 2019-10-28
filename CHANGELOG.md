@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add German translations.
+
 ## [3.0.19] - 2019-10-24
 
 ### Added
