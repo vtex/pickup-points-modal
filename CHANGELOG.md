@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.21-beta] - 2020-01-24
+
 ### Fixed
 
 - Fix showing pickup unavailable items
