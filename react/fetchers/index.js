@@ -70,9 +70,9 @@ export function updateShippingData(logisticsInfo, pickupPoint) {
         itemIndex: li.itemIndex,
         addressId: hasSla ? pickupAddressWithAddressId.addressId : li.addressId,
         selectedSla: hasSla ? pickupPoint.id : li.selectedSla,
-        selectedDeliveryChannel: hasSla
-          ? PICKUP_IN_STORE
-          : li.selectedDeliveryChannel,
+        selectedDeliveryChannel: li.selectedSla
+          ? li.selectedDeliveryChannel
+          : null,
       }
     }),
   }
