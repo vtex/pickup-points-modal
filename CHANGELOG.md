@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Showing pickup unavailable items.
+
 ## [3.0.20] - 2019-10-28
 
 ### Added
+
 - Add German translations.
 
 ## [3.0.19] - 2019-10-24
