@@ -2,6 +2,7 @@ import { newAddress } from '../utils/newAddress'
 import { PICKUP_IN_STORE, SEARCH } from '../constants'
 import axios from 'axios'
 import axiosRetry from 'axios-retry'
+import { isDelivery } from '../utils/DeliveryChannelsUtils'
 
 axiosRetry(axios, { retries: 2 })
 
@@ -66,13 +67,17 @@ export function updateShippingData(logisticsInfo, pickupPoint) {
     selectedAddresses: [pickupAddressWithAddressId],
     logisticsInfo: logisticsInfo.map(li => {
       const hasSla = li.slas.some(sla => sla.id === pickupPoint.id)
+      const hasDeliverySla = li.slas.some(sla => isDelivery(sla))
+
       return {
         itemIndex: li.itemIndex,
         addressId: hasSla ? pickupAddressWithAddressId.addressId : li.addressId,
         selectedSla: hasSla ? pickupPoint.id : li.selectedSla,
-        selectedDeliveryChannel: li.selectedSla
-          ? li.selectedDeliveryChannel
-          : null,
+        selectedDeliveryChannel: hasSla
+          ? PICKUP_IN_STORE
+          : hasDeliverySla
+            ? li.selectedDeliveryChannel
+            : null,
       }
     }),
   }

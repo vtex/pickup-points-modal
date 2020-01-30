@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Selecting delivery channel for Delivery items.
+
 ## [3.0.21] - 2020-01-29
 
 ### Fixed
