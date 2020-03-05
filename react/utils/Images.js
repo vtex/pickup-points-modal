@@ -2,12 +2,12 @@ const DEFAULT_WIDTH = 50
 const DEFAULT_HEIGHT = 50
 const DEFAULT_HDF = 1
 
-const baseUrlRegex = new RegExp(/.+ids\/(\d+)(?:-(\d+)-(\d+)|)\//)
+const baseUrlRegex = new RegExp(/.+ids\/(\d+)[a-zA-Z]+(?:-(\d+)-(\d+)|)\//)
 const sizeRegex = new RegExp(/-(\d+)-(\d+)/)
 
 function cleanImageUrl(imageUrl) {
   let resizedImageUrl = imageUrl
-  const result = baseUrlRegex.exec(imageUrl)
+  const result = baseUrlRegex.exec(imageUrl) || []
   if (result.length > 0) {
     if (
       result.length === 4 &&
