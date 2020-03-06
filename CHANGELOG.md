@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Modal breaking if an image URL does not match the regex.
+
+### Changed
+
+- Regular expression used to get image dimensions.
+
 ## [3.0.22] - 2020-01-30
 
 ### Fixed
