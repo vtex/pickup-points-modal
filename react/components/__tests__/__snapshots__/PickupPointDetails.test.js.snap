@@ -25,7 +25,7 @@ exports[`PickupPointDetails should render self and components 1`] = `
           fill="#4C8EEF"
         />
       </svg>
-      See all pickup points
+      See all Pick Up In Store sites
     </button>
   </div>
   <div
@@ -34,7 +34,7 @@ exports[`PickupPointDetails should render self and components 1`] = `
     <p
       className="pickupDetailsHeaderTitle pkpmodal-details-header-title"
     >
-      Pickup point details
+      Pick Up In Store details
     </p>
     <div
       className="pickupDetailsHeaderButtons pkpmodal-details-header-buttons"
@@ -171,7 +171,7 @@ exports[`PickupPointDetails should render self and components 1`] = `
         <h3
           className="modalDetailsInfoTitle title pkpmodal-details-info-title"
         >
-          Product availability in this pickup point
+          Available products for pickup
         </h3>
         <div
           className="productItems pkpmodal-product-items"
@@ -223,7 +223,7 @@ exports[`PickupPointDetails should render self and components 1`] = `
       onClick={[Function]}
       type="button"
     >
-      Pickup in this point
+      Select this store
     </button>
   </div>
 </div>
