@@ -83,7 +83,11 @@ class PickupPointDetails extends Component {
   }
 
   handleConfirmButtonClick = () => {
-    updateShippingData(this.props.logisticsInfo, this.props.selectedPickupPoint)
+    updateShippingData(
+      this.props.residentialAddress,
+      this.props.logisticsInfo,
+      this.props.selectedPickupPoint
+    )
     this.props.handleClosePickupPointsModal()
   }
 
@@ -299,6 +303,7 @@ PickupPointDetails.propTypes = {
   items: PropTypes.array.isRequired,
   logisticsInfo: PropTypes.array.isRequired,
   onClickPickupModal: PropTypes.func,
+  residentialAddress: PropTypes.object,
   selectedRules: PropTypes.object.isRequired,
   selectedPickupPoint: PropTypes.object.isRequired,
   sellerId: PropTypes.string,
