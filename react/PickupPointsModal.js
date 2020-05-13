@@ -188,6 +188,7 @@ class PickupPointsModal extends Component {
       orderFormId,
       pickupOptions,
       pickupPoints,
+      residentialAddress,
       rules,
       salesChannel,
       searchAddress,
@@ -228,6 +229,7 @@ class PickupPointsModal extends Component {
             <ModalState
               activePickupPoint={activePickupPoint}
               address={searchAddressWithAddressQuery}
+              residentialAddress={residentialAddress}
               askForGeolocation={askForGeolocation}
               googleMapsKey={googleMapsKey}
               isSearching={isSearching}
@@ -321,6 +323,7 @@ PickupPointsModal.propTypes = {
   logisticsInfo: PropTypes.array.isRequired,
   pickupOptions: PropTypes.array.isRequired,
   pickupPoints: PropTypes.array.isRequired,
+  residentialAddress: PropTypes.object,
   rules: PropTypes.object.isRequired,
   searchAddress: PropTypes.object.isRequired,
   sellerId: PropTypes.string,

@@ -22,6 +22,7 @@ export function injectState(Component) {
           logisticsInfo,
           pickupOptions,
           pickupPoints,
+          residentialAddress,
           searchedAreaNoPickups,
           selectNextPickupPoint,
           selectPreviousPickupPoint,
@@ -55,6 +56,7 @@ export function injectState(Component) {
             selectedPickupPoint={selectedPickupPoint}
             pickupOptions={pickupOptions}
             pickupPoints={pickupPoints}
+            residentialAddress={residentialAddress}
             searchedAreaNoPickups={searchedAreaNoPickups}
             searchPickupsInArea={searchPickupsInArea}
             selectNextPickupPoint={selectNextPickupPoint}

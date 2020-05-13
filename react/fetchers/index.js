@@ -49,7 +49,11 @@ export function getAvailablePickups({
   })
 }
 
-export function updateShippingData(logisticsInfo, pickupPoint) {
+export function updateShippingData(
+  residentialAddress,
+  logisticsInfo,
+  pickupPoint
+) {
   const pickupAddress = pickupPoint.pickupStoreInfo
     ? pickupPoint.pickupStoreInfo.address
     : pickupPoint.address
@@ -64,7 +68,10 @@ export function updateShippingData(logisticsInfo, pickupPoint) {
   })
   const shippingData = {
     ...(hasGeocoordinates ? { clearAddressIfPostalCodeNotFound: false } : {}),
-    selectedAddresses: [pickupAddressWithAddressId],
+    selectedAddresses: [
+      ...(residentialAddress ? [residentialAddress] : []),
+      pickupAddressWithAddressId,
+    ],
     logisticsInfo: logisticsInfo.map(li => {
       const hasSla = li.slas.some(sla => sla.id === pickupPoint.id)
       const hasDeliverySla = li.slas.some(sla => isDelivery(sla))

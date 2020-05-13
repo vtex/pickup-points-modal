@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `shippingData` attachment request not sending the current residential address.
+
 ## [3.2.1] - 2020-04-28
 
 ### Fixed
