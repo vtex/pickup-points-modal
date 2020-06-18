@@ -22,7 +22,7 @@
   "pickupPointsModal.noneItemsAvailable": "Nessun prodotto disponibile",
   "pickupPointsModal.businessHours": "Orari lavorativi",
   "pickupPointsModal.confirmPoint": "Ritira presso questo punto di ritiro",
-  "pickupPointsModal.price": "{value, plural, one {} =0 {Gratis} other {{formattedPrice}}}",
+  "pickupPointsModal.price": "{value, plural, =0 {Gratis} other {{formattedPrice}}}",
   "pickupPointsModal.askGeolocation": "Cerca un indirizzo usando la tua località",
   "pickupPointsModal.marker": "Marker di geolocalizzazione",
   "pickupPointsModal.geolocationDiscover": "Ti suggeriremo il punto di ritiro a te più vicino",
