@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- i18n for RO & DE.
+- Missing json files for BG, DA, EL, FI, KO, RU, SK, SL, SV & UK.
+
 ## [3.2.3] - 2020-06-25
 
 ### Changed
