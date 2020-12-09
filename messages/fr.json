@@ -17,7 +17,7 @@
   "pickupPointsModal.productsInPoint": "Produits disponibles dans ce relais colis",
   "pickupPointsModal.aditionalInfo": "Autres informations",
   "pickupPointsModal.unavailable": "non disponible",
-  "pickupPointsModal.unavailableItemsAmount": "{itemsAmount, plural, =0 {} one {#article non disponible} other {# article non disponible}}",
+  "pickupPointsModal.unavailableItemsAmount": "{itemsAmount, plural, =0 {} one {# article non disponible} other {# article non disponible}}",
   "pickupPointsModal.allItemsAvailable": "Tous les produits sont disponibles",
   "pickupPointsModal.noneItemsAvailable": "Pas de produits disponibles",
   "pickupPointsModal.businessHours": "Horaires d’ouverture",
