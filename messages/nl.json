@@ -17,7 +17,7 @@
   "pickupPointsModal.productsInPoint": "Productbeschikbaarheid in dit afhaalpunt",
   "pickupPointsModal.aditionalInfo": "Andere informatie",
   "pickupPointsModal.unavailable": "niet beschikbaar",
-  "pickupPointsModal.unavailableItemsAmount": "{itemsAmount, plural, =0 {} one {#item niet beschikbaar} other {# items niet beschikbaar}}",
+  "pickupPointsModal.unavailableItemsAmount": "{itemsAmount, plural, =0 {} one {# item niet beschikbaar} other {# items niet beschikbaar}}",
   "pickupPointsModal.allItemsAvailable": "Alle producten zijn beschikbaar",
   "pickupPointsModal.noneItemsAvailable": "Geen product beschikbaar",
   "pickupPointsModal.businessHours": "Kantooruren",
