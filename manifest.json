@@ -1,7 +1,7 @@
 {
   "name": "pickup-points-modal",
   "vendor": "vtex",
-  "version": "3.3.1",
+  "version": "4.0.0",
   "title": "Pickup Points Modal React component",
   "description": "Pickup Points Modal React component",
   "defaultLocale": "en",
@@ -12,12 +12,12 @@
   ],
   "settingsSchema": {},
   "dependencies": {
-    "vtex.country-codes": "1.x",
-    "vtex.shipping-estimate-translator": "1.x",
-    "vtex.address-form": "3.x"
+    "vtex.country-codes": "2.x",
+    "vtex.shipping-estimate-translator": "2.x",
+    "vtex.address-form": "4.x"
   },
   "builders": {
-    "react": "2.x",
+    "react": "3.x",
     "messages": "1.x"
   },
   "scripts": {
