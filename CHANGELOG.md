@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Outdated pickup point details shown when switching pickup points through the map or arrow keys.
+
 ## [3.4.0] - 2021-05-13
 
 ### Added
