@@ -250,8 +250,8 @@ class ModalState extends Component {
     const { bestPickupOptions, selectedPickupPoint } = this.state
     const previousIndex =
       bestPickupOptions
-        .map(pickupPoint => pickupPoint.pickupPointId)
-        .indexOf(selectedPickupPoint.pickupPointId) - 1
+        .map(pickupPoint => pickupPoint.id)
+        .indexOf(selectedPickupPoint.id) - 1
 
     if (previousIndex < 0) return
 
@@ -265,8 +265,8 @@ class ModalState extends Component {
     const { bestPickupOptions, selectedPickupPoint } = this.state
     const nextIndex =
       bestPickupOptions
-        .map(pickupPoint => pickupPoint.pickupPointId)
-        .indexOf(selectedPickupPoint.pickupPointId) + 1
+        .map(pickupPoint => pickupPoint.id)
+        .indexOf(selectedPickupPoint.id) + 1
 
     if (nextIndex > bestPickupOptions.length - 1) return
 
