@@ -152,8 +152,8 @@ class PickupPointDetails extends Component {
     const pickupIndex =
       bestPickupOptions &&
       bestPickupOptions
-        .map(pickupPoint => pickupPoint.pickupPointId || pickupPoint.id)
-        .indexOf(selectedPickupPoint.pickupPointId || selectedPickupPoint.id)
+        .map(pickupPoint => pickupPoint.id || pickupPoint.pickupPointId)
+        .indexOf(selectedPickupPoint.id || selectedPickupPoint.pickupPointId)
 
     const isFirst = pickupIndex === 0
     const isLast =
