@@ -4,7 +4,7 @@
 files: [
  {
   "source" : "/messages/en.json",
-  "translation" : "/messages/%two_letters_code%.json",
+  "translation" : "/messages/%locale%.json",
   "type" : "json",
  }
 ]
