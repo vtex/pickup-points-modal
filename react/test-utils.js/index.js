@@ -1,5 +1,5 @@
 import React from 'react'
-import messages from '../../messages/pt.json'
+import messages from '../../messages/pt-BR.json'
 import { IntlProvider } from 'react-intl'
 import { render } from 'react-testing-library'
 import { ModalStateContext } from '../modalStateContext'
