@@ -83,7 +83,7 @@ class PickupPointDetails extends Component {
     }
   }
 
-  getPickupInfo(props) {
+  getPickupInfo = props => {
     return props.pickupPoints.find(
       pickupPoint => pickupPoint.id === props.selectedPickupPoint.pickupPointId
     )
@@ -163,7 +163,9 @@ class PickupPointDetails extends Component {
       <div className={`${styles.modalDetails} pkpmodal-details`}>
         <div className={`${styles.modalDetailsTop} pkpmodal-details-top`}>
           <button
-            className={`${styles.modalDetailsBackLnk} pkpmodal-details-back-lnk btn btn-link`}
+            className={`${
+              styles.modalDetailsBackLnk
+            } pkpmodal-details-back-lnk btn btn-link`}
             onClick={this.handleBackButtonClick}
             type="button">
             <BackChevron />
@@ -174,12 +176,17 @@ class PickupPointDetails extends Component {
         <div
           className={`${styles.pickupDetailsHeader} pkpmodal-details-header`}>
           <p
-            className={`${styles.pickupDetailsHeaderTitle} pkpmodal-details-header-title`}>
+            className={`${
+              styles.pickupDetailsHeaderTitle
+            } pkpmodal-details-header-title`}>
             {translate(intl, 'pointDetails')}
           </p>
           <div
-            className={`${styles.pickupDetailsHeaderButtons} pkpmodal-details-header-buttons`}>
+            className={`${
+              styles.pickupDetailsHeaderButtons
+            } pkpmodal-details-header-buttons`}>
             <button
+              data-testid="goToPreviousPickupPoint"
               className={`${styles.pickupDetailsHeaderButton} ${
                 isFirst ? styles.firstOrLast : ''
               } pkpmodal-details-header-button`}
@@ -187,6 +194,7 @@ class PickupPointDetails extends Component {
               <ArrowPrevious />
             </button>
             <button
+              data-testid="goToNextPickupPoint"
               className={`${styles.pickupDetailsHeaderButton} ${
                 isLast ? styles.firstOrLast : ''
               } pkpmodal-details-header-button`}
@@ -214,7 +222,9 @@ class PickupPointDetails extends Component {
             <div
               className={`${styles.modalDetailsGroup} pkpmodal-details-group`}>
               <h3
-                className={`${styles.modalDetailsInfoTitle} title pkpmodal-details-info-title`}>
+                className={`${
+                  styles.modalDetailsInfoTitle
+                } title pkpmodal-details-info-title`}>
                 {translate(intl, 'productsInPoint')}
               </h3>
               {items && <ProductItems items={items} />}
@@ -224,9 +234,13 @@ class PickupPointDetails extends Component {
             </div>
             {hasAditionalInfo && (
               <div
-                className={`${styles.modalDetailsGroup} pkpmodal-details-group`}>
+                className={`${
+                  styles.modalDetailsGroup
+                } pkpmodal-details-group`}>
                 <h3
-                  className={`${styles.modalDetailsInfoTitle} pkpmodal-details-info-title`}>
+                  className={`${
+                    styles.modalDetailsInfoTitle
+                  } pkpmodal-details-info-title`}>
                   {translate(intl, 'aditionalInfo')}
                 </h3>
                 {selectedPickupPoint.pickupStoreInfo.additionalInfo}
@@ -235,29 +249,41 @@ class PickupPointDetails extends Component {
 
             {businessHours && (
               <div
-                className={`${styles.modalDetailsGroup} pkpmodal-details-group`}>
+                className={`${
+                  styles.modalDetailsGroup
+                } pkpmodal-details-group`}>
                 <h3
-                  className={`${styles.modalDetailsInfoTitle} pkpmodal-details-info-title`}>
+                  className={`${
+                    styles.modalDetailsInfoTitle
+                  } pkpmodal-details-info-title`}>
                   {translate(intl, 'businessHours')}
                 </h3>
                 <table
-                  className={`${styles.modalDetailsHours} pkpmodal-details-hours`}>
+                  className={`${
+                    styles.modalDetailsHours
+                  } pkpmodal-details-hours`}>
                   <tbody>
                     {businessHours.map((day, i) => {
                       return (
                         <tr key={i}>
                           <td
-                            className={`${styles.modalDetailsHoursDay} pkpmodal-details-hours-day`}>
+                            className={`${
+                              styles.modalDetailsHoursDay
+                            } pkpmodal-details-hours-day`}>
                             {translate(intl, `weekDay${day.number}`)}
                           </td>
                           {day.closed ? (
                             <td
-                              className={`${styles.modalDetailsHoursClosed} pkpmodal-details-hours-closed`}>
+                              className={`${
+                                styles.modalDetailsHoursClosed
+                              } pkpmodal-details-hours-closed`}>
                               {translate(intl, 'closed')}
                             </td>
                           ) : (
                             <td
-                              className={`${styles.modalDetailsHoursRange} pkpmodal-details-hours-range`}>
+                              className={`${
+                                styles.modalDetailsHoursRange
+                              } pkpmodal-details-hours-range`}>
                               <PickupPointHour time={day.openingTime} />{' '}
                               {translate(intl, 'hourTo')}{' '}
                               <PickupPointHour time={day.closingTime} />
@@ -280,7 +306,9 @@ class PickupPointDetails extends Component {
               id={confirmButtonId}
               kind="primary"
               large
-              moreClassName={`${styles.modalDetailConfirmBtn} pkpmodal-details-confirm-btn`}
+              moreClassName={`${
+                styles.modalDetailConfirmBtn
+              } pkpmodal-details-confirm-btn`}
               onClick={this.handleConfirmButtonClick}
               title={translate(intl, 'confirmPoint')}
             />

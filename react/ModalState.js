@@ -66,7 +66,7 @@ class ModalState extends Component {
       this.props.address.geoCoordinates &&
       this.props.address.geoCoordinates.value
 
-    if (thisAddressCoords.length > 0) {
+    if (thisAddressCoords && thisAddressCoords.length > 0) {
       this.getExternalPickupOptions(thisAddressCoords)
     }
   }
