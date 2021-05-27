@@ -61,7 +61,29 @@ class PickupPointDetails extends Component {
     document.removeEventListener('keydown', this.keyListener)
   }
 
-  getPickupInfo(props) {
+  componentDidUpdate(prevProps) {
+    const { props } = this
+
+    if (prevProps.selectedPickupPoint.id !== props.selectedPickupPoint.id) {
+      this.setState({
+        unavailableItems: getUnavailableItemsByPickup(
+          props.items,
+          props.logisticsInfo,
+          props.selectedPickupPoint,
+          props.sellerId
+        ),
+        items: getItemsWithPickupPoint(
+          props.items,
+          props.logisticsInfo,
+          props.selectedPickupPoint,
+          props.sellerId
+        ),
+        pickupPointInfo: this.getPickupInfo(props),
+      })
+    }
+  }
+
+  getPickupInfo = props => {
     return props.pickupPoints.find(
       pickupPoint => pickupPoint.id === props.selectedPickupPoint.pickupPointId
     )
@@ -130,8 +152,8 @@ class PickupPointDetails extends Component {
     const pickupIndex =
       bestPickupOptions &&
       bestPickupOptions
-        .map(pickupPoint => pickupPoint.pickupPointId || pickupPoint.id)
-        .indexOf(selectedPickupPoint.pickupPointId || selectedPickupPoint.id)
+        .map(pickupPoint => pickupPoint.id || pickupPoint.pickupPointId)
+        .indexOf(selectedPickupPoint.id || selectedPickupPoint.pickupPointId)
 
     const isFirst = pickupIndex === 0
     const isLast =
@@ -164,6 +186,7 @@ class PickupPointDetails extends Component {
               styles.pickupDetailsHeaderButtons
             } pkpmodal-details-header-buttons`}>
             <button
+              data-testid="goToPreviousPickupPoint"
               className={`${styles.pickupDetailsHeaderButton} ${
                 isFirst ? styles.firstOrLast : ''
               } pkpmodal-details-header-button`}
@@ -171,6 +194,7 @@ class PickupPointDetails extends Component {
               <ArrowPrevious />
             </button>
             <button
+              data-testid="goToNextPickupPoint"
               className={`${styles.pickupDetailsHeaderButton} ${
                 isLast ? styles.firstOrLast : ''
               } pkpmodal-details-header-button`}

@@ -37,9 +37,18 @@ class PickupPointInfo extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.pickupPoint.id !== prevProps.pickupPoint.id) {
       this.setState({
+        unavailableItemsAmount: getUnavailableItemsAmount(
+          this.props.items,
+          this.props.logisticsInfo,
+          this.props.pickupPoint.id,
+          this.props.sellerId
+        ),
         info:
           (this.props.pickupPoint && this.props.pickupPoint.pickupStoreInfo) ||
           this.props.pickupPoint,
+        distance:
+          this.props.pickupPoint.pickupDistance ||
+          this.props.pickupPoint.distance,
       })
     }
   }
@@ -130,9 +139,7 @@ class PickupPointInfo extends Component {
               !isBestPickupPointAndAvailable && <PinIcon />}
             {distance && (
               <p
-                className={`${
-                  styles.pickupPointDistance
-                } pkpmodal-pickup-point-distance`}>
+                className={`${styles.pickupPointDistance} pkpmodal-pickup-point-distance`}>
                 {translate(intl, 'distance', {
                   distanceValue:
                     distance > MAX_KILOMETERS ? '1000+' : distanceValue,
@@ -143,9 +150,7 @@ class PickupPointInfo extends Component {
           <div
             className={`${styles.pickupPointInfo} pkpmodal-pickup-point-info`}>
             <p
-              className={`${
-                styles.pickupPointName
-              } pkpmodal-pickup-point-name`}>
+              className={`${styles.pickupPointName} pkpmodal-pickup-point-name`}>
               {info.friendlyName}
             </p>
             <div
@@ -161,18 +166,14 @@ class PickupPointInfo extends Component {
 
             {shouldShowAllUnavailable && (
               <span
-                className={`${
-                  styles.pickupPointNoneAvailable
-                } pkpmodal-pickup-point-available`}>
+                className={`${styles.pickupPointNoneAvailable} pkpmodal-pickup-point-available`}>
                 {translate(intl, 'noneItemsAvailable')}
               </span>
             )}
 
             {shouldShowUnavailableAmount && (
               <span
-                className={`${
-                  styles.pickupPointAvailability
-                } pkpmodal-pickup-point-availability`}>
+                className={`${styles.pickupPointAvailability} pkpmodal-pickup-point-availability`}>
                 {translate(intl, 'unavailableItemsAmount', {
                   itemsAmount: unavailableItemsAmount,
                 })}
@@ -181,9 +182,7 @@ class PickupPointInfo extends Component {
 
             {unavailableItemsAmount === 0 && (
               <span
-                className={`${
-                  styles.pickupPointAllAvailable
-                } pkpmodal-pickup-point-available`}>
+                className={`${styles.pickupPointAllAvailable} pkpmodal-pickup-point-available`}>
                 {translate(intl, 'allItemsAvailable')}
               </span>
             )}
@@ -197,9 +196,7 @@ class PickupPointInfo extends Component {
                 : styles.pickupPointSlaAvailabilityPostalCode
             } pkpmodal-pickup-point-sla-availability`}>
             <span
-              className={`${
-                styles.pickupPointPrice
-              } pkpmodal-pickup-point-price`}>
+              className={`${styles.pickupPointPrice} pkpmodal-pickup-point-price`}>
               {translate(intl, 'price', {
                 value: pickupPoint && pickupPoint.price,
                 formattedPrice: formatCurrency({
@@ -210,9 +207,7 @@ class PickupPointInfo extends Component {
             </span>
             {shouldShowEstimate && (
               <span
-                className={`${
-                  styles.pickupPointSla
-                } pkpmodal-pickup-point-sla`}>
+                className={`${styles.pickupPointSla} pkpmodal-pickup-point-sla`}>
                 <TranslateEstimate
                   shippingEstimate={pickupPoint && pickupPoint.shippingEstimate}
                   isPickup

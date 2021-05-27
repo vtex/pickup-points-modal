@@ -2,6 +2,7 @@ import React from 'react'
 import PickupPointDetails from '../PickupPointDetails'
 
 import { mount } from 'enzyme'
+import { render, fireEvent } from 'react-testing-library'
 import { Provider } from 'react-redux'
 import { IntlProvider } from 'react-intl'
 import renderer from 'react-test-renderer'
@@ -10,6 +11,8 @@ import BRA from '@vtex/address-form/lib/country/BRA'
 import { PICKUP, DELIVERY, PICKUP_IN_STORE, SIDEBAR } from '../../constants'
 import messages from '../../../messages/en.json'
 import { ModalStateContext } from '../../modalStateContext'
+import ModalState from '../../ModalState'
+
 jest.mock('../../utils/Images', () => ({
   fixImageUrl: () => 'teste.png',
 }))
@@ -20,6 +23,7 @@ describe('PickupPointDetails', () => {
     handleChangeActiveSLAOption,
     handleClosePickupPointsModal,
     togglePickupDetails,
+    selectNextPickupPoint,
     setActiveSidebarState,
     modalState
 
@@ -36,7 +40,7 @@ describe('PickupPointDetails', () => {
     neighborhood: 'Barra da Tijuca',
     complement: 'Loja Barra da Tijuca',
     reference: null,
-    geoCoordinates: [],
+    geoCoordinates: { value: [] },
     addressQuery: 'query',
   }
 
@@ -45,6 +49,7 @@ describe('PickupPointDetails', () => {
     handleClosePickupPointsModal = jest.fn()
     togglePickupDetails = jest.fn()
     setActiveSidebarState = jest.fn()
+    selectNextPickupPoint = jest.fn()
 
     modalState = {
       activeState: SIDEBAR,
@@ -53,24 +58,96 @@ describe('PickupPointDetails', () => {
       shouldUseMaps: false,
       setShouldSearchArea: jest.fn(),
       setSelectedPickupPoint: jest.fn(),
+      selectNextPickupPoint,
       pickupPoints: [
         {
           id: '1',
-          friendlyName: 'test',
-          address: {
-            geoCoordinates: [123, 123],
+          pickupPointId: '1',
+          friendlyName: 'Loja VTEX',
+          name: 'test',
+          address: { geoCoordinates: [123, 123] },
+          businessHours: [
+            { DayOfWeek: 0, OpeningTime: '02:00:00', ClosingTime: '14:00:00' },
+            { DayOfWeek: 6, OpeningTime: '03:00:00', ClosingTime: '11:30:00' },
+          ],
+        },
+        {
+          id: '2',
+          pickupPointId: '2',
+          friendlyName: 'Outra Loja',
+          name: 'test2',
+          address: { geoCoordinates: [125, 125] },
+          businessHours: [
+            { ClosingTime: '12:00:00', DayOfWeek: 0, OpeningTime: '02:00:00' },
+            { ClosingTime: '22:30:00', DayOfWeek: 6, OpeningTime: '16:00:00' },
+          ],
+        },
+      ],
+      pickupOptions: [
+        {
+          id: '1',
+          pickupPointId: '1',
+          friendlyName: 'Loja VTEX',
+          address: { geoCoordinates: [123, 123] },
+          pickupStoreInfo: {
+            isPickupStore: true,
+            friendlyName: 'Loja VTEX',
+            address: {
+              addressType: 'pickup',
+              receiverName: null,
+              addressId: '1f848d7',
+              isDisposable: true,
+              postalCode: '22230061',
+              city: 'Rio de Janeiro',
+              state: 'RJ',
+              country: 'BRA',
+              street: 'Rua Marquês de Abrantes',
+              number: '5',
+              neighborhood: 'Flamengo',
+              complement: '',
+              reference: null,
+              geoCoordinates: [-43.17771, -22.93772],
+            },
+            additionalInfo: 'não entre de sunga\nnão entre sem sunga',
+            dockId: '11dbf12',
+          },
+        },
+        {
+          id: '2',
+          pickupPointId: '2',
+          friendlyName: 'Outra Loja',
+          address: { geoCoordinates: [125, 125] },
+          pickupStoreInfo: {
+            isPickupStore: true,
+            friendlyName: 'Outra Loja',
+            address: {
+              addressType: 'pickup',
+              receiverName: null,
+              addressId: '1f848d7',
+              isDisposable: true,
+              postalCode: '22230061',
+              city: 'Rio de Janeiro',
+              state: 'RJ',
+              country: 'BRA',
+              street: 'Rua Marquês de Abrantes',
+              number: '5',
+              neighborhood: 'Flamengo',
+              complement: '',
+              reference: null,
+              geoCoordinates: [-43.17771, -22.93772],
+            },
+            additionalInfo: 'não entre de sunga\nnão entre sem sunga',
+            dockId: '11dbf12',
           },
         },
       ],
       selectedPickupPoint: {
-        name: 'test',
+        name: 'Loja VTEX',
         price: 100,
         shippingEstimate: '1bd',
         pickupStoreInfo: {
-          friendlyName: 'test',
-          address: {
-            geoCoordinates: [123, 123],
-          },
+          friendlyName: 'Loja VTEX',
+          address: { geoCoordinates: [123, 123] },
         },
         deliveryChannel: PICKUP_IN_STORE,
         id: '1',
@@ -88,10 +165,7 @@ describe('PickupPointDetails', () => {
               shippingEstimate: '1bd',
               deliveryChannel: PICKUP_IN_STORE,
               id: '1',
-              pickupStoreInfo: {
-                friendlyName: 'test',
-                address,
-              },
+              pickupStoreInfo: { friendlyName: 'test', address },
             },
             {
               name: 'test',
@@ -99,10 +173,7 @@ describe('PickupPointDetails', () => {
               shippingEstimate: '1bd',
               deliveryChannel: PICKUP_IN_STORE,
               id: '2',
-              pickupStoreInfo: {
-                friendlyName: 'test',
-                address,
-              },
+              pickupStoreInfo: { friendlyName: 'test', address },
             },
           ],
         },
@@ -117,10 +188,7 @@ describe('PickupPointDetails', () => {
               shippingEstimate: '1bd',
               deliveryChannel: PICKUP_IN_STORE,
               id: '1',
-              pickupStoreInfo: {
-                friendlyName: 'test',
-                address,
-              },
+              pickupStoreInfo: { friendlyName: 'test', address },
             },
             {
               name: 'test',
@@ -128,10 +196,7 @@ describe('PickupPointDetails', () => {
               shippingEstimate: '1bd',
               deliveryChannel: PICKUP_IN_STORE,
               id: '2',
-              pickupStoreInfo: {
-                friendlyName: 'test',
-                address,
-              },
+              pickupStoreInfo: { friendlyName: 'test', address },
             },
           ],
         },
@@ -146,10 +211,7 @@ describe('PickupPointDetails', () => {
               shippingEstimate: '1bd',
               deliveryChannel: PICKUP_IN_STORE,
               id: '1',
-              pickupStoreInfo: {
-                friendlyName: 'test',
-                address,
-              },
+              pickupStoreInfo: { friendlyName: 'test', address },
             },
             {
               name: 'test',
@@ -157,10 +219,7 @@ describe('PickupPointDetails', () => {
               shippingEstimate: '1bd',
               deliveryChannel: PICKUP_IN_STORE,
               id: '3',
-              pickupStoreInfo: {
-                friendlyName: 'test',
-                address,
-              },
+              pickupStoreInfo: { friendlyName: 'test', address },
             },
           ],
         },
@@ -302,13 +361,13 @@ describe('PickupPointDetails', () => {
                   },
                 },
                 {
-                  name: 'test',
+                  name: 'test2',
                   price: 100,
                   shippingEstimate: '1bd',
                   deliveryChannel: PICKUP_IN_STORE,
                   id: '2',
                   pickupStoreInfo: {
-                    friendlyName: 'test',
+                    friendlyName: 'test2',
                     address,
                   },
                 },
@@ -331,13 +390,13 @@ describe('PickupPointDetails', () => {
                   },
                 },
                 {
-                  name: 'test',
+                  name: 'test3',
                   price: 100,
                   shippingEstimate: '1bd',
                   deliveryChannel: PICKUP_IN_STORE,
                   id: '3',
                   pickupStoreInfo: {
-                    friendlyName: 'test',
+                    friendlyName: 'test3',
                     address,
                   },
                 },
@@ -487,5 +546,56 @@ describe('PickupPointDetails', () => {
     confirmButton.simulate('click')
 
     expect(handleClosePickupPointsModal.mock.calls).toHaveLength(1)
+  })
+
+  it('should show the right info about the selected pickup point', () => {
+    const { queryByText, getByTestId } = render(
+      <ModalState
+        activePickupPoint={undefined}
+        address={address}
+        residentialAddress={undefined}
+        askForGeolocation={false}
+        googleMapsKey={'1234'}
+        isSearching={false}
+        items={state.orderForm.items}
+        mapStatus={'HIDE_MAP'}
+        logisticsInfo={modalState.logisticsInfo}
+        pickupPoints={modalState.pickupPoints}
+        pickupOptions={modalState.pickupOptions}
+        salesChannel={undefined}
+        orderFormId={undefined}
+        selectedPickupPoint={modalState.selectedPickupPoint}>
+        <IntlProvider
+          locale="pt"
+          messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
+          <PickupPointDetails {...props} />
+        </IntlProvider>
+      </ModalState>
+    )
+
+    expect(queryByText('Loja VTEX')).toBeTruthy()
+    expect(queryByText('03:00')).toBeTruthy()
+    expect(queryByText('11:30')).toBeTruthy()
+
+    const nextPickupPointButton = getByTestId('goToNextPickupPoint')
+    const previousPickupPointButton = getByTestId('goToPreviousPickupPoint')
+
+    fireEvent.click(nextPickupPointButton)
+    expect(queryByText('Loja VTEX')).toBeFalsy()
+    expect(queryByText('03:00')).toBeFalsy()
+    expect(queryByText('11:30')).toBeFalsy()
+
+    expect(queryByText('Outra Loja')).toBeTruthy()
+    expect(queryByText('16:00')).toBeTruthy()
+    expect(queryByText('22:30')).toBeTruthy()
+
+    fireEvent.click(previousPickupPointButton)
+    expect(queryByText('Outra Loja')).toBeFalsy()
+    expect(queryByText('16:00')).toBeFalsy()
+    expect(queryByText('22:30')).toBeFalsy()
+
+    expect(queryByText('Loja VTEX')).toBeTruthy()
+    expect(queryByText('03:00')).toBeTruthy()
+    expect(queryByText('11:30')).toBeTruthy()
   })
 })

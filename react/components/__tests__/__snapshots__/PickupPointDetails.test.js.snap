@@ -41,6 +41,7 @@ exports[`PickupPointDetails should render self and components 1`] = `
     >
       <button
         className="pickupDetailsHeaderButton  pkpmodal-details-header-button"
+        data-testid="goToPreviousPickupPoint"
         onClick={[Function]}
       >
         <svg
@@ -58,6 +59,7 @@ exports[`PickupPointDetails should render self and components 1`] = `
       </button>
       <button
         className="pickupDetailsHeaderButton  pkpmodal-details-header-button"
+        data-testid="goToNextPickupPoint"
         onClick={[Function]}
       >
         <svg
@@ -121,7 +123,7 @@ exports[`PickupPointDetails should render self and components 1`] = `
             <p
               className="pickupPointName pkpmodal-pickup-point-name"
             >
-              test
+              Loja VTEX
             </p>
             <div
               className="pickupPointAddress pkpmodal-pickup-point-address "
@@ -210,6 +212,73 @@ exports[`PickupPointDetails should render self and components 1`] = `
         <div
           className="productItems pkpmodal-product-items"
         />
+      </div>
+      <div
+        className="modalDetailsGroup pkpmodal-details-group"
+      >
+        <h3
+          className="modalDetailsInfoTitle pkpmodal-details-info-title"
+        >
+          Business Hours
+        </h3>
+        <table
+          className="modalDetailsHours pkpmodal-details-hours"
+        >
+          <tbody>
+            <tr>
+              <td
+                className="modalDetailsHoursDay pkpmodal-details-hours-day"
+              >
+                Monday to Friday
+              </td>
+              <td
+                className="modalDetailsHoursClosed pkpmodal-details-hours-closed"
+              >
+                Closed
+              </td>
+            </tr>
+            <tr>
+              <td
+                className="modalDetailsHoursDay pkpmodal-details-hours-day"
+              >
+                Saturday
+              </td>
+              <td
+                className="modalDetailsHoursRange pkpmodal-details-hours-range"
+              >
+                <span>
+                  03:00
+                </span>
+                 
+                -
+                 
+                <span>
+                  11:30
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td
+                className="modalDetailsHoursDay pkpmodal-details-hours-day"
+              >
+                Sunday
+              </td>
+              <td
+                className="modalDetailsHoursRange pkpmodal-details-hours-range"
+              >
+                <span>
+                  02:00
+                </span>
+                 
+                -
+                 
+                <span>
+                  14:00
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

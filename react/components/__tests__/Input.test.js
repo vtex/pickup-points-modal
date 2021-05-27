@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import IntlContainer from '../../containers/IntlContainer'
 import renderer from 'react-test-renderer'
 
-loadTranslation('./messages/pt.json')
+loadTranslation('./messages/pt-BR.json')
 setLocale('pt')
 
 describe('Input', () => {
