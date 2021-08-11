@@ -1,7 +1,7 @@
 {
   "pickupPointsModal.loading": "Загрузка...",
-  "pickupPointsModal.deliver": "Доставить",
-  "pickupPointsModal.pickup": "Забрать",
+  "pickupPointsModal.deliver": "Отправка по адресу",
+  "pickupPointsModal.pickup": "Пункт выдачи в магазине",
   "pickupPointsModal.items": "{itemsAmount, plural, =0 {} one {# товар} few {# товара} many {# товаров} other {# товаров}}",
   "pickupPointsModal.cancelBackList": "Посмотреть все пункты выдачи",
   "pickupPointsModal.slaOption": "{name} - {price} - {shippingEstimate}",
@@ -41,7 +41,7 @@
   "pickupPointsModal.useSearchBar": "Используйте строку поиска, чтобы найти другие пункты",
   "pickupPointsModal.errorCouldNotGetLocation": "Невозможно определить ваше текущее местоположение",
   "pickupPointsModal.errorCouldNotGetLocationSubtitle": "Попробуйте воспользоваться полем поиска",
-  "pickupPointsModal.geolocationEmpty": "Подобрать пункты выдачи",
+  "pickupPointsModal.geolocationEmpty": "Введите адрес для поиска доступных пунктов выдачи в магазинах",
   "pickupPointsModal.geolocationEmptyInstructions": "Совет: будьте конкретны, чтобы найти наилучшие результаты.",
   "pickupPointsModal.postalCodeEmptyInstructions": "Пожалуйста, введите адрес",
   "pickupPointsModal.nearTo": "Рядом с {address}",

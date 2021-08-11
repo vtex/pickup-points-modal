@@ -1,7 +1,7 @@
 {
   "pickupPointsModal.loading": "Laden…",
-  "pickupPointsModal.deliver": "Liefern",
-  "pickupPointsModal.pickup": "Abholung",
+  "pickupPointsModal.deliver": "Versand an Adresse",
+  "pickupPointsModal.pickup": "Abholen am Abholpunkt",
   "pickupPointsModal.items": "{itemsAmount, plural, =0 {} one {# Artikel} other {# Artikel}}",
   "pickupPointsModal.cancelBackList": "Alle Abholpunkte anzeigen",
   "pickupPointsModal.slaOption": "{name} - {price} - {shippingEstimate}",
@@ -16,7 +16,7 @@
   "pickupPointsModal.searchLocationMap": "Suche nach Straße, Postleitzahl, Stadtviertel oder Stadt",
   "pickupPointsModal.productsInPoint": "Produktverfügbarkeit an diesem Abholpunkt",
   "pickupPointsModal.aditionalInfo": "Weitere Informationen",
-  "pickupPointsModal.unavailable": "nicht verfügbar",
+  "pickupPointsModal.unavailable": "nicht vorrätig",
   "pickupPointsModal.unavailableItemsAmount": "{itemsAmount, plural, =0 {} one {#Artikel nicht verfügbar} other {#Artikel nicht verfügbar}}",
   "pickupPointsModal.allItemsAvailable": "Alle Produkte sind verfügbar",
   "pickupPointsModal.noneItemsAvailable": "Kein Produkt verfügbar",
@@ -41,7 +41,7 @@
   "pickupPointsModal.useSearchBar": "Verwenden Sie die Suchleiste, um andere Punkte zu finden",
   "pickupPointsModal.errorCouldNotGetLocation": "Ihr aktueller Standort kann nicht identifiziert werden",
   "pickupPointsModal.errorCouldNotGetLocationSubtitle": "Versuchen Sie es mit dem Suchfeld",
-  "pickupPointsModal.geolocationEmpty": "Abholpunkte sammeln",
+  "pickupPointsModal.geolocationEmpty": "Geben Sie eine Adresse ein, um nach verfügbaren Pick Up In Store-Standorten zu suchen",
   "pickupPointsModal.geolocationEmptyInstructions": "Tipp: Seien Sie spezifisch, wenn Sie nach den besten Ergebnissen suchen.",
   "pickupPointsModal.postalCodeEmptyInstructions": "Bitte geben Sie eine Adresse ein",
   "pickupPointsModal.nearTo": "In der Nähe von {address}",
@@ -58,6 +58,6 @@
   "pickupPointsModal.backToSearch": "Zurück zur Suche",
   "pickupPointsModal.searchArea": "Diesen Bereich durchsuchen",
   "pickupPointsModal.showPickupPointsList": "Alle Abholpunkte anzeigen",
-  "pickupPointsModal.bestResults": "Beste Ergebnisse",
+  "pickupPointsModal.bestResults": "Best results",
   "pickupPointsModal.resultsOrderedByDistance": "Ergebnisse nach Entfernung sortiert"
 }

@@ -1,7 +1,7 @@
 {
   "pickupPointsModal.loading": "Nalagam…",
-  "pickupPointsModal.deliver": "Dostavi",
-  "pickupPointsModal.pickup": "Prevzemi",
+  "pickupPointsModal.deliver": "Pošlji na naslov",
+  "pickupPointsModal.pickup": "Prevzemi v Trgovini",
   "pickupPointsModal.items": "{itemsAmount, plural, =0 {} one {# izdelek} two {# izdelka} few {# izdelkov} other {# izdelki}}",
   "pickupPointsModal.cancelBackList": "Glej vse točke prevzema",
   "pickupPointsModal.slaOption": "{name} - {price} - {shippingEstimate}",
@@ -41,7 +41,7 @@
   "pickupPointsModal.useSearchBar": "Uporabite iskalno vrstico, da najdete druge točke",
   "pickupPointsModal.errorCouldNotGetLocation": "Ne moremo identificirati vaše trenutne lokacije",
   "pickupPointsModal.errorCouldNotGetLocationSubtitle": "Poskusite uporabiti iskalno polje",
-  "pickupPointsModal.geolocationEmpty": "Poberite točke prevzema",
+  "pickupPointsModal.geolocationEmpty": "Vtipkajte naslov za iskanje strani, ki so na voljo s Prevzemom v trgovini",
   "pickupPointsModal.geolocationEmptyInstructions": "Namig: Bodite specifični pri iskanju za najboljše rezultate.",
   "pickupPointsModal.postalCodeEmptyInstructions": "Vnesite naslov",
   "pickupPointsModal.nearTo": "Blizu {address}",
