@@ -1,7 +1,7 @@
 {
   "pickupPointsModal.loading": "Načítava sa…",
-  "pickupPointsModal.deliver": "Doručiť",
-  "pickupPointsModal.pickup": "Vyzdvihnutie",
+  "pickupPointsModal.deliver": "Odoslať na adresu",
+  "pickupPointsModal.pickup": "Vyzdvihnutie v obchode",
   "pickupPointsModal.items": "{itemsAmount, plural, =0 {} one {# položka} other {# položky (položiek)}}",
   "pickupPointsModal.cancelBackList": "Pozrite si všetky odberné miesta",
   "pickupPointsModal.slaOption": "{name} - {price} - {shippingEstimate}",
@@ -41,7 +41,7 @@
   "pickupPointsModal.useSearchBar": "Nájdite ďalšie miesta pomocou lišty vyhľadávania",
   "pickupPointsModal.errorCouldNotGetLocation": "Nepodarilo sa zistiť vašu aktuálnu polohu",
   "pickupPointsModal.errorCouldNotGetLocationSubtitle": "Skúste použiť vyhľadávacie pole",
-  "pickupPointsModal.geolocationEmpty": "Vybrať odberné miesta",
+  "pickupPointsModal.geolocationEmpty": "Zadajte adresu a vyhľadajte dostupné odberné miesta na Vyzdvihnutie v obchode",
   "pickupPointsModal.geolocationEmptyInstructions": "Tip: Na vyhľadanie čo najlepších výsledkov buďte konkrétni.",
   "pickupPointsModal.postalCodeEmptyInstructions": "Zadajte adresu",
   "pickupPointsModal.nearTo": "Blízko {address}",

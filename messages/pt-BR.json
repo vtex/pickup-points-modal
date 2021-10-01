@@ -1,10 +1,10 @@
 {
   "pickupPointsModal.loading": "Carregando…",
-  "pickupPointsModal.deliver": "Receber",
+  "pickupPointsModal.deliver": "Receber em casa",
   "pickupPointsModal.pickup": "Retirar",
   "pickupPointsModal.items": "{itemsAmount, plural, =0 {} one {# item} other {# itens}}",
   "pickupPointsModal.cancelBackList": "Ver todos os pontos de retirada",
-  "pickupPointsModal.slaOption": "{name} - {price} - {shippingEstimate}",
+  "pickupPointsModal.slaOption": "{shippingEstimate} - {price, plural, =0 {Grátis} other {{price}}} ({name})",
   "pickupPointsModal.free": "Grátis",
   "pickupPointsModal.selectPickupPoint": "Selecione um ponto de retirada",
   "pickupPointsModal.pointDetails": "Detalhes do ponto",

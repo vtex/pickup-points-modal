@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- I18n Ja, No.
+
+### Fixed
+
+- I18n Ca, Cs, Da, De, El, Fi, Fr, Ko, Nl, Pl, Ro, Ru, Sk, Sl, Sv and Uk.
+
 ## [3.4.2] - 2021-08-27
 
 ### Fixed

@@ -1,7 +1,7 @@
 {
   "pickupPointsModal.loading": "로딩 중입니다...",
-  "pickupPointsModal.deliver": "배달",
-  "pickupPointsModal.pickup": "픽업",
+  "pickupPointsModal.deliver": "배송 주소",
+  "pickupPointsModal.pickup": "매장에서 픽업",
   "pickupPointsModal.items": "{itemsAmount, plural, =0 {} one {# 품목} other {# 품목}}",
   "pickupPointsModal.cancelBackList": "모든 픽업 지점 보기",
   "pickupPointsModal.slaOption": "{name} - {price} - {shippingEstimate}",
@@ -41,7 +41,7 @@
   "pickupPointsModal.useSearchBar": "검색 창을 사용하여 다른 지점 찾기",
   "pickupPointsModal.errorCouldNotGetLocation": "현재 위치를 식별할 수 없습니다",
   "pickupPointsModal.errorCouldNotGetLocationSubtitle": "검색 필드를 사용해 보십시오",
-  "pickupPointsModal.geolocationEmpty": "픽점 지점 고르기",
+  "pickupPointsModal.geolocationEmpty": "주소를 입력하여 매장에서 가능한 픽업 찾기",
   "pickupPointsModal.geolocationEmptyInstructions": "팁: 최상의 결과를 검색하려면 구체적으로 하십시오.",
   "pickupPointsModal.postalCodeEmptyInstructions": "주소를 입력하세요",
   "pickupPointsModal.nearTo": "{address} 근처",

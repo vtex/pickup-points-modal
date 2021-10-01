@@ -1,7 +1,7 @@
 {
   "pickupPointsModal.loading": "Načítání…",
-  "pickupPointsModal.deliver": "Doručení",
-  "pickupPointsModal.pickup": "Vyzvednutí",
+  "pickupPointsModal.deliver": "Doručit na adresu",
+  "pickupPointsModal.pickup": "Vyzvednout v obchodě",
   "pickupPointsModal.items": "{itemsAmount, plural, =0 {} one {# položka} few {# položek} many {# položek} other {# položek}}",
   "pickupPointsModal.cancelBackList": "Zobrazit všechny body pro vyzvednutí",
   "pickupPointsModal.slaOption": "{name} - {price} - {shippingEstimate}",
@@ -61,4 +61,3 @@
   "pickupPointsModal.bestResults": "Nejlepší výsledky",
   "pickupPointsModal.resultsOrderedByDistance": "Výsledky řazeny dle vzdálenosti"
 }
-  

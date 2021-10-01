@@ -1,7 +1,7 @@
 {
   "pickupPointsModal.loading": "Lataa…",
-  "pickupPointsModal.deliver": "Toimita",
-  "pickupPointsModal.pickup": "Nouto",
+  "pickupPointsModal.deliver": "Toimitus osoitteeseen",
+  "pickupPointsModal.pickup": "Nouto myymälästä",
   "pickupPointsModal.items": "{itemsAmount, plural, =0 {} one {# tuote} other {# tuotetta}}",
   "pickupPointsModal.cancelBackList": "Näytä kaikki noutopisteet",
   "pickupPointsModal.slaOption": "{name} - {price} - {shippingEstimate}",
@@ -41,7 +41,7 @@
   "pickupPointsModal.useSearchBar": "Hae toisia pisteitä hakukentässä",
   "pickupPointsModal.errorCouldNotGetLocation": "Nykyistä sijaintiasi ei tunnistettu",
   "pickupPointsModal.errorCouldNotGetLocationSubtitle": "Kokeile käyttää hakukenttää",
-  "pickupPointsModal.geolocationEmpty": "Noudon noutopisteet",
+  "pickupPointsModal.geolocationEmpty": "Kirjoita osoite hakeaksesi saatavilla olevia noutopisteitä",
   "pickupPointsModal.geolocationEmptyInstructions": "Vinkki: Ole tarkka haussasi, jos haluat parhaat tulokset.",
   "pickupPointsModal.postalCodeEmptyInstructions": "Syötä osoite",
   "pickupPointsModal.nearTo": "Lähellä osoitetta {address}",

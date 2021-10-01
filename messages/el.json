@@ -1,7 +1,7 @@
 {
   "pickupPointsModal.loading": "Φορτώνει…",
-  "pickupPointsModal.deliver": "Παράδοση",
-  "pickupPointsModal.pickup": "Παραλαβή",
+  "pickupPointsModal.deliver": "Μεταφορά στη διεύθυνση",
+  "pickupPointsModal.pickup": "Παραλαβή στο Κατάστημα",
   "pickupPointsModal.items": "{itemsAmount, plural, =0 {} one {# προϊόν} other {# προϊόντα}}",
   "pickupPointsModal.cancelBackList": "Προβολή όλων των σημείων παραλαβής",
   "pickupPointsModal.slaOption": "{name} - {price} - {shippingEstimate}",
@@ -41,7 +41,7 @@
   "pickupPointsModal.useSearchBar": "Χρησιμοποιήστε τη μπάρα αναζήτησης για να βρείτε άλλα σημεία",
   "pickupPointsModal.errorCouldNotGetLocation": "Αδυναμία αναγνώρισης της τρέχουσας τοποθεσίας σας",
   "pickupPointsModal.errorCouldNotGetLocationSubtitle": "Δοκιμάστε να χρησιμοποιήσετε το πεδίο αναζήτησης",
-  "pickupPointsModal.geolocationEmpty": "Επιλογή σημείων παραλαβής",
+  "pickupPointsModal.geolocationEmpty": "Πληκτρολογήστε μια διεύθυνση για αναζήτηση διαθέσιμων τοποθεσιών Παραλαβής στο Κατάστημα",
   "pickupPointsModal.geolocationEmptyInstructions": "Συμβουλή: Για καλύτερα αποτελέσματα, να είστε συγκεκριμένοι στην αναζήτηση.",
   "pickupPointsModal.postalCodeEmptyInstructions": "Εισάγετε μια Διεύθυνση",
   "pickupPointsModal.nearTo": "Κοντά σε {address}",
