@@ -144,11 +144,16 @@ class Geolocation extends Component {
         // TODO#2: look into retrying timeout, refer to TODO#1
         // Might be done either over there or here.
 
-        // TODO#3: Log in case of timeout in order to better study the ideal timeout;
-        // also log the user device browser etc if possible in this case.
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_COULD_NOT_GETLOCATION)
         this.setCurrentActiveState(ERROR_COULD_NOT_GETLOCATION)
+        // TODO#3: Log the user device, browser, etc, to study
+        // the causes of geolocation timing out more closely.
+
+        // Also the event below is likely erroneously named, timeouts
+        // don't seem to happen when the user dismisses, but when it
+        // takes too long for the GPS or similar to respond, or the
+        // device is blocking it for some reason.
         searchPickupAddressByGeolocationEvent({ dismissedGeolocation: true })
         break
       default:
