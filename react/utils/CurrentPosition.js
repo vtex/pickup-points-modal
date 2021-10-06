@@ -1,4 +1,4 @@
-import geolocationAutoCompleteAddress from '@vtex/address-form/lib/geolocation/geolocationAutoCompleteAddress'
+import { geolocationAutoCompleteAddress } from 'vtex.address-form/geolocationAutoCompleteAddress'
 
 export function getCurrentPosition(successCallback, errorCallback) {
   return navigator.geolocation.getCurrentPosition(
