@@ -140,6 +140,11 @@ class Geolocation extends Component {
         })
         break
       case 3: // TIMEOUT
+        // TODO#2: look into retrying timeout, refer to TODO#1
+        // Might be done either over there or here.
+
+        // TODO#3: Log in case of timeout in order to better study the ideal timeout;
+        // also log the user device browser etc if possible in this case.
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_COULD_NOT_GETLOCATION)
         this.setCurrentActiveState(ERROR_COULD_NOT_GETLOCATION)
