@@ -7,7 +7,7 @@ export function getCurrentPosition(successCallback, errorCallback) {
       // TODO#1: retry in case of timeout, possibly with a lower accuracy.
       // Not implementing right now because we might need to look into issues that long
       // timeouts might cause, especially in terms of UX. But below is a suggestion:
-      /* 
+      /*
       const TIMEOUT = 3
       if (error.code === TIMEOUT ) {
         navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
