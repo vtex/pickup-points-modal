@@ -88,10 +88,11 @@ class Geolocation extends Component {
   }
 
   getCurrentPositionSuccess = position => {
-    const { address, googleMaps, onChangeAddress, rules } = this.props
+    const { address, googleMaps, onChangeAddress, rules, setAskForGeolocation } = this.props
 
     this.setState({ isLoadingGeolocation: false })
     this.setCurrentActiveState(SEARCHING)
+    setAskForGeolocation(false)
     handleGetAddressByGeolocation({
       newPosition: {
         lat: position.coords.latitude,
