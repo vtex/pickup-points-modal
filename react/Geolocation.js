@@ -88,10 +88,11 @@ class Geolocation extends Component {
   }
 
   getCurrentPositionSuccess = position => {
-    const { address, googleMaps, onChangeAddress, rules } = this.props
+    const { address, googleMaps, onChangeAddress, rules, setAskForGeolocation } = this.props
 
     this.setState({ isLoadingGeolocation: false })
     this.setCurrentActiveState(SEARCHING)
+    setAskForGeolocation(false)
     handleGetAddressByGeolocation({
       newPosition: {
         lat: position.coords.latitude,
@@ -140,9 +141,19 @@ class Geolocation extends Component {
         })
         break
       case 3: // TIMEOUT
+        // TODO#2: look into retrying timeout, refer to TODO#1
+        // Might be done either over there or here.
+
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_COULD_NOT_GETLOCATION)
         this.setCurrentActiveState(ERROR_COULD_NOT_GETLOCATION)
+        // TODO#3: Log the user device, browser, etc, to study
+        // the causes of geolocation timing out more closely.
+
+        // Also the event below is likely erroneously named, timeouts
+        // don't seem to happen when the user dismisses, but when it
+        // takes too long for the GPS or similar to respond, or the
+        // device is blocking it for some reason.
         searchPickupAddressByGeolocationEvent({ dismissedGeolocation: true })
         break
       default:
