@@ -12,8 +12,20 @@ import styles from '../index.css'
 import emptyStyles from './EmptySearch.css'
 import { getShipsTo } from '../utils/AddressUtils'
 import GPSDenied from '../assets/components/GPSDenied'
-import { ERROR_NOT_ALLOWED } from '../constants'
+import { ERROR_COULD_NOT_GETLOCATION, ERROR_NOT_ALLOWED, ERROR_NOT_FOUND } from '../constants'
 import { injectState } from '../modalStateContext'
+
+const getGeolocationErrorMessage = (status) => {
+  switch (status) {
+    case ERROR_NOT_ALLOWED:
+      return 'askGeolocationDenied'
+    case ERROR_NOT_FOUND:
+    case ERROR_COULD_NOT_GETLOCATION:
+      return 'geolocationError'
+    default:
+      return null
+  }
+}
 
 class EmptySearch extends PureComponent {
   render() {
@@ -32,6 +44,8 @@ class EmptySearch extends PureComponent {
       setActiveState,
       shouldUseMaps,
     } = this.props
+
+    const geolocationErrorMessage = getGeolocationErrorMessage(geolocationStatus)
 
     return (
       <div className={`${styles.modalfullPage} pkpmodal-full-page`}>
@@ -72,10 +86,10 @@ class EmptySearch extends PureComponent {
             rules={rules}
             shipsTo={getShipsTo(intl, logisticsInfo)}
           />
-          {geolocationStatus === ERROR_NOT_ALLOWED && (
+          {geolocationErrorMessage && (
             <div className={emptyStyles.permissionDenied}>
               <GPSDenied />
-              <span>{translate(intl, 'askGeolocationDenied')}</span>
+              <span>{translate(intl, geolocationErrorMessage)}</span>
             </div>
           )}
         </div>
