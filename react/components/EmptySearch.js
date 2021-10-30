@@ -21,7 +21,7 @@ const getGeolocationErrorMessage = (status) => {
       return 'askGeolocationDenied'
     case ERROR_NOT_FOUND:
     case ERROR_COULD_NOT_GETLOCATION:
-      return 'geolocationError'
+      return 'errorCouldNotGetLocation'
     default:
       return null
   }
