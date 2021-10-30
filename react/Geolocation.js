@@ -116,7 +116,7 @@ class Geolocation extends Component {
       case 0: // UNKNOWN ERROR
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_COULD_NOT_GETLOCATION)
-        this.setCurrentActiveState(ERROR_COULD_NOT_GETLOCATION)
+        this.setCurrentActiveState(INITIAL)
         searchPickupAddressByGeolocationEvent({
           confirmedGeolocation: true,
           browserError: true,
@@ -134,26 +134,20 @@ class Geolocation extends Component {
       case 2: // POSITION_UNAVAILABLE
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_NOT_FOUND)
-        this.setCurrentActiveState(ERROR_NOT_FOUND)
+        this.setCurrentActiveState(INITIAL)
         searchPickupAddressByGeolocationEvent({
           confirmedGeolocation: true,
           positionUnavailable: true,
         })
         break
       case 3: // TIMEOUT
-        // TODO#2: look into retrying timeout, refer to TODO#1
-        // Might be done either over there or here.
-
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_COULD_NOT_GETLOCATION)
-        this.setCurrentActiveState(ERROR_COULD_NOT_GETLOCATION)
-        // TODO#3: Log the user device, browser, etc, to study
-        // the causes of geolocation timing out more closely.
-
-        // Also the event below is likely erroneously named, timeouts
-        // don't seem to happen when the user dismisses, but when it
-        // takes too long for the GPS or similar to respond, or the
-        // device is blocking it for some reason.
+        this.setCurrentActiveState(INITIAL)
+        // The event below ("dismissedGeolocation") is likely erroneously named;
+        // error code 3 happens when the geolocation function takes too long
+        // to respond, for a number of reasons. Keeping the name though to
+        // avoid breaking things.
         searchPickupAddressByGeolocationEvent({ dismissedGeolocation: true })
         break
       default:
