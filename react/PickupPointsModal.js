@@ -17,6 +17,7 @@ import { newAddress } from './utils/newAddress'
 import { HIDE_MAP, SHOW_MAP } from './constants'
 import { getPickupOptionGeolocations } from './utils/pickupUtils'
 import { helpers } from 'vtex.address-form'
+import { searchPickupAddressByGeolocationEvent } from './utils/metrics'
 
 const { validateField, addValidation } = helpers
 const NULL_VALUE = {
@@ -24,6 +25,8 @@ const NULL_VALUE = {
 }
 
 class PickupPointsModal extends Component {
+  startTime = null
+
   constructor(props) {
     super(props)
 
@@ -40,6 +43,7 @@ class PickupPointsModal extends Component {
       isLargeScreen: window.innerWidth > 1023,
       shouldUseMaps: !!props.googleMapsKey,
       innerWidth: window.innerWidth,
+      isLoadingGeolocation: null,
     }
   }
 
@@ -63,6 +67,9 @@ class PickupPointsModal extends Component {
         isMounted: true,
       })
     }
+
+    this.startTime = Date.now()
+
     window.addEventListener('resize', this.resize)
   }
 
@@ -170,7 +177,19 @@ class PickupPointsModal extends Component {
     const style = document.body.style
     style.overflow = 'auto'
     style.position = ''
+    if (this.state.isLoadingGeolocation) {
+      const elapsedTime = Date.now() - this.startTime
+
+      searchPickupAddressByGeolocationEvent({
+        closedWhileLoading: true,
+        elapsedTime,
+      })
+    }
     this.props.closePickupPointsModal()
+  }
+
+  handleChangeGeolocationLoading = (event) => {
+    this.setState({ isLoadingGeolocation: event.loading })
   }
 
   render() {
@@ -246,6 +265,7 @@ class PickupPointsModal extends Component {
                 askForGeolocation={askForGeolocation}
                 googleMaps={googleMaps}
                 onChangeAddress={this.handleAddressChange}
+                onChangeisLoadingGeolocation={this.handleChangeGeolocationLoading}
                 rules={rules}>
                 <SearchArea
                   address={searchAddressWithAddressQuery}
