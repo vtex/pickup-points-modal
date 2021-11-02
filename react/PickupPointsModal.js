@@ -265,7 +265,7 @@ class PickupPointsModal extends Component {
                 askForGeolocation={askForGeolocation}
                 googleMaps={googleMaps}
                 onChangeAddress={this.handleAddressChange}
-                onChangeisLoadingGeolocation={this.handleChangeGeolocationLoading}
+                onChangeGeolocationState={this.handleChangeGeolocationLoading}
                 rules={rules}>
                 <SearchArea
                   address={searchAddressWithAddressQuery}
