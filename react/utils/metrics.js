@@ -8,6 +8,8 @@ export function searchPickupAddressByGeolocationEvent(data) {
       deniedGeolocationPopUp: data.deniedGeolocation || false,
       positionUnavailable: data.positionUnavailable || false,
       browserError: data.browserError || false,
+      closedWhileLoading: data.closedWhileLoading || false,
+      elapsedTime: data.elapsedTime || 0,
     },
   })
 }
