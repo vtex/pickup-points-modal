@@ -20,6 +20,10 @@ import {
 } from './constants'
 
 class Geolocation extends Component {
+  unsubscribeGetCurrentPosition = null
+  unsubscribeGetAddressByGeolocation = null
+  startTime = null
+
   constructor(props) {
     super(props)
 
@@ -31,15 +35,32 @@ class Geolocation extends Component {
   }
 
   componentDidMount() {
+    this.startTime = Date.now()
     this.getPermissionStatus()
     if (this.props.askForGeolocation) {
       this.handleGetCurrentPosition()
     }
   }
 
-  componentDidUpdate(prevProps) {
+  unsubscribeAsyncTasks = () => {
+    this.unsubscribeGetCurrentPosition?.()
+    this.unsubscribeGetCurrentPosition = null
+    this.unsubscribeGetAddressByGeolocation?.()
+    this.unsubscribeGetAddressByGeolocation = null
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeAsyncTasks()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.activeState !== prevProps.activeState) {
       this.getPermissionStatus()
+    }
+
+    const { isLoadingGeolocation } = this.state
+    if (isLoadingGeolocation !== prevState.isLoadingGeolocation) {
+      this.props.onChangeGeolocationState?.({ loading: isLoadingGeolocation })
     }
   }
 
@@ -80,11 +101,12 @@ class Geolocation extends Component {
 
   handleCurrentPosition = () => {
     this.setState({ isLoadingGeolocation: true })
-    this.props.googleMaps &&
-      getCurrentPosition(
+    if(this.props.googleMaps) {
+      this.unsubscribeGetCurrentPosition = getCurrentPosition(
         this.getCurrentPositionSuccess,
         this.getCurrentPositionError
       )
+    }
   }
 
   getCurrentPositionSuccess = position => {
@@ -93,7 +115,10 @@ class Geolocation extends Component {
     this.setState({ isLoadingGeolocation: false })
     this.setCurrentActiveState(SEARCHING)
     setAskForGeolocation(false)
-    handleGetAddressByGeolocation({
+
+    const elapsedTime = Date.now() - this.startTime
+
+    this.unsubscribeGetAddressByGeolocation = handleGetAddressByGeolocation({
       newPosition: {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
@@ -103,15 +128,21 @@ class Geolocation extends Component {
       rules: rules,
       address: address,
     })
+
     searchPickupAddressByGeolocationEvent({
       searchedAddressByGeolocation: true,
       confirmedGeolocation: true,
+      elapsedTime,
     })
   }
 
   getCurrentPositionError = error => {
-    this.setState({ isLoadingGeolocation: false })
     const { setAskForGeolocation, setGeolocationStatus } = this.props
+
+    this.setState({ isLoadingGeolocation: false })
+
+    const elapsedTime = Date.now() - this.startTime
+
     switch (error.code) {
       case 0: // UNKNOWN ERROR
         setAskForGeolocation(false)
@@ -120,6 +151,7 @@ class Geolocation extends Component {
         searchPickupAddressByGeolocationEvent({
           confirmedGeolocation: true,
           browserError: true,
+          elapsedTime,
         })
         break
       case 1: // PERMISSION_DENIED
@@ -129,6 +161,7 @@ class Geolocation extends Component {
         this.setState({ permissionStatus: DENIED })
         searchPickupAddressByGeolocationEvent({
           deniedGeolocation: true,
+          elapsedTime,
         })
         break
       case 2: // POSITION_UNAVAILABLE
@@ -138,6 +171,7 @@ class Geolocation extends Component {
         searchPickupAddressByGeolocationEvent({
           confirmedGeolocation: true,
           positionUnavailable: true,
+          elapsedTime,
         })
         break
       case 3: // TIMEOUT
@@ -148,7 +182,10 @@ class Geolocation extends Component {
         // error code 3 happens when the geolocation function takes too long
         // to respond, for a number of reasons. Keeping the name though to
         // avoid breaking things.
-        searchPickupAddressByGeolocationEvent({ dismissedGeolocation: true })
+        searchPickupAddressByGeolocationEvent({
+          dismissedGeolocation: true,
+          elapsedTime,
+        })
         break
       default:
         return false
@@ -174,6 +211,7 @@ class Geolocation extends Component {
 
 Geolocation.propTypes = {
   children: PropTypes.any.isRequired,
+  onChangeGeolocationState: PropTypes.func,
 }
 
 export default injectState(Geolocation)
