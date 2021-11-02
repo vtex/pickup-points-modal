@@ -1,9 +1,25 @@
 import { geolocationAutoCompleteAddress } from 'vtex.address-form/geolocationAutoCompleteAddress'
 
 export function getCurrentPosition(successCallback, errorCallback) {
-  return navigator.geolocation.getCurrentPosition(
-    position => successCallback(position),
-    errorCallback,
+  let hasBeenCanceled = false
+
+  const handleSuccess = position => {
+    if (hasBeenCanceled) {
+      return
+    }
+    successCallback(position)
+  }
+
+  const handleError = error => {
+    if (hasBeenCanceled) {
+      return
+    }
+    errorCallback(error)
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    handleSuccess,
+    handleError,
     {
       maximumAge: Infinity,
       // getCurrentPosition timeout varies a lot depending on device,
@@ -14,6 +30,9 @@ export function getCurrentPosition(successCallback, errorCallback) {
       enableHighAccuracy: true,
     }
   )
+  return () => {
+    hasBeenCanceled = true
+  }
 }
 
 export function handleGetAddressByGeolocation({
@@ -23,9 +42,15 @@ export function handleGetAddressByGeolocation({
   rules,
   address,
 }) {
+  let hasBeenCanceled = false
+
   const geocoder = new googleMaps.Geocoder()
 
   geocoder.geocode({ location: newPosition }, (results, status) => {
+    if (hasBeenCanceled) {
+      return
+    }
+
     if (status === googleMaps.GeocoderStatus.OK) {
       if (results[0]) {
         const googleAddress = results[0]
@@ -48,4 +73,8 @@ export function handleGetAddressByGeolocation({
       console.warn(`Google Maps Error: ${status}`)
     }
   })
+
+  return () => {
+    hasBeenCanceled = true
+  }
 }
