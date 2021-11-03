@@ -101,7 +101,7 @@ class Geolocation extends Component {
 
   handleCurrentPosition = () => {
     this.setState({ isLoadingGeolocation: true })
-    if(this.props.googleMaps) {
+    if (this.props.googleMaps) {
       this.unsubscribeGetCurrentPosition = getCurrentPosition(
         this.getCurrentPositionSuccess,
         this.getCurrentPositionError
