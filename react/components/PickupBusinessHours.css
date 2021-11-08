@@ -1,0 +1,25 @@
+.modalDetailsHours {
+  font-size: 12px;
+  width: 100%;
+  max-width: 340px;
+}
+
+.modalDetailsHours td {
+  border-bottom: 1px solid #f2f4f5;
+  padding-top: 6px;
+}
+
+.modalDetailsHoursRange,
+.modalDetailsHoursClosed {
+  text-align: right;
+}
+
+.modalDetailsHoursClosed {
+  color: #ff4c4c;
+}
+
+.modalDetailsInfoTitle {
+  font-weight: 500;
+  color: #666666;
+  margin-top: 0;
+}
