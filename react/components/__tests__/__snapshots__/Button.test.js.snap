@@ -3,7 +3,6 @@
 exports[`Button should render alert mode 1`] = `
 <button
   className=" btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block "
-  disabled={undefined}
   type="button"
 >
   title
@@ -13,7 +12,6 @@ exports[`Button should render alert mode 1`] = `
 exports[`Button should render danger mode 1`] = `
 <button
   className=" btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block "
-  disabled={undefined}
   type="button"
 >
   title
@@ -23,7 +21,6 @@ exports[`Button should render danger mode 1`] = `
 exports[`Button should render info mode 1`] = `
 <button
   className=" btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block "
-  disabled={undefined}
   type="button"
 >
   title
@@ -33,7 +30,6 @@ exports[`Button should render info mode 1`] = `
 exports[`Button should render light-danger mode with size xl not checked with fixed value 1`] = `
 <button
   className=" btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block "
-  disabled={undefined}
   fixedValue={false}
   notChecked={false}
   size="xl"
@@ -46,7 +42,6 @@ exports[`Button should render light-danger mode with size xl not checked with fi
 exports[`Button should render light-primary mode with size lg and loading 1`] = `
 <button
   className=" btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block "
-  disabled={undefined}
   isLoading={true}
   size="lg"
   type="button"
@@ -70,7 +65,6 @@ exports[`Button should render link mode with size sm and disabled and is not lon
 exports[`Button should render muted mode with size xs and is not inline 1`] = `
 <button
   className=" btn pkp-modal-btn primary pkp-modal-btn-primary "
-  disabled={undefined}
   size="xs"
   type="button"
 >
@@ -81,7 +75,6 @@ exports[`Button should render muted mode with size xs and is not inline 1`] = `
 exports[`Button should render primary mode 1`] = `
 <button
   className=" btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block "
-  disabled={undefined}
   type="button"
 >
   title
@@ -91,7 +84,6 @@ exports[`Button should render primary mode 1`] = `
 exports[`Button should render success mode 1`] = `
 <button
   className=" btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block "
-  disabled={undefined}
   type="button"
 >
   title
