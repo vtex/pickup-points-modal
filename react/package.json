@@ -35,11 +35,6 @@
     "react-intl": "^2.8.0",
     "react-tooltip": "^3.10.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-push": "yarn run lint"
-    }
-  },
   "bugs": {
     "url": "https://github.com/vtex/pickup-points-modal/issues"
   },
