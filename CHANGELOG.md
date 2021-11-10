@@ -6,8 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Metrics for when the modal is closed while geolocation is loading
+- Metrics for the time it takes for geolocation to load
+
+### Changed
+- Increase geolocation timeout to 10s
+- Change geolocation error modal state to the initial search state, with an added error message.
+
+### Fixed
+- Prevent the modal from updating address etc. after the modal has been closed (at least a scenario where this happens).
 
 ## [3.5.1] - 2021-10-13
+### Changed
+- Increase geolocation timeout to 6s
 
 ## [3.5.0] - 2021-10-01
 

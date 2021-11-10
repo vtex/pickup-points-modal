@@ -20,6 +20,10 @@ import {
 } from './constants'
 
 class Geolocation extends Component {
+  unsubscribeGetCurrentPosition = null
+  unsubscribeGetAddressByGeolocation = null
+  startTime = null
+
   constructor(props) {
     super(props)
 
@@ -31,15 +35,32 @@ class Geolocation extends Component {
   }
 
   componentDidMount() {
+    this.startTime = Date.now()
     this.getPermissionStatus()
     if (this.props.askForGeolocation) {
       this.handleGetCurrentPosition()
     }
   }
 
-  componentDidUpdate(prevProps) {
+  unsubscribeAsyncTasks = () => {
+    this.unsubscribeGetCurrentPosition?.()
+    this.unsubscribeGetCurrentPosition = null
+    this.unsubscribeGetAddressByGeolocation?.()
+    this.unsubscribeGetAddressByGeolocation = null
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeAsyncTasks()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.activeState !== prevProps.activeState) {
       this.getPermissionStatus()
+    }
+
+    const { isLoadingGeolocation } = this.state
+    if (isLoadingGeolocation !== prevState.isLoadingGeolocation) {
+      this.props.onChangeGeolocationState?.({ loading: isLoadingGeolocation })
     }
   }
 
@@ -80,11 +101,12 @@ class Geolocation extends Component {
 
   handleCurrentPosition = () => {
     this.setState({ isLoadingGeolocation: true })
-    this.props.googleMaps &&
-      getCurrentPosition(
+    if (this.props.googleMaps) {
+      this.unsubscribeGetCurrentPosition = getCurrentPosition(
         this.getCurrentPositionSuccess,
         this.getCurrentPositionError
       )
+    }
   }
 
   getCurrentPositionSuccess = position => {
@@ -93,7 +115,10 @@ class Geolocation extends Component {
     this.setState({ isLoadingGeolocation: false })
     this.setCurrentActiveState(SEARCHING)
     setAskForGeolocation(false)
-    handleGetAddressByGeolocation({
+
+    const elapsedTime = Date.now() - this.startTime
+
+    this.unsubscribeGetAddressByGeolocation = handleGetAddressByGeolocation({
       newPosition: {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
@@ -103,23 +128,30 @@ class Geolocation extends Component {
       rules: rules,
       address: address,
     })
+
     searchPickupAddressByGeolocationEvent({
       searchedAddressByGeolocation: true,
       confirmedGeolocation: true,
+      elapsedTime,
     })
   }
 
   getCurrentPositionError = error => {
-    this.setState({ isLoadingGeolocation: false })
     const { setAskForGeolocation, setGeolocationStatus } = this.props
+
+    this.setState({ isLoadingGeolocation: false })
+
+    const elapsedTime = Date.now() - this.startTime
+
     switch (error.code) {
       case 0: // UNKNOWN ERROR
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_COULD_NOT_GETLOCATION)
-        this.setCurrentActiveState(ERROR_COULD_NOT_GETLOCATION)
+        this.setCurrentActiveState(INITIAL)
         searchPickupAddressByGeolocationEvent({
           confirmedGeolocation: true,
           browserError: true,
+          elapsedTime,
         })
         break
       case 1: // PERMISSION_DENIED
@@ -129,32 +161,31 @@ class Geolocation extends Component {
         this.setState({ permissionStatus: DENIED })
         searchPickupAddressByGeolocationEvent({
           deniedGeolocation: true,
+          elapsedTime,
         })
         break
       case 2: // POSITION_UNAVAILABLE
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_NOT_FOUND)
-        this.setCurrentActiveState(ERROR_NOT_FOUND)
+        this.setCurrentActiveState(INITIAL)
         searchPickupAddressByGeolocationEvent({
           confirmedGeolocation: true,
           positionUnavailable: true,
+          elapsedTime,
         })
         break
       case 3: // TIMEOUT
-        // TODO#2: look into retrying timeout, refer to TODO#1
-        // Might be done either over there or here.
-
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_COULD_NOT_GETLOCATION)
-        this.setCurrentActiveState(ERROR_COULD_NOT_GETLOCATION)
-        // TODO#3: Log the user device, browser, etc, to study
-        // the causes of geolocation timing out more closely.
-
-        // Also the event below is likely erroneously named, timeouts
-        // don't seem to happen when the user dismisses, but when it
-        // takes too long for the GPS or similar to respond, or the
-        // device is blocking it for some reason.
-        searchPickupAddressByGeolocationEvent({ dismissedGeolocation: true })
+        this.setCurrentActiveState(INITIAL)
+        // The event below ("dismissedGeolocation") is likely erroneously named;
+        // error code 3 happens when the geolocation function takes too long
+        // to respond, for a number of reasons. Keeping the name though to
+        // avoid breaking things.
+        searchPickupAddressByGeolocationEvent({
+          dismissedGeolocation: true,
+          elapsedTime,
+        })
         break
       default:
         return false
@@ -180,6 +211,7 @@ class Geolocation extends Component {
 
 Geolocation.propTypes = {
   children: PropTypes.any.isRequired,
+  onChangeGeolocationState: PropTypes.func,
 }
 
 export default injectState(Geolocation)
