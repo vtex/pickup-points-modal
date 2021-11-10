@@ -95,16 +95,18 @@ function normalizeBusinessHours(
       (businessDay) => number === businessDay.DayOfWeek
     )
 
-    const dayObject = day && {
-      closed: false,
-      openingTime: day.OpeningTime,
-      closingTime: day.ClosingTime,
+    if (day == null) {
+      return {
+        number,
+        closed: true,
+      }
     }
 
     return {
       number,
-      closed: true,
-      ...(dayObject ?? {}),
+      closed: false,
+      openingTime: day.OpeningTime,
+      closingTime: day.ClosingTime,
     }
   })
 }
