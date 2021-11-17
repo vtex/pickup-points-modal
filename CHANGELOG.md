@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Arabic translation.
+
 ## [3.5.2] - 2021-11-10
 ### Added
 - Metrics for when the modal is closed while geolocation is loading
