@@ -8,6 +8,11 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
+"@types/google.maps@^3.46.1":
+  version "3.46.1"
+  resolved "https://registry.yarnpkg.com/@types/google.maps/-/google.maps-3.46.1.tgz#a1a3bf99402022ea0039cc8c3230a1f9a216e46e"
+  integrity sha512-GAa5ZWYgXG50yLXybb7A824esGm/L0LKHS7qD0qkP0IA/Qp5r922P9tmYcbCkGEf3Zgf7Ukbp7l08/IGIJuQwQ==
+
 "@types/node@^16.11.6":
   version "16.11.6"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.6.tgz#6bef7a2a0ad684cf6e90fcfe31cecabd9ce0a3ae"
