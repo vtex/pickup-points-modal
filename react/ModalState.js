@@ -257,7 +257,7 @@ class ModalState extends Component {
 
     this.setSelectedPickupPoint({
       pickupPoint: bestPickupOptions[previousIndex],
-      isSelectedBestPickupPoint: previousIndex < BEST_PICKUPS_AMOUNT,
+      isBestPickupPoint: previousIndex < BEST_PICKUPS_AMOUNT,
     })
   }
 
@@ -272,7 +272,7 @@ class ModalState extends Component {
 
     this.setSelectedPickupPoint({
       pickupPoint: bestPickupOptions[nextIndex],
-      isSelectedBestPickupPoint: nextIndex < BEST_PICKUPS_AMOUNT,
+      isBestPickupPoint: nextIndex < BEST_PICKUPS_AMOUNT,
     })
   }
 
