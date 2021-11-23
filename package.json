@@ -1,12 +1,8 @@
 {
-  "name": "@vtex/pickup-points-modal",
-  "version": "3.0.7",
-  "description": "Pickup Points Modal React component",
-  "main": "lib/index.js",
-  "files": [
-    "lib"
-  ],
+  "name": "pickup-points-modal",
+  "private": true,
   "scripts": {
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json}\"",
     "build": "nwb build-react-component --copy-files --no-demo && nwb build-react-app && npm run css && npm run removeMocks && npm run addLocales",
     "css": "mv dist/0.styles.css lib/0.styles.css && mv dist/0.styles.css.map lib/0.styles.css.map ",
     "removeMocks": "rm -rf lib/**/__mocks__ && rm -rf lib/__mocks__ && rm -rf dist",
@@ -15,9 +11,10 @@
     "symlink": "ln -s react src",
     "symlink:remove": "rm -rf src",
     "start": "nwb serve-react-demo",
-    "lint": "eslint react/**/*.js",
-    "lint-fix": "eslint --fix react/**/*.js",
+    "lint": "eslint --ext js,jsx,ts,tsx .",
+    "lint-fix": "yarn lint --fix",
     "lint:locales": "intl-equalizer",
+    "lint:ts": "tsc --noEmit -p react/tsconfig.json",
     "test": "jest --env=jsdom",
     "test:coverage": "jest --env=jsdom --coverage",
     "test:watch": "jest --env=jsdom --watch",
@@ -25,52 +22,42 @@
     "build:link": "npm link && watch 'npm run build' src",
     "postreleasy": "npm publish --access public"
   },
-  "keywords": [
-    "react-component",
-    "vtex",
-    "checkout",
-    "pickup-points"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/vtex/pickup-points-modal.git"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
-  "author": "Fernando de Almeida Coelho <nandoacoelho@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "@vtex/address-form": "2.5.6",
-    "@vtex/intl-equalizer": "^2.2.0",
-    "classnames": "2.2.5",
-    "import-fresh": "^3.0.0",
-    "lodash": "^4.17.15",
-    "react-tooltip": "^3.4.0"
+  "lint-staged": {
+    "*.{ts,js,tsx,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,graphql,gql}": [
+      "prettier --write"
+    ]
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.1",
-    "babel-jest": "^22.2.2",
-    "babel-plugin-add-react-displayname": "^0.0.5",
-    "babel-preset-react-app": "^3.1.1",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "@vtex/prettier-config": "^0.3.6",
+    "babel-jest": "^27.3.1",
     "enzyme": "^3.4.1",
     "enzyme-adapter-react-16": "^1.2.0",
     "enzyme-react-intl": "^2.0.0",
-    "eslint": "^4.17.0",
-    "eslint-config-prettier": "^3.0.1",
-    "eslint-config-vtex": "^8.0.0",
-    "eslint-config-vtex-react": "^3.0.3",
-    "eslint-plugin-cypress": "^2.0.1",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "^21.21.0",
-    "eslint-plugin-prettier": "^2.6.2",
-    "eslint-plugin-react": "^7.6.1",
-    "eslint-utils": "^1.4.2",
-    "husky": "1.0.0-rc.2",
+    "eslint": "^7",
+    "eslint-config-vtex": "^14.1.1",
+    "eslint-config-vtex-react": "^8.2.0",
+    "husky": "^4.2.3",
     "i18n-iso-countries": "^3.5.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^22.2.2",
+    "jest": "^27.3.1",
     "jest-enzyme": "^6.0.3",
+    "lint-staged": "^10.1.1",
     "mockdate": "^2.0.2",
     "nwb": "^0.23.0",
-    "prettier": "^1.14.2",
+    "prettier": "^2.4.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-hot-loader": "^3.1.3",
@@ -79,46 +66,7 @@
     "react-test-renderer": "^16.2.0",
     "react-testing-library": "^6.0.0",
     "redux": "^4.0.0",
+    "typescript": "^3.8.3",
     "watch": "^1.0.2"
-  },
-  "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/react/setupTests.js",
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "<rootDir>/es/",
-      "<rootDir>/lib/",
-      "<rootDir>/umd/",
-      "__mocks__"
-    ],
-    "modulePathIgnorePatterns": [
-      "<rootDir>/es/",
-      "<rootDir>/lib/",
-      "<rootDir>/umd/"
-    ],
-    "transformIgnorePatterns": [
-      "[/\\\\]lib[/\\\\].+\\.(js|jsx)$",
-      "[/\\\\]umd[/\\\\].+\\.(js|jsx)$",
-      "[/\\\\]es[/\\\\].+\\.(js|jsx)$",
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ],
-    "moduleNameMapper": {
-      "\\.(css|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)(\\?.*)?$": "identity-obj-proxy"
-    },
-    "testURL": "http://localhost/",
-    "transform": {
-      "^.+\\.js$": "<rootDir>/jest.transform.js"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "yarn run lint && yarn lint:locales && yarn test"
-    }
-  },
-  "bugs": {
-    "url": "https://github.com/vtex/pickup-points-modal/issues"
-  },
-  "homepage": "https://github.com/vtex/pickup-points-modal#readme",
-  "directories": {
-    "lib": "lib"
   }
 }

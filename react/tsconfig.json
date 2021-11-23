@@ -1,7 +1,26 @@
 {
   "compilerOptions": {
+    "alwaysStrict": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "lib": ["es2017", "dom", "es2018.promise", "esnext.asynciterable"],
     "module": "es6",
     "moduleResolution": "node",
-    "target": "es2017"
-  }
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "target": "es2017",
+    "forceConsistentCasingInFileNames": true,
+    "target": "es2017",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "allowJs": true
+  },
+  "include": ["./**/*.js", "./**/*.jsx", "./**/*.ts", "./**/*.tsx"]
 }

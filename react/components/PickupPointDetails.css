@@ -62,28 +62,6 @@
   margin-top: 0;
 }
 
-/* business hours */
-
-.modalDetailsHours {
-  font-size: 12px;
-  width: 100%;
-  max-width: 340px;
-}
-
-.modalDetailsHours td {
-  border-bottom: 1px solid #f2f4f5;
-  padding-top: 6px;
-}
-
-.modalDetailsHoursRange,
-.modalDetailsHoursClosed {
-  text-align: right;
-}
-
-.modalDetailsHoursClosed {
-  color: #ff4c4c;
-}
-
 /* links and icons */
 
 .modalDetailsBackLnk {

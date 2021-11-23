@@ -190,7 +190,6 @@ exports[`PickupPointDetails should render self and components 1`] = `
             <div
               className="__react_component_tooltip place-top type-dark "
               data-id="tooltip"
-              id={undefined}
             />
           </span>
           <span
@@ -205,7 +204,6 @@ exports[`PickupPointDetails should render self and components 1`] = `
             <div
               className="__react_component_tooltip place-top type-dark "
               data-id="tooltip"
-              id={undefined}
             />
           </span>
         </div>
@@ -287,7 +285,6 @@ exports[`PickupPointDetails should render self and components 1`] = `
   >
     <button
       className="modalDetailConfirmBtn pkpmodal-details-confirm-btn btn pkp-modal-btn primary pkp-modal-btn-primary block pkp-modal-btn-block lg pkp-modal-btn-lg "
-      disabled={undefined}
       id="confirm-pickup-1"
       onClick={[Function]}
       type="button"
