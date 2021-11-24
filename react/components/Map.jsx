@@ -62,7 +62,9 @@ class Map extends Component {
       selectedPickupPoint?.address?.geoCoordinates ??
       []
 
-    const isInBounds = bounds?.contains(this.getLocation(geoCoordinates))
+    const isInBounds =
+      geoCoordinates.length === 2 &&
+      bounds?.contains(this.getLocation(geoCoordinates))
 
     if (selectedPickupPoint !== prevProps.selectedPickupPoint && !isInBounds) {
       this.setState({
@@ -115,7 +117,9 @@ class Map extends Component {
     const bounds = hasAddressCoords ? new googleMaps.LatLngBounds() : null
 
     if (bounds != null) {
-      bounds.extend(this.getLocation(mapCenter))
+      if (mapCenter.length === 2) {
+        bounds.extend(this.getLocation(mapCenter))
+      }
 
       bestPickupOptions?.forEach((pickupPoint) => {
         const location = this.getLocation(
