@@ -263,6 +263,10 @@ export const GoogleMap = forwardRef<GoogleMapRefObject, Props>(
 
       map.setCenter(geoCoordinatesToLatLng(center))
 
+      if (map.getZoom() !== STANDARD_ZOOM) {
+        map.setZoom(STANDARD_ZOOM)
+      }
+
       if (isLargeScreen) {
         map.panBy(PAN_LEFT_LAT, PAN_LEFT_LNG)
       }
@@ -278,6 +282,10 @@ export const GoogleMap = forwardRef<GoogleMapRefObject, Props>(
       }
 
       map.fitBounds(bounds)
+
+      if ((map.getZoom() ?? STANDARD_ZOOM) > STANDARD_ZOOM) {
+        map.setZoom(STANDARD_ZOOM)
+      }
 
       if (isLargeScreen) {
         map.panBy(PAN_LEFT_LAT, PAN_LEFT_LNG)

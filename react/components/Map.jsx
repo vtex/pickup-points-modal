@@ -97,6 +97,7 @@ class Map extends Component {
       setSelectedPickupPoint,
       updateLocationTab,
       setShouldSearchArea,
+      isSearching,
     } = this.props
 
     const { hoveringIds, mapCenter } = this.state
@@ -121,13 +122,15 @@ class Map extends Component {
         bounds.extend(this.getLocation(mapCenter))
       }
 
-      bestPickupOptions?.forEach((pickupPoint) => {
-        const location = this.getLocation(
-          pickupPoint.pickupStoreInfo.address.geoCoordinates
-        )
+      if (!isSearching) {
+        bestPickupOptions?.forEach((pickupPoint) => {
+          const location = this.getLocation(
+            pickupPoint.pickupStoreInfo.address.geoCoordinates
+          )
 
-        bounds.extend(location)
-      })
+          bounds.extend(location)
+        })
+      }
     }
 
     return (
@@ -300,6 +303,7 @@ Map.propTypes = {
   address: AddressShapeWithValidation,
   externalPickupPoints: PropTypes.array,
   isLargeScreen: PropTypes.bool,
+  isSearching: PropTypes.bool,
   pickupPoints: PropTypes.array,
   isLoadingGoogle: PropTypes.bool,
   loadingElement: PropTypes.node,
