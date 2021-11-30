@@ -1,13 +1,13 @@
 import React from 'react'
-import PickupPointDetails from '../PickupPointDetails'
-
-import { mount } from 'enzyme'
-import { render, fireEvent } from 'react-testing-library'
+import { render, screen } from '@vtex/test-tools/react'
 import { Provider } from 'react-redux'
 import { IntlProvider } from 'react-intl'
 import renderer from 'react-test-renderer'
 import { addValidation } from '@vtex/address-form'
 import BRA from '@vtex/address-form/lib/country/BRA'
+import userEvent from '@testing-library/user-event'
+
+import PickupPointDetails from '../PickupPointDetails'
 import { PICKUP, DELIVERY, PICKUP_IN_STORE, SIDEBAR } from '../../constants'
 import messages from '../../../messages/en.json'
 import { ModalStateContext } from '../../modalStateContext'
@@ -16,16 +16,17 @@ import ModalState from '../../ModalState'
 jest.mock('../../utils/Images', () => ({
   fixImageUrl: () => 'teste.png',
 }))
+
 describe('PickupPointDetails', () => {
-  let state,
-    store,
-    props,
-    handleChangeActiveSLAOption,
-    handleClosePickupPointsModal,
-    togglePickupDetails,
-    selectNextPickupPoint,
-    setActiveSidebarState,
-    modalState
+  let state
+  let store
+  let props
+  let handleChangeActiveSLAOption
+  let handleClosePickupPointsModal
+  let togglePickupDetails
+  let selectNextPickupPoint
+  let setActiveSidebarState
+  let modalState
 
   const address = {
     addressType: 'residential',
@@ -53,11 +54,11 @@ describe('PickupPointDetails', () => {
 
     modalState = {
       activeState: SIDEBAR,
-      shouldUseMaps: true,
       setActiveSidebarState,
       shouldUseMaps: false,
       setShouldSearchArea: jest.fn(),
       setSelectedPickupPoint: jest.fn(),
+      setHoverPickupPoint: jest.fn(),
       selectNextPickupPoint,
       pickupPoints: [
         {
@@ -65,7 +66,11 @@ describe('PickupPointDetails', () => {
           pickupPointId: '1',
           friendlyName: 'Loja VTEX',
           name: 'test',
-          address: { geoCoordinates: [123, 123] },
+          address: {
+            addressId: '19fk',
+            addressType: 'residential',
+            geoCoordinates: [123, 123],
+          },
           businessHours: [
             { DayOfWeek: 0, OpeningTime: '02:00:00', ClosingTime: '14:00:00' },
             { DayOfWeek: 6, OpeningTime: '03:00:00', ClosingTime: '11:30:00' },
@@ -76,7 +81,11 @@ describe('PickupPointDetails', () => {
           pickupPointId: '2',
           friendlyName: 'Outra Loja',
           name: 'test2',
-          address: { geoCoordinates: [125, 125] },
+          address: {
+            addressId: '19fk',
+            addressType: 'residential',
+            geoCoordinates: [125, 125],
+          },
           businessHours: [
             { ClosingTime: '12:00:00', DayOfWeek: 0, OpeningTime: '02:00:00' },
             { ClosingTime: '22:30:00', DayOfWeek: 6, OpeningTime: '16:00:00' },
@@ -88,7 +97,11 @@ describe('PickupPointDetails', () => {
           id: '1',
           pickupPointId: '1',
           friendlyName: 'Loja VTEX',
-          address: { geoCoordinates: [123, 123] },
+          address: {
+            addressId: '19fk',
+            addressType: 'residential',
+            geoCoordinates: [123, 123],
+          },
           pickupStoreInfo: {
             isPickupStore: true,
             friendlyName: 'Loja VTEX',
@@ -116,7 +129,11 @@ describe('PickupPointDetails', () => {
           id: '2',
           pickupPointId: '2',
           friendlyName: 'Outra Loja',
-          address: { geoCoordinates: [125, 125] },
+          address: {
+            addressId: '19fk',
+            addressType: 'residential',
+            geoCoordinates: [125, 125],
+          },
           pickupStoreInfo: {
             isPickupStore: true,
             friendlyName: 'Outra Loja',
@@ -147,7 +164,11 @@ describe('PickupPointDetails', () => {
         shippingEstimate: '1bd',
         pickupStoreInfo: {
           friendlyName: 'Loja VTEX',
-          address: { geoCoordinates: [123, 123] },
+          address: {
+            addressId: '19fk',
+            addressType: 'residential',
+            geoCoordinates: [123, 123],
+          },
         },
         deliveryChannel: PICKUP_IN_STORE,
         id: '1',
@@ -238,6 +259,8 @@ describe('PickupPointDetails', () => {
             pickupStoreInfo: {
               friendlyName: 'test',
               address: {
+                addressId: '19fk',
+                addressType: 'residential',
                 geoCoordinates: [123, 123],
               },
             },
@@ -251,6 +274,8 @@ describe('PickupPointDetails', () => {
             pickupStoreInfo: {
               friendlyName: 'test',
               address: {
+                addressId: '19fk',
+                addressType: 'residential',
                 geoCoordinates: [123, 123],
               },
             },
@@ -449,8 +474,12 @@ describe('PickupPointDetails', () => {
           startsWithCurrencySymbol: true,
         },
       },
+      bestPickupOptions: [],
       pickupPointId: '2',
-      pickupOptionGeolocations: [[123, 123], [123, 123]],
+      pickupOptionGeolocations: [
+        [123, 123],
+        [123, 123],
+      ],
       googleMapsKey: '1234',
       address: addValidation({
         addressType: 'residential',
@@ -490,6 +519,7 @@ describe('PickupPointDetails', () => {
       togglePickupDetails,
       logisticsInfo: [],
       pickupPointInfo: {},
+      shouldUseMaps: true,
     }
   })
 
@@ -500,52 +530,54 @@ describe('PickupPointDetails', () => {
           <ModalStateContext.Provider value={modalState}>
             <IntlProvider
               locale="pt"
-              messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
+              messages={{ ...messages, 'country.BRA': 'BRA' }}
+            >
               <PickupPointDetails {...props} />
             </IntlProvider>
           </ModalStateContext.Provider>
         </Provider>
       )
       .toJSON()
+
     expect(wrapper).toMatchSnapshot()
   })
 
   it('should simulate go back to list of pickups', () => {
-    const wrapper = mount(
+    render(
       <Provider store={store}>
         <ModalStateContext.Provider value={modalState}>
-          <IntlProvider
-            locale="pt"
-            messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
-            <PickupPointDetails {...props} />
-          </IntlProvider>
+          <PickupPointDetails {...props} />
         </ModalStateContext.Provider>
       </Provider>
     )
 
-    const backLink = wrapper.find('button.pkpmodal-details-back-lnk')
+    const backButton = screen.getByRole('button', {
+      name: 'See all Pick Up In Store sites',
+    })
 
-    backLink.simulate('click')
+    userEvent.click(backButton)
 
-    expect(setActiveSidebarState.mock.calls).toHaveLength(1)
+    expect(setActiveSidebarState).toHaveBeenCalledTimes(1)
   })
 
   it('should simulate confirm a pickupPoint', () => {
-    const wrapper = mount(
+    jest.useFakeTimers()
+
+    render(
       <ModalStateContext.Provider value={modalState}>
-        <IntlProvider
-          locale="pt"
-          messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
-          <PickupPointDetails {...props} />
-        </IntlProvider>
+        <PickupPointDetails {...props} />
       </ModalStateContext.Provider>
     )
 
-    const confirmButton = wrapper.find('.pkpmodal-details-confirm-btn')
+    const confirmButton = screen.getByRole('button', {
+      name: 'Select this store',
+    })
 
-    confirmButton.simulate('click')
+    userEvent.click(confirmButton)
 
-    expect(handleClosePickupPointsModal.mock.calls).toHaveLength(1)
+    jest.runAllTimers()
+
+    expect(handleClosePickupPointsModal).toHaveBeenCalledTimes(1)
   })
 
   it('should show the right info about the selected pickup point', () => {
@@ -555,47 +587,46 @@ describe('PickupPointDetails', () => {
         address={address}
         residentialAddress={undefined}
         askForGeolocation={false}
-        googleMapsKey={'1234'}
+        googleMapsKey="1234"
         isSearching={false}
         items={state.orderForm.items}
-        mapStatus={'HIDE_MAP'}
+        mapStatus="HIDE_MAP"
         logisticsInfo={modalState.logisticsInfo}
         pickupPoints={modalState.pickupPoints}
         pickupOptions={modalState.pickupOptions}
         salesChannel={undefined}
         orderFormId={undefined}
-        selectedPickupPoint={modalState.selectedPickupPoint}>
-        <IntlProvider
-          locale="pt"
-          messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
-          <PickupPointDetails {...props} />
-        </IntlProvider>
+        selectedPickupPoint={modalState.selectedPickupPoint}
+      >
+        <PickupPointDetails {...props} />
       </ModalState>
     )
 
     expect(queryByText('Loja VTEX')).toBeTruthy()
-    expect(queryByText('03:00')).toBeTruthy()
-    expect(queryByText('11:30')).toBeTruthy()
+    expect(queryByText('3:00 AM')).toBeTruthy()
+    expect(queryByText('11:30 AM')).toBeTruthy()
 
     const nextPickupPointButton = getByTestId('goToNextPickupPoint')
     const previousPickupPointButton = getByTestId('goToPreviousPickupPoint')
 
-    fireEvent.click(nextPickupPointButton)
+    userEvent.click(nextPickupPointButton)
+
     expect(queryByText('Loja VTEX')).toBeFalsy()
-    expect(queryByText('03:00')).toBeFalsy()
-    expect(queryByText('11:30')).toBeFalsy()
+    expect(queryByText('3:00 AM')).toBeFalsy()
+    expect(queryByText('11:30 AM')).toBeFalsy()
 
     expect(queryByText('Outra Loja')).toBeTruthy()
-    expect(queryByText('16:00')).toBeTruthy()
-    expect(queryByText('22:30')).toBeTruthy()
+    expect(queryByText('4:00 PM')).toBeTruthy()
+    expect(queryByText('10:30 PM')).toBeTruthy()
 
-    fireEvent.click(previousPickupPointButton)
+    userEvent.click(previousPickupPointButton)
+
     expect(queryByText('Outra Loja')).toBeFalsy()
-    expect(queryByText('16:00')).toBeFalsy()
-    expect(queryByText('22:30')).toBeFalsy()
+    expect(queryByText('4:00 PM')).toBeFalsy()
+    expect(queryByText('10:30 PM')).toBeFalsy()
 
     expect(queryByText('Loja VTEX')).toBeTruthy()
-    expect(queryByText('03:00')).toBeTruthy()
-    expect(queryByText('11:30')).toBeTruthy()
+    expect(queryByText('3:00 AM')).toBeTruthy()
+    expect(queryByText('11:30 AM')).toBeTruthy()
   })
 })

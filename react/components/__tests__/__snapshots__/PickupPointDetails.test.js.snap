@@ -58,7 +58,7 @@ exports[`PickupPointDetails should render self and components 1`] = `
         </svg>
       </button>
       <button
-        className="pickupDetailsHeaderButton  pkpmodal-details-header-button"
+        className="pickupDetailsHeaderButton firstOrLast pkpmodal-details-header-button"
         data-testid="goToNextPickupPoint"
         onClick={[Function]}
       >

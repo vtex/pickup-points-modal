@@ -1,8 +1,7 @@
 import React from 'react'
-import ProductItems from '../ProductItems'
-import { shallowWithIntl, loadTranslation } from 'enzyme-react-intl'
+import { shallow } from 'enzyme'
 
-loadTranslation('./messages/pt-BR.json')
+import ProductItems from '../ProductItems'
 
 describe('ProductItems', () => {
   it('should render self and subcomponents', () => {
@@ -28,7 +27,8 @@ describe('ProductItems', () => {
         },
       ],
     }
-    const wrapper = shallowWithIntl(<ProductItems {...props} />)
+
+    const wrapper = shallow(<ProductItems {...props} />)
 
     expect(wrapper.find('img').prop('src')).toBe(
       '//basedevmkp.vteximg.com.br/arquivos/ids/168552-50-50'
