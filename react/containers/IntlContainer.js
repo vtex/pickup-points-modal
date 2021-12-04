@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { IntlProvider, addLocaleData } from 'react-intl'
-import enTranslation from '../../messages/en.json'
 import enLocale from 'react-intl/locale-data/en'
 import reduce from 'lodash/reduce'
 import getCountryISO2 from '@vtex/address-form/lib/countryISOMap'
 import enAdressFormTranslations from '@vtex/address-form/lib/locales/en.json'
 import enCountryCodeTranslations from 'i18n-iso-countries/langs/en.json'
+
+import enTranslation from '../../messages/en.json'
 
 addLocaleData(enLocale)
 
@@ -71,8 +72,9 @@ class IntlContainer extends Component {
           )
         }
       )
-      .catch(event => {
+      .catch((event) => {
         console.error(event)
+
         return Promise.reject(event)
       })
   }
@@ -88,20 +90,21 @@ class IntlContainer extends Component {
           ...translation,
         }
       })
-      .catch(e => {
+      .catch((e) => {
         if (process.env.NODE_ENV !== 'production') {
           this.couldNotFindModuleError(e)
         }
+
         return import(`../locales/${baseLocale}`)
-          .then(baseTranslation => baseTranslation)
+          .then((baseTranslation) => baseTranslation)
           .catch(() => {
-            this.setState({
+            this.setState((prevState) => ({
               messages: {
-                ...this.state.messages,
+                ...prevState.messages,
                 ...enTranslation,
                 ...this.addCountryCodeNameSpace(enCountryCodeTranslations),
               },
-            })
+            }))
           })
       })
   }
@@ -117,20 +120,21 @@ class IntlContainer extends Component {
           ...addressTranslation,
         }
       })
-      .catch(e => {
+      .catch((e) => {
         if (process.env.NODE_ENV !== 'production') {
           this.couldNotFindModuleError(e)
         }
+
         return import(`@vtex/address-form/lib/locales/${baseLocale}`)
-          .then(baseAddressTranslation => baseAddressTranslation)
+          .then((baseAddressTranslation) => baseAddressTranslation)
           .catch(() => {
-            this.setState({
+            this.setState((prevState) => ({
               locale: 'en',
               messages: {
-                ...this.state.messages,
+                ...prevState.messages,
                 ...enAdressFormTranslations,
               },
-            })
+            }))
           })
       })
   }
@@ -148,12 +152,15 @@ class IntlContainer extends Component {
           }
         }
       )
-      .catch(e => {
+      .catch((e) => {
         if (process.env.NODE_ENV !== 'production') {
           this.couldNotFindModuleError(e)
         }
-        return import(`@vtex/pickup-points-modal/lib/locales/${baseLocale}.json`).then(
-          basePickupPointsModalTranslation => basePickupPointsModalTranslation
+
+        return import(
+          `@vtex/pickup-points-modal/lib/locales/${baseLocale}.json`
+        ).then(
+          (basePickupPointsModalTranslation) => basePickupPointsModalTranslation
         )
       })
   }
@@ -169,6 +176,7 @@ class IntlContainer extends Component {
       obj,
       (acc, value, key) => {
         acc[`country.${getCountryISO2(key)}`] = value
+
         return acc
       },
       {}
@@ -178,6 +186,7 @@ class IntlContainer extends Component {
   couldNotFindModuleError(e) {
     const regex = new RegExp(/Cannot find module '\.\/([A-z-]{1,7})'\./)
     const result = regex.exec(e.message)
+
     if (!result) return false
 
     return result[1]

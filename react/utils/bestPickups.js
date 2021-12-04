@@ -1,6 +1,7 @@
 import estimateCalculator from '@vtex/estimate-calculator'
-import { getUnavailableItemsAmount } from './pickupUtils'
 import sortBy from 'lodash/sortBy'
+
+import { getUnavailableItemsAmount } from './pickupUtils'
 
 export function getBestPickupPoints(pickupOptions, items, logisticsInfo) {
   const result = getOptionsWithAvailability({
@@ -31,7 +32,7 @@ function getOptionsWithAvailability({ items, logisticsInfo, pickupOptions }) {
     missingLimit: items.length / 2,
   }
 
-  const optionsWithAvailability = pickupOptions.map(pickupOption => {
+  const optionsWithAvailability = pickupOptions.map((pickupOption) => {
     const unavailableAmount = getUnavailableItemsAmount(
       items,
       logisticsInfo,
@@ -42,9 +43,10 @@ function getOptionsWithAvailability({ items, logisticsInfo, pickupOptions }) {
       calcParams.priceLimit = pickupOption.price
     }
 
-    const estimateInSeconds = estimateCalculator.getShippingEstimateQuantityInSeconds(
-      pickupOption.shippingEstimate
-    )
+    const estimateInSeconds =
+      estimateCalculator.getShippingEstimateQuantityInSeconds(
+        pickupOption.shippingEstimate
+      )
 
     if (estimateInSeconds > calcParams.shippingEstimateLimit) {
       calcParams.shippingEstimateLimit = estimateInSeconds
@@ -75,12 +77,13 @@ function calculatePickupPointsScore({ calcParams, pickupOptions }) {
     missingLimit,
   } = calcParams
 
-  const newPickupOptions = pickupOptions.map(pickup => {
+  const newPickupOptions = pickupOptions.map((pickup) => {
     let points
 
-    const shippingEstimate = estimateCalculator.getShippingEstimateQuantityInSeconds(
-      pickup.shippingEstimate
-    )
+    const shippingEstimate =
+      estimateCalculator.getShippingEstimateQuantityInSeconds(
+        pickup.shippingEstimate
+      )
 
     // Distance
     points = multipliers.pickupDistance * pickup.pickupDistance

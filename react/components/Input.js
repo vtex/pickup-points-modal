@@ -4,22 +4,17 @@ import { injectIntl, intlShape } from 'react-intl'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 
 class Input extends Component {
-  handleChange = event => this.props.onChange(event.target.value)
+  handleChange = (event) => this.props.onChange(event.target.value)
 
   render() {
-    const {
-      address,
-      placeholder,
-      onBlur,
-      onFocus,
-      inputRef,
-      autoFocus,
-    } = this.props
+    const { address, placeholder, onBlur, onFocus, inputRef, autoFocus } =
+      this.props
 
     const fieldValue = address.addressQuery
 
     return (
       <input
+        // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus={autoFocus || false}
         data-hj-whitelist
         onBlur={onBlur}

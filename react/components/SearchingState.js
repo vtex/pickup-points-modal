@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
+
 import styles from '../index.css'
 import searchingStyles from './SearchingState.css'
 import Spinner from '../assets/components/Spinner'
@@ -15,11 +16,11 @@ class SearchingState extends PureComponent {
       <div
         className={`${
           isFullPage ? styles.modalfullPage : styles.modalSidebar
-        } pkpmodal-full-page`}>
+        } pkpmodal-full-page`}
+      >
         <div
-          className={`${styles.searchAlone} ${
-            searchingStyles.searchingWrapper
-          } pkpmodal-search-alone`}>
+          className={`${styles.searchAlone} ${searchingStyles.searchingWrapper} pkpmodal-search-alone`}
+        >
           <Spinner size={24} />
           <p className={searchingStyles.searching}>
             {(activeState === SEARCHING || activeSidebarState === SEARCHING) &&

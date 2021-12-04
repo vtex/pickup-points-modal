@@ -1,5 +1,6 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
+
 import Button from '../Button'
 
 describe('Button', () => {
@@ -14,6 +15,7 @@ describe('Button', () => {
       title: 'title',
       kind: 'success',
     }
+
     const wrapper = shallow(<Button {...props} />)
 
     expect(wrapper.getElements()[0]).toMatchSnapshot()
@@ -24,6 +26,7 @@ describe('Button', () => {
       title: 'title',
       kind: 'primary',
     }
+
     const wrapper = shallow(<Button {...props} />)
 
     expect(wrapper.getElements()[0]).toMatchSnapshot()
@@ -34,6 +37,7 @@ describe('Button', () => {
       title: 'title',
       kind: 'info',
     }
+
     const wrapper = shallow(<Button {...props} />)
 
     expect(wrapper.getElements()[0]).toMatchSnapshot()
@@ -44,6 +48,7 @@ describe('Button', () => {
       title: 'title',
       kind: 'alert',
     }
+
     const wrapper = shallow(<Button {...props} />)
 
     expect(wrapper.getElements()[0]).toMatchSnapshot()
@@ -54,6 +59,7 @@ describe('Button', () => {
       title: 'title',
       kind: 'danger',
     }
+
     const wrapper = shallow(<Button {...props} />)
 
     expect(wrapper.getElements()[0]).toMatchSnapshot()
@@ -66,6 +72,7 @@ describe('Button', () => {
       size: 'xs',
       inline: true,
     }
+
     const wrapper = shallow(<Button {...props} />)
 
     expect(wrapper.getElements()[0]).toMatchSnapshot()
@@ -79,6 +86,7 @@ describe('Button', () => {
       disabled: true,
       lonely: true,
     }
+
     const wrapper = shallow(<Button {...props} />)
 
     expect(wrapper.getElements()[0]).toMatchSnapshot()
@@ -91,6 +99,7 @@ describe('Button', () => {
       size: 'lg',
       isLoading: true,
     }
+
     const wrapper = shallow(<Button {...props} />)
 
     expect(wrapper.getElements()[0]).toMatchSnapshot()
@@ -104,6 +113,7 @@ describe('Button', () => {
       notChecked: false,
       fixedValue: false,
     }
+
     const wrapper = shallow(<Button {...props} />)
 
     expect(wrapper.getElements()[0]).toMatchSnapshot()

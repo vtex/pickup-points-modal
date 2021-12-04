@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { injectIntl, intlShape } from 'react-intl'
+
 import Button from './Button'
 import styles from '../index.css'
 import errorStyles from './ErrorState.css'
-import { injectIntl, intlShape } from 'react-intl'
 import { INITIAL } from '../constants'
 import { translate } from '../utils/i18nUtils'
 import { injectState } from '../modalStateContext'
@@ -18,11 +19,11 @@ class ErrorState extends PureComponent {
       <div
         className={`${
           isFullPage ? styles.modalfullPage : styles.modalSidebar
-        } pkpmodal-full-page`}>
+        } pkpmodal-full-page`}
+      >
         <div
-          className={`${styles.searchAlone} ${
-            errorStyles.errorModal
-          } pkpmodal-search-alone`}>
+          className={`${styles.searchAlone} ${errorStyles.errorModal} pkpmodal-search-alone`}
+        >
           <div className={errorStyles.errorWrapper}>
             <Icon />
             <p className={errorStyles.errorTitle}>{translate(intl, title)}</p>
@@ -34,9 +35,7 @@ class ErrorState extends PureComponent {
                 id="pkpmodal-back-to-search"
                 kind="primary"
                 large
-                moreClassName={`${
-                  errorStyles.errorBackButton
-                } pkpmodal-back-to-search`}
+                moreClassName={`${errorStyles.errorBackButton} pkpmodal-back-to-search`}
                 onClick={this.handleClick}
                 title={translate(intl, 'backToSearch')}
               />

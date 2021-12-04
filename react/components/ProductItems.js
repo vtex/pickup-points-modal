@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { fixImageUrl } from '../utils/Images'
 import ReactTooltip from 'react-tooltip'
 import TranslateEstimate from 'vtex.shipping-estimate-translator/TranslateEstimate'
 
+import { fixImageUrl } from '../utils/Images'
 import styles from './ProductItems.css'
 
 function createKey(firstLogisticsInfo, selectedSlaItem) {
@@ -21,8 +21,9 @@ class ProductItems extends Component {
 
     return itemsByPackages ? (
       <div
-        className={` ${styles.producItemsGroup} pkpmodal-product-items-group`}>
-        {itemsByPackages.map(itemsPackage => {
+        className={` ${styles.producItemsGroup} pkpmodal-product-items-group`}
+      >
+        {itemsByPackages.map((itemsPackage) => {
           const { firstLogisticsInfo, selectedSlaItem } = itemsPackage
 
           return (
@@ -40,19 +41,18 @@ class ProductItems extends Component {
                 </p>
               )}
               <div className={`${styles.productItems} pkpmodal-product-items`}>
-                {itemsPackage.items.map(item => {
+                {itemsPackage.items.map((item) => {
                   return (
                     <span
-                      className={`${
-                        styles.productItem
-                      } pkpmodal-product-item ${!isAvailable &&
-                        `${
-                          styles.productItemUnavailable
-                        } pkpmodal-product-item-unavailable`}`}
+                      className={`${styles.productItem} pkpmodal-product-item ${
+                        !isAvailable &&
+                        `${styles.productItemUnavailable} pkpmodal-product-item-unavailable`
+                      }`}
                       height="50"
                       width="50"
                       data-tip={item.name}
-                      key={item.uniqueId}>
+                      key={item.uniqueId}
+                    >
                       <img
                         alt={item.name}
                         height="50"
@@ -61,9 +61,7 @@ class ProductItems extends Component {
                       />
                       {!isAvailable && (
                         <span
-                          className={`${
-                            styles.productItemUnavailableSlash
-                          } pkpmodal-product-item-unavailable-slash`}
+                          className={`${styles.productItemUnavailableSlash} pkpmodal-product-item-unavailable-slash`}
                         />
                       )}
                       <ReactTooltip effect="solid" />
@@ -78,17 +76,16 @@ class ProductItems extends Component {
       </div>
     ) : (
       <div className={`${styles.productItems} pkpmodal-product-items`}>
-        {items.map(item => {
+        {items.map((item) => {
           return (
             <span
-              className={`${
-                styles.productItem
-              } pkpmodal-product-item ${!isAvailable &&
-                `${
-                  styles.productItemUnavailable
-                } pkpmodal-product-item-unavailable`}`}
+              className={`${styles.productItem} pkpmodal-product-item ${
+                !isAvailable &&
+                `${styles.productItemUnavailable} pkpmodal-product-item-unavailable`
+              }`}
               data-tip={item.name}
-              key={item.uniqueId}>
+              key={item.uniqueId}
+            >
               <img
                 alt={item.name}
                 data-tip={item.name}
@@ -96,9 +93,7 @@ class ProductItems extends Component {
               />
               {!isAvailable && (
                 <span
-                  className={`${
-                    styles.productItemUnavailableSlash
-                  } pkpmodal-product-item-unavailable-slash`}
+                  className={`${styles.productItemUnavailableSlash} pkpmodal-product-item-unavailable-slash`}
                 />
               )}
               <ReactTooltip effect="solid" />

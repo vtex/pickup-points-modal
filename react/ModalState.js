@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import sortBy from 'lodash/sortBy'
+
 import { ModalStateContext } from './modalStateContext'
 import {
   PROMPT,
@@ -91,6 +92,7 @@ class ModalState extends Component {
 
     const thisAddressCoords =
       address && address.geoCoordinates && address.geoCoordinates.value
+
     const prevAddressCoords = prevProps.address.geoCoordinates.value
 
     const thisPickupOptions = getPickupSlaString(pickupOptions)
@@ -108,6 +110,7 @@ class ModalState extends Component {
       activeSidebarState === ERROR_NOT_FOUND
     ) {
       this.setState({ searchedAreaNoPickups: true })
+
       return
     }
 
@@ -182,75 +185,83 @@ class ModalState extends Component {
         if (activeSidebarState === LIST) return
         this.setActiveSidebarState(LIST)
 
+      // TODO: is this fallthrough intentional?
+      // eslint-disable-next-line no-fallthrough
       case isDetailsNoSelectedPickupPoint:
+
+      // eslint-disable-next-line no-fallthrough
       case isSidebarState:
         if (activeState === SIDEBAR) return
         this.setActiveState(SIDEBAR)
         this.setActiveSidebarState(LIST)
+
         return
 
       case isGeolocationSearchingState:
         if (activeState === GEOLOCATION_SEARCHING) return
         this.setActiveState(GEOLOCATION_SEARCHING)
         this.setActiveSidebarState(LIST)
+
         return
 
       case isErrorNopickupsState:
         if (isCurrentStateFromAllStates(ERROR_NOT_FOUND, this.state)) {
           return
         }
+
         if (activeState === SIDEBAR) {
           this.setActiveSidebarState(ERROR_NOT_FOUND)
         } else {
           this.setActiveState(ERROR_NOT_FOUND)
         }
-        return
+
+        break
 
       default:
-        return
     }
   }
 
-  setMapCenterLatLng = lastMapCenterLatLng =>
+  setMapCenterLatLng = (lastMapCenterLatLng) =>
     this.setState({ lastMapCenterLatLng })
 
-  setShowOtherPickupPoints = showOtherPickupPoints =>
+  setShowOtherPickupPoints = (showOtherPickupPoints) =>
     this.setState({ showOtherPickupPoints })
 
-  setAskForGeolocation = askForGeolocation =>
+  setAskForGeolocation = (askForGeolocation) =>
     this.setState({ askForGeolocation })
 
-  setShouldSearchArea = shouldSearchArea =>
-    this.setState({
+  setShouldSearchArea = (shouldSearchArea) =>
+    this.setState((prevState) => ({
       shouldSearchArea,
       searchedAreaNoPickups:
-        shouldSearchArea && this.state.searchedAreaNoPickups
+        shouldSearchArea && prevState.searchedAreaNoPickups
           ? false
-          : this.state.searchedAreaNoPickups,
-    })
+          : prevState.searchedAreaNoPickups,
+    }))
 
-  setGeolocationStatus = status => this.setState({ geolocationStatus: status })
+  setGeolocationStatus = (status) =>
+    this.setState({ geolocationStatus: status })
 
-  setActiveState = state =>
-    this.setState({
-      lastState: this.state.activeState,
+  setActiveState = (state) =>
+    this.setState((prevState) => ({
+      lastState: prevState.activeState,
       activeState: state,
       searchedAreaNoPickups: false,
-    })
+    }))
 
-  setActiveSidebarState = state => {
-    this.setState({
-      lastSidebarState: this.state.activeSidebarState,
+  setActiveSidebarState = (state) => {
+    this.setState((prevState) => ({
+      lastSidebarState: prevState.activeSidebarState,
       activeSidebarState: state,
       searchedAreaNoPickups: false,
-    })
+    }))
   }
 
   selectPreviousPickupPoint = () => {
     const { bestPickupOptions, selectedPickupPoint } = this.state
     const previousIndex =
       bestPickupOptions
-        .map(pickupPoint => pickupPoint.id)
+        .map((pickupPoint) => pickupPoint.id)
         .indexOf(selectedPickupPoint.id) - 1
 
     if (previousIndex < 0) return
@@ -265,7 +276,7 @@ class ModalState extends Component {
     const { bestPickupOptions, selectedPickupPoint } = this.state
     const nextIndex =
       bestPickupOptions
-        .map(pickupPoint => pickupPoint.id)
+        .map((pickupPoint) => pickupPoint.id)
         .indexOf(selectedPickupPoint.id) + 1
 
     if (nextIndex > bestPickupOptions.length - 1) return
@@ -276,7 +287,7 @@ class ModalState extends Component {
     })
   }
 
-  setHoverPickupPoint = pickupPoint => {
+  setHoverPickupPoint = (pickupPoint) => {
     this.setState({ hoverPickupPoint: pickupPoint })
   }
 
@@ -290,6 +301,7 @@ class ModalState extends Component {
         activeSidebarState: LIST,
         isSelectedBestPickupPoint: false,
       })
+
       return
     }
 
@@ -303,6 +315,7 @@ class ModalState extends Component {
         activeSidebarState: DETAILS,
         isSelectedBestPickupPoint: isBestPickupPoint,
       })
+
       return
     }
 
@@ -315,14 +328,14 @@ class ModalState extends Component {
       orderFormId,
       pickupAddress,
     })
-      .then(response =>
+      .then((response) =>
         this.updatePickupPoints({
           data: response.data,
           pickupPoint,
           isBestPickupPoint,
         })
       )
-      .catch(error => {
+      .catch(() => {
         this.setState(
           {
             selectedPickupPoint: pickupPoint,
@@ -353,8 +366,8 @@ class ModalState extends Component {
       orderFormId,
       pickupAddress: newAreaAddress,
     })
-      .then(response => this.updatePickupPoints({ data: response.data }))
-      .catch(error => {
+      .then((response) => this.updatePickupPoints({ data: response.data }))
+      .catch(() => {
         this.setActiveSidebarState(LIST)
         this.setState({ localSearching: false })
       })
@@ -371,6 +384,7 @@ class ModalState extends Component {
 
     const availablePickupOptions =
       data.logisticsInfo && getPickupOptions(data.logisticsInfo)
+
     const availablePickupPoints = data.pickupPoints
 
     const newPickupOptions = getUniquePickupPoints(
@@ -389,9 +403,9 @@ class ModalState extends Component {
     )
 
     const newExternalPickupPoints = externalPickupPoints.filter(
-      externalPickup =>
+      (externalPickup) =>
         !newBestPickupOptions.some(
-          option => option.pickupPointId === externalPickup.id
+          (option) => option.pickupPointId === externalPickup.id
         )
     )
 
@@ -406,7 +420,8 @@ class ModalState extends Component {
     if (pickupPoint) {
       const availablePickupLI =
         data.logisticsInfo &&
-        data.logisticsInfo.find(li => findSla(li, pickupPoint))
+        data.logisticsInfo.find((li) => findSla(li, pickupPoint))
+
       const availablePickupSLA =
         availablePickupLI && findSla(availablePickupLI, pickupPoint)
 
@@ -447,28 +462,28 @@ class ModalState extends Component {
     }
   }
 
-  removePickupDistance = pickupPoints => {
-    return pickupPoints.map(pickup => ({
+  removePickupDistance = (pickupPoints) => {
+    return pickupPoints.map((pickup) => ({
       ...pickup,
       distance: null,
       pickupDistance: null,
     }))
   }
 
-  getExternalPickupOptions = geoCoordinates => {
+  getExternalPickupOptions = (geoCoordinates) => {
     const { bestPickupOptions, externalPickupPoints } = this.state
 
     fetchExternalPickupPoints(geoCoordinates)
-      .then(data =>
+      .then((data) =>
         this.setState({
           externalPickupPoints: data.items
             .filter(
-              item =>
+              (item) =>
                 !bestPickupOptions.some(
-                  option => option.pickupPointId === item.pickupPoint.id
+                  (option) => option.pickupPointId === item.pickupPoint.id
                 )
             )
-            .map(item => ({
+            .map((item) => ({
               ...item.pickupPoint,
               distance: null,
             })),
@@ -535,7 +550,8 @@ class ModalState extends Component {
           setShouldSearchArea: this.setShouldSearchArea,
           setShowOtherPickupPoints: this.setShowOtherPickupPoints,
           showOtherPickupPoints,
-        }}>
+        }}
+      >
         {children}
       </ModalStateContext.Provider>
     )
@@ -544,6 +560,19 @@ class ModalState extends Component {
 
 ModalState.propTypes = {
   children: PropTypes.any.isRequired,
+  askForGeolocation: PropTypes.bool,
+  items: PropTypes.array,
+  pickupOptions: PropTypes.array,
+  logisticsInfo: PropTypes.array,
+  isSearching: PropTypes.bool,
+  pickupPoints: PropTypes.array,
+  residentialAddress: PropTypes.object,
+  selectedPickupPoint: PropTypes.object,
+  activePickupPoint: PropTypes.object,
+  address: PropTypes.object,
+  mapStatus: PropTypes.string,
+  orderFormId: PropTypes.string,
+  salesChannel: PropTypes.string,
 }
 
 export default ModalState

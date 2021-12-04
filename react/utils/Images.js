@@ -8,6 +8,7 @@ const sizeRegex = new RegExp(/-(\d+)-(\d+)/)
 function cleanImageUrl(imageUrl) {
   let resizedImageUrl = imageUrl
   const result = baseUrlRegex.exec(imageUrl) || []
+
   if (result.length > 0) {
     if (
       result.length === 4 &&
@@ -18,8 +19,10 @@ function cleanImageUrl(imageUrl) {
     } else {
       resizedImageUrl = result[0]
     }
+
     return resizedImageUrl
   }
+
   return undefined
 }
 
@@ -34,6 +37,7 @@ function changeImageUrlSize(
   const widthCalc = width * highDensityFactor
   const heightCalc = height * highDensityFactor
   const resizedImageUrl = imageUrl.slice(0, -1) // Remove last "/"
+
   return `${resizedImageUrl}-${widthCalc}-${heightCalc}`
 }
 
@@ -41,6 +45,7 @@ export function replaceHttpToRelativeProtocol(url) {
   if (!url) {
     return undefined
   }
+
   return url.replace(/https:\/\/|http:\/\//, '//')
 }
 

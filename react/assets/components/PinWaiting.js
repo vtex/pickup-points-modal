@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+
 import styles from './PinWaiting.css'
 
 class PinWaiting extends PureComponent {
@@ -10,7 +11,8 @@ class PinWaiting extends PureComponent {
         height="85"
         viewBox="0 0 141 85"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg">
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path
           d="M70.2429 85C31.5096 85 0 72.9809 0 58.2063C0 43.4317 31.5096 31.4126 70.2429 31.4126C108.976 31.4126 140.486 43.4317 140.486 58.2063C140.486 72.9809 108.976 85 70.2429 85Z"
           fill="#EBEBEB"

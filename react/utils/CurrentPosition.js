@@ -3,33 +3,32 @@ import { geolocationAutoCompleteAddress } from 'vtex.address-form/geolocationAut
 export function getCurrentPosition(successCallback, errorCallback) {
   let hasBeenCanceled = false
 
-  const handleSuccess = position => {
+  const handleSuccess = (position) => {
     if (hasBeenCanceled) {
       return
     }
+
     successCallback(position)
   }
 
-  const handleError = error => {
+  const handleError = (error) => {
     if (hasBeenCanceled) {
       return
     }
+
     errorCallback(error)
   }
 
-  navigator.geolocation.getCurrentPosition(
-    handleSuccess,
-    handleError,
-    {
-      maximumAge: Infinity,
-      // getCurrentPosition timeout varies a lot depending on device,
-      // browser, and even user location. Avoid reducing this value,
-      // but if you do, track timeouts on a logging service.
-      // (currently, look for "dismissedGeolocation" on our kibana logs)
-      timeout: 10000,
-      enableHighAccuracy: true,
-    }
-  )
+  navigator.geolocation.getCurrentPosition(handleSuccess, handleError, {
+    maximumAge: Infinity,
+    // getCurrentPosition timeout varies a lot depending on device,
+    // browser, and even user location. Avoid reducing this value,
+    // but if you do, track timeouts on a logging service.
+    // (currently, look for "dismissedGeolocation" on our kibana logs)
+    timeout: 10000,
+    enableHighAccuracy: true,
+  })
+
   return () => {
     hasBeenCanceled = true
   }
@@ -59,6 +58,7 @@ export function handleGetAddressByGeolocation({
           googleAddress,
           rules
         )
+
         onChangeAddress({
           ...autoCompletedAddress,
           complement: {
