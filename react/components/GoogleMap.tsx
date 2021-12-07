@@ -67,6 +67,11 @@ interface Props {
   bounds?: google.maps.LatLngBounds | null
 }
 
+/**
+ * Distance of map center to start prompting to search area
+ */
+const DISTANCE = 50
+
 const STANDARD_ZOOM = 14
 
 /**
@@ -188,15 +193,13 @@ export const GoogleMap = forwardRef<GoogleMapRefObject, Props>(
       const [referenceCenterLng, referenceCenterLat] =
         referenceCenterRef.current
 
-      const differenceLat = (referenceCenterLat - currentCenter.lat()) * 1000
-      const differenceLng = (referenceCenterLng - currentCenter.lng()) * 1000
+      const differenceLat =
+        Math.abs(referenceCenterLat - currentCenter.lat()) * 1000
 
-      const DISTANCE = 50
+      const differenceLng =
+        Math.abs(referenceCenterLng - currentCenter.lng()) * 1000
 
-      const outerLat = differenceLat > DISTANCE || differenceLat < -DISTANCE
-      const outerLng = differenceLng > DISTANCE || differenceLng < -DISTANCE
-
-      setShouldSearchArea(outerLat || outerLng)
+      setShouldSearchArea(differenceLat > DISTANCE || differenceLng > DISTANCE)
       setMapCenterLatLng(currentCenter)
     }, [map, setMapCenterLatLng, setShouldSearchArea])
 
