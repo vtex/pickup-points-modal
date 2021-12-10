@@ -17,7 +17,7 @@ import { newAddress } from './utils/newAddress'
 import { HIDE_MAP, SHOW_MAP } from './constants'
 import { getPickupOptionGeolocations } from './utils/pickupUtils'
 import { helpers } from 'vtex.address-form'
-import { searchPickupAddressByGeolocationEvent } from './utils/metrics'
+import { closePickupPointsModalEvent, openPickupPointsModalEvent, searchPickupAddressByGeolocationEvent } from './utils/metrics'
 
 const { validateField, addValidation } = helpers
 const NULL_VALUE = {
@@ -71,6 +71,7 @@ class PickupPointsModal extends Component {
     this.startTime = Date.now()
 
     window.addEventListener('resize', this.resize)
+    openPickupPointsModalEvent()
   }
 
   componentWillUnmount() {
@@ -173,6 +174,11 @@ class PickupPointsModal extends Component {
     this.props.onAddressChange(addressValidated)
   }
 
+  handleManuallyCloseModal = () => {
+    closePickupPointsModalEvent()
+    this.handleCloseModal()
+  }
+
   handleCloseModal = () => {
     const style = document.body.style
     style.overflow = 'auto'
@@ -238,12 +244,12 @@ class PickupPointsModal extends Component {
         <div>
           <div
             className={`${styles.modalBackdrop} pkpmodal-backdrop`}
-            onClick={this.handleCloseModal}
+            onClick={this.handleManuallyCloseModal}
           />
           <div className={`${styles.pkpmodal} pkpmodal`}>
             <CloseButton
               alt={translate(intl, 'closeButton')}
-              onClickClose={this.handleCloseModal}
+              onClickClose={this.handleManuallyCloseModal}
             />
             <ModalState
               activePickupPoint={activePickupPoint}

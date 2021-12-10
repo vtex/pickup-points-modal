@@ -19,6 +19,7 @@ import { injectState } from '../modalStateContext'
 import { updateShippingData } from '../fetchers'
 import { getCleanId } from '../utils/StateUtils'
 import PickupBusinessHours from './PickupBusinessHours'
+import { pickupPointConfirmationEvent } from '../utils/metrics'
 
 class PickupPointDetails extends Component {
   constructor(props) {
@@ -109,6 +110,8 @@ class PickupPointDetails extends Component {
       this.props.logisticsInfo,
       this.props.selectedPickupPoint
     )
+
+    pickupPointConfirmationEvent()
     this.props.handleClosePickupPointsModal()
   }
 

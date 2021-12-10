@@ -11,6 +11,7 @@ import { getPickupGeolocationString } from '../utils/GetString'
 import { injectState } from '../modalStateContext'
 import { LIST, BEST_PICKUPS_AMOUNT, HIDE_MAP } from '../constants'
 import { getPickupPointGeolocations } from '../utils/pickupUtils'
+import { pickupPointSelectionEvent, SELECTION_METHOD_MAP } from '../utils/metrics'
 
 const BIG_MARKER_WIDTH = 38
 const BIG_MARKER_HEIGHT = 49
@@ -631,6 +632,7 @@ class Map extends Component {
       marker,
       'click',
       () => {
+        pickupPointSelectionEvent({ selectionMethod: SELECTION_METHOD_MAP })
         this.resetMarkers()
         this.setIcon({
           marker,
