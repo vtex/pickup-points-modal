@@ -10,6 +10,7 @@ import { BEST_PICKUPS_AMOUNT } from '../constants'
 import InfiniteScroll from 'react-infinite-scroller'
 import debounce from 'lodash/debounce'
 import Spinner from '../assets/components/Spinner'
+import { pickupPointSelectionEvent, SELECTION_METHOD_LIST, SELECTION_METHOD_LIST_OTHERS } from '../utils/metrics'
 
 class PickupPointsList extends PureComponent {
   constructor(props) {
@@ -105,7 +106,11 @@ class PickupPointsList extends PureComponent {
                 className={`${
                   styles.pointsItem
                 } pkpmodal-points-item best-pickupPoint-${pickupPoint.id}`}
-                key={`best-pickupPoint-${pickupPoint.id}`}>
+                key={`best-pickupPoint-${pickupPoint.id}`}
+                onClick={() => {
+                  pickupPointSelectionEvent({ selectionMethod: SELECTION_METHOD_LIST })
+                }}
+                >
                 <PickupPointInfo
                   isList
                   isBestPickupPoint
@@ -156,7 +161,11 @@ class PickupPointsList extends PureComponent {
                   className={`${
                     styles.pointsItem
                   } pkpmodal-points-item pickupPoint-${pickupPoint.id}`}
-                  key={`pickupPoint-${pickupPoint.id}`}>
+                  key={`pickupPoint-${pickupPoint.id}`}
+                  onClick={() => {
+                    pickupPointSelectionEvent({ selectionMethod: SELECTION_METHOD_LIST_OTHERS })
+                  }}
+                  >
                   <PickupPointInfo
                     isList
                     isBestPickupPoint={bestPickupOptions.some(
