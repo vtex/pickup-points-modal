@@ -99,3 +99,8 @@ PickupPointsModal.propTypes = {
   salesChannel={salesChannel}
 />
 ```
+
+## Usage Metrics
+You can track how the users are interacting with the pickup points modal via [this Kibana dashboard](https://search-storedash-data-3-32cfdpt6mog2la33veml5chk5u.us-east-1.es.amazonaws.com/_plugin/kibana/app/kibana#/dashboard/1ebe2740-5ce4-11ec-ae80-8bab55ad9e44?_g=(refreshInterval:(pause:!f,value:60000),time:(from:now-15m,mode:quick,to:now))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(darkTheme:!f,hidePanelTitles:!f,useMargins:!t),panels:!((embeddableConfig:(vis:(legendOpen:!t)),gridData:(h:15,i:'1',w:24,x:0,y:0),id:aa08f140-5c4e-11ec-9abe-e1e2cda1bc0b,panelIndex:'1',type:visualization,version:'6.8.0'),(embeddableConfig:(),gridData:(h:15,i:'2',w:24,x:24,y:0),id:'8f2006f0-4215-11ec-904f-bb8ea826d116',panelIndex:'2',type:visualization,version:'6.8.0')),query:(language:lucene,query:''),timeRestore:!f,title:'Checkout%20-%20Pickup%20Points%20Modal',viewMode:view)) (requires being logged on to the AWS VPN).
+
+It might be of interest to keep an eye on it after deployments, to see if and how it affects user experience. Particularly, you can track if the pickup point selection "conversion rate" has gone up or down by comparing how often the modal has been opened vs. how often the users actually end up selecting a pickup point.
