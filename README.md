@@ -103,4 +103,10 @@ PickupPointsModal.propTypes = {
 ## Usage Metrics
 You can track how the users are interacting with the pickup points modal via [this Kibana dashboard](https://search-storedash-data-3-32cfdpt6mog2la33veml5chk5u.us-east-1.es.amazonaws.com/_plugin/kibana/app/kibana#/dashboard/1ebe2740-5ce4-11ec-ae80-8bab55ad9e44?_g=(refreshInterval:(pause:!f,value:60000),time:(from:now-15m,mode:quick,to:now))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(darkTheme:!f,hidePanelTitles:!f,useMargins:!t),panels:!((embeddableConfig:(vis:(legendOpen:!t)),gridData:(h:15,i:'1',w:24,x:0,y:0),id:aa08f140-5c4e-11ec-9abe-e1e2cda1bc0b,panelIndex:'1',type:visualization,version:'6.8.0'),(embeddableConfig:(),gridData:(h:15,i:'2',w:24,x:24,y:0),id:'8f2006f0-4215-11ec-904f-bb8ea826d116',panelIndex:'2',type:visualization,version:'6.8.0')),query:(language:lucene,query:''),timeRestore:!f,title:'Checkout%20-%20Pickup%20Points%20Modal',viewMode:view)) (requires being logged on to the AWS VPN).
 
+<img width="1779" alt="Captura de Tela 2021-12-14 às 15 02 38" src="https://user-images.githubusercontent.com/5691711/146065460-a22bee02-2602-44e5-a6d5-e9a4eee0e157.png">
+
 It might be of interest to keep an eye on it after deployments, to see if and how it affects user experience. Particularly, you can track if the pickup point selection "conversion rate" has gone up or down by comparing how often the modal has been opened vs. how often the users actually end up selecting a pickup point.
+
+<img width="398" alt="Captura de Tela 2021-12-14 às 15 14 24" src="https://user-images.githubusercontent.com/5691711/146065519-ba6fe179-0eb3-4ea9-9567-372f4ef508b7.png">
+
+
