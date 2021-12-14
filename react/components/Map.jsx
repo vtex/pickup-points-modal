@@ -24,7 +24,7 @@ const MARKER_WIDTH = 25
 const MARKER_HEIGHT = 31
 
 const THIRD_ZINDEX = 3
-const FORTH_ZINDEX = 4
+const FOURTH_ZINDEX = 4
 
 class Map extends Component {
   constructor(props) {
@@ -238,7 +238,9 @@ class Map extends Component {
               key={pickupId}
               position={location}
               draggable={false}
-              zIndex={index < BEST_PICKUPS_AMOUNT ? FORTH_ZINDEX : THIRD_ZINDEX}
+              zIndex={
+                index < BEST_PICKUPS_AMOUNT ? FOURTH_ZINDEX : THIRD_ZINDEX
+              }
               onClick={() => {
                 pickupPointSelectionEvent({
                   selectionMethod: SELECTION_METHOD_MAP,
