@@ -22,6 +22,10 @@ interface Context {
 
 const ctx = createContext<Context | null>(null)
 
+const isGeoCoordinate = (
+  maybeGeocoordinate: number[]
+): maybeGeocoordinate is [number, number] => maybeGeocoordinate.length === 2
+
 export const useMaps = () => {
   const contextValue = useContext(ctx)
 
@@ -226,15 +230,16 @@ export const GoogleMap = forwardRef<GoogleMapRefObject, Props>(
             stylers: [{ visibility: 'off' }],
           },
         ],
-        center:
-          center.length === 2 ? geoCoordinatesToLatLng(center) : undefined,
+        center: isGeoCoordinate(center)
+          ? geoCoordinatesToLatLng(center)
+          : undefined,
       })
 
       if (bounds) {
         googleMap.fitBounds(bounds)
       }
 
-      if (center.length === 2) {
+      if (isGeoCoordinate(center)) {
         toggleSearchArea()
 
         if (isLargeScreen) {
@@ -260,7 +265,7 @@ export const GoogleMap = forwardRef<GoogleMapRefObject, Props>(
         return
       }
 
-      if (center.length !== 2) {
+      if (!isGeoCoordinate(center)) {
         return
       }
 
