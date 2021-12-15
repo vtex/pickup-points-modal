@@ -291,6 +291,12 @@ class PickupPointsModal extends Component {
                   shouldShow={shouldShowMap}
                   isLargeScreen={isLargeScreen}
                 />
+                {/*
+                 * Used for rendering the <ZoomControls /> component. This is
+                 * currently done this way because the ZoomControls must be a child of <Map />
+                 * to be able to consume the <GoogleMaps /> context, but it must be placed in
+                 * this position for the layout to work
+                 */}
                 <div id="controls-wrapper" />
 
                 {shouldUseMaps && (
