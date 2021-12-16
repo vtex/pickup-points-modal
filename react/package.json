@@ -10,7 +10,8 @@
     "css": "mv dist/styles.css lib/styles.css && mv dist/styles.css.map lib/styles.css.map ",
     "removeMocks": "rm -rf lib/**/__mocks__ && rm -rf lib/__mocks__ && rm -rf dist",
     "addLocales": "cp -R -f react/locales/ lib/locales/",
-    "postreleasy": "npm publish --access public"
+    "postreleasy": "npm publish --access public",
+    "test": "vtex-test-tools test"
   },
   "keywords": [
     "react-component",
@@ -25,7 +26,7 @@
   "author": "Fernando de Almeida Coelho <nandoacoelho@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@vtex/address-form": "2.5.6",
+    "@vtex/address-form": "^3.5.8",
     "@vtex/estimate-calculator": "^1.1.0",
     "axios": "^0.19.0",
     "axios-retry": "^3.1.2",
@@ -42,16 +43,36 @@
   "directories": {
     "lib": "lib"
   },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./setupTestsAfterEnv.js"
+    ]
+  },
+  "vtexTestTools": {
+    "defaultLocale": "en"
+  },
   "devDependencies": {
+    "@apollo/react-testing": "^4.0.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/google.maps": "^3.46.1",
     "@types/node": "^16.11.6",
     "@types/prop-types": "^15.7.4",
     "@types/react": "^17.0.34",
     "@types/react-dom": "^17.0.11",
     "@types/react-intl": "2",
-    "@vtex/address-form": "^3.5.8",
+    "@vtex/test-tools": "^3.4.3",
+    "enzyme": "^3.4.1",
+    "enzyme-adapter-react-16": "^1.2.0",
+    "i18n-iso-countries": "^3.5.0",
+    "jest-enzyme": "^6.0.3",
+    "mockdate": "^2.0.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-redux": "^5.0.7",
+    "react-test-renderer": "^16.12.0",
+    "redux": "^4.0.0",
     "vtex.country-codes": "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.country-codes@1.1.2/public/_types/react",
     "vtex.render-runtime": "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.render-runtime@7.39.1/public/_types/react",
-    "vtex.shipping-estimate-translator": "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.shipping-estimate-translator@1.0.4/public/_types/react",
-    "watch": "^1.0.2"
+    "vtex.shipping-estimate-translator": "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.shipping-estimate-translator@1.0.4/public/_types/react"
   }
 }

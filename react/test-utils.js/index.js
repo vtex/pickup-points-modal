@@ -1,21 +1,23 @@
 import React from 'react'
-import messages from '../../messages/pt-BR.json'
 import { IntlProvider } from 'react-intl'
-import { render } from 'react-testing-library'
+import { render } from '@vtex/test-tools/react'
+
+import messages from '../../messages/pt-BR.json'
 import { ModalStateContext } from '../modalStateContext'
 import { SIDEBAR } from '../constants/index.js'
 
-const renderWithIntl = node => {
+const renderWithIntl = (node) => {
   return render(
     <IntlProvider
       locale="pt"
-      messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
+      messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}
+    >
       {node}
     </IntlProvider>
   )
 }
 
-const renderWithModalState = node => {
+const renderWithModalState = (node) => {
   return render(
     <ModalStateContext.Provider
       value={{
@@ -34,16 +36,18 @@ const renderWithModalState = node => {
             address: {},
           },
         },
-      }}>
+      }}
+    >
       <IntlProvider
         locale="pt"
-        messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}>
+        messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}
+      >
         {node}
       </IntlProvider>
     </ModalStateContext.Provider>
   )
 }
 
-export * from 'react-testing-library'
+export * from '@testing-library/react'
 
 export { renderWithIntl, renderWithModalState }

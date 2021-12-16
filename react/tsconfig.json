@@ -20,7 +20,8 @@
     "target": "es2017",
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "allowJs": true
+    "allowJs": true,
+    "types": ["google.maps"]
   },
   "include": ["./**/*.js", "./**/*.jsx", "./**/*.ts", "./**/*.tsx"]
 }

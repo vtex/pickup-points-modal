@@ -1,15 +1,18 @@
 import React from 'react'
-import Input from '../Input'
-import { shallowWithIntl, loadTranslation, setLocale } from 'enzyme-react-intl'
+import { shallow } from 'enzyme'
 import { Provider } from 'react-redux'
-import IntlContainer from '../../containers/IntlContainer'
 import renderer from 'react-test-renderer'
+import { IntlProvider } from 'react-intl'
 
-loadTranslation('./messages/pt-BR.json')
-setLocale('pt')
+import messages from '../../../messages/pt-BR.json'
+import IntlContainer from '../../containers/IntlContainer'
+import Input from '../Input'
 
 describe('Input', () => {
-  let state, store, props, onChange
+  let state
+  let store
+  let props
+  let onChange
 
   beforeEach(() => {
     onChange = jest.fn()
@@ -88,6 +91,7 @@ describe('Input', () => {
         </Provider>
       )
       .toJSON()
+
     expect(wrapper).toMatchSnapshot()
   })
 
@@ -160,11 +164,19 @@ describe('Input', () => {
         </Provider>
       )
       .toJSON()
+
     expect(wrapper).toMatchSnapshot()
   })
 
   it('should simulate onChange', () => {
-    const wrapper = shallowWithIntl(<Input {...props} />)
+    const wrapper = shallow(
+      <IntlProvider
+        locale="pt"
+        messages={{ ...messages, 'country.BRA': 'BRA' }}
+      >
+        <Input {...props} />
+      </IntlProvider>
+    )
 
     wrapper.simulate('change', {
       target: {

@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import debounce from 'lodash/debounce'
-import Map from './components/Map'
+import { injectIntl, intlShape } from 'react-intl'
+import { helpers } from 'vtex.address-form'
+
+import Map from './components/Map.jsx'
 import CloseButton from './components/CloseButton'
 import styles from './index.css'
 import ZoomControls from './components/ZoomControls'
@@ -10,14 +13,16 @@ import ModalState from './ModalState'
 import Geolocation from './Geolocation'
 import SearchArea from './components/SearchArea'
 import SearchOverlay from './assets/components/SearchOverlay'
-import { injectIntl, intlShape } from 'react-intl'
 import { withGoogleMaps } from './containers/withGoogleMaps'
 import { translate } from './utils/i18nUtils'
 import { newAddress } from './utils/newAddress'
 import { HIDE_MAP, SHOW_MAP } from './constants'
 import { getPickupOptionGeolocations } from './utils/pickupUtils'
-import { helpers } from 'vtex.address-form'
-import { closePickupPointsModalEvent, openPickupPointsModalEvent, searchPickupAddressByGeolocationEvent } from './utils/metrics'
+import {
+  closePickupPointsModalEvent,
+  openPickupPointsModalEvent,
+  searchPickupAddressByGeolocationEvent,
+} from './utils/metrics'
 
 const { validateField, addValidation } = helpers
 const NULL_VALUE = {
@@ -48,7 +53,8 @@ class PickupPointsModal extends Component {
   }
 
   componentDidMount() {
-    const style = document.body.style
+    const { style } = document.body
+
     style.overflow = 'hidden'
     style.position = 'fixed'
     style.width = '100%'
@@ -83,6 +89,7 @@ class PickupPointsModal extends Component {
     // On mobile browsers trigger the resize event when keyboard is opened
     // even though the screen size itself is the same
     const isWidthEqual = this.state.innerWidth === window.innerWidth
+
     if (!this.state.isMounted || isWidthEqual) return
     this.setState({
       isLargeScreen: window.innerWidth > 1023,
@@ -91,7 +98,7 @@ class PickupPointsModal extends Component {
     })
   }, 200)
 
-  updateLocationTab = mapStatus => this.setState({ mapStatus })
+  updateLocationTab = (mapStatus) => this.setState({ mapStatus })
 
   activatePickupDetails = () =>
     this.setState({
@@ -99,7 +106,7 @@ class PickupPointsModal extends Component {
       mapStatus: HIDE_MAP,
     })
 
-  getPostalCodeValue = address => {
+  getPostalCodeValue = (address) => {
     // TODO move this to Address Form
     if (
       address &&
@@ -119,7 +126,7 @@ class PickupPointsModal extends Component {
     return address.postalCode && address.postalCode.value
   }
 
-  getValidPostalCode = address => {
+  getValidPostalCode = (address) => {
     if (address.postalCode) {
       const postalCodevalue = this.getPostalCodeValue(address)
 
@@ -149,10 +156,11 @@ class PickupPointsModal extends Component {
         visited: null,
       }
     }
+
     return NULL_VALUE
   }
 
-  handleAddressChange = address => {
+  handleAddressChange = (address) => {
     const { searchAddress } = this.props
 
     const addressValidated = {
@@ -180,7 +188,8 @@ class PickupPointsModal extends Component {
   }
 
   handleCloseModal = () => {
-    const style = document.body.style
+    const { style } = document.body
+
     style.overflow = 'auto'
     style.position = ''
     if (this.state.isLoadingGeolocation) {
@@ -191,6 +200,7 @@ class PickupPointsModal extends Component {
         elapsedTime,
       })
     }
+
     this.props.closePickupPointsModal()
   }
 
@@ -265,25 +275,29 @@ class PickupPointsModal extends Component {
               pickupOptions={pickupOptions}
               salesChannel={salesChannel}
               orderFormId={orderFormId}
-              selectedPickupPoint={selectedPickupPoint}>
+              selectedPickupPoint={selectedPickupPoint}
+            >
               <Geolocation
                 address={searchAddressWithAddressQuery}
                 askForGeolocation={askForGeolocation}
                 googleMaps={googleMaps}
                 onChangeAddress={this.handleAddressChange}
                 onChangeGeolocationState={this.handleChangeGeolocationLoading}
-                rules={rules}>
+                rules={rules}
+              >
                 <SearchArea
                   address={searchAddressWithAddressQuery}
                   mapStatus={mapStatus}
                   shouldShow={shouldShowMap}
                   isLargeScreen={isLargeScreen}
                 />
-                <ZoomControls
-                  isLargeScreen={isLargeScreen}
-                  mapStatus={mapStatus}
-                  shouldShow={shouldShowMap}
-                />
+                {/*
+                 * Used for rendering the <ZoomControls /> component. This is
+                 * currently done this way because the ZoomControls must be a child of <Map />
+                 * to be able to consume the <GoogleMaps /> context, but it must be placed in
+                 * this position for the layout to work
+                 */}
+                <div id="controls-wrapper" />
 
                 {shouldUseMaps && (
                   <Map
@@ -301,7 +315,13 @@ class PickupPointsModal extends Component {
                     selectedPickupPointGeolocation={getPickupOptionGeolocations(
                       selectedPickupPoint
                     )}
-                  />
+                  >
+                    <ZoomControls
+                      isLargeScreen={isLargeScreen}
+                      mapStatus={mapStatus}
+                      shouldShow={shouldShowMap}
+                    />
+                  </Map>
                 )}
                 <SearchOverlay />
                 <StateHandler
