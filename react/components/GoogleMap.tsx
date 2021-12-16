@@ -69,6 +69,12 @@ interface Props {
    * @see {@type google.maps.Map['fitBounds']}
    */
   bounds?: google.maps.LatLngBounds | null
+  /**
+   * Type of gesture handling to be used for this map instance.
+   *
+   * @see {@type google.maps.MapOptions['gestureHandling']}
+   */
+  gestureHandling?: google.maps.MapOptions['gestureHandling']
 }
 
 /**
@@ -164,6 +170,7 @@ export const GoogleMap = forwardRef<GoogleMapRefObject, Props>(
       onClick,
       referenceCenter,
       bounds,
+      gestureHandling,
     },
     ref
   ) {
@@ -233,6 +240,7 @@ export const GoogleMap = forwardRef<GoogleMapRefObject, Props>(
         center: isGeoCoordinate(center)
           ? geoCoordinatesToLatLng(center)
           : undefined,
+        gestureHandling,
       })
 
       if (bounds) {

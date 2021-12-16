@@ -148,6 +148,9 @@ class Map extends Component {
         referenceCenter={address.geoCoordinates.value}
         bounds={bounds}
         ref={this.mapRef}
+        // Disables holding ctrl to zoom, since this in a modal it does not
+        // affect the scrolling of the page and creates a better user experience
+        gestureHandling="greedy"
       >
         {children}
         <GoogleMarker
