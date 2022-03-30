@@ -13,7 +13,7 @@
   "pickupPointsModal.map": "الخريطة",
   "pickupPointsModal.pickupPoint.modify": "تعديل",
   "pickupPointsModal.details": "انظر التفاصيل أو قم بتغيير خيار الالتقاط.",
-  "pickupPointsModal.searchLocationMap": "ابحث عن شارع أو رمز بريدي أو حي أو مدينة",
+  "pickupPointsModal.searchLocationMap": "ابحث عن شارع أو رمز بريدي أو منطقة أو مدينة",
   "pickupPointsModal.productsInPoint": "متاح للاستلام",
   "pickupPointsModal.aditionalInfo": "معلومات أخرى",
   "pickupPointsModal.unavailable": "غير متاح",
