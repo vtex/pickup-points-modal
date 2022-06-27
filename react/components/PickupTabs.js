@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
+
 import { translate } from '../utils/i18nUtils'
 import { HIDE_MAP, SHOW_MAP, LIST } from '../constants'
 import styles from './PickupTabs.css'
 import { injectState } from '../modalStateContext'
 
 class PickupTabs extends Component {
-  handleLocationTab = event => {
+  handleLocationTab = (event) => {
     if (event.target.value === !this.props.mapStatus) return
 
     this.props.updateLocationTab(event.target.value)
@@ -20,13 +21,9 @@ class PickupTabs extends Component {
   render() {
     const { intl, mapStatus } = this.props
 
-    const buttonActive = `${
-      styles.pickupViewOptionActive
-    } pkpmodal-pickup-view-option-active`
+    const buttonActive = `${styles.pickupViewOptionActive} pkpmodal-pickup-view-option-active`
 
-    const buttonInactive = `${
-      styles.pickupViewOptionInctive
-    } pkpmodal-pickup-view-option-inactive`
+    const buttonInactive = `${styles.pickupViewOptionInctive} pkpmodal-pickup-view-option-inactive`
 
     return (
       <div className={`${styles.pickupViewMode} pkpmodal-pickup-view-mode`}>
@@ -38,7 +35,8 @@ class PickupTabs extends Component {
           }`}
           onClick={this.handleLocationTab}
           type="button"
-          value={HIDE_MAP}>
+          value={HIDE_MAP}
+        >
           {translate(intl, 'list')}
         </button>
         <button
@@ -49,7 +47,8 @@ class PickupTabs extends Component {
           }`}
           onClick={this.handleLocationTab}
           type="button"
-          value={SHOW_MAP}>
+          value={SHOW_MAP}
+        >
           {translate(intl, 'map')}
         </button>
       </div>

@@ -1,16 +1,21 @@
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { injectIntl, intlShape } from 'react-intl'
+import InfiniteScroll from 'react-infinite-scroller'
+import debounce from 'lodash/debounce'
+
 import styles from './PickupSidebar.css'
 import PickupPointInfo from './PickupPointInfo'
 import { injectState } from '../modalStateContext'
 import { translate } from '../utils/i18nUtils'
-import { injectIntl, intlShape } from 'react-intl'
 import Button from './Button'
 import { BEST_PICKUPS_AMOUNT } from '../constants'
-import InfiniteScroll from 'react-infinite-scroller'
-import debounce from 'lodash/debounce'
 import Spinner from '../assets/components/Spinner'
-import { pickupPointSelectionEvent, SELECTION_METHOD_LIST, SELECTION_METHOD_LIST_OTHERS } from '../utils/metrics'
+import {
+  pickupPointSelectionEvent,
+  SELECTION_METHOD_LIST,
+  SELECTION_METHOD_LIST_OTHERS,
+} from '../utils/metrics'
 
 class PickupPointsList extends PureComponent {
   constructor(props) {
@@ -28,11 +33,8 @@ class PickupPointsList extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      bestPickupOptions,
-      externalPickupPoints,
-      pickupOptions,
-    } = this.props
+    const { bestPickupOptions, externalPickupPoints, pickupOptions } =
+      this.props
 
     const { currentAmount } = this.state
 
@@ -101,16 +103,17 @@ class PickupPointsList extends PureComponent {
             <p className={styles.pickupListTitle}>
               {translate(intl, 'bestResults')}
             </p>
-            {bestPickupOptions.map(pickupPoint => (
+            {bestPickupOptions.map((pickupPoint) => (
+              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
               <div
-                className={`${
-                  styles.pointsItem
-                } pkpmodal-points-item best-pickupPoint-${pickupPoint.id}`}
+                className={`${styles.pointsItem} pkpmodal-points-item best-pickupPoint-${pickupPoint.id}`}
                 key={`best-pickupPoint-${pickupPoint.id}`}
                 onClick={() => {
-                  pickupPointSelectionEvent({ selectionMethod: SELECTION_METHOD_LIST })
+                  pickupPointSelectionEvent({
+                    selectionMethod: SELECTION_METHOD_LIST,
+                  })
                 }}
-                >
+              >
                 <PickupPointInfo
                   isList
                   isBestPickupPoint
@@ -132,9 +135,7 @@ class PickupPointsList extends PureComponent {
                 id="pkpmodal-show-list-btn"
                 kind="secondary"
                 large
-                moreClassName={`${
-                  styles.showListButton
-                } pkpmodal-show-list-btn`}
+                moreClassName={`${styles.showListButton} pkpmodal-show-list-btn`}
                 onClick={this.handleShowList}
                 title={translate(intl, 'showPickupPointsList')}
               />
@@ -155,21 +156,24 @@ class PickupPointsList extends PureComponent {
                 </p>
               }
               useWindow={false}
-              threshold={1}>
-              {currentPickupPoints.map(pickupPoint => (
+              threshold={1}
+            >
+              {currentPickupPoints.map((pickupPoint) => (
+                // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
                 <div
-                  className={`${
-                    styles.pointsItem
-                  } pkpmodal-points-item pickupPoint-${pickupPoint.id}`}
+                  className={`${styles.pointsItem} pkpmodal-points-item pickupPoint-${pickupPoint.id}`}
                   key={`pickupPoint-${pickupPoint.id}`}
                   onClick={() => {
-                    pickupPointSelectionEvent({ selectionMethod: SELECTION_METHOD_LIST_OTHERS })
+                    pickupPointSelectionEvent({
+                      selectionMethod: SELECTION_METHOD_LIST_OTHERS,
+                    })
                   }}
-                  >
+                >
                   <PickupPointInfo
                     isList
                     isBestPickupPoint={bestPickupOptions.some(
-                      localPickupPoint => localPickupPoint.id === pickupPoint.id
+                      (localPickupPoint) =>
+                        localPickupPoint.id === pickupPoint.id
                     )}
                     items={items}
                     logisticsInfo={logisticsInfo}

@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react'
+
 import styles from './SearchOverlay.css'
 import { injectState } from '../../modalStateContext'
+
 class SearchOverlay extends PureComponent {
   render() {
     const { searchedAreaNoPickups } = this.props
+
     return (
       <svg
         className={`${styles.searchOverlay} ${
@@ -13,7 +16,8 @@ class SearchOverlay extends PureComponent {
         height="560"
         viewBox="0 0 899 560"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg">
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path
           fillRule="evenodd"
           clipRule="evenodd"

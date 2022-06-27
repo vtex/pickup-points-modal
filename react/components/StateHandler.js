@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { intlShape } from 'react-intl'
+
 import EmptySearch from './EmptySearch'
 import SearchingState from './SearchingState'
 import ErrorState from './ErrorState'
@@ -15,7 +17,6 @@ import {
   GEOLOCATION_SEARCHING,
 } from '../constants'
 import { injectState } from '../modalStateContext'
-import { intlShape } from 'react-intl'
 
 class StateHandler extends PureComponent {
   render() {
@@ -24,7 +25,7 @@ class StateHandler extends PureComponent {
       activePickupPoint,
       askForGeolocation,
       changeActiveSLAOption,
-      closePickupPointsModal,
+      onClosePickupPointsModal,
       googleMaps,
       intl,
       isLargeScreen,
@@ -63,6 +64,8 @@ class StateHandler extends PureComponent {
       }
 
       case GEOLOCATION_SEARCHING:
+
+      // eslint-disable-next-line no-fallthrough
       case SEARCHING: {
         return <SearchingState activeState={activeState} />
       }
@@ -92,7 +95,7 @@ class StateHandler extends PureComponent {
           <PickupSidebar
             activePickupPoint={activePickupPoint}
             changeActiveSLAOption={changeActiveSLAOption}
-            closePickupPointsModal={closePickupPointsModal}
+            onClosePickupPointsModal={onClosePickupPointsModal}
             googleMaps={googleMaps}
             isLargeScreen={isLargeScreen}
             isSearching={isSearching}
@@ -112,6 +115,10 @@ class StateHandler extends PureComponent {
           />
         )
       }
+
+      default: {
+        return null
+      }
     }
   }
 }
@@ -121,7 +128,7 @@ StateHandler.propTypes = {
   activePickupPoint: PropTypes.object,
   askForGeolocation: PropTypes.bool,
   changeActiveSLAOption: PropTypes.func.isRequired,
-  closePickupPointsModal: PropTypes.func.isRequired,
+  onClosePickupPointsModal: PropTypes.func.isRequired,
   googleMaps: PropTypes.object.isRequired,
   intl: intlShape.isRequired,
   isLargeScreen: PropTypes.bool.isRequired,

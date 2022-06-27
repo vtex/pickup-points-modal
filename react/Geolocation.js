@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import get from 'lodash/get'
+
 import { GeolocationContext } from './geolocationContext'
 import { injectState } from './modalStateContext'
 import { searchPickupAddressByGeolocationEvent } from './utils/metrics'
@@ -59,13 +59,15 @@ class Geolocation extends Component {
     }
 
     const { isLoadingGeolocation } = this.state
+
     if (isLoadingGeolocation !== prevState.isLoadingGeolocation) {
       this.props.onChangeGeolocationState?.({ loading: isLoadingGeolocation })
     }
   }
 
-  setCurrentActiveState = state => {
+  setCurrentActiveState = (state) => {
     const { activeState, setActiveSidebarState, setActiveState } = this.props
+
     if (activeState === SIDEBAR) {
       setActiveSidebarState(state)
     } else {
@@ -75,23 +77,28 @@ class Geolocation extends Component {
 
   getPermissionStatus = () => {
     if (navigator.permissions) {
-      navigator.permissions.query({ name: 'geolocation' }).then(permission => {
-        this.setState({
-          permissionStatus: permission.state,
+      navigator.permissions
+        .query({ name: 'geolocation' })
+        .then((permission) => {
+          this.setState({
+            permissionStatus: permission.state,
+          })
         })
-      })
     }
   }
 
   handleGetCurrentPosition = () => {
     const { setGeolocationStatus } = this.props
     const { permissionStatus } = this.state
+
     switch (permissionStatus) {
       case DENIED:
         this.getCurrentPositionError({ code: 1 })
         break
 
       case GRANTED:
+
+      // eslint-disable-next-line no-fallthrough
       default:
         setGeolocationStatus(SEARCHING)
         this.setCurrentActiveState(SEARCHING)
@@ -109,8 +116,14 @@ class Geolocation extends Component {
     }
   }
 
-  getCurrentPositionSuccess = position => {
-    const { address, googleMaps, onChangeAddress, rules, setAskForGeolocation } = this.props
+  getCurrentPositionSuccess = (position) => {
+    const {
+      address,
+      googleMaps,
+      onChangeAddress,
+      rules,
+      setAskForGeolocation,
+    } = this.props
 
     this.setState({ isLoadingGeolocation: false })
     this.setCurrentActiveState(SEARCHING)
@@ -123,10 +136,10 @@ class Geolocation extends Component {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       },
-      googleMaps: googleMaps,
-      onChangeAddress: onChangeAddress,
-      rules: rules,
-      address: address,
+      googleMaps,
+      onChangeAddress,
+      rules,
+      address,
     })
 
     searchPickupAddressByGeolocationEvent({
@@ -136,7 +149,7 @@ class Geolocation extends Component {
     })
   }
 
-  getCurrentPositionError = error => {
+  getCurrentPositionError = (error) => {
     const { setAskForGeolocation, setGeolocationStatus } = this.props
 
     this.setState({ isLoadingGeolocation: false })
@@ -154,6 +167,7 @@ class Geolocation extends Component {
           elapsedTime,
         })
         break
+
       case 1: // PERMISSION_DENIED
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_NOT_ALLOWED)
@@ -164,6 +178,7 @@ class Geolocation extends Component {
           elapsedTime,
         })
         break
+
       case 2: // POSITION_UNAVAILABLE
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_NOT_FOUND)
@@ -174,6 +189,7 @@ class Geolocation extends Component {
           elapsedTime,
         })
         break
+
       case 3: // TIMEOUT
         setAskForGeolocation(false)
         setGeolocationStatus(ERROR_COULD_NOT_GETLOCATION)
@@ -187,6 +203,7 @@ class Geolocation extends Component {
           elapsedTime,
         })
         break
+
       default:
         return false
     }
@@ -202,7 +219,8 @@ class Geolocation extends Component {
           getCurrentPosition: this.handleCurrentPosition,
           isLoadingGeolocation,
           permissionStatus,
-        }}>
+        }}
+      >
         {children}
       </GeolocationContext.Provider>
     )
@@ -212,6 +230,16 @@ class Geolocation extends Component {
 Geolocation.propTypes = {
   children: PropTypes.any.isRequired,
   onChangeGeolocationState: PropTypes.func,
+  askForGeolocation: PropTypes.bool,
+  activeState: PropTypes.string,
+  setAskForGeolocation: PropTypes.func,
+  setGeolocationStatus: PropTypes.func,
+  address: PropTypes.object,
+  googleMaps: PropTypes.object,
+  onChangeAddress: PropTypes.func,
+  rules: PropTypes.object,
+  setActiveSidebarState: PropTypes.func,
+  setActiveState: PropTypes.func,
 }
 
 export default injectState(Geolocation)

@@ -1,5 +1,6 @@
-import { newAddress } from '../newAddress'
 import MockDate from 'mockdate'
+
+import { newAddress } from '../newAddress'
 
 describe('newAddress', () => {
   it('should return country past as parameter', () => {

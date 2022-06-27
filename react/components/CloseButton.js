@@ -11,13 +11,15 @@ class CloseButton extends PureComponent {
       <button
         className={`${styles.closeButton} pkpmodal-close`}
         onClick={onClickClose}
-        type="button">
+        type="button"
+      >
         <svg
           width="14"
           height="14"
           viewBox="0 0 14 14"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <rect
             x="0.0341797"
             y="12.4351"

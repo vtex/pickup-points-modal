@@ -37,10 +37,8 @@ export function formatCurrency({
 export function formatNumber({ value, storePreferencesData }) {
   const { currencyFormatInfo } = storePreferencesData
 
-  const {
-    currencyDecimalSeparator,
-    currencyGroupSeparator,
-  } = currencyFormatInfo
+  const { currencyDecimalSeparator, currencyGroupSeparator } =
+    currencyFormatInfo
 
   if (!value) return null
 

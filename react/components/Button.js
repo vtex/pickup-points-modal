@@ -21,6 +21,7 @@ class Button extends Component {
       case 'secondary':
         style += `${styles.secondary} pkp-modal-btn-secondary `
         break
+
       default:
         style += `${styles.primary} pkp-modal-btn-primary `
         break

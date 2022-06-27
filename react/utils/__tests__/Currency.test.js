@@ -85,7 +85,7 @@ describe('formatCurrency', () => {
     ).toBe(formattedValue)
   })
 
-  it("should return null if has no value", () => {
+  it('should return null if has no value', () => {
     const storePreferencesData = {
       countryCode: 'BRA',
       currencyCode: 'BRL',
@@ -112,7 +112,7 @@ describe('formatCurrency', () => {
     ).toBe(formattedValue)
   })
 
-  it("should return converted number with multiple decimals", () => {
+  it('should return converted number with multiple decimals', () => {
     const storePreferencesData = {
       countryCode: 'BRA',
       currencyCode: 'BRL',
@@ -129,7 +129,7 @@ describe('formatCurrency', () => {
 
     const value = 1.92341234
 
-    const formattedValue = "1,9"
+    const formattedValue = '1,9'
 
     expect(
       formatNumber({

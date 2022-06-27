@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { translate } from '../utils/i18nUtils'
 
+import { translate } from '../utils/i18nUtils'
 import styles from './GeolocationStatus.css'
 
 class GeolocationStatus extends Component {
@@ -27,9 +27,8 @@ class GeolocationStatus extends Component {
           )}
           {subtitleTop && (
             <h3
-              className={`${
-                styles.locatingSubtitle
-              } pkpmodal-locating-subtitle`}>
+              className={`${styles.locatingSubtitle} pkpmodal-locating-subtitle`}
+            >
               {translate(intl, subtitleTop)}
             </h3>
           )}
@@ -40,22 +39,19 @@ class GeolocationStatus extends Component {
           )}
           {(titleBottom || subtitleBottom) && (
             <div
-              className={`${
-                styles.locatingInstructions
-              } pkpmodal-locating-instructions`}>
+              className={`${styles.locatingInstructions} pkpmodal-locating-instructions`}
+            >
               {titleBottom && (
                 <h2
-                  className={`${
-                    styles.locatingTitleSmall
-                  } pkpmodal-locating-title-small`}>
+                  className={`${styles.locatingTitleSmall} pkpmodal-locating-title-small`}
+                >
                   {translate(intl, titleBottom)}
                 </h2>
               )}
               {subtitleBottom && (
                 <h3
-                  className={`${
-                    styles.locatingSubtitle
-                  } pkpmodal-locating-subtitle`}>
+                  className={`${styles.locatingSubtitle} pkpmodal-locating-subtitle`}
+                >
                   {translate(intl, subtitleBottom)}
                 </h3>
               )}
@@ -65,7 +61,8 @@ class GeolocationStatus extends Component {
 
         {children && (
           <div
-            className={`${styles.locatingActions} pkpmodal-locating-actions`}>
+            className={`${styles.locatingActions} pkpmodal-locating-actions`}
+          >
             {children}
           </div>
         )}

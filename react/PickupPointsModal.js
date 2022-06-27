@@ -253,6 +253,7 @@ class PickupPointsModal extends Component {
       !loading && (
         <div>
           <div
+            aria-hidden
             className={`${styles.modalBackdrop} pkpmodal-backdrop`}
             onClick={this.handleManuallyCloseModal}
           />
@@ -328,13 +329,12 @@ class PickupPointsModal extends Component {
                   activePickupPoint={activePickupPoint}
                   askForGeolocation={askForGeolocation}
                   changeActiveSLAOption={changeActiveSLAOption}
-                  closePickupPointsModal={this.handleCloseModal}
+                  onClosePickupPointsModal={this.handleCloseModal}
                   googleMaps={googleMaps}
                   intl={intl}
                   items={items}
                   isLargeScreen={isLargeScreen}
                   isSearching={isSearching}
-                  handleAddressChange={this.handleAddressChange}
                   loading={loading}
                   mapStatus={mapStatus}
                   onAddressChange={this.handleAddressChange}
@@ -375,6 +375,11 @@ PickupPointsModal.propTypes = {
   sellerId: PropTypes.string,
   selectedPickupPoint: PropTypes.object,
   storePreferencesData: PropTypes.object.isRequired,
+  googleMapsKey: PropTypes.string,
+  isAPIEnabled: PropTypes.bool,
+  onAddressChange: PropTypes.func,
+  orderFormId: PropTypes.string,
+  salesChannel: PropTypes.string,
 }
 
 export default injectIntl(withGoogleMaps(PickupPointsModal))

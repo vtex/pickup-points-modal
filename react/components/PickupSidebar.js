@@ -2,18 +2,20 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
+import { injectIntl, intlShape } from 'react-intl'
+
 import PickupSidebarHeader from './PickupSidebarHeader'
 import Input from './Input'
 import PickupTabs from './PickupTabs'
 import SearchForm from './SearchForm'
 import styles from './PickupSidebar.css'
 import SidebarStateHandler from './SidebarStateHandler'
-import { injectIntl, intlShape } from 'react-intl'
 import { SHOW_MAP, DETAILS, INITIAL } from '../constants'
 import { translate } from '../utils/i18nUtils'
 import { getShipsTo } from '../utils/AddressUtils'
 import { injectState } from '../modalStateContext'
 import LocationSummaryIcon from '../assets/components/LocationSummaryIcon'
+
 class PickupSidebar extends Component {
   getAddress = () => {
     const { searchAddress } = this.props
@@ -38,7 +40,7 @@ class PickupSidebar extends Component {
       activePickupPoint,
       activeSidebarState,
       changeActiveSLAOption,
-      closePickupPointsModal,
+      onClosePickupPointsModal,
       googleMaps,
       intl,
       isLargeScreen,
@@ -80,7 +82,8 @@ class PickupSidebar extends Component {
           {
             'pkpmodal-info-bar-map': mapStatus === SHOW_MAP,
           }
-        )}>
+        )}
+      >
         <div
           className={classNames(
             styles.infoBarContainer,
@@ -88,7 +91,8 @@ class PickupSidebar extends Component {
             {
               infoBarContainerActive: mapStatus === SHOW_MAP,
             }
-          )}>
+          )}
+        >
           {!isPickupDetailsActive && <PickupSidebarHeader />}
           {shouldShowSearchForm && (
             <SearchForm
@@ -109,12 +113,12 @@ class PickupSidebar extends Component {
 
           {shouldShowAddressChange && (
             <div
-              className={`${styles.locationSummary} pkpmodal-location-summary`}>
+              className={`${styles.locationSummary} pkpmodal-location-summary`}
+            >
               <LocationSummaryIcon />
               <div
-                className={`${
-                  styles.locationSummaryText
-                } pkpmodal-location-summary-btn`}>
+                className={`${styles.locationSummaryText} pkpmodal-location-summary-btn`}
+              >
                 {translate(intl, 'nearTo', {
                   address: this.getAddress(),
                 })}
@@ -122,9 +126,8 @@ class PickupSidebar extends Component {
               <button
                 type="button"
                 onClick={this.handleInitialState}
-                className={`${
-                  styles.locationReset
-                } pkpmodal-location-reset btn btn-link`}>
+                className={`${styles.locationReset} pkpmodal-location-reset btn btn-link`}
+              >
                 {translate(intl, 'pickupPoint.modify')}
               </button>
             </div>
@@ -142,7 +145,7 @@ class PickupSidebar extends Component {
 
           <SidebarStateHandler
             changeActiveSLAOption={changeActiveSLAOption}
-            closePickupPointsModal={closePickupPointsModal}
+            onClosePickupPointsModal={onClosePickupPointsModal}
             activeSidebarState={activeSidebarState}
             activePickupPoint={activePickupPoint}
             logisticsInfo={logisticsInfo}
@@ -169,7 +172,7 @@ PickupSidebar.propTypes = {
   activePickupPoint: PropTypes.object,
   setSelectedPickupPoint: PropTypes.func.isRequired,
   changeActiveSLAOption: PropTypes.func.isRequired,
-  closePickupPointsModal: PropTypes.func.isRequired,
+  onClosePickupPointsModal: PropTypes.func.isRequired,
   googleMaps: PropTypes.object,
   intl: intlShape.isRequired,
   isLargeScreen: PropTypes.bool,

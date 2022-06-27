@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+
 import PickupPointDetails from './PickupPointDetails'
 import PickupPointsList from './PickupPointsList'
 import SearchingState from './SearchingState'
@@ -21,7 +22,7 @@ class SidebarStateHandler extends PureComponent {
     const {
       activeSidebarState,
       changeActiveSLAOption,
-      closePickupPointsModal,
+      onClosePickupPointsModal,
       items,
       rules,
       styles,
@@ -32,6 +33,8 @@ class SidebarStateHandler extends PureComponent {
 
     switch (activeSidebarState) {
       case GEOLOCATION_SEARCHING:
+
+      // eslint-disable-next-line no-fallthrough
       case SEARCHING: {
         return (
           <SearchingState
@@ -80,7 +83,7 @@ class SidebarStateHandler extends PureComponent {
         return (
           <PickupPointDetails
             handleChangeActiveSLAOption={changeActiveSLAOption}
-            handleClosePickupPointsModal={closePickupPointsModal}
+            handleClosePickupPointsModal={onClosePickupPointsModal}
             items={items}
             selectedRules={rules}
             sellerId={sellerId}
@@ -98,7 +101,7 @@ class SidebarStateHandler extends PureComponent {
 SidebarStateHandler.propTypes = {
   activeSidebarState: PropTypes.string.isRequired,
   changeActiveSLAOption: PropTypes.func.isRequired,
-  closePickupPointsModal: PropTypes.func.isRequired,
+  onClosePickupPointsModal: PropTypes.func.isRequired,
   items: PropTypes.array.isRequired,
   pickupOptions: PropTypes.array.isRequired,
   rules: PropTypes.object.isRequired,

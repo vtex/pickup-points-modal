@@ -7,9 +7,11 @@ describe('fixImageUrl', () => {
     const cleanedImage = fixImageUrl(
       `http:${baseUrl}/155401-135-135/CAN-09-04--1-.jpg`
     )
+
     const cleanedImage2 = fixImageUrl(
       `http:${baseUrl}/ahsuh155401as-135-135/CAN-09-04--1-.jpg`
     )
+
     const cleanedImage3 = fixImageUrl(
       `http:${baseUrl}/155sdsdsd401-135-135/CAN-09-04--1-.jpg`
     )

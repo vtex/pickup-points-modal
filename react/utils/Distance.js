@@ -4,9 +4,10 @@ export function formatDistance(value, locale) {
   if (shouldConvertToMiles(locale)) {
     return value / KM_TO_MILE
   }
+
   return value
 }
 
 function shouldConvertToMiles(locale) {
-  return MILE_COUNTRY_LOCALES.some(country => locale === country)
+  return MILE_COUNTRY_LOCALES.some((country) => locale === country)
 }

@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { translate } from '../utils/i18nUtils'
 
+import { translate } from '../utils/i18nUtils'
 import styles from './PickupSidebarHeader.css'
 
 class PickupSidebarHeader extends PureComponent {

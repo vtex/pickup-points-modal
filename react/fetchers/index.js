@@ -1,17 +1,16 @@
-import { newAddress } from '../utils/newAddress'
-import { PICKUP_IN_STORE, SEARCH } from '../constants'
 import axios from 'axios'
 import axiosRetry from 'axios-retry'
+
+import { newAddress } from '../utils/newAddress'
+import { PICKUP_IN_STORE, SEARCH } from '../constants'
 import { isDelivery } from '../utils/DeliveryChannelsUtils'
 
 axiosRetry(axios, { retries: 2 })
 
 export function fetchExternalPickupPoints(geoCoordinates) {
   return fetch(
-    `/api/checkout/pub/pickup-points?geoCoordinates=${geoCoordinates[0]};${
-      geoCoordinates[1]
-    }&page=1&pageSize=100`
-  ).then(response => response.json())
+    `/api/checkout/pub/pickup-points?geoCoordinates=${geoCoordinates[0]};${geoCoordinates[1]}&page=1&pageSize=100`
+  ).then((response) => response.json())
 }
 
 export function getAvailablePickups({
@@ -30,7 +29,7 @@ export function getAvailablePickups({
     orderFormId,
     shippingData: {
       selectedAddresses: [pickupAddressWithAddressId],
-      logisticsInfo: logisticsInfo.map(li => ({
+      logisticsInfo: logisticsInfo.map((li) => ({
         addressId: pickupAddressWithAddressId.addressId,
         itemIndex: li.itemIndex,
         selectedDeliveryChannel: PICKUP_IN_STORE,
@@ -66,15 +65,16 @@ export function updateShippingData(
     addressId: undefined,
     addressType: SEARCH,
   })
+
   const shippingData = {
     ...(hasGeocoordinates ? { clearAddressIfPostalCodeNotFound: false } : {}),
     selectedAddresses: [
       ...(residentialAddress ? [residentialAddress] : []),
       pickupAddressWithAddressId,
     ],
-    logisticsInfo: logisticsInfo.map(li => {
-      const hasSla = li.slas.some(sla => sla.id === pickupPoint.id)
-      const hasDeliverySla = li.slas.some(sla => isDelivery(sla))
+    logisticsInfo: logisticsInfo.map((li) => {
+      const hasSla = li.slas.some((sla) => sla.id === pickupPoint.id)
+      const hasDeliverySla = li.slas.some((sla) => isDelivery(sla))
 
       return {
         itemIndex: li.itemIndex,
@@ -83,11 +83,12 @@ export function updateShippingData(
         selectedDeliveryChannel: hasSla
           ? PICKUP_IN_STORE
           : hasDeliverySla
-            ? li.selectedDeliveryChannel
-            : null,
+          ? li.selectedDeliveryChannel
+          : null,
       }
     }),
   }
+
   return (
     window.vtexjs &&
     window.vtexjs.checkout.sendAttachment('shippingData', shippingData)
