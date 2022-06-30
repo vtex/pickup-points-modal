@@ -1,7 +1,7 @@
 export function getPickupSlaString(slas) {
   return slas.reduce(
     (accumulatedString, currentPickupPoint) =>
-      currentPickupPoint.id ? accumulatedString + currentPickupPoint.id : '',
+      currentPickupPoint.id ? accumulatedString + currentPickupPoint.id + currentPickupPoint.pickupDistance : '',
     ''
   )
 }
