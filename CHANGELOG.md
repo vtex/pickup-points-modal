@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Fixed
+- Updates pickup points distances when changing the user location.
 - Lint issues.
 
 ## [3.7.0] - 2022-03-09
