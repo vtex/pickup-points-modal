@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Indonesian translation.
+
 ## [3.7.4] - 2022-09-06
 ### Fixed
 - Reset address on change to avoid using previous address geo coordinates.
