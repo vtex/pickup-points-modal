@@ -27,6 +27,14 @@ class SearchForm extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.address !== this.props.address) {
+      this.setState({
+        address: this.props.address,
+      })
+    }
+  }
+
   setMyLocationButtonVisibility = (visibility) => {
     this.setState({
       isMyLocationButtonVisible: visibility,
