@@ -49,6 +49,16 @@ class SearchForm extends Component {
     this.props.getCurrentPosition()
   }
 
+  componentDidUpdate(_, prevState) {
+    if (
+      this.state.address.postalCode?.value &&
+      this.state.address.postalCode.value !==
+        prevState.address.postalCode?.value
+    ) {
+      this.props.onChangeAddress(this.state.address)
+    }
+  }
+
   handleAddressChange = (address) => {
     this.setState((prevState) => ({
       address: {
@@ -56,10 +66,6 @@ class SearchForm extends Component {
         ...address,
       },
     }))
-
-    if (address.postalCode.value) {
-      this.props.onChangeAddress({ ...this.state.address, ...address })
-    }
   }
 
   render() {
