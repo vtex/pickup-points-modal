@@ -57,7 +57,10 @@ class SearchForm extends Component {
       },
     }))
 
-    if (address.postalCode?.value) {
+    if (
+      address.postalCode?.value ||
+      address.geoCoordinates?.value?.length > 0
+    ) {
       this.props.onChangeAddress({ ...this.state.address, ...address })
     }
   }
