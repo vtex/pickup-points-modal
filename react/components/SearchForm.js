@@ -17,6 +17,21 @@ const { PostalCodeGetter, CountrySelector } = components
 const { GeolocationInput, DefaultInput } = inputs
 const { AddressShapeWithValidation } = shapes
 
+function compareGeoCoordinates(currentCoordinates, prevCoordinates) {
+  if (!currentCoordinates || currentCoordinates.length === 0) {
+    return false
+  }
+
+  if (!prevCoordinates || prevCoordinates.length === 0) {
+    return true
+  }
+
+  const [currentLat, currentLng] = currentCoordinates
+  const [prevLat, prevLng] = prevCoordinates
+
+  return currentLat !== prevLat || currentLng !== prevLng
+}
+
 class SearchForm extends Component {
   constructor(props) {
     super(props)
@@ -51,9 +66,13 @@ class SearchForm extends Component {
 
   componentDidUpdate(_, prevState) {
     if (
-      this.state.address.postalCode?.value &&
-      this.state.address.postalCode.value !==
-        prevState.address.postalCode?.value
+      (this.state.address.postalCode?.value &&
+        this.state.address.postalCode.value !==
+          prevState.address.postalCode?.value) ||
+      compareGeoCoordinates(
+        this.state.address.geoCoordinates?.value,
+        prevState.address.geoCoordinates?.value
+      )
     ) {
       this.props.onChangeAddress(this.state.address)
     }
