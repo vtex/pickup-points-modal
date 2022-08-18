@@ -23,6 +23,15 @@ class SearchForm extends Component {
 
     this.state = {
       isMyLocationButtonVisible: true,
+      address: this.props.address,
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.address !== this.props.address) {
+      this.setState({
+        address: this.props.address,
+      })
     }
   }
 
@@ -48,9 +57,24 @@ class SearchForm extends Component {
     this.props.getCurrentPosition()
   }
 
+  handleAddressChange = (address) => {
+    this.setState((prevState) => ({
+      address: {
+        ...prevState.address,
+        ...address,
+      },
+    }))
+
+    if (
+      address.postalCode?.value ||
+      address.geoCoordinates?.value?.length > 0
+    ) {
+      this.props.onChangeAddress({ ...this.state.address, ...address })
+    }
+  }
+
   render() {
     const {
-      address,
       googleMaps,
       Input,
       intl,
@@ -60,13 +84,14 @@ class SearchForm extends Component {
       isLoadingGoogle,
       isLoadingGeolocation,
       isSidebar,
-      onChangeAddress,
       rules,
       placeholder,
       setGeolocationFrom,
       shipsTo,
       permissionStatus,
     } = this.props
+
+    const { address } = this.state
 
     const geolocationStyle = `${styles.askGeolocationBtn} pkp-modal-ask-geolocation-btn`
 
@@ -95,7 +120,7 @@ class SearchForm extends Component {
               onFocus: this.handleInputFocus,
             }}
             isLoadingGoogle={isLoadingGoogle}
-            onChangeAddress={onChangeAddress}
+            onChangeAddress={this.handleAddressChange}
             placeholder={placeholder}
             rules={rules}
             useSearchBox
@@ -106,7 +131,7 @@ class SearchForm extends Component {
               <CountrySelector
                 address={address}
                 Input={DefaultInput}
-                onChangeAddress={onChangeAddress}
+                onChangeAddress={this.handleAddressChange}
                 shipsTo={shipsTo}
               />
             )}
@@ -115,7 +140,7 @@ class SearchForm extends Component {
               autoFocus
               address={address}
               Input={DefaultInput}
-              onChangeAddress={onChangeAddress}
+              onChangeAddress={this.handleAddressChange}
               rules={rules}
               inputProps={{
                 onBlur: this.handleInputBlur,
