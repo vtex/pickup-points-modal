@@ -6962,17 +6962,25 @@ vtex-tachyons@^3.2.0:
   resolved "https://registry.yarnpkg.com/vtex-tachyons/-/vtex-tachyons-3.2.2.tgz#e9e39d939778ef7d80a92c476cecf7417f79a6e8"
   integrity sha512-4M53uuvV+2XEjplVYiPgpBuaI5dtGksVgz/20NNjbZkXklJM7Lwgod/hOoh3PtIn36+95zZVVgXYfs3e6EU8YA==
 
-"vtex.country-codes@http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.country-codes@1.1.2/public/_types/react":
-  version "0.0.0"
-  resolved "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.country-codes@1.1.2/public/_types/react#fa7a0347e046eab3dd768998fc9252b2c0dd5aef"
+"vtex.address-form@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.address-form@3.27.1/public/@types/vtex.address-form":
+  version "3.27.1"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.address-form@3.27.1/public/@types/vtex.address-form#4b5702b3f7047090eb39a3dc909b404b4435b788"
 
-"vtex.render-runtime@http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.render-runtime@7.39.1/public/_types/react":
-  version "7.39.1"
-  resolved "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.render-runtime@7.39.1/public/_types/react#8c51998a3db63bb726dd4a61e4ad112c9db308a3"
-
-"vtex.shipping-estimate-translator@http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.shipping-estimate-translator@1.0.4/public/_types/react":
+"vtex.country-codes@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.country-codes@1.1.2/public/_types/react":
   version "0.0.0"
-  resolved "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.shipping-estimate-translator@1.0.4/public/_types/react#fa7a0347e046eab3dd768998fc9252b2c0dd5aef"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.country-codes@1.1.2/public/_types/react#fa7a0347e046eab3dd768998fc9252b2c0dd5aef"
+
+"vtex.pickup-points-modal@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pickup-points-modal@3.7.2/public/@types/vtex.pickup-points-modal":
+  version "3.7.2"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pickup-points-modal@3.7.2/public/@types/vtex.pickup-points-modal#2dcd183f44a3043b4164f685b0a951663e682e21"
+
+"vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@7.45.0/public/@types/vtex.render-runtime":
+  version "7.45.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@7.45.0/public/@types/vtex.render-runtime#d9c9c4bbe8efe698a6b6566cc22e9dd7687a2442"
+
+"vtex.shipping-estimate-translator@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.shipping-estimate-translator@1.4.0/public/@types/vtex.shipping-estimate-translator":
+  version "1.4.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.shipping-estimate-translator@1.4.0/public/@types/vtex.shipping-estimate-translator#428db63e7f358e8670ec82fc31a027c28bee5819"
 
 w3c-hr-time@^1.0.1:
   version "1.0.2"

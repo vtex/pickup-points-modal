@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
+import { helpers } from 'vtex.address-form'
 
 import { translate } from '../utils/i18nUtils'
 import Input from './Input'
@@ -16,6 +17,9 @@ import {
   ERROR_NOT_FOUND,
 } from '../constants'
 import { injectState } from '../modalStateContext'
+import { newAddress } from '../utils/newAddress'
+
+const { addValidation } = helpers
 
 const getGeolocationErrorMessage = (status) => {
   switch (status) {
@@ -34,6 +38,18 @@ const getGeolocationErrorMessage = (status) => {
 }
 
 class EmptySearch extends PureComponent {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      address: addValidation(
+        newAddress({
+          country: props.searchAddress.country.value,
+        })
+      ),
+    }
+  }
+
   render() {
     const {
       askForGeolocation,
@@ -45,7 +61,6 @@ class EmptySearch extends PureComponent {
       loading,
       logisticsInfo,
       rules,
-      searchAddress,
       setGeolocationStatus,
       setActiveState,
       shouldUseMaps,
@@ -74,7 +89,7 @@ class EmptySearch extends PureComponent {
             )}
           </h3>
           <SearchForm
-            address={searchAddress}
+            address={this.state.address}
             // eslint-disable-next-line jsx-a11y/no-autofocus
             autoFocus
             askForGeolocation={askForGeolocation}

@@ -71,8 +71,10 @@
     "react-redux": "^5.0.7",
     "react-test-renderer": "^16.12.0",
     "redux": "^4.0.0",
-    "vtex.country-codes": "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.country-codes@1.1.2/public/_types/react",
-    "vtex.render-runtime": "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.render-runtime@7.39.1/public/_types/react",
-    "vtex.shipping-estimate-translator": "http://vtex.vteximg.com.br/_v/public/typings/v1/vtex.shipping-estimate-translator@1.0.4/public/_types/react"
+    "vtex.address-form": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.address-form@3.27.1/public/@types/vtex.address-form",
+    "vtex.country-codes": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.country-codes@1.1.2/public/_types/react",
+    "vtex.pickup-points-modal": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pickup-points-modal@3.7.2/public/@types/vtex.pickup-points-modal",
+    "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@7.45.0/public/@types/vtex.render-runtime",
+    "vtex.shipping-estimate-translator": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.shipping-estimate-translator@1.4.0/public/@types/vtex.shipping-estimate-translator"
   }
 }
