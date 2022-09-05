@@ -22,6 +22,7 @@ describe('newAddress', () => {
       state: null,
       street: null,
       addressQuery: '',
+      isDisposable: false,
     }
 
     const resultAddress = newAddress({
