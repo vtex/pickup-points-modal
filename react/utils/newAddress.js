@@ -1,6 +1,6 @@
 import getGGUID from './Gguid'
 
-export function newAddress(address) {
+export function newAddress(address = {}) {
   const {
     addressType,
     city,
@@ -16,6 +16,7 @@ export function newAddress(address) {
     street,
     addressQuery,
     addressId,
+    isDisposable,
   } = address
 
   return {
@@ -33,5 +34,6 @@ export function newAddress(address) {
     state: state || null,
     street: street || null,
     addressQuery: addressQuery || '',
+    isDisposable: isDisposable ?? false,
   }
 }

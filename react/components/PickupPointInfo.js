@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import TranslateEstimate from 'vtex.shipping-estimate-translator/TranslateEstimate'
-import { AddressSummary } from '@vtex/address-form'
+import { components } from 'vtex.address-form'
 
 import { formatCurrency, formatNumber } from '../utils/Currency'
 import { formatDistance } from '../utils/Distance'
@@ -15,6 +15,8 @@ import UnavailableMarker from '../assets/components/UnavailableMarker'
 import SearchMarkerIcon from '../assets/components/SearchMarkerIcon'
 import BestMarkerIcon from '../assets/components/BestMarkerIcon'
 import { getCleanId } from '../utils/StateUtils'
+
+const { AddressSummary } = components
 
 const MAX_KILOMETERS = 1000
 
