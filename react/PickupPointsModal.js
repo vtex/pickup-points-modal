@@ -201,7 +201,10 @@ class PickupPointsModal extends Component {
       })
     }
 
-    this.props.closePickupPointsModal()
+    this.props.closePickupPointsModal({
+      rules: this.props.rules,
+      activePickupPoint: this.props.activePickupPoint,
+    })
   }
 
   handleChangeGeolocationLoading = (event) => {
