@@ -8,14 +8,22 @@ import { isDelivery } from '../utils/DeliveryChannelsUtils'
 axiosRetry(axios, { retries: 2 })
 
 function getRootPath() {
-  return window.__RUNTIME__.rootPath || (window.vtex && window.vtex.renderRuntime && window.vtex.renderRuntime.rootPath) || '';
+  return (
+    window.__RUNTIME__.rootPath ||
+    (window.vtex &&
+      window.vtex.renderRuntime &&
+      window.vtex.renderRuntime.rootPath) ||
+    ''
+  )
 }
 
 export function fetchExternalPickupPoints(geoCoordinates) {
   const rootPath = getRootPath()
 
   return fetch(
-    `${rootPath || ''}/api/checkout/pub/pickup-points?geoCoordinates=${geoCoordinates[0]};${geoCoordinates[1]}&page=1&pageSize=100`
+    `${rootPath || ''}/api/checkout/pub/pickup-points?geoCoordinates=${
+      geoCoordinates[0]
+    };${geoCoordinates[1]}&page=1&pageSize=100`
   ).then((response) => response.json())
 }
 
@@ -47,7 +55,9 @@ export function getAvailablePickups({
   }
 
   return axios({
-    url: `${rootPath || ''}/api/checkout/pub/orderForms/simulation?sc=${salesChannel}&rnbBehavior=0`,
+    url: `${
+      rootPath || ''
+    }/api/checkout/pub/orderForms/simulation?sc=${salesChannel}&rnbBehavior=0`,
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
