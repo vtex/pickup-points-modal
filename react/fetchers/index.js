@@ -116,21 +116,22 @@ export function updateShippingData(
 
   const defaultDeliverySla = firstItemWithSelectedDelivery.selectedSla
 
-  const newLogisticsInfo = logisticsInfoWithPickupSelected.map((li) => {
-    const hasDefaultDeliverySla = li.slas.find(
-      (sla) => sla.id === defaultDeliverySla
-    )
+  const logisticsInfoWithDefaultDeliverySla =
+    logisticsInfoWithPickupSelected.map((li) => {
+      const hasDefaultDeliverySla = li.slas.find(
+        (sla) => sla.id === defaultDeliverySla
+      )
 
-    if (!li.selectedDeliveryChannel && hasDefaultDeliverySla) {
-      return {
-        ...li,
-        selectedSla: defaultDeliverySla,
-        selectedDeliveryChannel: DELIVERY,
+      if (!li.selectedDeliveryChannel && hasDefaultDeliverySla) {
+        return {
+          ...li,
+          selectedSla: defaultDeliverySla,
+          selectedDeliveryChannel: DELIVERY,
+        }
       }
-    }
 
-    return li
-  })
+      return li
+    })
 
   const shippingData = {
     ...(hasGeocoordinates ? { clearAddressIfPostalCodeNotFound: false } : {}),
@@ -138,7 +139,7 @@ export function updateShippingData(
       ...(residentialAddress ? [residentialAddress] : []),
       pickupAddressWithAddressId,
     ],
-    logisticsInfo: newLogisticsInfo,
+    logisticsInfo: logisticsInfoWithDefaultDeliverySla,
   }
 
   return (
