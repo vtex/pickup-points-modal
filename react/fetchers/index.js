@@ -114,7 +114,8 @@ export function updateShippingData(
     logisticsInfoWithPickupSelected
   )
 
-  const defaultDeliverySla = firstItemWithSelectedDelivery.selectedSla
+  const defaultDeliverySla =
+    firstItemWithSelectedDelivery && firstItemWithSelectedDelivery.selectedSla
 
   const logisticsInfoWithDefaultDeliverySla =
     logisticsInfoWithPickupSelected.map((li) => {
