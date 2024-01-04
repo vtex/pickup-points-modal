@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.8.3] - 2024-01-04
+
 ### Fixed
 - Add rootPath to API requests.
 - Prevent multiple pickup point selection for items from white label sellers.
