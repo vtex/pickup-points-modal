@@ -2,8 +2,11 @@ import axios from 'axios'
 import axiosRetry from 'axios-retry'
 
 import { newAddress } from '../utils/newAddress'
-import { PICKUP_IN_STORE, SEARCH } from '../constants'
-import { isDelivery } from '../utils/DeliveryChannelsUtils'
+import { DELIVERY, PICKUP_IN_STORE, SEARCH } from '../constants'
+import {
+  getFirstItemWithSelectedDelivery,
+  isPickup,
+} from '../utils/DeliveryChannelsUtils'
 
 axiosRetry(axios, { retries: 2 })
 
@@ -84,27 +87,60 @@ export function updateShippingData(
     addressType: SEARCH,
   })
 
+  const logisticsInfoWithPickupSelected = logisticsInfo.map((li) => {
+    const hasPickupSla = li.slas.some((sla) => sla.id === pickupPoint.id)
+    const shouldKeepSelectedSla = !isPickup(li)
+
+    return {
+      itemIndex: li.itemIndex,
+      slas: li.slas,
+      addressId: hasPickupSla
+        ? pickupAddressWithAddressId.addressId
+        : li.addressId,
+      selectedSla: hasPickupSla
+        ? pickupPoint.id
+        : shouldKeepSelectedSla
+        ? li.selectedSla
+        : null,
+      selectedDeliveryChannel: hasPickupSla
+        ? PICKUP_IN_STORE
+        : shouldKeepSelectedSla
+        ? li.selectedDeliveryChannel
+        : null,
+    }
+  })
+
+  const firstItemWithSelectedDelivery = getFirstItemWithSelectedDelivery(
+    logisticsInfoWithPickupSelected
+  )
+
+  const defaultDeliverySla =
+    firstItemWithSelectedDelivery && firstItemWithSelectedDelivery.selectedSla
+
+  const logisticsInfoWithDefaultDeliverySla =
+    logisticsInfoWithPickupSelected.map((li) => {
+      const hasDefaultDeliverySla = li.slas.find(
+        (sla) => sla.id === defaultDeliverySla
+      )
+
+      if (!li.selectedDeliveryChannel && hasDefaultDeliverySla) {
+        return {
+          ...li,
+          selectedSla: defaultDeliverySla,
+          selectedDeliveryChannel: DELIVERY,
+        }
+      }
+
+      return li
+    })
+
   const shippingData = {
     ...(hasGeocoordinates ? { clearAddressIfPostalCodeNotFound: false } : {}),
     selectedAddresses: [
       ...(residentialAddress ? [residentialAddress] : []),
       pickupAddressWithAddressId,
     ],
-    logisticsInfo: logisticsInfo.map((li) => {
-      const hasSla = li.slas.some((sla) => sla.id === pickupPoint.id)
-      const hasDeliverySla = li.slas.some((sla) => isDelivery(sla))
-
-      return {
-        itemIndex: li.itemIndex,
-        addressId: hasSla ? pickupAddressWithAddressId.addressId : li.addressId,
-        selectedSla: hasSla ? pickupPoint.id : li.selectedSla,
-        selectedDeliveryChannel: hasSla
-          ? PICKUP_IN_STORE
-          : hasDeliverySla
-          ? li.selectedDeliveryChannel
-          : null,
-      }
-    }),
+    logisticsInfo: logisticsInfoWithDefaultDeliverySla,
   }
 
   return (

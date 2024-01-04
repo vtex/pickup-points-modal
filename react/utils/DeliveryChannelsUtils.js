@@ -32,3 +32,7 @@ export function isDelivery(deliveryChannelSource) {
 
   return deliveryChannel === DELIVERY
 }
+
+export function getFirstItemWithSelectedDelivery(logisticsInfo) {
+  return logisticsInfo.find((li) => isDelivery(li))
+}
