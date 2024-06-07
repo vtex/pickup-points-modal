@@ -23,9 +23,9 @@ export function isPickup(deliveryChannelSource) {
 
 export function findSla(li, pickupPoint) {
   return li.slas.find((sla) => {
-    const hasSameId = sla.id && sla.id.includes(pickupPoint.id)
+    const hasSameId = sla.id && sla.id === pickupPoint.id
     const hasSamePickupPointId =
-      sla.pickupPointId && sla.pickupPointId.includes(pickupPoint.id)
+      sla.pickupPointId && sla.pickupPointId === pickupPoint.id
 
     return hasSameId || hasSamePickupPointId
   })
