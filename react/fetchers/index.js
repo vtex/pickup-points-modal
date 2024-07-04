@@ -134,7 +134,7 @@ export function updateShippingData(
       return li
     })
 
-  const contactInformation = window?.vtexjs?.checkout?.orderForm?.shippingData?.contactInformation ?? []
+  const contactInformation = window?.vtexjs?.checkout?.orderForm?.shippingData?.contactInformation?.map(({ id }) => ({ id })) ?? []
 
   const shippingData = {
     ...(hasGeocoordinates ? { clearAddressIfPostalCodeNotFound: false } : {}),
