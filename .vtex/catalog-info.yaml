@@ -1,0 +1,22 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: pickup-points-modal
+  description: Componente React do modal de seleção de pickup points (lista + mapa).
+  tags:
+    - javascript
+    - react
+  annotations:
+    vtex.com/janus-acronym: ""
+    vtex.com/o11y-os-index: ""
+    grafana/dashboard-selector: ""
+    github.com/project-slug: vtex/pickup-points-modal
+    vtex.com/platform-flow-id: Shopper#4
+    backstage.io/techdocs-ref: dir:../
+    vtex.com/application-id: V5G7Q14G
+spec:
+  system: checkout
+  lifecycle: stable
+  owner: te-0001
+  type: library
+  dependsOn: []
