@@ -30,3 +30,7 @@ yarn-error.log*
 
 package-lock.json
 src/
+
+# SpecKit feature directories (local development)
+/specs
+.specify/feature.json
