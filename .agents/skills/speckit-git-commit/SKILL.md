@@ -6,9 +6,9 @@ type: skill
 
 # speckit-git-commit
 
-Compor commit messages no padrão Conventional Commits do repo.
+Compose commit messages in the repo's Conventional Commits style.
 
-## Formato
+## Format
 
 ```
 <type>(<scope>): <subject>
@@ -18,44 +18,44 @@ Compor commit messages no padrão Conventional Commits do repo.
 <footer>
 ```
 
-### Types aceitos
+### Accepted types
 
-| Type | Quando usar |
+| Type | When to use |
 |---|---|
-| `feat` | Feature visível ao usuário |
+| `feat` | User-visible feature |
 | `fix` | Bug fix |
-| `chore` | Tooling/deps sem mudança funcional |
-| `docs` | Mudança em docs (README, CHANGELOG, AGENTS) |
-| `refactor` | Refactor sem mudança funcional |
-| `test` | Apenas testes |
-| `perf` | Mudança que melhora performance |
+| `chore` | Tooling/deps without functional change |
+| `docs` | Documentation change (README, CHANGELOG, AGENTS) |
+| `refactor` | Refactor without functional change |
+| `test` | Tests only |
+| `perf` | Performance improvement |
 
-### Scope sugerido
+### Suggested scopes
 
 - `modal` — `PickupPointsModal.js`, `ModalState.js`
-- `map` — componentes que tocam Google Maps
+- `map` — Google Maps components
 - `i18n` — `messages/`
 - `fetchers` — `react/fetchers/`
 - `tooling` — config files
 
-## Regras vinculadas à constituição
+## Rules tied to the constitution
 
-- **Breaking change** em `PickupPointsModal` props/eventos:
-  - Adicionar `BREAKING CHANGE:` no footer.
-  - Major bump em `manifest.json` (pedir confirmação primeiro).
-  - Entrada no CHANGELOG.
+- **Breaking change** in `PickupPointsModal` props/events:
+  - Add `BREAKING CHANGE:` in the footer.
+  - Major bump in `manifest.json` (ask first).
+  - CHANGELOG entry.
 
-- **Mudança i18n:** scope `i18n` e listar locales tocados no body.
+- **i18n change:** scope `i18n` and list the locales touched in the body.
 
 ## Staging
 
-- Sempre staging por path específico (`git add react/components/X.js`),
-  **nunca** `git add -A` ou `git add .` — pode incluir `.env*` ou
-  artefatos do build.
-- Confirmar com `git status` antes de commitar.
+- Always stage by specific path (`git add react/components/X.js`),
+  **never** `git add -A` or `git add .` — those can pull in `.env*` or
+  build artifacts.
+- Confirm with `git status` before committing.
 
-## Não fazer
+## Don't
 
-- `--no-verify` para pular hooks.
-- Commit message em maiúsculas no subject.
-- Subject > 72 chars.
+- `--no-verify` to skip hooks.
+- Subject in uppercase.
+- Subject longer than 72 chars.

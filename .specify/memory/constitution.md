@@ -2,94 +2,99 @@
 
 **Version** 1.0.0 | **Ratified** 2026-05-14 | **Last Amended** 2026-05-14
 
-Esta constituição define os princípios **vinculantes** que governam as
-decisões técnicas e de produto do `vtex.pickup-points-modal`. Em conflito
-com qualquer outra fonte (README, CONTRIBUTING, docs externas), esta
-constituição prevalece. Mudanças exigem PR aprovado por 2 mantenedores
-e bump da seção **Governance** abaixo.
+This constitution defines the **binding** principles that govern technical
+and product decisions for `vtex.pickup-points-modal`. In case of conflict
+with any other source (README, CONTRIBUTING, external docs), this
+constitution prevails. Changes require a PR approved by 2 maintainers and
+a version bump in the **Governance** section below.
 
 ## Principles
 
 ### 1. Backward-compatible public API
 
-O contrato exposto em [PickupPointsModal.js](../../react/PickupPointsModal.js)
-é consumido por workspaces de produção em centenas de lojas VTEX. Toda
-mudança em props, eventos, ou shape de `orderForm`/`logisticsInfo` exigida
-pelo componente é **breaking** e demanda major bump no `manifest.json`.
+The contract exposed in [PickupPointsModal.js](../../react/PickupPointsModal.js)
+is consumed by production workspaces across hundreds of VTEX stores. Any
+change to props, events, or the shape of `orderForm`/`logisticsInfo`
+required by the component is **breaking** and demands a major bump in
+`manifest.json`.
 
-- **Why:** apps VTEX IO recebem o pacote por dep range `1.x`/`3.x`; quebra
-  silenciosa derruba checkout de lojas em produção.
-- **How to apply:** qualquer PR que mexe em `PickupPointsModal.js` precisa
-  de revisão dedicada ao contrato público + nota explícita no CHANGELOG.
+- **Why:** VTEX IO apps receive this package via `1.x`/`3.x` dependency
+  ranges; silently breaking the contract takes down checkout in
+  production stores.
+- **How to apply:** any PR touching `PickupPointsModal.js` requires a
+  dedicated review focused on the public contract plus an explicit
+  CHANGELOG entry.
 
 ### 2. Tested behavior over coverage number
 
-Toda lógica nova precisa de testes Jest cobrindo:
+Every new piece of logic requires Jest tests covering:
 
-- Caso esperado (golden path)
-- Pelo menos um caso de erro / borda
-- Não regressão visível: testes da feature que está sendo modificada
-  continuam passando
+- The expected case (golden path)
+- At least one error / edge case
+- No visible regression: tests for the feature being modified continue
+  to pass
 
-Não há meta absoluta de cobertura — o que importa é que cada mudança de
-comportamento esteja amarrada a um teste.
+There is no absolute coverage target — what matters is that every
+behavioral change is anchored to a test.
 
-- **Why:** a base mistura JS legado e TS, e o `orderForm` da VTEX tem
-  shape com muitos opcionais. Cobertura por número engana — bugs aparecem
-  em combinações que não estavam no plano.
-- **How to apply:** PR sem teste novo em mudança de comportamento volta
-  para o autor. Bugs detectados em produção devem ser reproduzidos por
-  teste **antes** do fix.
+- **Why:** the codebase mixes legacy JS and TS, and VTEX's `orderForm`
+  has a shape with many optional fields. Coverage-by-number lies — bugs
+  show up in combinations that were not in the plan.
+- **How to apply:** PRs with behavioral changes but no new test go back
+  to the author. Bugs detected in production must be reproduced with a
+  test **before** the fix.
 
 ### 3. Internationalization is non-negotiable
 
-Toda string visível ao usuário passa por `react-intl`. Chaves novas
-devem ser adicionadas em **todos** os locales presentes em `messages/`
-no mesmo PR — mesmo que seja a string original em inglês como fallback
-temporário.
+Every user-facing string goes through `react-intl`. New keys must be
+added to **all** locales present in `messages/` in the same PR — even if
+the value is the original English string as a temporary fallback.
 
-- **Why:** o componente roda em lojas BR/EN/ES/MX/PT em produção; faltar
-  uma chave em um locale gera `Missing translation` visível no checkout.
-- **How to apply:** rode `yarn lint:locales` antes de abrir o PR.
-  `intl-equalizer` precisa passar.
+- **Why:** the component runs across BR/EN/ES/MX/PT stores in
+  production; missing a key in one locale renders `Missing translation`
+  visibly in checkout.
+- **How to apply:** run `yarn lint:locales` before opening the PR.
+  `intl-equalizer` must pass.
 
-### 4. Performance budget no path do checkout
+### 4. Performance budget on the checkout path
 
-O modal abre no fluxo crítico de finalização de compra. Mudanças não
-podem:
+The modal opens in the critical purchase-completion flow. Changes must
+not:
 
-- Adicionar requests de rede no `componentDidMount`/`useEffect` inicial
-  sem cache ou debounce.
-- Carregar bibliotecas pesadas (>50KB minified) na bundle principal —
-  use dynamic import se realmente necessário.
-- Quebrar lazy-load do Google Maps (carregado on-demand).
+- Add network requests in the initial `componentDidMount`/`useEffect`
+  without cache or debounce.
+- Load heavy libraries (>50KB minified) into the main bundle — use
+  dynamic import if strictly necessary.
+- Break the lazy-load of Google Maps (currently loaded on demand).
 
-- **Why:** abandono de checkout sobe ~1% para cada 100ms a mais de TTI
-  segundo análises internas da equipe de Checkout.
-- **How to apply:** PRs que adicionam dependência precisam justificar
-  tamanho no description. Suspeita de regressão de performance abre
-  task de profiling antes do merge.
+- **Why:** checkout abandonment rises ~1% for every additional 100ms of
+  TTI according to internal Checkout team analyses.
+- **How to apply:** PRs that add a dependency must justify size in the
+  description. Suspected performance regressions open a profiling task
+  before merge.
 
 ### 5. Side-effect free utilities
 
-Funções em `react/utils/` e `react/fetchers/` devem ser puras ou ter o
-side-effect declarado no nome (`fetchX`, `saveY`). Sem singletons, sem
-estado global escondido.
+Functions in `react/utils/` and `react/fetchers/` must be pure or
+declare the side effect in the name (`fetchX`, `saveY`). No singletons,
+no hidden global state.
 
-- **Why:** facilita testar via unit test sem precisar montar o componente
-  inteiro com providers.
-- **How to apply:** PR que adiciona estado global em util volta para o
-  autor com sugestão de mover para `containers/` ou `ModalState.js`.
+- **Why:** makes it easy to unit-test without mounting the full
+  component tree with providers.
+- **How to apply:** PRs that add global state to a utility go back to
+  the author with a suggestion to move it into `containers/` or
+  `ModalState.js`.
 
 ## Governance
 
-- **Quem ratifica:** mantenedores do repo + tech lead da equipe Checkout.
-- **Como propor mudança:** PR alterando este arquivo, ligado a uma RFC
-  curta no description. Mínimo 2 aprovações.
-- **Versionamento:** seguir SemVer no campo `Version` acima. Patch para
-  esclarecimento, minor para novo princípio, major para revogação ou
-  reescrita de princípio existente.
-- **Auditoria:** revisão completa da constituição a cada 6 meses ou
-  quando um princípio for violado em produção (incident review).
-- **Conflitos com AGENTS.md:** constituição vence. AGENTS.md descreve
-  o "como"; constitution descreve o "por que" e "o que não pode".
+- **Ratified by:** repo maintainers + Checkout team tech lead.
+- **How to propose a change:** PR editing this file, linked to a short
+  RFC in the description. Minimum 2 approvals required.
+- **Versioning:** follow SemVer in the `Version` field above. Patch for
+  clarification, minor for a new principle, major for revoking or
+  rewriting an existing principle.
+- **Audit:** full constitution review every 6 months, or whenever a
+  principle is violated in production (incident review).
+- **Conflicts with AGENTS.md:** the constitution wins. AGENTS.md
+  describes the "how"; the constitution describes the "why" and "what
+  not to do".

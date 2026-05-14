@@ -1,46 +1,49 @@
 ---
 name: speckit-plan
-description: Break an approved spec.md into a technical plan.md with arquivos a tocar, ordem de execução, riscos e estratégia de testes para a pickup-points-modal.
+description: Break an approved spec.md into a technical plan.md listing files to touch, execution order, risks, and test strategy for a pickup-points-modal feature.
 type: skill
 ---
 
 # speckit-plan
 
-Use depois que `speckit-specify` aprovou uma `spec.md`. Esta skill quebra a
-spec em um **plano técnico executável** sem ainda implementar.
+Use after `speckit-specify` has produced an approved `spec.md`. This
+skill breaks the spec into an **executable technical plan**, without
+implementing anything yet.
 
-## Quando usar
+## When to use
 
-- `specs/<slug>/spec.md` aprovado pelo usuário.
-- Feature toca mais de um arquivo / camada (caso contrário pode pular
-  para `speckit-tasks` direto).
+- `specs/<slug>/spec.md` approved by the user.
+- The feature touches more than one file/layer (otherwise you can jump
+  straight to `speckit-tasks`).
 
-## Fluxo
+## Flow
 
-1. Ler `specs/<slug>/spec.md`.
-2. Ler [.specify/memory/constitution.md](../../../.specify/memory/constitution.md)
-   para checar conflito com princípios vinculantes.
-3. Rodar `.specify/scripts/bash/setup-plan.sh <slug>` se existir.
-4. Preencher `specs/<slug>/plan.md` usando
+1. Read `specs/<slug>/spec.md`.
+2. Read [.specify/memory/constitution.md](../../../.specify/memory/constitution.md)
+   to check conflicts with binding principles.
+3. Run `.specify/scripts/bash/setup-plan.sh <slug>` if available.
+4. Fill `specs/<slug>/plan.md` using
    [.specify/templates/plan-template.md](../../../.specify/templates/plan-template.md).
 
-## Output esperado
+## Expected output
 
-`specs/<slug>/plan.md` cobrindo:
+`specs/<slug>/plan.md` covering:
 
-- **Files to touch** (com motivo de cada)
-- **Order of operations** (o que faz primeiro, por quê)
-- **Test strategy** (unit, integração, e2e se aplicável)
-- **i18n plan** (chaves novas, locales tocados)
-- **Risks** (backward-compat, performance, regressão)
-- **Out of scope** explícito
+- **Files to touch** (with rationale for each)
+- **Order of operations** (what comes first and why)
+- **Test strategy** (unit, integration, e2e if applicable)
+- **i18n plan** (new keys, locales touched)
+- **Risks** (backward-compat, performance, regression)
+- **Out of scope** explicitly stated
 
 ## Constitution check
 
-Antes de marcar o plano como pronto, valide:
+Before marking the plan as ready, validate:
 
-- Princípio 1 (backward-compat): mudança quebra contrato público? Documentar.
-- Princípio 2 (tested behavior): cada mudança de comportamento tem teste planejado?
-- Princípio 3 (i18n): toda string nova listada?
-- Princípio 4 (performance): adicionou request síncrono ou bundle?
-- Princípio 5 (side-effect free): novo util é puro?
+- Principle 1 (backward-compat): does the change break the public
+  contract? Document it.
+- Principle 2 (tested behavior): does each behavioral change have a
+  planned test?
+- Principle 3 (i18n): is every new string listed?
+- Principle 4 (performance): added a synchronous request or bundle bloat?
+- Principle 5 (side-effect free): is the new utility pure?

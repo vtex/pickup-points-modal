@@ -6,55 +6,55 @@
 ## Business Context
 
 ### Problem
-<O que dói para o usuário final / time? Por que agora?>
+<What hurts the end user / team? Why now?>
 
 ### Stakeholders
 - **Requested by:** <PM/customer/team>
-- **Impacted users:** <quem usa o feature>
-- **Reviewers:** <quem precisa aprovar>
+- **Impacted users:** <who uses the feature>
+- **Reviewers:** <who needs to approve>
 
 ### Success metrics
-- <Métrica observável após release — ex: "modal abre em <300ms p95">
+- <Observable metric post-release — e.g. "modal opens in <300ms p95">
 
 ## Architectural Decisions
 
 ### Components affected
-<Liste arquivos/módulos. Marque como `read`, `write`, ou `new`.>
+<List files/modules. Mark each as `read`, `write`, or `new`.>
 
 ### Alternatives considered
-| Opção | Por que descartada |
+| Option | Why it was dropped |
 |---|---|
-| <A> | <razão> |
-| <B> | <razão> |
+| <A> | <reason> |
+| <B> | <reason> |
 
 ### Backward-compatibility risk
-<Mudança quebra contrato público do `PickupPointsModal`?
-Se sim: justificar major bump. Citar Princípio 1 da constitution.>
+<Does the change break the public contract of `PickupPointsModal`?
+If yes: justify a major bump. Cite Principle 1 of the constitution.>
 
 ## Technical Contract
 
 ### Props/Events changes
-<Lista de mudanças em `PickupPointsModal` ou containers expostos.>
+<List of changes to `PickupPointsModal` or exposed containers.>
 
 ### Fixtures / mocks
-<Quais fixtures em `react/__mocks__/` precisam ser atualizadas?>
+<Which fixtures under `react/__mocks__/` need updating?>
 
 ### i18n
-- Locales tocados: <pt-BR, en-US, ...>
-- Chaves novas: `<key1>`, `<key2>`
+- Locales touched: <pt-BR, en-US, ...>
+- New keys: `<key1>`, `<key2>`
 
 ### Test plan
-- **Golden path:** <cenário>
+- **Golden path:** <scenario>
 - **Edge cases:**
-  - <caso 1>
-  - <caso 2>
+  - <case 1>
+  - <case 2>
 
 ### Acceptance criteria
-- [ ] <Critério verificável 1>
-- [ ] <Critério verificável 2>
+- [ ] <Verifiable criterion 1>
+- [ ] <Verifiable criterion 2>
 
 ## Out of scope
-- <O que essa spec NÃO cobre>
+- <What this spec does NOT cover>
 
 ## Clarifications
-<Append-only. `speckit-clarify` adiciona aqui.>
+<Append-only. `speckit-clarify` appends here.>

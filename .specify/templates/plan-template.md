@@ -6,43 +6,43 @@
 
 | Path | Type | Reason |
 |---|---|---|
-| `react/components/Foo.js` | write | <motivo> |
-| `react/utils/bar.ts` | new | <motivo> |
-| `messages/pt.json` | write | <chaves novas> |
+| `react/components/Foo.js` | write | <reason> |
+| `react/utils/bar.ts` | new | <reason> |
+| `messages/pt.json` | write | <new keys> |
 
 ## Order of operations
 
-1. <Primeiro passo, geralmente o que destrava o resto>
-2. <Segundo passo>
+1. <First step, usually the one that unblocks the rest>
+2. <Second step>
 3. ...
 
 ## Test strategy
 
-- **Unit:** <onde, o quê>
-- **Integration:** <onde, o quê — usar fixtures em `react/__mocks__/`>
-- **Manual QA:** <cenários no `yarn start`>
+- **Unit:** <where, what>
+- **Integration:** <where, what — use fixtures under `react/__mocks__/`>
+- **Manual QA:** <scenarios via `yarn start`>
 
 ## i18n plan
 
-- Locales tocados: <lista>
-- Chaves novas: <lista>
-- Fallback strategy: <inglês como default se tradução faltar?>
+- Locales touched: <list>
+- New keys: <list>
+- Fallback strategy: <English as default if translation missing?>
 
 ## Risks
 
-| Risco | Mitigação |
+| Risk | Mitigation |
 |---|---|
-| Backward-compat em `PickupPointsModal` props | <mitigação> |
-| Performance regression no open do modal | <profiling antes/depois> |
-| Locale faltando após merge | `yarn lint:locales` no CI |
+| Backward-compat on `PickupPointsModal` props | <mitigation> |
+| Performance regression when modal opens | <profiling before/after> |
+| Missing locale after merge | `yarn lint:locales` in CI |
 
 ## Constitution checks
 
-- [ ] Princípio 1 (backward-compat) — <ok ou major bump documentado>
-- [ ] Princípio 2 (tested behavior) — <cada mudança tem teste>
-- [ ] Princípio 3 (i18n) — <chaves em todos locales>
-- [ ] Princípio 4 (performance) — <sem regressão de bundle>
-- [ ] Princípio 5 (side-effect free utils) — <utils puros>
+- [ ] Principle 1 (backward-compat) — <ok or major bump documented>
+- [ ] Principle 2 (tested behavior) — <each change has a test>
+- [ ] Principle 3 (i18n) — <keys in every locale>
+- [ ] Principle 4 (performance) — <no bundle regression>
+- [ ] Principle 5 (side-effect free utils) — <utilities are pure>
 
 ## Out of scope
-- <O que esse plan NÃO faz>
+- <What this plan does NOT do>

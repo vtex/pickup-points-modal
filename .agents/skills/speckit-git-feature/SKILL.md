@@ -6,41 +6,41 @@ type: skill
 
 # speckit-git-feature
 
-Cria branch de feature seguindo a convenção do repo.
+Creates a feature branch following the repo's naming convention.
 
-## Quando usar
+## When to use
 
-- Início de qualquer trabalho não-trivial.
-- Antes de `speckit-implement`.
+- At the start of any non-trivial work.
+- Before `speckit-implement`.
 
-## Convenção de naming
+## Naming convention
 
-| Prefixo | Quando usar |
+| Prefix | When to use |
 |---|---|
-| `feat/<slug>` | Feature nova visível ao usuário |
+| `feat/<slug>` | User-visible new feature |
 | `fix/<slug>` | Bug fix |
-| `chore/<slug>` | Tooling, docs, deps sem mudança funcional |
-| `refactor/<slug>` | Refactor sem mudança funcional |
-| `chk-<ticket>` | Ticket Jira da equipe Checkout (formato `chk-NNNN`) |
+| `chore/<slug>` | Tooling, docs, deps without functional change |
+| `refactor/<slug>` | Refactor without functional change |
+| `chk-<ticket>` | Checkout team Jira ticket (`chk-NNNN` format) |
 
-`<slug>` é kebab-case, descritivo, max 5 palavras.
+`<slug>` is kebab-case, descriptive, max 5 words.
 
-## Fluxo
+## Flow
 
 ```sh
 git fetch origin
 git checkout -b feat/<slug> origin/main
 ```
 
-## Validações
+## Validations
 
-- Branch atual antes de criar: idealmente `main` ou `origin/main`.
-- Working tree limpo: pendente? Stash ou commit antes.
-- Existe branch com mesmo slug? Apontar e perguntar.
+- Current branch before creating: ideally `main` or `origin/main`.
+- Working tree clean: anything pending? Stash or commit first.
+- Branch with the same slug exists? Surface it and ask.
 
-## Não fazer
+## Don't
 
-- Não criar branch a partir de uma branch de outra feature ainda não
-  mergeada.
-- Não usar `master` (o repo usa `main`).
-- Não force-push em branch que já tem PR aberto.
+- Don't create a branch off another feature branch that has not been
+  merged yet.
+- Don't use `master` (the repo uses `main`).
+- Don't force-push to a branch that already has an open PR.

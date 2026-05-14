@@ -6,50 +6,50 @@ type: skill
 
 # speckit-implement
 
-Execução das tasks do `tasks.md`. Versão estruturada da skill `implementing`,
-amarrada ao Golden Path Full.
+Execution of the tasks listed in `tasks.md`. Structured variant of the
+`implementing` skill, tied to the Full Golden Path.
 
-## Quando usar
+## When to use
 
-- `specs/<slug>/tasks.md` aprovado.
-- Usuário diz "/speckit-implement" ou "executa as tasks".
+- `specs/<slug>/tasks.md` approved.
+- The user says "/speckit-implement" or "execute the tasks".
 
-## Fluxo
+## Flow
 
-Para cada task em `tasks.md`:
+For each task in `tasks.md`:
 
-1. Marcar como `in_progress` no TodoWrite.
-2. Ler arquivos relevantes.
-3. Editar.
-4. Rodar `yarn lint --fix` no escopo.
-5. Rodar `yarn test` no escopo afetado.
-6. Marcar como `completed`. Só uma task `in_progress` por vez.
+1. Mark it as `in_progress` in TodoWrite.
+2. Read the relevant files.
+3. Edit.
+4. Run `yarn lint --fix` in scope.
+5. Run `yarn test` over the affected scope.
+6. Mark as `completed`. Only one task `in_progress` at a time.
 
-Ao terminar todas:
+When all tasks are done:
 
-- `yarn lint` global
+- `yarn lint` globally
 - `yarn lint:ts`
-- `yarn lint:locales` se mexeu em i18n
+- `yarn lint:locales` if i18n was touched
 - `yarn test`
 - `yarn build`
-- Compor commits com `speckit-git-commit`
-- Abrir PR
+- Compose commits with `speckit-git-commit`
+- Open the PR
 
-## Sinais para pausar e reportar
+## Signals to pause and report
 
-- Teste que existia antes começou a falhar fora do escopo da task.
-- Lint reclama de arquivo que você não tocou (provavelmente regra mudou,
-  reportar antes de fixar massivamente).
-- `yarn build` falha por causa de tipo em código legado JS — escalar.
+- A previously-passing test starts failing outside of the task's scope.
+- Lint complains about a file you did not touch (likely a rule change —
+  surface it before mass-fixing).
+- `yarn build` fails due to types in legacy JS code — escalate.
 
 ## Constitution gates
 
-Antes de abrir PR, validar:
+Before opening the PR, validate:
 
-| Princípio | Check |
+| Principle | Check |
 |---|---|
-| 1 — backward-compat | Props/eventos públicos inalterados (ou major bump documentado). |
-| 2 — tested behavior | Cada task de comportamento tem teste novo. |
-| 3 — i18n | `yarn lint:locales` passa. |
-| 4 — performance | Sem nova lib > 50KB sem dynamic import. |
-| 5 — side-effect free | Novos utils são puros. |
+| 1 — backward-compat | `PickupPointsModal` public props/events unchanged (or major bump documented). |
+| 2 — tested behavior | Each behavior task has a new test. |
+| 3 — i18n | `yarn lint:locales` passes. |
+| 4 — performance | No new dep > 50KB without dynamic import. |
+| 5 — side-effect free | New utilities are pure. |

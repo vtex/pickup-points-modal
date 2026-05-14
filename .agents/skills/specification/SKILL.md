@@ -6,53 +6,53 @@ type: skill
 
 # specification
 
-Use esta skill quando o usuário pedir para "criar uma spec", "escrever um SDD",
-ou referenciar um arquivo em `specs/`. O entregável é um arquivo
-`specs/<feature-slug>/spec.md` com três seções obrigatórias.
+Use this skill when the user asks to "create a spec", "write an SDD", or
+references a file under `specs/`. The deliverable is a
+`specs/<feature-slug>/spec.md` file with three mandatory sections.
 
-## Quando usar
+## When to use
 
-- Feature nova que toca o contrato público do `PickupPointsModal`.
-- Mudança de arquitetura (novo container, novo fluxo de estado).
-- Refactor com impacto cross-cutting (i18n, fetchers, mapa).
+- New feature that touches the public contract of `PickupPointsModal`.
+- Architectural change (new container, new state flow).
+- Refactor with cross-cutting impact (i18n, fetchers, map).
 
-**Não use** para bug fix pontual ou tweak de estilo — vai direto para
-`implementing` ou `speckit-git-commit`.
+**Do not use** for a one-off bug fix or a styling tweak — go straight to
+`implementing` or `speckit-git-commit`.
 
-## Estrutura do entregável
+## Deliverable structure
 
 ```markdown
 # Spec: <feature>
 
 ## Business Context
-- Problema que estamos resolvendo
-- Stakeholders (quem pediu, quem é impactado)
-- Métricas de sucesso
+- Problem being solved
+- Stakeholders (who asked, who is impacted)
+- Success metrics
 
 ## Architectural Decisions
-- Componentes/arquivos afetados
-- Alternativas consideradas + por que foram descartadas
-- Riscos de backward-compatibility (referenciar Principle 1 da constitution)
+- Components/files affected
+- Alternatives considered + why they were dropped
+- Backward-compatibility risk (cite Principle 1 of the constitution)
 
 ## Technical Contract
-- Mudanças em props/eventos
-- Mudanças em fixtures/mocks
-- Plano de testes (golden path + edge cases)
-- Plano de i18n (chaves novas, locales tocados)
-- Critérios de aceite verificáveis
+- Changes to props/events
+- Changes to fixtures/mocks
+- Test plan (golden path + edge cases)
+- i18n plan (new keys, locales touched)
+- Verifiable acceptance criteria
 ```
 
-## Inputs esperados
+## Expected inputs
 
-- Descrição em linguagem natural da feature.
-- Link para ticket Jira/issue se existir.
-- Lista de arquivos suspeitos (se o usuário já investigou).
+- Natural-language description of the feature.
+- Link to a Jira/issue ticket if one exists.
+- List of suspected files (if the user has already investigated).
 
-## Como aplicar
+## How to apply
 
-1. Ler [.specify/memory/constitution.md](../../../.specify/memory/constitution.md)
-   para entender princípios vinculantes.
-2. Ler [AGENTS.md](../../../AGENTS.md) para limites de autonomia.
-3. Esboçar as 3 seções com `TBD` onde faltar input.
-4. Apresentar para o usuário antes de criar o arquivo final.
-5. Não implementar nada — apenas spec.
+1. Read [.specify/memory/constitution.md](../../../.specify/memory/constitution.md)
+   to understand binding principles.
+2. Read [AGENTS.md](../../../AGENTS.md) for autonomy limits.
+3. Sketch the 3 sections with `TBD` markers where input is missing.
+4. Present the draft to the user before creating the final file.
+5. Do not implement anything — spec only.

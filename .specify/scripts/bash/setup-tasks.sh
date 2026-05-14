@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # setup-tasks.sh [slug]
-# Gera tasks.md a partir do template para a feature ativa (ou slug passado).
+# Generates tasks.md from the template for the active feature (or the slug
+# passed as an argument).
 
 set -euo pipefail
 . "$(dirname "$0")/common.sh"
@@ -13,16 +14,16 @@ else
   feature_file="$root/.specify/feature.json"
   require_file "$feature_file"
   slug=$(sed -n 's/.*"slug":"\([^"]*\)".*/\1/p' "$feature_file")
-  [ -n "$slug" ] || die "feature ativa não pôde ser determinada"
+  [ -n "$slug" ] || die "could not determine the active feature"
 fi
 
 target="$root/specs/$slug"
-[ -d "$target" ] || die "specs/$slug não existe"
+[ -d "$target" ] || die "specs/$slug does not exist"
 require_file "$target/plan.md"
 
 if [ -f "$target/tasks.md" ]; then
-  die "specs/$slug/tasks.md já existe"
+  die "specs/$slug/tasks.md already exists"
 fi
 
 cp "$root/.specify/templates/tasks-template.md" "$target/tasks.md"
-printf "criado: specs/%s/tasks.md\n" "$slug"
+printf "created: specs/%s/tasks.md\n" "$slug"

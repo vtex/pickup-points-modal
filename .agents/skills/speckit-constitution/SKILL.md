@@ -6,18 +6,18 @@ type: skill
 
 # speckit-constitution
 
-Use para criar ou editar `.specify/memory/constitution.md`. Esse arquivo é a
-**fonte de verdade vinculante** — sobrescreve qualquer outro doc em caso
-de conflito.
+Use to create or edit `.specify/memory/constitution.md`. This file is the
+**binding source of truth** — it overrides any other doc in case of
+conflict.
 
-## Quando usar
+## When to use
 
-- Primeira vez criando a constituição.
-- Adicionando um novo princípio (minor bump).
-- Revogando ou reescrevendo um princípio (major bump).
-- Atualizando regras de governança.
+- First time creating the constitution.
+- Adding a new principle (minor bump).
+- Revoking or rewriting a principle (major bump).
+- Updating governance rules.
 
-## Estrutura obrigatória
+## Required structure
 
 ```markdown
 # <Project> — Project Constitution
@@ -25,26 +25,26 @@ de conflito.
 **Version** X.Y.Z | **Ratified** YYYY-MM-DD | **Last Amended** YYYY-MM-DD
 
 ## Principles
-### 1. <Nome do princípio>
+### 1. <Principle name>
 - Why: ...
 - How to apply: ...
 
 ## Governance
-- Quem ratifica
-- Como propor mudança
-- Versionamento (SemVer)
-- Auditoria
+- Who ratifies
+- How to propose a change
+- Versioning (SemVer)
+- Audit cadence
 ```
 
-## Regras
+## Rules
 
-- **Sem placeholders.** Nada de `[PROJECT_NAME]`, `[PRINCIPLE_1_NAME]` etc.
-  no arquivo final.
-- **Version sempre presente.** O grep do review (item 9) procura por
+- **No placeholders.** No `[PROJECT_NAME]`, `[PRINCIPLE_1_NAME]`, etc.
+  left in the final file.
+- **Version line always present.** The review script (item 9) greps for
   `**Version** ... **Ratified**`.
-- **Princípios concretos.** Cada um tem `Why` e `How to apply` reais —
-  bullets vazios falham o item 1b por extensão.
+- **Concrete principles.** Each one has real `Why` and `How to apply` —
+  empty bullets will fail item 1b downstream.
 
 ## Template
 
-Veja [.specify/templates/constitution-template.md](../../../.specify/templates/constitution-template.md).
+See [.specify/templates/constitution-template.md](../../../.specify/templates/constitution-template.md).

@@ -1,45 +1,46 @@
 #!/usr/bin/env bash
-# common.sh — funções compartilhadas pelos scripts do SpecKit.
-# Source nos demais scripts:  . "$(dirname "$0")/common.sh"
+# common.sh — shared helpers for SpecKit scripts.
+# Source from sibling scripts:  . "$(dirname "$0")/common.sh"
 
 set -euo pipefail
 
-# Diretório raiz do repo (resolve mesmo se o script foi chamado de outro CWD)
+# Absolute path to the repo root (works even if the script is invoked
+# from a different CWD).
 repo_root() {
   git rev-parse --show-toplevel
 }
 
-# Diretório onde as specs locais vivem (ignorado pelo git)
+# Directory where local-only specs live (git-ignored).
 specs_dir() {
   printf "%s/specs" "$(repo_root)"
 }
 
-# Diretório de estado do SpecKit
+# SpecKit state directory.
 specify_dir() {
   printf "%s/.specify" "$(repo_root)"
 }
 
-# Slugifica um título: "Add awesome feature!" -> "add-awesome-feature"
+# Slugify a title: "Add awesome feature!" -> "add-awesome-feature".
 slugify() {
   printf "%s" "$1" \
     | tr '[:upper:]' '[:lower:]' \
     | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g'
 }
 
-# Imprime no stderr e sai com erro
+# Print to stderr and exit non-zero.
 die() {
   printf "error: %s\n" "$*" >&2
   exit 1
 }
 
-# Garante que o working tree está limpo (sem alterações pendentes)
+# Fail loudly if the working tree has pending changes.
 require_clean_tree() {
   if ! git diff --quiet || ! git diff --cached --quiet; then
-    die "working tree não está limpo — commit ou stash antes"
+    die "working tree is not clean — commit or stash before running"
   fi
 }
 
-# Garante que o arquivo existe; senão morre
+# Assert that a file exists; abort otherwise.
 require_file() {
-  [ -f "$1" ] || die "arquivo obrigatório ausente: $1"
+  [ -f "$1" ] || die "required file missing: $1"
 }

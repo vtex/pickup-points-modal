@@ -6,37 +6,38 @@ type: skill
 
 # speckit-tasks
 
-Transforma um `plan.md` aprovado em um `tasks.md` com itens executáveis
-um-por-um. Pré-requisito imediato do `speckit-implement`.
+Turns an approved `plan.md` into a `tasks.md` of one-at-a-time
+executable items. It is the direct prerequisite for `speckit-implement`.
 
-## Quando usar
+## When to use
 
-- `specs/<slug>/plan.md` aprovado.
-- Pronto para começar a codar.
+- `specs/<slug>/plan.md` approved.
+- Ready to start coding.
 
-## Fluxo
+## Flow
 
-1. Ler `specs/<slug>/plan.md`.
-2. Preencher `specs/<slug>/tasks.md` com tasks do tipo:
-   - **Atômica:** uma task = um conceito mudando (não "implementar tudo").
-   - **Verificável:** termina quando teste X passa ou comportamento Y é
-     observável.
-   - **Ordenada:** dependências explícitas (T2 depende de T1).
-3. Cada task tem: ID, título, arquivos, critério de feito, teste associado.
+1. Read `specs/<slug>/plan.md`.
+2. Fill `specs/<slug>/tasks.md` with tasks that are:
+   - **Atomic:** one task = one concept changing (not "implement
+     everything").
+   - **Verifiable:** done when test X passes or behavior Y is
+     observable.
+   - **Ordered:** explicit dependencies (T2 depends on T1).
+3. Each task has: ID, title, files, done criteria, associated test.
 
-## Tamanho ideal
+## Ideal size
 
-- 3–8 tasks por feature pequena.
-- 8–15 tasks por feature média.
-- Se passar disso, **quebre em sub-features** — provavelmente o plano
-  está muito grande.
+- 3–8 tasks for a small feature.
+- 8–15 tasks for a medium feature.
+- More than that, **break it into sub-features** — the plan is
+  probably too large.
 
 ## Template
 
-Veja [.specify/templates/tasks-template.md](../../../.specify/templates/tasks-template.md).
+See [.specify/templates/tasks-template.md](../../../.specify/templates/tasks-template.md).
 
-## Não fazer
+## Don't
 
-- Não criar task "implementar tudo".
-- Não criar task sem critério de aceite.
-- Não pular escrita de teste em task de mudança de comportamento (princípio 2).
+- Don't create an "implement everything" task.
+- Don't create a task without acceptance criteria.
+- Don't skip writing a test for a behavioral-change task (Principle 2).

@@ -6,49 +6,51 @@ type: skill
 
 # implementing
 
-Use esta skill quando o usuário disser "implementa", "implementa essa spec",
-"implementa specs/<feature>.md", ou pedir execução autônoma a partir de uma
-spec já aprovada.
+Use this skill when the user says "implement it", "implement this spec",
+"implement specs/<feature>.md", or asks for autonomous execution from an
+already-approved spec.
 
-## Pré-requisitos
+## Prerequisites
 
-- `specs/<feature>/spec.md` existe, aprovado pelo usuário.
-- Constituição lida ([.specify/memory/constitution.md](../../../.specify/memory/constitution.md)).
-- AGENTS.md lido para limites de autonomia.
+- `specs/<feature>/spec.md` exists and is approved by the user.
+- Constitution has been read
+  ([.specify/memory/constitution.md](../../../.specify/memory/constitution.md)).
+- AGENTS.md has been read for autonomy limits.
 
-Se algum desses faltar, **pare** e peça para o usuário rodar a skill
-`specification` primeiro.
+If any of these is missing, **stop** and ask the user to run the
+`specification` skill first.
 
-## Fluxo
+## Flow
 
-1. **Branch.** `git checkout -b feat/<feature-slug>` (use `fix/<slug>` para
-   bug fix, `chore/<slug>` para tooling).
-2. **Quebrar em tasks.** Liste 3–8 tasks concretas em TodoWrite.
-3. **Implementar task-a-task.**
-   - Para cada task: editar arquivos → rodar `yarn lint --fix` → rodar
-     `yarn test` no escopo afetado → marcar task completa.
-   - Nunca pule testes. Princípio 2 da constitution.
-4. **Lint & types.** Rode `yarn lint` e `yarn lint:ts` antes de commitar.
-5. **i18n.** Se adicionou string visível, rode `yarn lint:locales`.
-   Princípio 3 da constitution.
-6. **Build.** `yarn build` precisa passar.
-7. **Commit.** Use `speckit-git-commit` para formatar Conventional Commits.
-8. **PR.** Abra com `gh pr create` linkando a spec, princípios afetados,
-   e plano de teste manual.
+1. **Branch.** `git checkout -b feat/<feature-slug>` (use `fix/<slug>`
+   for bug fixes, `chore/<slug>` for tooling).
+2. **Break into tasks.** List 3–8 concrete tasks in TodoWrite.
+3. **Implement task by task.**
+   - For each task: edit files → run `yarn lint --fix` → run
+     `yarn test` in the affected scope → mark task complete.
+   - Never skip tests. Principle 2 of the constitution.
+4. **Lint & types.** Run `yarn lint` and `yarn lint:ts` before
+   committing.
+5. **i18n.** If a visible string was added, run `yarn lint:locales`.
+   Principle 3 of the constitution.
+6. **Build.** `yarn build` must pass.
+7. **Commit.** Use `speckit-git-commit` to format Conventional Commits.
+8. **PR.** Open with `gh pr create`, linking the spec, principles
+   affected, and manual test plan.
 
 ## Autonomy limits
 
-Veja [AGENTS.md](../../../AGENTS.md). Em resumo:
+See [AGENTS.md](../../../AGENTS.md). In short:
 
-- **Não tocar** `manifest.json`, `package.json`, `.travis.yml`,
-  `.github/`, `.vtex/deployment.yaml` sem confirmação explícita.
-- **Não publicar.** `vtex publish` e `npm publish` são manuais.
-- **Não force-push** na branch que já tem PR aberto.
+- **Do not touch** `manifest.json`, `package.json`, `.travis.yml`,
+  `.github/`, `.vtex/deployment.yaml` without explicit confirmation.
+- **Do not publish.** `vtex publish` and `npm publish` are manual.
+- **Do not force-push** to a branch that already has an open PR.
 
-## Quando reportar de volta
+## When to pause and report
 
-Pause e reporte para o usuário quando:
+Pause and report back to the user when:
 
-- O build falhar de um jeito que sugere mudança em dep range.
-- O typecheck encontrar problema em código que você não tocou.
-- Uma decisão de produto/UX não estiver na spec.
+- The build fails in a way that suggests a dependency range change.
+- Typecheck flags an issue in code you did not touch.
+- A product/UX decision is not covered by the spec.

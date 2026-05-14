@@ -6,36 +6,36 @@ type: skill
 
 # speckit-clarify
 
-Gera perguntas focadas para destravar uma spec com TBDs ou ambiguidades.
-Roda entre `speckit-specify` e `speckit-plan`.
+Generates focused questions to unblock a spec with TBDs or ambiguities.
+Runs between `speckit-specify` and `speckit-plan`.
 
-## Quando usar
+## When to use
 
-- `spec.md` tem 2+ `TBD` em campos obrigatórios.
-- Critério de aceite vago ("deve funcionar bem").
-- Stakeholder não foi explícito em edge cases.
+- `spec.md` has 2+ `TBD` markers in required fields.
+- Vague acceptance criteria ("it should just work well").
+- A stakeholder was not explicit about edge cases.
 
-## Fluxo
+## Flow
 
-1. Ler `specs/<slug>/spec.md`.
-2. Identificar lacunas em:
-   - Business Context (quem, por quê, métrica)
-   - Architectural Decisions (alternativas, riscos)
-   - Technical Contract (props, fixtures, i18n, aceite)
-3. Gerar **no máximo 5 perguntas** por iteração, em ordem de impacto.
-4. Aguardar respostas do usuário.
-5. Atualizar `spec.md` com as respostas — preservar o histórico em
-   `## Clarifications` no fim do arquivo.
+1. Read `specs/<slug>/spec.md`.
+2. Identify gaps in:
+   - Business Context (who, why, metric)
+   - Architectural Decisions (alternatives, risks)
+   - Technical Contract (props, fixtures, i18n, acceptance)
+3. Generate **at most 5 questions** per iteration, ordered by impact.
+4. Wait for user replies.
+5. Update `spec.md` with the answers — preserve history under a
+   `## Clarifications` section at the end of the file.
 
-## Perguntas boas
+## Good questions
 
-- Específicas: "O modal deve fechar ao escolher um pickup? Antes ou
-  depois do confirm?"
-- Acionáveis: a resposta muda o plan.
-- Únicas: não repete o que já está respondido na spec.
+- Specific: "Should the modal close when a pickup is chosen? Before or
+  after the confirm step?"
+- Actionable: the answer changes the plan.
+- Unique: not already answered earlier in the spec.
 
-## Perguntas ruins
+## Bad questions
 
-- "Tem mais alguma coisa?"
-- "O que você acha?"
-- Perguntas que o agente pode responder lendo o código.
+- "Anything else?"
+- "What do you think?"
+- Questions the agent could answer by reading the code.

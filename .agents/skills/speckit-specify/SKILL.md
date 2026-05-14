@@ -6,38 +6,39 @@ type: skill
 
 # speckit-specify
 
-Use para transformar uma descrição em linguagem natural em uma `spec.md`
-estruturada. É o primeiro passo do Golden Path Full (SDD).
+Use to turn a natural-language description into a structured `spec.md`.
+It is the first step of the Full Golden Path (SDD).
 
-## Quando usar
+## When to use
 
-- Feature nova solicitada via Jira/Slack.
-- Usuário diz "spec essa feature: ..." ou "/speckit-specify ...".
+- New feature requested via Jira/Slack.
+- The user says "spec this feature: ..." or "/speckit-specify ...".
 
-## Fluxo
+## Flow
 
-1. Criar pasta `specs/<feature-slug>/`.
-2. Rodar `.specify/scripts/bash/create-new-feature.sh <slug>` se existir,
-   senão criar manualmente.
-3. Preencher `spec.md` usando o template em
+1. Create the `specs/<feature-slug>/` folder.
+2. Run `.specify/scripts/bash/create-new-feature.sh <slug>` if available;
+   otherwise create the folder manually.
+3. Fill `spec.md` using the template at
    [.specify/templates/spec-template.md](../../../.specify/templates/spec-template.md).
-4. Marcar campos não esclarecidos como `TBD` — não inventar.
-5. Apresentar para o usuário antes de iniciar `speckit-plan`.
+4. Mark unresolved fields as `TBD` — do not invent answers.
+5. Present the draft to the user before starting `speckit-plan`.
 
-## Inputs mínimos para não retornar TBD em massa
+## Minimum inputs to avoid mass-TBD
 
-- Quem pediu (Jira/PM/stakeholder)?
-- Qual problema do usuário final?
-- Quais arquivos/componentes provavelmente afetados?
+- Who requested it (Jira/PM/stakeholder)?
+- What user-facing problem are we solving?
+- Which files/components are likely affected?
 
 ## Output
 
-`specs/<slug>/spec.md` com seções:
+`specs/<slug>/spec.md` with the sections:
 - Business Context
 - Architectural Decisions
-- Technical Contract (props, fixtures, i18n, testes, aceite)
+- Technical Contract (props, fixtures, i18n, tests, acceptance)
 
-## Importante
+## Important
 
-`/specs` está no `.gitignore` — é diretório local. Não commite specs no
-repo público. Para arquivar, mova para o Confluence interno.
+`/specs` is in `.gitignore` — it is a local-only directory. Do not
+commit specs into this public repo. To archive, move them to the
+internal Confluence space.

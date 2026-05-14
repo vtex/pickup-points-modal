@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # update-agent-context.sh
-# Imprime no stdout um resumo do contexto para colar em um prompt de agente.
-# Lê AGENTS.md, constitution.md e a feature ativa (se houver).
+# Prints a context summary on stdout — useful to paste into an agent prompt.
+# Reads AGENTS.md, constitution.md and the active feature (if any).
 
 set -euo pipefail
 . "$(dirname "$0")/common.sh"

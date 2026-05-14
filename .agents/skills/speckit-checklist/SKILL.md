@@ -6,47 +6,47 @@ type: skill
 
 # speckit-checklist
 
-Gera um checklist de validação para colocar no PR description ou em
-`specs/<slug>/checklist.md`. Não é genérico — é derivado da spec e dos
-princípios da constituição.
+Generates a validation checklist to drop into the PR description or
+into `specs/<slug>/checklist.md`. Not generic — it is derived from the
+spec and the constitution principles.
 
-## Quando usar
+## When to use
 
-- Antes de pedir review humano.
-- Em features que tocam checkout-critical paths.
+- Before requesting human review.
+- On features touching checkout-critical paths.
 
-## Estrutura
+## Structure
 
 ```markdown
 # Checklist — <feature>
 
 ## Pre-merge gates
-- [ ] `yarn lint` passa
-- [ ] `yarn lint:ts` passa
-- [ ] `yarn test` passa
-- [ ] `yarn lint:locales` passa (se mexeu em i18n)
-- [ ] `yarn build` passa
-- [ ] CHANGELOG atualizado se mudança visível
+- [ ] `yarn lint` passes
+- [ ] `yarn lint:ts` passes
+- [ ] `yarn test` passes
+- [ ] `yarn lint:locales` passes (if i18n was touched)
+- [ ] `yarn build` passes
+- [ ] CHANGELOG updated if the change is user-visible
 
 ## Constitution checks
-- [ ] Princípio 1: contrato público preservado ou major bump
-- [ ] Princípio 2: testes cobrem golden path + edge case
-- [ ] Princípio 3: chaves novas em todos os locales
-- [ ] Princípio 4: sem regressão de bundle/TTI
-- [ ] Princípio 5: utils novos são puros
+- [ ] Principle 1: public contract preserved or major bump
+- [ ] Principle 2: tests cover golden path + edge case
+- [ ] Principle 3: new keys present in every locale
+- [ ] Principle 4: no bundle/TTI regression
+- [ ] Principle 5: new utilities are pure
 
 ## Manual QA
-- [ ] Cenário <X> testado no demo (`yarn start`)
-- [ ] Funciona com `searchAddress` vazio
-- [ ] Funciona com 0 pickup points retornados
-- [ ] Funciona em locale `pt-BR` e `en-US`
+- [ ] Scenario <X> tested in the demo (`yarn start`)
+- [ ] Works with empty `searchAddress`
+- [ ] Works with 0 pickup points returned
+- [ ] Works in `pt-BR` and `en-US` locales
 
 ## Rollback plan
-- Branch revertível? <sim/não>
-- Migração de dados? <sim/não>
-- Feature flag? <nome>
+- Branch revertable? <yes/no>
+- Data migration? <yes/no>
+- Feature flag? <name>
 ```
 
 ## Template
 
-Veja [.specify/templates/checklist-template.md](../../../.specify/templates/checklist-template.md).
+See [.specify/templates/checklist-template.md](../../../.specify/templates/checklist-template.md).
