@@ -39,31 +39,17 @@ A ordem importa: o item de cima sobrescreve o de baixo em caso de conflito.
 Todos os comandos abaixo foram verificados como executáveis a partir da raiz
 do repo. **Sempre rode `yarn install` antes da primeira execução.**
 
-```sh
-# Setup
-yarn install
-
-# Lint
-yarn lint
-yarn lint-fix
-
-# Typecheck
-yarn lint:ts
-
-# Tests
-yarn test
-yarn test:coverage
-yarn test:watch
-
-# Build (publica artefatos em lib/)
-yarn build
-
-# Dev server (demo local)
-yarn start
-
-# Formatação
-yarn format
-```
+- `yarn install` — instala dependências (raiz + `react/`).
+- `yarn lint` — roda ESLint em `js,jsx,ts,tsx`.
+- `yarn lint-fix` — ESLint com `--fix`.
+- `yarn lint:ts` — typecheck via `tsc --noEmit -p react/tsconfig.json`.
+- `yarn lint:locales` — `intl-equalizer` em `messages/` (i18n).
+- `yarn test` — Jest no workspace `react/`.
+- `yarn test:coverage` — Jest com coverage.
+- `yarn test:watch` — Jest em watch mode.
+- `yarn build` — build de produção (`lib/` + locales).
+- `yarn start` — `nwb serve-react-demo` (dev server local).
+- `yarn format` — Prettier em `**/*.{ts,tsx,js,jsx,json}`.
 
 ## Expected skills
 
