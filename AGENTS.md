@@ -30,10 +30,11 @@ conflict.
 - [VTEX IO docs](https://developers.vtex.com/docs/guides/vtex-io-documentation) —
   builders, runtime and publish flow.
 - **Product artifacts (L3) — public repo:** this repository is public on
-  GitHub; product vision / one-pager / PRDs live in VTEX's internal
-  Confluence space (Checkout team). Access through
-  `https://vtex.atlassian.net/wiki/spaces/CHK` (restricted) — any product
-  decision must be linked in the PR description.
+  GitHub; product vision / one-pager / PRDs must live in an internal
+  private companion repo or doc space, **not** in this repo. Companion
+  location: `<companion-private-repo TBD>` — to be filled in by the
+  Checkout team. Until set, any product decision driving a PR must be
+  linked in the PR description.
 
 ## Verified commands
 
