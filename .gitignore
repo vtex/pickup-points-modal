@@ -31,6 +31,10 @@ yarn-error.log*
 package-lock.json
 src/
 
-# SpecKit feature directories (local development)
-/specs
+# SpecKit — commit spec.md; ignore ephemeral plan/tasks/analysis and local cache
+specs/**/plan.md
+specs/**/tasks.md
+specs/**/analysis.md
+.specify/cache/
+.specify/.tmp/
 .specify/feature.json
