@@ -1,7 +1,6 @@
 - name: pickup-points-modal
-  referenceId: PLACEHOLDER
-  description: SonarQube scan for pickup-points-modal
   referenceId: V5G7Q14G
+  description: SonarQube scan for pickup-points-modal
   build:
     provider: dkcicd
     pipelines:
