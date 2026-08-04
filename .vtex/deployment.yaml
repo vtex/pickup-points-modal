@@ -8,6 +8,8 @@
         parameters:
           sonarProjectName: pickup-points-modal
           nodeVersion: 20-bookworm
+          nodeCommands:
+            - run test:coverage
         runtime:
           architecture: amd64
         when:
