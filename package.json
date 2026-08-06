@@ -16,7 +16,7 @@
     "lint:locales": "intl-equalizer",
     "lint:ts": "tsc --noEmit -p react/tsconfig.json",
     "test": "yarn --cwd react test",
-    "test:coverage": "yarn --cwd react test --coverage",
+    "test:coverage": "yarn --cwd react install --frozen-lockfile && yarn --cwd react test --coverage",
     "test:watch": "yarn --cwd react test --watch",
     "prepublishOnly": "npm run symlink:remove && npm run symlink && npm run build && npm run symlink:remove",
     "build:link": "npm link && watch 'npm run build' src",

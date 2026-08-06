@@ -1,5 +1,5 @@
 - name: pickup-points-modal
-  referenceId: PLACEHOLDER
+  referenceId: V5G7Q14G
   description: SonarQube scan for pickup-points-modal
   build:
     provider: dkcicd
@@ -8,6 +8,8 @@
         parameters:
           sonarProjectName: pickup-points-modal
           nodeVersion: 20-bookworm
+          nodeCommands:
+            - run test:coverage
         runtime:
           architecture: amd64
         when:
