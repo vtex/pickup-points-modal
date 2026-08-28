@@ -6,6 +6,8 @@ react/node_modules/
 
 # testing
 /coverage
+react/coverage/
+.scannerwork/
 
 # production
 /demo/dist
