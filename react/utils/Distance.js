@@ -9,5 +9,5 @@ export function formatDistance(value, locale) {
 }
 
 function shouldConvertToMiles(locale) {
-  return MILE_COUNTRY_LOCALES.some((country) => locale === country)
+  return MILE_COUNTRY_LOCALES.includes(locale)
 }

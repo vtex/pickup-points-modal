@@ -21,5 +21,5 @@ export function groupByCommonDeliveries(li) {
 export function groupByCommonPickups(li) {
   const selectedSla = li.slas.find((sla) => sla.id === li.selectedSla)
 
-  return `seller-${li.seller}-${selectedSla && selectedSla.id}`
+  return `seller-${li.seller}-${selectedSla?.id}`
 }
