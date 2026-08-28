@@ -7,11 +7,9 @@ interface Props {
 }
 
 const PickupPointHour: React.FC<Props> = (props) => {
-  const hoursNumbers = props.time.split(':').map((t) => parseInt(t, 10)) as [
-    number,
-    number,
-    number
-  ]
+  const hoursNumbers = props.time
+    .split(':')
+    .map((t) => Number.parseInt(t, 10)) as [number, number, number]
 
   const time = new Date().setHours(...hoursNumbers)
 

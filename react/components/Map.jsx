@@ -111,7 +111,7 @@ class Map extends Component {
 
     const externalLocations = filteredExternalPickupPoints
       ?.map((pickup) => pickup.address.geoCoordinates)
-      .filter((item) => item)
+      .filter(Boolean)
 
     const hasAddressCoords = address?.geoCoordinates.value.length !== 0
 
