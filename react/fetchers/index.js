@@ -12,11 +12,7 @@ axiosRetry(axios, { retries: 2 })
 
 function getRootPath() {
   return (
-    window.__RUNTIME__.rootPath ||
-    (window.vtex &&
-      window.vtex.renderRuntime &&
-      window.vtex.renderRuntime.rootPath) ||
-    ''
+    window.__RUNTIME__.rootPath || window.vtex?.renderRuntime?.rootPath || ''
   )
 }
 
@@ -114,8 +110,7 @@ export function updateShippingData(
     logisticsInfoWithPickupSelected
   )
 
-  const defaultDeliverySla =
-    firstItemWithSelectedDelivery && firstItemWithSelectedDelivery.selectedSla
+  const defaultDeliverySla = firstItemWithSelectedDelivery?.selectedSla
 
   const logisticsInfoWithDefaultDeliverySla =
     logisticsInfoWithPickupSelected.map((li) => {
@@ -143,8 +138,5 @@ export function updateShippingData(
     logisticsInfo: logisticsInfoWithDefaultDeliverySla,
   }
 
-  return (
-    window.vtexjs &&
-    window.vtexjs.checkout.sendAttachment('shippingData', shippingData)
-  )
+  return window.vtexjs?.checkout.sendAttachment('shippingData', shippingData)
 }
