@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- SonarQube scanner configuration (`sonar-project.properties`), scoping analysis to `react/` and excluding generated coverage artifacts.
+
+### Fixed
+- Jest coverage report is now normalized to repo-root-relative paths so SonarQube can resolve it.
+
 ## [3.8.3] - 2024-01-04
 
 ### Fixed
