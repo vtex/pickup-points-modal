@@ -27,7 +27,7 @@ class Button extends Component {
         break
     }
 
-    style += !inline ? `${styles.block} pkp-modal-btn-block ` : ''
+    style += inline ? '' : `${styles.block} pkp-modal-btn-block `
     style += large ? `${styles.lg} pkp-modal-btn-lg ` : ''
     style += disabled ? `${styles.disabled} pkp-modal-btn-block ` : ''
 
