@@ -131,18 +131,14 @@ class PickupPointDetails extends Component {
     const { unavailableItems, items, pickupPointInfo } = this.state
 
     const businessHours =
-      !pickupPointInfo ||
-      !pickupPointInfo.businessHours ||
+      !pickupPointInfo?.businessHours ||
       pickupPointInfo.businessHours.length === 0
         ? null
         : pickupPointInfo.businessHours
 
-    const hasAditionalInfo =
-      selectedPickupPoint.pickupStoreInfo &&
-      selectedPickupPoint.pickupStoreInfo.additionalInfo
+    const hasAditionalInfo = selectedPickupPoint.pickupStoreInfo?.additionalInfo
 
-    const shouldShowSelectPickupButton =
-      selectedPickupPoint && selectedPickupPoint.pickupStoreInfo
+    const shouldShowSelectPickupButton = selectedPickupPoint?.pickupStoreInfo
 
     const confirmButtonId =
       selectedPickupPoint &&
@@ -151,11 +147,9 @@ class PickupPointDetails extends Component {
         .split(' ')
         .join('-')}`
 
-    const pickupIndex =
-      bestPickupOptions &&
-      bestPickupOptions
-        .map((pickupPoint) => pickupPoint.id || pickupPoint.pickupPointId)
-        .indexOf(selectedPickupPoint.id || selectedPickupPoint.pickupPointId)
+    const pickupIndex = bestPickupOptions
+      ?.map((pickupPoint) => pickupPoint.id || pickupPoint.pickupPointId)
+      .indexOf(selectedPickupPoint.id || selectedPickupPoint.pickupPointId)
 
     const isFirst = pickupIndex === 0
     const isLast =
