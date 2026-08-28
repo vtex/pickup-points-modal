@@ -23,6 +23,7 @@ class Geolocation extends Component {
   unsubscribeGetCurrentPosition = null
   unsubscribeGetAddressByGeolocation = null
   startTime = null
+  contextValue = null
 
   constructor(props) {
     super(props)
@@ -209,18 +210,32 @@ class Geolocation extends Component {
     }
   }
 
-  render() {
-    const { children } = this.props
+  // Memoizes the context value so its identity only changes when one of its
+  // members actually changes. `handleCurrentPosition` is a class property, so
+  // its identity is already stable for the lifetime of the instance.
+  getContextValue = () => {
     const { isLoadingGeolocation, permissionStatus } = this.state
 
+    if (
+      !this.contextValue ||
+      this.contextValue.isLoadingGeolocation !== isLoadingGeolocation ||
+      this.contextValue.permissionStatus !== permissionStatus
+    ) {
+      this.contextValue = {
+        getCurrentPosition: this.handleCurrentPosition,
+        isLoadingGeolocation,
+        permissionStatus,
+      }
+    }
+
+    return this.contextValue
+  }
+
+  render() {
+    const { children } = this.props
+
     return (
-      <GeolocationContext.Provider
-        value={{
-          getCurrentPosition: this.handleCurrentPosition,
-          isLoadingGeolocation,
-          permissionStatus,
-        }}
-      >
+      <GeolocationContext.Provider value={this.getContextValue()}>
         {children}
       </GeolocationContext.Provider>
     )
