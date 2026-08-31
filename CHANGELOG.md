@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - SonarQube scanner configuration (`sonar-project.properties`), scoping analysis to `react/` and excluding generated coverage artifacts.
+- Unit tests for the utility layer, taking `react/utils` from 67% to 95.7% line coverage. `AddressUtils`, `SlasUtils`, `Distance` and `GetString` had no tests at all.
 
 ### Fixed
 - Jest coverage report is now normalized to repo-root-relative paths so SonarQube can resolve it.
