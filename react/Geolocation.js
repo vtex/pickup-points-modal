@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { GeolocationContext } from './geolocationContext'
 import { injectState } from './modalStateContext'
 import { searchPickupAddressByGeolocationEvent } from './utils/metrics'
+import memoizeOne from './utils/memoizeOne'
 import {
   getCurrentPosition,
   handleGetAddressByGeolocation,
@@ -23,13 +24,14 @@ class Geolocation extends Component {
   unsubscribeGetCurrentPosition = null
   unsubscribeGetAddressByGeolocation = null
   startTime = null
-  contextValue = null
-  // Seeded with the same values the constructor puts in state, so each field
-  // carries the type it will hold. Initialising them to null instead would
-  // make `memoizedIsLoadingGeolocation !== isLoadingGeolocation` a null-vs-
-  // boolean comparison that is trivially always true.
-  memoizedIsLoadingGeolocation = false
-  memoizedPermissionStatus = null
+
+  // `handleCurrentPosition` is a class property, so its identity is already
+  // stable for the lifetime of the instance.
+  getContextValue = memoizeOne((isLoadingGeolocation, permissionStatus) => ({
+    getCurrentPosition: this.handleCurrentPosition,
+    isLoadingGeolocation,
+    permissionStatus,
+  }))
 
   constructor(props) {
     super(props)
@@ -216,34 +218,14 @@ class Geolocation extends Component {
     }
   }
 
-  // Memoizes the context value so its identity only changes when one of its
-  // members actually changes. `handleCurrentPosition` is a class property, so
-  // its identity is already stable for the lifetime of the instance.
-  getContextValue = () => {
-    const { isLoadingGeolocation, permissionStatus } = this.state
-
-    if (
-      this.contextValue === null ||
-      this.memoizedIsLoadingGeolocation !== isLoadingGeolocation ||
-      this.memoizedPermissionStatus !== permissionStatus
-    ) {
-      this.memoizedIsLoadingGeolocation = isLoadingGeolocation
-      this.memoizedPermissionStatus = permissionStatus
-      this.contextValue = {
-        getCurrentPosition: this.handleCurrentPosition,
-        isLoadingGeolocation,
-        permissionStatus,
-      }
-    }
-
-    return this.contextValue
-  }
-
   render() {
     const { children } = this.props
+    const { isLoadingGeolocation, permissionStatus } = this.state
 
     return (
-      <GeolocationContext.Provider value={this.getContextValue()}>
+      <GeolocationContext.Provider
+        value={this.getContextValue(isLoadingGeolocation, permissionStatus)}
+      >
         {children}
       </GeolocationContext.Provider>
     )
