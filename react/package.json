@@ -11,7 +11,8 @@
     "removeMocks": "rm -rf lib/**/__mocks__ && rm -rf lib/__mocks__ && rm -rf dist",
     "addLocales": "cp -R -f react/locales/ lib/locales/",
     "postreleasy": "npm publish --access public",
-    "test": "vtex-test-tools test"
+    "test": "vtex-test-tools test",
+    "test:coverage": "vtex-test-tools test --coverage"
   },
   "keywords": [
     "react-component",
