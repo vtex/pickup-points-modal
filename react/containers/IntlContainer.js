@@ -75,7 +75,7 @@ class IntlContainer extends Component {
       .catch((error_) => {
         console.error(error_)
 
-        return Promise.reject(error_)
+        throw error_
       })
   }
 

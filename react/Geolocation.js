@@ -24,6 +24,8 @@ class Geolocation extends Component {
   unsubscribeGetAddressByGeolocation = null
   startTime = null
   contextValue = null
+  memoizedIsLoadingGeolocation = null
+  memoizedPermissionStatus = null
 
   constructor(props) {
     super(props)
@@ -217,10 +219,12 @@ class Geolocation extends Component {
     const { isLoadingGeolocation, permissionStatus } = this.state
 
     if (
-      !this.contextValue ||
-      this.contextValue.isLoadingGeolocation !== isLoadingGeolocation ||
-      this.contextValue.permissionStatus !== permissionStatus
+      this.contextValue === null ||
+      this.memoizedIsLoadingGeolocation !== isLoadingGeolocation ||
+      this.memoizedPermissionStatus !== permissionStatus
     ) {
+      this.memoizedIsLoadingGeolocation = isLoadingGeolocation
+      this.memoizedPermissionStatus = permissionStatus
       this.contextValue = {
         getCurrentPosition: this.handleCurrentPosition,
         isLoadingGeolocation,
