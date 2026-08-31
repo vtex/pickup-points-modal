@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.8.4] - 2026-08-31
+
 ### Added
 - SonarQube scanner configuration (`sonar-project.properties`), scoping analysis to `react/` and excluding generated coverage artifacts.
 - Unit tests for the utility layer, taking `react/utils` from 67% to 95.7% line coverage. `AddressUtils`, `SlasUtils`, `Distance` and `GetString` had no tests at all.
