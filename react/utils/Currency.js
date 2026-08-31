@@ -42,7 +42,7 @@ export function formatNumber({ value, storePreferencesData }) {
 
   if (!value) return null
 
-  value = value && value.toFixed(1)
+  value = value?.toFixed(1)
 
   const valueDividedInParts = value.split('.')
 

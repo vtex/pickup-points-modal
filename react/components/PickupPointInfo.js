@@ -31,9 +31,7 @@ class PickupPointInfo extends Component {
         props.pickupPoint.id,
         props.sellerId
       ),
-      info:
-        (props.pickupPoint && props.pickupPoint.pickupStoreInfo) ||
-        props.pickupPoint,
+      info: props.pickupPoint?.pickupStoreInfo || props.pickupPoint,
       distance: props.pickupPoint.pickupDistance || props.pickupPoint.distance,
     }
   }
@@ -47,9 +45,7 @@ class PickupPointInfo extends Component {
           this.props.pickupPoint.id,
           this.props.sellerId
         ),
-        info:
-          (this.props.pickupPoint && this.props.pickupPoint.pickupStoreInfo) ||
-          this.props.pickupPoint,
+        info: this.props.pickupPoint?.pickupStoreInfo || this.props.pickupPoint,
         distance:
           this.props.pickupPoint.pickupDistance ||
           this.props.pickupPoint.distance,
@@ -81,8 +77,7 @@ class PickupPointInfo extends Component {
   }
 
   handlePickupModal = () =>
-    this.props.onClickPickupModal &&
-    this.props.onClickPickupModal(this.props.liPackage)
+    this.props.onClickPickupModal?.(this.props.liPackage)
 
   handleKeyDown = (evt) => {
     if (evt.key === 'Enter' || evt.keyCode === 13) {
@@ -114,7 +109,7 @@ class PickupPointInfo extends Component {
 
     const sholdShowUnavailableMarker = !isList && !pickupPoint.pickupStoreInfo
     const sholdShowSearchMarker = isList && !pickupPoint.pickupStoreInfo
-    const shouldShowEstimate = pickupPoint && pickupPoint.shippingEstimate
+    const shouldShowEstimate = pickupPoint?.shippingEstimate
     const isBestPickupPointAndAvailable =
       pickupPoint.pickupStoreInfo &&
       (isBestPickupPoint || (isSelectedBestPickupPoint && !isList))
@@ -224,9 +219,9 @@ class PickupPointInfo extends Component {
               className={`${styles.pickupPointPrice} pkpmodal-pickup-point-price`}
             >
               {translate(intl, 'price', {
-                value: pickupPoint && pickupPoint.price,
+                value: pickupPoint?.price,
                 formattedPrice: formatCurrency({
-                  value: pickupPoint && pickupPoint.price,
+                  value: pickupPoint?.price,
                   storePreferencesData,
                 }),
               })}
@@ -236,7 +231,7 @@ class PickupPointInfo extends Component {
                 className={`${styles.pickupPointSla} pkpmodal-pickup-point-sla`}
               >
                 <TranslateEstimate
-                  shippingEstimate={pickupPoint && pickupPoint.shippingEstimate}
+                  shippingEstimate={pickupPoint?.shippingEstimate}
                   isPickup
                 />
               </span>

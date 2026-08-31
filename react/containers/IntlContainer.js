@@ -39,7 +39,7 @@ class IntlContainer extends Component {
   }
 
   getBaseLocale(locale) {
-    return locale.indexOf('-') !== -1 ? locale.split('-')[0] : locale
+    return locale.includes('-') ? locale.split('-')[0] : locale
   }
 
   handleLocaleChange = (e, locale) => {
@@ -72,10 +72,10 @@ class IntlContainer extends Component {
           )
         }
       )
-      .catch((event) => {
-        console.error(event)
+      .catch((error_) => {
+        console.error(error_)
 
-        return Promise.reject(event)
+        throw error_
       })
   }
 

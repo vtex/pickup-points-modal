@@ -22,12 +22,12 @@ class PickupSidebar extends Component {
     const { city, postalCode, neighborhood, street } = searchAddress
 
     return (
-      (street && street.value) ||
+      street?.value ||
       (city.value &&
         neighborhood.value &&
         `${city.value} > ${neighborhood.value}`) ||
-      (city && city.value) ||
-      (postalCode && postalCode.value)
+      city?.value ||
+      postalCode?.value
     )
   }
 

@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Jest coverage report is now normalized to repo-root-relative paths so SonarQube can resolve it.
+- Resolved 38 SonarQube findings across `react/`: optional chaining for null-guard chains, a dead assignment in `Images.js`, `.includes()` over `.indexOf()`/`.some()` existence checks, `Number.parseInt`/`Number.parseFloat`, `Date.now()`, `filter(Boolean)`, a stable list key in `PickupBusinessHours`, and a memoized geolocation context value that no longer re-renders every consumer on each render.
 
 ## [3.8.3] - 2024-01-04
 

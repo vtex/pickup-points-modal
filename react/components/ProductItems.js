@@ -10,8 +10,8 @@ function createKey(firstLogisticsInfo, selectedSlaItem) {
   return (
     firstLogisticsInfo.itemIndex +
     firstLogisticsInfo.itemId +
-    (selectedSlaItem && selectedSlaItem.id) +
-    (selectedSlaItem && selectedSlaItem.shippingEstimate)
+    selectedSlaItem?.id +
+    selectedSlaItem?.shippingEstimate
   )
 }
 
@@ -32,9 +32,7 @@ class ProductItems extends Component {
                 <p>
                   <TranslateEstimate
                     shippingEstimate={
-                      itemsPackage &&
-                      itemsPackage.selectedSlaItem &&
-                      itemsPackage.selectedSlaItem.shippingEstimate
+                      itemsPackage?.selectedSlaItem?.shippingEstimate
                     }
                     isPickup
                   />

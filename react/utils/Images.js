@@ -6,7 +6,7 @@ const baseUrlRegex = new RegExp(/.+ids\/([a-zA-Z0-9]+)(?:-(\d+)-(\d+)|)\//)
 const sizeRegex = new RegExp(/-(\d+)-(\d+)/)
 
 function cleanImageUrl(imageUrl) {
-  let resizedImageUrl = imageUrl
+  let resizedImageUrl
   const result = baseUrlRegex.exec(imageUrl) || []
 
   if (result.length > 0) {

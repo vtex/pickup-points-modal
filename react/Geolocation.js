@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { GeolocationContext } from './geolocationContext'
 import { injectState } from './modalStateContext'
 import { searchPickupAddressByGeolocationEvent } from './utils/metrics'
+import memoizeOne from './utils/memoizeOne'
 import {
   getCurrentPosition,
   handleGetAddressByGeolocation,
@@ -23,6 +24,14 @@ class Geolocation extends Component {
   unsubscribeGetCurrentPosition = null
   unsubscribeGetAddressByGeolocation = null
   startTime = null
+
+  // `handleCurrentPosition` is a class property, so its identity is already
+  // stable for the lifetime of the instance.
+  getContextValue = memoizeOne((isLoadingGeolocation, permissionStatus) => ({
+    getCurrentPosition: this.handleCurrentPosition,
+    isLoadingGeolocation,
+    permissionStatus,
+  }))
 
   constructor(props) {
     super(props)
@@ -215,11 +224,7 @@ class Geolocation extends Component {
 
     return (
       <GeolocationContext.Provider
-        value={{
-          getCurrentPosition: this.handleCurrentPosition,
-          isLoadingGeolocation,
-          permissionStatus,
-        }}
+        value={this.getContextValue(isLoadingGeolocation, permissionStatus)}
       >
         {children}
       </GeolocationContext.Provider>

@@ -150,9 +150,9 @@ const PickupBusinessHours: React.FC<Props & InjectedIntlProps> = ({
       </h3>
       <table className={`${styles.modalDetailsHours} pkpmodal-details-hours`}>
         <tbody>
-          {formattedBusinessHours.map((day, i) => {
+          {formattedBusinessHours.map((day) => {
             return (
-              <tr key={i}>
+              <tr key={day.number}>
                 <td
                   className={`${styles.modalDetailsHoursDay} pkpmodal-details-hours-day`}
                 >

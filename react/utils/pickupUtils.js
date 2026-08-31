@@ -14,9 +14,7 @@ function getLogisticsInfoItem(logisticsInfo, index) {
 }
 
 function hasPickupPoint(logisticsInfo, pickupPointId) {
-  return (
-    logisticsInfo && logisticsInfo.slas.some((sla) => sla.id === pickupPointId)
-  )
+  return logisticsInfo?.slas.some((sla) => sla.id === pickupPointId)
 }
 
 function getPickupPointId(pickupPoint) {
@@ -36,7 +34,7 @@ export function getUnavailableItemsAmount(
     sellerId
   )
 
-  return unavailableItems && unavailableItems.length
+  return unavailableItems?.length
 }
 
 export function getUnavailableItemsByPickup(
