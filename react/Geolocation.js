@@ -24,7 +24,11 @@ class Geolocation extends Component {
   unsubscribeGetAddressByGeolocation = null
   startTime = null
   contextValue = null
-  memoizedIsLoadingGeolocation = null
+  // Seeded with the same values the constructor puts in state, so each field
+  // carries the type it will hold. Initialising them to null instead would
+  // make `memoizedIsLoadingGeolocation !== isLoadingGeolocation` a null-vs-
+  // boolean comparison that is trivially always true.
+  memoizedIsLoadingGeolocation = false
   memoizedPermissionStatus = null
 
   constructor(props) {
