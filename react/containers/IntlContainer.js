@@ -32,7 +32,7 @@ class IntlContainer extends Component {
     this.handleLocaleChange({}, this.props.locale)
   }
 
-  // eslint-disable-next-line
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (!nextProps.locale) return
     this.handleLocaleChange({}, nextProps.locale)
