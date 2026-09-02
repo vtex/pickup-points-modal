@@ -62,10 +62,7 @@ class ModalState extends Component {
   }
 
   componentDidMount() {
-    const thisAddressCoords =
-      this.props.address &&
-      this.props.address.geoCoordinates &&
-      this.props.address.geoCoordinates.value
+    const thisAddressCoords = this.props.address?.geoCoordinates?.value
 
     if (thisAddressCoords && thisAddressCoords.length > 0) {
       this.getExternalPickupOptions(thisAddressCoords)
@@ -90,8 +87,7 @@ class ModalState extends Component {
       selectedPickupPoint,
     } = this.state
 
-    const thisAddressCoords =
-      address && address.geoCoordinates && address.geoCoordinates.value
+    const thisAddressCoords = address?.geoCoordinates?.value
 
     const prevAddressCoords = prevProps.address.geoCoordinates.value
 
@@ -418,9 +414,9 @@ class ModalState extends Component {
     }))
 
     if (pickupPoint) {
-      const availablePickupLI =
-        data.logisticsInfo &&
-        data.logisticsInfo.find((li) => findSla(li, pickupPoint))
+      const availablePickupLI = data.logisticsInfo?.find((li) =>
+        findSla(li, pickupPoint)
+      )
 
       const availablePickupSLA =
         availablePickupLI && findSla(availablePickupLI, pickupPoint)

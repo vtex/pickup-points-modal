@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Resolved 10 type-dependent SonarQube findings across `react/ModalState.js`, `react/PickupPointsModal.js` and `react/components/GoogleMarker.tsx`: optional-chaining conversions checked individually for falsy-but-defined divergence, and a concise `\d` regex class.
+
 ## [3.8.5] - 2026-08-31
 
 ## [3.8.4] - 2026-08-31
