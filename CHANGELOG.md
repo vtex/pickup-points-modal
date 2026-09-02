@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Resolved 31 Tier-3 SonarQube findings across `react/components`, `react/assets`, `react/containers` and `react/__mocks__`: dead PropTypes verified unused via a whole-tree grep (parents, HOC/context injection), unscoped `eslint-disable` comments either named or removed after confirming they suppressed nothing, WCAG AA text-contrast fixes on five components/CSS files, a duplicate CSS selector merge, and a `margin` shorthand that was silently zeroing a `margin-bottom`.
+
 ## [3.8.5] - 2026-08-31
 
 ## [3.8.4] - 2026-08-31
