@@ -37,11 +37,7 @@ class PickupPointsModal extends Component {
 
     this.state = {
       addressQuery: {
-        value:
-          (props.searchAddress &&
-            props.searchAddress.street &&
-            props.searchAddress.street.value) ||
-          '',
+        value: props.searchAddress?.street?.value || '',
       },
       isMounted: false,
       mapStatus: HIDE_MAP,
