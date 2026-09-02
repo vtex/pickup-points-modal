@@ -36,7 +36,7 @@ class Button extends Component {
 }
 
 Button.propTypes = {
-  disabled: PropTypes.bool, // eslint-disable-line
+  disabled: PropTypes.bool,
   inline: PropTypes.bool, // eslint-disable-line
   kind: PropTypes.string,
   large: PropTypes.bool, // eslint-disable-line
