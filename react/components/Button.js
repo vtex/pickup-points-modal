@@ -39,7 +39,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   inline: PropTypes.bool,
   kind: PropTypes.string,
-  large: PropTypes.bool, // eslint-disable-line
+  large: PropTypes.bool,
   moreClassName: PropTypes.string,
   title: PropTypes.string,
 }
