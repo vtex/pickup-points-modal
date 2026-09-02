@@ -244,7 +244,6 @@ class PickupPointInfo extends Component {
 }
 
 PickupPointInfo.defaultProps = {
-  showAddress: true,
   isBestPickupPoint: false,
 }
 
@@ -264,7 +263,6 @@ PickupPointInfo.propTypes = {
   shouldUseMaps: PropTypes.bool,
   setShouldSearchArea: PropTypes.func.isRequired,
   setHoverPickupPoint: PropTypes.func.isRequired,
-  showAddress: PropTypes.bool,
   storePreferencesData: PropTypes.object.isRequired,
   togglePickupDetails: PropTypes.func,
 }
