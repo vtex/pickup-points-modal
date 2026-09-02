@@ -107,7 +107,6 @@ SidebarStateHandler.propTypes = {
   sellerId: PropTypes.string,
   shouldUseMaps: PropTypes.bool.isRequired,
   styles: PropTypes.object.isRequired,
-  selectedPickupPoint: PropTypes.object,
   storePreferencesData: PropTypes.object.isRequired,
 }
 
