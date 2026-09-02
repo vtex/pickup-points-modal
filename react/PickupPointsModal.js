@@ -144,8 +144,8 @@ class PickupPointsModal extends Component {
 
       return {
         ...address.postalCode,
-        value: validatedPostalCode && validatedPostalCode.value,
-        valid: validatedPostalCode && validatedPostalCode.valid,
+        value: validatedPostalCode?.value,
+        valid: validatedPostalCode?.valid,
         visited: null,
       }
     }
