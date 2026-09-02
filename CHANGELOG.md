@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Resolved 13 further SonarQube findings in `react/`: optional chaining for eleven `a && a.b` guard chains across `ModalState`, `PickupPointsModal` and `GoogleMarker`, `\d` for a verbose `[0-9]` class in the ARG postal-code regex, and a memoized `ModalStateContext` value so consumers no longer re-render on every parent render.
+
 ## [3.8.5] - 2026-08-31
 
 ## [3.8.4] - 2026-08-31
