@@ -261,7 +261,6 @@ PickupPointInfo.propTypes = {
   selectedRules: PropTypes.object.isRequired,
   sellerId: PropTypes.any,
   setSelectedPickupPoint: PropTypes.func.isRequired,
-  setActiveSidebarState: PropTypes.func.isRequired,
   shouldUseMaps: PropTypes.bool,
   setShouldSearchArea: PropTypes.func.isRequired,
   setHoverPickupPoint: PropTypes.func.isRequired,
