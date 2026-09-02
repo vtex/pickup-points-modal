@@ -39,7 +39,7 @@ SearchingState.defaultProps = {
 }
 
 SearchingState.propTypes = {
-  isFullPage: PropTypes.bool.isRequired,
+  isFullPage: PropTypes.bool,
   activeState: PropTypes.string,
   activeSidebarState: PropTypes.string,
   intl: intlShape.isRequired,
