@@ -22,8 +22,8 @@
 .pickupViewOptionActive:hover,
 .pickupViewOptionActive:active,
 .pickupViewOptionActive:focus {
-  border: 1px solid #357edd;
-  background: #357edd;
+  border: 1px solid #3071c7;
+  background: #3071c7;
   color: #fff;
   text-decoration: none;
   text-shadow: none;
