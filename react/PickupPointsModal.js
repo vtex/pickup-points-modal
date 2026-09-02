@@ -105,11 +105,8 @@ class PickupPointsModal extends Component {
   getPostalCodeValue = (address) => {
     // TODO move this to Address Form
     if (
-      address &&
-      address.country &&
-      address.country.value === 'ARG' &&
-      address.postalCode &&
-      address.postalCode.value
+      address?.country?.value === 'ARG' &&
+      address?.postalCode?.value
     ) {
       const corePostalCode = address.postalCode.value.match(/([0-9]{4})/g)
 
