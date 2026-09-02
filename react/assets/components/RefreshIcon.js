@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
 class RefreshIcon extends PureComponent {
   render() {
@@ -20,6 +21,11 @@ class RefreshIcon extends PureComponent {
       </svg>
     )
   }
+}
+
+RefreshIcon.propTypes = {
+  /** CSS class(es) applied to the SVG root element */
+  classes: PropTypes.string,
 }
 
 export default RefreshIcon

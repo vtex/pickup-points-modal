@@ -79,10 +79,11 @@
   background: #fff;
   border: 0;
   border-left: 1px solid #eee;
-  color: #2d78f6;
+  color: #2460c5;
   display: flex;
   flex: none;
   height: 100%;
+  opacity: 0.9;
   padding: 10px 16px;
   position: absolute;
   right: 0;
@@ -90,12 +91,8 @@
   transition: 0.256s ease-in;
 }
 
-.askGeolocationBtn {
-  opacity: 0.9;
-}
-
 .askGeolocationBtn:hover {
-  color: #2d78f6;
+  color: #2460c5;
   background: #fdfdfd;
   opacity: 1;
 }

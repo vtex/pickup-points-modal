@@ -194,7 +194,7 @@ SearchForm.defaultProps = {
 SearchForm.propTypes = {
   Input: PropTypes.func,
   address: AddressShapeWithValidation,
-  askForGeolocation: PropTypes.bool, // eslint-disable-line
+  askForGeolocation: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
   googleMaps: PropTypes.object,
   getCurrentPosition: PropTypes.func,
   intl: intlShape.isRequired,
@@ -208,10 +208,7 @@ SearchForm.propTypes = {
   placeholder: PropTypes.string,
   permissionStatus: PropTypes.string,
   rules: PropTypes.object,
-  setActiveState: PropTypes.func,
-  setGeolocationStatus: PropTypes.func,
   setGeolocationFrom: PropTypes.func,
-  status: PropTypes.string,
   shipsTo: PropTypes.array,
 }
 
