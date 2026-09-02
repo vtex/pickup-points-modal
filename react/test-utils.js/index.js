@@ -8,10 +8,7 @@ import { SIDEBAR } from '../constants/index.js'
 
 const renderWithIntl = (node) => {
   return render(
-    <IntlProvider
-      locale="pt"
-      messages={{ ...messages, 'country.BRA': 'BRA' }}
-    >
+    <IntlProvider locale="pt" messages={{ ...messages, 'country.BRA': 'BRA' }}>
       {node}
     </IntlProvider>
   )
