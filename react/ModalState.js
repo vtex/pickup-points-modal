@@ -88,8 +88,7 @@ class ModalState extends Component {
       selectedPickupPoint,
     } = this.state
 
-    const thisAddressCoords =
-      address && address.geoCoordinates && address.geoCoordinates.value
+    const thisAddressCoords = address?.geoCoordinates?.value
 
     const prevAddressCoords = prevProps.address.geoCoordinates.value
 
