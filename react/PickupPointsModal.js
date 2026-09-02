@@ -160,10 +160,7 @@ class PickupPointsModal extends Component {
       ...addValidation(
         newAddress({
           ...address,
-          country:
-            searchAddress &&
-            searchAddress.country &&
-            searchAddress.country.value,
+          country: searchAddress?.country?.value,
         })
       ),
       neighborhood: address.neighborhood || NULL_VALUE,
