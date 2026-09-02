@@ -256,7 +256,6 @@ PickupPointInfo.propTypes = {
   items: PropTypes.any,
   liPackage: PropTypes.object,
   logisticsInfo: PropTypes.any,
-  onChangeActivePickupPointId: PropTypes.func,
   onClickPickupModal: PropTypes.func,
   pickupPoint: PropTypes.object.isRequired,
   selectedRules: PropTypes.object.isRequired,
