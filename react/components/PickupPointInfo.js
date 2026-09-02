@@ -264,7 +264,6 @@ PickupPointInfo.propTypes = {
   setShouldSearchArea: PropTypes.func.isRequired,
   setHoverPickupPoint: PropTypes.func.isRequired,
   storePreferencesData: PropTypes.object.isRequired,
-  togglePickupDetails: PropTypes.func,
 }
 
 export default injectState(injectIntl(PickupPointInfo))
