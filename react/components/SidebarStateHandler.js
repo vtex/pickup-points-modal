@@ -103,7 +103,6 @@ SidebarStateHandler.propTypes = {
   changeActiveSLAOption: PropTypes.func.isRequired,
   onClosePickupPointsModal: PropTypes.func.isRequired,
   items: PropTypes.array.isRequired,
-  pickupOptions: PropTypes.array.isRequired,
   rules: PropTypes.object.isRequired,
   sellerId: PropTypes.string,
   shouldUseMaps: PropTypes.bool.isRequired,
