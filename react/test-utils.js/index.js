@@ -40,7 +40,7 @@ const renderWithModalState = (node) => {
     >
       <IntlProvider
         locale="pt"
-        messages={{ ...messages, ...{ 'country.BRA': 'BRA' } }}
+        messages={{ ...messages, 'country.BRA': 'BRA' }}
       >
         {node}
       </IntlProvider>
