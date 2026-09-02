@@ -414,9 +414,9 @@ class ModalState extends Component {
     }))
 
     if (pickupPoint) {
-      const availablePickupLI =
-        data.logisticsInfo &&
-        data.logisticsInfo.find((li) => findSla(li, pickupPoint))
+      const availablePickupLI = data.logisticsInfo?.find((li) =>
+        findSla(li, pickupPoint)
+      )
 
       const availablePickupSLA =
         availablePickupLI && findSla(availablePickupLI, pickupPoint)
