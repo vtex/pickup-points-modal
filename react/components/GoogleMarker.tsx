@@ -131,11 +131,7 @@ export const GoogleMarker: React.VFC<Props> = ({
   useEffect(() => {
     const currentPosition = marker.getPosition()
 
-    if (
-      currentPosition == null ||
-      currentPosition.lat() !== lat ||
-      currentPosition.lng() !== lng
-    ) {
+    if (currentPosition?.lat() !== lat || currentPosition?.lng() !== lng) {
       marker.setPosition(new google.maps.LatLng(lat, lng))
     }
   }, [marker, lat, lng])
