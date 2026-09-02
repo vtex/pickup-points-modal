@@ -17,14 +17,10 @@ class Button extends Component {
 
     let style = `${moreClassName} ${styles.btn} pkp-modal-btn `
 
-    switch (kind) {
-      case 'secondary':
-        style += `${styles.secondary} pkp-modal-btn-secondary `
-        break
-
-      default:
-        style += `${styles.primary} pkp-modal-btn-primary `
-        break
+    if (kind === 'secondary') {
+      style += `${styles.secondary} pkp-modal-btn-secondary `
+    } else {
+      style += `${styles.primary} pkp-modal-btn-primary `
     }
 
     style += inline ? '' : `${styles.block} pkp-modal-btn-block `
