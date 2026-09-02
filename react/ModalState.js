@@ -27,6 +27,7 @@ import {
 } from './utils/StateUtils'
 import { findSla } from './utils/SlasUtils'
 import { newAddress } from './utils/newAddress'
+import memoizeOne from './utils/memoizeOne'
 
 class ModalState extends Component {
   constructor(props) {
@@ -492,8 +493,14 @@ class ModalState extends Component {
       .catch(() => this.setState({ externalPickupPoints }))
   }
 
-  render() {
-    const { children } = this.props
+  // Every entry below comes either from `this.state` or from a class
+  // property, whose identity is already stable for the lifetime of the
+  // instance. React replaces `this.state` on every update, so keying the
+  // memo on it reuses the same object on renders caused only by new props or
+  // children. Any state change rebuilds the value, including the two fields
+  // that never reach it (`askForGeolocation`, `localSearching`) — a missed
+  // reuse, never a stale read.
+  getContextValue = memoizeOne((state) => {
     const {
       activeState,
       activeSidebarState,
@@ -514,44 +521,48 @@ class ModalState extends Component {
       selectedPickupPoint,
       shouldSearchArea,
       showOtherPickupPoints,
-    } = this.state
+    } = state
+
+    return {
+      activeState,
+      activeSidebarState,
+      bestPickupOptions,
+      externalPickupPoints,
+      geolocationStatus,
+      isSearching,
+      isSelectedBestPickupPoint,
+      hoverPickupPoint,
+      lastState,
+      lastSidebarState,
+      lastMapCenterLatLng,
+      logisticsInfo,
+      pickupOptions,
+      pickupPoints,
+      residentialAddress,
+      searchedAreaNoPickups,
+      searchPickupsInArea: this.searchPickupsInArea,
+      selectNextPickupPoint: this.selectNextPickupPoint,
+      selectPreviousPickupPoint: this.selectPreviousPickupPoint,
+      selectedPickupPoint,
+      setActiveState: this.setActiveState,
+      setAskForGeolocation: this.setAskForGeolocation,
+      setActiveSidebarState: this.setActiveSidebarState,
+      setGeolocationStatus: this.setGeolocationStatus,
+      setHoverPickupPoint: this.setHoverPickupPoint,
+      setMapCenterLatLng: this.setMapCenterLatLng,
+      setSelectedPickupPoint: this.setSelectedPickupPoint,
+      shouldSearchArea,
+      setShouldSearchArea: this.setShouldSearchArea,
+      setShowOtherPickupPoints: this.setShowOtherPickupPoints,
+      showOtherPickupPoints,
+    }
+  })
+
+  render() {
+    const { children } = this.props
 
     return (
-      <ModalStateContext.Provider
-        value={{
-          activeState,
-          activeSidebarState,
-          bestPickupOptions,
-          externalPickupPoints,
-          geolocationStatus,
-          isSearching,
-          isSelectedBestPickupPoint,
-          hoverPickupPoint,
-          lastState,
-          lastSidebarState,
-          lastMapCenterLatLng,
-          logisticsInfo,
-          pickupOptions,
-          pickupPoints,
-          residentialAddress,
-          searchedAreaNoPickups,
-          searchPickupsInArea: this.searchPickupsInArea,
-          selectNextPickupPoint: this.selectNextPickupPoint,
-          selectPreviousPickupPoint: this.selectPreviousPickupPoint,
-          selectedPickupPoint,
-          setActiveState: this.setActiveState,
-          setAskForGeolocation: this.setAskForGeolocation,
-          setActiveSidebarState: this.setActiveSidebarState,
-          setGeolocationStatus: this.setGeolocationStatus,
-          setHoverPickupPoint: this.setHoverPickupPoint,
-          setMapCenterLatLng: this.setMapCenterLatLng,
-          setSelectedPickupPoint: this.setSelectedPickupPoint,
-          shouldSearchArea,
-          setShouldSearchArea: this.setShouldSearchArea,
-          setShowOtherPickupPoints: this.setShowOtherPickupPoints,
-          showOtherPickupPoints,
-        }}
-      >
+      <ModalStateContext.Provider value={this.getContextValue(this.state)}>
         {children}
       </ModalStateContext.Provider>
     )
