@@ -208,7 +208,6 @@ SearchForm.propTypes = {
   placeholder: PropTypes.string,
   permissionStatus: PropTypes.string,
   rules: PropTypes.object,
-  setGeolocationStatus: PropTypes.func,
   setGeolocationFrom: PropTypes.func,
   status: PropTypes.string,
   shipsTo: PropTypes.array,
