@@ -37,11 +37,7 @@ class PickupPointsModal extends Component {
 
     this.state = {
       addressQuery: {
-        value:
-          (props.searchAddress &&
-            props.searchAddress.street &&
-            props.searchAddress.street.value) ||
-          '',
+        value: props.searchAddress?.street?.value || '',
       },
       isMounted: false,
       mapStatus: HIDE_MAP,
@@ -108,14 +104,8 @@ class PickupPointsModal extends Component {
 
   getPostalCodeValue = (address) => {
     // TODO move this to Address Form
-    if (
-      address &&
-      address.country &&
-      address.country.value === 'ARG' &&
-      address.postalCode &&
-      address.postalCode.value
-    ) {
-      const corePostalCode = address.postalCode.value.match(/([0-9]{4})/g)
+    if (address?.country?.value === 'ARG' && address.postalCode?.value) {
+      const corePostalCode = address.postalCode.value.match(/(\d{4})/g)
 
       return (
         (corePostalCode.length > 0 && corePostalCode[0]) ||
@@ -123,7 +113,7 @@ class PickupPointsModal extends Component {
       )
     }
 
-    return address.postalCode && address.postalCode.value
+    return address.postalCode?.value
   }
 
   getValidPostalCode = (address) => {
@@ -151,8 +141,8 @@ class PickupPointsModal extends Component {
 
       return {
         ...address.postalCode,
-        value: validatedPostalCode && validatedPostalCode.value,
-        valid: validatedPostalCode && validatedPostalCode.valid,
+        value: validatedPostalCode?.value,
+        valid: validatedPostalCode?.valid,
         visited: null,
       }
     }
@@ -167,10 +157,7 @@ class PickupPointsModal extends Component {
       ...addValidation(
         newAddress({
           ...address,
-          country:
-            searchAddress &&
-            searchAddress.country &&
-            searchAddress.country.value,
+          country: searchAddress?.country?.value,
         })
       ),
       neighborhood: address.neighborhood || NULL_VALUE,
