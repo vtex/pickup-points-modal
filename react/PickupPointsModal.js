@@ -116,7 +116,7 @@ class PickupPointsModal extends Component {
       )
     }
 
-    return address.postalCode && address.postalCode.value
+    return address.postalCode?.value
   }
 
   getValidPostalCode = (address) => {
