@@ -27,8 +27,68 @@ import {
 } from './utils/StateUtils'
 import { findSla } from './utils/SlasUtils'
 import { newAddress } from './utils/newAddress'
+import memoizeOne from './utils/memoizeOne'
 
 class ModalState extends Component {
+  // The context value is rebuilt only when one of the memoized arguments
+  // below changes; the handler methods are class properties, so their
+  // identity is already stable for the lifetime of the instance.
+  getContextValue = memoizeOne(
+    (
+      activeState,
+      activeSidebarState,
+      bestPickupOptions,
+      externalPickupPoints,
+      geolocationStatus,
+      hoverPickupPoint,
+      isSearching,
+      isSelectedBestPickupPoint,
+      lastState,
+      lastSidebarState,
+      lastMapCenterLatLng,
+      logisticsInfo,
+      pickupOptions,
+      pickupPoints,
+      residentialAddress,
+      searchedAreaNoPickups,
+      selectedPickupPoint,
+      shouldSearchArea,
+      showOtherPickupPoints
+    ) => ({
+      activeState,
+      activeSidebarState,
+      bestPickupOptions,
+      externalPickupPoints,
+      geolocationStatus,
+      isSearching,
+      isSelectedBestPickupPoint,
+      hoverPickupPoint,
+      lastState,
+      lastSidebarState,
+      lastMapCenterLatLng,
+      logisticsInfo,
+      pickupOptions,
+      pickupPoints,
+      residentialAddress,
+      searchedAreaNoPickups,
+      searchPickupsInArea: this.searchPickupsInArea,
+      selectNextPickupPoint: this.selectNextPickupPoint,
+      selectPreviousPickupPoint: this.selectPreviousPickupPoint,
+      selectedPickupPoint,
+      setActiveState: this.setActiveState,
+      setAskForGeolocation: this.setAskForGeolocation,
+      setActiveSidebarState: this.setActiveSidebarState,
+      setGeolocationStatus: this.setGeolocationStatus,
+      setHoverPickupPoint: this.setHoverPickupPoint,
+      setMapCenterLatLng: this.setMapCenterLatLng,
+      setSelectedPickupPoint: this.setSelectedPickupPoint,
+      shouldSearchArea,
+      setShouldSearchArea: this.setShouldSearchArea,
+      setShowOtherPickupPoints: this.setShowOtherPickupPoints,
+      showOtherPickupPoints,
+    })
+  )
+
   constructor(props) {
     super(props)
 
@@ -518,15 +578,15 @@ class ModalState extends Component {
 
     return (
       <ModalStateContext.Provider
-        value={{
+        value={this.getContextValue(
           activeState,
           activeSidebarState,
           bestPickupOptions,
           externalPickupPoints,
           geolocationStatus,
+          hoverPickupPoint,
           isSearching,
           isSelectedBestPickupPoint,
-          hoverPickupPoint,
           lastState,
           lastSidebarState,
           lastMapCenterLatLng,
@@ -535,22 +595,10 @@ class ModalState extends Component {
           pickupPoints,
           residentialAddress,
           searchedAreaNoPickups,
-          searchPickupsInArea: this.searchPickupsInArea,
-          selectNextPickupPoint: this.selectNextPickupPoint,
-          selectPreviousPickupPoint: this.selectPreviousPickupPoint,
           selectedPickupPoint,
-          setActiveState: this.setActiveState,
-          setAskForGeolocation: this.setAskForGeolocation,
-          setActiveSidebarState: this.setActiveSidebarState,
-          setGeolocationStatus: this.setGeolocationStatus,
-          setHoverPickupPoint: this.setHoverPickupPoint,
-          setMapCenterLatLng: this.setMapCenterLatLng,
-          setSelectedPickupPoint: this.setSelectedPickupPoint,
           shouldSearchArea,
-          setShouldSearchArea: this.setShouldSearchArea,
-          setShowOtherPickupPoints: this.setShowOtherPickupPoints,
-          showOtherPickupPoints,
-        }}
+          showOtherPickupPoints
+        )}
       >
         {children}
       </ModalStateContext.Provider>
