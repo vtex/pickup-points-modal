@@ -35,8 +35,7 @@ class Input extends Component {
 
 Input.propTypes = {
   address: AddressShapeWithValidation,
-  autoFocus: PropTypes.bool, // eslint-disable-line
-  disabled: PropTypes.bool, // eslint-disable-line
+  autoFocus: PropTypes.bool,
   googleMapsKey: PropTypes.string,
   inputRef: PropTypes.func,
   intl: intlShape.isRequired,

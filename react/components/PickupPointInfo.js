@@ -244,7 +244,6 @@ class PickupPointInfo extends Component {
 }
 
 PickupPointInfo.defaultProps = {
-  showAddress: true,
   isBestPickupPoint: false,
 }
 
@@ -256,19 +255,15 @@ PickupPointInfo.propTypes = {
   items: PropTypes.any,
   liPackage: PropTypes.object,
   logisticsInfo: PropTypes.any,
-  onChangeActivePickupPointId: PropTypes.func,
   onClickPickupModal: PropTypes.func,
   pickupPoint: PropTypes.object.isRequired,
   selectedRules: PropTypes.object.isRequired,
   sellerId: PropTypes.any,
   setSelectedPickupPoint: PropTypes.func.isRequired,
-  setActiveSidebarState: PropTypes.func.isRequired,
   shouldUseMaps: PropTypes.bool,
   setShouldSearchArea: PropTypes.func.isRequired,
   setHoverPickupPoint: PropTypes.func.isRequired,
-  showAddress: PropTypes.bool,
   storePreferencesData: PropTypes.object.isRequired,
-  togglePickupDetails: PropTypes.func,
 }
 
 export default injectState(injectIntl(PickupPointInfo))

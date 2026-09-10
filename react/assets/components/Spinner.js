@@ -69,12 +69,9 @@ Spinner.propTypes = {
   color: PropTypes.string,
   /** Size (diameter) of the spinner */
   size: PropTypes.number,
-  /** Sets the display to block */
-  block: PropTypes.bool,
 }
 
 Spinner.defaultProps = {
-  block: false,
   size: 40,
 }
 

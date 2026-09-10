@@ -83,15 +83,12 @@
   display: flex;
   flex: none;
   height: 100%;
+  opacity: 0.9;
   padding: 10px 16px;
   position: absolute;
   right: 0;
   top: 0;
   transition: 0.256s ease-in;
-}
-
-.askGeolocationBtn {
-  opacity: 0.9;
 }
 
 .askGeolocationBtn:hover {

@@ -18,7 +18,7 @@ import DefaultInput from '@vtex/address-form/lib/inputs/DefaultInput'
 import AddressShapeWithValidation from '@vtex/address-form/lib/propTypes/AddressShapeWithValidation'
 import AddressSummary from '@vtex/address-form/lib/AddressSummary'
 // Added react context for injectRules mock
-// eslint-disable-next-line
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 
 function injectRules(component) {

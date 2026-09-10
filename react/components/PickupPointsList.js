@@ -198,7 +198,6 @@ class PickupPointsList extends PureComponent {
 
 PickupPointsList.propTypes = {
   bestPickupOptions: PropTypes.array,
-  changeActivePickupDetails: PropTypes.func,
   externalPickupPoints: PropTypes.array,
   intl: intlShape,
   items: PropTypes.array.isRequired,

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
 import styles from './SearchOverlay.css'
 import { injectState } from '../../modalStateContext'
@@ -29,6 +30,11 @@ class SearchOverlay extends PureComponent {
       </svg>
     )
   }
+}
+
+SearchOverlay.propTypes = {
+  /** Injected by ModalState: whether the current search area returned no pickup points */
+  searchedAreaNoPickups: PropTypes.bool,
 }
 
 export default injectState(SearchOverlay)
