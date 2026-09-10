@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Removed unnecessary nested object-literal spreads in the `react/test-utils.js` `IntlProvider` message helpers (`javascript:S7747`).
+
 ## [3.8.5] - 2026-08-31
 
 ## [3.8.4] - 2026-08-31
