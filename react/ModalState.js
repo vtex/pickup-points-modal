@@ -33,6 +33,9 @@ class ModalState extends Component {
   // The context value is rebuilt only when one of the memoized arguments
   // below changes; the handler methods are class properties, so their
   // identity is already stable for the lifetime of the instance.
+  // One positional argument per context field is deliberate: memoizeOne
+  // compares arguments by identity, so wrapping them in an object would
+  // defeat the memoization. Hence the S107 suppression below.
   getContextValue = memoizeOne(
     (
       activeState,
@@ -54,7 +57,7 @@ class ModalState extends Component {
       selectedPickupPoint,
       shouldSearchArea,
       showOtherPickupPoints
-    ) => ({
+    ) => /* NOSONAR javascript:S107 — see the comment above */ ({
       activeState,
       activeSidebarState,
       bestPickupOptions,
