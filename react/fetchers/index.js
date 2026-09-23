@@ -129,6 +129,8 @@ export function updateShippingData(
       return li
     })
 
+  const contactInformation = window?.vtexjs?.checkout?.orderForm?.shippingData?.contactInformation?.map(({ id }) => ({ id })) ?? []
+
   const shippingData = {
     ...(hasGeocoordinates ? { clearAddressIfPostalCodeNotFound: false } : {}),
     selectedAddresses: [
@@ -136,6 +138,7 @@ export function updateShippingData(
       pickupAddressWithAddressId,
     ],
     logisticsInfo: logisticsInfoWithDefaultDeliverySla,
+    contactInformation,
   }
 
   return window.vtexjs?.checkout.sendAttachment('shippingData', shippingData)
