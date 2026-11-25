@@ -17,7 +17,7 @@
     "vtex.address-form": "3.x"
   },
   "builders": {
-    "react": "2.x",
+    "react": "3.x",
     "messages": "1.x"
   },
   "scripts": {

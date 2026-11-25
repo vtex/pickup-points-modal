@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Update `react` builder from `2.x` to `3.x` (render-runtime `8.x`). No change to the public API, `react/` source or dependency ranges.
+
 ## [3.8.6] - 2026-09-10
 
 ### Fixed
